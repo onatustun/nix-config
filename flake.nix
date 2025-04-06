@@ -16,26 +16,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 
   outputs = inputs: let
     system = "x86_64-linux";
-    pkgs = import inputs.nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-    
+
     mkHost = hostPath: extraModules: inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = { inherit inputs; };
       modules = [
         hostPath
         { nixpkgs.config.allowUnfree = true; }
-        
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -43,13 +39,12 @@
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs system; };
             users.onat = import ./home;
+            sharedModules = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
           };
         }
       ] ++ extraModules;
     };
   in {
     nixosConfigurations.laptop = mkHost ./hosts/laptop [];
-    
-    devShells.${system}.default = import ./shell.nix { inherit pkgs; };
   };
 }

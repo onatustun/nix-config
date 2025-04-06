@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }: {
   nix.settings.experimental-features = [
@@ -24,10 +23,7 @@
   };
 
   programs = {
-    zsh = {
-      enable = true;
-      promptInit = lib.mkForce '''';
-    };
+    zsh.enable = true;
     hyprland.enable = true;
   };
 

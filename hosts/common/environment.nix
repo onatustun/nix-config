@@ -41,11 +41,6 @@
     ];
   };
 
-  environment.variables = {
-    SSH_ASKPASS = lib.mkForce "";
-    GIT_ASKPASS = lib.mkForce "";
-  };
-
   services.xserver = {
     enable = true;
 
@@ -63,7 +58,4 @@
       wayland = true;
     };
   };
-
-  services.gnome.gnome-keyring.enable = lib.mkForce false;
-  programs.ssh.startAgent = true;
 }
