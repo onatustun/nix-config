@@ -1,0 +1,2 @@
+*.lock -diff
+*.age binary

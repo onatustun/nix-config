@@ -1,0 +1,1 @@
+{hostName, ...}: {networking = {inherit hostName;};}
