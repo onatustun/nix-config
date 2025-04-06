@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   ...
 }: {
   environment = {
@@ -44,13 +43,17 @@
   services.xserver = {
     enable = true;
 
-    desktopManager.gnome = {
-      enable = true;
-      extraGSettingsOverridePackages = [ pkgs.mutter ];
-      extraGSettingsOverrides = ''
-        [org.gnome.mutter]
-        experimental-features=['scale-monitor-framebuffer']
-      '';
+    desktopManager = { 
+      plasma6.enable = true;
+
+      gnome = {
+        enable = true;
+        extraGSettingsOverridePackages = [ pkgs.mutter ];
+        extraGSettingsOverrides = ''
+          [org.gnome.mutter]
+          experimental-features=['scale-monitor-framebuffer']
+        '';
+      };
     };
 
     displayManager.gdm = {

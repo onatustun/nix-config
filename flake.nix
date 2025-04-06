@@ -39,7 +39,6 @@
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs system; };
             users.onat = import ./home;
-            sharedModules = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
           };
         }
       ] ++ extraModules;
