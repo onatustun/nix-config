@@ -15,12 +15,6 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
   };
 
   outputs = inputs: let
@@ -39,6 +33,7 @@
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs system; };
             users.onat = import ./home;
+            backupFileExtension = "homebackup";
           };
         }
       ] ++ extraModules;

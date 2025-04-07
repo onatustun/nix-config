@@ -2,8 +2,8 @@
   imports = [
     ./audio.nix
     ./bluetooth.nix
-    ./environment.nix
     ./fonts.nix
+    ./gdm.nix
     ./locale.nix
     ./packages.nix
   ];

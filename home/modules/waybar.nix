@@ -1,6 +1,6 @@
 {
   programs.waybar = {
-    enable = true;
+    enable = false;
 
     settings = [{
 	    position = "bottom";

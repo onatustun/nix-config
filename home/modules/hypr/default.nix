@@ -11,7 +11,7 @@
     systemd.enable = true;
 
     settings = {
-      monitor = "eDP-1, 2256x1504@60, 0x0, 1.175677";
+      monitor = "eDP-1, 2256x1504@60, 0x0, 1";
 
       "$terminal" = "ghostty";
       "$menu" = "tofi-drun --drun-launch=true";

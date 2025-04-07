@@ -4,7 +4,6 @@
     ./ff.nix
     ./ghostty.nix
     ./git.nix
-    ./gnome
     ./hypr
     ./nvf.nix
     ./omp.nix
