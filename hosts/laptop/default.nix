@@ -24,7 +24,10 @@
 
   programs = {
     zsh.enable = true;
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
   };
 
   users = {
@@ -40,7 +43,6 @@
     };
   };
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   boot.loader.systemd-boot.enable = true;
   services.power-profiles-daemon.enable = true;
   system.stateVersion = "24.11";

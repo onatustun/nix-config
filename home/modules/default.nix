@@ -9,7 +9,7 @@
     ./omp.nix
     ./tmux.nix
     ./tofi.nix
-    ./waybar.nix
+    ./waybar
     ./zsh.nix
   ];
 }

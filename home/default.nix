@@ -15,18 +15,12 @@
 
     packages = with pkgs; [
       bat
-      brightnessctl
       btop
-      dunst
       fzf
-      hyprshot
-      hyprsunset
       obsidian
       pavucontrol
       ripgrep
       tree
-      wl-clipboard
-      xdg-desktop-portal-hyprland
       zoxide
     ];
   };
