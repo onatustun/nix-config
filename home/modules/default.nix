@@ -7,8 +7,8 @@
     ./hypr
     ./nvf.nix
     ./omp.nix
+    ./rofi.nix
     ./tmux.nix
-    ./tofi.nix
     ./waybar
     ./zsh.nix
   ];
