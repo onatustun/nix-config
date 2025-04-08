@@ -28,7 +28,7 @@
   }
 
   #window {
-    padding: 0 4px 0 4px;
+    padding: 0;
     color: #928374;
   }
 

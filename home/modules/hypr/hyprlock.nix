@@ -39,7 +39,7 @@
         }
         {
           monitor = "";
-          text = "    $USER";
+          text = "$USER";
           outline_thickness = 2;
           dots_size = 0.2;
           dots_spacing = 0.2;
@@ -58,10 +58,8 @@
         dots_size = 0.2;
         dots_spacing = 0.2;
         dots_center = true;
-        outer_color = "rgba(25, 25, 25, 0)";
-        inner_color = "rgba(25, 25, 25, 0.1)";
         fade_on_empty = false;
-        placeholder_text = "<i>🔒 Enter Password</i>";
+        placeholder_text = "";
         hide_input = false;
         position = "0, -250";
         halign = "center";

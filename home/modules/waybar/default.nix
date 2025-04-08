@@ -9,7 +9,7 @@
       position = "bottom";
       fixed-center = true;
       height = 28;
-      margin = "3 60 3 60";
+      margin = "0 60 16";
       mode = "dock";
       start_hidden = false;
       reload_style_on_change = true;

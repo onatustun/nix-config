@@ -19,6 +19,7 @@
 
   outputs = inputs: let
     system = "x86_64-linux";
+    monitorSpec = "eDP-1";
 
     mkHost = hostPath: extraModules: inputs.nixpkgs.lib.nixosSystem {
       inherit system;
@@ -31,7 +32,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs system; };
+            extraSpecialArgs = { inherit inputs system monitorSpec; };
             users.onat = import ./home;
             backupFileExtension = "homebackup";
           };

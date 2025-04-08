@@ -2,16 +2,23 @@
   pkgs,
   ... 
 }: {
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa = {
+  security.rtkit.enable = true;
+
+  services = {
+    pulseaudio.enable = false;
+
+    pipewire = {
       enable = true;
-      support32Bit = true;
+      jack.enable = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
     };
   };
-
-  security.rtkit.enable = true;
 
   environment.systemPackages = with pkgs; [
     pavucontrol

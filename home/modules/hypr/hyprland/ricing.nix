@@ -1,32 +1,45 @@
 {
-  wayland.windowManager.hyprland.settings = {
-    general = {
-      gaps_in = 12;
-      gaps_out = 24;
-      border_size = 0;
-      resize_on_border = false;
-      allow_tearing = false;
-      layout = "dwindle";
-     };
+  plugin.scroller = {
+    center_row_if_space_available = true;
+  };
 
-    dwindle = {
-      pseudotile = true;
-      preserve_split = true;
+  general = {
+    gaps_in = 0;
+    gaps_out = 0;
+    border_size = 0;
+    layout = "scroller";
+   };
+
+  decoration = {
+    rounding = 0;
+    active_opacity = 1.0;
+    inactive_opacity = 0.9;
+
+    blur = {
+      enabled = true;
+      size = 8;
+      passes = 3;
+      new_optimizations = "on";
+      noise = 0.01;
+      contrast = 0.9;
+      brightness = 0.8;
     };
+  };
 
-    decoration = {
-      rounding = 18;
-      active_opacity = 1.0;
-      inactive_opacity = 0.9;
-      shadow.enabled = false;
-      blur.enabled = false;
-    };
+  animations = {
+        enabled = "yes";
+        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+        animation = [
+          "windows, 1, 5, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "border, 1, 10, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
+        ];
+      };
 
-    animations.enabled = false;
-
-    misc = {
-      force_default_wallpaper = 0;
-      disable_hyprland_logo = true;
-    };
+  misc = {
+    force_default_wallpaper = 0;
+    disable_hyprland_logo = true;
   };
 }

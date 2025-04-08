@@ -1,12 +1,8 @@
 {
+  monitorSpec,
   pkgs,
   ...
 }: {
-  imports = [
-    ./binds.nix
-    ./ricing.nix
-  ];
-
   home.packages = with pkgs; [
     brightnessctl
     cliphist
@@ -17,10 +13,18 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+
+    plugins = with pkgs.hyprlandPlugins;[
+      hyprscroller
+    ];
+
     systemd.enable = false;
     xwayland.enable = true;
 
-    settings = {
+    settings = let
+      ricing = import ./ricing.nix;
+      binds = import ./binds.nix;
+    in ricing // binds // {      
       exec-once = [
         "hyprpaper"
         "pkill waybar & sleep 0.5 && waybar"
@@ -37,14 +41,10 @@
         "XDG_SESSION_TYPE,wayland"
       ];
 
-      monitor = "eDP-1, 2256x1504@60, 0x0, 1";
-
-      "$menu" = "rofi -show";
-      "$terminal" = "ghostty";
+      monitor = "${monitorSpec},preferred,auto,1.333667";
 
       cursor.no_hardware_cursors = "true";
       input.kb_layout = "us";
-      gestures.workspace_swipe = "false";
 
       windowrulev2 = [
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
