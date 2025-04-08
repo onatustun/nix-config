@@ -9,40 +9,32 @@
       position = "bottom";
       fixed-center = true;
       height = 28;
-      margin = "0 60 16";
+      margin = "0 16 16";
       mode = "dock";
       start_hidden = false;
       reload_style_on_change = true;
       spacing = 0;
 
-      modules-left = [ "group/leftWrapper" ];
-      modules-right = [ "group/rightWrapper" ];
-
-      "group/leftWrapper" = {
-        orientation = "horizontal";
-        modules = [ "hyprland/workspaces" ];
-      };
-
-      "group/rightWrapper" = {
-        orientation = "horizontal";
-        modules = [
-          "wireplumber"
-          "network"
-          "battery"
-          "clock"
-        ];
-      };
+      modules-left = [ "hyprland/workspaces" ];
+      modules-right = [
+        "bluetooth"
+        "wireplumber"
+        "network"
+        "battery"
+        "clock"
+      ];
       
       "hyprland/workspaces" = {
         tooltip = false;
         format = "{icon}";
       };
 
-      tray = {
-        icon-size = 18;
-        spacing = 4;
-        padding = "0 2px 0 2px";
-        border-radius = 0;
+      bluetooth = {
+        format = "";
+        format-connected = "";
+        format-disabled = "";
+        tooltip-format = "{status}";
+        tooltip-format-connected = "{device_alias}";
       };
 
       clock = {

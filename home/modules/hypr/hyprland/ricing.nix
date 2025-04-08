@@ -4,16 +4,16 @@
   };
 
   general = {
-    gaps_in = 0;
-    gaps_out = 0;
+    gaps_in = 8;
+    gaps_out = 16;
     border_size = 0;
     layout = "scroller";
    };
 
   decoration = {
-    rounding = 0;
+    rounding = 8;
     active_opacity = 1.0;
-    inactive_opacity = 0.9;
+    inactive_opacity = 0.8;
 
     blur = {
       enabled = true;
@@ -27,16 +27,16 @@
   };
 
   animations = {
-        enabled = "yes";
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        animation = [
-          "windows, 1, 5, myBezier"
-          "windowsOut, 1, 7, default, popin 80%"
-          "border, 1, 10, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 6, default"
-        ];
-      };
+    enabled = "yes";
+    bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+    animation = [
+      "windows, 1, 5, myBezier"
+      "windowsOut, 1, 7, default, popin 80%"
+      "border, 1, 10, default"
+      "fade, 1, 7, default"
+      "workspaces, 1, 6, default"
+    ];
+  };
 
   misc = {
     force_default_wallpaper = 0;

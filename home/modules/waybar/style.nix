@@ -11,66 +11,20 @@
   #waybar {
     background-color: transparent;
     color: #928374;
-    border-radius: 6px;
   }
 
-  #leftWrapper {
+  .modules-left, .modules-right {
     background-color: #1d2021;
-    color: #928374;
-    border-radius: 6px;
+    padding: 0 4px;
+    border-radius: 8px;
   }
 
-  #rightWrapper {
-    background-color: #1d2021;
-    color: #928374;
-    padding: 0 4px 0 4px;
-    border-radius: 6px;
-  }
-
-  #window {
-    padding: 0;
-    color: #928374;
-  }
-
-  #window.empty, #window.solo {
-    padding: 0;
-    background-color: transparent;
-  }
-
-  button {
+  button, button:hover {
     box-shadow: none;
     text-shadow: none;
     background: none;
     transition: none;
     border: none;
-  }
-
-  button:hover {
-    box-shadow: none;
-    text-shadow: none;
-    background: none;
-    transition: none;
-    border: none;
-  }
-
-  .modules-left {
-    background-color: inherit;
-    border-radius: 0;
-  }
-
-  .modules-right {
-    background-color: inherit;
-    border-radius: 0;
-  }
-
-  .modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-    padding-left: 0;
-  }
-
-  .modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-    padding-right: 0;
   }
 
   tooltip {
@@ -86,6 +40,16 @@
     font-weight: 500;
   }
 
+  #workspaces button {
+    color: #928374;
+    opacity: 0.8;
+    padding: 0 4px;
+  }
+
+  #workspaces button.active {
+    opacity: 1;
+  }
+
   #battery.critical,
   #network.disabled,
   #network.disconnected,
@@ -98,16 +62,13 @@
     color: #d65d0e;
   }
 
-  #tray {
-    padding: 0 4px 0 4px;
-    border-radius: 6px;
-  }
-
-  #tray > .passive {
-      -gtk-icon-effect: dim;
-  }
-
-  #tray > .needs-attention {
-      -gtk-icon-effect: highlight;
+  #bluetooth {
+    min-width: 25px;
+    min-height: 18px;
+    background-size: 18px;
+    background-image: ./bluetooth.svg;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 4px;
   }
 ''
