@@ -11,6 +11,6 @@
     ./rofi.nix
     ./tmux.nix
     ./waybar
-    ./zsh.nix
+    ./zsh
   ];
 }
