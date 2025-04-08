@@ -7,21 +7,42 @@
     settings = [{
       layer = "top";
       position = "bottom";
+      fixed-center = true;
+      height = 28;
+      margin = "3 60 3 60";
+      mode = "dock";
+      start_hidden = false;
+      reload_style_on_change = true;
+      spacing = 0;
 
-      modules-left = [ 
-        "hyprland/workspaces" 
-      ];
+      modules-left = [ "group/leftWrapper" ];
+      modules-right = [ "group/rightWrapper" ];
 
-      modules-right = [
-        "pulseaudio"
-        "network"
-        "battery"
-        "clock"
-      ];
+      "group/leftWrapper" = {
+        orientation = "horizontal";
+        modules = [ "hyprland/workspaces" ];
+      };
 
+      "group/rightWrapper" = {
+        orientation = "horizontal";
+        modules = [
+          "wireplumber"
+          "network"
+          "battery"
+          "clock"
+        ];
+      };
+      
       "hyprland/workspaces" = {
         tooltip = false;
         format = "{icon}";
+      };
+
+      tray = {
+        icon-size = 18;
+        spacing = 4;
+        padding = "0 2px 0 2px";
+        border-radius = 0;
       };
 
       clock = {
@@ -47,15 +68,15 @@
         ];
       };
 
-      pulseaudio = {
-        on-click = "sleep 0.1 && pavucontrol";
+      wireplumber = {
+        on-click = "pavucontrol";
         tooltip = true;
         tooltip-format = "{volume}%";
         format = "{icon}";
-        format-muted = " ";
+        format-muted = "";
 
         format-icons = [
-          " " 
+          "" 
           "" 
           ""
         ];
