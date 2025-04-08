@@ -1,13 +1,15 @@
-let 
-  wallpaper = "./wallpaper.jpg";
-in{
+let
+  wallpaperPath = ./wallpaper.jpg;
+in
+{
   services.hyprpaper = {
     enable = true;
 
     settings = {
       splash = false;
-      preload = [wallpaper];
-      wallpaper = [wallpaper];
+      preload = [ (toString wallpaperPath) ];
+      wallpaper = [ "eDP-1, ${(toString wallpaperPath)}" ];
     };
   };
 }
+

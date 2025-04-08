@@ -1,8 +1,8 @@
 {
   wayland.windowManager.hyprland.settings = {
     general = {
-      gaps_in = 0;
-      gaps_out = 0;
+      gaps_in = 12;
+      gaps_out = 24;
       border_size = 0;
       resize_on_border = false;
       allow_tearing = false;
@@ -15,9 +15,9 @@
     };
 
     decoration = {
-      rounding = 0;
+      rounding = 18;
       active_opacity = 1.0;
-      inactive_opacity = 1.0;
+      inactive_opacity = 0.9;
       shadow.enabled = false;
       blur.enabled = false;
     };

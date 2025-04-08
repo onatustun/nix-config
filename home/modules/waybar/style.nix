@@ -73,14 +73,6 @@
     padding-right: 0;
   }
 
-  #workspaces button {
-    opacity: 0.5;
-  }
-
-  #workspaces button.active {
-    opacity: 1.0;
-  }
-
   tooltip {
     border-radius: 12px;
   }
@@ -89,11 +81,10 @@
   #wireplumber,
   #network,
   #battery {
-      margin: 0 6px 0 6px;
-      padding: 0;
-      font-weight: 500;
+    margin: 0 6px 0 6px;
+    padding: 0;
+    font-weight: 500;
   }
-
 
   #battery.critical,
   #network.disabled,
