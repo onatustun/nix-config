@@ -1,6 +1,7 @@
 {
   imports = [
     ./brave.nix
+    ./eza.nix
     ./ff.nix
     ./ghostty.nix
     ./git.nix

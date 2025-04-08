@@ -17,11 +17,11 @@
       bat
       btop
       fzf
-      obsidian
-      pavucontrol
       ripgrep
       tree
       zoxide
+
+      obsidian
     ];
   };
 }

@@ -7,7 +7,8 @@
 
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/nix#laptop";
-      ls = "ls -la --color";
+      la = "exa -l";
+      ls = "ls --color=auto";
       ff = "fastfetch";
       c = "clear";
       cat = "bat";
@@ -29,8 +30,6 @@
       if [ -z "$TMUX" ] && [ -n "$DISPLAY" ]; then
         tmux attach-session -t default || tmux new-session -s default
       fi
-
-
     '';
 
     oh-my-zsh = {
