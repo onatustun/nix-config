@@ -15,9 +15,7 @@
       reload_style_on_change = true;
       spacing = 0;
 
-      modules-left = [ "hyprland/workspaces" 
-        "bluetooth"
-      ];
+      modules-left = [ "hyprland/workspaces" ];
       modules-right = [
         "bluetooth"
         "wireplumber"
@@ -40,33 +38,24 @@
       };
 
       wireplumber = {
+        format = " ";
         on-click = "pavucontrol";
         tooltip = true;
         tooltip-format = "{volume}%";
-        format = " ";
       };
 
       clock = {
         interval = 1;
         tooltip = true;
-        tooltip-format = "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
+        tooltip-format = "{:%a %d %b}";
         format = "{:%H:%M}";
       };
 
       network = {
+        format = " ";
         interval = 5;
         tooltip = true;
         tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
-        format-wifi = "{icon}";
-        format-disconnected = "󰤮";
-
-        format-icons = [
-          "󰤯 "
-          "󰤟 "
-          "󰤢 "
-          "󰤥 "
-          "󰤨 "
-        ];
       };
 
       battery = {

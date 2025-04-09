@@ -32,7 +32,6 @@
   }
 
   #clock,
-  #network,
   #battery {
     margin: 0 6px;
   }
@@ -47,10 +46,7 @@
     opacity: 1;
   }
 
-  #battery.critical,
-  #network.disabled,
-  #network.disconnected,
-  #wireplumber.muted {
+  #battery.critical {
     color: #cc241d;
   }
 
@@ -59,7 +55,9 @@
     color: #d65d0e;
   }
 
-  #bluetooth, #wireplumber {
+  #bluetooth, 
+  #wireplumber,
+  #network {
     margin: 0 6px;
     min-width: 16px;
     min-height: 16px;
@@ -82,7 +80,15 @@
     background-image: url("${./icons/bluetooth/connected.svg}");
   }
 
-  #bluetooth.off, #format-disabled {
+  #bluetooth.off, #bluetooth.disabled {
     background-image: url("${./icons/bluetooth/off.svg}");
   }
-''
+
+  #network.disabled, #network.disconnected {
+    background-image: url("${./icons/network/disconnect.svg}");
+  }
+
+  #network {
+    background-image: url("${./icons/network/default.svg}");
+  }
+ ''
