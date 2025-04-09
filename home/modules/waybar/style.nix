@@ -66,13 +66,17 @@
     min-height: 16px;
     padding: 0 2px;
     background-size: 16px 16px;
-    background-image: url("${./bluetooth.svg}");
+    background-image: url("${./icons/bluetooth/default.svg}");
     background-position: center;
     background-repeat: no-repeat;
     color: transparent;
   }
-  
+
   #bluetooth.connected {
-    background-image: url("${./bluetooth-connected.svg}");
+    background-image: url("${./icons/bluetooth/connected.svg}");
+  }
+
+  #bluetooth.off, #format-disabled {
+    background-image: url("${./icons/bluetooth/off.svg}");
   }
 ''
