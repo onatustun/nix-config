@@ -15,7 +15,9 @@
       reload_style_on_change = true;
       spacing = 0;
 
-      modules-left = [ "hyprland/workspaces" ];
+      modules-left = [ "hyprland/workspaces" 
+        "bluetooth"
+      ];
       modules-right = [
         "bluetooth"
         "wireplumber"
@@ -30,11 +32,11 @@
       };
 
       bluetooth = {
-        format = "";
-        format-connected = "";
-        format-disabled = "";
+        format = " ";
+        tooltip = true;
         tooltip-format = "{status}";
         tooltip-format-connected = "{device_alias}";
+        on-click = "blueman-manager";
       };
 
       clock = {

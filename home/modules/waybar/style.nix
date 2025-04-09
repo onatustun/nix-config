@@ -35,9 +35,7 @@
   #wireplumber,
   #network,
   #battery {
-    margin: 0 6px 0 6px;
-    padding: 0;
-    font-weight: 500;
+    margin: 0 6px;
   }
 
   #workspaces button {
@@ -63,12 +61,18 @@
   }
 
   #bluetooth {
-    min-width: 25px;
-    min-height: 18px;
-    background-size: 18px;
-    background-image: ./bluetooth.svg;
+    margin: 0 6px;
+    min-width: 16px;
+    min-height: 16px;
+    padding: 0 2px;
+    background-size: 16px 16px;
+    background-image: url("${./bluetooth.svg}");
     background-position: center;
     background-repeat: no-repeat;
-    margin: 0 4px;
+    color: transparent;
+  }
+  
+  #bluetooth.connected {
+    background-image: url("${./bluetooth-connected.svg}");
   }
 ''
