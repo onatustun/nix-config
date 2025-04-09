@@ -39,6 +39,13 @@
         on-click = "blueman-manager";
       };
 
+      wireplumber = {
+        on-click = "pavucontrol";
+        tooltip = true;
+        tooltip-format = "{volume}%";
+        format = " ";
+      };
+
       clock = {
         interval = 1;
         tooltip = true;
@@ -59,20 +66,6 @@
           "󰤢 "
           "󰤥 "
           "󰤨 "
-        ];
-      };
-
-      wireplumber = {
-        on-click = "pavucontrol";
-        tooltip = true;
-        tooltip-format = "{volume}%";
-        format = "{icon}";
-        format-muted = "";
-
-        format-icons = [
-          "" 
-          "" 
-          ""
         ];
       };
 

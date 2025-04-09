@@ -32,7 +32,6 @@
   }
 
   #clock,
-  #wireplumber,
   #network,
   #battery {
     margin: 0 6px;
@@ -60,16 +59,23 @@
     color: #d65d0e;
   }
 
-  #bluetooth {
+  #bluetooth, #wireplumber {
     margin: 0 6px;
     min-width: 16px;
     min-height: 16px;
     padding: 0 2px;
     background-size: 16px 16px;
-    background-image: url("${./icons/bluetooth/default.svg}");
     background-position: center;
     background-repeat: no-repeat;
     color: transparent;
+  }
+
+  #wireplumber {
+    background-image: url("${./icons/wireplumber/default.svg}");
+  }
+
+  #wireplumber.muted {
+    background-image: url("${./icons/wireplumber/muted.svg}");
   }
 
   #bluetooth.connected {
