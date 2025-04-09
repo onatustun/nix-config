@@ -57,7 +57,8 @@
 
   #bluetooth, 
   #wireplumber,
-  #network {
+  #network,
+  #battery {
     margin: 0 6px;
     min-width: 16px;
     min-height: 16px;
@@ -91,4 +92,25 @@
   #network {
     background-image: url("${./icons/network/default.svg}");
   }
+  
+  #battery {
+    background-image: url("${./icons/battery/default.svg}");
+  }
+
+  #battery.low {
+    background-image: url("${./icons/battery/low.svg}");
+  }
+  
+  #battery.empty {
+    background-image: url("${./icons/battery/empty.svg}");
+  }
+
+  #battery.high {
+    background-image: url("${./icons/battery/high.svg}");
+  }
+
+  #battery.full {
+    background-image: url("${./icons/battery/full.svg}");
+  }
+
  ''
