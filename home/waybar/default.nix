@@ -33,6 +33,7 @@
 
       bluetooth = {
         format = " ";
+        format-charging = " ";
         tooltip = true;
         tooltip-format-connected = "{device_alias}";
       };

@@ -116,4 +116,8 @@
   #battery.full {
     background-image: url("${./icons/battery/full.svg}");
   }
+
+  #battery.charging {
+    background-image: url("${./icons/battery/charging.svg}");
+  }
 ''
