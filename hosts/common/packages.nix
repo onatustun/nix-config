@@ -6,5 +6,9 @@
     home-manager
     git
     vim
+
+    nodePackages.nodejs
+    nodejs
+    pnpm
   ];
 }

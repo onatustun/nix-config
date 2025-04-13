@@ -9,6 +9,8 @@
       position = "bottom";
       height = 28;
       margin = "0 16 16";
+      start_hidden = false;
+      mode = "dock";
       reload_style_on_change = true;
       spacing = 0;
 
@@ -18,13 +20,13 @@
 
       modules-right = [
         "bluetooth"
-        "wireplumber"
         "network"
+        "wireplumber"
         "battery"
         "clock"
       ];
-      
-      "hyprland/workspaces" = {
+
+       "hyprland/workspaces" = {
         format = "{icon}";
         tooltip = false;
       };

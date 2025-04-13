@@ -18,7 +18,13 @@
       hyprscroller
     ];
 
-    systemd.enable = false;
+    systemd = {
+      enable = true;
+      variables = [
+        "--all"
+      ];
+    };
+
     xwayland.enable = true;
 
     settings = let
@@ -45,6 +51,11 @@
 
       cursor.no_hardware_cursors = "true";
       input.kb_layout = "us";
+
+      layerrule = [
+        "noanim, rofi"
+        "blur, rofi"
+      ];
 
       windowrulev2 = [
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"

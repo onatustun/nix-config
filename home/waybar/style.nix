@@ -13,13 +13,16 @@
     color: #928374;
   }
 
-  .modules-left, .modules-right {
+  .modules-left,
+  .modules-center,
+  .modules-right {
     background-color: #1d2021;
-    padding: 0 4px;
+    padding: 0 2px;
     border-radius: 8px;
   }
 
-  button, button:hover {
+  button, 
+  button:hover {
     box-shadow: none;
     text-shadow: none;
     background: none;
@@ -31,28 +34,25 @@
     border-radius: 12px;
   }
 
-  #clock,
-  #battery {
-    margin: 0 6px;
-  }
-
   #workspaces button {
     color: #928374;
-    opacity: 0.8;
-    padding: 0 4px;
+    opacity: 0.5;
+    padding: 0 2px;
+    margin: 0 6px;
   }
 
   #workspaces button.active {
     opacity: 1;
   }
 
-  #battery.critical {
-    color: #cc241d;
-  }
-
-  #battery.charging,
-  #battery.warning {
-    color: #d65d0e;
+  #clock {
+    margin: 0 6px;
+    min-width: 16px;
+    min-height: 16px;
+    padding: 0 2px;
+    background-size: 16px 16px;
+    background-position: center;
+    color: #928374;
   }
 
   #bluetooth, 
@@ -75,6 +75,7 @@
 
   #wireplumber.muted {
     background-image: url("${./icons/wireplumber/muted.svg}");
+    opacity: 0.5;
   }
 
   #bluetooth.connected {
@@ -83,26 +84,29 @@
 
   #bluetooth.off, #bluetooth.disabled {
     background-image: url("${./icons/bluetooth/off.svg}");
-  }
-
-  #network.disabled, #network.disconnected {
-    background-image: url("${./icons/network/disconnect.svg}");
+    opacity: 0.5;
   }
 
   #network {
     background-image: url("${./icons/network/default.svg}");
   }
+
+  #network.disabled, #network.disconnected {
+    background-image: url("${./icons/network/disconnect.svg}");
+    opacity: 0.5;
+  }
   
-  #battery {
-    background-image: url("${./icons/battery/default.svg}");
+  #battery.empty {
+    background-image: url("${./icons/battery/empty.svg}");
+    opacity: 0.5;
   }
 
   #battery.low {
     background-image: url("${./icons/battery/low.svg}");
   }
-  
-  #battery.empty {
-    background-image: url("${./icons/battery/empty.svg}");
+
+  #battery {
+    background-image: url("${./icons/battery/default.svg}");
   }
 
   #battery.high {
@@ -112,5 +116,4 @@
   #battery.full {
     background-image: url("${./icons/battery/full.svg}");
   }
-
- ''
+''

@@ -24,10 +24,7 @@
 
   programs = {
     zsh.enable = true;
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-    };
+    hyprland.enable = true;
   };
 
   users = {
@@ -43,7 +40,16 @@
     };
   };
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+
+    grub = {
+      enable = true; 
+      efiSupport = true;
+      device = "nodev";
+      useOSProber = true;
+    };
+  };
   services.power-profiles-daemon.enable = true;
   system.stateVersion = "24.11";
 }

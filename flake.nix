@@ -21,7 +21,7 @@
     system = "x86_64-linux";
     monitorSpec = "eDP-1";
 
-    mkHost = hostPath: extraModules: inputs.nixpkgs.lib.nixosSystem {
+    mkHost = hostPath: inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = { inherit inputs; };
       modules = [
@@ -37,9 +37,9 @@
             backupFileExtension = "homebackup";
           };
         }
-      ] ++ extraModules;
+      ];
     };
   in {
-    nixosConfigurations.laptop = mkHost ./hosts/laptop [];
+    nixosConfigurations.laptop = mkHost ./hosts/laptop;
   };
 }
