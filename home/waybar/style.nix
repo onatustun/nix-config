@@ -17,7 +17,6 @@
   .modules-center,
   .modules-right {
     background-color: #1d2021;
-    padding: 0 2px;
     border-radius: 8px;
   }
 
@@ -50,8 +49,6 @@
     min-width: 16px;
     min-height: 16px;
     padding: 0 2px;
-    background-size: 16px 16px;
-    background-position: center;
     color: #928374;
   }
 

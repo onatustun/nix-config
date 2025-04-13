@@ -33,7 +33,6 @@
     in ricing // binds // {      
       exec-once = [
         "hyprpaper"
-        "pkill waybar & sleep 0.5 && waybar"
         "wl-paste --type image --watch cliphist store"
         "wl-paste --type text --watch cliphist store"
       ];
