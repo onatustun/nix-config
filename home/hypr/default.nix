@@ -9,8 +9,9 @@
   ];
 
   home.packages = with pkgs; [
+    hyprcursor
+    hyprpaper
     hyprshot
     hyprsunset
-    hyprpaper
   ];
 }

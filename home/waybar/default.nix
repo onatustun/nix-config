@@ -33,9 +33,10 @@
 
       bluetooth = {
         format = " ";
-        format-charging = " ";
+        format-connected-battery = " ";
         tooltip = true;
-        tooltip-format-connected = "{device_alias}";
+        tooltip-format-connected = "{status}";
+        tooltip-format-connected-battery = "{status} {device_battery_percentage}%";
       };
 
       wireplumber = {
@@ -60,7 +61,9 @@
       };
 
       battery = {
+        interval = 5;
         format = " ";
+        format-time = "{H}h {M}m";
         tooltip = true;
         tooltip-format = "{capacity}% {time}";
 

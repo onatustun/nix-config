@@ -45,6 +45,8 @@
         "WLR_NO_HARDWARE_CURSORS,1"
         "WLR_RENDERER_ALLOW_SOFTWARE,1"
         "XDG_SESSION_TYPE,wayland"
+        "HYPRCURSOR_THEME,hypr_Bibata-Modern-Ice"
+        "HYPRCURSOR_SIZE,24"
       ];
 
       monitor = "${monitorSpec},preferred,auto,1.333667";
