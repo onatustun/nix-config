@@ -1,11 +1,21 @@
 {
-  services.xserver = {
-    enable = true;
-
-    displayManager.gdm = {
+  services = {
+    xserver = {
       enable = true;
-      wayland = true;
+
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
+    };
+
+    displayManager = {
+      defaultSession = "hyprland";
+
+      autoLogin = {
+        enable = true;
+        user = "onat";
+      };
     };
   };
 }
-

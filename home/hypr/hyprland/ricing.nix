@@ -1,4 +1,9 @@
-{
+{ 
+  monitorSpec,
+  ... 
+}: {
+  monitor = "${monitorSpec},preferred,auto,1.333667";
+
   plugin.scroller = {
     center_row_if_space_available = true;
   };
@@ -37,12 +42,5 @@
       "fade, 1, 7, default"
       "workspaces, 1, 6, default"
     ];
-  };
-
-  misc = {
-    force_default_wallpaper = 0;
-    disable_hyprland_logo = true;
-    middle_click_paste = false;
-    vfr = true;
   };
 }

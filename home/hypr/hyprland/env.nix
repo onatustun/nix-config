@@ -1,0 +1,12 @@
+{
+  env = [
+    "MOZ_ENABLE_WAYLAND, 1" 
+    "NIXOS_OZONE_WL, 1" 
+    "QT_QPA_PLATFORM,wayland"
+    "WLR_NO_HARDWARE_CURSORS,1"
+    "WLR_RENDERER_ALLOW_SOFTWARE,1"
+    "XDG_SESSION_TYPE,wayland"
+    "HYPRCURSOR_THEME,hypr_Bibata-Modern-Ice"
+    "HYPRCURSOR_SIZE,24"
+  ];
+}
