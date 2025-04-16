@@ -56,9 +56,6 @@ in {
 
     "$mod, I, scroller:setmode, col"
     "$mod, U, scroller:setmode, row"
-
-    "$mod, T, togglegroup"
-    "$mod, G, changegroupactive"
   ] ++ (
     builtins.concatLists (
       builtins.genList (

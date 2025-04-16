@@ -8,5 +8,6 @@
     "XDG_SESSION_TYPE,wayland"
     "HYPRCURSOR_THEME,hypr_Bibata-Modern-Ice"
     "HYPRCURSOR_SIZE,24"
+    "XCURSOR_SIZE,24"
   ];
 }

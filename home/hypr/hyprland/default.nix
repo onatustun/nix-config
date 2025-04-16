@@ -26,21 +26,14 @@
       ];
     };
 
-    settings = let
-      binds = import ./binds.nix;
-      env = import ./env.nix;
-      exec = import ./exec.nix;
-      misc = import ./misc.nix;
-      ricing = import ./ricing.nix;
-      rules = import ./rules.nix;
-    in binds 
-    // env 
-    // exec 
-    // misc 
-    // ricing 
-    // rules {      
-      cursor.no_hardware_cursors = "true";
-      input.kb_layout = "us";
-    };
+    settings = 
+      (import ./binds.nix) //
+      (import ./env.nix) //
+      (import ./exec.nix) //
+      (import ./input.nix) //
+      (import ./misc.nix) //
+      (import ./ricing.nix) //
+      (import ./rules.nix) {
+    };  
   };
 }

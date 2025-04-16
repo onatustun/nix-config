@@ -1,8 +1,5 @@
 { 
-  monitorSpec,
-  ... 
-}: {
-  monitor = "${monitorSpec},preferred,auto,1.333667";
+  monitor = ",preferred,auto,1.333667";
 
   plugin.scroller = {
     center_row_if_space_available = true;
@@ -12,6 +9,7 @@
     gaps_in = 8;
     gaps_out = 16;
     border_size = 0;
+    resize_on_border = true;
     layout = "scroller";
    };
 
