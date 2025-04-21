@@ -1,16 +1,13 @@
 {
+  config,
   pkgs,
   lib,
   ...
 }: let
-  icons = import ./icons.nix { inherit pkgs lib; };
+  icons = import ./icons.nix { inherit pkgs lib config; };
   iconsPath = "${icons.waybarIconsDir}";
-  style = import ./style.nix { inherit iconsPath; };
+  style = import ./style.nix { inherit iconsPath config; };
 in {
-  imports = [
-    ./icons.nix
-  ];
-
   programs.waybar = {
     enable = true;
     systemd.enable = true;

@@ -1,6 +1,8 @@
-{ iconsPath }:
-
-''
+{ 
+  config,
+  iconsPath,
+  ...
+}: ''
   * {
     font-family: JetBrainsMono Nerd Font Mono;
     font-size: 16px;
@@ -12,13 +14,13 @@
 
   #waybar {
     background-color: transparent;
-    color: #928374;
+    color: ${config.stylix.base16Scheme.base05};
   }
 
   .modules-left,
   .modules-center,
   .modules-right {
-    background-color: #1d2021;
+    background-color: ${config.stylix.base16Scheme.base00};
     border-radius: 8px;
   }
 
@@ -36,7 +38,7 @@
   }
 
   #workspaces button {
-    color: #928374;
+    color: ${config.stylix.base16Scheme.base05};
     opacity: 0.5;
     padding: 0 2px;
     margin: 0 6px;
@@ -51,7 +53,7 @@
     min-width: 16px;
     min-height: 16px;
     padding: 0 2px;
-    color: #928374;
+    color: ${config.stylix.base16Scheme.base05};
   }
 
   #bluetooth, 

@@ -1,4 +1,5 @@
-{ 
+{
+  config,
   pkgs, 
   lib, 
   ... 
@@ -41,7 +42,7 @@
         lib.mapAttrsToList (name: path: ''
           mkdir -p $out/$(dirname ${name})
           cat > $out/${name}.svg <<EOF
-<svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 256 256">
+<svg xmlns="http://www.w3.org/2000/svg" fill="${config.stylix.base16Scheme.base05}" viewBox="0 0 256 256">
   <path d="${path}"/>
 </svg>
 EOF
