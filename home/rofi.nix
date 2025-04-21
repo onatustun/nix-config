@@ -13,6 +13,7 @@
       configuration {
         modi: "drun";
       }
+
       @theme "~/.config/rofi/themes/spotlight-dark" 
     '';
 
