@@ -11,16 +11,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix";
   };
 
   outputs = inputs: let
     system = "x86_64-linux";
+    pkgs = inputs.nixpkgs.legacyPackages.${system};
+    mkShell = name: import ./shells/${name}.nix { inherit pkgs; };
 
     mkHost = hostPath: inputs.nixpkgs.lib.nixosSystem {
       inherit system;
@@ -42,12 +40,7 @@
       ];
     };
   in {
-    nixosConfigurations = { 
-      laptop = mkHost ./hosts/laptop;
-    };
-
-    devShells.${system}.default = import ./shell.nix {
-      pkgs = inputs.nixpkgs;
-    };  
+    nixosConfigurations.laptop = mkHost ./hosts/laptop;
+    devShells.${system}.nix = mkShell "default"
   };
 }
