@@ -12,33 +12,4 @@
   if [ -z "$TMUX" ] && [ -n "$DISPLAY" ]; then
     tmux attach-session -t default || tmux new-session -s default
   fi
-
-  nix() {
-    if [[ "$1" == "develop" ]]; then
-      shift
-      local flake_path_given=false
-      for arg in "$@"; do
-        if [[ "$arg" == *#* ]]; then
-          flake_path_given=true
-          break
-        fi
-        if [[ "$arg" != -* ]]; then
-          flake_path_given=true
-          break
-        fi
-      done
-      if ! $flake_path_given; then
-        set -- /home/onat/nix "$@"
-      fi
-      for arg in "$@"; do
-        if [[ "$arg" == "-c" ]]; then
-          command nix develop "$@"
-          return
-        fi
-      done
-      command nix develop "$@" -c zsh
-    else
-      command nix "$@"
-    fi
-  }
 ''

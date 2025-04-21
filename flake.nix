@@ -17,7 +17,6 @@
   outputs = inputs: let
     system = "x86_64-linux";
     pkgs = inputs.nixpkgs.legacyPackages.${system};
-    mkShell = name: import ./shells/${name}.nix { inherit pkgs; };
 
     mkHost = hostPath: inputs.nixpkgs.lib.nixosSystem {
       inherit system;
@@ -40,10 +39,6 @@
     };
   in {
     nixosConfigurations.laptop = mkHost ./hosts/laptop;
-
-    devShells.${system} = {
-      default = mkShell "default";
-      node = mkShell "node";
-    };
+    devShells.${system}.default = import ./shell.nix { inherit pkgs; };
   };
 }
