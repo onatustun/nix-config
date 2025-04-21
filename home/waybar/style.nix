@@ -1,3 +1,5 @@
+{ iconsPath }:
+
 ''
   * {
     font-family: JetBrainsMono Nerd Font Mono;
@@ -66,19 +68,55 @@
     color: transparent;
   }
 
+  #wireplumber {
+    background-image: url("${iconsPath}/wireplumber/default.svg");
+  }
+
+  #wireplumber.muted {
+    background-image: url("${iconsPath}/wireplumber/muted.svg");
+    opacity: 0.5;
+  }
+
+  #bluetooth.connected {
+    background-image: url("${iconsPath}/bluetooth/connected.svg");
+  }
+
+  #bluetooth.off, #bluetooth.disabled {
+    background-image: url("${iconsPath}/bluetooth/off.svg");
+    opacity: 0.5;
+  }
+
+  #network {
+    background-image: url("${iconsPath}/network/default.svg");
+  }
+
+  #network.disabled, #network.disconnected {
+    background-image: url("${iconsPath}/network/disconnect.svg");
+    opacity: 0.5;
+  }
+  
+  #battery.empty {
+    background-image: url("${iconsPath}/battery/empty.svg");
+    opacity: 0.5;
+  }
+
+  #battery.low {
+    background-image: url("${iconsPath}/battery/low.svg");
+  }
+
   #battery {
-    background-image: url("${./icons/battery/default.svg}");
+    background-image: url("${iconsPath}/battery/default.svg");
   }
 
   #battery.high {
-    background-image: url("${./icons/battery/high.svg}");
+    background-image: url("${iconsPath}/battery/high.svg");
   }
 
   #battery.full {
-    background-image: url("${./icons/battery/full.svg}");
+    background-image: url("${iconsPath}/battery/full.svg");
   }
 
   #battery.charging {
-    background-image: url("${./icons/battery/charging.svg}");
+    background-image: url("${iconsPath}/battery/charging.svg");
   }
 ''
