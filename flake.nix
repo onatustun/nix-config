@@ -3,8 +3,7 @@
 
   inputs = {
     stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.follows = "unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -41,6 +40,9 @@
     };
   in {
     nixosConfigurations.laptop = mkHost ./hosts/laptop;
-    devShells.${system}.nix = mkShell "default"
+
+    devShells.${system} = {
+      default = mkShell "default";
+    };
   };
 }
