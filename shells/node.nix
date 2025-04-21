@@ -3,8 +3,8 @@
   ... 
 }: pkgs.mkShell {
   buildInputs = with pkgs; [
-    git
-    home-manager
-    vim
+    nodePackages.nodejs
+    nodejs
+    pnpm
   ];
 }

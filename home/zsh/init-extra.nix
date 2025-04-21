@@ -16,6 +16,22 @@
   nix() {
     if [[ "$1" == "develop" ]]; then
       shift
+      local flake_path_given=false
+      for arg in "$@"; do
+        # If argument contains a #, it's a flake reference with a shell name
+        if [[ "$arg" == *#* ]]; then
+          flake_path_given=true
+          break
+        fi
+        # If argument does not start with -, it's a flake path
+        if [[ "$arg" != -* ]]; then
+          flake_path_given=true
+          break
+        fi
+      done
+      if ! $flake_path_given; then
+        set -- /home/onat/nix "$@"
+      fi
       for arg in "$@"; do
         if [[ "$arg" == "-c" ]]; then
           command nix develop "$@"

@@ -43,6 +43,7 @@
 
     devShells.${system} = {
       default = mkShell "default";
+      node = mkShell "node";
     };
   };
 }
