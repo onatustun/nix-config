@@ -3,10 +3,16 @@
     enable = true;
 
     settings.vim = {
-      binds = {
-        cheatsheet.enable = true;
-        whichKey.enable = true;
-      };
+      autocomplete.nvim-cmp.enable = true;
+      autopairs.nvim-autopairs.enable = true;
+      binds.whichKey.enable = true;
+      git.enable = true;
+      lsp.formatOnSave = true;
+      mini.statusline.enable = true;
+      spellcheck.enable = true;
+      telescope.enable = true;
+      viAlias = true;
+      vimAlias = true;
 
       languages = {
         enableLSP = true;
@@ -14,9 +20,7 @@
 
         css.enable = true;
         html.enable = true;
-        markdown.enable = true;
         nix.enable = true;
-        rust.enable = true;
         tailwind.enable = true;
         ts.enable = true;
       };
@@ -31,8 +35,8 @@
 
       theme = {
 	      enable = true;
-	      name = "gruvbox";
-        style = "dark";
+	      name = "base16";
+        transparent = true;
 	    };
 
       treesitter = {
@@ -45,8 +49,8 @@
       };
 
       ui = {
-        noice.enable = true;
         borders.enable = true;
+        noice.enable = true;
       };
 
       visuals = {
@@ -56,18 +60,6 @@
         nvim-scrollbar.enable = true;
         nvim-web-devicons.enable = true;
       };
-
-      autocomplete.nvim-cmp.enable = true;
-      autopairs.nvim-autopairs.enable = true;
-      dashboard.alpha.enable = true;
-      filetree.neo-tree.enable = true;
-      git.enable = true;
-      lsp.formatOnSave = true;
-      spellcheck.enable = true;
-      statusline.lualine.enable = true;
-      telescope.enable = true;
-      viAlias = true;
-      vimAlias = true;
     };
   };
 }

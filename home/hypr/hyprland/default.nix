@@ -1,7 +1,23 @@
 {
+  lib,
   pkgs,
   ...
-}: {
+}: 
+let
+  configFiles = [
+    ./binds.nix
+    ./env.nix
+    ./exec.nix
+    ./input.nix
+    ./misc.nix
+    ./ricing.nix
+    ./rules.nix
+  ];
+
+  hyprSettings = lib.foldl' (
+    acc: file: acc // (import file)
+  ) {} configFiles;
+in {
   home.packages = with pkgs; [
     brightnessctl
     cliphist
@@ -26,14 +42,6 @@
       ];
     };
 
-    settings = 
-      (import ./binds.nix) //
-      (import ./env.nix) //
-      (import ./exec.nix) //
-      (import ./input.nix) //
-      (import ./misc.nix) //
-      (import ./ricing.nix) //
-      (import ./rules.nix) {
-    };  
+    settings = hyprSettings;
   };
 }

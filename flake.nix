@@ -15,11 +15,12 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = inputs: let
     system = "x86_64-linux";
-    monitorSpec = "eDP-1";
 
     mkHost = hostPath: inputs.nixpkgs.lib.nixosSystem {
       inherit system;
@@ -28,11 +29,12 @@
         hostPath
         { nixpkgs.config.allowUnfree = true; }
         inputs.home-manager.nixosModules.home-manager
+        inputs.stylix.nixosModules.stylix
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs system monitorSpec; };
+            extraSpecialArgs = { inherit inputs system; };
             users.onat = import ./home;
             backupFileExtension = "homebackup";
           };

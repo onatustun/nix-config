@@ -66,42 +66,6 @@
     color: transparent;
   }
 
-  #wireplumber {
-    background-image: url("${./icons/wireplumber/default.svg}");
-  }
-
-  #wireplumber.muted {
-    background-image: url("${./icons/wireplumber/muted.svg}");
-    opacity: 0.5;
-  }
-
-  #bluetooth.connected {
-    background-image: url("${./icons/bluetooth/connected.svg}");
-  }
-
-  #bluetooth.off, #bluetooth.disabled {
-    background-image: url("${./icons/bluetooth/off.svg}");
-    opacity: 0.5;
-  }
-
-  #network {
-    background-image: url("${./icons/network/default.svg}");
-  }
-
-  #network.disabled, #network.disconnected {
-    background-image: url("${./icons/network/disconnect.svg}");
-    opacity: 0.5;
-  }
-  
-  #battery.empty {
-    background-image: url("${./icons/battery/empty.svg}");
-    opacity: 0.5;
-  }
-
-  #battery.low {
-    background-image: url("${./icons/battery/low.svg}");
-  }
-
   #battery {
     background-image: url("${./icons/battery/default.svg}");
   }

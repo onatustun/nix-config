@@ -6,18 +6,17 @@
   };
 
   general = {
-    gaps_in = 8;
-    gaps_out = 16;
+    gaps_in = 5;
+    gaps_out = 10;
     border_size = 0;
     resize_on_border = true;
     layout = "scroller";
    };
 
   decoration = {
-    rounding = 8;
+    rounding = 5;
     active_opacity = 1.0;
     inactive_opacity = 0.8;
-    shadow.enabled = false;
 
     blur = {
       enabled = true;
@@ -32,13 +31,13 @@
 
   animations = {
     enabled = "yes";
-    bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+    bezier = "myBezier, 0.25, 0.9, 0.1, 1.02";
     animation = [
-      "windows, 1, 5, myBezier"
+      "windows, 1, 7, myBezier"
       "windowsOut, 1, 7, default, popin 80%"
       "border, 1, 10, default"
-      "fade, 1, 7, default"
-      "workspaces, 1, 6, default"
+      "fade, 1, 8, default"
+      "workspaces, 1, 7, default"
     ];
   };
 }
