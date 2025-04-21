@@ -1,10 +1,7 @@
-{ 
-  pkgs, 
-  ... 
-}: pkgs.mkShell {
-  buildInputs = with pkgs; [
-    nodePackages.nodejs
-    nodejs
-    pnpm
+{ pkgs, ... }:
+pkgs.mkShell {
+  buildInputs = [
+    pkgs.nodejs
+    pkgs.pnpm
   ];
 }
