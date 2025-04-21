@@ -1,10 +1,17 @@
 {
+  pkgs,
+  ...
+}: {
   imports = [
     ./audio.nix
     ./bluetooth.nix
     ./fonts.nix
     ./gdm.nix
     ./locale.nix
-    ./packages.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    direnv
+    git
   ];
 }
