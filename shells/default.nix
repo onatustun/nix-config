@@ -1,12 +1,16 @@
-{ pkgs, ... }:
-pkgs.mkShell {
-  buildInputs = [
-    pkgs.git
-    pkgs.nixfmt-classic
-    pkgs.vim
-    pkgs.home-manager
+{ 
+  pkgs, 
+  ... 
+}: pkgs.mkShell {
+  buildInputs = with pkgs; [
+    git
+    home-manager
+    nixd
+    nixfmt-rfc-style
+    vim
   ];
+
   shellHook = ''
-    echo "Default NixOS config development shell!"
+    echo "nixos dev shell"
   '';
 }
