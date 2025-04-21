@@ -38,7 +38,10 @@
       ];
     };
   in {
-    nixosConfigurations.laptop = mkHost ./hosts/laptop;
+    nixosConfigurations = {
+      laptop = mkHost ./hosts/laptop;
+    };
+
     devShells.${system}.default = import ./shell.nix { inherit pkgs; };
   };
 }

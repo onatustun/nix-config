@@ -29,7 +29,6 @@
       bat
       fzf
       ripgrep
-      tree
       zoxide
       obsidian
     ];

@@ -5,6 +5,7 @@
   buildInputs = with pkgs; [
     git
     home-manager
+    nix
     vim
   ];
 }
