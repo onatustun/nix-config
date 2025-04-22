@@ -6,17 +6,18 @@
   };
 
   general = {
-    gaps_in = 5;
-    gaps_out = 10;
+    gaps_in = 8;
+    gaps_out = 16;
     border_size = 0;
     resize_on_border = true;
     layout = "scroller";
    };
 
   decoration = {
-    rounding = 5;
+    rounding = 8;
     active_opacity = 1.0;
     inactive_opacity = 0.8;
+    shadow.enabled = false;
 
     blur = {
       enabled = true;

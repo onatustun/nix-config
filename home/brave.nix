@@ -7,6 +7,7 @@
     package = pkgs.brave;
 
     extensions = [
+      { id = "cdglnehniifkbagbbombnjghhcihifij"; } # Kagi Search
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin
       { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # Vimium
       { id = "ghmbeldphafepmbegfdlkpapadhbakde"; } # Proton Pass

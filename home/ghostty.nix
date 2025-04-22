@@ -12,7 +12,6 @@
       gtk-titlebar = false;
       mouse-hide-while-typing = true;
       shell-integration-features = "no-cursor";
-      theme = "Builtin Solarized Dark";
       window-decoration = true;
 
       font-feature = [ 
