@@ -5,11 +5,6 @@
     stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,18 +14,41 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake ({ inherit inputs; }) {
-      systems = [ "x86_64-linux" ];
+  outputs = inputs: let
+    system = "x86_64-linux";
+    pkgs = inputs.nixpkgs.legacyPackages.${system};
 
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-      };
-
+    mkHost = hostPath: inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit inputs; };
       modules = [
-        ./hosts.nix
-        ./shell.nix
-        ./templates/default.nix
+        hostPath
+        { nixpkgs.config.allowUnfree = true; }
+        inputs.home-manager.nixosModules.home-manager
+        inputs.stylix.nixosModules.stylix
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs system; };
+            users.onat = import ./home;
+            backupFileExtension = "homebackup";
+          };
+        }
       ];
     };
-}
+  in {
+    nixosConfigurations = {
+      laptop = mkHost ./hosts/laptop;
+    };
 
+    devShells.${system}.default = import ./shell.nix { inherit pkgs; };
+
+    templates = {
+      node = {
+        path = ./templates/node;
+        description = "node template";
+      };
+    };
+  };
+}
