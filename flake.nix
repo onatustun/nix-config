@@ -45,9 +45,9 @@
     devShells.${system}.default = import ./shell.nix { inherit pkgs; };
 
     templates = {
-      python = {
-        path = ./templates/python;
-        description = "Python development environment template";
+      node = {
+        path = ./templates/node;
+        description = "node template";
       };
     };
   };
