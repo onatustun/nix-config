@@ -5,8 +5,5 @@
     touchpad.natural_scroll = false;
   };
 
-  gestures = {
-    workspace_swipe = false;
-    workspace_swipe_forever = true;
-  };
+  gestures.workspace_swipe = false;
 }

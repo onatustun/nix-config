@@ -1,20 +1,30 @@
 { 
   monitor = ",preferred,auto,1.333667";
 
-  plugin.scroller = {
-    center_row_if_space_available = true;
+  plugin = {
+    scroller = {
+      center_row_if_space_available = true;
+    };
+
+    hyprexpo = {
+      columns = 3;
+      enable_gesture = true;
+      gesture_fingers = 3;
+      gesture_distance = 300;
+      gesture_positive = true;
+    };
   };
 
   general = {
+    border_size = 0;
     gaps_in = 8;
     gaps_out = 16;
-    border_size = 0;
-    resize_on_border = true;
     layout = "scroller";
+    resize_on_border = true;
    };
 
   decoration = {
-    rounding = 8;
+    rounding = 6;
     active_opacity = 1.0;
     inactive_opacity = 0.8;
     shadow.enabled = false;

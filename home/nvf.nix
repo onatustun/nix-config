@@ -36,7 +36,6 @@
       theme = {
 	      enable = true;
 	      name = "base16";
-        transparent = true;
 	    };
 
       treesitter = {

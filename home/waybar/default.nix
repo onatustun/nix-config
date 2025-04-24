@@ -16,18 +16,17 @@ in {
     settings = [{
       layer = "top";
       position = "bottom";
-      height = 28;
-      margin = "0 16 16";
-      start_hidden = false;
+      margin = "0 64 8";
       mode = "dock";
-      reload_style_on_change = true;
-      spacing = 0;
 
       modules-left = [ 
+        "custom/launcher" 
         "hyprland/workspaces" 
+        "wlr/taskbar"
       ];
 
       modules-right = [
+        "tray"
         "bluetooth"
         "network"
         "wireplumber"
@@ -35,24 +34,71 @@ in {
         "clock"
       ];
 
-       "hyprland/workspaces" = {
+      "custom/launcher" = {
+        format = " ";
+        tooltip = false;
+        on-click = "rofi -show";
+      };
+
+      "hyprland/workspaces" = {
         format = "{icon}";
         tooltip = false;
       };
 
+      "wlr/taskbar" = {
+        format = "{icon}";
+        icon-size = 16;
+        tooltip = true;
+        tooltip-format = "{name}";
+      };
+
+      tray = {
+        icon-size = 16;
+        spacing = 2;
+      };
+      
       bluetooth = {
         format = " ";
         format-connected-battery = " ";
+        format-disabled = "";
+        format-off = "";
+        format-no-controller = "";
         tooltip = true;
         tooltip-format-connected = "{status}";
         tooltip-format-connected-battery = "{status} {device_battery_percentage}%";
       };
 
+      network = {
+        interval = 5;
+        format = " ";
+        format-disabled = "";
+        format-disconnected = "";
+        tooltip = true;
+        tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
+      };
+
       wireplumber = {
         format = " ";
+        format-muted = "";
         tooltip = true;
         tooltip-format = "{volume}%";
         on-click = "pavucontrol";
+      };
+
+      battery = {
+        interval = 5;
+        format = " ";
+        format-time = "{H}h{M}m";
+        tooltip = true;
+        tooltip-format = "{capacity}% {time}";
+
+        states = {
+          full = 90;
+          high = 70;
+          medium = 50;
+          low = 30;
+          empty = 10;
+        };
       };
 
       clock = {
@@ -60,29 +106,6 @@ in {
         format = "{:%H:%M}";
         tooltip = true;
         tooltip-format = "{:%a %d %b}";
-      };
-
-      network = {
-        interval = 5;
-        format = " ";
-        tooltip = true;
-        tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
-      };
-
-      battery = {
-        interval = 5;
-        format = " ";
-        format-time = "{H}h {M}m";
-        tooltip = true;
-        tooltip-format = "{capacity}% {time}";
-
-        states = {
-          empty = 10;
-          low = 30;
-          medium = 50;
-          high = 70;
-          full = 90;
-        };
       };
     }];
   };

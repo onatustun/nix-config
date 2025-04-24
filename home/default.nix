@@ -27,6 +27,7 @@
 
     packages = with pkgs; [
       bat
+      bottom
       fzf
       ripgrep
       zoxide

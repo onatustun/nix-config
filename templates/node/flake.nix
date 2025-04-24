@@ -1,9 +1,7 @@
 {
   description = "nodejs flake";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  };
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
   outputs = inputs: let
     system = "x86_64-linux";

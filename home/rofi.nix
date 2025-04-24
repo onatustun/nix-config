@@ -30,10 +30,10 @@
       window {
         background-color: ${config.stylix.base16Scheme.base00}; 
         border-color: ${config.stylix.base16Scheme.base0D}; 
-        border-radius: 8;
+        border-radius: 6;
         border: 2px;
         location: center;
-        width: 540;
+        width: 360;
       }
 
       inputbar {

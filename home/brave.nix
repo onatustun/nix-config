@@ -19,7 +19,6 @@
 
     commandLineArgs = [
       "--password-store=basic"
-      "--disable-search-engine-collection"
       "--extension-mime-request-handling=always-prompt-for-install"
       "--fingerprinting-canvas-image-data-noise"
       "--fingerprinting-canvas-measuretext-noise"
