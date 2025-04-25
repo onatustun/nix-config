@@ -1,6 +1,5 @@
 {
   imports = [
     ./templates
-    ./hosts.nix
   ];
 }

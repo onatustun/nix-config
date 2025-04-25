@@ -7,7 +7,7 @@
       inherit system;
       specialArgs = { inherit inputs; };
       modules = [
-        ../hosts/${hostName}
+        ./${hostName}
         { nixpkgs.config.allowUnfree = true; }
         inputs.home-manager.nixosModules.home-manager
         inputs.stylix.nixosModules.stylix

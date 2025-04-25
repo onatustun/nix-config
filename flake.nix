@@ -25,6 +25,7 @@
     imports = [
       ./shell.nix
       ./parts
+      ./hosts
     ];
   };
 }
