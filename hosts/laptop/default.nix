@@ -2,16 +2,21 @@
   pkgs,
   ...
 }: {
-  nix.settings.experimental-features = [
-    "flakes"
-    "nix-command"
-  ];
-
   imports = [
     ./hardware-configuration.nix
     ../common
   ];
 
+  nix.settings = {
+    auto-optimise-store = true;
+    warn-dirty = false;
+
+    experimental-features = [
+      "flakes"
+      "nix-command"
+    ];
+  };
+  
   networking = {
     hostName = "laptop";
     networkmanager.enable = true;

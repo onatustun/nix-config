@@ -95,9 +95,9 @@ in {
         states = {
           full = 90;
           high = 70;
-          medium = 50;
-          low = 30;
-          empty = 10;
+          medium = 60;
+          low = 35;
+          empty = 15;
         };
       };
 
