@@ -17,12 +17,12 @@
   outputs = inputs: let
     system = "x86_64-linux";
     pkgs = inputs.nixpkgs.legacyPackages.${system};
-
-    mkHost = hostPath: inputs.nixpkgs.lib.nixosSystem {
+  in {
+    nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = { inherit inputs; };
       modules = [
-        hostPath
+        ./hosts/laptop
         { nixpkgs.config.allowUnfree = true; }
         inputs.home-manager.nixosModules.home-manager
         inputs.stylix.nixosModules.stylix
@@ -32,17 +32,19 @@
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs system; };
             users.onat = import ./home;
-            backupFileExtension = "homebackup";
           };
         }
       ];
     };
-  in {
-    nixosConfigurations = {
-      laptop = mkHost ./hosts/laptop;
-    };
 
-    devShells.${system}.default = import ./shell.nix { inherit pkgs; };
+    devShells.${system}.default = pkgs.mkShell {
+      packages = with pkgs; [
+        git 
+        home-manager 
+        nix 
+        vim
+      ];
+    };
 
     templates = {
       node = {
