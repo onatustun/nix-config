@@ -9,7 +9,6 @@
       modules = [
         ../modules
         ./${hostName}
-        { nixpkgs.config.allowUnfree = true; }
         inputs.home-manager.nixosModules.home-manager
         inputs.stylix.nixosModules.stylix
         {
