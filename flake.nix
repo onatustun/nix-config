@@ -13,11 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix";
   };

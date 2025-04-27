@@ -11,7 +11,6 @@
     ./git.nix
     ./hypr 
     ./nvf.nix
-    ./niri.nix
     ./omp.nix
     ./rofi.nix
     ./stylix.nix
@@ -19,7 +18,6 @@
     ./waybar 
     ./zsh
     inputs.nvf.homeManagerModules.default
-    inputs.niri.homeModules.niri
   ];
 
   home = {
