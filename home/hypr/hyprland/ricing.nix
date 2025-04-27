@@ -1,4 +1,4 @@
-{ 
+{
   monitor = ",preferred,auto,1.333667";
 
   plugin.scroller.center_row_if_space_available = true;

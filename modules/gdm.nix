@@ -13,7 +13,7 @@
       defaultSession = "hyprland";
 
       autoLogin = {
-        enable = true;
+        enable = false;
         user = "onat";
       };
     };
