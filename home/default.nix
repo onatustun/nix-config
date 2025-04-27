@@ -6,7 +6,6 @@
   imports = [
     ./brave.nix
     ./eza.nix
-    ./fetch.nix
     ./ff.nix
     ./ghostty.nix
     ./git.nix
@@ -30,7 +29,6 @@
       bat
       bottom
       fzf
-      nyxt
       ripgrep
       zoxide
       obsidian

@@ -93,11 +93,11 @@ in {
         tooltip-format = "{capacity}% {time}";
 
         states = {
-          full = 90;
+          full = 100;
           high = 70;
           medium = 60;
-          low = 35;
-          empty = 15;
+          low = 40;
+          empty = 0;
         };
       };
 

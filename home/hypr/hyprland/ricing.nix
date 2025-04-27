@@ -1,22 +1,10 @@
 { 
   monitor = ",preferred,auto,1.333667";
 
-  plugin = {
-    scroller = {
-      center_row_if_space_available = true;
-    };
-
-    hyprexpo = {
-      columns = 3;
-      enable_gesture = true;
-      gesture_fingers = 3;
-      gesture_distance = 300;
-      gesture_positive = true;
-    };
-  };
+  plugin.scroller.center_row_if_space_available = true;
 
   general = {
-    border_size = 0;
+    border_size = 2;
     gaps_in = 8;
     gaps_out = 16;
     layout = "scroller";
@@ -24,24 +12,25 @@
    };
 
   decoration = {
-    rounding = 6;
+    rounding = 2;
     active_opacity = 1.0;
     inactive_opacity = 0.8;
     shadow.enabled = false;
 
     blur = {
       enabled = true;
-      size = 8;
-      passes = 3;
-      new_optimizations = "on";
-      noise = 0.01;
-      contrast = 0.9;
       brightness = 0.8;
+      contrast = 0.9;
+      new_optimizations = 1;
+      noise = 0.01;
+      passes = 3;
+      size = 8;
     };
   };
 
   animations = {
     enabled = "yes";
+    first_launch_animation = true;
     bezier = "myBezier, 0.25, 0.9, 0.1, 1.02";
     animation = [
       "windows, 1, 7, myBezier"

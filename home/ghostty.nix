@@ -6,6 +6,7 @@
     installVimSyntax = true;
 
     settings = {
+      bold-is-bright = true;
       confirm-close-surface = false;
       font-family = "JetBrainsMono Nerd Font";
       font-size = 12;

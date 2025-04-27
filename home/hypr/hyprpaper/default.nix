@@ -1,6 +1,5 @@
 let
   wallpaperPath = ./wallpaper.jpg;
-  monitorID = "eDP-1";
 in {
   services.hyprpaper = {
     enable = true;
@@ -8,7 +7,7 @@ in {
     settings = {
       splash = false;
       preload = [ (toString wallpaperPath) ];
-      wallpaper = [ "${monitorID}, ${toString wallpaperPath}" ];
+      wallpaper = [ "eDP-1, ${toString wallpaperPath}" ];
     };
   };
 }
