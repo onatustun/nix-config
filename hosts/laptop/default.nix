@@ -6,6 +6,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ./hardware-configuration.nix
+    ./disko.nix
   ];
   
   networking = {
@@ -33,6 +34,5 @@
 
   services.fwupd.enable = true;
   hardware.framework.enableKmod = true;
-
   system.stateVersion = "24.11";
 }
