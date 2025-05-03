@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./brave.nix
+    ./direnv.nix
     ./eza.nix
     ./ff.nix
     ./ghostty.nix
@@ -12,6 +13,7 @@
     ./hypr 
     ./nvf.nix
     ./omp.nix
+    ./pointer.nix
     ./rofi.nix
     ./stylix.nix
     ./tmux.nix
@@ -19,11 +21,6 @@
     ./zsh
     inputs.nvf.homeManagerModules.default
   ];
-
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 
   home = {
     username = "onat";
@@ -40,26 +37,5 @@
       zoxide
       obsidian
     ];
-
-    pointerCursor = {
-      name = "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 24;
-
-      hyprcursor = {
-        enable = true;
-        size = 24;
-      };
-    };
-  };
-
-  gtk = {
-    enable = true;
-
-    cursorTheme = {
-      name = "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 24;
-    };
   };
 }
