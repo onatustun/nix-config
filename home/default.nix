@@ -20,6 +20,11 @@
     inputs.nvf.homeManagerModules.default
   ];
 
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   home = {
     username = "onat";
     homeDirectory = "/home/onat";
@@ -30,6 +35,8 @@
       bottom
       fzf
       ripgrep
+      ranger
+      xfce.thunar
       zoxide
       obsidian
     ];

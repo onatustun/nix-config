@@ -1,68 +1,92 @@
 { 
-  pkgs, 
+  pkgs,
   config,
+  lib,
   ... 
-}: {
+}: let
+  inherit (lib) mkForce;
+  inherit (config.lib.formats.rasi) mkLiteral;
+in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-  };
+    font = mkForce "JetBrainsMono Nerd Font 12";
+    extraConfig.modi = mkForce "drun";
+    
+    theme = mkForce {
+      "*" = {
+        "accent-color" = mkLiteral "${config.stylix.base16Scheme.base0D}";
+        bg0 = mkLiteral "${config.stylix.base16Scheme.base00}";
+        fg0 = mkLiteral "${config.stylix.base16Scheme.base05}";
+        "background-color" = mkLiteral "transparent";
+        "text-color" = mkLiteral "@fg0";
+        margin = mkLiteral "0";
+        padding = mkLiteral "0";
+        spacing = mkLiteral "0";
+      };
 
-  xdg.configFile = {
-    "rofi/config.rasi".text = ''
-      configuration {
-        modi: "drun";
-      }
+      window = {
+        location = mkLiteral "center";
+        width = 360;
+        "border-color" = mkLiteral "@accent-color";
+        "border-radius" = 6;
+        border = mkLiteral "2px";
+        "background-color" = mkLiteral "@bg0";
+      };
 
-      @theme "~/.config/rofi/themes/spotlight-dark" 
-    '';
+      inputbar = {
+        spacing = mkLiteral "8px";
+        padding = mkLiteral "8px";
+        "background-color" = mkLiteral "@bg0";
+      };
 
-    "rofi/themes/spotlight-dark.rasi".text = ''
-      * {
-        background-color: transparent;
-        font: "JetBrainsMono Nerd Font 12";
-        margin: 0;
-        padding: 0;
-        spacing: 0;
-        text-color: ${config.stylix.base16Scheme.base05}; 
-      }
+      "prompt, entry, element-icon, element-text" = {
+        "vertical-align" = mkLiteral "0.5";
+      };
 
-      window {
-        background-color: ${config.stylix.base16Scheme.base00}; 
-        border-color: ${config.stylix.base16Scheme.base0D}; 
-        border-radius: 6;
-        border: 2px;
-        location: center;
-        width: 360;
-      }
+      prompt = {
+        "text-color" = mkLiteral "@accent-color";
+      };
 
-      inputbar {
-        children: [ entry ];
-        font-size: 20px; 
-        padding: 16px;
-        spacing: 16px;
-      }
+      textbox = {
+        padding = mkLiteral "8px";
+        "background-color" = mkLiteral "@bg0";
+      };
 
-      textbox {
-        padding: 8px 24px;
-      }
+      listview = {
+        lines = 8;
+        columns = 1;
+        "fixed-height" = false;
+      };
 
-      listview {
-        columns: 1;
-        fixed-height: false;
-        lines: 8;
-      }
+      element = {
+        padding = mkLiteral "8px";
+        spacing = mkLiteral "8px";
+      };
 
-      element {
-        background-color: transparent;
-        padding: 8px 16px;
-        spacing: 16px;
-      }
+      "element normal normal" = {
+        "text-color" = mkLiteral "@fg0";
+      };
 
-      element selected normal,
-      element selected active {
-        background-color: ${config.stylix.base16Scheme.base0D}; 
-      }
-    '';
+      "element normal active" = {
+        "text-color" = mkLiteral "@accent-color";
+      };
+
+      "element alternate active" = {
+        "text-color" = mkLiteral "@accent-color";
+      };
+
+      "element selected" = {
+        "text-color" = mkLiteral "@bg0";
+      };
+
+      "element selected normal, element selected active" = {
+        "background-color" = mkLiteral "@accent-color";
+      };
+
+      "element-text" = {
+        "text-color" = mkLiteral "inherit";
+      };
+    };
   };
 }

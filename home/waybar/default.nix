@@ -94,10 +94,10 @@ in {
 
         states = {
           full = 100;
-          high = 70;
+          high = 80;
           medium = 60;
           low = 40;
-          empty = 0;
+          empty = 15;
         };
       };
 

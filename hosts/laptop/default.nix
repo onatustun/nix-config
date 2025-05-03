@@ -1,8 +1,10 @@
 {
+  inputs,
   pkgs,
   ...
 }: {
   imports = [
+    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ./hardware-configuration.nix
   ];
   
@@ -29,6 +31,8 @@
     };
   };
 
-  services.power-profiles-daemon.enable = true;
+  services.fwupd.enable = true;
+  hardware.framework.enableKmod = true;
+
   system.stateVersion = "24.11";
 }
