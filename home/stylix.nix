@@ -1,4 +1,7 @@
-let
+{ 
+  pkgs,
+  ... 
+}: let
   nord = {
     dark = {
       base00 = "#2E3440";
@@ -118,10 +121,31 @@ let
       base0F = "#d33682";    
     };
   };
-in {
+in {  
   stylix = {
     enable = true;
     base16Scheme = solarized.dark;
-    targets.waybar.enable = false;
+
+    targets = {
+      waybar.enable = false;
+      rofi.enable = false;
+    };
+
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+    };
   };
 }

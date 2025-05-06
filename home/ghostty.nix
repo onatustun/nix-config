@@ -1,14 +1,14 @@
 {
   programs.ghostty = {
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     installBatSyntax = true;
     installVimSyntax = true;
 
     settings = {
       bold-is-bright = true;
       confirm-close-surface = false;
-      font-family = "JetBrainsMono Nerd Font";
+      font-family = "JetBrainsMono Nerd Font Mono";
       font-size = 12;
       gtk-titlebar = false;
       mouse-hide-while-typing = true;

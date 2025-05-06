@@ -6,7 +6,6 @@
   imports = [
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ./hardware-configuration.nix
-    ./disko.nix
   ];
   
   networking = {
@@ -15,12 +14,12 @@
   };
 
   programs = {
-    zsh.enable = true;
+    fish.enable = true;
     hyprland.enable = true;
   };
 
   users = {
-    defaultUserShell = pkgs.zsh;
+    defaultUserShell = pkgs.fish;
 
     users.onat = {
       isNormalUser = true;

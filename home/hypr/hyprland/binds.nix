@@ -41,8 +41,9 @@ in {
   "$mod" = "SUPER";
 
   bind = [
-    "$mod, Q, exec, ghostty"
     "$mod, D, exec, rofi -show"
+    "$mod, E, exec, thunar"
+    "$mod, Q, exec, ghostty"
 
     "$mod, C, killactive"
     "$mod, F, fullscreen, 0"

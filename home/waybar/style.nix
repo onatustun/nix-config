@@ -9,7 +9,7 @@
     border: none;
     box-shadow: none;
     color: ${config.stylix.base16Scheme.base05};
-    font-family: JetBrainsMono Nerd Font;
+    font-family: JetBrainsMono Nerd Font Mono;
     font-size: 16px;
     margin: 0;
     min-height: 0;

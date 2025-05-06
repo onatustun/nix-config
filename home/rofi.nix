@@ -10,7 +10,7 @@ in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-    font = mkForce "JetBrainsMono Nerd Font 12";
+    font = mkForce "JetBrainsMono Nerd Font Mono 12";
     extraConfig.modi = mkForce "drun";
     
     theme = mkForce {

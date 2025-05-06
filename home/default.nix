@@ -8,6 +8,7 @@
     ./direnv.nix
     ./eza.nix
     ./ff.nix
+    ./fish.nix
     ./ghostty.nix
     ./git.nix
     ./hypr 
@@ -18,7 +19,6 @@
     ./stylix.nix
     ./tmux.nix
     ./waybar 
-    ./zsh
     inputs.nvf.homeManagerModules.default
   ];
 
@@ -27,15 +27,22 @@
     homeDirectory = "/home/onat";
     stateVersion = "24.11";
 
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      BROWSER = "brave";
+    };
+
     packages = with pkgs; [
       bat
       bottom
+      fd
       fzf
-      ripgrep
-      ranger
-      xfce.thunar
-      zoxide
       obsidian
+      ripgrep
+      xfce.thunar
+      yazi
+      zoxide
     ];
   };
 }
