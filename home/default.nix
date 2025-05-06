@@ -13,9 +13,9 @@
     ./git.nix
     ./hypr 
     ./nvf.nix
-    ./omp.nix
     ./pointer.nix
     ./rofi.nix
+    ./starship.nix
     ./stylix.nix
     ./tmux.nix
     ./waybar 

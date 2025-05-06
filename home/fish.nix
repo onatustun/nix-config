@@ -35,16 +35,12 @@
         name = "plugin-sudope";
         src = pkgs.fishPlugins.plugin-sudope.src;
       }
-      {
-        name = "z";
-        src = pkgs.fishPlugins.z.src;
-      }
     ];
 
     shellInit = ''
       set fish_greeting
       fish_vi_key_bindings
-      set -U Z_CMD "j"
+      zoxide init --cmd cd fish | source
 
       if status is-interactive
       and not set -q TMUX
