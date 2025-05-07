@@ -8,7 +8,7 @@
     ./direnv.nix
     ./eza.nix
     ./ff.nix
-    ./fish.nix
+    ./fish
     ./ghostty.nix
     ./git.nix
     ./hypr 
