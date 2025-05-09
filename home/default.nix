@@ -28,14 +28,17 @@
     stateVersion = "24.11";
 
     sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
       BROWSER = "brave";
+      EDITOR = "nvim";
+      SHELL = "fish";
+      TERM = "ghostty";
+      VISUAL = "nvim";
     };
 
     packages = with pkgs; [
       bat
       bottom
+      wlr-randr
       fd
       fzf
       obsidian

@@ -6,19 +6,14 @@
     stable.url = "github:nixos/nixpkgs/nixos-24.05";
     
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixos-hardware.url = "github:nixos/nixos-hardware/master";
-    systems.url = "github:nix-systems/default";
+    hardware.url = "github:nixos/nixos-hardware";
+    systems.url = "github:nix-systems";
     
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    nur = {
-      url = "github:nix-community/nur";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
+        
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";

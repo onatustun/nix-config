@@ -24,7 +24,7 @@
     border-radius: 6px;
   }
 
-  #custom-launcher,
+  #custom-keyboard,
   #bluetooth, 
   #network,
   #wireplumber,
@@ -32,7 +32,7 @@
   #clock,
   #workspaces button,
   #tray,
-  #taskbar button {
+  #taskbar button { 
     margin: 0 2px;
     min-width: 16px;
     min-height: 16px;
@@ -40,7 +40,7 @@
   }
 
   #window,
-  #custom-launcher,
+  #custom-keyboard,
   #bluetooth, 
   #network,
   #wireplumber,
@@ -70,8 +70,12 @@
     border-radius: 6px;
   }
 
-  #custom-launcher {
-    background-image: url("${iconsPath}/misc/launcher.svg");
+  #custom-keyboard {
+    background-image: url("${iconsPath}/misc/keyboard.svg");
+  }
+
+  #custom-keyboard.disabled {
+    opacity: 0.5;
   }
 
   #workspaces button {

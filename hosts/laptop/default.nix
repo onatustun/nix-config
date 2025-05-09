@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+    inputs.hardware.nixosModules.framework-13-7040-amd
     ./hardware-configuration.nix
   ];
   
@@ -23,6 +23,8 @@
 
     users.onat = {
       isNormalUser = true;
+      useDefaultShell = true;
+      shell = pkgs.fish;
 
       extraGroups = [
         "networkmanager"
@@ -31,7 +33,7 @@
     };
   };
 
-  services.fwupd.enable = true;
   hardware.framework.enableKmod = true;
+  services.fwupd.enable = true;
   system.stateVersion = "24.11";
 }

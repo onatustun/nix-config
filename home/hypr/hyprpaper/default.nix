@@ -7,7 +7,10 @@ in {
     settings = {
       splash = false;
       preload = [ (toString wallpaperPath) ];
-      wallpaper = [ "eDP-1, ${toString wallpaperPath}" ];
+      wallpaper = [ 
+        "eDP-1, ${toString wallpaperPath}" 
+        "DP-2, ${toString wallpaperPath}" 
+      ];
     };
   };
 }
