@@ -38,9 +38,9 @@
     packages = with pkgs; [
       bat
       bottom
-      wlr-randr
       fd
       fzf
+      nix-prefetch-git
       obsidian
       ripgrep
       xfce.thunar

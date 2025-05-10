@@ -18,4 +18,12 @@
     name = "plugin-sudope";
     src = plugin-sudope.src;
   }
+  {
+    name = "puffer";
+    src = puffer.src;
+  }
+  {
+    name = "sponge";
+    src = sponge.src;
+  }
 ]
