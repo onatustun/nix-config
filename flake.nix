@@ -7,7 +7,7 @@
     
     flake-parts.url = "github:hercules-ci/flake-parts";
     hardware.url = "github:nixos/nixos-hardware";
-    systems.url = "github:nix-systems";
+    systems.url = "github:nix-systems/default";
     
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -31,7 +31,6 @@
     systems = import inputs.systems;
 
     imports = [
-      ./shell.nix
       ./parts
       ./hosts
     ];
