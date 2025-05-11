@@ -123,10 +123,10 @@ in {
 
         states = {
           full = 100;
-          high = 80;
-          medium = 60;
-          low = 40;
-          empty = 15;
+          high = 75;
+          medium = 50;
+          low = 25;
+          empty = 0;
         };
       };
 

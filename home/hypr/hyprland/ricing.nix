@@ -40,7 +40,7 @@
       "windowsOut, 1, 7, default, popin 80%"
       "border, 1, 10, default"
       "fade, 1, 8, default"
-      "workspaces, 1, 7, default"
+      "workspaces, 0, 7, default"
     ];
   };
 }

@@ -1,7 +1,4 @@
 {
-  pkgs,
-  ...
-}: {
   imports = [
     ./audio.nix
     ./bluetooth.nix
@@ -11,9 +8,5 @@
     ./graphics.nix
     ./locale.nix
     ./nix.nix
-  ];
-
-  environment.systemPackages = with pkgs; [
-    git
   ];
 }

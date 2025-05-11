@@ -12,6 +12,7 @@
     ./ghostty.nix
     ./git.nix
     ./hypr 
+    ./nh.nix
     ./nvf.nix
     ./pointer.nix
     ./rofi.nix
@@ -29,6 +30,7 @@
 
     sessionVariables = {
       BROWSER = "brave";
+      FLAKE = "/home/onat/nix";
       EDITOR = "nvim";
       SHELL = "fish";
       TERM = "ghostty";
@@ -40,11 +42,15 @@
       bottom
       fd
       fzf
+      git
       nix-prefetch-git
       obsidian
+      rar
       ripgrep
+      unzip
       xfce.thunar
       yazi
+      zip
       zoxide
     ];
   };
