@@ -20,7 +20,6 @@
         packages = with pkgs; [
           nodejs
           pnpm
-          yarn
         ];
       };
     };
