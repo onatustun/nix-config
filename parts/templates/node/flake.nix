@@ -1,8 +1,8 @@
 {
-  description = "nodejs environment";
+  description = "nodejs typescript environment";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/commit/c0e32b7cfd8b0af5118372db72fd2b9ffab8d9c7";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
   };
