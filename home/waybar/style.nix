@@ -24,6 +24,23 @@
     border-radius: 6px;
   }
 
+  tooltip {
+    padding: 0;
+    margin: 0;
+    background-color: ${config.stylix.base16Scheme.base00};
+    color: ${config.stylix.base16Scheme.base05};
+    border-width: 0px;
+    border-color: ${config.stylix.base16Scheme.base0C};
+    border-radius: 8px;
+  }
+
+  tooltip label {
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    color: ${config.stylix.base16Scheme.base05};
+  }
+
   #custom-keyboard,
   #bluetooth, 
   #network,

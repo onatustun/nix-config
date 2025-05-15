@@ -3,7 +3,6 @@
 
   nix = {
     settings = {
-      accept-flake-config = true;
       auto-optimise-store = true;
       warn-dirty = false;
 

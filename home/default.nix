@@ -30,8 +30,8 @@
 
     sessionVariables = {
       BROWSER = "brave";
-      FLAKE = "/home/onat/nix";
       EDITOR = "nvim";
+      FLAKE = "/home/onat/nix";
       SHELL = "fish";
       TERM = "ghostty";
       VISUAL = "nvim";
@@ -43,6 +43,7 @@
       fd
       fzf
       git
+      networkmanagerapplet
       nix-prefetch-git
       obsidian
       rar
@@ -51,6 +52,7 @@
       xfce.thunar
       yazi
       zip
+      zmkBATx
       zoxide
     ];
   };

@@ -4,7 +4,6 @@
   lib,
   ...
 }: let
-
   toggleKeyboardScript = pkgs.writeScriptBin "toggle-laptop-keyboard" ''
     #!/${pkgs.runtimeShell}
     CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}"
@@ -14,19 +13,19 @@
     mkdir -p "$CACHE_DIR"
 
     if [ "$1" == "--toggle" ]; then
-        if [ -f "$STATE_FILE" ]; then
-            rm "$STATE_FILE"
-            ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 1
-        else
-            touch "$STATE_FILE"
-            ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 0
-        fi
+      if [ -f "$STATE_FILE" ]; then
+        rm "$STATE_FILE"
+        ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 1
+      else
+        touch "$STATE_FILE"
+        ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 0
+      fi
     fi
 
     if [ -f "$STATE_FILE" ]; then
-        echo '{"text": "disabled", "class": "disabled"}'
+      echo '{"text": "disabled", "class": "disabled"}'
     else
-        echo '{"text": "enabled", "class": "enabled"}'
+      echo '{"text": "enabled", "class": "enabled"}'
     fi
   '';
 
@@ -83,7 +82,7 @@ in {
 
       tray = {
         icon-size = 16;
-        spacing = 2;
+        spacing = 4;
       };
       
       bluetooth = {
@@ -93,6 +92,7 @@ in {
         format-off = "";
         format-no-controller = "";
         tooltip = true;
+        on-click = "blueman-manager";
         tooltip-format-connected = "{status}";
         tooltip-format-connected-battery = "{status} {device_battery_percentage}%";
       };

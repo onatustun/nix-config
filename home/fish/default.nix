@@ -14,6 +14,7 @@
     };
 
     shellAbbrs = import ./shellAbbrs.nix;
+    shellAliases = import ./shellAliases.nix;
     shellInit = import ./shellInit.nix;
     shellInitLast = import ./shellInitLast.nix;
   };
