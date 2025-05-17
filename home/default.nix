@@ -12,6 +12,7 @@
     ./ghostty.nix
     ./git.nix
     ./hypr 
+    ./helix.nix 
     ./nh.nix
     ./nvf.nix
     ./pointer.nix
@@ -22,7 +23,7 @@
     ./waybar 
     inputs.nvf.homeManagerModules.default
   ];
-
+    
   home = {
     username = "onat";
     homeDirectory = "/home/onat";
@@ -30,11 +31,11 @@
 
     sessionVariables = {
       BROWSER = "brave";
-      EDITOR = "nvim";
+      EDITOR = "hx";
       FLAKE = "/home/onat/nix";
       SHELL = "fish";
       TERM = "ghostty";
-      VISUAL = "nvim";
+      VISUAL = "hx";
     };
 
     packages = with pkgs; [

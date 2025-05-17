@@ -9,6 +9,7 @@ in {
       preload = [ (toString wallpaperPath) ];
       wallpaper = [ 
         "eDP-1, ${toString wallpaperPath}" 
+        "DP-2, ${toString wallpaperPath}" 
       ];
     };
   };

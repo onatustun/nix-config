@@ -1,7 +1,6 @@
 {
   layerrule = [
     "noanim, rofi"
-    "blur, rofi"
   ];
 
   windowrulev2 = [

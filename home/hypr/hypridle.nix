@@ -8,8 +8,8 @@
 
       listener = [
         { 
-          on-resume="brightnessctl -r";
-          on-timeout="brightnessctl -s set 10";
+          on-resume="brightnessctl s 10+";
+          on-timeout="brightnessctl s 10";
           timeout=240;
         }
 
