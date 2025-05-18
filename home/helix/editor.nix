@@ -29,6 +29,11 @@
   color-modes = true;
   text-width = 80;
   workspace-lsp-roots = [];
+  default-line-ending = "native";
+  insert-final-newline = true;
+  popup-border = "none";
+  indent-heuristic = "hybrid";
+  jump-label-alphabet = "abcdefghijklmnopqrstuvwxyz";
   end-of-line-diagnostics = "warning";
   clipboard-provider = "wayland";
 
@@ -112,7 +117,7 @@
       "diff"
     ];
   
-    line-numbers.min-width = 3;
+    line-numbers.min-width = 1;
   };
 
   soft-wrap = {

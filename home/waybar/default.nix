@@ -29,9 +29,18 @@
     fi
   '';
 
-  icons = import ./icons.nix { inherit pkgs lib config; };
+  icons = import ./icons.nix { inherit
+    pkgs
+    lib
+    config;
+  };
+
   iconsPath = "${icons.waybarIconsDir}";
-  style = import ./style.nix { inherit iconsPath config; };
+
+  style = import ./style.nix { inherit
+    iconsPath
+    config;
+  };
 in {
   programs.waybar = {
     enable = true;
@@ -41,7 +50,7 @@ in {
     settings = [{
       layer = "top";
       position = "bottom";
-      margin = "0 64 16";
+      margin = "0 64 8";
       mode = "dock";
 
       modules-left = [ 

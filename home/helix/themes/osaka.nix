@@ -50,7 +50,7 @@
       "tag" = { fg = "green500" }
       "type.builtin" = { fg = "yellow300", modifiers = ["bold"] }
       "type" = { fg = "yellow300" }
-      "ui.background" = {  }
+      "ui.background" = {}
       "ui.cursor" = {fg = "base02", bg = "cyan900"}
       "ui.cursor.insert" = {fg = "base04", bg = "base3"}
       "ui.cursorline" = { bg = "base04" }

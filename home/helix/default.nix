@@ -26,6 +26,15 @@
     settings = {
       theme = "${config.stylix.base16Scheme.name}";
       editor = import ./editor.nix;
+      
+      keys.normal = {
+        space.l = [
+          ":new"
+          ":insert-output lazygit"
+          ":buffer-close!"
+          ":redraw"
+        ];
+      };
     };
   };
 }

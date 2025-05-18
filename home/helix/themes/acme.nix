@@ -11,7 +11,7 @@
       "diff.minus" = {fg = "red"}
       "diff.plus" = {fg = "green"}
       "string" = "red"
-      "ui.background" = {bg="acme_bg"}
+      "ui.background" = {}
       "ui.bufferline.active" = { fg = "black", bg = "acme_bg" }
       "ui.bufferline" = { fg = "black", bg = "acme_bar_bg" }
       "ui.cursor" = {bg="cursor", fg="white"}

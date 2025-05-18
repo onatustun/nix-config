@@ -29,6 +29,7 @@
           halign = "center";
           valign = "center";
         }
+
         {
           monitor = "";
           text = ''cmd[update:1000] echo "<span>$(date +"%I:%M")</span>"'';
@@ -37,6 +38,7 @@
           halign = "center";
           valign = "center";
         }
+
         {
           monitor = "";
           text = "$USER";

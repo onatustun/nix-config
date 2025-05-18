@@ -50,8 +50,8 @@
   #clock,
   #workspaces button,
   #tray,
-  #taskbar button { 
-    margin: 0 2px;
+  #taskbar button {
+    margin: 0 1px;  
     min-width: 16px;
     min-height: 16px;
     padding: 2px;
