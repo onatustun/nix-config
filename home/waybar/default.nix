@@ -41,7 +41,7 @@ in {
     settings = [{
       layer = "top";
       position = "bottom";
-      margin = "0 64 8";
+      margin = "0 64 16";
       mode = "dock";
 
       modules-left = [ 

@@ -20,8 +20,9 @@
 
   .modules-left,
   .modules-right {
-    background-color: ${config.stylix.base16Scheme.base00};
+    background-color: #002b36;
     border-radius: 6px;
+    padding: 0 2px;
   }
 
   tooltip {

@@ -1,7 +1,6 @@
 {
   imports = [
-    ./solarized.nix
+    ./acme.nix
     ./solarized-osaka.nix
-    ./stylix.nix
   ];
 }

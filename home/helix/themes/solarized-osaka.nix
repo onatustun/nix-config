@@ -10,7 +10,6 @@
       "keyword.function" = { fg = "green500" }
       "namespace" = { fg = "violet300" }
       "operator" = { fg = "green500" }
-      # Special also affects typed chars in file finder
       "special" = { fg = "orange500" }
       "variable" = { fg = "base0" }
       "variable.builtin" = { fg = "orange500" }
@@ -24,10 +23,10 @@
       "function.special" = { fg = "magenta900" }
       "comment" = { fg = "base01" }
       "string" = { fg = "cyan500" }
-      "constant" = { fg = "cyan500" }
-      "constant.builtin" = { fg = "cyan500", modifiers = ["bold"] }
+      "constant" = { fg = "red500" }
+      "constant.builtin" = { fg = "red500", modifiers = ["bold"] }
       "constant.character" = { fg = "cyan500" }
-      "constant.character.escape" = { fg = "red900", modifiers = ["bold"] }
+      "constant.character.escape" = { fg = "orange900", modifiers = ["bold"] }
       "label" = { fg = "green500" }
       "module" = { fg = "violet900" }
       "tag" = { fg = "green500" }
@@ -37,7 +36,6 @@
       "punctuation.special" = { fg = "orange500" }
       "variable.other.member" = { fg = "blue500" }
 
-      # TODO
       "markup.heading" = "green300"
       "markup.list" = "red300"
       "markup.bold" = { fg = "yellow500", modifiers = ["bold"] }
@@ -52,12 +50,11 @@
       "diff.delta" = { fg = "orange900" }
       "diff.minus" = { fg = "red900" }
 
-      "ui.background" = { bg = "bg" }
+      "ui.background" = {  }
 
       "ui.virtual.whitespace" = { fg = "base01" }
       "ui.virtual.inlay-hint" = { fg = "base01", modifiers = ["italic"] }
 
-      # Line Numbers
       "ui.linenr" = { fg = "base01" }
       "ui.linenr.selected" = { fg = "yellow500", modifiers = ["bold"] }
       "ui.gutter.selected" = { bg = "base02" }

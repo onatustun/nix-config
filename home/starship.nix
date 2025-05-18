@@ -15,6 +15,8 @@
         truncation_symbol	= "../";
         truncate_to_repo	= false;
       };
+
+      fill.symbol = " ";
     };
   };
 }

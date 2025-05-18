@@ -23,7 +23,7 @@
     };
               
     settings = {
-      theme = "solarized-osaka";
+      theme = "acme";
 
       editor = {
         mouse = true;
