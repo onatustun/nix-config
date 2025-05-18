@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./themes.nix
+    ./themes
   ];
 
   programs.helix = {
@@ -23,7 +23,7 @@
     };
               
     settings = {
-      theme = "stylix";
+      theme = "solarized-osaka";
 
       editor = {
         mouse = true;
