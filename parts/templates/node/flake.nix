@@ -18,8 +18,14 @@
     }: {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
+          dprint
+          nil
           nodejs
+          nodePackages.prettier
+          nodePackages.typescript-language-server
           pnpm
+          tailwindcss-language-server
+          vscode-langservers-extracted
         ];
       };
     };

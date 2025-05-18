@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
@@ -14,14 +13,12 @@
     ./hypr 
     ./helix
     ./nh.nix
-    ./nvf.nix
     ./pointer.nix
     ./rofi.nix
     ./starship.nix
     ./stylix.nix
     ./tmux.nix
     ./waybar 
-    inputs.nvf.homeManagerModules.default
   ];
     
   home = {

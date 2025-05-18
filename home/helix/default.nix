@@ -1,4 +1,9 @@
 {
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     ./themes.nix
   ];
@@ -6,46 +11,53 @@
   programs.helix = {
     enable = true;
     defaultEditor = true;
+
+    extraPackages = with pkgs; [
+      markdown-oxide
+    ];
+
+    languages = import ./languages.nix { inherit
+      pkgs
+      lib
+      inputs;
+    };
               
     settings = {
       theme = "stylix";
 
       editor = {
-        auto-completion = false;
-        auto-format = true;
-        auto-info = true;
-        auto-pairs = true;
-        auto-save = false;
-        bufferline = "multiple";
-        color-modes = true;
-        completion-replace = true;
-        completion-trigger-len = 2;
-        cursorcolumn = false;
-        cursorline = true;
-        idle-timeout = 0;
-        line-number = "relative";
-        middle-click-paste = true;
         mouse = true;
-        scroll-lines = 3;
         scrolloff = 5;
-        text-width = 100;
-        true-color = false;
-        undercurl = false;
+        default-yank-register = "+";
+        middle-click-paste = false;
+        scroll-lines = 3;
 
         shell = [
           "bash"
           "-c"
         ];
-
-        lsp = {
-          auto-signature-help = true;
-          display-inlay-hints = true;
-          display-messages = true;
-          display-signature-help-docs = true;
-          enable = true;
-          goto-reference-include-declaration = true;
-          snippets = true;
-        };
+      
+        line-number = "relative";
+        cursorline = true;
+        cursorcolumn = false;
+        continue-comments = true;
+        auto-completion = true;
+        path-completion = true;
+        auto-format = false;
+        idle-timeout = 0;
+        completion-timeout = 250;
+        preview-completion-insert = true;
+        completion-trigger-len = 2;
+        completion-replace = true;       
+        auto-info = true;
+        true-color = false;
+        undercurl = false;
+        bufferline = "multiple";
+        color-modes = true;
+        text-width = 80;
+        workspace-lsp-roots = [];
+        end-of-line-diagnostics = "warning";
+        clipboard-provider = "wayland";
 
         statusline = {
           left = [
@@ -71,6 +83,17 @@
           };
         };
 
+        lsp = {
+          enable = true;
+          display-messages = true;
+          display-progress-messages = false;
+          auto-signature-help = true;
+          display-inlay-hints = true;
+          display-signature-help-docs = true;
+          snippets = true;
+          goto-reference-include-declaration = true;
+        };
+
         cursor-shape = {
           normal = "block";
           insert = "bar";
@@ -78,15 +101,18 @@
         };
 
         file-picker = {
-          deduplicate-links = true;
-          follow-symlinks = true;
-          git-exclude = true;
-          git-global = true;
-          git-ignore = true;
           hidden = false;
-          ignore = true;
+          follow-symlinks = true;
+          deduplicate-links = true;
           parents = true;
+          ignore = true;
+          git-ignore = true;
+          git-global = true;
+          git-exclude = true;
         };
+
+        auto-pairs = true;
+        auto-save = false;
 
         search = {
           smart-case = true;
@@ -94,13 +120,13 @@
         };
 
         whitespace = {
-          characters.tab = "→";
           render.tab = "all";
+          characters.tab = "→";
         };
 
         indent-guides = {
-          character = "▏";
           render = true;
+          character = "▏";
           skip-levels = 1;
         };
 
@@ -118,10 +144,23 @@
 
         soft-wrap = {
           enable = false;
-          max-indent-retain = 40;
           max-wrap = 20;
-          wrap-at-text-width = false;
+          max-indent-retain = 40;
           wrap-indicator = "↪";
+          wrap-at-text-width = false;
+        };
+
+        smart-tab = {
+          enable = true;
+          supersede-menu = false;
+        };
+
+        inline-diagnostics = {
+          cursor-line = "warning";
+          other-lines = "disable";
+          prefix-len = 1;
+          max-wrap = 20;
+          max-diagnostics = 10;
         };
       };
     };
