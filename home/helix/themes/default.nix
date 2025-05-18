@@ -1,6 +1,6 @@
 {
   imports = [
     ./acme.nix
-    ./solarized-osaka.nix
+    ./osaka.nix
   ];
 }

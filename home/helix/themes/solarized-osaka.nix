@@ -1,5 +1,5 @@
 {
-  home.file.".config/helix/themes/solarized-osaka.toml" = {
+  home.file.".config/helix/themes/osaka.toml" = {
     text = ''
       "attribute" = { fg = "blue300" }
       "keyword" = { fg = "green500" }

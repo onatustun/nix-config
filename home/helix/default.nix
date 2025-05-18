@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   inputs,
   ...
 }: {
@@ -23,7 +24,7 @@
     };
               
     settings = {
-      theme = "acme";
+      theme = "${config.stylix.base16Scheme}";
 
       editor = {
         mouse = true;
