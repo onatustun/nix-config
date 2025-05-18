@@ -3,6 +3,7 @@
   ... 
 }: let
   osaka= {
+    name = "osaka";
     base00 = "#00141A";
     base01 = "#073642";
     base02 = "#586e75";
@@ -22,6 +23,7 @@
   };
   
   acme = {
+    name = "acme";
     base00 = "#fdf6e3";
     base01 = "#eee8d5";
     base02 = "#93a1a1";
@@ -50,6 +52,8 @@ in {
       rofi.enable = false;
       waybar.enable = false;
     };
+
+    image = ./wallpaper.jpg;
 
     fonts = {
       monospace = {

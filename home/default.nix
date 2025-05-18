@@ -16,7 +16,7 @@
     ./pointer.nix
     ./rofi.nix
     ./starship.nix
-    ./stylix.nix
+    ./stylix
     ./tmux.nix
     ./waybar 
   ];

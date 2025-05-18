@@ -6,7 +6,7 @@
     ./hypridle.nix
     ./hyprland
     ./hyprlock.nix
-    ./hyprpaper
+    ./hyprpaper.nix
   ];
 
   home.packages = with pkgs; [

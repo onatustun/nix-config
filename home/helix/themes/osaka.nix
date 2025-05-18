@@ -2,109 +2,94 @@
   home.file.".config/helix/themes/osaka.toml" = {
     text = ''
       "attribute" = { fg = "blue300" }
-      "keyword" = { fg = "green500" }
-      "keyword.directive" = { fg = "red500" }
-      "keyword.storage.modifier" = { fg = "green500" }
-      "keyword.storage.type" = { fg = "green500" }
-      "keyword.control.import" = { fg = "green500" }
-      "keyword.function" = { fg = "green500" }
-      "namespace" = { fg = "violet300" }
-      "operator" = { fg = "green500" }
-      "special" = { fg = "orange500" }
-      "variable" = { fg = "base0" }
-      "variable.builtin" = { fg = "orange500" }
-      "variable.parameter" = { fg = "orange500" }
-      "type" = { fg = "yellow300" }
-      "type.builtin" = { fg = "yellow300", modifiers = ["bold"] }
-      "constructor" = { fg = "orange500" }
-      "function" = { fg = "blue500" }
-      "function.macro" = { fg = "magenta900" }
-      "function.builtin" = { fg = "blue900", modifiers = ["bold"] }
-      "function.special" = { fg = "magenta900" }
       "comment" = { fg = "base01" }
-      "string" = { fg = "cyan500" }
-      "constant" = { fg = "red500" }
       "constant.builtin" = { fg = "red500", modifiers = ["bold"] }
-      "constant.character" = { fg = "cyan500" }
       "constant.character.escape" = { fg = "orange900", modifiers = ["bold"] }
-      "label" = { fg = "green500" }
-      "module" = { fg = "violet900" }
-      "tag" = { fg = "green500" }
-      "punctuation" = { fg = "orange500" }
-      "punctuation.delimiter" = { fg = "green500" }
-      "punctuation.bracket" = { fg = "orange500" }
-      "punctuation.special" = { fg = "orange500" }
-      "variable.other.member" = { fg = "blue500" }
-
-      "markup.heading" = "green300"
-      "markup.list" = "red300"
-      "markup.bold" = { fg = "yellow500", modifiers = ["bold"] }
-      "markup.italic" = { fg = "magentac300", modifiers = ["italic"] }
-      "markup.strikethrough" = { modifiers = ["crossed_out"] }
-      "markup.link.url" = { fg = "yellow300", modifiers = ["underlined"] }
-      "markup.link.text" = "blue300"
-      "markup.quote" = "cyan300"
-      "markup.raw" = "green300"
-
-      "diff.plus" = { fg = "green900" }
+      "constant.character" = { fg = "cyan500" }
+      "constant" = { fg = "red500" }
+      "constructor" = { fg = "orange500" }
+      "diagnostic.error" = { fg = "red500", bg = "red900",underline = { style = "curl", color = "red900" } }
+      "diagnostic.hint" = { fg = "cyan500", bg = "cyan900", underline = { style = "curl", color = "cyan900" } }
+      "diagnostic.info" = { fg = "blue500", bg = "blue900", underline = { style = "curl", color = "blue900" } }
+      "diagnostic.warning" = { fg = "yellow500", bg = "yellow900", underline = { style = "curl", color = "yellow900" } }
       "diff.delta" = { fg = "orange900" }
       "diff.minus" = { fg = "red900" }
-
+      "diff.plus" = { fg = "green900" }
+      "error" = { fg = "red500", modifiers= ["bold", "underlined"] }
+      "function.builtin" = { fg = "blue900", modifiers = ["bold"] }
+      "function" = { fg = "blue500" }
+      "function.macro" = { fg = "magenta900" }
+      "function.special" = { fg = "magenta900" }
+      "hint" = { fg = "cyan500", modifiers= ["bold", "underlined"] }
+      "info" = { fg = "blue500", modifiers= ["bold", "underlined"] }
+      "keyword.control.import" = { fg = "green500" }
+      "keyword.directive" = { fg = "red500" }
+      "keyword" = { fg = "green500" }
+      "keyword.function" = { fg = "green500" }
+      "keyword.storage.modifier" = { fg = "green500" }
+      "keyword.storage.type" = { fg = "green500" }
+      "label" = { fg = "green500" }
+      "markup.bold" = { fg = "yellow500", modifiers = ["bold"] }
+      "markup.heading" = "green300"
+      "markup.italic" = { fg = "magentac300", modifiers = ["italic"] }
+      "markup.link.text" = "blue300"
+      "markup.link.url" = { fg = "yellow300", modifiers = ["underlined"] }
+      "markup.list" = "red300"
+      "markup.quote" = "cyan300"
+      "markup.raw" = "green300"
+      "markup.strikethrough" = { modifiers = ["crossed_out"] }
+      "module" = { fg = "violet900" }
+      "namespace" = { fg = "violet300" }
+      "operator" = { fg = "green500" }
+      "punctuation.bracket" = { fg = "orange500" }
+      "punctuation.delimiter" = { fg = "green500" }
+      "punctuation" = { fg = "orange500" }
+      "punctuation.special" = { fg = "orange500" }
+      "special" = { fg = "orange500" }
+      "string" = { fg = "cyan500" }
+      "tag" = { fg = "green500" }
+      "type.builtin" = { fg = "yellow300", modifiers = ["bold"] }
+      "type" = { fg = "yellow300" }
       "ui.background" = {  }
-
-      "ui.virtual.whitespace" = { fg = "base01" }
-      "ui.virtual.inlay-hint" = { fg = "base01", modifiers = ["italic"] }
-
+      "ui.cursor" = {fg = "base02", bg = "cyan900"}
+      "ui.cursor.insert" = {fg = "base04", bg = "base3"}
+      "ui.cursorline" = { bg = "base04" }
+      "ui.cursorline.primary" = { bg = "base02" }
+      "ui.cursorline.secondary" = { bg = "base03" }
+      "ui.cursor.match" = { fg = "base04", bg = "base00" }
+      "ui.cursor.primary" = { fg = "base04", bg = "base1" }
+      "ui.cursor.select" = { fg = "base02", bg = "cyan900" }
+      "ui.gutter.selected" = { bg = "base02" }
+      "ui.help" = { modifiers = ["reversed"] }
+      "ui.highlight" = { fg = "yellow100" }
       "ui.linenr" = { fg = "base01" }
       "ui.linenr.selected" = { fg = "yellow500", modifiers = ["bold"] }
-      "ui.gutter.selected" = { bg = "base02" }
-      "ui.cursorline" = { bg = "base04" }
-
+      "ui.menu" = { fg = "base0", bg = "base03" }
+      "ui.menu.selected" = { fg = "base02", bg = "base2"}
+      "ui.popup" = { fg = "base1", bg = "base02" }
+      "ui.popup.info" = {fg = "base02", bg = "base04", modifiers = ["bold"]}
+      "ui.selection" = { bg = "base02" }
+      "ui.selection.primary" = { bg = "base01" }
       "ui.statusline" = { fg = "base1", bg = "base03" }
       "ui.statusline.inactive" = { fg = "base0", bg = "base04" }
-      "ui.statusline.normal" = { fg = "base03", bg = "blue500", modifiers = ["bold"]}
       "ui.statusline.insert" = { fg = "base04", bg = "green500", modifiers = ["bold"]}
+      "ui.statusline.normal" = { fg = "base03", bg = "blue500", modifiers = ["bold"]}
       "ui.statusline.select" = { fg = "base04", bg = "yellow500", modifiers = ["bold"]}
       "ui.statusline.seperator" = { bg = "yellow500" }
-
-      "ui.popup" = { fg = "base1", bg = "base02" }
-      "ui.menu.selected" = { fg = "base02", bg = "base2"}
-      "ui.menu" = { fg = "base0", bg = "base03" }
-      "ui.window" = { fg = "base3" }
-      "ui.help" = { modifiers = ["reversed"] }
-
-      "ui.popup.info" = {fg = "base02", bg = "base04", modifiers = ["bold"]}
-
       "ui.text" = { fg = "base1" }
       "ui.text.focus" = { fg = "blue300", modifiers = ["bold"]}
       "ui.text.inactive" = { fg = "base01" }
       "ui.text.info" = { fg = "base2" }
-      "ui.highlight" = { fg = "yellow100" }
-
-      "ui.cursor.primary" = { fg = "base04", bg = "base1" }
-      "ui.cursor.select" = { fg = "base02", bg = "cyan900" }
-      "ui.cursorline.primary" = { bg = "base02" }
-      "ui.cursorline.secondary" = { bg = "base03" }
-
-      "ui.selection" = { bg = "base02" }
-      "ui.selection.primary" = { bg = "base01" }
-
       "ui.virtual.indent-guide" = { fg = "base02" }
+      "ui.virtual.inlay-hint" = { fg = "base01", modifiers = ["italic"] }
       "ui.virtual.ruler" = { fg = "red900" }
-
-      "ui.cursor" = {fg = "base02", bg = "cyan900"}
-      "ui.cursor.insert" = {fg = "base04", bg = "base3"}
-      "ui.cursor.match" = { fg = "base04", bg = "base00" }
-
+      "ui.virtual.whitespace" = { fg = "base01" }
+      "ui.window" = { fg = "base3" }
+      "variable.builtin" = { fg = "orange500" }
+      "variable" = { fg = "base0" }
+      "variable.other.member" = { fg = "blue500" }
+      "variable.parameter" = { fg = "orange500" }
       "warning" =  { fg = "yellow500", modifiers= ["bold", "underlined"] }
-      "error" = { fg = "red500", modifiers= ["bold", "underlined"] }
-      "info" = { fg = "blue500", modifiers= ["bold", "underlined"] }
-      "hint" = { fg = "cyan500", modifiers= ["bold", "underlined"] }
-
-      "diagnostic.warning" = { fg = "yellow500", bg = "yellow900", underline = { style = "curl", color = "yellow900" } }
-      "diagnostic.error" = { fg = "red500", bg = "red900",underline = { style = "curl", color = "red900" } }
-      "diagnostic.info" = { fg = "blue500", bg = "blue900", underline = { style = "curl", color = "blue900" } }
-      "diagnostic.hint" = { fg = "cyan500", bg = "cyan900", underline = { style = "curl", color = "cyan900" } }
 
       [palette]
       base04 = "#00141A"
@@ -165,8 +150,6 @@
       green500 = "#859900"
       green300 = "#BAFB00"
       green100 = "#D6FFAC"
-
-      bg = "#00141A"
     '';
   };
 }
