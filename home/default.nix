@@ -12,7 +12,7 @@
     ./ghostty.nix
     ./git.nix
     ./hypr 
-    ./helix.nix 
+    ./helix
     ./nh.nix
     ./nvf.nix
     ./pointer.nix
