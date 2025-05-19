@@ -6,7 +6,7 @@
     installVimSyntax = true;
 
     settings = {
-      background-opacity = 0.95;
+      background-opacity = 0.85;
       bold-is-bright = true;
       confirm-close-surface = false;
       font-family = "JetBrainsMono Nerd Font Mono";

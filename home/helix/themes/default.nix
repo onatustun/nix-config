@@ -1,6 +1,6 @@
 {
   imports = [
-    ./day.nix
+    ./ayu.nix
     ./osaka.nix
   ];
 }
