@@ -46,6 +46,7 @@
       obsidian
       rar
       ripgrep
+      swww
       typst
       unzip
       xfce.thunar
