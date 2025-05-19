@@ -1,6 +1,6 @@
 {
   imports = [
-    ./acme.nix
+    ./latte.nix
     ./osaka.nix
   ];
 }
