@@ -4,6 +4,8 @@
 }: let
   osaka= {
     name = "osaka";
+    type = "dark";
+    image = ./osaka.jpg;
     base00 = "#00141A";
     base01 = "#073642";
     base02 = "#586e75";
@@ -24,6 +26,8 @@
   
   latte = {
     name = "latte";
+    type = "light";
+    image = ./latte.png;
     base00 = "#eff1f5";
     base01 = "#e6e9ef";
     base02 = "#ccd0da";
@@ -41,19 +45,20 @@
     base0E = "#8839ef";
     base0F = "#dd7878";
   };
+
+  current = latte;
 in {
   stylix = {
     enable = true;
-    base16Scheme = latte;
-    polarity = "dark";
+    base16Scheme = current;
+    polarity = current.type;
+    image = current.image;
 
     targets = {
       helix.enable = false;
       rofi.enable = false;
       waybar.enable = false;
     };
-
-    image = ./wallpaper.jpg;
 
     fonts = {
       monospace = {
