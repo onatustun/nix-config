@@ -1,6 +1,6 @@
 {
   imports = [
-    ./latte.nix
+    ./day.nix
     ./osaka.nix
   ];
 }

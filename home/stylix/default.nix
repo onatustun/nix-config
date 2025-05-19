@@ -24,29 +24,29 @@
     base0F = "#d33682";
   };
   
-  latte = {
-    name = "latte";
+  day = {
+    name = "day";
     type = "light";
-    image = ./latte.png;
-    base00 = "#eff1f5";
-    base01 = "#e6e9ef";
-    base02 = "#ccd0da";
-    base03 = "#bcc0cc";
-    base04 = "#acb0be";
-    base05 = "#4c4f69";
-    base06 = "#dc8a78";
-    base07 = "#7287fd";
-    base08 = "#d20f39";
-    base09 = "#fe640b";
-    base0A = "#df8e1d";
-    base0B = "#40a02b";
-    base0C = "#179299";
-    base0D = "#1e66f5";
-    base0E = "#8839ef";
-    base0F = "#dd7878";
+    image = ./day.png;
+    base00 = "#D5D6DB";
+    base01 = "#CBCCD1";
+    base02 = "#DFE0E5";
+    base03 = "#9699A3";
+    base04 = "#4C505E";
+    base05 = "#343B59";
+    base06 = "#1A1B26";
+    base07 = "#1A1B26";
+    base08 = "#343B58";
+    base09 = "#965027";
+    base0A = "#166775";
+    base0B = "#485E30";
+    base0C = "#3E6968";
+    base0D = "#34548A";
+    base0E = "#5A4A78";
+    base0F = "#8C4351";
   };
 
-  current = latte;
+  current = day;
 in {
   stylix = {
     enable = true;
