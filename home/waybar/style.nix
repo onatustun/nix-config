@@ -20,7 +20,7 @@
 
   .modules-left,
   .modules-right {
-    background-color: ${config.stylix.base16Scheme.base01};
+    background-color: ${config.stylix.base16Scheme.bg};
     border-radius: 6px;
     padding: 0 2px;
   }

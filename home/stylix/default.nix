@@ -5,8 +5,9 @@
 }: let
   osaka= {
     name = "osaka";
-    type = "dark";
+    polarity = "dark";
     image = ./osaka.jpg;
+    bg = "rgba(7, 54, 66, 0.85)";
     base00 = "#00141A";
     base01 = "#073642";
     base02 = "#586e75";
@@ -27,8 +28,9 @@
 
   light = {
     name = "light";
-    type = "light";
+    polarity = "light";
     image = ./light.jpg;
+    bg = "rgba(253, 246, 227, 0.85)";
     base00 = "#fdf6e3";
     base01 = "#eee8d5";
     base02 = "#93a1a1";
@@ -47,12 +49,12 @@
     base0F = "#d33682";
   };
 
-  current = light;
+  current = osaka;
 in {
   stylix = {
     enable = true;
     base16Scheme = current;
-    polarity = current.type;
+    polarity = current.polarity;
     image = current.image;
 
     targets = {
@@ -94,7 +96,7 @@ in {
 
       ''
         run --quiet ${swww} img -o eDP-1 "/home/onat/nix/home/stylix/${current.name}" \
-        && run --quiet ${swww} img -o DP-2 "/home/onat/nix/home/stylix/${current.name}"
+        && run --quiet ${swww} img -o DP-3 "/home/onat/nix/home/stylix/${current.name}"
       '';
   };
 }

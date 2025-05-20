@@ -15,6 +15,15 @@
         "uwu-colors"
       ];
     }
+
+    {
+      name = "typst";
+      auto-format = true;
+
+      language-servers = [
+        "tinymist"
+      ];
+    }
   
     {
       name = "nix";
@@ -34,6 +43,17 @@
       args = [
         "lsp"
       ];
+    };
+
+    tinymist = {
+      command = lib.getExe pkgs.tinymist;
+
+      config = {
+        exportPdf = "onType";
+        outputPath = "$root/target/$dir/$name";
+        formatterMode = "typstyle";
+        formatterPrintWidth = 80;
+      };
     };
   
     typescript-language-server = {
