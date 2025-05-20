@@ -28,7 +28,7 @@
   light = {
     name = "light";
     type = "light";
-    image = ./light.png;
+    image = ./light.jpg;
     base00 = "#fdf6e3";
     base01 = "#eee8d5";
     base02 = "#93a1a1";
