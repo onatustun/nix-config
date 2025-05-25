@@ -1,6 +1,6 @@
 {
   monitor = [
-    "eDP-1,2256x1504,auto,1.333667"
+    "eDP-1,2256x1504,auto,1.6"
     "DP-3,3840x2400,auto-down,2.4"
   ];
 
@@ -16,7 +16,7 @@
 
   decoration = {
     rounding = 6;
-    active_opacity = 0.90;
+    active_opacity = 0.9;
     inactive_opacity = 0.7;
     shadow.enabled = false;
 

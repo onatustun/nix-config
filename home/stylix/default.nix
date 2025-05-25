@@ -3,11 +3,10 @@
   pkgs,
   ... 
 }: let
-  osaka= {
+  dark = {
     name = "osaka";
     polarity = "dark";
     image = ./osaka.jpg;
-    bg = "rgba(7, 54, 66, 0.85)";
     base00 = "#00141A";
     base01 = "#073642";
     base02 = "#586e75";
@@ -29,27 +28,26 @@
   light = {
     name = "light";
     polarity = "light";
-    image = ./light.jpg;
-    bg = "rgba(253, 246, 227, 0.85)";
-    base00 = "#fdf6e3";
-    base01 = "#eee8d5";
-    base02 = "#93a1a1";
-    base03 = "#839496";
-    base04 = "#657b83";
-    base05 = "#586e75";
-    base06 = "#073642";
-    base07 = "#002b36";
-    base08 = "#dc322f";
-    base09 = "#cb4b16";
-    base0A = "#b58900";
-    base0B = "#859900";
-    base0C = "#2aa198";
-    base0D = "#268bd2";
-    base0E = "#6c71c4";
-    base0F = "#d33682";
+    image = ./osaka.jpg;
+    base00 = "#eff1f5";
+    base01 = "#e6e9ef";
+    base02 = "#ccd0da";
+    base03 = "#bcc0cc";
+    base04 = "#acb0be";
+    base05 = "#4c4f69";
+    base06 = "#dc8a78";
+    base07 = "#7287fd";
+    base08 = "#d20f39";
+    base09 = "#fe640b";
+    base0A = "#df8e1d";
+    base0B = "#40a02b";
+    base0C = "#179299";
+    base0D = "#1e66f5";
+    base0E = "#8839ef";
+    base0F = "#dd7878";
   };
 
-  current = osaka;
+  current = light;
 in {
   stylix = {
     enable = true;

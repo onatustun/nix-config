@@ -1,5 +1,5 @@
 {
-  home.file.".config/helix/themes/osaka.toml" = {
+  home.file.".config/helix/themes/dark.toml" = {
     text = ''
       "attribute" = { fg = "blue300" }
       "comment" = { fg = "base01" }

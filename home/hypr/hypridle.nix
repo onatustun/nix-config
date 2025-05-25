@@ -12,8 +12,8 @@
       listener = [
         { 
           timeout=180;
-          on-timeout="brightnessctl s 30";
-          on-resume="brightnessctl s 255";
+          on-timeout="brightnessctl s 30%-";
+          on-resume="brightnessctl -s s 30%+";
         }
 
         {

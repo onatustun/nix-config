@@ -1,104 +1,165 @@
 {
   home.file.".config/helix/themes/light.toml" = {
     text = ''
-      "attribute" = { fg = "violet" }
-      "comment" = { fg = "base01" }
-      "constant.builtin" = { fg = "cyan", modifiers = ["bold"] }
-      "constant.character.escape" = { fg = "red", modifiers = ["bold"] }
-      "constant" = { fg = "cyan" }
-      "constructor" = { fg = "blue" }
-      "diagnostic.deprecated" = { modifiers = ["crossed_out"] }
-      "diagnostic.error" = { underline = { style = "curl", color = "red" } }
-      "diagnostic.hint" = { underline = { style = "curl", color = "base01" } }
-      "diagnostic.info" = { underline = { style = "curl", color = "blue" } }
-      "diagnostic.unnecessary" = { modifiers = ["dim"] }
-      "diagnostic.warning" = { underline = { style = "curl", color = "orange" } }
-      "diff.delta" = { fg = "yellow" }
-      "diff.minus" = { fg = "red" }
-      "diff.plus" = { fg = "green" }
-      "error" = { fg = "red", modifiers= ["bold", "underlined"] }
-      "function.builtin" = { fg = "blue", modifiers = ["bold"] }
-      "function" = { fg = "blue" }
-      "function.macro" = { fg = "magenta" }
-      "function.special" = { fg = "magenta" }
-      "hint" = { fg = "base01", modifiers= ["bold", "underlined"] }
-      "info" = { fg = "blue", modifiers= ["bold", "underlined"] }
-      "keyword.directive" = { fg = "orange" }
-      "keyword" = { fg = "green" }
-      "label" = { fg = "green" }
-      "markup.bold" = { fg = "yellow", modifiers = ["bold"] }
-      "markup.heading" = "blue"
-      "markup.italic" = { fg = "magenta", modifiers = ["italic"] }
-      "markup.link.text" = "red"
-      "markup.link.url" = { fg = "yellow", modifiers = ["underlined"] }
-      "markup.list" = "red"
-      "markup.quote" = "cyan"
+      "attribute" = "yellow"
+
+      "type" = "yellow"
+      "type.enum.variant" = "teal"
+
+      "constructor" = "sapphire"
+
+      "constant" = "peach"
+      "constant.character" = "teal"
+      "constant.character.escape" = "pink"
+
+      "string" = "green"
+      "string.regexp" = "pink"
+      "string.special" = "blue"
+      "string.special.symbol" = "red"
+
+      "comment" = { fg = "overlay2", modifiers = ["italic"] }
+
+      "variable" = "text"
+      "variable.parameter" = { fg = "maroon", modifiers = ["italic"] }
+      "variable.builtin" = "red"
+      "variable.other.member" = "blue"
+
+      "label" = "sapphire" # used for lifetimes
+
+      "punctuation" = "overlay2"
+      "punctuation.special" = "sky"
+
+      "keyword" = "mauve"
+      "keyword.control.conditional" = { fg = "mauve", modifiers = ["italic"] }
+
+      "operator" = "sky"
+
+      "function" = "blue"
+      "function.macro" = "mauve"
+
+      "tag" = "blue"
+
+      "namespace" = { fg = "yellow", modifiers = ["italic"] }
+
+      "special" = "blue" # fuzzy highlight
+
+      "markup.heading.1" = "red"
+      "markup.heading.2" = "peach"
+      "markup.heading.3" = "yellow"
+      "markup.heading.4" = "green"
+      "markup.heading.5" = "sapphire"
+      "markup.heading.6" = "lavender"
+      "markup.list" = "teal"
+      "markup.list.unchecked" = "overlay2"
+      "markup.list.checked" = "green"
+      "markup.bold" = { fg = "red", modifiers = ["bold"] }
+      "markup.italic" = { fg = "red", modifiers = ["italic"] }
+      "markup.link.url" = { fg = "blue", modifiers = ["italic", "underlined"] }
+      "markup.link.text" = "lavender"
+      "markup.link.label" = "sapphire"
       "markup.raw" = "green"
-      "markup.strikethrough" = { modifiers = ["crossed_out"] }
-      "module" = { fg = "violet" }
-      "namespace" = { fg = "violet" }
-      "operator" = { fg = "green" }
-      "special" = { fg = "orange" }
-      "string" = { fg = "cyan" }
-      "tag" = { fg = "magenta" }
-      "type.builtin" = { fg = "yellow", modifiers = ["bold"] }
-      "type" = { fg = "yellow" }
-      "ui.background" = {}
-      "ui.cursor" = {fg = "base02", bg = "cyan"}
-      "ui.cursor.insert" = {fg = "base03", bg = "base3"}
-      "ui.cursorline" = { bg = "base0" }
-      "ui.cursorline.primary" = { bg = "base02" }
-      "ui.cursorline.secondary" = { bg = "base025" }
-      "ui.cursor.match" = { fg = "base02", bg = "base015" }
-      "ui.cursor.primary" = { fg = "base03", bg = "base1" }
-      "ui.cursor.select" = { fg = "base02", bg = "cyan" }
-      "ui.help" = { modifiers = ["reversed"] }
-      "ui.linenr" = { fg = "base0", bg = "base02" }
-      "ui.linenr.selected" = { fg = "blue", modifiers = ["bold"] }
-      "ui.menu" = { fg = "base0", bg = "base02" }
-      "ui.menu.selected" = { fg = "base02", bg = "base2"}
-      "ui.popup" = { bg = "base02" }
-      "ui.popup.info" = { bg = "base1" }
-      "ui.selection" = { bg = "base0175" }
-      "ui.selection.primary" = { bg = "base015" }
-      "ui.statusline" = { fg = "base03", bg = "base0" }
-      "ui.statusline.inactive" = { fg = "base1", bg = "base01" }
-      "ui.statusline.insert" = { bg = "green" }
-      "ui.statusline.normal" = { bg = "blue" }
-      "ui.statusline.select" = { bg = "yellow" }
-      "ui.text" = { fg = "base1" }
-      "ui.text.focus" = { fg = "blue", modifiers = ["bold"]}
-      "ui.text.info" = {fg = "base02", modifiers = ["bold"]}
-      "ui.virtual.indent-guide" = { fg = "base02" }
-      "ui.virtual.inlay-hint" = { fg = "base01", modifiers = ["italic"] }
-      "ui.virtual.jump-label" = { fg = "red", modifiers = ["bold"] }
-      "ui.virtual.ruler" = { bg = "base02" }
-      "ui.virtual.whitespace" = { fg = "base01" }
-      "ui.window" = { fg = "base3" }
-      "variable.builtin" = { fg = "cyan", modifiers = ["bold"] }
-      "variable.function" = { fg = "blue" }
-      "warning" =  { fg = "orange", modifiers= ["bold", "underlined"] }
+      "markup.quote" = "pink"
+
+      "diff.plus" = "green"
+      "diff.minus" = "red"
+      "diff.delta" = "blue"
+
+      # User Interface
+      # --------------
+      "ui.background" = { fg = "text", bg = "base" }
+
+      "ui.linenr" = { fg = "surface1" }
+      "ui.linenr.selected" = { fg = "lavender" }
+
+      "ui.statusline" = { fg = "subtext1", bg = "mantle" }
+      "ui.statusline.inactive" = { fg = "surface2", bg = "mantle" }
+      "ui.statusline.normal" = { fg = "base", bg = "rosewater", modifiers = ["bold"] }
+      "ui.statusline.insert" = { fg = "base", bg = "green", modifiers = ["bold"] }
+      "ui.statusline.select" = { fg = "base", bg = "lavender", modifiers = ["bold"] }
+
+      "ui.popup" = { fg = "text", bg = "surface0" }
+      "ui.window" = { fg = "crust" }
+      "ui.help" = { fg = "overlay2", bg = "surface0" }
+
+      "ui.bufferline" = { fg = "subtext0", bg = "mantle" }
+      "ui.bufferline.active" = { fg = "mauve", bg = "base", underline = { color = "mauve", style = "line" } }
+      "ui.bufferline.background" = { bg = "crust" }
+
+      "ui.text" = "text"
+      "ui.text.focus" = { fg = "text", bg = "surface0", modifiers = ["bold"] }
+      "ui.text.inactive" = { fg = "overlay1" }
+      "ui.text.directory" = { fg = "blue" }
+
+      "ui.virtual" = "overlay0"
+      "ui.virtual.ruler" = { bg = "surface0" }
+      "ui.virtual.indent-guide" = "surface0"
+      "ui.virtual.inlay-hint" = { fg = "surface1", bg = "mantle" }
+      "ui.virtual.jump-label" = { fg = "rosewater", modifiers = ["bold"] }
+
+      "ui.selection" = { bg = "surface1" }
+
+      "ui.cursor" = { fg = "base", bg = "secondary_cursor" }
+      "ui.cursor.primary" = { fg = "base", bg = "rosewater" }
+      "ui.cursor.match" = { fg = "peach", modifiers = ["bold"] }
+
+      "ui.cursor.primary.normal" = { fg = "base", bg = "rosewater" }
+      "ui.cursor.primary.insert" = { fg = "base", bg = "green" }
+      "ui.cursor.primary.select" = { fg = "base", bg = "lavender" }
+
+      "ui.cursor.normal" = { fg = "base", bg = "secondary_cursor_normal" }
+      "ui.cursor.insert" = { fg = "base", bg = "secondary_cursor_insert" }
+      "ui.cursor.select" = { fg = "base", bg = "secondary_cursor_select" }
+
+      "ui.cursorline.primary" = { bg = "cursorline" }
+
+      "ui.highlight" = { bg = "surface1", modifiers = ["bold"] }
+
+      "ui.menu" = { fg = "overlay2", bg = "surface0" }
+      "ui.menu.selected" = { fg = "text", bg = "surface1", modifiers = ["bold"] }
+
+      "diagnostic.error" = { underline = { color = "red", style = "curl" } }
+      "diagnostic.warning" = { underline = { color = "yellow", style = "curl" } }
+      "diagnostic.info" = { underline = { color = "sky", style = "curl" } }
+      "diagnostic.hint" = { underline = { color = "teal", style = "curl" } }
+      "diagnostic.unnecessary" = { modifiers = ["dim"] }
+
+      error = "red"
+      warning = "yellow"
+      info = "sky"
+      hint = "teal"
 
       [palette]
-      red      = '#dc322f'
-      green    = '#859900'
-      yellow   = '#b58900'
-      blue     = '#268bd2'
-      magenta  = '#d33682'
-      cyan     = '#2aa198'
-      orange   = '#cb4b16'
-      violet   = '#6c71c4'
-      base0    = '#657b83'
-      base1    = '#586e75'
-      base2    = '#073642'
-      base3    = '#002b36'
-      base00   = '#839496'
-      base01   = '#93a1a1'
-      base015  = '#c5c8bd'
-      base0175 = '#dddbcc'
-      base02   = '#eee8d5'
-      base025  = '#f5eedb'
-      base03   = '#fdf6e3'
+      rosewater = "#dc8a78"
+      flamingo = "#dd7878"
+      pink = "#ea76cb"
+      mauve = "#8839ef"
+      red = "#d20f39"
+      maroon = "#e64553"
+      peach = "#fe640b"
+      yellow = "#df8e1d"
+      green = "#40a02b"
+      teal = "#179299"
+      sky = "#04a5e5"
+      sapphire = "#209fb5"
+      blue = "#1e66f5"
+      lavender = "#7287fd"
+      text = "#4c4f69"
+      subtext1 = "#5c5f77"
+      subtext0 = "#6c6f85"
+      overlay2 = "#7c7f93"
+      overlay1 = "#8c8fa1"
+      overlay0 = "#9ca0b0"
+      surface2 = "#acb0be"
+      surface1 = "#bcc0cc"
+      surface0 = "#ccd0da"
+      base = "#eff1f5"
+      mantle = "#e6e9ef"
+      crust = "#dce0e8"
+
+      cursorline = "#e8ecf1"
+      secondary_cursor = "#e1a99d"
+      secondary_cursor_normal = "#97a7fb"
+      secondary_cursor_insert = "#74b867"
     '';
   };
 }

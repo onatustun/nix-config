@@ -2,21 +2,24 @@
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
+    enableInteractive = true;
     enableTransience = true;
 
     settings = {
       add_newline = false;
-      format = "$directory$nix_shell$fill$git_branch$git_status$line_break$character";
-      hostname.ssh_only = false;
-      nix_shell.format = "via [$state( \($name\))]($style)";
-      username.show_always = true;
+      fill.symbol = " ";
+      format = "$directory$nix_shell$direnv$fill$git_branch$git_status$line_break$character";
+      nix_shell.format = "via [$state nix-shell]($style)";
 
-      directory = {
-        truncation_symbol	= "../";
-        truncate_to_repo	= false;
+      direnv = {
+        disabled = false;
+        format = " [$symbol]($style) ";
       };
 
-      fill.symbol = " ";
+      directory = {
+        truncation_symbol = "../";
+        truncate_to_repo = false;
+      };
     };
   };
 }
