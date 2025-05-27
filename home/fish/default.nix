@@ -9,8 +9,8 @@
     interactiveShellInit = import ./interactiveShellInit.nix;
     loginShellInit = import ./loginShellInit.nix;
 
-    plugins = import ./plugins.nix { 
-      inherit pkgs; 
+    plugins = import ./plugins.nix { inherit
+      pkgs; 
     };
 
     shellAbbrs = import ./shellAbbrs.nix;
