@@ -31,7 +31,6 @@
       "--fingerprinting-canvas-image-data-noise"
       "--fingerprinting-canvas-measuretext-noise"
       "--fingerprinting-client-rects-noise"
-      "--force-dark-mode"
       "--ignore-gpu-blocklist"
       "--no-crash-upload"
       "--no-default-browser-check"

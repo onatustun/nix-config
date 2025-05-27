@@ -4,9 +4,9 @@
   ... 
 }: let
   dark = {
-    name = "osaka";
+    name = "dark";
     polarity = "dark";
-    image = ./osaka.jpg;
+    image = ./dark.jpg;
     base00 = "#00141A";
     base01 = "#073642";
     base02 = "#586e75";
@@ -28,7 +28,7 @@
   light = {
     name = "light";
     polarity = "light";
-    image = ./osaka.jpg;
+    image = ./light.jpg;
     base00 = "#eff1f5";
     base01 = "#e6e9ef";
     base02 = "#ccd0da";

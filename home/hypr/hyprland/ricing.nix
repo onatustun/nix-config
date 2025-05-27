@@ -16,16 +16,16 @@
 
   decoration = {
     rounding = 6;
-    active_opacity = 0.9;
-    inactive_opacity = 0.7;
+    active_opacity = 1;
+    inactive_opacity = 0.9;
     shadow.enabled = false;
 
     blur = {
+      brightness = 1;
+      contrast = 1;
       enabled = true;
-      brightness = 0.8;
-      contrast = 0.9;
-      new_optimizations = 1;
-      noise = 0.01;
+      new_optimizations = true;
+      noise = 0.05;
       passes = 3;
       size = 8;
       vibrancy = 1;

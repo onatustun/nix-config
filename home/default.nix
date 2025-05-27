@@ -31,7 +31,6 @@
       EDITOR = "hx";
       FLAKE = "/home/onat/nix";
       SHELL = "fish";
-      TERM = "ghostty";
       VISUAL = "hx";
     };
 

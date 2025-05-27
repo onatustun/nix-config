@@ -1,6 +1,6 @@
 {
   imports = [
     ./light.nix
-    ./osaka.nix
+    ./dark.nix
   ];
 }

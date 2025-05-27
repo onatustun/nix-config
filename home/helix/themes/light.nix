@@ -1,6 +1,8 @@
 {
   home.file.".config/helix/themes/light.toml" = {
     text = ''
+      # Syntax highlighting
+      # -------------------
       "attribute" = "yellow"
 
       "type" = "yellow"
@@ -35,7 +37,7 @@
       "operator" = "sky"
 
       "function" = "blue"
-      "function.macro" = "mauve"
+      "function.macro" = "rosewater"
 
       "tag" = "blue"
 
@@ -66,7 +68,7 @@
 
       # User Interface
       # --------------
-      "ui.background" = { fg = "text", bg = "base" }
+      "ui.background" = { fg = "text" }
 
       "ui.linenr" = { fg = "surface1" }
       "ui.linenr.selected" = { fg = "lavender" }
@@ -74,8 +76,8 @@
       "ui.statusline" = { fg = "subtext1", bg = "mantle" }
       "ui.statusline.inactive" = { fg = "surface2", bg = "mantle" }
       "ui.statusline.normal" = { fg = "base", bg = "rosewater", modifiers = ["bold"] }
-      "ui.statusline.insert" = { fg = "base", bg = "green", modifiers = ["bold"] }
-      "ui.statusline.select" = { fg = "base", bg = "lavender", modifiers = ["bold"] }
+      "ui.statusline.insert" = { fg = "base", bg = "green", modifiers = ["bold"]  }
+      "ui.statusline.select" = { fg = "base", bg = "lavender", modifiers = ["bold"]  }
 
       "ui.popup" = { fg = "text", bg = "surface0" }
       "ui.window" = { fg = "crust" }
@@ -158,7 +160,8 @@
 
       cursorline = "#e8ecf1"
       secondary_cursor = "#e1a99d"
-      secondary_cursor_normal = "#97a7fb"
+      secondary_cursor_select = "#97a7fb"
+      secondary_cursor_normal = "#e1a99d"
       secondary_cursor_insert = "#74b867"
     '';
   };

@@ -6,7 +6,7 @@
     installVimSyntax = true;
 
     settings = {
-      background-opacity = 1.0;
+      background-opacity = 0.9;
       bold-is-bright = true;
       confirm-close-surface = false;
       font-family = "JetBrainsMono Nerd Font Mono";
@@ -15,12 +15,6 @@
       mouse-hide-while-typing = true;
       shell-integration-features = "no-cursor";
       window-decoration = true;
-
-      font-feature = [ 
-        "-liga" 
-        "-dlig" 
-        "-calt" 
-      ]; 
     };
   };
 }
