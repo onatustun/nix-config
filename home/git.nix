@@ -3,7 +3,12 @@
     git = {
       enable = true;
       userName = "onatustun";
-      userEmail = "onatustun@gmail.com";
+      userEmail = "onat@ustun.uk";
+
+      ignores = [
+        ".direnv"
+        ".envrc"
+      ];
 
       extraConfig = {
         init.defaultBranch = "main";

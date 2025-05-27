@@ -2,8 +2,7 @@
   lib,
   pkgs,
   ...
-}: 
-let
+}: let
   configFiles = [
     ./binds.nix
     ./env.nix

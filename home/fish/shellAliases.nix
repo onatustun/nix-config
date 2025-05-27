@@ -1,10 +1,8 @@
 {
-  cp = "cp -rvp";
+  cat = "bat";
   grep = "rg";
-  ls = "eza -la";
-  mv = "mv -v";
-  q = "exit";
-  rm = "rm -rv";
-  sl = "ls";
+  h = "cd ~";
+  ls = "eza -al";
+  sl = "eza -al";
   tree = "eza -T";
 }

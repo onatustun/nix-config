@@ -3,6 +3,7 @@
   ...
 }: {
   imports = [
+    ./bat.nix
     ./brave.nix
     ./direnv.nix
     ./eza.nix
@@ -35,7 +36,6 @@
     };
 
     packages = with pkgs; [
-      bat
       bottom
       fd
       fzf

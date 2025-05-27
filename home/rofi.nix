@@ -11,7 +11,11 @@ in {
     enable = true;
     package = pkgs.rofi-wayland;
     font = mkForce "JetBrainsMono Nerd Font Mono 12";
-    extraConfig.modi = mkForce "drun";
+    location = mkForce "center";
+
+    modes = mkForce [
+      "drun"
+    ];
     
     theme = mkForce {
       "*" = {
@@ -26,7 +30,6 @@ in {
       };
 
       window = {
-        location = mkLiteral "center";
         width = 360;
         "border-color" = mkLiteral "@accent-color";
         "border-radius" = 6;
