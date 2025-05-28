@@ -4,31 +4,6 @@
   lib,
   ...
 }: let
-  toggleKeyboardScript = pkgs.writeScriptBin "toggle-laptop-keyboard" ''
-    #!/${pkgs.runtimeShell}
-    CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}"
-    STATE_FILE="$CACHE_DIR/laptop-keyboard-disabled"
-    KEYBOARD_NAME="at-translated-set-2-keyboard"
-
-    mkdir -p "$CACHE_DIR"
-
-    if [ "$1" == "--toggle" ]; then
-      if [ -f "$STATE_FILE" ]; then
-        rm "$STATE_FILE"
-        ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 1
-      else
-        touch "$STATE_FILE"
-        ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 0
-      fi
-    fi
-
-    if [ -f "$STATE_FILE" ]; then
-      echo '{"text": "disabled", "class": "disabled"}'
-    else
-      echo '{"text": "enabled", "class": "enabled"}'
-    fi
-  '';
-
   icons = import ./icons.nix { inherit
     pkgs
     lib
@@ -60,22 +35,12 @@ in {
 
       modules-right = [
         "tray"
-        "custom/keyboard" 
         "bluetooth"
         "network"
         "wireplumber"
         "battery"
         "clock"
       ];
-
-      "custom/keyboard" = {
-        format = " ";
-        tooltip = false;
-        on-click = "${toggleKeyboardScript}/bin/toggle-laptop-keyboard --toggle";
-        exec = "${toggleKeyboardScript}/bin/toggle-laptop-keyboard";
-        return-type = "json";
-        interval = 1;
-      };
 
       "hyprland/workspaces" = {
         format = "{icon}";

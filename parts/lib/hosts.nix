@@ -10,8 +10,8 @@
     };
 
     modules = [
-      ../hosts/shared
-      ../hosts/${hostName}
+      ../../hosts/shared
+      ../../hosts/${hostName}
       inputs.home-manager.nixosModules.home-manager
       inputs.stylix.nixosModules.stylix
 
@@ -26,7 +26,7 @@
             system; 
           };
 
-          users.onat = import ../home;
+          users.onat = import ../../home;
         };
       }
     ] ++ extraModules;
