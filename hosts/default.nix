@@ -1,8 +1,8 @@
-{ 
-  mkHosts,
-  ... 
+{
+  mkHost,
+  ...
 }: {
-  flake.nixosConfigurations = mkHosts {
-    laptop = "x86_64-linux" [];
+  flake.nixosConfigurations = {
+    laptop = mkHost "laptop" "x86_64-linux" [];
   };
 }

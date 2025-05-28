@@ -2,7 +2,7 @@
   inputs,
   ...
 }: let
-  mkHostSystem = hostName: system: extraModules: inputs.nixpkgs.lib.nixosSystem {
+  mkHost = hostName: system: extraModules: inputs.nixpkgs.lib.nixosSystem {
     inherit system;
 
     specialArgs = { inherit
@@ -32,5 +32,5 @@
     ] ++ extraModules;
   };
 in {
-  _module.args.mkHosts = hosts: inputs.nixpkgs.lib.mapAttrs mkHostSystem hosts;
+  _module.args.mkHost = mkHost;
 }

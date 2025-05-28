@@ -1,6 +1,6 @@
 {
   imports = [
-    ./mkHost.nix
+    ./lib
     ./shell.nix
     ./templates
   ];
