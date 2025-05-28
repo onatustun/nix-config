@@ -22,6 +22,7 @@
           nodejs
           nodePackages.prettier
           pnpm
+          tailwindcss
           tailwindcss-language-server
           vscode-langservers-extracted
           zola

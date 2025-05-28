@@ -1,0 +1,36 @@
+{
+  inputs,
+  ...
+}: let
+  mkHostSystem = hostName: system: extraModules: inputs.nixpkgs.lib.nixosSystem {
+    inherit system;
+
+    specialArgs = { inherit
+      inputs; 
+    };
+
+    modules = [
+      ../hosts/shared
+      ../hosts/${hostName}
+      inputs.home-manager.nixosModules.home-manager
+      inputs.stylix.nixosModules.stylix
+
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "backup";
+
+          extraSpecialArgs = { inherit
+            inputs
+            system; 
+          };
+
+          users.onat = import ../home;
+        };
+      }
+    ] ++ extraModules;
+  };
+in {
+  _module.args.mkHosts = hosts: inputs.nixpkgs.lib.mapAttrs mkHostSystem hosts;
+}
