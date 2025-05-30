@@ -8,23 +8,23 @@
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit
-    inputs; 
+    inputs;
   } {
     systems = import inputs.systems;
-   
-    perSystem = { 
+
+    perSystem = {
       pkgs,
-      ... 
+      ...
     }: {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
-          dprint
           nil
           nodejs
           nodePackages.prettier
-          nodePackages.typescript-language-server
           pnpm
+          tailwindcss
           tailwindcss-language-server
+          typescript-language-server
           vscode-langservers-extracted
         ];
       };

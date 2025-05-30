@@ -10,7 +10,6 @@
       auto-format = true;
 
       language-servers = [
-        "dprint"
         "typescript-language-server"
         "uwu-colors"
       ];
@@ -22,6 +21,7 @@
 
       language-servers = [
         "tinymist"
+        "uwu-colors"
       ];
     }
   
@@ -37,14 +37,6 @@
   ];
 
   language-server = {
-    dprint = {
-      command = lib.getExe pkgs.dprint;
-
-      args = [
-        "lsp"
-      ];
-    };
-
     tinymist = {
       command = lib.getExe pkgs.tinymist;
 

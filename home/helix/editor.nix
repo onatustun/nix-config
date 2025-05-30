@@ -9,7 +9,7 @@
     "bash"
     "-c"
   ];
-
+      
   line-number = "relative";
   cursorline = true;
   cursorcolumn = false;
