@@ -42,6 +42,7 @@
     color: ${config.stylix.base16Scheme.base05};
   }
 
+  #custom-keyboard,
   #bluetooth, 
   #network,
   #wireplumber,
@@ -57,6 +58,7 @@
   }
 
   #window,
+  #custom-keyboard,
   #bluetooth, 
   #network,
   #wireplumber,
@@ -84,6 +86,14 @@
 
   tooltip {
     border-radius: 6px;
+  }
+
+  #custom-keyboard {
+    background-image: url("${iconsPath}/misc/keyboard.svg");
+  }
+
+  #custom-keyboard.disabled {
+    opacity: 0.5;
   }
 
   #workspaces button {

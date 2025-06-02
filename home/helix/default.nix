@@ -13,19 +13,24 @@
     enable = true;
     defaultEditor = true;
 
-    extraPackages = with pkgs; [
-      markdown-oxide
-    ];
-
     languages = import ./languages.nix { inherit
-      pkgs
+      inputs
       lib
-      inputs;
+      pkgs;
     };
 
     settings = {
       theme = "${config.stylix.base16Scheme.name}";
       editor = import ./editor.nix;
+
+      keys.normal.C-g = [
+        ":write-all"
+        ":new"
+        ":insert-output lazygit"
+        ":buffer-close!"
+        ":redraw"
+        ":reload-all"
+      ];
     };
   };
 }
