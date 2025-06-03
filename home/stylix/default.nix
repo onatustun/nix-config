@@ -47,7 +47,7 @@
     base0F = "#dd7878";
   };
 
-  current = light;
+  current = dark;
 in {
   stylix = {
     enable = true;

@@ -43,7 +43,6 @@
   }
 
   #custom-keyboard,
-  #bluetooth, 
   #network,
   #wireplumber,
   #battery, 
@@ -59,7 +58,6 @@
 
   #window,
   #custom-keyboard,
-  #bluetooth, 
   #network,
   #wireplumber,
   #battery,
@@ -70,9 +68,6 @@
     color: transparent;
   }
 
-  #bluetooth.off, 
-  #bluetooth.disabled, 
-  #bluetooth.no-controller, 
   #wireplumber.muted,
   #network.disabled, 
   #network.disconnected {
@@ -102,17 +97,6 @@
 
   #workspaces button.active {
     opacity: 1;
-  }
-
-  #bluetooth.on, 
-  #bluetooth.discoverable, 
-  #bluetooth.pairable {
-    background-image: url("${iconsPath}/bluetooth/default.svg");
-  }
-
-  #bluetooth.connected, 
-  #bluetooth.discovering {
-    background-image: url("${iconsPath}/bluetooth/connected.svg");
   }
 
   #network {

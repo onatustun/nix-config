@@ -61,7 +61,6 @@ in {
       modules-right = [
         "tray"
         "custom/keyboard" 
-        "bluetooth"
         "network"
         "wireplumber"
         "battery"
@@ -94,18 +93,6 @@ in {
         interval = 1;
       };
            
-      bluetooth = {
-        format = " ";
-        format-connected-battery = " ";
-        format-disabled = "";
-        format-off = "";
-        format-no-controller = "";
-        tooltip = true;
-        on-click = "blueman-manager";
-        tooltip-format-connected = "{status}";
-        tooltip-format-connected-battery = "{status} {device_battery_percentage}%";
-      };
-
       network = {
         interval = 5;
         format = " ";
