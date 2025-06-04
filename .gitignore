@@ -1,2 +1,13 @@
 .direnv
 .envrc
+
+*
+!.gitignore
+
+!home/*
+!hosts/*
+!parts/*
+
+!flake.lock
+
+!*.nix
