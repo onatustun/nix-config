@@ -2,6 +2,7 @@
   monitor = [
     "eDP-1,2256x1504,auto,1.6"
     "DP-3,3840x2400,auto-down,2.4"
+    "DP-4,1920x1080,auto-up,1.4"
   ];
 
   plugin.scroller.center_row_if_space_available = true;
