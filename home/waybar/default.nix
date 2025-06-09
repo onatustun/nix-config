@@ -36,16 +36,15 @@
   };
 
   iconsPath = "${icons.waybarIconsDir}";
-
-  style = import ./style.nix { inherit
-    iconsPath
-    config;
-  };
-in {
+  in {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    style = style;
+
+    style = import ./style.nix { inherit
+      iconsPath
+      config;
+    };
 
     settings = [{
       layer = "top";

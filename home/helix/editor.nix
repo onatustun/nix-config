@@ -55,9 +55,9 @@
     ];
 
     mode = {
-      normal = "NORMAL";
-      insert = "INSERT";
-      select = "SELECT";
+      normal = "N";
+      insert = "I";
+      select = "S";
     };
   };
 
