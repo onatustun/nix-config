@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   ...
 }: {
   imports = [
@@ -8,31 +7,7 @@
     ./hardware-configuration.nix
   ];
   
-  networking = {
-    hostName = "laptop";
-    networkmanager.enable = true;
-  };
-
-  programs = {
-    fish.enable = true;
-    hyprland.enable = true;
-  };
-
-  users = {
-    defaultUserShell = pkgs.fish;
-
-    users.onat = {
-      isNormalUser = true;
-      useDefaultShell = true;
-      shell = pkgs.fish;
-
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-      ];
-    };
-  };
-
+  networking.hostName = "laptop";
   hardware.framework.enableKmod = true;
   services.fwupd.enable = true;
   system.stateVersion = "24.11";

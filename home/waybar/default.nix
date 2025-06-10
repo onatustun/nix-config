@@ -59,7 +59,7 @@
 
       modules-right = [
         "tray"
-        "custom/keyboard" 
+        # "custom/keyboard" 
         "network"
         "wireplumber"
         "battery"
@@ -97,6 +97,7 @@
         format = " ";
         format-disabled = "";
         format-disconnected = "";
+        format-ethernet = " ";
         tooltip = true;
         tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
       };

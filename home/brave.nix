@@ -16,6 +16,19 @@
     ];
 
     commandLineArgs = [
+      "--enable-features=UseOzonePlatform,WaylandWindowDecorations"
+      "--ozone-platform=wayland"
+
+      "--enable-gpu-rasterization"
+      "--enable-oop-rasterization"
+      "--enable-zero-copy"
+      "--ignore-gpu-blocklist"
+      "--enable-hardware-overlays"
+
+      "--enable-smooth-scrolling"
+      "--enable-tcp-fast-open"
+      "--max_old_space_size=4096"
+
       "--disable-breakpad"
       "--disable-reading-from-canvas"
       "--disable-speech-api"
@@ -23,21 +36,15 @@
       "--disable-sync"
       "--disable-wake-on-wifi"
       "--disk-cache=$XDG_RUNTIME_DIR/chromium-cache"
-      "--enable-features=UseOzonePlatform"
-      "--enable-gpu-rasterization"
-      "--enable-oop-rasterization"
-      "--enable-zero-copy"
       "--extension-mime-request-handling=always-prompt-for-install"
       "--fingerprinting-canvas-image-data-noise"
       "--fingerprinting-canvas-measuretext-noise"
       "--fingerprinting-client-rects-noise"
-      "--ignore-gpu-blocklist"
       "--no-crash-upload"
       "--no-default-browser-check"
       "--no-first-run"
       "--no-pings"
       "--no-service-autorun"
-      "--ozone-platform=wayland"
       "--popups-to-tabs"
     ];
   };

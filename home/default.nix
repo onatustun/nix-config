@@ -1,5 +1,7 @@
 {
   pkgs,
+  inputs,
+  system,
   ...
 }: {
   imports = [
@@ -21,6 +23,8 @@
     ./tmux.nix
     ./waybar 
   ];
+
+  xdg.userDirs.createDirectories = true;
     
   home = {
     username = "onat";

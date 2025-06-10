@@ -9,8 +9,6 @@
       background-opacity = 0.9;
       bold-is-bright = true;
       confirm-close-surface = false;
-      font-family = "JetBrainsMono Nerd Font Mono";
-      font-size = 12;
       gtk-titlebar = false;
       mouse-hide-while-typing = true;
       shell-integration-features = "no-cursor";

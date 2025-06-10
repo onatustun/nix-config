@@ -2,6 +2,14 @@
   programs.fish = {
     shellInit = ''
       fish_vi_key_bindings
+
+      set fish_cursor_default block
+      set fish_cursor_insert block
+      set fish_cursor_replace_one block
+      set fish_cursor_replace block
+      set fish_cursor_external block
+      set fish_cursor_visual block
+
       zoxide init --cmd cd fish | source
     '';
 

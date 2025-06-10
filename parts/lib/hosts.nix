@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   ...
 }: let
   mkHost = hostName: system: extraModules: inputs.nixpkgs.lib.nixosSystem {

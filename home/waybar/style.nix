@@ -103,6 +103,10 @@
     background-image: url("${iconsPath}/network/default.svg");
   }
 
+  #network.ethernet {
+    background-image: url("${iconsPath}/network/ethernet.svg");
+  }
+
   #wireplumber {
     background-image: url("${iconsPath}/wireplumber/default.svg");
   }

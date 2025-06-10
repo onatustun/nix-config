@@ -3,7 +3,7 @@
     git = {
       enable = true;
       userName = "onatustun";
-      userEmail = "onat@ustun.uk";
+      userEmail = "o@ust.sh";
 
       ignores = [
         ".direnv"

@@ -8,5 +8,6 @@
     ./graphics.nix
     ./locale.nix
     ./nix.nix
+    ./user.nix
   ];
 }

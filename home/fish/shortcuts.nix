@@ -12,6 +12,7 @@
       s = "sudo -E";
       sx = "sudo -E hx";
       x = "hx";
+      syz = "sudo -E yazi";
       yz = "yazi";
     };
 

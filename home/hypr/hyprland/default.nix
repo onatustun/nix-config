@@ -23,6 +23,8 @@ in {
     dunst
     networkmanagerapplet
     wl-clipboard
+    xdg-desktop-portal-hyprland
+    xdg-user-dirs
   ];
 
   wayland.windowManager.hyprland = {
