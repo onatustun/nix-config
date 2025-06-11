@@ -3,11 +3,12 @@
   lib,
   ...
 }: let
-  mkHost = hostName: system: extraModules: inputs.nixpkgs.lib.nixosSystem {
-    inherit system;
+  mkHost = hostName: system: extraModules: inputs.nixpkgs.lib.nixosSystem { inherit
+    system;
 
     specialArgs = { inherit
-      inputs; 
+      inputs
+      hostName; 
     };
 
     modules = [

@@ -1,8 +1,12 @@
 {
   pkgs,
+  hostName,
   ...
 }: {
-  networking.networkmanager.enable = true;
+  networking = {
+    networkmanager.enable = true;
+    hostName = "hostName";
+  };
 
   programs = {
     fish.enable = true;

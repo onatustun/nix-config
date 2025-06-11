@@ -7,8 +7,6 @@
   imports = [
     ./hardware-configuration.nix
   ];
-  
-  networking.hostName = "desktop";
 
   hardware.nvidia = {
     modesetting.enable = true;
