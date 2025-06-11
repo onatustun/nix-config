@@ -1,7 +1,11 @@
 {
-  monitor = [
-    # "eDP-1,2256x1504,auto,1.6"
-    # "DP-3,3840x2400,auto-down,2.4"
+  isLaptop,
+  ...
+}: {
+  monitor = if isLaptop then [
+    "eDP-1,2256x1504,auto,1.6"
+    "DP-3,3840x2400,auto-down,2.4"
+  ] else [
     "HDMI-A-1,1920x1080@240,auto-left, 1"
     "DP-4,1920x1080@240,auto,1"
   ];

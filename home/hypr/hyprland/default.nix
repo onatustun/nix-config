@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  isLaptop,
   ...
 }: let
   configFiles = [
@@ -14,14 +15,21 @@
   ];
 
   hyprSettings = lib.foldl' (
-    acc: file: acc // (import file)
-  ) {} configFiles;
+    acc: file: 
+      acc // (if lib.functionArgs (import file) ? isLaptop 
+        then (import file) { inherit
+          isLaptop;
+        } else (import file) {
+        })
+  ) {
+  } configFiles;
 in {
   home.packages = with pkgs; [
     brightnessctl
     cliphist
     dunst
     networkmanagerapplet
+    playerctl
     wl-clipboard
     xdg-desktop-portal-hyprland
     xdg-user-dirs

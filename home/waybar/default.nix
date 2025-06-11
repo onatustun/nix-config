@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  isLaptop,
   ...
 }: let
   toggleKeyboardScript = pkgs.writeScriptBin "toggle-laptop-keyboard" ''
@@ -59,12 +60,14 @@
 
       modules-right = [
         "tray"
-        # "custom/keyboard" 
         "network"
         "wireplumber"
         "battery"
         "clock"
-      ];
+      ] ++ (if isLaptop then [
+        "custom/keyboard"
+      ] else[
+      ]);
 
       "hyprland/workspaces" = {
         format = "{icon}";
@@ -98,6 +101,7 @@
         format-disabled = "";
         format-disconnected = "";
         format-ethernet = " ";
+        exec = "nm-connection-editor &";
         tooltip = true;
         tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
       };

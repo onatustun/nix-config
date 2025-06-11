@@ -1,8 +1,6 @@
 {
   home.file.".config/helix/themes/light.toml" = {
     text = ''
-      # Syntax highlighting
-      # -------------------
       "attribute" = "yellow"
 
       "type" = "yellow"
@@ -66,8 +64,6 @@
       "diff.minus" = "red"
       "diff.delta" = "blue"
 
-      # User Interface
-      # --------------
       "ui.background" = { fg = "text" }
 
       "ui.linenr" = { fg = "surface1" }

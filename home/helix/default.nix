@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   inputs,
   ...
@@ -15,7 +14,6 @@
 
     languages = import ./languages.nix { inherit
       inputs
-      lib
       pkgs;
     };
 

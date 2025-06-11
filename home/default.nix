@@ -1,7 +1,5 @@
 {
   pkgs,
-  inputs,
-  system,
   ...
 }: {
   imports = [
@@ -44,7 +42,6 @@
       fd
       fzf
       git
-      networkmanagerapplet
       nix-prefetch-git
       obsidian
       rar

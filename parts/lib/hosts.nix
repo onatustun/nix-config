@@ -24,7 +24,9 @@
 
           extraSpecialArgs = { inherit
             inputs
-            system; 
+            system;
+
+            isLaptop = hostName == "laptop";
           };
 
           users.onat = import ../../home;
