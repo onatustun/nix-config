@@ -7,12 +7,13 @@
       lg = "lazygit";
       md = "mkdir -pv";
       mv = "mv -v";
+      q = "exit";
       rmf = "rm -frv";
       rm = "rm -rv";
       s = "sudo -E";
       sx = "sudo -E hx";
-      x = "hx";
       syz = "sudo -E yazi";
+      x = "hx";
       yz = "yazi";
     };
 
