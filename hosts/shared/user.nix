@@ -22,7 +22,13 @@
       shell = pkgs.fish;
 
       extraGroups = [
+        "audo"
+        "input"
+        "libvirt"
         "networkmanager"
+        "power"
+        "storage"
+        "video"
         "wheel"
       ];
     };

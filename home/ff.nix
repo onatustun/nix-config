@@ -1,4 +1,7 @@
-{ 
+{
+  isLaptop,
+  ...
+}: { 
   programs.fastfetch = {
     enable = true;
 
@@ -19,15 +22,18 @@
         "uptime"
 	      "packages"
 	      "cpu"
-	      "gpu"
-	      "swap"
+      ] ++ (if !isLaptop then [
+        "gpu"
+      ] else [
+      ]) ++ [
+ 	      "swap"
 	      "disk"
         "display"
         "wm"
 	      "brightness"
 	      "shell"
 	      "terminal"
-        "colors"
+        "colors"       
       ];
     };
   };

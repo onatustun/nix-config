@@ -7,7 +7,9 @@
 
     specialArgs = { inherit
       inputs
-      hostName; 
+      hostName;
+      
+      isLaptop = hostName == "laptop";
     };
 
     modules = [

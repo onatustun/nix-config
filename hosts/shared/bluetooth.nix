@@ -1,8 +1,11 @@
 {
+  isLaptop,
+  ...
+}: {
   hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
+    enable = isLaptop;
+    powerOnBoot = isLaptop;
   };
 
-  services.blueman.enable = true;
+  services.blueman.enable = isLaptop;
 }

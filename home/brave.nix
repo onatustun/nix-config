@@ -30,6 +30,7 @@
       "--enable-tcp-fast-open"
       "--max_old_space_size=4096"
 
+      "--enable-blink-features=MiddleClickAutoscroll"
       "--disable-breakpad"
       "--disable-reading-from-canvas"
       "--disable-speech-api"

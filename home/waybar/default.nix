@@ -60,14 +60,15 @@
 
       modules-right = [
         "tray"
-        "network"
-        "wireplumber"
-        "battery"
-        "clock"
       ] ++ (if isLaptop then [
         "custom/keyboard"
       ] else[
-      ]);
+      ]) ++ [
+        "network"
+        "wireplumber"
+        "battery"
+        "clock"       
+      ];
 
       "hyprland/workspaces" = {
         format = "{icon}";
@@ -101,7 +102,7 @@
         format-disabled = "";
         format-disconnected = "";
         format-ethernet = " ";
-        exec = "nm-connection-editor &";
+        on-click = "nm-connection-editor";
         tooltip = true;
         tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
       };

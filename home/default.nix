@@ -22,7 +22,20 @@
     ./waybar 
   ];
 
-  xdg.userDirs.createDirectories = true;
+  xdg = {
+    enable = true;
+    userDirs.createDirectories = true;
+    mime.enable = true;
+
+    mimeApps = {
+      enable = true;
+
+      defaultApplications = {
+        "inode/directory" = "thunar.desktop";
+        "text/plain" = "helix.desktop";
+      };
+    };
+  };
 
   manual = {
     html.enable = false;
@@ -51,6 +64,7 @@
       less
       nix-prefetch-git
       obsidian
+      prettyping
       rar
       ripgrep
       swww

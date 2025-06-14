@@ -5,11 +5,9 @@
   env = [
     "ELECTRON_OZONE_PLATFORM_HINT,auto"
     "NIXOS_OZONE_WL, 1" 
-
     "MOZ_ENABLE_WAYLAND, 1"
     "QT_QPA_PLATFORM,wayland"
     "XDG_SESSION_TYPE,wayland"
-    
     "HYPRCURSOR_SIZE,24"
     "HYPRCURSOR_THEME,hypr_Bibata-Modern-Ice"
     "WLR_NO_HARDWARE_CURSORS,1"
