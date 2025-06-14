@@ -6,13 +6,14 @@
       ff = "fastfetch";
       lg = "lazygit";
       md = "mkdir -pv";
+      mkdir = "mkdir -pv";
       mv = "mv -v";
-      q = "exit";
       rmf = "rm -frv";
       rm = "rm -rv";
       s = "sudo -E";
       sx = "sudo -E hx";
       syz = "sudo -E yazi";
+      "x." = "hx .";
       x = "hx";
       yz = "yazi";
     };
@@ -23,6 +24,7 @@
       h = "cd ~";
       ls = "eza -al";
       man = "batman";
+      q = "exit";
       sl = "eza -al";
       tree = "eza -T";
     };

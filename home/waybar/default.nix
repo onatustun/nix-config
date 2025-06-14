@@ -1,8 +1,8 @@
 {
   config,
-  pkgs,
-  lib,
   isLaptop,
+  lib,
+  pkgs,
   ...
 }: let
   toggleKeyboardScript = pkgs.writeScriptBin "toggle-laptop-keyboard" ''

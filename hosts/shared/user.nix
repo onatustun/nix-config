@@ -1,6 +1,6 @@
 {
-  pkgs,
   hostName,
+  pkgs,
   ...
 }: {
   networking = {

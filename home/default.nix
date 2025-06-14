@@ -48,6 +48,7 @@
       fd
       fzf
       git
+      less
       nix-prefetch-git
       obsidian
       rar

@@ -1,7 +1,7 @@
 {
+  isLaptop,
   lib,
   pkgs,
-  isLaptop,
   ...
 }: let
   configFiles = [
