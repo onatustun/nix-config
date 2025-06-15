@@ -63,6 +63,8 @@
       git
       less
       nix-prefetch-git
+      nix-search-cli
+      nix-search-tv
       obsidian
       prettyping
       rar

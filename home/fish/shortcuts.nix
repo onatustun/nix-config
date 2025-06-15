@@ -9,14 +9,15 @@
       md = "mkdir -pv";
       mkdir = "mkdir -pv";
       mv = "mv -v";
+      ns = "nix-search";
       rmf = "rm -frv";
       rm = "rm -rv";
+      s = "sudo -E";
       "sx." = "sudo -E hx .";
       sx = "sudo -E hx";
       syz = "sudo -E yazi";
       "x." = "hx .";
       x = "hx";
-      s = "sudo -E";
       yz = "yazi";
       z = "cd";
       zi = "cdi";
@@ -30,6 +31,7 @@
       h = "cd ~";
       ls = "eza -al";
       man = "batman";
+      nsf = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
       ping = "prettyping";
       q = "exit";
       sl = "eza -al";

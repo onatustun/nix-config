@@ -3,19 +3,8 @@
   pkgs,
   ...
 }: {
-  systemd.services = {
-    NetworkManager-wait-online.enable = false;
-    systemd-networkd-wait-online.enable = false;
-  };
-  
-  services.journald.extraConfig = ''
-    SystemMaxUse=100M
-    RuntimeMaxUse=50M
-    ForwardToSyslog=no
-    ForwardToWall=no
-  '';
-
   boot = {
+    plymouth.enable = true;
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest;
 
@@ -35,18 +24,16 @@
 
     initrd = {
       systemd.enable = true;
-      verbose = false;
+      supportedFilesystems = [
+        "ext4"
+      ];
     };
 
     kernelParams = [
       "quiet"
       "systemd.show_status=auto"
       "rd.udev.log_level=3"
-      "udev.log_level=3"
-      "rd.systemd.show_status=auto"
-      "nmi_watchdog=0"
-      "rootwait"
-      "rd.timeout=10"
+      "plymouth.use-simpledrm"
     ];
     
     loader = {
