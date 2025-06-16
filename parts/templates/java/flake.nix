@@ -18,7 +18,6 @@
     }: {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
-          gradle
           jdk
           jdt-language-server
           maven

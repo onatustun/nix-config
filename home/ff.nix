@@ -1,5 +1,6 @@
 {
   isLaptop,
+  lib,
   ...
 }: { 
   programs.fastfetch = {
@@ -22,10 +23,9 @@
         "uptime"
 	      "packages"
 	      "cpu"
-      ] ++ (if !isLaptop then [
+      ] ++ lib.optional (!isLaptop) [
         "gpu"
-      ] else [
-      ]) ++ [
+      ] ++ [
  	      "swap"
 	      "disk"
         "display"

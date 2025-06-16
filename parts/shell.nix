@@ -7,6 +7,7 @@
       packages = with pkgs; [
         git
         home-manager
+        nh
         nil
         nix
         vim

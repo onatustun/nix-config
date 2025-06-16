@@ -37,7 +37,7 @@
   };
 
   iconsPath = "${icons.waybarIconsDir}";
-  in {
+in {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -60,10 +60,9 @@
 
       modules-right = [
         "tray"
-      ] ++ (if isLaptop then [
+      ] ++ lib.optional isLaptop [
         "custom/keyboard"
-      ] else[
-      ]) ++ [
+      ] ++ [
         "network"
         "wireplumber"
         "battery"

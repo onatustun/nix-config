@@ -1,5 +1,6 @@
 {
   isLaptop,
+  lib,
   ...
 }: {
   env = [
@@ -13,12 +14,11 @@
     "WLR_NO_HARDWARE_CURSORS,1"
     "WLR_RENDERER_ALLOW_SOFTWARE,1"
     "XCURSOR_SIZE,24"
-  ] ++ (if !isLaptop then [
+  ] ++ lib.optionals (!isLaptop) [
     "GBX_BACKEND, nvidia-drm"
     "__GLX_VENDOR_LIBRARY_NAME,nvidia"
     "LIBVA_DRIVER_NAME,nvidia"
     "__GL_GSYNC_ALLOWED, 1"
     "__GL_VRR_ALLOWED, 1"
-  ] else [
-  ]);
+  ];
 }

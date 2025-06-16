@@ -18,7 +18,8 @@
     acc: file: 
       acc // (if lib.functionArgs (import file) ? isLaptop 
         then (import file) { inherit
-          isLaptop;
+          isLaptop
+          lib;
         } else (import file) {
         })
   ) {
