@@ -34,8 +34,9 @@
       systems = import inputs.systems;
 
       imports = [
-        ./parts
         ./hosts
+        ./parts
+        ./pkgs
       ];
     };
 }

@@ -6,8 +6,8 @@
       "DP-3,3840x2400,auto-down,2.4"
     ]
     else [
-      "HDMI-A-1,1920x1080@240,auto-left, 1"
-      "DP-4,1920x1080@240,auto,1"
+      "HDMI-A-1,1920x1080@240,auto, 1"
+      "DP-2,1920x1080@240,auto-up,1, transform, 2"
     ];
 
   plugin.scroller.center_row_if_space_available = true;
