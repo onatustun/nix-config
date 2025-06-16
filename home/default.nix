@@ -1,26 +1,29 @@
 {
+  wm,
   pkgs,
+  lib,
   ...
 }: {
-  imports = [
-    ./bat.nix
-    ./brave.nix
-    ./direnv.nix
-    ./eza.nix
-    ./ff.nix
-    ./fish
-    ./ghostty.nix
-    ./git.nix
-    ./hypr 
-    ./helix
-    ./nh.nix
-    ./pointer.nix
-    ./rofi.nix
-    ./starship.nix
-    ./stylix
-    ./tmux.nix
-    ./waybar 
-  ];
+  imports =
+    [
+      ./bat.nix
+      ./brave.nix
+      ./direnv.nix
+      ./eza.nix
+      ./ff.nix
+      ./fish
+      ./ghostty.nix
+      ./git.nix
+      ./helix
+      ./nh.nix
+      ./pointer.nix
+      ./rofi.nix
+      ./starship.nix
+      ./stylix
+      ./tmux.nix
+      ./waybar
+    ]
+    ++ lib.optional (wm == "hyprland") ./hypr;
 
   xdg = {
     enable = true;
@@ -42,7 +45,7 @@
     json.enable = false;
     manpages.enable = false;
   };
-    
+
   home = {
     username = "onat";
     homeDirectory = "/home/onat";

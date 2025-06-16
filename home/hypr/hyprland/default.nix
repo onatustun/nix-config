@@ -14,16 +14,17 @@
     ./rules.nix
   ];
 
-  hyprSettings = lib.foldl' (
-    acc: file: 
-      acc // (if lib.functionArgs (import file) ? isLaptop 
-        then (import file) { inherit
-          isLaptop
-          lib;
-        } else (import file) {
-        })
-  ) {
-  } configFiles;
+  hyprSettings =
+    lib.foldl' (
+      acc: file:
+        acc
+        // (
+          if lib.functionArgs (import file) ? isLaptop
+          then (import file) {inherit isLaptop lib;}
+          else (import file) {}
+        )
+    ) {}
+    configFiles;
 in {
   home.packages = with pkgs; [
     brightnessctl
@@ -39,17 +40,11 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-
-    plugins = with pkgs.hyprlandPlugins; [
-      hyprscroller
-    ];
+    plugins = [pkgs.hyprlandPlugins.hyprscroller];
 
     systemd = {
       enable = true;
-
-      variables = [
-        "--all"
-      ];
+      variables = ["--all"];
     };
 
     settings = hyprSettings;

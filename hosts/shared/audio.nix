@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ... 
-}: {
+{pkgs, ...}: {
   security.rtkit.enable = true;
 
   services = {
@@ -20,7 +17,5 @@
     };
   };
 
-  environment.systemPackages = [
-    pkgs.pavucontrol
-  ];
+  environment.systemPackages = [pkgs.pavucontrol];
 }

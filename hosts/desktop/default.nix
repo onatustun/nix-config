@@ -1,10 +1,5 @@
-{
-  config,
-  ...
-}: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+{config, ...}: {
+  imports = [./hardware-configuration.nix];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -12,9 +7,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  services.xserver.videoDrivers = [
-    "nvidia"
-  ];
-
+  services.xserver.videoDrivers = ["nvidia"];
   system.stateVersion = "24.11";
 }

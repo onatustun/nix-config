@@ -24,7 +24,7 @@
       bind-key c new-window -c "#{pane_current_path}"
       bind-key % split-window -h -c "#{pane_current_path}"
       bind-key '"' split-window -v -c "#{pane_current_path}"
-    
+
       set -g status on
       set -g status-position top
       set -g status-style fg=brightwhite

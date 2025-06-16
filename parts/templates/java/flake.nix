@@ -7,23 +7,22 @@
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit
-    inputs;
-  } {
-    systems = import inputs.systems;
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = import inputs.systems;
 
-    perSystem = {
-      pkgs,
-      ...
-    }: {
-      devShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          jdk
-          jdt-language-server
-          maven
-          nil
-        ];
+      perSystem = {pkgs, ...}: {
+        formatter = pkgs.alejandra;
+
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            alejandra
+            jdk
+            jdt-language-server
+            maven
+            nil
+          ];
+        };
       };
     };
-  };
 }

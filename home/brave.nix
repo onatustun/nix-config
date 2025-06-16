@@ -1,19 +1,16 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.chromium = {
     enable = true;
     package = pkgs.brave;
 
     extensions = [
-      { id = "cdglnehniifkbagbbombnjghhcihifij"; } # Kagi Search
-      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin
-      { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # Vimium
-      { id = "gebbhagfogifgggkldgodflihgfeippi"; } # Return Youtube Dislike
-      { id = "ghmbeldphafepmbegfdlkpapadhbakde"; } # Proton Pass
-      { id = "jinjaccalgkegednnccohejagnlnfdag"; } # Violentmonkey
-      { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock
+      {id = "cdglnehniifkbagbbombnjghhcihifij";} # Kagi Search
+      {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # uBlock Origin
+      {id = "dbepggeogbaibhgnhhndojpepiihcmeb";} # Vimium
+      {id = "gebbhagfogifgggkldgodflihgfeippi";} # Return Youtube Dislike
+      {id = "ghmbeldphafepmbegfdlkpapadhbakde";} # Proton Pass
+      {id = "jinjaccalgkegednnccohejagnlnfdag";} # Violentmonkey
+      {id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # SponsorBlock
     ];
 
     commandLineArgs = [

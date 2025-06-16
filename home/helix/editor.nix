@@ -6,13 +6,13 @@
     "bash"
     "-c"
   ];
-      
+
   line-number = "relative";
   cursorline = true;
   continue-comments = false;
   auto-format = false;
   idle-timeout = 0;
-  completion-replace = true;       
+  completion-replace = true;
   bufferline = "multiple";
   color-modes = true;
   insert-final-newline = false;
@@ -68,7 +68,7 @@
       "spacer"
       "diff"
     ];
-  
+
     line-numbers.min-width = 1;
   };
 }

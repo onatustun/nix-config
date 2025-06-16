@@ -2,7 +2,7 @@
   isLaptop,
   lib,
   ...
-}: { 
+}: {
   programs.fastfetch = {
     enable = true;
 
@@ -10,31 +10,34 @@
       logo.source = "nixos";
 
       display.size = {
-	      maxPrefix = "MB";
-	      ndigits = 0;
+        maxPrefix = "MB";
+        ndigits = 0;
       };
 
-      modules = [
-        "title"
-        "os"
-        "host"
-	      "bios"
-        "kernel"
-        "uptime"
-	      "packages"
-	      "cpu"
-      ] ++ lib.optional (!isLaptop) [
-        "gpu"
-      ] ++ [
- 	      "swap"
-	      "disk"
-        "display"
-        "wm"
-	      "brightness"
-	      "shell"
-	      "terminal"
-        "colors"       
-      ];
+      modules =
+        [
+          "title"
+          "os"
+          "host"
+          "bios"
+          "kernel"
+          "uptime"
+          "packages"
+          "cpu"
+        ]
+        ++ lib.optional (!isLaptop) [
+          "gpu"
+        ]
+        ++ [
+          "swap"
+          "disk"
+          "display"
+          "wm"
+          "brightness"
+          "shell"
+          "terminal"
+          "colors"
+        ];
     };
   };
 }

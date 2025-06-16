@@ -1,7 +1,4 @@
-{
-  isLaptop,
-  ...
-}: {
+{isLaptop, ...}: {
   hardware.bluetooth = {
     enable = isLaptop;
     powerOnBoot = isLaptop;

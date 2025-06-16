@@ -1,7 +1,7 @@
 {
-  lib, 
+  lib,
   pkgs,
-  ... 
+  ...
 }: let
   dark = {
     name = "dark";
@@ -90,9 +90,7 @@ in {
     reload-swww = let
       swww = "${pkgs.swww}/bin/swww";
     in
-      lib.hm.dag.entryAfter ["writeBoundary"]
-
-      ''
+      lib.hm.dag.entryAfter ["writeBoundary"] ''
         run --quiet ${swww} img -o eDP-1 "/home/onat/nix/home/stylix/${current.name}" \
         && run --quiet ${swww} img -o DP-3 "/home/onat/nix/home/stylix/${current.name}"
       '';

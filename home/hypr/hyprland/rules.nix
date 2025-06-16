@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   layerrule = [
     "noanim, rofi"
   ];

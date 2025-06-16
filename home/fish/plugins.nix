@@ -1,7 +1,5 @@
-{ 
-  pkgs,
-  ...
-}: with pkgs.fishPlugins; [
+{pkgs, ...}:
+with pkgs.fishPlugins; [
   {
     name = "autopair";
     src = autopair.src;

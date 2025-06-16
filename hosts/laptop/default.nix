@@ -8,10 +8,7 @@
     ./hardware-configuration.nix
   ];
 
-  environment.systemPackages = [
-    pkgs.framework-tool
-  ];
-  
+  environment.systemPackages = [pkgs.framework-tool];
   hardware.framework.enableKmod = true;
   services.fwupd.enable = true;
   system.stateVersion = "24.11";

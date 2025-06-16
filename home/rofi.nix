@@ -1,8 +1,8 @@
-{ 
+{
   config,
   lib,
   pkgs,
-  ... 
+  ...
 }: let
   inherit (lib) mkForce;
   inherit (config.lib.formats.rasi) mkLiteral;
@@ -13,7 +13,7 @@ in {
     extraConfig.modi = mkForce "drun";
     font = mkForce "JetBrainsMono Nerd Font Mono 12";
     location = mkForce "center";
-    
+
     theme = mkForce {
       "*" = {
         "accent-color" = mkLiteral "${config.stylix.base16Scheme.base0D}";

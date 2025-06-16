@@ -7,47 +7,49 @@
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit
-    inputs; 
-  } {
-    systems = import inputs.systems;
-   
-    perSystem = { 
-      lib,
-      pkgs,
-      ... 
-    }: {
-      devShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          gnumake
-          nil
-          nodejs
-          nodePackages.prettier
-          tailwindcss
-          tailwindcss-language-server
-          vscode-langservers-extracted
-          zola
-        ];
-      };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = import inputs.systems;
 
-      packages.default = pkgs.stdenv.mkDerivation {
-        pname = "";
-        version = "0.1.0";
-        src = lib.cleanSource ./.;
+      perSystem = {
+        lib,
+        pkgs,
+        ...
+      }: {
+        formatter = pkgs.alejandra;
 
-        nativeBuildInputs = with pkgs; [
-          nodejs
-          tailwindcss
-          zola
-        ];
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            alejandra
+            gnumake
+            nil
+            nodejs
+            nodePackages.prettier
+            tailwindcss
+            tailwindcss-language-server
+            vscode-langservers-extracted
+            zola
+          ];
+        };
 
-        buildPhase = ''
-          tailwindcss -i ./src/input.css -o ./static/output.css --minify
-          zola build --output-dir $out --force
-        '';
+        packages.default = pkgs.stdenv.mkDerivation {
+          pname = "";
+          version = "0.1.0";
+          src = lib.cleanSource ./.;
 
-        dontInstall = true;
+          nativeBuildInputs = with pkgs; [
+            nodejs
+            tailwindcss
+            zola
+          ];
+
+          buildPhase = ''
+            tailwindcss -i ./src/input.css -o ./static/output.css --minify
+            zola build --output-dir $out --force
+          '';
+
+          dontInstall = true;
+        };
       };
     };
-  };
 }

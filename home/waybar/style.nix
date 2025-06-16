@@ -1,4 +1,4 @@
-{ 
+{
   config,
   iconsPath,
   ...
@@ -45,12 +45,12 @@
   #custom-keyboard,
   #network,
   #wireplumber,
-  #battery, 
+  #battery,
   #clock,
   #workspaces button,
   #tray,
   #taskbar button {
-    margin: 0 1px;  
+    margin: 0 1px;
     min-width: 16px;
     min-height: 16px;
     padding: 2px;
@@ -69,7 +69,7 @@
   }
 
   #wireplumber.muted,
-  #network.disabled, 
+  #network.disabled,
   #network.disconnected {
     background-image: none;
     margin: 0;
@@ -110,7 +110,7 @@
   #wireplumber {
     background-image: url("${iconsPath}/wireplumber/default.svg");
   }
-  
+
   #battery.empty {
     background-image: url("${iconsPath}/battery/empty.svg");
     opacity: 0.5;

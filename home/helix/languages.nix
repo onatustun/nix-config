@@ -89,10 +89,10 @@
         "uwu-colors"
       ];
     }
-  
+
     {
       name = "nix";
-      auto-format = false;
+      auto-format = true;
 
       language-servers = [
         "nil"

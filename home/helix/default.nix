@@ -11,11 +11,7 @@
   programs.helix = {
     enable = true;
     defaultEditor = true;
-
-    languages = import ./languages.nix { inherit
-      inputs
-      pkgs;
-    };
+    languages = import ./languages.nix {inherit inputs pkgs;};
 
     settings = {
       theme = "${config.stylix.base16Scheme.name}";

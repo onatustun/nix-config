@@ -1,8 +1,8 @@
 {
   config,
-  lib, 
-  pkgs, 
-  ... 
+  lib,
+  pkgs,
+  ...
 }: let
   myWaybarIcons = {
     "battery/charging" = "M150.81,131.79a8,8,0,0,1,.35,7.79l-16,32a8,8,0,0,1-14.32-7.16L131.06,144H112a8,8,0,0,1-7.16-11.58l16-32a8,8,0,1,1,14.32,7.16L124.94,128H144A8,8,0,0,1,150.81,131.79ZM96,16h64a8,8,0,0,0,0-16H96a8,8,0,0,0,0,16ZM200,56V224a24,24,0,0,1-24,24H80a24,24,0,0,1-24-24V56A24,24,0,0,1,80,32h96A24,24,0,0,1,200,56Zm-16,0a8,8,0,0,0-8-8H80a8,8,0,0,0-8,8V224a8,8,0,0,0,8,8h96a8,8,0,0,0,8-8Z";
@@ -26,23 +26,22 @@
     "misc/keyboard" = "M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48Zm0,144H32V64H224V192Zm-16-64a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16H200A8,8,0,0,1,208,128Zm0-32a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16H200A8,8,0,0,1,208,96ZM72,160a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16h8A8,8,0,0,1,72,160Zm96,0a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,160Zm40,0a8,8,0,0,1-8,8h-8a8,8,0,0,1,0-16h8A8,8,0,0,1,208,160Z";
   };
 
-  waybarIconsDir = pkgs.runCommand "waybar-icons"
-    { }
-    (
-      ''
-        mkdir -p $out
-      ''
-      + lib.concatStringsSep "\n" (
-        lib.mapAttrsToList (name: path: ''
-          mkdir -p $out/$(dirname ${name})
-          cat > $out/${name}.svg <<EOF
-<svg xmlns="http://www.w3.org/2000/svg" fill="${config.stylix.base16Scheme.base05}" viewBox="0 0 256 256">
-  <path d="${path}"/>
-</svg>
-EOF
-        '') myWaybarIcons
-      )
-    );
+  waybarIconsDir = pkgs.runCommand "waybar-icons" {} (
+    ''
+      mkdir -p $out
+    ''
+    + lib.concatStringsSep "\n" (
+      lib.mapAttrsToList (name: path: ''
+                  mkdir -p $out/$(dirname ${name})
+                  cat > $out/${name}.svg <<EOF
+        <svg xmlns="http://www.w3.org/2000/svg" fill="${config.stylix.base16Scheme.base05}" viewBox="0 0 256 256">
+          <path d="${path}"/>
+        </svg>
+        EOF
+      '')
+      myWaybarIcons
+    )
+  );
 in {
   waybarIconsDir = waybarIconsDir;
   home.file."waybar/icons".source = waybarIconsDir;

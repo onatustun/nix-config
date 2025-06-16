@@ -1,8 +1,5 @@
-{
-  pkgs,
-  ...
-}: {
-  fonts = { 
+{pkgs, ...}: {
+  fonts = {
     fontDir.enable = true;
     fontconfig.enable = true;
 
