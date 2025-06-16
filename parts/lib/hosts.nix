@@ -1,11 +1,10 @@
 {inputs, ...}: let
-  mkHost = hostName: system: config: extraModules:
+  mkHost = hostName: system: extraModules:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
       specialArgs = {
         inherit inputs hostName;
-        inherit (config) wm shell;
         isLaptop = hostName == "laptop";
       };
 
@@ -24,7 +23,6 @@
 
               extraSpecialArgs = {
                 inherit inputs system;
-                inherit (config) wm shell;
                 isLaptop = hostName == "laptop";
               };
 

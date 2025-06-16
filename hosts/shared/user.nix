@@ -1,8 +1,6 @@
 {
   hostName,
   pkgs,
-  shell,
-  wm,
   ...
 }: {
   networking = {
@@ -11,17 +9,17 @@
   };
 
   programs = {
-    ${shell}.enable = true;
-    ${wm}.enable = true;
+    fish.enable = true;
+    hyprland.enable = true;
   };
 
   users = {
-    defaultUserShell = pkgs.${shell};
+    defaultUserShell = pkgs.fish;
 
     users.onat = {
       isNormalUser = true;
       useDefaultShell = true;
-      shell = pkgs.${shell};
+      shell = pkgs.fish;
 
       extraGroups = [
         "audio"

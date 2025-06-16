@@ -1,4 +1,4 @@
-{wm, ...}: {
+{
   services = {
     xserver = {
       enable = true;
@@ -10,7 +10,7 @@
     };
 
     displayManager = {
-      defaultSession = wm;
+      defaultSession = "hyprland";
 
       autoLogin = {
         enable = true;

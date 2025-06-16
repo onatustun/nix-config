@@ -1,30 +1,23 @@
-{
-  wm,
-  shell,
-  pkgs,
-  lib,
-  ...
-}: {
-  imports =
-    [
-      ./bat.nix
-      ./brave.nix
-      ./direnv.nix
-      ./eza.nix
-      ./ff.nix
-      ./${shell}
-      ./ghostty.nix
-      ./git.nix
-      ./helix
-      ./nh.nix
-      ./pointer.nix
-      ./rofi.nix
-      ./starship.nix
-      ./stylix
-      ./tmux.nix
-      ./waybar
-    ]
-    ++ lib.optional (wm == "hyprland") ./hypr;
+{pkgs, ...}: {
+  imports = [
+    ./bat.nix
+    ./brave.nix
+    ./direnv.nix
+    ./eza.nix
+    ./ff.nix
+    ./fish
+    ./ghostty.nix
+    ./git.nix
+    ./helix
+    ./hypr
+    ./nh.nix
+    ./pointer.nix
+    ./rofi.nix
+    ./starship.nix
+    ./stylix
+    ./tmux.nix
+    ./waybar
+  ];
 
   xdg = {
     enable = true;
@@ -56,7 +49,7 @@
       BROWSER = "brave";
       EDITOR = "hx";
       FLAKE = "/home/onat/nix";
-      SHELL = shell;
+      SHELL = "fish";
       VISUAL = "hx";
     };
 
