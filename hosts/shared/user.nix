@@ -3,7 +3,6 @@
   pkgs,
   shell,
   wm,
-  lib,
   ...
 }: {
   networking = {
@@ -11,13 +10,10 @@
     hostName = hostName;
   };
 
-  programs =
-    {
-      ${shell}.enable = true;
-    }
-    // lib.optionalAttrs (wm == "hyprland") {
-      hyprland.enable = true;
-    };
+  programs = {
+    ${shell}.enable = true;
+    ${wm}.enable = true;
+  };
 
   users = {
     defaultUserShell = pkgs.${shell};

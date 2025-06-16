@@ -24,8 +24,7 @@
       ./tmux.nix
       ./waybar
     ]
-    ++ lib.optional (lib.elem "hyprland" wm) ./hypr
-    ++ lib.optional (lib.elem "niri" wm) ./niri;
+    ++ lib.optional (wm == "hyprland") ./hypr;
 
   xdg = {
     enable = true;
