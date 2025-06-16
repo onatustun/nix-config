@@ -15,7 +15,7 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    textmkdir -p $out/share/icons/hypr_Bibata-Modern-Ice
+    mkdir -p $out/share/icons/hypr_Bibata-Modern-Ice
     cd $out/share/icons/hypr_Bibata-Modern-Ice
     tar -xzf $src --strip-components=1
 
