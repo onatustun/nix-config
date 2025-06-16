@@ -16,7 +16,7 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };    
+    };
 
     stylix = {
       url = "github:danth/stylix";

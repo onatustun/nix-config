@@ -1,5 +1,9 @@
 {
-  perSystem = {pkgs, config, ...}: {
+  perSystem = {
+    pkgs,
+    config,
+    ...
+  }: {
     formatter = pkgs.alejandra;
 
     devShells.default = pkgs.mkShell {
@@ -17,7 +21,7 @@
       DIRENV_LOG_FORMAT = "";
       shellHook = ''
         ${config.pre-commit.installationScript}
-      '';      
+      '';
     };
   };
 }
