@@ -4,8 +4,6 @@
     config,
     ...
   }: {
-    formatter = pkgs.alejandra;
-
     devShells.default = pkgs.mkShell {
       packages = with pkgs; [
         alejandra
@@ -22,6 +20,8 @@
       shellHook = ''
         ${config.pre-commit.installationScript}
       '';
+
+      formatter = pkgs.alejandra;
     };
   };
 }

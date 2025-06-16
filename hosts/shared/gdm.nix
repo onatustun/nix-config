@@ -9,13 +9,6 @@
       };
     };
 
-    displayManager = {
-      defaultSession = wm;
-
-      autoLogin = {
-        enable = true;
-        user = "onat";
-      };
-    };
+    displayManager.defaultSession = wm;
   };
 }
