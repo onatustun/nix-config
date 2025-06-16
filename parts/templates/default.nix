@@ -1,9 +1,28 @@
 {
   flake.templates = {
-    empty.path = ./empty;
-    java.path = ./java;
-    node.path = ./node;
-    typst.path = ./typst;
-    zola.path = ./zola;
+    empty = {
+      path = ./empty;
+      description = "empty";
+    };
+
+    java = {
+      path = ./java;
+      description = "java";
+    };
+
+    node = {
+      path = ./node;
+      description = "node";
+    };
+
+    typst = {
+      path = ./typst;
+      description = "typst";
+    };
+
+    zola = {
+      path = ./zola;
+      description = "zola";
+    };
   };
 }

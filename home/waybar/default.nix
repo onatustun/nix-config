@@ -54,9 +54,7 @@ in {
           [
             "tray"
           ]
-          ++ lib.optional isLaptop [
-            "custom/keyboard"
-          ]
+          ++ lib.optional isLaptop "custom/keyboard"
           ++ [
             "network"
             "wireplumber"
