@@ -2,6 +2,7 @@
   nixpkgs = {
     overlays = [
       inputs.self.overlays.default
+      inputs.niri.overlays.niri
     ];
 
     config = {
