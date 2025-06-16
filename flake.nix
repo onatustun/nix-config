@@ -36,7 +36,6 @@
       imports = [
         ./hosts
         ./parts
-        ./pkgs
       ];
     };
 }

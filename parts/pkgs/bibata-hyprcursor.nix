@@ -1,8 +1,8 @@
 {
-  stdenv,
+  stdenvNoCC,
   fetchurl,
 }:
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation (final: {
   pname = "bibata-hyprcursor";
   version = "1.0";
 
@@ -19,4 +19,4 @@ stdenv.mkDerivation rec {
 
     runHook postInstall
   '';
-}
+})
