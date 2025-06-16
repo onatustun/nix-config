@@ -1,5 +1,5 @@
 {
-  perSystem = {pkgs, ...}: {
+  perSystem = {pkgs, config, ...}: {
     formatter = pkgs.alejandra;
 
     devShells.default = pkgs.mkShell {
@@ -12,6 +12,12 @@
         nix
         vim
       ];
+
+      name = "";
+      DIRENV_LOG_FORMAT = "";
+      shellHook = ''
+        ${config.pre-commit.installationScript}
+      '';      
     };
   };
 }

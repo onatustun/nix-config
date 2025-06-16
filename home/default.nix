@@ -1,5 +1,6 @@
 {
   wm,
+  shell,
   pkgs,
   lib,
   ...
@@ -11,7 +12,7 @@
       ./direnv.nix
       ./eza.nix
       ./ff.nix
-      ./fish
+      ./${shell}
       ./ghostty.nix
       ./git.nix
       ./helix
@@ -55,7 +56,7 @@
       BROWSER = "brave";
       EDITOR = "hx";
       FLAKE = "/home/onat/nix";
-      SHELL = "fish";
+      SHELL = shell;
       VISUAL = "hx";
     };
 
