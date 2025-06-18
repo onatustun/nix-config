@@ -4,9 +4,7 @@
   ...
 }: {
   boot = {
-    initrd.systemd.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    plymouth.enable = true;
     tmp.cleanOnBoot = true;
 
     blacklistedKernelModules =
@@ -26,13 +24,6 @@
         ]
         else ["nvidia"]
       );
-
-    kernelParams = [
-      "quiet"
-      "systemd.show_status=auto"
-      "rd.udev.log_level=3"
-      "plymouth.use-simpledrm"
-    ];
 
     loader = {
       efi.canTouchEfiVariables = true;
