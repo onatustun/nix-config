@@ -8,9 +8,8 @@
     border-radius: 0;
     border: none;
     box-shadow: none;
-    color: ${config.stylix.base16Scheme.base05};
     font-family: JetBrainsMono Nerd Font Mono;
-    font-size: 16px;
+    font-size: 14px;
     margin: 0;
     min-height: 0;
     padding: 0;
@@ -18,11 +17,13 @@
     transition: none;
   }
 
+  window#waybar {
+    background-color: ${config.stylix.base16Scheme.base00};
+  }
+
   .modules-left,
   .modules-right {
-    background-color: ${config.stylix.base16Scheme.base01};
-    border-radius: 6px;
-    padding: 0 2px;
+    padding: 0 10px;
   }
 
   tooltip {
@@ -32,7 +33,7 @@
     color: ${config.stylix.base16Scheme.base05};
     border-width: 0px;
     border-color: ${config.stylix.base16Scheme.base0C};
-    border-radius: 8px;
+    border-radius: 6px;
   }
 
   tooltip label {
@@ -48,24 +49,14 @@
   #battery,
   #clock,
   #workspaces button,
-  #tray,
-  #taskbar button {
-    margin: 0 1px;
-    min-width: 16px;
-    min-height: 16px;
-    padding: 2px;
-  }
-
-  #window,
-  #custom-keyboard,
-  #network,
-  #wireplumber,
-  #battery,
-  #taskbar button {
-    background-size: 16px 16px;
-    background-position: center;
+  #tray {
+    min-width: 14px;
+    min-height: 14px;
+    padding: 1px 3px;
+    color: ${config.stylix.base16Scheme.base05};
     background-repeat: no-repeat;
-    color: transparent;
+    background-position: center;
+    background-size: 14px;
   }
 
   #wireplumber.muted,
@@ -80,59 +71,53 @@
   }
 
   tooltip {
-    border-radius: 6px;
+    border-radius: 4px;
   }
 
   #custom-keyboard {
-    background-image: url("${iconsPath}/misc/keyboard.svg");
+    background-image: url("${iconsPath}/keyboard.svg");
   }
 
   #custom-keyboard.disabled {
     opacity: 0.5;
   }
 
+  #network {
+    background-image: url("${iconsPath}/network-default.svg");
+  }
+
+  #network.ethernet {
+    background-image: url("${iconsPath}/network-ethernet.svg");
+  }
+
+  #network.disabled,
+  #network.disconnected {
+    opacity: 0.3;
+  }
+
+  #wireplumber {
+    background-image: url("${iconsPath}/wireplumber-default.svg");
+  }
+
+  #wireplumber.muted {
+    opacity: 0.3;
+  }
+
   #workspaces button {
     opacity: 0.5;
+    background-image: none;
   }
 
   #workspaces button.active {
     opacity: 1;
+    background-color: ${config.stylix.base16Scheme.base0D};
+    color: ${config.stylix.base16Scheme.base00};
   }
 
-  #network {
-    background-image: url("${iconsPath}/network/default.svg");
-  }
-
-  #network.ethernet {
-    background-image: url("${iconsPath}/network/ethernet.svg");
-  }
-
-  #wireplumber {
-    background-image: url("${iconsPath}/wireplumber/default.svg");
-  }
-
-  #battery.empty {
-    background-image: url("${iconsPath}/battery/empty.svg");
-    opacity: 0.5;
-  }
-
-  #battery.low {
-    background-image: url("${iconsPath}/battery/low.svg");
-  }
-
-  #battery.medium {
-    background-image: url("${iconsPath}/battery/medium.svg");
-  }
-
-  #battery.high {
-    background-image: url("${iconsPath}/battery/high.svg");
-  }
-
-  #battery.full {
-    background-image: url("${iconsPath}/battery/full.svg");
-  }
-
-  #battery.charging {
-    background-image: url("${iconsPath}/battery/charging.svg");
+  #custom-keyboard.hidden {
+    opacity: 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
   }
 ''

@@ -2,52 +2,53 @@
   monitor =
     if isLaptop
     then [
-      "eDP-1,2256x1504,auto,1.6"
-      "DP-3,3840x2400,auto-down,2.4"
+      "eDP-1, 2256x1504@60, 0x0, 1.5667"
+      "DP-3, 3840x2400, auto-down, 2.4"
     ]
     else [
-      "HDMI-A-1,1920x1080@240,auto, 1"
-      "DP-2,1920x1080@240,auto-up,1, transform, 2"
+      "DP-2, 1920x1080@240, 0x0, 1, transform, 2"
+      "HDMI-A-1, 1920x1080@240, auto-down, 1"
     ];
 
-  plugin.scroller.center_row_if_space_available = true;
+  dwindle = {
+    force_split = 2;
+    special_scale_factor = 1.0;
+    split_width_multiplier = 1.0;
+    use_active_for_splits = true;
+    pseudotile = "yes";
+    preserve_split = "yes";
+  };
 
   general = {
     border_size = 2;
-    gaps_in = 8;
-    gaps_out = 16;
-    layout = "scroller";
+    gaps_in = 4;
+    gaps_out = 8;
+    layout = "dwindle";
     resize_on_border = true;
   };
 
   decoration = {
-    rounding = 6;
+    rounding = 4;
     active_opacity = 1;
-    inactive_opacity = 0.9;
-    shadow.enabled = false;
-
-    blur = {
-      brightness = 1;
-      contrast = 1;
-      enabled = true;
-      new_optimizations = true;
-      noise = 0.05;
-      passes = 3;
-      size = 8;
-      vibrancy = 1;
-    };
+    inactive_opacity = 1;
+    shadow.enabled = true;
+    blur.enabled = true;
   };
 
   animations = {
-    enabled = "yes";
+    enabled = true;
     first_launch_animation = true;
-    bezier = "myBezier, 0.25, 0.9, 0.1, 1.02";
+
+    bezier = [
+      "ease,0.4,0.02,0.21,1"
+    ];
+
     animation = [
-      "windows, 1, 7, myBezier"
-      "windowsOut, 1, 7, default, popin 80%"
-      "border, 1, 10, default"
-      "fade, 1, 8, default"
-      "workspaces, 0, 7, default"
+      "windows, 1, 3.5, ease, slide"
+      "windowsOut, 1, 3.5, ease, slide"
+      "border, 1, 6, default"
+      "fade, 1, 3, ease"
+      "workspaces, 0, 0, default"
     ];
   };
 }

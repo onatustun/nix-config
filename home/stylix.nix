@@ -1,12 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   dark = {
-    name = "dark";
     polarity = "dark";
-    image = ./dark.jpg;
     base00 = "#00141A";
     base01 = "#073642";
     base02 = "#586e75";
@@ -26,9 +20,7 @@
   };
 
   light = {
-    name = "light";
     polarity = "light";
-    image = ./light.jpg;
     base00 = "#eff1f5";
     base01 = "#e6e9ef";
     base02 = "#ccd0da";
@@ -53,7 +45,6 @@ in {
     enable = true;
     base16Scheme = current;
     polarity = current.polarity;
-    image = current.image;
 
     targets = {
       helix.enable = false;
@@ -82,17 +73,5 @@ in {
         name = "Noto Color Emoji";
       };
     };
-  };
-
-  services.swww.enable = true;
-
-  home.activation = {
-    reload-swww = let
-      swww = "${pkgs.swww}/bin/swww";
-    in
-      lib.hm.dag.entryAfter ["writeBoundary"] ''
-        run --quiet ${swww} img -o eDP-1 "/home/onat/nix/home/stylix/${current.name}" \
-        && run --quiet ${swww} img -o DP-3 "/home/onat/nix/home/stylix/${current.name}"
-      '';
   };
 }

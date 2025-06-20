@@ -28,10 +28,10 @@
       set -g status on
       set -g status-position top
       set -g status-style fg=brightwhite
-      set -g status-left "#[fg=black]#[bg=yellow] #S #[fg=default]#[bg=default]"
+      set -g status-left "#[fg=black]#[bg=blue] #S #[fg=default]#[bg=default]"
       set -g status-left-style default
       set -g status-right ""
-      setw -g window-status-current-style fg=yellow,bg=default
+      setw -g window-status-current-style fg=blue,bg=default
     '';
   };
 }

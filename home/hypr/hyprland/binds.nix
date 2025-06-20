@@ -4,29 +4,25 @@
       key = "H";
       arrow = "left";
       dir = "l";
-      cycle = "scroller:cyclewidth";
-      step = "prev";
+      amt = "-80 0";
     };
     down = {
       key = "J";
       arrow = "down";
       dir = "d";
-      cycle = "scroller:cycleheight";
-      step = "prev";
+      amt = "0 80";
     };
     up = {
       key = "K";
       arrow = "up";
       dir = "u";
-      cycle = "scroller:cycleheight";
-      step = "next";
+      amt = "0 -80";
     };
     right = {
       key = "L";
       arrow = "right";
       dir = "r";
-      cycle = "scroller:cyclewidth";
-      step = "next";
+      amt = "80 0";
     };
   };
 
@@ -49,18 +45,11 @@ in {
       "$mod, E, exec, thunar"
       "$mod, Q, exec, ghostty"
 
+      "$mod, S, togglesplit"
       "$mod, C, killactive"
       "$mod, F, fullscreen, 0"
       "$mod, V, togglefloating"
-
-      "$mod, bracketleft, scroller:movefocus, begin"
-      "$mod, bracketright, scroller:movefocus, end"
-
-      "$mod CTRL, bracketleft, scroller:movewindow, begin"
-      "$mod CTRL, bracketright, scroller:movewindow, end"
-
-      "$mod, I, scroller:setmode, col"
-      "$mod, U, scroller:setmode, row"
+      "$mod Shift, E, exit"
     ]
     ++ (builtins.concatLists (
       builtins.genList (
@@ -99,7 +88,7 @@ in {
   ];
 
   binde =
-    makeBinds "$mod ALT" (nav: nav.cycle) (nav: nav.step)
+    makeBinds "$mod ALT" (_: "resizeactive") (nav: nav.amt)
     ++ makeBinds "$mod CTRL" (_: "movewindow") (nav: nav.dir)
     ++ makeBinds "$mod" (_: "movefocus") (nav: nav.dir);
 }

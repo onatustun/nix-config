@@ -42,48 +42,47 @@ in {
       {
         layer = "top";
         position = "bottom";
-        margin = "0 128 8";
+        margin = "0 8 0";
         mode = "dock";
 
         modules-left = [
+          "niri/workspaces"
           "hyprland/workspaces"
-          "wlr/taskbar"
         ];
 
-        modules-right =
-          [
-            "tray"
-          ]
-          ++ lib.optional isLaptop "custom/keyboard"
-          ++ [
-            "network"
-            "wireplumber"
-            "battery"
-            "clock"
-          ];
+        modules-right = [
+          "custom/keyboard"
+          "network"
+          "wireplumber"
+          "battery"
+          "clock"
+        ];
+
+        "niri/workspaces" = {
+          format = "{icon}";
+          tooltip = false;
+        };
 
         "hyprland/workspaces" = {
           format = "{icon}";
           tooltip = false;
         };
 
-        "wlr/taskbar" = {
-          format = "{icon}";
-          icon-size = 16;
-          tooltip = true;
-          tooltip-format = "{name}";
-        };
-
-        tray = {
-          icon-size = 16;
-          spacing = 4;
-        };
-
         "custom/keyboard" = {
           format = " ";
           tooltip = false;
           on-click = "${toggleKeyboardScript}/bin/toggle-laptop-keyboard --toggle";
-          exec = "${toggleKeyboardScript}/bin/toggle-laptop-keyboard";
+          exec = ''
+            if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ] && [ "${
+              if isLaptop
+              then "true"
+              else "false"
+            }" = "true" ]; then
+              ${toggleKeyboardScript}/bin/toggle-laptop-keyboard
+            else
+              echo '{"text": "", "class": "hidden"}'
+            fi
+          '';
           return-type = "json";
           interval = 1;
         };
@@ -108,24 +107,30 @@ in {
         };
 
         battery = {
-          interval = 5;
-          format = " ";
+          interval = 60;
+          format = "{icon} {capacity}%";
           format-time = "{H}h{M}m";
           tooltip = true;
           tooltip-format = "{capacity}% {time}";
 
-          states = {
-            full = 100;
-            high = 80;
-            medium = 60;
-            low = 40;
-            empty = 20;
-          };
+          format-icons = [
+            "󰂎"
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
         };
 
         clock = {
           interval = 1;
-          format = "{:%H:%M}";
+          format = "[{:%H:%M}]";
           tooltip = true;
           tooltip-format = "{:%a %d %b}";
         };

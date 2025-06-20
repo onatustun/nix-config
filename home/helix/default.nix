@@ -14,7 +14,7 @@
     languages = import ./languages.nix {inherit inputs pkgs;};
 
     settings = {
-      theme = "${config.stylix.base16Scheme.name}";
+      theme = "${config.stylix.base16Scheme.polarity}";
       editor = import ./editor.nix;
       keys = import ./keys.nix;
     };

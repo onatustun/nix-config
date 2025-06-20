@@ -27,24 +27,19 @@
     configFiles;
 in {
   home.packages = with pkgs; [
-    brightnessctl
-    cliphist
-    dunst
-    networkmanagerapplet
-    playerctl
-    wl-clipboard
     xdg-desktop-portal-hyprland
-    xdg-user-dirs
   ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    plugins = [pkgs.hyprlandPlugins.hyprscroller];
 
     systemd = {
       enable = true;
-      variables = ["--all"];
+      enableXdgAutostart = true;
+      variables = [
+        "--all"
+      ];
     };
 
     settings = hyprSettings;
