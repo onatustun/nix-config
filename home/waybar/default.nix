@@ -145,13 +145,13 @@ in {
 
         clock = {
           interval = 1;
-          format = "[{:%H:%M}]";
+          format = "{:%H:%M}";
           tooltip = true;
           tooltip-format = "{:%a %d %b}";
         };
 
         "custom/power" = {
-          format = "[ ⏻ ]";
+          format = " ⏻";
           tooltip = false;
           on-click = "wlogout --protocol layer-shell";
         };

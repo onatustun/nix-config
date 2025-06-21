@@ -60,9 +60,10 @@
       rar
       ripgrep
       skim
+      slurp
       swayidle
-      unzip
       swaylock
+      unzip
       wl-clipboard
       wl-clip-persist
       wlogout

@@ -1,26 +1,28 @@
 {
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) getExe;
+in {
   services.swayidle = {
     enable = true;
 
     events = [
       {
         event = "before-sleep";
-        command = "swaylock -defF";
+        command = "${getExe config.programs.swaylock.package} -defF";
       }
       {
         event = "lock";
-        command = "swaylock -defF";
+        command = "${getExe config.programs.swaylock.package} -defF";
       }
     ];
+
     timeouts = [
       {
-        timeout = 60;
-        command = "brightnessctl s 30%-";
-        resumeCommand = "brightnessctl -s s 30%+";
-      }
-      {
-        timeout = 300;
-        command = "swaylock -defF";
+        timeout = 200;
+        command = "${getExe config.programs.swaylock.package} -defF";
       }
     ];
   };
