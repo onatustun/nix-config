@@ -31,25 +31,6 @@
             zola
           ];
         };
-
-        packages.default = pkgs.stdenv.mkDerivation {
-          pname = "";
-          version = "0.1.0";
-          src = lib.cleanSource ./.;
-
-          nativeBuildInputs = with pkgs; [
-            nodejs
-            tailwindcss
-            zola
-          ];
-
-          buildPhase = ''
-            tailwindcss -i ./src/input.css -o ./static/output.css --minify
-            zola build --output-dir $out --force
-          '';
-
-          dontInstall = true;
-        };
       };
     };
 }

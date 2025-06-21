@@ -26,7 +26,9 @@
     shellAliases = {
       cat = "prettybat";
       cff = "clear && fastfetch";
+      cfl = "clear && fastfetch && eza -al";
       cl = "clear && eza -al";
+      clf = "clear && eza -al && fastfetch";
       grep = "rg";
       h = "cd ~";
       ls = "eza -al";
