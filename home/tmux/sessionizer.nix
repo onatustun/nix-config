@@ -6,7 +6,7 @@
       if [[ $# -eq 1 ]]; then
           selected=$1
       else
-          selected=$(find ~/Documents/code ~/ ~/Documents/code/git ~/Documents/ ~/nix/ -mindepth 1 -maxdepth 1 -type d | \
+          selected=$(find ~/Documents/code ~/ ~/Documents/code/git ~/Documents/ ~/nix/ ~/nix/hosts/ ~/nix/parts/ ~/nix/parts/templates ~/nix/home ~/nix/home/hypr -mindepth 1 -maxdepth 1 -type d | \
               sed "s|^$HOME/||" | \
               sk --margin 10% --color="bw"
           )
