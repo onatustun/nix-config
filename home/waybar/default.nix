@@ -42,7 +42,7 @@ in {
       {
         layer = "top";
         position = "bottom";
-        margin = "0 512 0";
+        margin = "0 256 0";
         mode = "dock";
 
         modules-left = [
@@ -78,8 +78,8 @@ in {
         };
 
         tray = {
-          icon-size = 16;
-          spacing = 4;
+          icon-size = 14;
+          spacing = 1;
         };
 
         "custom/keyboard" = {
@@ -124,6 +124,7 @@ in {
           interval = 60;
           format = "{icon} {capacity}%";
           format-time = "{H}h{M}m";
+          format-charging = "󰂄 {time}";
           tooltip = true;
           tooltip-format = "{capacity}% {time}";
 
