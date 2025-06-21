@@ -82,11 +82,11 @@
       dunst
       fd
       fzf
+      gammastep
+      geoclue2
       git
       hyprcursor
-      hyprsunset
       less
-      nix-prefetch-git
       nix-search-cli
       nix-search-tv
       obsidian
@@ -94,8 +94,8 @@
       prettyping
       rar
       ripgrep
+      skim
       unzip
-      tmux-sessionizer
       wl-clipboard
       wl-clip-persist
       xdg-user-dirs
@@ -105,7 +105,6 @@
       zip
       zmkBATx
       zoxide
-      skim
     ];
   };
 }

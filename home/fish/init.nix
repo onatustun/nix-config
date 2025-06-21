@@ -21,10 +21,10 @@
     interactiveShellInit = ''
       if status is-interactive
       and not set -q TMUX
-        if tmux has-session -t 0
-          exec tmux attach-session -t 0
+        if tmux has-session -t Home
+          exec tmux attach-session -t Home
         else
-          tmux new-session -s 0
+          tmux new-session -s Home
         end
       end
 

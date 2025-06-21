@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./ignore.nix
     ./themes
   ];
 

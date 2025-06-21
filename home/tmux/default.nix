@@ -38,6 +38,10 @@
       bind-key -r L resize-pane -R 5
 
       bind-key f run-shell "tmux neww /home/onat/.config/tmux/sessionizer.sh"
+      bind G new-window -n 'lazygit' lazygit
+      bind-key g run-shell "/home/onat/.config/tmux/github.sh"
+      bind-key -r H run-shell "/home/onat/.config/tmux/sessionizer.sh ~"
+      bind-key -r N run-shell "/home/onat/.config/tmux/sessionizer.sh ~/nix"
 
       bind-key c new-window -c "#{pane_current_path}"
       bind-key % split-window -h -c "#{pane_current_path}"

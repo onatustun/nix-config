@@ -34,5 +34,6 @@
 
       tmux switch-client -t $selected_name
     '';
+    executable = true;
   };
 }
