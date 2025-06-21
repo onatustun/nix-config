@@ -49,7 +49,8 @@
   #battery,
   #clock,
   #workspaces button,
-  #tray {
+  #tray,
+  #taskbar button {
     min-width: 14px;
     min-height: 14px;
     padding: 1px 3px;
@@ -112,6 +113,17 @@
     opacity: 1;
     background-color: ${config.stylix.base16Scheme.base0D};
     color: ${config.stylix.base16Scheme.base00};
+  }
+
+  #workspaces button.active.visible {
+    opacity: 1;
+    background-color: ${config.stylix.base16Scheme.base0D};
+    color: ${config.stylix.base16Scheme.base00};
+  }
+
+  #workspaces button.visible {
+    opacity: 1;
+    color: ${config.stylix.base16Scheme.base0D};
   }
 
   #custom-keyboard.hidden {

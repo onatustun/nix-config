@@ -48,9 +48,11 @@ in {
         modules-left = [
           "niri/workspaces"
           "hyprland/workspaces"
+          "wlr/taskbar"
         ];
 
         modules-right = [
+          "tray"
           "custom/keyboard"
           "network"
           "wireplumber"
@@ -66,6 +68,18 @@ in {
         "hyprland/workspaces" = {
           format = "{icon}";
           tooltip = false;
+        };
+
+        "wlr/taskbar" = {
+          format = "{icon}";
+          icon-size = 16;
+          tooltip = true;
+          tooltip-format = "{name}";
+        };
+
+        tray = {
+          icon-size = 16;
+          spacing = 4;
         };
 
         "custom/keyboard" = {

@@ -16,7 +16,7 @@
     ./rofi.nix
     ./starship.nix
     ./stylix.nix
-    ./tmux.nix
+    ./tmux
     ./waybar
   ];
 
@@ -95,6 +95,7 @@
       rar
       ripgrep
       unzip
+      tmux-sessionizer
       wl-clipboard
       wl-clip-persist
       xdg-user-dirs
@@ -104,6 +105,7 @@
       zip
       zmkBATx
       zoxide
+      skim
     ];
   };
 }
