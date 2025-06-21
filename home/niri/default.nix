@@ -11,6 +11,8 @@
     ./rules.nix
   ];
 
+  systemd.user.services.xwayland-satellite.Install.WantedBy = ["niri.service"];
+
   xdg.portal = {
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
     configPackages = [pkgs.niri-unstable];

@@ -49,7 +49,6 @@
   #battery,
   #clock,
   #workspaces button,
-  #tray,
   #taskbar button {
     min-width: 14px;
     min-height: 14px;

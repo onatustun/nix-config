@@ -58,6 +58,7 @@ in {
           "wireplumber"
           "battery"
           "clock"
+          "custom/power"
         ];
 
         "niri/workspaces" = {
@@ -79,7 +80,6 @@ in {
 
         tray = {
           icon-size = 14;
-          spacing = 1;
         };
 
         "custom/keyboard" = {
@@ -148,6 +148,12 @@ in {
           format = "[{:%H:%M}]";
           tooltip = true;
           tooltip-format = "{:%a %d %b}";
+        };
+
+        "custom/power" = {
+          format = "[ ⏻ ]";
+          tooltip = false;
+          on-click = "wlogout --protocol layer-shell";
         };
       }
     ];

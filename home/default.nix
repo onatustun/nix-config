@@ -9,58 +9,23 @@
     ./ghostty.nix
     ./git.nix
     ./helix
-    ./hypr
+    ./hyprland
     ./nh.nix
     ./niri
     ./pointer.nix
     ./rofi.nix
     ./starship.nix
     ./stylix.nix
+    ./swayidle.nix
+    ./swaylock.nix
     ./tmux
     ./waybar
+    ./wlogout.nix
+    ./xdg.nix
+    ./xwayland.nix
   ];
 
-  systemd.user.services.xwayland-satellite = {
-    Unit = {
-      Description = "Xwayland outside your Wayland";
-      BindsTo = "graphical-session.target";
-      PartOf = "graphical-session.target";
-      After = "graphical-session.target";
-      Requisite = "graphical-session.target";
-    };
-
-    Service = {
-      Type = "notify";
-      NotifyAccess = "all";
-      ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-      StandardOutput = "journal";
-    };
-
-    Install.WantedBy = ["niri.service"];
-  };
-
-  xdg = {
-    enable = true;
-    userDirs.createDirectories = true;
-    mime.enable = true;
-
-    mimeApps = {
-      enable = true;
-
-      defaultApplications = {
-        "inode/directory" = "thunar.desktop";
-        "text/plain" = "helix.desktop";
-      };
-    };
-  };
-
   services.cliphist.enable = true;
-
-  manual = {
-    html.enable = false;
-    json.enable = false;
-    manpages.enable = false;
-  };
 
   home = {
     username = "onat";
@@ -83,8 +48,8 @@
       fd
       fzf
       gammastep
-      geoclue2
       git
+      grim
       hyprcursor
       less
       nix-search-cli
@@ -95,9 +60,12 @@
       rar
       ripgrep
       skim
+      swayidle
       unzip
+      swaylock
       wl-clipboard
       wl-clip-persist
+      wlogout
       xdg-user-dirs
       xfce.thunar
       xwayland-satellite
