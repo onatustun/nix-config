@@ -39,8 +39,13 @@
       systems = import inputs.systems;
 
       imports = [
+        ./dev-shell.nix
         ./hosts
-        ./parts
+        ./lib
+        ./overlays
+        ./pkgs
+        ./pre-commit-hooks.nix
+        ./templates
       ];
     };
 }
