@@ -1,8 +1,6 @@
 {inputs, ...}: {
   nixpkgs = {
-    overlays = [
-      inputs.self.overlays.default
-    ];
+    overlays = [inputs.self.overlays.default];
 
     config = {
       allowUnfree = true;

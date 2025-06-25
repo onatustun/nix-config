@@ -1,7 +1,7 @@
 {
   perSystem = {
-    pkgs,
     config,
+    pkgs,
     ...
   }: {
     devShells.default = pkgs.mkShell {
@@ -12,6 +12,7 @@
         nh
         nil
         nix
+        nixos-rebuild
         vim
       ];
 
