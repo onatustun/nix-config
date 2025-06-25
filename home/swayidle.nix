@@ -6,7 +6,7 @@
   inherit (lib) getExe;
 in {
   services.swayidle = {
-    enable = true;
+    enable = false;
 
     events = [
       {

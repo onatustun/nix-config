@@ -41,6 +41,7 @@
     };
 
     packages = with pkgs; [
+      appimage-run
       bottom
       brightnessctl
       cliphist
@@ -51,10 +52,14 @@
       git
       grim
       hyprcursor
+      imv
+      killall
       less
+      mpv
       nix-search-cli
       nix-search-tv
       obsidian
+      p7zip
       playerctl
       prettyping
       rar
@@ -64,6 +69,7 @@
       swayidle
       swaylock
       unzip
+      wget
       wl-clipboard
       wl-clip-persist
       wlogout
