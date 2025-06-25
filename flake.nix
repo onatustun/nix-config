@@ -43,7 +43,6 @@
         ./hosts
         ./lib
         ./overlays
-        ./pkgs
         ./pre-commit-hooks.nix
         ./templates
       ];
