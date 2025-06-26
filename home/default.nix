@@ -36,7 +36,6 @@
       BROWSER = "brave";
       EDITOR = "hx";
       FLAKE = "/home/onat/nix";
-      SHELL = "fish";
       VISUAL = "hx";
     };
 

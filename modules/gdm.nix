@@ -9,13 +9,9 @@
       };
     };
 
-    displayManager = {
-      defaultSession = "hyprland";
-
-      autoLogin = {
-        enable = false;
-        user = "onat";
-      };
+    displayManager.autoLogin = {
+      enable = false;
+      user = "onat";
     };
   };
 }

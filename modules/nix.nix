@@ -27,4 +27,13 @@
 
     optimise.automatic = true;
   };
+
+  home-manager.sharedModules = [
+    {
+      programs.nh = {
+        enable = true;
+        flake = "/home/onat/nix";
+      };
+    }
+  ];
 }
