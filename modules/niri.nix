@@ -71,7 +71,7 @@
       always-center-single-column = true;
       center-focused-column = "on-overflow";
       default-column-width = {proportion = 0.5;};
-      gaps = 8;
+      gaps = 4;
 
       border = {
         enable = true;
@@ -91,10 +91,10 @@
       ];
 
       struts = {
-        left = 8;
-        bottom = 8;
-        top = 8;
-        right = 8;
+        left = 4;
+        bottom = 4;
+        top = 4;
+        right = 4;
       };
     };
 
@@ -186,7 +186,7 @@
         draw-border-with-background = false;
 
         geometry-corner-radius = let
-          radius = 4.0;
+          radius = 2.0;
         in {
           bottom-left = radius;
           bottom-right = radius;

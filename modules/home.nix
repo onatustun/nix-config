@@ -1,14 +1,19 @@
 {
-  imports = [
-    ./helix.nix
-    ./niri.nix
-    ./pointer.nix
-    ./stylix.nix
-    ./rofi.nix
-    ./waybar.nix
-    ./wlogout.nix
-    ./xdg.nix
-  ];
+  isLaptop,
+  lib,
+  ...
+}: {
+  imports =
+    [
+      ./helix.nix
+      ./pointer.nix
+      ./stylix.nix
+      ./rofi.nix
+      ./waybar.nix
+      ./wlogout.nix
+      ./xdg.nix
+    ]
+    ++ lib.optionals isLaptop ./niri.nix;
 
   home = {
     username = "onat";
