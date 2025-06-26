@@ -17,5 +17,11 @@
     };
   };
 
-  environment.systemPackages = [pkgs.pavucontrol];
+  environment.systemPackages = with pkgs; [
+    pavucontrol
+    pipewire
+    playerctl
+    pwvucontrol
+    wireplumber
+  ];
 }

@@ -1,6 +1,6 @@
-{mkHost, ...}: {
+{mkNixos, ...}: {
   flake.nixosConfigurations = {
-    laptop = mkHost "laptop" "x86_64-linux" [
+    laptop = mkNixos "laptop" "x86_64-linux" [
       ../modules/ghostty.nix
       ../modules/brave.nix
       ../modules/gdm.nix
@@ -11,7 +11,7 @@
       ../modules/swaylock.nix
       ../modules/xwayland.nix
     ];
-    desktop = mkHost "desktop" "x86_64-linux" [
+    desktop = mkNixos "desktop" "x86_64-linux" [
       ../modules/ghostty.nix
       ../modules/brave.nix
       ../modules/gdm.nix

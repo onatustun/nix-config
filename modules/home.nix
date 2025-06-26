@@ -1,6 +1,7 @@
 {
   isLaptop,
   lib,
+  pkgs,
   ...
 }: {
   imports =
@@ -13,16 +14,21 @@
       ./wlogout.nix
       ./xdg.nix
     ]
-    ++ lib.optionals isLaptop ./niri.nix;
+    ++ lib.optional isLaptop ./niri.nix;
 
   home = {
     username = "onat";
-    homeDirectory = "/home/onat";
     stateVersion = "24.11";
+    homeDirectory =
+      if pkgs.stdenv.isLinux
+      then "/home/onat"
+      else "/Users/onat";
 
     sessionVariables = {
       EDITOR = "hx";
       VISUAL = "hx";
     };
   };
+
+  programs.home-manager.enable = true;
 }

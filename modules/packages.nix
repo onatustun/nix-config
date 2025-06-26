@@ -19,7 +19,6 @@
     nix-search-tv
     obsidian
     p7zip
-    playerctl
     prettyping
     rar
     ripgrep
