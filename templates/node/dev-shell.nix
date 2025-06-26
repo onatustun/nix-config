@@ -1,22 +1,23 @@
 {
   perSystem = {
-    config,
     pkgs,
+    config,
     ...
   }: {
     devShells.default = pkgs.mkShell {
-      name = "nix-config";
+      name = "nodejs typescript";
       formatter = pkgs.alejandra;
 
       packages = with pkgs; [
         alejandra
-        git
-        home-manager
-        nh
         nil
-        nix
-        nixos-rebuild
-        vim
+        nodejs
+        nodePackages.prettier
+        pnpm
+        tailwindcss
+        tailwindcss-language-server
+        typescript-language-server
+        vscode-langservers-extracted
       ];
 
       shellHook = ''

@@ -1,22 +1,23 @@
 {
   perSystem = {
-    config,
     pkgs,
+    config,
     ...
   }: {
     devShells.default = pkgs.mkShell {
-      name = "nix-config";
+      name = "zola";
       formatter = pkgs.alejandra;
 
       packages = with pkgs; [
         alejandra
-        git
-        home-manager
-        nh
+        gnumake
         nil
-        nix
-        nixos-rebuild
-        vim
+        nodejs
+        nodePackages.prettier
+        tailwindcss
+        tailwindcss-language-server
+        vscode-langservers-extracted
+        zola
       ];
 
       shellHook = ''

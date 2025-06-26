@@ -1,22 +1,16 @@
 {
   perSystem = {
-    config,
     pkgs,
+    config,
     ...
   }: {
     devShells.default = pkgs.mkShell {
-      name = "nix-config";
+      name = "empty";
       formatter = pkgs.alejandra;
 
       packages = with pkgs; [
         alejandra
-        git
-        home-manager
-        nh
         nil
-        nix
-        nixos-rebuild
-        vim
       ];
 
       shellHook = ''

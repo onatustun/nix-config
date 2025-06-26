@@ -1,22 +1,19 @@
 {
   perSystem = {
-    config,
     pkgs,
+    config,
     ...
   }: {
     devShells.default = pkgs.mkShell {
-      name = "nix-config";
+      name = "typst";
       formatter = pkgs.alejandra;
 
       packages = with pkgs; [
         alejandra
-        git
-        home-manager
-        nh
         nil
-        nix
-        nixos-rebuild
-        vim
+        tinymist
+        typst
+        typstyle
       ];
 
       shellHook = ''
