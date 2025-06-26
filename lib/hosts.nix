@@ -1,12 +1,11 @@
 {inputs, ...}: let
-  mkHost = hostName: system: extraModules:
+  mkHost = hostName: system: extraModules: let
+    isLaptop = hostName == "laptop";
+  in
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
-      specialArgs = {
-        inherit inputs hostName;
-        isLaptop = hostName == "laptop";
-      };
+      specialArgs = {inherit inputs hostName isLaptop;};
 
       modules =
         [
@@ -16,27 +15,18 @@
           ../modules/bat.nix
           ../modules/bluetooth.nix
           ../modules/boot.nix
-          ../modules/brave.nix
           ../modules/direnv.nix
           ../modules/eza.nix
           ../modules/fastfetch.nix
           ../modules/fish.nix
           ../modules/fonts.nix
-          ../modules/gdm.nix
-          ../modules/ghostty.nix
           ../modules/git.nix
-          ../modules/graphics.nix
-          ../modules/hyprland.nix
           ../modules/locale.nix
-          ../modules/niris.nix
           ../modules/nix.nix
           ../modules/packages.nix
           ../modules/starship.nix
-          ../modules/swayidle.nix
-          ../modules/swaylock.nix
           ../modules/tmux.nix
           ../modules/user.nix
-          ../modules/xwayland.nix
 
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
@@ -47,11 +37,7 @@
               useUserPackages = true;
               backupFileExtension = "backup";
               users.onat = import ../modules/home.nix;
-
-              extraSpecialArgs = {
-                inherit inputs system;
-                isLaptop = hostName == "laptop";
-              };
+              extraSpecialArgs = {inherit inputs system isLaptop;};
             };
           }
         ]

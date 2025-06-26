@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
   ];
 
+  networking.hostName = "laptop";
   environment.systemPackages = [pkgs.framework-tool];
   hardware.framework.enableKmod = true;
   services.fwupd.enable = true;

@@ -7,6 +7,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  networking.hostName = "laptop";
   services.xserver.videoDrivers = ["nvidia"];
   system.stateVersion = "24.11";
 }

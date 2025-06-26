@@ -17,8 +17,8 @@
       systems = import inputs.systems;
 
       imports = [
-        ./pre-commit-hooks.nix
         ./dev-shell.nix
+        ./pre-commit-hooks.nix
       ];
     };
 }

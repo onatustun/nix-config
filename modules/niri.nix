@@ -3,7 +3,6 @@
   isLaptop,
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   systemd.user.services.xwayland-satellite.Install.WantedBy = ["niri.service"];

@@ -1,13 +1,5 @@
 {
-  hostName,
-  pkgs,
-  inputs,
-  ...
-}: {
-  networking = {
-    networkmanager.enable = true;
-    hostName = hostName;
-  };
+  networking.networkmanager.enable = true;
 
   users.users.onat = {
     isNormalUser = true;

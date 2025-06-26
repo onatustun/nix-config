@@ -1,6 +1,24 @@
 {mkHost, ...}: {
   flake.nixosConfigurations = {
-    laptop = mkHost "laptop" "x86_64-linux" [];
-    desktop = mkHost "desktop" "x86_64-linux" [];
+    laptop = mkHost "laptop" "x86_64-linux" [
+      ../modules/ghostty.nix
+      ../modules/brave.nix
+      ../modules/gdm.nix
+      ../modules/graphics.nix
+      ../modules/hyprland.nix
+      ../modules/niris.nix
+      ../modules/swayidle.nix
+      ../modules/swaylock.nix
+      ../modules/xwayland.nix
+    ];
+    desktop = mkHost "desktop" "x86_64-linux" [
+      ../modules/ghostty.nix
+      ../modules/brave.nix
+      ../modules/gdm.nix
+      ../modules/graphics.nix
+      ../modules/hyprland.nix
+      ../modules/swaylock.nix
+      ../modules/xwayland.nix
+    ];
   };
 }

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   imports = [
     ./helix.nix
     ./niri.nix

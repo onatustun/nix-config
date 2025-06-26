@@ -1,6 +1,7 @@
 {
-  stdenvNoCC,
   fetchurl,
+  stdenvNoCC,
+  ...
 }:
 stdenvNoCC.mkDerivation {
   pname = "bibata-hyprcursor";
