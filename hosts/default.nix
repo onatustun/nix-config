@@ -1,24 +1,33 @@
-{mkNixos, ...}: {
+{
+  inputs,
+  mkNixos,
+  profiles,
+  ...
+}: let
+  inherit (inputs) self;
+in {
   flake.nixosConfigurations = {
-    laptop = mkNixos "laptop" "x86_64-linux" [
-      ../modules/ghostty.nix
-      ../modules/brave.nix
-      ../modules/gdm.nix
-      ../modules/graphics.nix
-      ../modules/hyprland.nix
-      ../modules/niris.nix
-      ../modules/swayidle.nix
-      ../modules/swaylock.nix
-      ../modules/xwayland.nix
-    ];
-    desktop = mkNixos "desktop" "x86_64-linux" [
-      ../modules/ghostty.nix
-      ../modules/brave.nix
-      ../modules/gdm.nix
-      ../modules/graphics.nix
-      ../modules/hyprland.nix
-      ../modules/swaylock.nix
-      ../modules/xwayland.nix
-    ];
+    laptop = mkNixos "laptop" "x86_64-linux" (
+      profiles.apps
+      ++ profiles.cli
+      ++ profiles.core
+      ++ profiles.gui
+      ++ profiles.hardware
+      ++ [
+        (self + /modules/niris.nix)
+        (self + /modules/swayidle.nix)
+        (self + /modules/packages.nix)
+      ]
+    );
+    desktop = mkNixos "desktop" "x86_64-linux" (
+      profiles.apps
+      ++ profiles.cli
+      ++ profiles.core
+      ++ profiles.gui
+      ++ profiles.hardware
+      ++ [
+        (self + /modules/packages.nix)
+      ]
+    );
   };
 }
