@@ -108,14 +108,14 @@
 
           general = {
             border_size = 2;
-            gaps_in = 2;
-            gaps_out = 4;
+            gaps_in = 4;
+            gaps_out = 8;
             layout = "dwindle";
             resize_on_border = true;
           };
 
           decoration = {
-            rounding = 2;
+            rounding = 0;
             active_opacity = 1;
             inactive_opacity = 1;
             shadow.enabled = true;

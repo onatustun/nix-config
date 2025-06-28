@@ -29,6 +29,7 @@
 
   profiles = {
     core = [
+      (self + /modules/locale.nix)
       (self + /modules/nix.nix)
       (self + /modules/user.nix)
     ];
