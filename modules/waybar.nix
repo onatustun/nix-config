@@ -69,7 +69,6 @@ in {
         modules-left = [
           "niri/workspaces"
           "hyprland/workspaces"
-          "wlr/taskbar"
         ];
 
         modules-right = [
@@ -90,13 +89,6 @@ in {
         "hyprland/workspaces" = {
           format = "{icon}";
           tooltip = false;
-        };
-
-        "wlr/taskbar" = {
-          format = "{icon}";
-          icon-size = 16;
-          tooltip = true;
-          tooltip-format = "{name}";
         };
 
         tray = {
@@ -138,7 +130,10 @@ in {
           format-muted = "";
           tooltip = true;
           tooltip-format = "{volume}%";
-          on-click = "pavucontrol";
+          on-click = "pwvucontrol";
+          on-click-middle = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          scroll-step = 5;
+          max-volume = 100.0;
         };
 
         battery = {

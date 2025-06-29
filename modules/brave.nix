@@ -10,9 +10,9 @@
         extensions = [
           {id = "cdglnehniifkbagbbombnjghhcihifij";} # Kagi Search
           {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # uBlock Origin
-          {id = "dbepggeogbaibhgnhhndojpepiihcmeb";} # Vimium
           {id = "gebbhagfogifgggkldgodflihgfeippi";} # Return Youtube Dislike
           {id = "ghmbeldphafepmbegfdlkpapadhbakde";} # Proton Pass
+          {id = "hfjbmagddngcpeloejdejnfgbamkjaeg";} # Vimium C
           {id = "jinjaccalgkegednnccohejagnlnfdag";} # Violentmonkey
           {id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # SponsorBlock
         ];

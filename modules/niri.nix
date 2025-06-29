@@ -71,11 +71,11 @@
       always-center-single-column = true;
       center-focused-column = "on-overflow";
       default-column-width = {proportion = 0.5;};
-      gaps = 4;
+      gaps = 16;
 
       border = {
         enable = true;
-        width = 2;
+        width = 0;
       };
 
       preset-window-heights = [
@@ -91,10 +91,10 @@
       ];
 
       struts = {
-        left = 4;
-        bottom = 4;
-        top = 4;
-        right = 4;
+        left = 16;
+        bottom = 16;
+        top = 16;
+        right = 16;
       };
     };
 
