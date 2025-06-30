@@ -10,9 +10,9 @@
 
       packages = with pkgs; [
         alejandra
+        gradle
         jdk
         jdt-language-server
-        maven
         nil
       ];
 

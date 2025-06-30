@@ -13,6 +13,7 @@
         gnumake
         nil
         nodejs
+        prettierd
         tailwindcss
         tailwindcss-language-server
         vscode-langservers-extracted

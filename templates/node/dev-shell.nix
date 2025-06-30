@@ -12,8 +12,7 @@
         alejandra
         nil
         nodejs
-        nodePackages.prettier
-        pnpm
+        prettierd
         tailwindcss
         tailwindcss-language-server
         typescript-language-server

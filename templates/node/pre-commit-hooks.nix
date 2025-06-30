@@ -3,6 +3,10 @@
 
   perSystem.pre-commit.settings = {
     excludes = ["flake.lock"];
-    hooks.alejandra.enable = true;
+
+    hooks = {
+      alejandra.enable = true;
+      prettier.enable = true;
+    };
   };
 }

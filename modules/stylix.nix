@@ -44,6 +44,7 @@ in {
   stylix = {
     enable = true;
     base16Scheme = current;
+    image = ./wallpaper.jpg;
     polarity = current.polarity;
 
     targets = {

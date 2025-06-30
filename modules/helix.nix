@@ -14,6 +14,36 @@
         {
           name = "tsx";
           auto-format = true;
+
+          formatter = {
+            command = "prettier";
+
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+
+          language-servers = [
+            "tailwindcss-ls"
+            "typescript-language-server"
+            "uwu-colors"
+          ];
+        }
+
+        {
+          name = "jsx";
+          auto-format = true;
+
+          formatter = {
+            command = "prettier";
+
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+
           language-servers = [
             "tailwindcss-ls"
             "typescript-language-server"
@@ -24,6 +54,16 @@
         {
           name = "html";
           auto-format = true;
+
+          formatter = {
+            command = "prettier";
+
+            args = [
+              "--parser"
+              "html"
+            ];
+          };
+
           language-servers = [
             "tailwindcss-ls"
             "vscode-html-language-server"
@@ -36,6 +76,16 @@
         {
           name = "css";
           auto-format = true;
+
+          formatter = {
+            command = "prettier";
+
+            args = [
+              "--parser"
+              "css"
+            ];
+          };
+
           language-servers = [
             "tailwindcss-ls"
             "vscode-css-language-server"
@@ -46,6 +96,8 @@
         {
           name = "typst";
           auto-format = true;
+          formatter.command = "typstyle";
+
           language-servers = [
             "tinymist"
             "uwu-colors"
@@ -55,6 +107,8 @@
         {
           name = "nix";
           auto-format = true;
+          formatter.command = "alejandra";
+
           language-servers = [
             "nil"
             "uwu-colors"
