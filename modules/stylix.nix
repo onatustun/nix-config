@@ -1,5 +1,7 @@
 {pkgs, ...}: let
   dark = {
+    scheme = "Custom Dark";
+    author = "Your Name";
     polarity = "dark";
     base00 = "#00141A";
     base01 = "#073642";
@@ -20,6 +22,8 @@
   };
 
   light = {
+    scheme = "Custom Light";
+    author = "Your Name";
     polarity = "light";
     base00 = "#eff1f5";
     base01 = "#e6e9ef";
@@ -44,7 +48,6 @@ in {
   stylix = {
     enable = true;
     base16Scheme = current;
-    image = ./wallpaper.jpg;
     polarity = current.polarity;
 
     targets = {

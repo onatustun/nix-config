@@ -1,17 +1,13 @@
 {
-  services = {
-    xserver = {
-      enable = true;
-
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
-    };
-
-    displayManager.autoLogin = {
+  services.displayManager = {
+    autoLogin = {
       enable = false;
       user = "onat";
+    };
+
+    gdm = {
+      enable = true;
+      wayland = true;
     };
   };
 }

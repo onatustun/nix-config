@@ -2,10 +2,12 @@
   isLaptop,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports =
     [
+      inputs.stylix.homeModules.stylix
       ./helix.nix
       ./pointer.nix
       ./stylix.nix
