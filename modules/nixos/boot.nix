@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     tmp.cleanOnBoot = true;
 
     blacklistedKernelModules = [
