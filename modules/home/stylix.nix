@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   dark = {
     scheme = "Custom Dark";
     author = "Your Name";
@@ -45,6 +49,8 @@
 
   current = dark;
 in {
+  imports = [inputs.stylix.homeModules.stylix];
+
   stylix = {
     enable = true;
     base16Scheme = current;

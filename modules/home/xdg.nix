@@ -6,7 +6,11 @@
 
     mimeApps = {
       enable = true;
-      defaultApplications."inode/directory" = "thunar.desktop";
+
+      defaultApplications = {
+        "inode/directory" = "thunar.desktop";
+        "text/plain" = "helix.desktop";
+      };
     };
   };
 }

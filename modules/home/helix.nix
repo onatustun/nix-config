@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-  xdg.mimeApps.defaultApplications."text/plain" = "helix.desktop";
-
   programs.helix = {
     enable = true;
+    package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
     defaultEditor = true;
+
     languages = {
       language = [
         {
@@ -118,7 +118,7 @@
 
       language-server = {
         uwu-colors = {
-          command = "${inputs.uwu-colors.packages.${pkgs.system}.default}/bin/uwu_colors";
+          command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
         };
       };
     };

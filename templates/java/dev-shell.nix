@@ -13,6 +13,7 @@
         gradle
         jdk
         jdt-language-server
+        maven
         nil
       ];
 

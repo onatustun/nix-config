@@ -1,13 +1,4 @@
-{inputs, ...}: {
-  nixpkgs = {
-    overlays = [inputs.self.overlays.default];
-
-    config = {
-      allowUnfree = true;
-      allowBroken = true;
-    };
-  };
-
+{
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -27,13 +18,4 @@
 
     optimise.automatic = true;
   };
-
-  home-manager.sharedModules = [
-    {
-      programs.nh = {
-        enable = true;
-        flake = "/home/onat/nix";
-      };
-    }
-  ];
 }

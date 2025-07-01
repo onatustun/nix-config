@@ -1,6 +1,5 @@
 {
   config,
-  isLaptop,
   lib,
   pkgs,
   ...
@@ -100,11 +99,7 @@ in {
           tooltip = false;
           on-click = "${toggleKeyboardScript}/bin/toggle-laptop-keyboard --toggle";
           exec = ''
-            if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ] && [ "${
-              if isLaptop
-              then "true"
-              else "false"
-            }" = "true" ]; then
+            if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
               ${toggleKeyboardScript}/bin/toggle-laptop-keyboard
             else
               echo '{"text": "", "class": "hidden"}'

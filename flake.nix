@@ -1,12 +1,17 @@
 {
-  description = "nixos config";
+  description = "nix config";
+  outputs = inputs: import ./outputs.nix inputs;
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-24.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     hardware.url = "github:nixos/nixos-hardware";
     systems.url = "github:nix-systems/default";
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -18,14 +23,44 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        pre-commit-hooks.follows = "pre-commit-hooks";
+      };
+    };
+
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
     };
 
     stylix = {
       url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+        home-manager.follows = "home-manager";
+      };
     };
 
     uwu-colors = {
@@ -33,18 +68,4 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = import inputs.systems;
-
-      imports = [
-        ./dev-shell.nix
-        ./hosts
-        ./lib
-        ./overlays
-        ./pre-commit-hooks.nix
-        ./templates
-      ];
-    };
 }
