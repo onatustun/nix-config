@@ -14,6 +14,7 @@
           {id = "ghmbeldphafepmbegfdlkpapadhbakde";} # Proton Pass
           {id = "hfjbmagddngcpeloejdejnfgbamkjaeg";} # Vimium C
           {id = "jinjaccalgkegednnccohejagnlnfdag";} # Violentmonkey
+          {id = "mmioliijnhnoblpgimnlajmefafdfilb";} # Shazam
           {id = "mnjggcdmjocbbbhaepdhchncahnbgone";} # SponsorBlock
         ];
 

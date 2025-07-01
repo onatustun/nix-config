@@ -20,9 +20,9 @@ in {
       ]
     );
     desktop = mkNixos "desktop" "x86_64-linux" (
-      profiles.apps
+      profiles.core
       ++ profiles.cli
-      ++ profiles.core
+      ++ profiles.apps
       ++ profiles.gui
       ++ profiles.hardware
       ++ [

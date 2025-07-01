@@ -76,7 +76,6 @@
             cff = "clear && fastfetch";
             cl = "clear && eza -al";
             clt = "clear && eza -T";
-            grep = "rg";
             ls = "eza -al";
             man = "batman";
             nsf = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
