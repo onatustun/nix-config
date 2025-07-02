@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (inputs) self nixpkgs home-manager;
+  inherit (inputs) self nixpkgs home-manager nur;
   inherit (lib.filesystem) listFilesRecursive;
   inherit (lib) filter hasSuffix;
   mkNixos = hostName: system: username:
@@ -14,6 +14,7 @@
       modules =
         [
           home-manager.nixosModules.home-manager
+          nur.modules.nixos.default
 
           {
             home-manager = {

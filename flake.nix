@@ -8,6 +8,15 @@
     hardware.url = "github:nixos/nixos-hardware";
     systems.url = "github:nix-systems/default";
 
+    nur = {
+      url = "github:nix-community/NUR";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
