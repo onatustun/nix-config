@@ -9,6 +9,7 @@ inputs.flake-parts.lib.mkFlake {inherit inputs;} {
     [
       ./dev-shell.nix
       ./hosts
+      ./overlays
       ./pre-commit-hooks.nix
       ./templates
     ]

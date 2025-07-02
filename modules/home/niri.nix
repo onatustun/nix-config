@@ -62,11 +62,11 @@
       always-center-single-column = true;
       center-focused-column = "on-overflow";
       default-column-width = {proportion = 0.5;};
-      gaps = 8;
+      gaps = 16;
 
       border = {
         enable = true;
-        width = 2;
+        width = 0;
       };
 
       preset-window-heights = [
@@ -81,11 +81,13 @@
         {proportion = 1.0 / 1.5;}
       ];
 
-      struts = {
-        left = 8;
-        bottom = 8;
-        top = 8;
-        right = 8;
+      struts = let
+        str = 0;
+      in {
+        left = str;
+        bottom = str;
+        top = str;
+        right = str;
       };
     };
 
@@ -177,7 +179,7 @@
         draw-border-with-background = false;
 
         geometry-corner-radius = let
-          radius = 4.0;
+          radius = 0.0;
         in {
           bottom-left = radius;
           bottom-right = radius;
@@ -196,7 +198,7 @@
 
     xwayland-satellite = {
       enable = true;
-      path = lib.getExe pkgs.xwayland-satellite;
+      path = lib.getExe pkgs.xwayland-satellite-unstable;
     };
 
     cursor = {
