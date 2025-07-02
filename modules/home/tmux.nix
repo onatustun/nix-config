@@ -36,8 +36,6 @@
       bind-key f run-shell "tmux neww ${homeDir}/.config/tmux/sessionizer.sh"
       bind G new-window -n 'lazygit' lazygit
       bind-key g run-shell "${homeDir}/.config/tmux/github.sh"
-      bind-key -r H run-shell "${homeDir}/.config/tmux/sessionizer.sh ~"
-      bind-key -r N run-shell "${homeDir}/.config/tmux/sessionizer.sh ~/nix"
 
       bind-key c new-window -c "#{pane_current_path}"
       bind-key % split-window -h -c "#{pane_current_path}"
@@ -56,9 +54,9 @@
         if [[ $# -eq 1 ]]; then
             selected=$1
         else
-            selected=$(find ~/ ~/Documents/code/git ~/Documents/code -mindepth 1 -maxdepth 1 -type d | \
+            selected=$(fd --max-depth 1 --type d . ~/ ~/Documents/code/git ~/Documents/code | \
                 sed "s|^$HOME/||" | \
-                sk --margin 35% --color="bw"
+                sk --margin 10,35% --color="bw"
             )
             if [[ -n "$selected" ]]; then
                 selected="$HOME/$selected"
