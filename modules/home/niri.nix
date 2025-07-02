@@ -196,7 +196,7 @@
 
     xwayland-satellite = {
       enable = true;
-      path = lib.getExe pkgs.xwayland-satellite-unstable;
+      path = lib.getExe pkgs.xwayland-satellite;
     };
 
     cursor = {
