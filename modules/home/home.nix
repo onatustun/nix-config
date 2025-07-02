@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  username,
+  ...
+}: {
   services.cliphist.enable = true;
   programs.home-manager.enable = true;
 
@@ -9,20 +13,12 @@
   };
 
   home = {
-    username = "onat";
-    stateVersion = "24.11";
+    username = username;
+    sessionVariables.FLAKE = "/home/${username}/nix";
     homeDirectory =
       if pkgs.stdenv.isLinux
-      then "/home/onat"
-      else "/Users/onat";
-
-    sessionVariables = {
-      BROWSER = "brave";
-      EDITOR = "hx";
-      FLAKE = "/home/onat/nix";
-      SHELL = "fish";
-      VISUAL = "hx";
-    };
+      then "/home/${username}"
+      else "/Users/${username}";
 
     packages = with pkgs; [
       appimage-run

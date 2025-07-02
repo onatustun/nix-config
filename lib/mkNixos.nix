@@ -6,10 +6,10 @@
   inherit (inputs) self nixpkgs home-manager;
   inherit (lib.filesystem) listFilesRecursive;
   inherit (lib) filter hasSuffix;
-  mkNixos = hostName: system:
+  mkNixos = hostName: system: username:
     nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs hostName;};
+      specialArgs = {inherit inputs hostName username;};
 
       modules =
         [
@@ -20,8 +20,8 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
-              users.onat.imports = listFilesRecursive (self + /modules/home) |> filter (hasSuffix ".nix");
-              extraSpecialArgs = {inherit inputs system;};
+              users.${username}.imports = listFilesRecursive (self + /modules/home) |> filter (hasSuffix ".nix");
+              extraSpecialArgs = {inherit inputs system username;};
             };
           }
         ]

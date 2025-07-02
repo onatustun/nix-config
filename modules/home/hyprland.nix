@@ -68,11 +68,6 @@
         "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
       ];
 
-      monitor = [
-        "eDP-1, 2256x1504@60, 0x0, 1.5667"
-        "DP-3, 3840x2400, auto-down, 2.4"
-      ];
-
       dwindle = {
         force_split = 2;
         special_scale_factor = 1.0;

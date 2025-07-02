@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  home.sessionVariables.BROWSER = "brave";
+
   programs.chromium = {
     enable = true;
     package = pkgs.brave;

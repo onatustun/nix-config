@@ -1,8 +1,8 @@
-{
+{username, ...}: {
   services.displayManager = {
     autoLogin = {
       enable = false;
-      user = "onat";
+      user = username;
     };
 
     gdm = {

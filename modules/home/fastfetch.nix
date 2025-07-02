@@ -19,6 +19,7 @@
         "uptime"
         "packages"
         "cpu"
+        "gpu"
         "swap"
         "disk"
         "display"

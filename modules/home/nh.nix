@@ -1,6 +1,6 @@
-{
+{username, ...}: {
   programs.nh = {
     enable = true;
-    flake = "/home/onat/nix";
+    flake = "/home/${username}/nix";
   };
 }

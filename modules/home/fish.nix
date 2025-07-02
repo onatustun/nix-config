@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  username,
+  ...
+}: {
+  home.sessionVariables.SHELL = "fish";
+
   programs = {
     command-not-found.enable = true;
 
@@ -25,10 +31,10 @@
       interactiveShellInit = ''
         if status is-interactive
         and not set -q TMUX
-          if tmux has-session -t onat
-            exec tmux attach-session -t onat
+          if tmux has-session -t ${username}
+            exec tmux attach-session -t ${username}
           else
-            tmux new-session -s onat
+            tmux new-session -s ${username}
           end
         end
 
@@ -72,10 +78,10 @@
 
       functions = {
         cpp = "cp -prv $argv ..";
-        flakeinit = "nix flake init -t '/home/onat/nix#'\$argv";
+        flakeinit = "nix flake init -t '/home/${username}/nix#'\$argv";
         mvp = "mv -v $argv ..";
         rebuild = "sudo nixos-rebuild switch --flake ~/nix#$argv";
-        shot = "grim -g \"$(slurp)\" /home/onat/Pictures/$argv.png";
+        shot = "grim -g \"$(slurp)\" /home/${username}/Pictures/$argv.png";
       };
 
       plugins = with pkgs.fishPlugins; [

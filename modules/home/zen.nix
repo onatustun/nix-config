@@ -22,6 +22,7 @@
       DontCheckDefaultBrowser = true;
       NoDefaultBookmarks = true;
       OfferToSaveLogins = false;
+
       EnableTrackingProtection = {
         Value = true;
         Locked = true;
