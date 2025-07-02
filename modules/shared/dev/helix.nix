@@ -1,0 +1,546 @@
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}: {
+  environment.sessionVariables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
+  };
+
+  home-manager.sharedModules = [
+    {
+      programs.helix = {
+        enable = true;
+        package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        defaultEditor = true;
+
+        languages = {
+          language = [
+            {
+              name = "tsx";
+              auto-format = true;
+
+              formatter = {
+                command = "prettier";
+
+                args = [
+                  "--parser"
+                  "typescript"
+                ];
+              };
+
+              language-servers = [
+                "tailwindcss-ls"
+                "typescript-language-server"
+                "uwu-colors"
+              ];
+            }
+
+            {
+              name = "jsx";
+              auto-format = true;
+
+              formatter = {
+                command = "prettier";
+
+                args = [
+                  "--parser"
+                  "typescript"
+                ];
+              };
+
+              language-servers = [
+                "tailwindcss-ls"
+                "typescript-language-server"
+                "uwu-colors"
+              ];
+            }
+
+            {
+              name = "html";
+              auto-format = true;
+
+              formatter = {
+                command = "prettier";
+
+                args = [
+                  "--parser"
+                  "html"
+                ];
+              };
+
+              language-servers = [
+                "tailwindcss-ls"
+                "vscode-html-language-server"
+                "vscode-css-language-server"
+                "typescript-language-server"
+                "uwu-colors"
+              ];
+            }
+
+            {
+              name = "css";
+              auto-format = true;
+
+              formatter = {
+                command = "prettier";
+
+                args = [
+                  "--parser"
+                  "css"
+                ];
+              };
+
+              language-servers = [
+                "tailwindcss-ls"
+                "vscode-css-language-server"
+                "uwu-colors"
+              ];
+            }
+
+            {
+              name = "typst";
+              auto-format = true;
+              formatter.command = "typstyle";
+
+              language-servers = [
+                "tinymist"
+                "uwu-colors"
+              ];
+            }
+
+            {
+              name = "nix";
+              auto-format = true;
+              formatter.command = "alejandra";
+
+              language-servers = [
+                "nil"
+                "uwu-colors"
+              ];
+            }
+          ];
+
+          language-server = {
+            uwu-colors = {
+              command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
+            };
+          };
+        };
+
+        settings = {
+          theme = "${config.stylix.base16Scheme.polarity}";
+
+          editor = {
+            default-yank-register = "+";
+            middle-click-paste = false;
+
+            shell = [
+              "bash"
+              "-c"
+            ];
+
+            line-number = "relative";
+            cursorline = true;
+            continue-comments = false;
+            auto-format = false;
+            idle-timeout = 0;
+            completion-replace = true;
+            bufferline = "multiple";
+            color-modes = true;
+            insert-final-newline = false;
+            end-of-line-diagnostics = "warning";
+            clipboard-provider = "wayland";
+            lsp.display-inlay-hints = true;
+            cursor-shape.insert = "bar";
+            file-picker.hidden = false;
+            auto-pairs = true;
+            auto-save = false;
+            inline-diagnostics.cursor-line = "warning";
+
+            statusline = {
+              left = [
+                "mode"
+                "spinner"
+                "file-name"
+                "read-only-indicator"
+                "file-modification-indicator"
+              ];
+
+              right = [
+                "version-control"
+                "diagnostics"
+                "selections"
+                "position"
+                "total-line-numbers"
+              ];
+
+              mode = {
+                normal = "N";
+                insert = "I";
+                select = "S";
+              };
+            };
+
+            whitespace = {
+              render.tab = "all";
+              characters.tab = "→";
+            };
+
+            indent-guides = {
+              render = true;
+              character = "▏";
+              skip-levels = 1;
+            };
+
+            gutters = {
+              layout = [
+                "diagnostics"
+                "spacer"
+                "line-numbers"
+                "spacer"
+                "diff"
+              ];
+
+              line-numbers.min-width = 1;
+            };
+          };
+
+          keys = {
+            normal.C-g = [
+              ":write-all"
+              ":new"
+              ":insert-output lazygit"
+              ":buffer-close!"
+              ":redraw"
+              ":reload-all"
+            ];
+          };
+        };
+      };
+
+      home.file = {
+        ".ignore".text = ''
+          .direnv
+          node_modules
+          .github
+        '';
+
+        ".config/helix/themes/dark.toml".text = ''
+          "attribute" = { fg = "blue300" }
+          "comment" = { fg = "base01" }
+          "constant.builtin" = { fg = "red500", modifiers = ["bold"] }
+          "constant.character.escape" = { fg = "orange900", modifiers = ["bold"] }
+          "constant.character" = { fg = "cyan500" }
+          "constant" = { fg = "red500" }
+          "constructor" = { fg = "orange500" }
+          "diagnostic.error" = { fg = "red500", bg = "red900",underline = { style = "curl", color = "red900" } }
+          "diagnostic.hint" = { fg = "cyan500", bg = "cyan900", underline = { style = "curl", color = "cyan900" } }
+          "diagnostic.info" = { fg = "blue500", bg = "blue900", underline = { style = "curl", color = "blue900" } }
+          "diagnostic.warning" = { fg = "yellow500", bg = "yellow900", underline = { style = "curl", color = "yellow900" } }
+          "diff.delta" = { fg = "orange900" }
+          "diff.minus" = { fg = "red900" }
+          "diff.plus" = { fg = "green900" }
+          "error" = { fg = "red500", modifiers= ["bold", "underlined"] }
+          "function.builtin" = { fg = "blue900", modifiers = ["bold"] }
+          "function" = { fg = "blue500" }
+          "function.macro" = { fg = "magenta900" }
+          "function.special" = { fg = "magenta900" }
+          "hint" = { fg = "cyan500", modifiers= ["bold", "underlined"] }
+          "info" = { fg = "blue500", modifiers= ["bold", "underlined"] }
+          "keyword.control.import" = { fg = "green500" }
+          "keyword.directive" = { fg = "red500" }
+          "keyword" = { fg = "green500" }
+          "keyword.function" = { fg = "green500" }
+          "keyword.storage.modifier" = { fg = "green500" }
+          "keyword.storage.type" = { fg = "green500" }
+          "label" = { fg = "green500" }
+          "markup.bold" = { fg = "yellow500", modifiers = ["bold"] }
+          "markup.heading" = "green300"
+          "markup.italic" = { fg = "magentac300", modifiers = ["italic"] }
+          "markup.link.text" = "blue300"
+          "markup.link.url" = { fg = "yellow300", modifiers = ["underlined"] }
+          "markup.list" = "red300"
+          "markup.quote" = "cyan300"
+          "markup.raw" = "green300"
+          "markup.strikethrough" = { modifiers = ["crossed_out"] }
+          "module" = { fg = "violet900" }
+          "namespace" = { fg = "violet300" }
+          "operator" = { fg = "green500" }
+          "punctuation.bracket" = { fg = "orange500" }
+          "punctuation.delimiter" = { fg = "green500" }
+          "punctuation" = { fg = "orange500" }
+          "punctuation.special" = { fg = "orange500" }
+          "special" = { fg = "orange500" }
+          "string" = { fg = "cyan500" }
+          "tag" = { fg = "green500" }
+          "type.builtin" = { fg = "yellow300", modifiers = ["bold"] }
+          "type" = { fg = "yellow300" }
+          "ui.background" = {}
+          "ui.cursor" = {fg = "base02", bg = "cyan900"}
+          "ui.cursor.insert" = {fg = "base04", bg = "base3"}
+          "ui.cursorline" = { bg = "base04" }
+          "ui.cursorline.primary" = { bg = "base02" }
+          "ui.cursorline.secondary" = { bg = "base03" }
+          "ui.cursor.match" = { fg = "base04", bg = "base00" }
+          "ui.cursor.primary" = { fg = "base04", bg = "base1" }
+          "ui.cursor.select" = { fg = "base02", bg = "cyan900" }
+          "ui.gutter.selected" = { bg = "base02" }
+          "ui.help" = { modifiers = ["reversed"] }
+          "ui.highlight" = { fg = "yellow100" }
+          "ui.linenr" = { fg = "base01" }
+          "ui.linenr.selected" = { fg = "yellow500", modifiers = ["bold"] }
+          "ui.menu" = { fg = "base0", bg = "base03" }
+          "ui.menu.selected" = { fg = "base02", bg = "base2"}
+          "ui.popup" = { fg = "base1", bg = "base02" }
+          "ui.popup.info" = {fg = "base02", bg = "base04", modifiers = ["bold"]}
+          "ui.selection" = { bg = "base02" }
+          "ui.selection.primary" = { bg = "base01" }
+          "ui.statusline" = { fg = "base1", bg = "base03" }
+          "ui.statusline.inactive" = { fg = "base0", bg = "base04" }
+          "ui.statusline.insert" = { fg = "base04", bg = "green500", modifiers = ["bold"]}
+          "ui.statusline.normal" = { fg = "base03", bg = "blue500", modifiers = ["bold"]}
+          "ui.statusline.select" = { fg = "base04", bg = "yellow500", modifiers = ["bold"]}
+          "ui.statusline.seperator" = { bg = "yellow500" }
+          "ui.text" = { fg = "base1" }
+          "ui.text.focus" = { fg = "blue300", modifiers = ["bold"]}
+          "ui.text.inactive" = { fg = "base01" }
+          "ui.text.info" = { fg = "base2" }
+          "ui.virtual.indent-guide" = { fg = "base02" }
+          "ui.virtual.inlay-hint" = { fg = "base01", modifiers = ["italic"] }
+          "ui.virtual.ruler" = { fg = "red900" }
+          "ui.virtual.whitespace" = { fg = "base01" }
+          "ui.window" = { fg = "base3" }
+          "variable.builtin" = { fg = "orange500" }
+          "variable" = { fg = "base0" }
+          "variable.other.member" = { fg = "blue500" }
+          "variable.parameter" = { fg = "orange500" }
+          "warning" =  { fg = "yellow500", modifiers= ["bold", "underlined"] }
+
+          [palette]
+          base04 = "#00141A"
+          base03 = "#002d38"
+          base02 = "#073541"
+          base01 = "#586E74"
+          base00 = "#647A82"
+          base0 = "#9FABAD"
+          base1 = "#ADB8B8"
+          base2 = "#EDE7D4"
+          base3 = "#FDF6E2"
+          base4 = "#FFFFFF"
+
+          yellow900 = "#332700"
+          yellow700 = "#664D00"
+          yellow500 = "#B58900"
+          yellow300 = "#FFC100"
+          yellow100 = "#FFE999"
+
+          orange900 = "#5C220A"
+          orange700 = "#A13C11"
+          orange500 = "#CB4B16"
+          orange300 = "#F8520E"
+          orange100 = "#FF9468"
+
+          red900 = "#57100F"
+          red700 = "#B7211F"
+          red500 = "#DC322F"
+          red300 = "#F6524F"
+          red100 = "#FF9D9B"
+
+          magenta900 = "#541232"
+          magenta700 = "#B02669"
+          magenta500 = "#D33682"
+          magenta300 = "#F255A1"
+          magenta100 = "#FF77B9"
+
+          violet900 = "#25285B"
+          violet700 = "#494FB6"
+          violet500 = "#6C71C4"
+          violet300 = "#9CA0ED"
+          violet100 = "#CCCFFF"
+
+          blue900 = "#103956"
+          blue700 = "#1B6497"
+          blue500 = "#268BD2"
+          blue300 = "#49AEF5"
+          blue100 = "#AADCFF"
+
+          cyan900 = "#103B3D"
+          cyan700 = "#1A6265"
+          cyan500 = "#2AA198"
+          cyan300 = "#29EEDF"
+          cyan100 = "#B9FFFA"
+
+          green900 = "#2C3300"
+          green700 = "#596600"
+          green500 = "#859900"
+          green300 = "#BAFB00"
+          green100 = "#D6FFAC"
+        '';
+
+        ".config/helix/themes/light.toml".text = ''
+          "attribute" = "yellow"
+
+          "type" = "yellow"
+          "type.enum.variant" = "teal"
+
+          "constructor" = "sapphire"
+
+          "constant" = "peach"
+          "constant.character" = "teal"
+          "constant.character.escape" = "pink"
+
+          "string" = "green"
+          "string.regexp" = "pink"
+          "string.special" = "blue"
+          "string.special.symbol" = "red"
+
+          "comment" = { fg = "overlay2", modifiers = ["italic"] }
+
+          "variable" = "text"
+          "variable.parameter" = { fg = "maroon", modifiers = ["italic"] }
+          "variable.builtin" = "red"
+          "variable.other.member" = "blue"
+
+          "label" = "sapphire" # used for lifetimes
+
+          "punctuation" = "overlay2"
+          "punctuation.special" = "sky"
+
+          "keyword" = "mauve"
+          "keyword.control.conditional" = { fg = "mauve", modifiers = ["italic"] }
+
+          "operator" = "sky"
+
+          "function" = "blue"
+          "function.macro" = "rosewater"
+
+          "tag" = "blue"
+
+          "namespace" = { fg = "yellow", modifiers = ["italic"] }
+
+          "special" = "blue" # fuzzy highlight
+
+          "markup.heading.1" = "red"
+          "markup.heading.2" = "peach"
+          "markup.heading.3" = "yellow"
+          "markup.heading.4" = "green"
+          "markup.heading.5" = "sapphire"
+          "markup.heading.6" = "lavender"
+          "markup.list" = "teal"
+          "markup.list.unchecked" = "overlay2"
+          "markup.list.checked" = "green"
+          "markup.bold" = { fg = "red", modifiers = ["bold"] }
+          "markup.italic" = { fg = "red", modifiers = ["italic"] }
+          "markup.link.url" = { fg = "blue", modifiers = ["italic", "underlined"] }
+          "markup.link.text" = "lavender"
+          "markup.link.label" = "sapphire"
+          "markup.raw" = "green"
+          "markup.quote" = "pink"
+
+          "diff.plus" = "green"
+          "diff.minus" = "red"
+          "diff.delta" = "blue"
+
+          "ui.background" = { fg = "text" }
+
+          "ui.linenr" = { fg = "surface1" }
+          "ui.linenr.selected" = { fg = "lavender" }
+
+          "ui.statusline" = { fg = "subtext1", bg = "mantle" }
+          "ui.statusline.inactive" = { fg = "surface2", bg = "mantle" }
+          "ui.statusline.normal" = { fg = "base", bg = "rosewater", modifiers = ["bold"] }
+          "ui.statusline.insert" = { fg = "base", bg = "green", modifiers = ["bold"]  }
+          "ui.statusline.select" = { fg = "base", bg = "lavender", modifiers = ["bold"]  }
+
+          "ui.popup" = { fg = "text", bg = "surface0" }
+          "ui.window" = { fg = "crust" }
+          "ui.help" = { fg = "overlay2", bg = "surface0" }
+
+          "ui.bufferline" = { fg = "subtext0", bg = "mantle" }
+          "ui.bufferline.active" = { fg = "mauve", bg = "base", underline = { color = "mauve", style = "line" } }
+          "ui.bufferline.background" = { bg = "crust" }
+
+          "ui.text" = "text"
+          "ui.text.focus" = { fg = "text", bg = "surface0", modifiers = ["bold"] }
+          "ui.text.inactive" = { fg = "overlay1" }
+          "ui.text.directory" = { fg = "blue" }
+
+          "ui.virtual" = "overlay0"
+          "ui.virtual.ruler" = { bg = "surface0" }
+          "ui.virtual.indent-guide" = "surface0"
+          "ui.virtual.inlay-hint" = { fg = "surface1", bg = "mantle" }
+          "ui.virtual.jump-label" = { fg = "rosewater", modifiers = ["bold"] }
+
+          "ui.selection" = { bg = "surface1" }
+
+          "ui.cursor" = { fg = "base", bg = "secondary_cursor" }
+          "ui.cursor.primary" = { fg = "base", bg = "rosewater" }
+          "ui.cursor.match" = { fg = "peach", modifiers = ["bold"] }
+
+          "ui.cursor.primary.normal" = { fg = "base", bg = "rosewater" }
+          "ui.cursor.primary.insert" = { fg = "base", bg = "green" }
+          "ui.cursor.primary.select" = { fg = "base", bg = "lavender" }
+
+          "ui.cursor.normal" = { fg = "base", bg = "secondary_cursor_normal" }
+          "ui.cursor.insert" = { fg = "base", bg = "secondary_cursor_insert" }
+          "ui.cursor.select" = { fg = "base", bg = "secondary_cursor_select" }
+
+          "ui.cursorline.primary" = { bg = "cursorline" }
+
+          "ui.highlight" = { bg = "surface1", modifiers = ["bold"] }
+
+          "ui.menu" = { fg = "overlay2", bg = "surface0" }
+          "ui.menu.selected" = { fg = "text", bg = "surface1", modifiers = ["bold"] }
+
+          "diagnostic.error" = { underline = { color = "red", style = "curl" } }
+          "diagnostic.warning" = { underline = { color = "yellow", style = "curl" } }
+          "diagnostic.info" = { underline = { color = "sky", style = "curl" } }
+          "diagnostic.hint" = { underline = { color = "teal", style = "curl" } }
+          "diagnostic.unnecessary" = { modifiers = ["dim"] }
+
+          error = "red"
+          warning = "yellow"
+          info = "sky"
+          hint = "teal"
+
+          [palette]
+          rosewater = "#dc8a78"
+          flamingo = "#dd7878"
+          pink = "#ea76cb"
+          mauve = "#8839ef"
+          red = "#d20f39"
+          maroon = "#e64553"
+          peach = "#fe640b"
+          yellow = "#df8e1d"
+          green = "#40a02b"
+          teal = "#179299"
+          sky = "#04a5e5"
+          sapphire = "#209fb5"
+          blue = "#1e66f5"
+          lavender = "#7287fd"
+          text = "#4c4f69"
+          subtext1 = "#5c5f77"
+          subtext0 = "#6c6f85"
+          overlay2 = "#7c7f93"
+          overlay1 = "#8c8fa1"
+          overlay0 = "#9ca0b0"
+          surface2 = "#acb0be"
+          surface1 = "#bcc0cc"
+          surface0 = "#ccd0da"
+          base = "#eff1f5"
+          mantle = "#e6e9ef"
+          crust = "#dce0e8"
+
+          cursorline = "#e8ecf1"
+          secondary_cursor = "#e1a99d"
+          secondary_cursor_select = "#97a7fb"
+          secondary_cursor_normal = "#e1a99d"
+          secondary_cursor_insert = "#74b867"
+        '';
+      };
+    }
+  ];
+}

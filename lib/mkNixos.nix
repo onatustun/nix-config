@@ -6,8 +6,15 @@
   inherit (inputs) self nixpkgs home-manager;
   inherit (lib.filesystem) listFilesRecursive;
   inherit (lib) filter hasSuffix;
-  mkNixos = hostName: system: username: let
+
+  mkNixos = {
+    hostName,
+    system,
+    username,
+    modules,
+  }: let
     homeDir = "/home/${username}";
+    moduleFiles = lib.flatten (map (moduleDir: filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir}))) modules);
   in
     nixpkgs.lib.nixosSystem {
       inherit system;
@@ -16,18 +23,16 @@
       modules =
         [
           home-manager.nixosModules.home-manager
-
           {
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "backup";
-              users.${username}.imports = listFilesRecursive (self + /modules/home) |> filter (hasSuffix ".nix");
               extraSpecialArgs = {inherit inputs system username homeDir;};
             };
           }
         ]
-        ++ (listFilesRecursive (self + /modules/nixos) |> filter (hasSuffix ".nix"))
-        ++ (listFilesRecursive (self + /hosts/${hostName}) |> filter (hasSuffix ".nix"));
+        ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/${hostName}))
+        ++ moduleFiles;
     };
 in {
   _module.args.mkNixos = mkNixos;

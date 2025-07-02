@@ -9,9 +9,12 @@ inputs.flake-parts.lib.mkFlake {inherit inputs;} {
     [
       ./dev-shell.nix
       ./hosts
-      ./overlays
       ./pre-commit-hooks.nix
       ./templates
     ]
     ++ (listFilesRecursive ./lib |> filter (hasSuffix ".nix"));
+
+  flake.overlays.default = final: prev:
+    (import ./pkgs {inherit final prev;})
+    // (inputs.niri.overlays.niri final prev);
 }
