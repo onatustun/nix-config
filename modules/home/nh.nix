@@ -1,6 +1,6 @@
-{username, ...}: {
+{homeDir, ...}: {
   programs.nh = {
     enable = true;
-    flake = "/home/${username}/nix";
+    flake = "${homeDir}/nix";
   };
 }

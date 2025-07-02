@@ -4,7 +4,10 @@
   username,
   ...
 }: {
-  imports = [inputs.zen-browser.homeModules.twilight];
+  imports = [
+    inputs.zen-browser.homeModules.twilight
+    inputs.nur.modules.homeManager.default
+  ];
 
   /*
   manual setups:
@@ -15,7 +18,7 @@
 
   look and feel:
     enable:
-      multiple collapsed toolbar
+      single toolbar
       right side toolbar
       compact: hide both
       always floating

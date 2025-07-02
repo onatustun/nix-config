@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  homeDir,
   ...
 }: {
   home.sessionVariables.SHELL = "fish";
@@ -25,6 +26,7 @@
       '';
 
       loginShellInit = ''
+        set -gx NIXPKGS_ALLOW_UNFREE 1
         set fish_greeting
       '';
 
@@ -78,10 +80,10 @@
 
       functions = {
         cpp = "cp -prv $argv ..";
-        flakeinit = "nix flake init -t '/home/${username}/nix#'\$argv";
+        flakeinit = "nix flake init -t '${homeDir}/nix#'\$argv";
         mvp = "mv -v $argv ..";
         rebuild = "sudo nixos-rebuild switch --flake ~/nix#$argv";
-        shot = "grim -g \"$(slurp)\" /home/${username}/Pictures/$argv.png";
+        shot = "grim -g \"$(slurp)\" ${homeDir}/Pictures/$argv.png";
       };
 
       plugins = with pkgs.fishPlugins; [

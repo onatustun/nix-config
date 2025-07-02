@@ -3,26 +3,26 @@
   inputs,
   ...
 }: let
-  inherit (inputs) self nixpkgs home-manager nur;
+  inherit (inputs) self nixpkgs home-manager;
   inherit (lib.filesystem) listFilesRecursive;
   inherit (lib) filter hasSuffix;
-  mkNixos = hostName: system: username:
+  mkNixos = hostName: system: username: let
+    homeDir = "/home/${username}";
+  in
     nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs hostName username;};
+      specialArgs = {inherit inputs hostName username homeDir;};
 
       modules =
         [
           home-manager.nixosModules.home-manager
-          nur.modules.nixos.default
 
           {
             home-manager = {
-              useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
               users.${username}.imports = listFilesRecursive (self + /modules/home) |> filter (hasSuffix ".nix");
-              extraSpecialArgs = {inherit inputs system username;};
+              extraSpecialArgs = {inherit inputs system username homeDir;};
             };
           }
         ]

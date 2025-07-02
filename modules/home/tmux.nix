@@ -1,4 +1,4 @@
-{username, ...}: {
+{homeDir, ...}: {
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -33,11 +33,11 @@
       bind-key -r K resize-pane -U 5
       bind-key -r L resize-pane -R 5
 
-      bind-key f run-shell "tmux neww /home/${username}/.config/tmux/sessionizer.sh"
+      bind-key f run-shell "tmux neww ${homeDir}/.config/tmux/sessionizer.sh"
       bind G new-window -n 'lazygit' lazygit
-      bind-key g run-shell "/home/${username}/.config/tmux/github.sh"
-      bind-key -r H run-shell "/home/${username}/.config/tmux/sessionizer.sh ~"
-      bind-key -r N run-shell "/home/${username}/.config/tmux/sessionizer.sh ~/nix"
+      bind-key g run-shell "${homeDir}/.config/tmux/github.sh"
+      bind-key -r H run-shell "${homeDir}/.config/tmux/sessionizer.sh ~"
+      bind-key -r N run-shell "${homeDir}/.config/tmux/sessionizer.sh ~/nix"
 
       bind-key c new-window -c "#{pane_current_path}"
       bind-key % split-window -h -c "#{pane_current_path}"

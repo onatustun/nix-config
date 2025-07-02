@@ -1,4 +1,5 @@
 {
+  homeDir,
   pkgs,
   username,
   ...
@@ -6,19 +7,10 @@
   services.cliphist.enable = true;
   programs.home-manager.enable = true;
 
-  manual = {
-    html.enable = false;
-    json.enable = false;
-    manpages.enable = false;
-  };
-
   home = {
     username = username;
-    sessionVariables.FLAKE = "/home/${username}/nix";
-    homeDirectory =
-      if pkgs.stdenv.isLinux
-      then "/home/${username}"
-      else "/Users/${username}";
+    homeDirectory = homeDir;
+    sessionVariables.FLAKE = "${homeDir}/nix";
 
     packages = with pkgs; [
       appimage-run
