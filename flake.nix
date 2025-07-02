@@ -5,8 +5,18 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    hardware.url = "github:nixos/nixos-hardware";
     systems.url = "github:nix-systems/default";
+    hardware.url = "github:nixos/nixos-hardware";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nur = {
       url = "github:nix-community/NUR";
@@ -17,13 +27,29 @@
       };
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    stylix = {
+      url = "github:danth/stylix";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        systems.follows = "systems";
+        home-manager.follows = "home-manager";
+      };
+    };
+
+    helix = {
+      url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
+    uwu-colors = {
+      url = "github:q60/uwu_colors";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -42,11 +68,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
 
@@ -54,22 +75,6 @@
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
       };
-    };
-
-    stylix = {
-      url = "github:danth/stylix";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        systems.follows = "systems";
-        home-manager.follows = "home-manager";
-      };
-    };
-
-    uwu-colors = {
-      url = "github:q60/uwu_colors";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
