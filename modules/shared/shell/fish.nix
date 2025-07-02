@@ -86,7 +86,7 @@
             cpp = "cp -prv $argv ..";
             flakeinit = "nix flake init -t '${homeDir}/nix#'\$argv";
             mvp = "mv -v $argv ..";
-            rebuild = "sudo nixos-rebuild switch --flake ~/testnix#$argv";
+            rebuild = "sudo nixos-rebuild switch --flake ~/nix#$argv";
             shot = "grim -g \"$(slurp)\" ${homeDir}/Pictures/$argv.png";
           };
 
