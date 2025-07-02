@@ -14,7 +14,5 @@ inputs.flake-parts.lib.mkFlake {inherit inputs;} {
     ]
     ++ (listFilesRecursive ./lib |> filter (hasSuffix ".nix"));
 
-  flake.overlays.default = final: prev:
-    (import ./pkgs {inherit final prev;})
-    // (inputs.niri.overlays.niri final prev);
+  flake.overlays.default = final: prev: (import ./pkgs {inherit final prev;});
 }

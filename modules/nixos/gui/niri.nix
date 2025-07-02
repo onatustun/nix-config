@@ -8,6 +8,7 @@
   cursorTheme = "Bibata-Modern-Ice";
   cursorSize = 24;
 in {
+  overlays.default = [inputs.niri.overlays.niri];
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache.enable = false;
 
