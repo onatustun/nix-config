@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  environment.sytsemPackages = [pkgs.swaylock];
+  environment.systemPackages = [pkgs.swaylock];
 
   home-manager.sharedModules = [
     {

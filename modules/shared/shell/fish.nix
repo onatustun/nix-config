@@ -67,8 +67,10 @@
             rmf = "rm -frv";
             rm = "rm -rv";
             s = "sudo -E";
+            "sx." = "sudo -E hx .";
             sx = "sudo -E hx";
             syz = "sudo -E yazi";
+            "x." = "hx .";
             x = "hx";
             yz = "yazi";
           };

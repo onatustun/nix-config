@@ -30,19 +30,5 @@
         "shared"
       ];
     };
-
-    server = mkNixos {
-      hostName = "server";
-      system = "x86_64-linux";
-      username = "onat";
-
-      modules = [
-        "nixos/core"
-        "shared/cli"
-        "shared/core"
-        "shared/dev"
-        "shared/shell"
-      ];
-    };
   };
 }
