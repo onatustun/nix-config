@@ -31,6 +31,11 @@
             set fish_cursor_visual block
 
             zoxide init --cmd cd fish | source
+
+            bind -M command ctrl-z 'toggle-editor'
+            bind -M default ctrl-z 'toggle-editor'
+            bind -M insert ctrl-z 'toggle-editor'
+            bind -M visual ctrl-z 'toggle-editor'
           '';
 
           loginShellInit = ''
@@ -92,8 +97,17 @@
             cpp = "cp -prv $argv ..";
             flakeinit = "nix flake init -t '${homeDir}/nix#'\$argv";
             mvp = "mv -v $argv ..";
-            rebuild = "sudo nixos-rebuild switch --flake `${homeDir}/nix#'\$argv";
+            rebuild = "sudo nixos-rebuild switch --flake ${homeDir}/nix#$argv";
             shot = "grim -g \"$(slurp)\" ${homeDir}/Pictures/$argv.png";
+
+            toggle-editor = ''
+              if jobs -q
+                sleep 0.1
+                fg 2>/dev/null
+              else
+                hx .
+              end
+            '';
           };
 
           plugins = with pkgs.fishPlugins; [
