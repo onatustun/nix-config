@@ -209,14 +209,31 @@
           };
 
           keys = {
-            normal.C-g = [
-              ":write-all"
-              ":new"
-              ":insert-output lazygit"
-              ":buffer-close!"
-              ":redraw"
-              ":reload-all"
-            ];
+            normal = {
+              G = {
+                j = "@vgj<esc>";
+                k = "@vgk<esc>";
+              };
+
+              g = {
+                j = "goto_last_line";
+                k = "goto_file_start";
+              };
+
+              C-g = [
+                ":write-all"
+                ":new"
+                ":insert-output lazygit"
+                ":buffer-close!"
+                ":redraw"
+                ":reload-all"
+              ];
+            };
+
+            select.g = {
+              j = "goto_last_line";
+              k = "goto_file_start";
+            };
           };
         };
       };
