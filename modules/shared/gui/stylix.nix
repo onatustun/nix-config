@@ -43,7 +43,7 @@
     base0F = "#dd7878";
   };
 
-  current = dark;
+  current = light;
 in {
   imports = [inputs.stylix.nixosModules.stylix];
 
