@@ -6,7 +6,11 @@
 }: {
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
-  environment.sessionVariables.SHELL = "fish";
+
+  environment = {
+    sessionVariables.SHELL = "fish";
+    systemPackages = [pkgs.xclip];
+  };
 
   home-manager.sharedModules = [
     {
@@ -86,7 +90,7 @@
             cpp = "cp -prv $argv ..";
             flakeinit = "nix flake init -t '${homeDir}/nix#'\$argv";
             mvp = "mv -v $argv ..";
-            rebuild = "sudo nixos-rebuild switch --flake ~/nix#$argv";
+            rebuild = "sudo nixos-rebuild switch --flake `${homeDir}/nix#'\$argv";
             shot = "grim -g \"$(slurp)\" ${homeDir}/Pictures/$argv.png";
           };
 

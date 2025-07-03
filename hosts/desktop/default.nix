@@ -29,18 +29,6 @@
     ];
   };
 
-  home-manager = {
-    users.${username}.home.stateVersion = "24.11";
-
-    sharedModules = [
-      {
-        wayland.windowManager.hyprland.settings.monitor = [
-          "DP-2, 1920x1080@240, 0x0, 1, transform, 2"
-          "HDMI-A-1, 1920x1080@240, auto-down, 1"
-        ];
-      }
-    ];
-  };
-
+  home-manager.users.${username}.home.stateVersion = "24.11";
   system.stateVersion = "24.11";
 }

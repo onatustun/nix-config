@@ -1,4 +1,9 @@
 {pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    xwayland
+    xwayland-satellite
+  ];
+
   home-manager.sharedModules = [
     {
       systemd.user.services.xwayland-satellite = {

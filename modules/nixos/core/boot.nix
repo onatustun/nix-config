@@ -1,6 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  isServer,
+  ...
+}: {
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    kernelPackages =
+      if isServer
+      then pkgs.linuxPackages_latest
+      else pkgs.linuxKernel.packages.linux_zen;
+
     tmp.cleanOnBoot = true;
 
     blacklistedKernelModules = [

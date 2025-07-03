@@ -1,8 +1,11 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
+  environment.systemPackages = [pkgs.wlogout];
+
   home-manager.sharedModules = [
     {
       programs.wlogout = {

@@ -1,14 +1,17 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }: let
   inherit (lib) getExe;
 in {
+  environment.systemPackages = [pkgs.swayidle];
+
   home-manager.sharedModules = [
     {
       services.swayidle = {
-        enable = false;
+        enable = true;
 
         events = [
           {

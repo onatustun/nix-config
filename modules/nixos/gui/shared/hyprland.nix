@@ -1,6 +1,8 @@
 {
   pkgs,
   inputs,
+  isDesktop,
+  isLaptop,
   ...
 }: {
   environment.systemPackages = [pkgs.xdg-desktop-portal-hyprland];
@@ -81,6 +83,19 @@
             "brightnessctl -r"
             "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
           ];
+
+          monitor =
+            if isDesktop
+            then [
+              "DP-2, 1920x1080@240, 0x0, 1, transform, 2"
+              "HDMI-A-1, 1920x1080@240, auto-down, 1"
+            ]
+            else if isLaptop
+            then [
+              "eDP-1, 2256x1504@60, 0x0, 1.5667"
+              "DP-3, 3840x2400, auto-down, 2.4"
+            ]
+            else [];
 
           dwindle = {
             force_split = 2;
