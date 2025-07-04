@@ -22,6 +22,7 @@
           fd
           fzf
           gammastep
+          geoclue2
           git
           killall
           less
