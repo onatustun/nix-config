@@ -63,6 +63,7 @@ in {
           (makeCommand "wl-paste --type text --watch cliphist store")
           (makeCommand "wl-clip-persist --clipboard both")
           (makeCommand "brightness -r")
+          (makeCommand "swayidle")
         ];
 
         outputs = {
@@ -74,7 +75,7 @@ in {
             };
 
             scale = 1.5;
-            background-color = "${config.stylix.base16Scheme.base09}";
+            background-color = "${config.stylix.base16Scheme.base00}";
           };
         };
 

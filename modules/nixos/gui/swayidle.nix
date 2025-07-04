@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -16,18 +15,18 @@ in {
         events = [
           {
             event = "before-sleep";
-            command = "${getExe config.programs.swaylock.package} -defF";
+            command = "${getExe pkgs.swaylock} -defF";
           }
           {
             event = "lock";
-            command = "${getExe config.programs.swaylock.package} -defF";
+            command = "${getExe pkgs.swaylock} -defF";
           }
         ];
 
         timeouts = [
           {
             timeout = 200;
-            command = "${getExe config.programs.swaylock.package} -defF";
+            command = "${getExe pkgs.swaylock} -defF";
           }
         ];
       };
