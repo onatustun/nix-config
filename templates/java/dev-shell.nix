@@ -1,21 +1,25 @@
 {
   perSystem = {
     config,
+    inputs',
     pkgs,
     ...
   }: {
     devShells.default = pkgs.mkShell {
       name = "java";
-      formatter = pkgs.alejandra;
+      formatter = inputs'.alejandra.packages.default;
 
-      packages = with pkgs; [
-        alejandra
-        gradle
-        jdk
-        jdt-language-server
-        maven
-        nil
-      ];
+      packages = with pkgs;
+        [
+          # gradle
+          jdk
+          jdt-language-server
+          # maven
+        ]
+        ++ (with inputs'; [
+          alejandra.packages.default
+          nil.packages.default
+        ]);
 
       shellHook = ''
         ${config.pre-commit.installationScript}

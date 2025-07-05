@@ -1,23 +1,27 @@
 {
   perSystem = {
     config,
+    inputs',
     pkgs,
     ...
   }: {
     devShells.default = pkgs.mkShell {
       name = "nodejs typescript";
-      formatter = pkgs.alejandra;
+      formatter = inputs'.alejandra.packages.default;
 
-      packages = with pkgs; [
-        alejandra
-        nil
-        nodejs
-        prettierd
-        tailwindcss
-        tailwindcss-language-server
-        typescript-language-server
-        vscode-langservers-extracted
-      ];
+      packages = with pkgs;
+        [
+          nodejs
+          prettierd
+          tailwindcss
+          tailwindcss-language-server
+          typescript-language-server
+          vscode-langservers-extracted
+        ]
+        ++ (with inputs'; [
+          alejandra.packages.default
+          nil.packages.default
+        ]);
 
       shellHook = ''
         ${config.pre-commit.installationScript}

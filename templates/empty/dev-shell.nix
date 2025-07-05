@@ -1,17 +1,20 @@
 {
   perSystem = {
     config,
+    inputs',
     pkgs,
     ...
   }: {
     devShells.default = pkgs.mkShell {
       name = "empty";
-      formatter = pkgs.alejandra;
+      formatter = inputs'.alejandra.packages.default;
 
-      packages = with pkgs; [
-        alejandra
-        nil
-      ];
+      packages = with pkgs;
+        []
+        ++ (with inputs'; [
+          alejandra.packages.default
+          nil.packages.default
+        ]);
 
       shellHook = ''
         ${config.pre-commit.installationScript}

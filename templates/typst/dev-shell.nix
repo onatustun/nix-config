@@ -1,20 +1,24 @@
 {
   perSystem = {
     config,
+    inputs',
     pkgs,
     ...
   }: {
     devShells.default = pkgs.mkShell {
       name = "typst";
-      formatter = pkgs.alejandra;
+      formatter = inputs'.alejandra.packages.default;
 
-      packages = with pkgs; [
-        alejandra
-        nil
-        tinymist
-        typst
-        typstyle
-      ];
+      packages = with pkgs;
+        [
+          tinymist
+          typst
+          typstyle
+        ]
+        ++ (with inputs'; [
+          alejandra.packages.default
+          nil.packages.default
+        ]);
 
       shellHook = ''
         ${config.pre-commit.installationScript}

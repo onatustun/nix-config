@@ -19,10 +19,5 @@
       path = ./typst;
       description = "typst";
     };
-
-    zola = {
-      path = ./zola;
-      description = "zola";
-    };
   };
 }

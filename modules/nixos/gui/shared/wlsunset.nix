@@ -1,4 +1,6 @@
-{
+{pkgs, ...}: {
+  environment.systemPackages = [pkgs.wlsunset];
+
   home-manager.sharedModules = [
     {
       services.wlsunset = {

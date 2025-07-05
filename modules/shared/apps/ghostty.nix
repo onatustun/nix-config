@@ -19,6 +19,12 @@
           mouse-hide-while-typing = true;
           shell-integration-features = "no-cursor";
           window-decoration = "auto";
+
+          font-feature = [
+            "-calt"
+            "-liga"
+            "-dlig"
+          ];
         };
       };
     }
