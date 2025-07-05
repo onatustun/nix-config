@@ -4,6 +4,7 @@
   ...
 }: let
   dark = {
+    name = "dark";
     polarity = "dark";
     base00 = "#00141A";
     base01 = "#073642";
@@ -23,7 +24,29 @@
     base0F = "#d33682";
   };
 
+  gruber = {
+    name = "gruber";
+    polarity = "dark";
+    base00 = "#181818";
+    base01 = "#453d41";
+    base02 = "#484848";
+    base03 = "#52494e";
+    base04 = "#e4e4ef";
+    base05 = "#f4f4ff";
+    base06 = "#f5f5f5";
+    base07 = "#e4e4ef";
+    base08 = "#f43841";
+    base09 = "#c73c3f";
+    base0A = "#ffdd33";
+    base0B = "#73c936";
+    base0C = "#95a99f";
+    base0D = "#96a6c8";
+    base0E = "#9e95c7";
+    base0F = "#cc8c3c";
+  };
+
   light = {
+    name = "light";
     polarity = "light";
     base00 = "#eff1f5";
     base01 = "#e6e9ef";
@@ -43,7 +66,7 @@
     base0F = "#dd7878";
   };
 
-  current = light;
+  current = gruber;
 in {
   imports = [inputs.stylix.nixosModules.stylix];
 

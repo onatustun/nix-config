@@ -10,12 +10,8 @@
 
       packages = with pkgs; [
         alejandra
-        git
         home-manager
-        nh
         nil
-        nix
-        nixos-rebuild
         vim
       ];
 
