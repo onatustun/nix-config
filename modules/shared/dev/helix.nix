@@ -433,7 +433,7 @@
           "info" = { fg = "aqua1", modifiers = ["bold"] }
           "hint" = { fg = "blue0", modifiers = ["bold"] }
 
-          "ui.background" = { bg = "bg0" }
+          "ui.background" = {}
           "ui.linenr" = { fg = "bg4" }
           "ui.linenr.selected" = { fg = "yellow0" }
           "ui.cursorline" = { bg = "bg1" }

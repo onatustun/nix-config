@@ -6,8 +6,12 @@
 }: {
   home-manager.sharedModules = [
     {
-      services.cliphist.enable = true;
       programs.home-manager.enable = true;
+
+      services = {
+        cliphist.enable = true;
+        geoclue2.enable = true;
+      };
 
       home = {
         username = username;
