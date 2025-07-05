@@ -8,6 +8,7 @@
       hostName = "laptop";
       system = "x86_64-linux";
       username = "onat";
+      home-manager = true;
       packages = ["bibata-hyprcursor"];
       overlays = [inputs.niri.overlays.niri];
 
@@ -21,6 +22,7 @@
       hostName = "desktop";
       system = "x86_64-linux";
       username = "onat";
+      home-manager = true;
       packages = ["bibata-hyprcursor"];
 
       modules = [
