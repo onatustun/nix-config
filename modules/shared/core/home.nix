@@ -7,11 +7,7 @@
   home-manager.sharedModules = [
     {
       programs.home-manager.enable = true;
-
-      services = {
-        cliphist.enable = true;
-        geoclue2.enable = true;
-      };
+      services.cliphist.enable = true;
 
       home = {
         username = username;
