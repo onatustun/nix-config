@@ -22,7 +22,11 @@
     power-profiles-daemon.enable = true;
   };
 
-  environment.systemPackages = [pkgs.framework-tool];
+  environment.systemPackages = with pkgs; [
+    framework-tool
+    power-profiles-daemon
+  ];
+
   hardware.framework.enableKmod = true;
   home-manager.users.${username}.home.stateVersion = "24.11";
   system.stateVersion = "24.11";
