@@ -3,18 +3,18 @@
   inputs,
   ...
 }: let
-  inherit (inputs) self nixpkgs;
-  inherit (lib) genAttrs optional filter hasSuffix flatten;
+  inherit (inputs) self nixpkgs home-manager;
+  inherit (lib) genAttrs optional filter hasSuffix flatten optionals;
   inherit (lib.filesystem) listFilesRecursive;
 
   mkNixos = {
     hostName,
     system,
     username,
-    modules,
-    overlays ? [],
+    homeVer ? null,
     packages ? [],
-    home-manager ? null,
+    overlays ? [],
+    modules,
   }: let
     homeDir = "/home/${username}";
     packageOverlay = final: prev: genAttrs packages (name: final.callPackage (self + /pkgs/${name}.nix) {});
@@ -23,10 +23,12 @@
     isLaptop = hostName == "laptop";
     isServer = hostName == "server";
 
-    homeManagerModules = optional (home-manager != null) [
+    homeManagerModules = optionals (homeVer != null) [
       home-manager.nixosModules.home-manager
+
       {
         home-manager = {
+          users.${username}.home.stateVersion = homeVer;
           useUserPackages = true;
           backupFileExtension = "backup";
           extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer;};
@@ -36,7 +38,7 @@
   in
     nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer;};
+      specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer homeVer;};
 
       modules =
         [
