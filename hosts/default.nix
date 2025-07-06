@@ -14,7 +14,7 @@
 
       modules = [
         "nixos"
-        "shared"
+        "common"
       ];
     };
 
@@ -29,7 +29,7 @@
         "nixos/core"
         "nixos/gui/shared"
         "nixos/hardware"
-        "shared"
+        "common"
       ];
     };
   };
