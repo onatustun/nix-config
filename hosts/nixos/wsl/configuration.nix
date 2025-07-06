@@ -1,4 +1,10 @@
-{username, ...}: {
+{
+  username,
+  inputs,
+  ...
+}: {
+  imports = [inputs.nixos-wsl.nixosModules.default];
+
   users.users.${username}.extraGroups = [
     "audio"
     "input"

@@ -37,8 +37,19 @@
       hostName = "wsl";
       system = "x86_64-linux";
       username = "onat";
-      extraInputs = [inputs.nixos-wsl.nixosModules.default];
-      modules = ["nixos/core"];
+      homeVer = "24.11";
+
+      modules = [
+        "common/core"
+        "common/cli"
+        "common/gui"
+        "common/shell"
+      ];
+
+      extraModules = [
+        (inputs.self + /modules/nixos/core/networking.nix)
+        (inputs.self + /modules/nixos/core/user.nix)
+      ];
     };
   };
 }

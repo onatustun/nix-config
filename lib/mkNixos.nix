@@ -14,8 +14,8 @@
     homeVer ? null,
     packages ? [],
     overlays ? [],
-    extraInputs ? [],
     modules,
+    extraModules ? [],
   }: let
     homeDir = "/home/${username}";
     packageOverlay = final: prev: genAttrs packages (name: final.callPackage (self + /pkgs/${name}.nix) {});
@@ -45,7 +45,7 @@
         [
           {nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}
         ]
-        ++ extraInputs
+        ++ extraModules
         ++ homeManagerModules
         ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/nixos/${hostName}))
         ++ flatten (map (moduleDir: filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir}))) modules);
