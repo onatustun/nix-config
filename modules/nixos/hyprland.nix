@@ -12,6 +12,8 @@
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
+  environment.systemPackages = [pkgs.hyprcursor];
+
   home-manager.sharedModules = [
     {
       wayland.windowManager.hyprland = {
@@ -80,7 +82,6 @@
             [
               "wl-paste --type image --watch cliphist store"
               "wl-paste --type text --watch cliphist store"
-              "brightnessctl -r"
               "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
             ]
             ++ lib.optionals isLaptop [
@@ -196,8 +197,6 @@
             ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
             ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
             ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-            ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
-            ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
           ];
 
           bindl = [

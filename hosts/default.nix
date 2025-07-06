@@ -49,6 +49,7 @@
       ];
 
       ignore = [
+        "apps"
         "audio"
         "bluetooth"
         "boot"
@@ -64,6 +65,7 @@
         "swaylock"
         "thunar"
         "waybar"
+        "wayland"
         "wlogout"
         "wlsunset"
         "xwayland"

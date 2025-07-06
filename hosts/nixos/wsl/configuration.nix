@@ -30,13 +30,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    cliphist
     curl
     procps
-    procps
     wget
-    wl-clipboard
-    wl-clip-persist
   ];
 
   system.stateVersion = "24.11";
