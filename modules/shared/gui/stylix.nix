@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  dark = {
+  solarized = {
     name = "dark";
     polarity = "dark";
     base00 = "#00141A";
@@ -45,7 +45,7 @@
     base0F = "#cc8c3c";
   };
 
-  light = {
+  latte = {
     name = "light";
     polarity = "light";
     base00 = "#eff1f5";

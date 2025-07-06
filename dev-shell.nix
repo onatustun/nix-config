@@ -16,7 +16,7 @@
         ]
         ++ (with inputs'; [
           alejandra.packages.default
-          nil.packages.default
+          nixd.packages.default
         ]);
 
       shellHook = ''

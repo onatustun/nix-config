@@ -117,7 +117,7 @@
               formatter.command = "alejandra";
 
               language-servers = [
-                "nil"
+                "nixd"
                 "uwu-colors"
               ];
             }
@@ -245,7 +245,7 @@
           .github
         '';
 
-        ".config/helix/themes/dark.toml".text = ''
+        ".config/helix/themes/solarized.toml".text = ''
           "attribute" = { fg = "blue300" }
           "comment" = { fg = "base01" }
           "constant.builtin" = { fg = "red500", modifiers = ["bold"] }
@@ -514,7 +514,7 @@
           aqua1 =    "#8ec07c"
         '';
 
-        ".config/helix/themes/light.toml".text = ''
+        ".config/helix/themes/latte.toml".text = ''
           "attribute" = "yellow"
 
           "type" = "yellow"

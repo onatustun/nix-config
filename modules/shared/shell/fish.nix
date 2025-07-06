@@ -97,7 +97,7 @@
             cpp = "cp -prv $argv ..";
             flakeinit = "nix flake init -t '${homeDir}/nix#'\$argv";
             mvp = "mv -v $argv ..";
-            rebuild = "sudo nixos-rebuild switch --flake ${homeDir}/nix#$argv";
+            rebuild = "nh os switch -H $argv";
             shot = "grim -g \"$(slurp)\" ${homeDir}/Pictures/$argv.png";
 
             toggle-editor = ''
