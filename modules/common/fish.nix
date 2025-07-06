@@ -45,16 +45,6 @@
           interactiveShellInit = ''
             if status is-interactive
             and not set -q TMUX
-              ${
-              if isWsl
-              then ''
-                if test -f /etc/clipboard-init.sh
-                  /etc/clipboard-init.sh
-                end
-              ''
-              else ""
-            }
-
               if tmux has-session -t ${username}
                 exec tmux attach-session -t ${username}
               else

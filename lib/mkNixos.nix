@@ -15,7 +15,7 @@
     packages ? [],
     overlays ? [],
     modules,
-    extraModules ? [],
+    ignore ? [],
   }: let
     homeDir = "/home/${username}";
     packageOverlay = final: prev: genAttrs packages (name: final.callPackage (self + /pkgs/${name}.nix) {});
@@ -37,6 +37,15 @@
         };
       }
     ];
+
+    filterIgnored = files:
+      filter (
+        file: let
+          fileName = baseNameOf (toString file);
+        in
+          !(builtins.elem fileName (map (name: "${name}.nix") ignore))
+      )
+      files;
   in
     nixpkgs.lib.nixosSystem {
       inherit system;
@@ -46,10 +55,13 @@
         [
           {nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}
         ]
-        ++ extraModules
         ++ homeManagerModules
         ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/nixos/${hostName}))
-        ++ flatten (map (moduleDir: filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir}))) modules);
+        ++ flatten (map (
+            moduleDir:
+              filterIgnored (filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir})))
+          )
+          modules);
     };
 in {
   _module.args.mkNixos = mkNixos;

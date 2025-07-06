@@ -26,10 +26,14 @@
       packages = ["bibata-hyprcursor"];
 
       modules = [
-        "nixos/core"
-        "nixos/gui/shared"
-        "nixos/hardware"
+        "nixos"
         "common"
+      ];
+
+      ignore = [
+        "niri"
+        "swayidle"
+        "xwayland"
       ];
     };
 
@@ -40,12 +44,30 @@
       homeVer = "24.11";
 
       modules = [
-        "nixos/core"
-        "common/cli"
-        "common/core"
-        "common/dev"
-        "common/gui"
-        "common/shell"
+        "nixos"
+        "common"
+      ];
+
+      ignore = [
+        "audio"
+        "bluetooth"
+        "boot"
+        "gdm"
+        "ghostty"
+        "graphics"
+        "hyprland"
+        "niri"
+        "packages"
+        "pointer"
+        "rofi"
+        "swayidle"
+        "swaylock"
+        "thunar"
+        "waybar"
+        "wlogout"
+        "wlsunset"
+        "xwayland"
+        "zen"
       ];
     };
   };
