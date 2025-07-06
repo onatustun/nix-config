@@ -18,6 +18,8 @@
           enable = true;
 
           shellInit = ''
+            set -g fish_term24bit 1
+
             fish_vi_key_bindings
 
             set fish_cursor_default block

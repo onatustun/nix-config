@@ -134,6 +134,7 @@
           theme = "${config.stylix.base16Scheme.name}";
 
           editor = {
+            true-color = true;
             default-yank-register = "+";
             middle-click-paste = false;
 
