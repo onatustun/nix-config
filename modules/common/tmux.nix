@@ -56,12 +56,27 @@
             if [[ $# -eq 1 ]]; then
                 selected=$1
             else
-                selected=$(fd --max-depth 1 --type d . ~/ ~/Documents/code/git ~/Documents/code | \
-                    sed "s|^$HOME/||" | \
-                    sk --margin 10,35% --color="bw"
+                search_dirs=()
+                potential_dirs=(
+                    "$HOME"
+                    "$HOME/Documents/code/git"
+                    "$HOME/Documents/code"
                 )
-                if [[ -n "$selected" ]]; then
-                    selected="$HOME/$selected"
+
+                for dir in "''${potential_dirs[@]}"; do
+                    if [[ -d "$dir" ]]; then
+                        search_dirs+=("$dir")
+                    fi
+                done
+
+                if [[ ''${#search_dirs[@]} -gt 0 ]]; then
+                    selected=$(fd --max-depth 1 --type d . "''${search_dirs[@]}" | \
+                        sed "s|^$HOME/||" | \
+                        sk --margin 10,35% --color="bw"
+                    )
+                    if [[ -n "$selected" ]]; then
+                        selected="$HOME/$selected"
+                    fi
                 fi
             fi
 
@@ -70,19 +85,16 @@
             fi
 
             selected_name=$(basename "$selected" | tr . _)
-            tmux_running=$(pgrep tmux)
-
-            if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-                tmux new-session -s $selected_name -c $selected
-                exit 0
-            fi
 
             if ! tmux has-session -t=$selected_name 2> /dev/null; then
                 tmux new-session -ds $selected_name -c $selected
-                tmux select-window -t $selected_name:1
             fi
 
-            tmux switch-client -t $selected_name
+            if [[ -z $TMUX ]]; then
+                tmux attach-session -t $selected_name
+            else
+                tmux switch-client -t $selected_name
+            fi
           '';
         };
 
