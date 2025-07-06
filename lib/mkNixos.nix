@@ -14,6 +14,7 @@
     homeVer ? null,
     packages ? [],
     overlays ? [],
+    extraInputs ? [],
     modules,
   }: let
     homeDir = "/home/${username}";
@@ -44,6 +45,7 @@
         [
           {nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}
         ]
+        ++ extraInputs
         ++ homeManagerModules
         ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/nixos/${hostName}))
         ++ flatten (map (moduleDir: filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir}))) modules);

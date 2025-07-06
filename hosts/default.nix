@@ -32,5 +32,13 @@
         "common"
       ];
     };
+
+    wsl = mkNixos {
+      hostName = "wsl";
+      system = "x86_64-linux";
+      username = "onat";
+      extraInputs = [inputs.nixos-wsl.nixosModules.default];
+      modules = ["nixos/core"];
+    };
   };
 }

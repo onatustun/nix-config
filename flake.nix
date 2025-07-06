@@ -8,6 +8,11 @@
     systems.url = "github:nix-systems/default";
     hardware.url = "github:nixos/nixos-hardware";
 
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
