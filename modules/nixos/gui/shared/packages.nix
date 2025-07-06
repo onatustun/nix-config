@@ -9,6 +9,5 @@
     slurp
     wl-clipboard
     wl-clip-persist
-    xfce.thunar
   ];
 }
