@@ -23,6 +23,7 @@
     isDesktop = hostName == "desktop";
     isLaptop = hostName == "laptop";
     isServer = hostName == "server";
+    isWsl = hostName == "wsl";
 
     homeManagerModules = optionals (homeVer != null) [
       home-manager.nixosModules.home-manager
@@ -32,14 +33,14 @@
           users.${username}.home.stateVersion = homeVer;
           useUserPackages = true;
           backupFileExtension = "backup";
-          extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer;};
+          extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl;};
         };
       }
     ];
   in
     nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer homeVer;};
+      specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer isWsl homeVer;};
 
       modules =
         [

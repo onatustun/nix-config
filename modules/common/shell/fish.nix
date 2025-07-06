@@ -2,15 +2,12 @@
   pkgs,
   username,
   homeDir,
+  isWsl,
   ...
 }: {
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
-
-  environment = {
-    sessionVariables.SHELL = "fish";
-    systemPackages = [pkgs.xclip];
-  };
+  environment.sessionVariables.SHELL = "fish";
 
   home-manager.sharedModules = [
     {
@@ -46,6 +43,16 @@
           interactiveShellInit = ''
             if status is-interactive
             and not set -q TMUX
+              ${
+              if isWsl
+              then ''
+                if test -f /etc/clipboard-init.sh
+                  /etc/clipboard-init.sh
+                end
+              ''
+              else ""
+            }
+
               if tmux has-session -t ${username}
                 exec tmux attach-session -t ${username}
               else
@@ -54,11 +61,15 @@
             end
 
             direnv hook fish | source
+
+            ${
+              if isWsl
+              then "fish_add_path --append /mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"
+              else ""
+            }
           '';
 
-          shellInitLast = ''
-            set fzf_preview_dir_cmd eza -l -a --color=always
-          '';
+          shellInitLast = "set fzf_preview_dir_cmd eza -l -a --color=always";
 
           shellAbbrs = {
             c = "clear";

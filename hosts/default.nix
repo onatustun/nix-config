@@ -40,15 +40,12 @@
       homeVer = "24.11";
 
       modules = [
-        "common/core"
+        "nixos/core"
         "common/cli"
+        "common/core"
+        "common/dev"
         "common/gui"
         "common/shell"
-      ];
-
-      extraModules = [
-        (inputs.self + /modules/nixos/core/networking.nix)
-        (inputs.self + /modules/nixos/core/user.nix)
       ];
     };
   };
