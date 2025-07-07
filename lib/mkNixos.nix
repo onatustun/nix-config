@@ -6,6 +6,7 @@
   inherit (inputs) self nixpkgs;
   inherit (lib) genAttrs filter optional optionals hasSuffix flatten;
   inherit (lib.filesystem) listFilesRecursive;
+  inherit (lib.strings) hasInfix;
 
   mkNixos = {
     hostName,
@@ -25,15 +26,28 @@
     isLaptop = hostName == "laptop";
     isServer = hostName == "server";
     isWsl = hostName == "wsl";
+
+    processModules = modules:
+      flatten (map (module:
+        if hasInfix "/" module
+        then let
+          parts = lib.splitString "/" module;
+          moduleDir = builtins.head parts;
+          moduleName = builtins.elemAt parts 1;
+          modulePath = self + /modules/${moduleDir}/${moduleName}.nix;
+        in
+          if builtins.pathExists modulePath
+          then [modulePath]
+          else []
+        else filterIgnored (filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${module}))))
+      modules);
   in
     nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer isWsl homeVer;};
 
       modules =
-        [
-          {nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}
-        ]
+        [{nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}]
         ++ optionals (homeVer != null) [
           inputs.home-manager.nixosModules.home-manager
 
@@ -46,8 +60,7 @@
             };
           }
         ]
-        ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/nixos/${hostName}))
-        ++ flatten (map (moduleDir: filterIgnored (filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir})))) modules);
+        ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/nixos/${hostName})) ++ processModules modules;
     };
 in {
   _module.args.mkNixos = mkNixos;

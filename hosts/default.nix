@@ -44,31 +44,17 @@
       homeVer = "24.11";
 
       modules = [
-        "nixos"
         "common"
+        "nixos/clipboard"
+        "nixos/locale"
+        "nixos/networking"
+        "nixos/user"
       ];
 
       ignore = [
         "apps"
-        "audio"
-        "bluetooth"
-        "boot"
-        "gdm"
         "ghostty"
-        "graphics"
-        "hyprland"
-        "niri"
-        "packages"
-        "pointer"
         "rofi"
-        "swayidle"
-        "swaylock"
-        "thunar"
-        "waybar"
-        "wayland"
-        "wlogout"
-        "wlsunset"
-        "xwayland"
         "zen"
       ];
     };

@@ -33,6 +33,9 @@
     curl
     procps
     wget
+    wsl
+    wsl-open
+    wsl-vpnkit
   ];
 
   system.stateVersion = "24.11";
