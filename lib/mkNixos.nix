@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (inputs) self nixpkgs home-manager;
+  inherit (inputs) self nixpkgs;
   inherit (lib) genAttrs optional filter hasSuffix flatten optionals;
   inherit (lib.filesystem) listFilesRecursive;
 
@@ -26,21 +26,13 @@
     isWsl = hostName == "wsl";
 
     homeManagerModules = optionals (homeVer != null) [
-      home-manager.nixosModules.home-manager
+      inputs.home-manager.nixosModules.home-manager
 
       {
         home-manager = {
-          programs.home-manager.enable = true;
           useUserPackages = true;
           backupFileExtension = "backup";
           extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl homeVer;};
-
-          home = {
-            username = username;
-            homeDirectory = homeDir;
-            sessionVariables.FLAKE = "${homeDir}/nix";
-            stateVersion = homeVer;
-          };
         };
       }
     ];
