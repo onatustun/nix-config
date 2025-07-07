@@ -30,10 +30,17 @@
 
       {
         home-manager = {
-          users.${username}.home.stateVersion = homeVer;
+          programs.home-manager.enable = true;
           useUserPackages = true;
           backupFileExtension = "backup";
-          extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl;};
+          extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl homeVer;};
+
+          home = {
+            username = username;
+            homeDirectory = homeDir;
+            sessionVariables.FLAKE = "${homeDir}/nix";
+            stateVersion = homeVer;
+          };
         };
       }
     ];
