@@ -1,10 +1,10 @@
 {
-  lib,
   inputs,
+  lib,
   ...
 }: let
   inherit (inputs) self nixpkgs;
-  inherit (lib) genAttrs optional filter hasSuffix flatten optionals;
+  inherit (lib) genAttrs filter optional optionals hasSuffix flatten;
   inherit (lib.filesystem) listFilesRecursive;
 
   mkNixos = {
@@ -19,32 +19,12 @@
   }: let
     homeDir = "/home/${username}";
     packageOverlay = final: prev: genAttrs packages (name: final.callPackage (self + /pkgs/${name}.nix) {});
+    filterIgnored = files: filter (file: let fileName = baseNameOf (toString file); in !(builtins.elem fileName (map (name: "${name}.nix") ignore))) files;
 
     isDesktop = hostName == "desktop";
     isLaptop = hostName == "laptop";
     isServer = hostName == "server";
     isWsl = hostName == "wsl";
-
-    homeManagerModules = optionals (homeVer != null) [
-      inputs.home-manager.nixosModules.home-manager
-
-      {
-        home-manager = {
-          useUserPackages = true;
-          backupFileExtension = "backup";
-          extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl homeVer;};
-        };
-      }
-    ];
-
-    filterIgnored = files:
-      filter (
-        file: let
-          fileName = baseNameOf (toString file);
-        in
-          !(builtins.elem fileName (map (name: "${name}.nix") ignore))
-      )
-      files;
   in
     nixpkgs.lib.nixosSystem {
       inherit system;
@@ -54,13 +34,20 @@
         [
           {nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}
         ]
-        ++ homeManagerModules
+        ++ optionals (homeVer != null) [
+          inputs.home-manager.nixosModules.home-manager
+
+          {
+            home-manager = {
+              users.${username}.home.stateVersion = homeVer;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl homeVer;};
+            };
+          }
+        ]
         ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/nixos/${hostName}))
-        ++ flatten (map (
-            moduleDir:
-              filterIgnored (filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir})))
-          )
-          modules);
+        ++ flatten (map (moduleDir: filterIgnored (filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${moduleDir})))) modules);
     };
 in {
   _module.args.mkNixos = mkNixos;
