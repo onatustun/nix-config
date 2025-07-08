@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     dunst
-    gammastep
     grim
     imv
     mpv

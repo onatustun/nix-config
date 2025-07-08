@@ -21,6 +21,7 @@
     pavucontrol
     pipewire
     playerctl
+    pwvucontrol
     wireplumber
   ];
 }
