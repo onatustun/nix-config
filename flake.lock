@@ -995,6 +995,7 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "pre-commit-hooks": "pre-commit-hooks",
+        "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
         "systems": "systems_2",
         "uwu-colors": "uwu-colors",
@@ -1036,6 +1037,29 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "spicetify-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1751776600,
+        "narHash": "sha256-75wd/aSvSoXUVd/buwI+Gsqx6LdmBVMbdXw+tCV1u58=",
+        "owner": "gerg-l",
+        "repo": "spicetify-nix",
+        "rev": "54fad36eeae085f4a6ce4522bc351705b9c0c58a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gerg-l",
+        "repo": "spicetify-nix",
         "type": "github"
       }
     },

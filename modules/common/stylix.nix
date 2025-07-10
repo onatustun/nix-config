@@ -103,6 +103,7 @@ in {
       stylix.targets = {
         helix.enable = false;
         rofi.enable = false;
+        spicetify.enable = false;
         waybar.enable = false;
       };
     }
