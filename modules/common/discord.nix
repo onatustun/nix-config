@@ -7,11 +7,11 @@
         enable = true;
 
         config = {
-          enableReactDevTools = true;
+          enableReactDevtools = true;
 
           plugins = {
             blurNSFW.enable = true;
-            clearURLS.enable = true;
+            clearURLs.enable = true;
             experiments.enable = true;
             fakeNitro.enable = true;
             noTypingAnimation.enable = true;
