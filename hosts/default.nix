@@ -55,6 +55,7 @@
         "apps"
         "ghostty"
         "rofi"
+        "spotify"
         "zen"
       ];
     };
