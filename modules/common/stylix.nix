@@ -102,6 +102,7 @@ in {
     {
       stylix.targets = {
         helix.enable = false;
+        nixcord.enable = false;
         rofi.enable = false;
         spicetify.enable = false;
         waybar.enable = false;

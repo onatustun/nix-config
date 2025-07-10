@@ -53,6 +53,7 @@
 
       ignore = [
         "apps"
+        "discord"
         "ghostty"
         "rofi"
         "spotify"
