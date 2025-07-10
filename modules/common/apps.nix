@@ -1,3 +1,6 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [obsidian];
+  environment.systemPackages = with pkgs; [
+    obsidian
+    spotify
+  ];
 }

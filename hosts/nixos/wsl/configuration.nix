@@ -33,8 +33,8 @@
     curl
     procps
     wget
-    wsl
     wsl-open
+    wslu
     wsl-vpnkit
   ];
 
