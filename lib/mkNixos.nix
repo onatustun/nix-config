@@ -47,7 +47,10 @@
       specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer isWsl homeVer;};
 
       modules =
-        [{nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}]
+        [
+          inputs.determinate.nixosModules.default
+          {nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}
+        ]
         ++ optionals (homeVer != null) [
           inputs.home-manager.nixosModules.home-manager
 

@@ -1,12 +1,16 @@
 {
   description = "nix config";
-  outputs = inputs: import ./outputs.nix inputs;
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
     hardware.url = "github:nixos/nixos-hardware";
+
+    determinate = {
+      url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
@@ -58,7 +62,6 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
         systems.follows = "systems";
-        home-manager.follows = "home-manager";
       };
     };
 
@@ -119,4 +122,21 @@
       };
     };
   };
+
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = import inputs.systems;
+
+      imports = let
+        inherit (inputs.nixpkgs.lib.filesystem) listFilesRecursive;
+        inherit (inputs.nixpkgs.lib) filter hasSuffix;
+      in
+        [
+          ./dev-shell.nix
+          ./hosts
+          ./pre-commit-hooks.nix
+          ./templates
+        ]
+        ++ (listFilesRecursive ./lib |> filter (hasSuffix ".nix"));
+    };
 }
