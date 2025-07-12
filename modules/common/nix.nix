@@ -44,8 +44,12 @@
       auto-optimise-store = true;
       builders-use-substitutes = true;
       fallback = true;
+      flake-registry = "";
       http-connections = 50;
+      lazy-trees = true;
       max-jobs = "auto";
+      sandbox = true;
+      show-trace = true;
       use-cgroups = true;
       warn-dirty = false;
     };
