@@ -5,5 +5,6 @@
     imv
     mpv
     slurp
+    zathura
   ];
 }

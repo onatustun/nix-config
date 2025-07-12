@@ -35,7 +35,7 @@
           bind-key -r K resize-pane -U 5
           bind-key -r L resize-pane -R 5
 
-          bind-key f display-popup -w 30% -h 60% -E "${homeDir}/.config/tmux/sessionizer.sh"
+          bind-key f display-popup -w 80% -h 80% -E "${homeDir}/.config/tmux/sessionizer.sh"
           bind G run-shell -b "${homeDir}/.config/tmux/lazygit.sh"
           bind-key g run-shell -b "${homeDir}/.config/tmux/github.sh"
 
@@ -72,7 +72,7 @@
                 if [[ ''${#search_dirs[@]} -gt 0 ]]; then
                     selected=$(fd --max-depth 1 --type d . "''${search_dirs[@]}" | \
                         sed "s|^$HOME/||" | \
-                        sk --margin 5% --color="bw"
+                        sk --margin 10% --color="bw"
                     )
                     if [[ -n "$selected" ]]; then
                         selected="$HOME/$selected"

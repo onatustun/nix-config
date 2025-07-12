@@ -17,7 +17,6 @@
         ]
         ++ (with inputs'; [
           alejandra.packages.default
-          nixd.packages.default
         ]);
 
       shellHook = ''

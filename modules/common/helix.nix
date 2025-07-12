@@ -127,6 +127,10 @@
             uwu-colors = {
               command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
             };
+
+            nixd = {
+              command = "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
+            };
           };
         };
 

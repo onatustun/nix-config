@@ -15,15 +15,6 @@
       url = "github:kamadorueda/alejandra";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixd = {
-      url = "github:nix-community/nixd";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-      };
-    };
   };
 
   outputs = inputs:
