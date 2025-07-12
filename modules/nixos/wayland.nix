@@ -5,7 +5,5 @@
     imv
     mpv
     slurp
-    wl-clipboard
-    wl-clip-persist
   ];
 }

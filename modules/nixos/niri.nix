@@ -64,7 +64,6 @@ in {
           (makeCommand "wl-clip-persist --clipboard both")
           (makeCommand "brightness -r")
           (makeCommand "swayidle")
-          (makeCommand "sleep 5 && zmkbatx")
         ];
 
         outputs = {

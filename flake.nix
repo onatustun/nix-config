@@ -2,15 +2,15 @@
   description = "nix config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    systems.url = "github:nix-systems/default";
-    hardware.url = "github:nixos/nixos-hardware";
-
     determinate = {
       url = "https://flakehub.com/f/determinatesystems/determinate/*";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    systems.url = "github:nix-systems/default";
+    hardware.url = "github:nixos/nixos-hardware";
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
@@ -22,6 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nur = {
       url = "github:nix-community/nur";
 
@@ -29,11 +34,6 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
       };
-    };
-
-    nh = {
-      url = "github:nix-community/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     pre-commit-hooks = {
@@ -65,6 +65,16 @@
       };
     };
 
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    uwu-colors = {
+      url = "github:q60/uwu_colors";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland = {
       url = "github:hyprwm/hyprland";
 
@@ -80,11 +90,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     ghostty = {
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,11 +102,6 @@
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
       };
-    };
-
-    uwu-colors = {
-      url = "github:q60/uwu_colors";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixcord = {

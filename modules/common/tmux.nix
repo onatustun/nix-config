@@ -35,9 +35,9 @@
           bind-key -r K resize-pane -U 5
           bind-key -r L resize-pane -R 5
 
-          bind-key f run-shell "tmux neww ${homeDir}/.config/tmux/sessionizer.sh"
-          bind G new-window -n 'lazygit' lazygit
-          bind-key g run-shell "${homeDir}/.config/tmux/github.sh"
+          bind-key f display-popup -w 30% -h 60% -E "${homeDir}/.config/tmux/sessionizer.sh"
+          bind G run-shell -b "${homeDir}/.config/tmux/lazygit.sh"
+          bind-key g run-shell -b "${homeDir}/.config/tmux/github.sh"
 
           bind-key c new-window -c "#{pane_current_path}"
           bind-key % split-window -h -c "#{pane_current_path}"
@@ -72,7 +72,7 @@
                 if [[ ''${#search_dirs[@]} -gt 0 ]]; then
                     selected=$(fd --max-depth 1 --type d . "''${search_dirs[@]}" | \
                         sed "s|^$HOME/||" | \
-                        sk --margin 10,35% --color="bw"
+                        sk --margin 5% --color="bw"
                     )
                     if [[ -n "$selected" ]]; then
                         selected="$HOME/$selected"
@@ -90,11 +90,29 @@
                 tmux new-session -ds $selected_name -c $selected
             fi
 
-            if [[ -z $TMUX ]]; then
-                tmux attach-session -t $selected_name
-            else
-                tmux switch-client -t $selected_name
+            tmux switch-client -t $selected_name
+          '';
+        };
+
+        ".config/tmux/lazygit.sh" = {
+          executable = true;
+
+          text = ''
+            #!/usr/bin/env bash
+
+            dir=$(tmux display-message -p '#{pane_current_path}')
+            cd "$dir"
+
+            if ! git rev-parse --git-dir > /dev/null 2>&1; then
+              tmux display-message "Not in a git repository"
+              exit
             fi
+
+            tmux display-popup \
+              -d "#{pane_current_path}" \
+              -w 80% \
+              -h 80% \
+              -E "lazygit"
           '';
         };
 
@@ -109,14 +127,14 @@
 
             if ! git rev-parse --git-dir > /dev/null 2>&1; then
               tmux display-message "Not in a git repository"
-              exit 1
+              exit
             fi
 
             url=$(git remote get-url origin 2>/dev/null)
 
             if [[ -z "$url" ]]; then
               tmux display-message "No origin remote found"
-              exit 1
+              exit
             fi
 
             if [[ $url == git@github.com:* ]]; then
@@ -127,6 +145,7 @@
 
             if [[ $url == *"github.com"* ]]; then
               xdg-open "$url"
+              tmux display-message "Opened GitHub repository in browser"
             else
               tmux display-message "This repository is not hosted on GitHub"
             fi

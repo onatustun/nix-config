@@ -84,10 +84,7 @@
               "wl-paste --type text --watch cliphist store"
               "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
             ]
-            ++ lib.optionals isLaptop [
-              "swayidle"
-              "sleep 5 && zmkbatx"
-            ];
+            ++ lib.optional isLaptop "swayidle";
 
           monitor =
             if isDesktop

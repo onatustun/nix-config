@@ -4,31 +4,6 @@
   pkgs,
   ...
 }: let
-  toggleKeyboardScript = pkgs.writeScriptBin "toggle-laptop-keyboard" ''
-    #!/${pkgs.runtimeShell}
-    CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}"
-    STATE_FILE="$CACHE_DIR/laptop-keyboard-disabled"
-    KEYBOARD_NAME="at-translated-set-2-keyboard"
-
-    mkdir -p "$CACHE_DIR"
-
-    if [ "$1" == "--toggle" ]; then
-      if [ -f "$STATE_FILE" ]; then
-        rm "$STATE_FILE"
-        ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 1
-      else
-        touch "$STATE_FILE"
-        ${pkgs.hyprland}/bin/hyprctl keyword "device[$KEYBOARD_NAME]:enabled" 0
-      fi
-    fi
-
-    if [ -f "$STATE_FILE" ]; then
-      echo '{"text": "disabled", "class": "disabled"}'
-    else
-      echo '{"text": "enabled", "class": "enabled"}'
-    fi
-  '';
-
   icons = let
     myWaybarIcons = {
       "network-default" = "M244.35,92.8l-104,125.43A15.93,15.93,0,0,1,128,224h0a15.93,15.93,0,0,1-12.31-5.77L11.65,92.8A15.65,15.65,0,0,1,8.11,80.91,15.93,15.93,0,0,1,14.28,70.1,186.67,186.67,0,0,1,128,32A186.67,186.67,0,0,1,241.72,70.1a15.93,15.93,0,0,1,6.17,10.81A15.65,15.65,0,0,1,244.35,92.8Z";
@@ -74,7 +49,6 @@ in {
 
             modules-right = [
               "tray"
-              "custom/keyboard"
               "network"
               "wireplumber"
               "battery"
@@ -94,21 +68,6 @@ in {
 
             tray = {
               icon-size = 14;
-            };
-
-            "custom/keyboard" = {
-              format = " ";
-              tooltip = false;
-              on-click = "${toggleKeyboardScript}/bin/toggle-laptop-keyboard --toggle";
-              exec = ''
-                if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-                  ${toggleKeyboardScript}/bin/toggle-laptop-keyboard
-                else
-                  echo '{"text": "", "class": "hidden"}'
-                fi
-              '';
-              return-type = "json";
-              interval = 1;
             };
 
             network = {
