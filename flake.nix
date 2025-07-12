@@ -8,7 +8,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     determinate = {
-      url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+      url = "https://flakehub.com/f/determinatesystems/determinate/*";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

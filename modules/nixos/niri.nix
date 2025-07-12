@@ -116,7 +116,7 @@ in {
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = "${lib.getExe pkgs.ghostty}";
+          "Mod+Q".action.spawn = ["${lib.getExe pkgs.fish}" "-c" "${inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ghostty"];
 
           "Mod+C".action.close-window = [];
           "Mod+O".action.toggle-overview = [];
