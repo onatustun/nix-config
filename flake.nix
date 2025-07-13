@@ -2,43 +2,76 @@
   description = "nix config";
 
   inputs = {
+    nixpkgs = {
+      type = "github";
+      owner = "nixos";
+      repo = "nixpkgs";
+      ref = "nixos-unstable";
+    };
+
+    flake-parts = {
+      type = "github";
+      owner = "hercules-ci";
+      repo = "flake-parts";
+    };
+
+    systems = {
+      type = "github";
+      owner = "nix-systems";
+      repo = "default";
+    };
+
+    hardware = {
+      type = "github";
+      owner = "nixos";
+      repo = "nixos-hardware";
+    };
+
     determinate = {
+      type = "tarball";
       url = "https://flakehub.com/f/determinatesystems/determinate/*";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    systems.url = "github:nix-systems/default";
-    hardware.url = "github:nixos/nixos-hardware";
-
     system-manager = {
-      url = "github:numtide/system-manager";
+      type = "github";
+      owner = "numtide";
+      repo = "system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-wsl = {
-      url = "github:nix-community/nixos-wsl";
+      type = "github";
+      owner = "nix-community";
+      repo = "nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-darwin = {
-      url = "github:lnl7/nix-darwin";
+      type = "github";
+      owner = "lnl7";
+      repo = "nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nh = {
-      url = "github:nix-community/nh";
+      type = "github";
+      owner = "nix-community";
+      repo = "nh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nur = {
-      url = "github:nix-community/nur";
+      type = "github";
+      owner = "nix-community";
+      repo = "nur";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -47,17 +80,23 @@
     };
 
     pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
+      type = "github";
+      owner = "cachix";
+      repo = "git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     alejandra = {
-      url = "github:kamadorueda/alejandra";
+      type = "github";
+      owner = "kamadorueda";
+      repo = "alejandra";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixd = {
-      url = "github:nix-community/nixd";
+      type = "github";
+      owner = "nix-community";
+      repo = "nixd";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -66,7 +105,9 @@
     };
 
     stylix = {
-      url = "github:danth/stylix";
+      type = "github";
+      owner = "danth";
+      repo = "stylix";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -76,17 +117,23 @@
     };
 
     helix = {
-      url = "github:helix-editor/helix";
+      type = "github";
+      owner = "helix-editor";
+      repo = "helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     uwu-colors = {
-      url = "github:q60/uwu_colors";
+      type = "github";
+      owner = "q60";
+      repo = "uwu_colors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland";
+      type = "github";
+      owner = "hyprwm";
+      repo = "hyprland";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -96,17 +143,23 @@
     };
 
     niri = {
-      url = "github:sodiboo/niri-flake";
+      type = "github";
+      owner = "sodiboo";
+      repo = "niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ghostty = {
-      url = "github:ghostty-org/ghostty";
+      type = "github";
+      owner = "ghostty-org";
+      repo = "ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+      type = "github";
+      owner = "0xc000022070";
+      repo = "zen-browser-flake";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -115,7 +168,9 @@
     };
 
     nixcord = {
-      url = "github:kaylorben/nixcord";
+      type = "github";
+      owner = "kaylorben";
+      repo = "nixcord";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -124,7 +179,9 @@
     };
 
     spicetify-nix = {
-      url = "github:gerg-l/spicetify-nix";
+      type = "github";
+      owner = "gerg-l";
+      repo = "spicetify-nix";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
