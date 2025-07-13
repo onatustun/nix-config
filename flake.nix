@@ -17,6 +17,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -123,14 +128,22 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = import inputs.systems;
+  outputs = inputs @ {
+    flake-parts,
+    nixpkgs,
+    systems,
+    nix-darwin,
+    ...
+  }: let
+    inherit (flake-parts.lib) mkFlake;
+    inherit (nixpkgs.lib.filesystem) listFilesRecursive;
+    inherit (nixpkgs.lib) filter hasSuffix;
+  in
+    mkFlake {inherit inputs;} {
+      systems = import systems;
+      flake.lib = nixpkgs.lib.extend (_: _: nix-darwin.lib);
 
-      imports = let
-        inherit (inputs.nixpkgs.lib.filesystem) listFilesRecursive;
-        inherit (inputs.nixpkgs.lib) filter hasSuffix;
-      in
+      imports =
         [
           ./dev-shell.nix
           ./hosts

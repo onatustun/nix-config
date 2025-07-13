@@ -2,13 +2,8 @@
   inputs,
   lib,
   ...
-}: let
-  inherit (inputs) self nixpkgs;
-  inherit (lib) genAttrs filter optional optionals hasSuffix flatten;
-  inherit (lib.filesystem) listFilesRecursive;
-  inherit (lib.strings) hasInfix;
-
-  mkNixos = {
+}: {
+  _module.args.mkNixos = {
     hostName,
     system,
     username,
@@ -18,8 +13,13 @@
     modules,
     ignore ? [],
   }: let
+    inherit (inputs) nixpkgs;
+    inherit (lib) genAttrs filter optional optionals hasSuffix flatten;
+    inherit (lib.filesystem) listFilesRecursive;
+    inherit (lib.strings) hasInfix;
+
     homeDir = "/home/${username}";
-    packageOverlay = final: prev: genAttrs packages (name: final.callPackage (self + /pkgs/${name}.nix) {});
+    packageOverlay = final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
     filterIgnored = files: filter (file: let fileName = baseNameOf (toString file); in !(builtins.elem fileName (map (name: "${name}.nix") ignore))) files;
 
     isDesktop = hostName == "desktop";
@@ -34,12 +34,12 @@
           parts = lib.splitString "/" module;
           moduleDir = builtins.head parts;
           moduleName = builtins.elemAt parts 1;
-          modulePath = self + /modules/${moduleDir}/${moduleName}.nix;
+          modulePath = inputs.self + /modules/${moduleDir}/${moduleName}.nix;
         in
           if builtins.pathExists modulePath
           then [modulePath]
           else []
-        else filterIgnored (filter (hasSuffix ".nix") (listFilesRecursive (self + /modules/${module}))))
+        else filterIgnored (filter (hasSuffix ".nix") (listFilesRecursive (inputs.self + /modules/${module}))))
       modules);
   in
     nixpkgs.lib.nixosSystem {
@@ -53,7 +53,6 @@
         ]
         ++ optionals (homeVer != null) [
           inputs.home-manager.nixosModules.home-manager
-
           {
             home-manager = {
               users.${username}.home.stateVersion = homeVer;
@@ -63,8 +62,6 @@
             };
           }
         ]
-        ++ filter (hasSuffix ".nix") (listFilesRecursive (self + /hosts/nixos/${hostName})) ++ processModules modules;
+        ++ filter (hasSuffix ".nix") (listFilesRecursive (inputs.self + /hosts/nixos/${hostName})) ++ processModules modules;
     };
-in {
-  _module.args.mkNixos = mkNixos;
 }

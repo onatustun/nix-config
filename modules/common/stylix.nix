@@ -4,7 +4,7 @@
   ...
 }: let
   solarized = {
-    name = "dark";
+    name = "solarized";
     polarity = "dark";
     base00 = "#00141A";
     base01 = "#073642";
@@ -46,7 +46,7 @@
   };
 
   latte = {
-    name = "light";
+    name = "latte";
     polarity = "light";
     base00 = "#eff1f5";
     base01 = "#e6e9ef";

@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  services.tumbler.enable = true;
+
   programs.thunar = {
     enable = true;
 
