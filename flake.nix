@@ -12,6 +12,11 @@
     systems.url = "github:nix-systems/default";
     hardware.url = "github:nixos/nixos-hardware";
 
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
