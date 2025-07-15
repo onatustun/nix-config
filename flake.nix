@@ -6,63 +6,63 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
     hardware.url = "github:nixos/nixos-hardware";
-    impermanence.url = "github:nix-community/impermanence";
+    # impermanence.url = "github:nix-community/impermanence";
 
-    disko = {
-      url = "github:nix-community/disko/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # disko = {
+    #   url = "github:nix-community/disko/latest";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    nixos-anywhere = {
-      url = "github:nix-community/nixos-anywhere";
+    # nixos-anywhere = {
+    #   url = "github:nix-community/nixos-anywhere";
 
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        disko.follows = "disko";
-      };
-    };
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     flake-parts.follows = "flake-parts";
+    #     disko.follows = "disko";
+    #   };
+    # };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixos-generators = {
+    #   url = "github:nix-community/nixos-generators";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # system-manager = {
+    #   url = "github:numtide/system-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-darwin = {
+    #   url = "github:lnl7/nix-darwin";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    sops-nix = {
-      url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # sops-nix = {
+    #   url = "github:mic92/sops-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    agenix = {
-      url = "github:ryantm/agenix";
+    # agenix = {
+    #   url = "github:ryantm/agenix";
 
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        darwin.follows = "nix-darwin";
-        home-manager.follows = "home-manager";
-      };
-    };
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     systems.follows = "systems";
+    #     darwin.follows = "nix-darwin";
+    #     home-manager.follows = "home-manager";
+    #   };
+    # };
 
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # deploy-rs = {
+    #   url = "github:serokell/deploy-rs";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -107,23 +107,23 @@
       };
     };
 
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote";
 
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-      };
-    };
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     flake-parts.follows = "flake-parts";
+    #   };
+    # };
 
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid";
+    # nix-on-droid = {
+    #   url = "github:nix-community/nix-on-droid";
 
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     home-manager.follows = "home-manager";
+    #   };
+    # };
 
     stylix = {
       url = "github:danth/stylix";
@@ -194,19 +194,20 @@
   };
 
   outputs = inputs @ {
-    flake-parts,
+    self,
     nixpkgs,
+    flake-parts,
     systems,
-    nix-darwin,
+    # nix-darwin,
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
     inherit (nixpkgs.lib.filesystem) listFilesRecursive;
     inherit (nixpkgs.lib) filter hasSuffix;
   in
-    mkFlake {inherit inputs;} {
+    mkFlake {inherit self inputs;} {
       systems = import systems;
-      flake.lib = nixpkgs.lib.extend (_: _: nix-darwin.lib);
+      # flake.lib = nixpkgs.lib.extend (_: _: nix-darwin.lib);
 
       imports =
         [

@@ -1,23 +1,11 @@
-{
-  flake.templates = {
-    empty = {
-      path = ./empty;
-      description = "empty";
-    };
-
-    java = {
-      path = ./java;
-      description = "java";
-    };
-
-    node = {
-      path = ./node;
-      description = "node";
-    };
-
-    typst = {
-      path = ./typst;
-      description = "typst";
-    };
-  };
+{inputs, ...}: let
+  inherit (inputs.nixpkgs.lib) mapAttrs;
+  inherit (builtins) readDir;
+in {
+  flake.templates =
+    readDir ./.
+    |> mapAttrs (name: _type: {
+      path = ./${name};
+      description = name;
+    });
 }
