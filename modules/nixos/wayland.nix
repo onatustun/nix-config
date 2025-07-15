@@ -6,6 +6,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    calibre
     dunst
     grim
     imv
