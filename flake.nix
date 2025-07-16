@@ -135,6 +135,11 @@
       };
     };
 
+    uwu-colors = {
+      url = "github:q60/uwu_colors";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";

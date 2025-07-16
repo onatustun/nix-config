@@ -34,6 +34,7 @@
               language-servers = [
                 "tailwindcss-ls"
                 "typescript-language-server"
+                "uwu-colors"
               ];
             }
 
@@ -53,6 +54,7 @@
               language-servers = [
                 "tailwindcss-ls"
                 "typescript-language-server"
+                "uwu-colors"
               ];
             }
 
@@ -72,6 +74,9 @@
               language-servers = [
                 "tailwindcss-ls"
                 "vscode-html-language-server"
+                "vscode-css-language-server"
+                "typescript-language-server"
+                "uwu-colors"
               ];
             }
 
@@ -91,6 +96,7 @@
               language-servers = [
                 "tailwindcss-ls"
                 "vscode-css-language-server"
+                "uwu-colors"
               ];
             }
 
@@ -101,6 +107,7 @@
 
               language-servers = [
                 "tinymist"
+                "uwu-colors"
               ];
             }
 
@@ -111,11 +118,16 @@
 
               language-servers = [
                 "nixd"
+                "uwu-colors"
               ];
             }
           ];
 
           language-server = {
+            uwu-colors = {
+              command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
+            };
+
             nixd = {
               command = "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
             };
