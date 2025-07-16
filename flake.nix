@@ -135,11 +135,6 @@
       };
     };
 
-    uwu-colors = {
-      url = "github:q60/uwu_colors";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     helix = {
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -199,6 +194,7 @@
     flake-parts,
     systems,
     # nix-darwin,
+    # system-manager,
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
@@ -207,7 +203,12 @@
   in
     mkFlake {inherit self inputs;} {
       systems = import systems;
-      # flake.lib = nixpkgs.lib.extend (_: _: nix-darwin.lib);
+
+      # flake = let
+      #   lib = nixpkgs.lib.extend (_: _:
+      #     nix-darwin.lib
+      #     // system-manager.lib);
+      # in {inherit lib;};
 
       imports =
         [
