@@ -1,6 +1,6 @@
 {
-  homeDir,
   username,
+  homeDir,
   ...
 }: {
   home-manager.sharedModules = [

@@ -1,7 +1,5 @@
 {inputs, ...}: {
-  imports = [
-    inputs.determinate.nixosModules.default
-  ];
+  imports = [inputs.determinate.nixosModules.default];
 
   nix = {
     settings = {

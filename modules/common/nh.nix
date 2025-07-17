@@ -1,7 +1,7 @@
 {
   inputs,
-  homeDir,
   pkgs,
+  homeDir,
   ...
 }: {
   programs.nh = {
