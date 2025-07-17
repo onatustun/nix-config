@@ -24,10 +24,12 @@
     packageOverlay = final: prev: genAttrs packages (name: final.callPackage (self + /pkgs/${name}.nix) {});
     filterIgnored = files: filter (file: let fileName = baseNameOf (toString file); in !(elem fileName (map (name: "${name}.nix") ignore))) files;
 
-    isDesktop = hostName == "desktop";
-    isLaptop = hostName == "laptop";
-    isServer = hostName == "server";
-    isWsl = hostName == "wsl";
+    hostTypes = {
+      isDesktop = hostName == "desktop";
+      isLaptop = hostName == "laptop";
+      isServer = hostName == "server";
+      isWsl = hostName == "wsl";
+    };
 
     processModules = modules:
       flatten (map (module:
@@ -42,7 +44,7 @@
   in
     nixosSystem {
       inherit system;
-      specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer isWsl homeVer;};
+      specialArgs = {inherit inputs hostName username homeDir homeVer;} // hostTypes;
 
       modules =
         []
@@ -57,7 +59,7 @@
               users.${username}.home.stateVersion = homeVer;
               useUserPackages = true;
               backupFileExtension = "backup";
-              extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl homeVer;};
+              extraSpecialArgs = {inherit inputs system username homeDir homeVer;} // hostTypes;
             };
           }
         ];
