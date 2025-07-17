@@ -1,4 +1,8 @@
-{
+{inputs, ...}: {
+  imports = [
+    inputs.determinate.nixosModules.default
+  ];
+
   nix = {
     settings = {
       extra-substituters = [

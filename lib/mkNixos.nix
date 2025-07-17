@@ -5,12 +5,12 @@
 }: {
   _module.args.mkNixos = {
     hostName,
-    system,
-    username,
+    system ? "x86_64-linux",
+    username ? "onat",
     homeVer ? null,
     packages ? [],
     overlays ? [],
-    modules,
+    modules ? [],
     ignore ? [],
   }: let
     inherit (inputs) nixpkgs;
@@ -47,12 +47,13 @@
       specialArgs = {inherit inputs hostName username homeDir isDesktop isLaptop isServer isWsl homeVer;};
 
       modules =
-        [
-          inputs.determinate.nixosModules.default
-          {nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}
-        ]
+        []
+        ++ [{nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}]
+        ++ filter (hasSuffix ".nix") (listFilesRecursive (inputs.self + /hosts/nixos/${hostName}))
+        ++ processModules modules
         ++ optionals (homeVer != null) [
           inputs.home-manager.nixosModules.home-manager
+
           {
             home-manager = {
               users.${username}.home.stateVersion = homeVer;
@@ -61,7 +62,6 @@
               extraSpecialArgs = {inherit inputs system username homeDir isDesktop isLaptop isServer isWsl homeVer;};
             };
           }
-        ]
-        ++ filter (hasSuffix ".nix") (listFilesRecursive (inputs.self + /hosts/nixos/${hostName})) ++ processModules modules;
+        ];
     };
 }

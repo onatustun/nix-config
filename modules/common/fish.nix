@@ -1,10 +1,13 @@
 {
+  lib,
   pkgs,
   username,
-  homeDir,
   isWsl,
+  homeDir,
   ...
-}: {
+}: let
+  inherit (lib) optionalString;
+in {
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
   environment.sessionVariables.SHELL = "fish";
@@ -14,22 +17,27 @@
       programs = {
         command-not-found.enable = true;
 
+        carapace = {
+          enable = true;
+          enableFishIntegration = true;
+        };
+
+        zoxide = {
+          enable = true;
+          enableFishIntegration = true;
+          options = ["--cmd cd"];
+        };
+
         fish = {
           enable = true;
 
           shellInit = ''
             set -g fish_term24bit 1
-
             fish_vi_key_bindings
 
-            set fish_cursor_default block
-            set fish_cursor_insert block
-            set fish_cursor_replace_one block
-            set fish_cursor_replace block
-            set fish_cursor_external block
-            set fish_cursor_visual block
-
-            zoxide init --cmd cd fish | source
+            for mode in default insert replace_one replace external visual
+              set fish_cursor_$mode block
+            end
 
             bind -M command ctrl-z 'toggle-editor'
             bind -M default ctrl-z 'toggle-editor'
@@ -45,13 +53,8 @@
           interactiveShellInit = ''
             if status is-interactive
             and not set -q TMUX
-              ${
-              if isWsl
-              then ''
-                cd ~
-              ''
-              else ""
-            }
+              ${optionalString isWsl "cd ~"}
+
               if tmux has-session -t ${username}
                 exec tmux attach-session -t ${username}
               else
@@ -61,11 +64,7 @@
 
             direnv hook fish | source
 
-            ${
-              if isWsl
-              then "fish_add_path --append /mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"
-              else ""
-            }
+            ${lib.optionalString isWsl "fish_add_path --append /mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"}
           '';
 
           shellInitLast = "set fzf_preview_dir_cmd eza -l -a --color=always";
