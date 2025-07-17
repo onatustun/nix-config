@@ -203,8 +203,6 @@
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
-    inherit (nixpkgs.lib.filesystem) listFilesRecursive;
-    inherit (nixpkgs.lib) filter hasSuffix;
   in
     mkFlake {inherit self inputs;} {
       systems = import systems;
@@ -215,7 +213,10 @@
       #     // system-manager.lib);
       # in {inherit lib;};
 
-      imports =
+      imports = let
+        inherit (nixpkgs.lib.filesystem) listFilesRecursive;
+        inherit (nixpkgs.lib) filter hasSuffix;
+      in
         [
           ./dev-shell.nix
           ./hosts
