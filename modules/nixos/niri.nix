@@ -7,6 +7,7 @@
 }: let
   cursorTheme = "Bibata-Modern-Ice";
   cursorSize = 24;
+  inherit (lib) getExe;
 in {
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache.enable = false;
@@ -115,7 +116,7 @@ in {
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = ["${lib.getExe pkgs.fish}" "-c" "${inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ghostty"];
+          "Mod+Q".action.spawn = ["${getExe pkgs.fish}" "-c" "${inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ghostty"];
 
           "Mod+C".action.close-window = [];
           "Mod+O".action.toggle-overview = [];
@@ -213,7 +214,7 @@ in {
 
         xwayland-satellite = {
           enable = true;
-          path = lib.getExe pkgs.xwayland-satellite-unstable;
+          path = getExe pkgs.xwayland-satellite-unstable;
         };
 
         cursor = {

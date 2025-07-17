@@ -64,7 +64,7 @@ in {
 
             direnv hook fish | source
 
-            ${lib.optionalString isWsl "fish_add_path --append /mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"}
+            ${optionalString isWsl "fish_add_path --append /mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"}
           '';
 
           shellInitLast = "set fzf_preview_dir_cmd eza -l -a --color=always";

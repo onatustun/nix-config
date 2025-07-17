@@ -5,7 +5,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (lib) optional;
+in {
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -84,7 +86,7 @@
               "wl-paste --type text --watch cliphist store"
               "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
             ]
-            ++ lib.optional isLaptop "swayidle";
+            ++ optional isLaptop "swayidle";
 
           monitor =
             if isDesktop

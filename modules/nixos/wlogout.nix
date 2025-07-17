@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (lib) mkDefault;
+in {
   environment.systemPackages = [pkgs.wlogout];
 
   home-manager.sharedModules = [
@@ -44,7 +46,7 @@
           }
         ];
 
-        style = lib.mkDefault ''
+        style = mkDefault ''
           * {
             background-image: none;
             font-size: 20px;

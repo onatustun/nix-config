@@ -12,11 +12,13 @@
     "TELEPHONE"
     "TIME"
   ];
+
+  inherit (lib) genAttrs;
 in {
   time.timeZone = "Europe/London";
 
   i18n = {
     defaultLocale = locale;
-    extraLocaleSettings = lib.genAttrs (map (v: "LC_${v}") lcVars) (_: locale);
+    extraLocaleSettings = genAttrs (map (v: "LC_${v}") lcVars) (_: locale);
   };
 }
