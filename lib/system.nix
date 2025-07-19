@@ -1,5 +1,5 @@
 inputs: self: super: let
-  inherit (super) nixosSystem darwinSystem;
+  inherit (super) nixosSystem darwinSystem makeSystemConfig;
 
   mkSystem = systemBuilder: {
     hostName,
@@ -82,4 +82,5 @@ inputs: self: super: let
 in {
   mkNixos = mkSystem nixosSystem;
   mkDarwin = mkSystem darwinSystem;
+  mkLinux = mkSystem makeSystemConfig;
 }
