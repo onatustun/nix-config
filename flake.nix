@@ -28,20 +28,20 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # system-manager = {
-    #   url = "github:numtide/system-manager";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # nix-darwin = {
-    #   url = "github:lnl7/nix-darwin";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     # sops-nix = {
     #   url = "github:mic92/sops-nix";
@@ -198,8 +198,8 @@
     nixpkgs,
     flake-parts,
     systems,
-    # nix-darwin,
-    # system-manager,
+    nix-darwin,
+    system-manager,
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
@@ -207,22 +207,24 @@
     mkFlake {inherit self inputs;} {
       systems = import systems;
 
-      # flake = let
-      #   lib = nixpkgs.lib.extend (_: _:
-      #     nix-darwin.lib
-      #     // system-manager.lib);
-      # in {inherit lib;};
+      flake = let
+        lib =
+          (nixpkgs.lib.extend (_: _:
+            nix-darwin.lib
+            // system-manager.lib)).extend
+          <| import ./lib inputs;
+      in {
+        inherit lib;
 
-      imports = let
-        inherit (nixpkgs.lib.filesystem) listFilesRecursive;
-        inherit (nixpkgs.lib) filter hasSuffix;
-      in
-        [
-          ./dev-shell.nix
-          ./hosts
-          ./pre-commit-hooks.nix
+        imports = [
           ./templates
-        ]
-        ++ (listFilesRecursive ./lib |> filter (hasSuffix ".nix"));
+          ./hosts
+        ];
+      };
+
+      imports = [
+        ./dev-shell.nix
+        ./pre-commit-hooks.nix
+      ];
     };
 }

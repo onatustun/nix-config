@@ -1,9 +1,11 @@
 {
-  mkNixos,
+  lib,
   inputs,
   ...
-}: {
-  flake.nixosConfigurations = {
+}: let
+  inherit (lib) mkNixos;
+in {
+  nixosConfigurations = {
     laptop = mkNixos {
       hostName = "laptop";
       system = "x86_64-linux";

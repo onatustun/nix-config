@@ -913,6 +913,26 @@
         "url": "https://flakehub.com/f/DeterminateSystems/nix-src/%2A"
       }
     },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1751313918,
+        "narHash": "sha256-HsJM3XLa43WpG+665aGEh8iS8AfEwOIQWk3Mke3e7nk=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "e04a388232d9a6ba56967ce5b53a8a6f713cdfcf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nixcord": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -1158,6 +1178,7 @@
         "hyprland": "hyprland",
         "nh": "nh",
         "niri": "niri",
+        "nix-darwin": "nix-darwin",
         "nixcord": "nixcord",
         "nixd": "nixd",
         "nixos-wsl": "nixos-wsl",
@@ -1166,6 +1187,7 @@
         "pre-commit-hooks": "pre-commit-hooks",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
+        "system-manager": "system-manager",
         "systems": "systems_2",
         "uwu-colors": "uwu-colors",
         "zen-browser": "zen-browser"
@@ -1267,6 +1289,26 @@
       "original": {
         "owner": "danth",
         "repo": "stylix",
+        "type": "github"
+      }
+    },
+    "system-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1748252092,
+        "narHash": "sha256-6nL55wvV7SthEXaXDiQo8xxkxQLAVcNBU21YJ7GJLm8=",
+        "owner": "numtide",
+        "repo": "system-manager",
+        "rev": "c6850451ef769fd03d0ad5474f928b916aa23775",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "system-manager",
         "type": "github"
       }
     },

@@ -1,8 +1,8 @@
-{inputs, ...}: let
-  inherit (inputs.nixpkgs.lib) mapAttrs;
+{lib, ...}: let
+  inherit (lib) mapAttrs;
   inherit (builtins) readDir;
 in {
-  flake.templates =
+  templates =
     readDir ./.
     |> mapAttrs (name: _type: {
       path = ./${name};
