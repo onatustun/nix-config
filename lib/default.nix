@@ -1,6 +1,3 @@
-inputs: final: prev: {
-  mkNixos = import ./mkNixos.nix {
-    inherit inputs;
-    lib = final;
-  };
+inputs: self: super: {
+  mkNixos = import ./mkNixos.nix inputs self super;
 }

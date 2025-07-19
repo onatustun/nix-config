@@ -1,7 +1,4 @@
-{
-  inputs,
-  lib,
-}: {
+inputs: self: super: {
   hostName,
   system ? "x86_64-linux",
   username ? "onat",
@@ -11,15 +8,13 @@
   modules ? [],
   ignore ? [],
 }: let
-  inherit (inputs) nixpkgs self;
-  inherit (nixpkgs.lib) nixosSystem;
-  inherit (lib) genAttrs filter flatten splitString optional hasSuffix optionals;
+  inherit (super) genAttrs filter flatten splitString optional hasSuffix optionals nixosSystem;
   inherit (builtins) elem head elemAt pathExists;
-  inherit (lib.strings) hasInfix;
-  inherit (lib.filesystem) listFilesRecursive;
+  inherit (super.strings) hasInfix;
+  inherit (super.filesystem) listFilesRecursive;
 
   homeDir = "/home/${username}";
-  packageOverlay = final: prev: genAttrs packages (name: final.callPackage (self + /pkgs/${name}.nix) {});
+  packageOverlay = final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
   filterIgnored = files: filter (file: let fileName = baseNameOf (toString file); in !(elem fileName (map (name: "${name}.nix") ignore))) files;
 
   hostTypes = {
@@ -34,10 +29,10 @@
       if hasInfix "/" module
       then let
         parts = splitString "/" module;
-        modulePath = self + /modules/${head parts}/${elemAt parts 1}.nix;
+        modulePath = inputs.self + /modules/${head parts}/${elemAt parts 1}.nix;
       in
         optional (pathExists modulePath) modulePath
-      else self + /modules/${module} |> listFilesRecursive |> filter (hasSuffix ".nix") |> filterIgnored)
+      else inputs.self + /modules/${module} |> listFilesRecursive |> filter (hasSuffix ".nix") |> filterIgnored)
     modules);
 in
   nixosSystem {
@@ -47,7 +42,7 @@ in
     modules =
       []
       ++ [{nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}]
-      ++ (listFilesRecursive (self + /hosts/nixos/${hostName}) |> filter (hasSuffix ".nix"))
+      ++ (listFilesRecursive (inputs.self + /hosts/${hostName}) |> filter (hasSuffix ".nix"))
       ++ processModules modules
       ++ optionals (homeVer != null) [
         inputs.home-manager.nixosModules.home-manager

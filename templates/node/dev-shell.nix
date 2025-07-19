@@ -22,9 +22,7 @@
           alejandra.packages.default
         ]);
 
-      shellHook = ''
-        ${config.pre-commit.installationScript}
-      '';
+      shellHook = config.pre-commit.installationScript;
     };
   };
 }

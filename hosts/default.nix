@@ -1,7 +1,6 @@
 {
   lib,
   inputs,
-  ...
 }: let
   inherit (lib) mkNixos;
 in {

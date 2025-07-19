@@ -213,14 +213,12 @@
             nix-darwin.lib
             // system-manager.lib)).extend
           <| import ./lib inputs;
-      in {
-        inherit lib;
-
-        imports = [
-          ./templates
-          ./hosts
-        ];
-      };
+      in
+        {
+          inherit lib;
+          imports = [./templates];
+        }
+        // import ./hosts {inherit inputs lib;};
 
       imports = [
         ./dev-shell.nix
