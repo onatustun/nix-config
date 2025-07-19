@@ -18,9 +18,7 @@
           typescript-language-server
           vscode-langservers-extracted
         ]
-        ++ (with inputs'; [
-          alejandra.packages.default
-        ]);
+        ++ (with inputs'; [alejandra.packages.default]);
 
       shellHook = config.pre-commit.installationScript;
     };

@@ -1,5 +1,5 @@
 {
-  description = "node environment";
+  description = "node typescript environment";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -17,9 +17,15 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = import inputs.systems;
+  outputs = inputs @ {
+    flake-parts,
+    systems,
+    ...
+  }: let
+    inherit (flake-parts.lib) mkFlake;
+  in
+    mkFlake {inherit inputs;} {
+      systems = import systems;
 
       imports = [
         ./dev-shell.nix

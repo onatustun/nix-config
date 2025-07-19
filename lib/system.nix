@@ -15,7 +15,7 @@ inputs: self: super: let
     ignore ? [],
   }: let
     inherit (super) genAttrs filter flatten splitString optional hasSuffix optionals;
-    inherit (builtins) elem head elemAt pathExists;
+    inherit (builtins) elem head elemAt;
     inherit (super.strings) hasInfix;
     inherit (super.filesystem) listFilesRecursive;
 
@@ -41,7 +41,7 @@ inputs: self: super: let
           parts = splitString "/" module;
           modulePath = inputs.self + /modules/${head parts}/${elemAt parts 1}.nix;
         in
-          optional (pathExists modulePath) modulePath
+          modulePath
         else inputs.self + /modules/${module} |> listFilesRecursive |> filter (hasSuffix ".nix") |> filterIgnored)
       modules);
 

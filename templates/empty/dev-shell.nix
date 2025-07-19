@@ -11,9 +11,7 @@
 
       packages = with pkgs;
         []
-        ++ (with inputs'; [
-          alejandra.packages.default
-        ]);
+        ++ (with inputs'; [alejandra.packages.default]);
 
       shellHook = config.pre-commit.installationScript;
     };
