@@ -1,6 +1,36 @@
 {
   description = "nix config";
 
+  outputs = inputs @ {
+    nixpkgs,
+    flake-parts,
+    systems,
+    nix-darwin,
+    system-manager,
+    home-manager,
+    ...
+  }: let
+    inherit (flake-parts.lib) mkFlake;
+  in
+    mkFlake {inherit inputs;} {
+      systems = import systems;
+
+      flake = let
+        lib = (((nixpkgs.lib
+          .extend (_: _: nix-darwin.lib))
+          .extend (_: _: system-manager.lib))
+          .extend (_: _: home-manager.lib))
+          .extend <| import ./lib inputs;
+      in
+        import ./hosts {inherit inputs lib;}
+        // import ./templates {inherit lib;};
+
+      imports = [
+        ./dev-shell.nix
+        ./pre-commit-hooks.nix
+      ];
+    };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -33,10 +63,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # system-manager = {
-    #   url = "github:numtide/system-manager";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
@@ -192,34 +222,4 @@
       };
     };
   };
-
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    flake-parts,
-    systems,
-    nix-darwin,
-    # system-manager,
-    ...
-  }: let
-    inherit (flake-parts.lib) mkFlake;
-  in
-    mkFlake {inherit self inputs;} {
-      systems = import systems;
-
-      flake = let
-        lib = (nixpkgs.lib.extend (_: _: nix-darwin.lib))
-          .extend <| import ./lib inputs;
-      in
-        {
-          inherit lib;
-          imports = [./templates];
-        }
-        // import ./hosts {inherit inputs lib;};
-
-      imports = [
-        ./dev-shell.nix
-        ./pre-commit-hooks.nix
-      ];
-    };
 }

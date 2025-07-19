@@ -1,3 +1,2 @@
-inputs: self: super: {
-  mkNixos = import ./mkNixos.nix inputs self super;
-}
+inputs: self: super:
+import ./system.nix inputs self super
