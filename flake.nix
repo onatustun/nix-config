@@ -33,10 +33,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # system-manager = {
+    #   url = "github:numtide/system-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
@@ -199,7 +199,7 @@
     flake-parts,
     systems,
     nix-darwin,
-    system-manager,
+    # system-manager,
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
@@ -208,11 +208,8 @@
       systems = import systems;
 
       flake = let
-        lib =
-          (nixpkgs.lib.extend (_: _:
-            nix-darwin.lib
-            // system-manager.lib)).extend
-          <| import ./lib inputs;
+        lib = (nixpkgs.lib.extend (_: _: nix-darwin.lib))
+          .extend <| import ./lib inputs;
       in
         {
           inherit lib;

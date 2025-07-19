@@ -1187,7 +1187,6 @@
         "pre-commit-hooks": "pre-commit-hooks",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
-        "system-manager": "system-manager",
         "systems": "systems_2",
         "uwu-colors": "uwu-colors",
         "zen-browser": "zen-browser"
@@ -1289,26 +1288,6 @@
       "original": {
         "owner": "danth",
         "repo": "stylix",
-        "type": "github"
-      }
-    },
-    "system-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1748252092,
-        "narHash": "sha256-6nL55wvV7SthEXaXDiQo8xxkxQLAVcNBU21YJ7GJLm8=",
-        "owner": "numtide",
-        "repo": "system-manager",
-        "rev": "c6850451ef769fd03d0ad5474f928b916aa23775",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "system-manager",
         "type": "github"
       }
     },
