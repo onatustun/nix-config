@@ -35,7 +35,7 @@ in {
           window = {
             width = 360;
             "border-color" = mkLiteral "@accent-color";
-            "border-radius" = 6;
+            "border-radius" = 0;
             border = mkLiteral "2px";
             "background-color" = mkLiteral "@bg0";
           };
