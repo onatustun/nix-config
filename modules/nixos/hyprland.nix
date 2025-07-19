@@ -7,6 +7,7 @@
   ...
 }: let
   inherit (lib) optional;
+  inherit (builtins) concatLists attrValues mapAttrs genList toString;
 in {
   programs.hyprland = {
     enable = true;
@@ -57,9 +58,9 @@ in {
           };
 
           makeBinds = mod: action: fn:
-            builtins.concatLists (
-              builtins.attrValues (
-                builtins.mapAttrs (name: nav: [
+            concatLists (
+              attrValues (
+                mapAttrs (name: nav: [
                   "${mod}, ${nav.arrow}, ${action nav}, ${fn nav}"
                   "${mod}, ${nav.key}, ${action nav}, ${fn nav}"
                 ])
@@ -195,13 +196,13 @@ in {
               "$mod, V, togglefloating"
               "$mod Shift, E, exit"
             ]
-            ++ (builtins.concatLists (
-              builtins.genList (
+            ++ (concatLists (
+              genList (
                 x: let
                   ws = let
                     c = (x + 1) / 10;
                   in
-                    builtins.toString (x + 1 - (c * 10));
+                    toString (x + 1 - (c * 10));
                 in [
                   "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
                   "$mod, ${ws}, workspace, ${toString (x + 1)}"

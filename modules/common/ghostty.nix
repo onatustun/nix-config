@@ -3,9 +3,7 @@
   pkgs,
   ...
 }: {
-  environment.systemPackages = [
-    inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
+  environment.systemPackages = [inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default];
 
   home-manager.sharedModules = [
     {
