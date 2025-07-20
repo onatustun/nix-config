@@ -1,4 +1,19 @@
-{homeDir, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  inherit (pkgs) writeShellScriptBin;
+  inherit (builtins) readFile;
+  inherit (inputs) self;
+  inherit (scripts) sessionizer lazygit github;
+
+  scripts = {
+    sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
+    lazygit = writeShellScriptBin "lazygit" (readFile (self + "/scripts/lazygit.sh"));
+    github = writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
+  };
+in {
   home-manager.sharedModules = [
     {
       programs.tmux = {
@@ -35,21 +50,15 @@
           bind-key -r K resize-pane -U 5
           bind-key -r L resize-pane -R 5
 
-          bind-key f display-popup -w 80% -h 80% -E "${homeDir}/nix/scripts/sessionizer.sh"
-          bind G run-shell -b "${homeDir}/nix/scripts/lazygit.sh"
-          bind-key g run-shell -b "${homeDir}/nix/scripts/github.sh"
+          bind-key f display-popup -w 80% -h 80% -E ${sessionizer}/bin/sessionizer
+          bind G run-shell -b ${lazygit}/bin/lazygit
+          bind-key g run-shell -b ${github}/bin/github
 
           bind-key c new-window -c "#{pane_current_path}"
           bind-key % split-window -h -c "#{pane_current_path}"
           bind-key '"' split-window -v -c "#{pane_current_path}"
           bind-key b set-option status
         '';
-      };
-
-      home.file = {
-        "nix/scripts/github.sh".executable = true;
-        "nix/scripts/lazygit.sh".executable = true;
-        "nix/scripts/sessionizer.sh".executable = true;
       };
     }
   ];
