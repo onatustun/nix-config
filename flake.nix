@@ -11,24 +11,25 @@
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
+
+    lib = (((nixpkgs.lib
+      .extend (_: _: nix-darwin.lib))
+      .extend (_: _: system-manager.lib))
+      .extend (_: _: home-manager.lib))
+      .extend <| import ./lib inputs;
   in
     mkFlake {inherit inputs;} {
       systems = import systems;
 
-      flake = let
-        lib = (((nixpkgs.lib
-          .extend (_: _: nix-darwin.lib))
-          .extend (_: _: system-manager.lib))
-          .extend (_: _: home-manager.lib))
-          .extend <| import ./lib inputs;
-      in
+      flake =
         import ./hosts {inherit inputs lib;}
         // import ./templates {inherit lib;};
 
-      imports = [
-        ./dev-shell.nix
-        ./pre-commit-hooks.nix
-      ];
+      imports = let
+        inherit (lib) filter hasSuffix;
+        inherit (lib.filesystem) listFilesRecursive;
+      in
+        ./parts |> listFilesRecursive |> filter (hasSuffix ".nix");
     };
 
   inputs = {
