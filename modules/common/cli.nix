@@ -19,5 +19,8 @@
       yazi
       zoxide
     ]
-    ++ (with inputs; [comma.packages.${pkgs.stdenv.hostPlatform.system}.default]);
+    ++ (with inputs; [
+      comma.packages.${pkgs.stdenv.hostPlatform.system}.default
+      nix-melt.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ]);
 }

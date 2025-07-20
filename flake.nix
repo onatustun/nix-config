@@ -152,6 +152,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-melt = {
+      url = "github:nix-community/nix-melt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nh = {
       url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -178,6 +183,7 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
         systems.follows = "systems";
+        nur.follows = "nur";
       };
     };
 
