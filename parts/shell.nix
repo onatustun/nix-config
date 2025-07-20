@@ -14,7 +14,6 @@
         [
           git
           home-manager
-          nix
           nixos-rebuild
           vim
         ]

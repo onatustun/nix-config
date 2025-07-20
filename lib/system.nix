@@ -11,6 +11,7 @@ inputs: self: super: let
     homeVer ? null,
     packages ? [],
     overlays ? [],
+    inputModules ? [],
     modules ? [],
     ignore ? [],
   }: let
@@ -32,6 +33,10 @@ inputs: self: super: let
       isLaptop = hostName == "laptop";
       isServer = hostName == "server";
       isWsl = hostName == "wsl";
+
+      isNixos = systemBuilder == nixosSystem;
+      isDarwin = systemBuilder == darwinSystem;
+      isLinux = systemBuilder == makeSystemConfig;
     };
 
     processModules = modules:
@@ -49,7 +54,7 @@ inputs: self: super: let
       inputs
       // hostTypes
       // {
-        inherit inputs system hostName username homeDir homeVer;
+        inherit inputs system systemBuilder hostName username homeDir homeVer;
         lib = self;
       };
 
@@ -77,7 +82,10 @@ inputs: self: super: let
   in
     systemBuilder {
       inherit specialArgs;
-      modules = baseModules ++ homeManagerModule;
+      modules =
+        baseModules
+        ++ homeManagerModule
+        ++ inputModules;
     };
 in {
   mkNixos = mkSystem nixosSystem;

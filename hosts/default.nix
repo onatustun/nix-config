@@ -12,6 +12,7 @@ in {
       homeVer = "24.11";
       packages = ["bibata-hyprcursor"];
       overlays = [inputs.niri.overlays.niri];
+      inputModules = [inputs.determinate.nixosModules.default];
 
       modules = [
         "nixos"
@@ -25,6 +26,7 @@ in {
       username = "onat";
       homeVer = "24.11";
       packages = ["bibata-hyprcursor"];
+      inputModules = [inputs.determinate.nixosModules.default];
 
       modules = [
         "nixos"
@@ -43,6 +45,7 @@ in {
       system = "x86_64-linux";
       username = "onat";
       homeVer = "24.11";
+      inputModules = [inputs.determinate.nixosModules.default];
 
       modules = [
         "common"
