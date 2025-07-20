@@ -75,6 +75,7 @@ in {
             ff = "fastfetch";
             find = "fd";
             lg = "lazygit";
+            melt = "nix-melt";
             md = "mkdir -pv";
             mv = "mv -v";
             ns = "nix-search";
