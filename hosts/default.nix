@@ -20,6 +20,7 @@ in {
       overlays = [
         inputs.niri.overlays.niri
         inputs.nur.overlays.default
+        inputs.nix-index-database.nixosModules.nix-index
       ];
 
       modules = [
@@ -38,6 +39,7 @@ in {
       inputModules = [
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
+        inputs.nix-index-database.nixosModules.nix-index
       ];
 
       overlays = [inputs.nur.overlays.default];
