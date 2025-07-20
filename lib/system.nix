@@ -1,11 +1,13 @@
 inputs: self: super: let
-  inherit (super) nixosSystem darwinSystem makeSystemConfig;
+  inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
 
   mkSystem = systemBuilder: {
     hostName,
     system ?
       if systemBuilder == darwinSystem
       then "aarch64-darwin"
+      else if systemBuilder == nixOnDroidConfiguration
+      then "aarch64-linux"
       else "x86_64-linux",
     username ? "onat",
     homeVer ? null,
@@ -64,12 +66,6 @@ inputs: self: super: let
       ++ processModules modules;
 
     homeManagerModule = optionals (homeVer != null) [
-      (
-        if systemBuilder == darwinSystem
-        then inputs.home-manager.darwinModules.home-manager
-        else inputs.home-manager.nixosModules.home-manager
-      )
-
       {
         home-manager = {
           users.${username}.home.stateVersion = homeVer;
@@ -91,4 +87,5 @@ in {
   mkNixos = mkSystem nixosSystem;
   mkDarwin = mkSystem darwinSystem;
   mkLinux = mkSystem makeSystemConfig;
+  mkDroid = mkSystem nixOnDroidConfiguration;
 }

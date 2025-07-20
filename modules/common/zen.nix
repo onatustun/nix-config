@@ -4,7 +4,6 @@
   username,
   ...
 }: {
-  imports = [inputs.nur.modules.nixos.default];
   environment.sessionVariables."BROWSER" = "zen-twilight";
 
   home-manager.sharedModules = [

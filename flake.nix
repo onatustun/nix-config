@@ -7,15 +7,17 @@
     systems,
     nix-darwin,
     system-manager,
+    nix-on-droid,
     home-manager,
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
 
-    lib = ((((nixpkgs.lib
+    lib = (((((nixpkgs.lib
       .extend (_: _: flake-parts.lib))
       .extend (_: _: nix-darwin.lib))
       .extend (_: _: system-manager.lib))
+      .extend (_: _: nix-on-droid.lib))
       .extend (_: _: home-manager.lib))
     .extend <| import ./lib inputs;
   in
@@ -91,14 +93,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nix-on-droid = {
-    #   url = "github:nix-community/nix-on-droid";
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid";
 
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     home-manager.follows = "home-manager";
-    #   };
-    # };
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
 
     # sops-nix = {
     #   url = "github:mic92/sops-nix";
