@@ -12,10 +12,18 @@
 
       packages = with pkgs;
         [
+          git
           home-manager
+          nix
+          nixos-rebuild
           vim
         ]
-        ++ (with inputs'; [alejandra.packages.default]);
+        ++ (with inputs'; [
+          alejandra.packages.default
+          comma.packages.default
+          nh.packages.default
+          nixd.packages.default
+        ]);
     };
   };
 }
