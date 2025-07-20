@@ -12,11 +12,12 @@
   }: let
     inherit (flake-parts.lib) mkFlake;
 
-    lib = (((nixpkgs.lib
+    lib = ((((nixpkgs.lib
+      .extend (_: _: flake-parts.lib))
       .extend (_: _: nix-darwin.lib))
       .extend (_: _: system-manager.lib))
       .extend (_: _: home-manager.lib))
-      .extend <| import ./lib inputs;
+    .extend (import ./lib inputs);
   in
     mkFlake {inherit inputs;} {
       systems = import systems;
@@ -36,13 +37,20 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
+
+    determinate = {
+      url = "https://flakehub.com/f/determinatesystems/determinate/*";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hardware.url = "github:nixos/nixos-hardware";
-    # impermanence.url = "github:nix-community/impermanence";
 
     # disko = {
     #   url = "github:nix-community/disko/latest";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
+    # impermanence.url = "github:nix-community/impermanence";
 
     # nixos-anywhere = {
     #   url = "github:nix-community/nixos-anywhere";
@@ -59,6 +67,15 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote";
+
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     flake-parts.follows = "flake-parts";
+    #   };
+    # };
+
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,6 +90,15 @@
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # nix-on-droid = {
+    #   url = "github:nix-community/nix-on-droid";
+
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     home-manager.follows = "home-manager";
+    #   };
+    # };
 
     # sops-nix = {
     #   url = "github:mic92/sops-nix";
@@ -95,35 +121,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    comma = {
-      url = "github:nix-community/comma";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    determinate = {
-      url = "https://flakehub.com/f/determinatesystems/determinate/*";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nur = {
-      url = "github:nix-community/nur";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-      };
-    };
-
-    nh = {
-      url = "github:nix-community/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -143,23 +140,29 @@
       };
     };
 
-    # lanzaboote = {
-    #   url = "github:nix-community/lanzaboote";
+    comma = {
+      url = "github:nix-community/comma";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     flake-parts.follows = "flake-parts";
-    #   };
-    # };
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # nix-on-droid = {
-    #   url = "github:nix-community/nix-on-droid";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     home-manager.follows = "home-manager";
-    #   };
-    # };
+    nur = {
+      url = "github:nix-community/nur";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
 
     stylix = {
       url = "github:danth/stylix";
