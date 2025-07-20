@@ -17,7 +17,7 @@
       .extend (_: _: nix-darwin.lib))
       .extend (_: _: system-manager.lib))
       .extend (_: _: home-manager.lib))
-    .extend (import ./lib inputs);
+    .extend <| import ./lib inputs;
   in
     mkFlake {inherit inputs;} {
       systems = import systems;
