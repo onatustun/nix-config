@@ -99,6 +99,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    comma = {
+      url = "github:nix-community/comma";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     determinate = {
       url = "https://flakehub.com/f/determinatesystems/determinate/*";
       inputs.nixpkgs.follows = "nixpkgs";
