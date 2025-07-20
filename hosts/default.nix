@@ -15,12 +15,13 @@ in {
       inputModules = [
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
+        inputs.nix-index-database.nixosModules.nix-index
+        inputs.stylix.nixosModules.stylix
       ];
 
       overlays = [
         inputs.niri.overlays.niri
         inputs.nur.overlays.default
-        inputs.nix-index-database.nixosModules.nix-index
       ];
 
       modules = [
@@ -40,6 +41,7 @@ in {
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
+        inputs.stylix.nixosModules.stylix
       ];
 
       overlays = [inputs.nur.overlays.default];
