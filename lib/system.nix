@@ -77,7 +77,7 @@ inputs: self: super: let
     ];
   in
     systemBuilder {
-      inherit specialArgs;
+      inherit specialArgs system;
       modules =
         baseModules
         ++ homeManagerModule
