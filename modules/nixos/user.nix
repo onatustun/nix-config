@@ -7,5 +7,6 @@
     shell = pkgs.fish;
     useDefaultShell = true;
     isNormalUser = true;
+    initialPassword = "Password123";
   };
 }

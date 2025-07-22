@@ -47,22 +47,22 @@
 
     hardware.url = "github:nixos/nixos-hardware";
 
-    # disko = {
-    #   url = "github:nix-community/disko/latest";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # impermanence.url = "github:nix-community/impermanence";
 
-    # nixos-anywhere = {
-    #   url = "github:nix-community/nixos-anywhere";
+    nixos-anywhere = {
+      url = "github:nix-community/nixos-anywhere";
 
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     flake-parts.follows = "flake-parts";
-    #     disko.follows = "disko";
-    #   };
-    # };
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        disko.follows = "disko";
+      };
+    };
 
     # nixos-generators = {
     #   url = "github:nix-community/nixos-generators";

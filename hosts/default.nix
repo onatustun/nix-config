@@ -88,5 +88,38 @@ in {
         "zen"
       ];
     };
+
+    server = mkNixos {
+      hostName = "server";
+      system = "x86_64-linux";
+      username = "onat";
+      homeVer = "24.11";
+
+      inputModules = [
+        inputs.determinate.nixosModules.default
+        inputs.home-manager.nixosModules.home-manager
+        inputs.nix-index-database.nixosModules.nix-index
+        inputs.stylix.nixosModules.stylix
+        inputs.disko.nixosModules.disko
+      ];
+
+      modules = [
+        "common"
+        "nixos/boot"
+        "nixos/clipboard"
+        "nixos/locale"
+        "nixos/networking"
+        "nixos/user"
+      ];
+
+      ignore = [
+        "apps"
+        "brave"
+        "discord"
+        "ghostty"
+        "spotify"
+        "zen"
+      ];
+    };
   };
 }
