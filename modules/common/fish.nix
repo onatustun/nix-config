@@ -3,7 +3,6 @@
   pkgs,
   username,
   isWsl,
-  isServer,
   homeDir,
   ...
 }: let
@@ -51,22 +50,22 @@ in {
             set fish_greeting
           '';
 
-          interactiveShellInit =
-            (optionalString (!isServer) ''
-              if status is-interactive && not set -q TMUX
-                ${lib.optionalString isWsl "cd ~"}
+          interactiveShellInit = ''
+            if status is-interactive
+            and not set -q TMUX
+              ${optionalString isWsl "cd ~"}
 
-                if tmux has-session -t ${username}
-                  exec tmux attach-session -t ${username}
-                else
-                  exec tmux new-session -s ${username}
-                end
+              if tmux has-session -t ${username}
+                exec tmux attach-session -t ${username}
+              else
+                tmux new-session -s ${username}
               end
-            '')
-            + ''
-              direnv hook fish | source
-              ${optionalString isWsl "fish_add_path --append /mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"}
-            '';
+            end
+
+            direnv hook fish | source
+
+            ${optionalString isWsl "fish_add_path --append /mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"}
+          '';
 
           shellInitLast = "set fzf_preview_dir_cmd eza -l -a --color=always";
 

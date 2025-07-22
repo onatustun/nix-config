@@ -19,13 +19,23 @@
   };
 
   environment.systemPackages = with pkgs; [
+    caddy
     jellyfin
     jellyfin-ffmpeg
     jellyfin-web
   ];
 
+  networking.firewall.allowedTCPPorts = [80 443];
+
   services = {
     openssh.enable = true;
+
+    caddy = {
+      enable = true;
+      virtualHosts."https://jellyfin.ust.sh".extraConfig = ''
+        reverse_proxy 127.0.0.1:8096
+      '';
+    };
 
     jellyfin = {
       enable = true;
