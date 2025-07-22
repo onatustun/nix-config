@@ -122,4 +122,18 @@ in {
       ];
     };
   };
+
+  deploy.nodes.server = {
+    hostname = "188.245.172.204";
+
+    profiles.system = {
+      sshUser = "root";
+      user = "root";
+      magicRollback = false;
+
+      path =
+        inputs.deploy-rs.lib.x86_64-linux.activate.nixos
+        inputs.self.nixosConfigurations.server;
+    };
+  };
 }
