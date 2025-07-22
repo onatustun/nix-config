@@ -21,7 +21,7 @@
     ];
 
     loader = {
-      efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = !isServer;
       timeout = 3;
 
       grub = {

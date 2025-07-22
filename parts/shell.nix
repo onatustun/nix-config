@@ -22,6 +22,7 @@
           comma.packages.default
           nh.packages.default
           nixd.packages.default
+          nixos-anywhere.packages.default
         ]);
     };
   };
