@@ -1,3 +1,6 @@
 {pkgs, ...}: {
-  environment.systemPackages = [pkgs.obsidian];
+  environment.systemPackages = with pkgs; [
+    jellyfin-media-player
+    obsidian
+  ];
 }
