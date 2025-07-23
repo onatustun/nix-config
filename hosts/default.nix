@@ -124,7 +124,7 @@ in {
   };
 
   deploy.nodes.server = {
-    hostname = "188.245.172.204";
+    hostname = "23.88.34.248";
 
     profiles.system = {
       sshUser = "root";
