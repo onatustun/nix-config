@@ -1,5 +1,6 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
+  inherit (self) collectNix;
 
   mkSystem = systemBuilder: {
     hostName,
@@ -17,10 +18,9 @@ inputs: self: super: let
     modules ? [],
     ignore ? [],
   }: let
-    inherit (super) genAttrs filter flatten splitString optional hasSuffix optionals;
+    inherit (super) genAttrs filter flatten splitString optional optionals;
     inherit (builtins) elem head elemAt;
     inherit (super.strings) hasInfix;
-    inherit (super.filesystem) listFilesRecursive;
 
     homeDir =
       if systemBuilder == darwinSystem
@@ -50,7 +50,7 @@ inputs: self: super: let
           modulePath = inputs.self + /modules/${head parts}/${elemAt parts 1}.nix;
         in
           modulePath
-        else inputs.self + /modules/${module} |> listFilesRecursive |> filter (hasSuffix ".nix") |> filterIgnored)
+        else collectNix (inputs.self + /modules/${module}) |> filterIgnored)
       modules);
 
     specialArgs =
@@ -63,7 +63,7 @@ inputs: self: super: let
 
     baseModules =
       [{nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}]
-      ++ (inputs.self + /hosts/${hostName} |> listFilesRecursive |> filter (hasSuffix ".nix"))
+      ++ collectNix (inputs.self + /hosts/${hostName})
       ++ processModules modules;
 
     homeManagerModule = optionals (homeVer != null) [
