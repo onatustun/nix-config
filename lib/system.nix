@@ -39,6 +39,7 @@ inputs: self: super: let
       isNixos = systemBuilder == nixosSystem;
       isDarwin = systemBuilder == darwinSystem;
       isLinux = systemBuilder == makeSystemConfig;
+      isDroid = systemBuilder == nixOnDroidConfiguration;
     };
 
     processModules = modules:

@@ -1,11 +1,5 @@
-{
-  pkgs,
-  username,
-  ...
-}: {
+{username, ...}: {
   users.users.${username} = {
-    shell = pkgs.fish;
-    useDefaultShell = true;
     isNormalUser = true;
     initialPassword = "Password123";
   };

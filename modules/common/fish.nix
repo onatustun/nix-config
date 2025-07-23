@@ -9,7 +9,16 @@
   inherit (lib) optionalString;
 in {
   programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
+
+  users = {
+    defaultUserShell = pkgs.fish;
+
+    users.${username} = {
+      shell = pkgs.fish;
+      useDefaultShell = true;
+    };
+  };
+
   environment.sessionVariables.SHELL = "fish";
 
   home-manager.sharedModules = [
