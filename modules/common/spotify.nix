@@ -3,7 +3,12 @@
   inputs,
   ...
 }: {
-  environment.systemPackages = [pkgs.spotify];
+  environment.systemPackages = with pkgs; [
+    ffmpeg-full
+    scdl
+    spotify
+    yt-dlp
+  ];
 
   home-manager.sharedModules = [
     inputs.spicetify-nix.homeManagerModules.default

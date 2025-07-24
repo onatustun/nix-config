@@ -11,8 +11,6 @@
     home-manager,
     ...
   }: let
-    inherit (flake-parts.lib) mkFlake;
-
     lib = (((((nixpkgs.lib
       .extend (_: _: flake-parts.lib))
       .extend (_: _: nix-darwin.lib))
@@ -20,6 +18,8 @@
       .extend (_: _: nix-on-droid.lib))
       .extend (_: _: home-manager.lib))
     .extend <| import ./lib inputs;
+
+    inherit (lib) mkFlake;
   in
     mkFlake {inherit inputs;} {
       systems = import systems;
@@ -29,10 +29,9 @@
         // import ./templates {inherit lib;};
 
       imports = let
-        inherit (lib) filter hasSuffix;
-        inherit (lib.filesystem) listFilesRecursive;
+        inherit (lib) collectNix;
       in
-        ./parts |> listFilesRecursive |> filter (hasSuffix ".nix");
+        collectNix ./parts;
     };
 
   inputs = {
