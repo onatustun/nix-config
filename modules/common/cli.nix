@@ -3,10 +3,20 @@
   inputs,
   ...
 }: {
+  programs = {
+    nix-index-database.comma.enable = true;
+
+    nix-index = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+  };
+
   environment.systemPackages = with pkgs;
     [
       bottom
       fd
+      ffmpeg-full
       fzf
       git
       git
@@ -18,9 +28,11 @@
       nix-search-tv
       prettyping
       ripgrep
+      scdl
       skim
       vim
       yazi
+      yt-dlp
       zoxide
     ]
     ++ (with inputs; [

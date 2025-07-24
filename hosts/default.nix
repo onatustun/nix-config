@@ -86,7 +86,6 @@ in {
         "brave"
         "discord"
         "ghostty"
-        "spotify"
         "zen"
       ];
     };
@@ -117,7 +116,6 @@ in {
         "brave"
         "discord"
         "ghostty"
-        "spotify"
         "zen"
       ];
     };
