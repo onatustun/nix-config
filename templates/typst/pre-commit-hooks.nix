@@ -1,12 +1,22 @@
 {inputs, ...}: {
   imports = [inputs.pre-commit-hooks.flakeModule];
 
-  perSystem.pre-commit.settings = {
-    excludes = ["flake.lock"];
+  perSystem = {inputs', ...}: {
+    pre-commit = {
+      check.enable = true;
 
-    hooks = {
-      alejandra.enable = true;
-      typstyle.enable = true;
+      settings = {
+        excludes = ["flake.lock"];
+
+        hooks = {
+          alejandra = {
+            enable = true;
+            package = inputs'.alejandra.packages.default;
+          };
+
+          typstyle.enable = true;
+        };
+      };
     };
   };
 }

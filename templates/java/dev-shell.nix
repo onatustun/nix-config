@@ -1,13 +1,14 @@
 {
   perSystem = {
-    config,
-    inputs',
     pkgs,
+    inputs',
+    config,
     ...
   }: {
     devShells.default = pkgs.mkShell {
       name = "java";
       formatter = inputs'.alejandra.packages.default;
+      shellHook = config.pre-commit.installationScript;
 
       packages = with pkgs;
         [
@@ -17,8 +18,6 @@
           # maven
         ]
         ++ (with inputs'; [alejandra.packages.default]);
-
-      shellHook = config.pre-commit.installationScript;
     };
   };
 }

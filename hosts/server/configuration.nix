@@ -25,11 +25,6 @@
     jellyfin-web
   ];
 
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
-
   services = {
     openssh.enable = true;
     jellyfin.enable = true;
@@ -42,6 +37,7 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [80 443];
   boot.loader.grub.efiInstallAsRemovable = true;
   system.stateVersion = "24.11";
 }

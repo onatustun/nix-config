@@ -1,6 +1,5 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
-  inherit (self) collectNix;
 
   mkSystem = systemBuilder: {
     hostName,
@@ -18,7 +17,7 @@ inputs: self: super: let
     modules ? [],
     ignore ? [],
   }: let
-    inherit (super) genAttrs filter flatten splitString optional optionals;
+    inherit (super) genAttrs filter flatten splitString collectNix optional optionals;
     inherit (builtins) elem head elemAt;
     inherit (super.strings) hasInfix;
 
@@ -26,9 +25,6 @@ inputs: self: super: let
       if systemBuilder == darwinSystem
       then "/Users/${username}"
       else "/home/${username}";
-
-    packageOverlay = final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
-    filterIgnored = files: filter (file: let fileName = baseNameOf (toString file); in !(elem fileName (map (name: "${name}.nix") ignore))) files;
 
     hostTypes = {
       isDesktop = hostName == "desktop";
@@ -42,14 +38,16 @@ inputs: self: super: let
       isDroid = systemBuilder == nixOnDroidConfiguration;
     };
 
+    packageOverlay = final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
+    filterIgnored = files: filter (file: !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore))) files;
+
     processModules = modules:
       flatten (map (module:
         if hasInfix "/" module
         then let
           parts = splitString "/" module;
-          modulePath = inputs.self + /modules/${head parts}/${elemAt parts 1}.nix;
         in
-          modulePath
+          inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
         else collectNix (inputs.self + /modules/${module}) |> filterIgnored)
       modules);
 
@@ -79,6 +77,7 @@ inputs: self: super: let
   in
     systemBuilder {
       inherit specialArgs system;
+
       modules =
         baseModules
         ++ homeManagerModule

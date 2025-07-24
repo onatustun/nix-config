@@ -1,13 +1,14 @@
 {
   perSystem = {
-    config,
-    inputs',
     pkgs,
+    inputs',
+    config,
     ...
   }: {
     devShells.default = pkgs.mkShell {
       name = "nodejs typescript";
       formatter = inputs'.alejandra.packages.default;
+      shellHook = config.pre-commit.installationScript;
 
       packages = with pkgs;
         [
@@ -19,8 +20,6 @@
           vscode-langservers-extracted
         ]
         ++ (with inputs'; [alejandra.packages.default]);
-
-      shellHook = config.pre-commit.installationScript;
     };
   };
 }
