@@ -233,14 +233,5 @@
         flake-parts.follows = "flake-parts";
       };
     };
-
-    spicetify-nix = {
-      url = "github:gerg-l/spicetify-nix";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
   };
 }

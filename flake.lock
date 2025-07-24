@@ -1566,7 +1566,6 @@
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "pre-commit-hooks": "pre-commit-hooks",
-        "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
         "system-manager": "system-manager",
         "systems": "systems_4",
@@ -1642,29 +1641,6 @@
       "original": {
         "owner": "andreymatin",
         "repo": "scss-reset",
-        "type": "github"
-      }
-    },
-    "spicetify-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1752381641,
-        "narHash": "sha256-R2iDZb94RosuCeuIukacZVVXxzWYr4jn/QI/ax15nW8=",
-        "owner": "gerg-l",
-        "repo": "spicetify-nix",
-        "rev": "8f9fd947c52aa6adb6bafe72516eccf186708954",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gerg-l",
-        "repo": "spicetify-nix",
         "type": "github"
       }
     },
