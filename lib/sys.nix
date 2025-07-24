@@ -17,8 +17,9 @@ inputs: self: super: let
     modules ? [],
     ignore ? [],
   }: let
-    inherit (super) genAttrs filter flatten splitString collectNix optional optionals;
+    inherit (super) genAttrs filter flatten splitString optional optionals;
     inherit (builtins) elem head elemAt;
+    inherit (self) collectNix;
     inherit (super.strings) hasInfix;
 
     homeDir =
