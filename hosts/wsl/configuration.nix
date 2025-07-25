@@ -7,13 +7,9 @@
   imports = [inputs.nixos-wsl.nixosModules.default];
 
   users.users.${username}.extraGroups = [
-    "audio"
     "input"
     "libvirt"
-    "networkmanager"
-    "power"
     "storage"
-    "video"
     "wheel"
   ];
 

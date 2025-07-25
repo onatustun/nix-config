@@ -1,16 +1,4 @@
-{
-  config,
-  username,
-  ...
-}: {
-  services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
+{username, ...}: {
   users.users.${username}.extraGroups = [
     "audio"
     "input"

@@ -1,12 +1,17 @@
 {
   lib,
   modulesPath,
+  inputs,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib) mkDefault;
 in {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    inputs.hardware.nixosModules.framework-13-7040-amd
+  ];
 
   boot = {
     kernelModules = ["kvm-amd"];
@@ -39,6 +44,19 @@ in {
 
   swapDevices = [{device = "/dev/disk/by-uuid/f2ce709b-e968-4dbd-b4ce-f8b6f8b81afd";}];
   networking.useDHCP = mkDefault true;
-  nixpkgs.hostPlatform = mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware = {
+    cpu.amd.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+    framework.enableKmod = true;
+  };
+
+  services = {
+    fwupd.enable = true;
+    power-profiles-daemon.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    framework-tool
+    power-profiles-daemon
+  ];
 }

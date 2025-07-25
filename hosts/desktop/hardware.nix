@@ -38,6 +38,16 @@ in {
 
   swapDevices = [{device = "/dev/disk/by-uuid/f21c6765-340e-4bbd-8a13-d902376a5430";}];
   networking.useDHCP = mkDefault true;
-  nixpkgs.hostPlatform = mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware = {
+    cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
+
+    nvidia = {
+      modesetting.enable = true;
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+  };
+
+  services.xserver.videoDrivers = ["nvidia"];
 }

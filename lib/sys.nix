@@ -17,7 +17,7 @@ inputs: self: super: let
     modules ? [],
     ignore ? [],
   }: let
-    inherit (super) genAttrs filter flatten splitString optional optionals;
+    inherit (super) genAttrs filter flatten splitString optional optionals mkDefault;
     inherit (builtins) elem head elemAt;
     inherit (self) collectNix;
     inherit (super.strings) hasInfix;
@@ -61,7 +61,14 @@ inputs: self: super: let
       };
 
     baseModules =
-      [{nixpkgs.overlays = overlays ++ optional (packages != []) packageOverlay;}]
+      [
+        {
+          nixpkgs = {
+            hostPlatform = mkDefault system;
+            overlays = overlays ++ optional (packages != []) packageOverlay;
+          };
+        }
+      ]
       ++ collectNix (inputs.self + /hosts/${hostName})
       ++ processModules modules;
 

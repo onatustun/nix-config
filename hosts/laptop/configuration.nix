@@ -1,11 +1,4 @@
-{
-  inputs,
-  pkgs,
-  username,
-  ...
-}: {
-  imports = [inputs.hardware.nixosModules.framework-13-7040-amd];
-
+{username, ...}: {
   users.users.${username}.extraGroups = [
     "audio"
     "input"
@@ -17,16 +10,5 @@
     "wheel"
   ];
 
-  services = {
-    fwupd.enable = true;
-    power-profiles-daemon.enable = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    framework-tool
-    power-profiles-daemon
-  ];
-
-  hardware.framework.enableKmod = true;
   system.stateVersion = "24.11";
 }
