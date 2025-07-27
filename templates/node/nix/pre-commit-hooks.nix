@@ -17,6 +17,11 @@
             package = inputs'.alejandra.packages.default;
           };
 
+          deadnix = {
+            enable = true;
+            package = inputs'.deadnix.packages.default;
+          };
+
           prettier.enable = true;
         };
       };
