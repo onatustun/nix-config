@@ -19,7 +19,15 @@ in {
     };
   };
 
-  environment.sessionVariables.SHELL = "fish";
+  environment = {
+    sessionVariables.SHELL = "fish";
+
+    systemPackages = with pkgs; [
+      carapace
+      inshellisense
+      zsh
+    ];
+  };
 
   home-manager.sharedModules = [
     {
@@ -83,7 +91,6 @@ in {
             cp = "cp -prv";
             ff = "fastfetch";
             find = "fd";
-            lg = "lazygit";
             melt = "nix-melt";
             md = "mkdir -pv";
             mv = "mv -v";
@@ -101,9 +108,6 @@ in {
 
           shellAliases = {
             cat = "prettybat";
-            cff = "clear && fastfetch";
-            cl = "clear && eza -al";
-            clt = "clear && eza -T";
             ls = "eza -al";
             man = "batman";
             nsf = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
