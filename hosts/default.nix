@@ -121,6 +121,20 @@ in {
     };
   };
 
+  # nixOnDroidConfigurations.pixel = mkDroid {
+  #   hostName = "pixel";
+  #   system = "aarch64-linux";
+  #   username = "onat";
+
+  #   modules = [
+  #     "common/fonts"
+  #     "common/nh"
+  #     "common/nix"
+  #     "nixos/locale"
+  #     "nixos/user"
+  #   ];
+  # };
+
   deploy.nodes.server = {
     hostname = "23.88.34.248";
 

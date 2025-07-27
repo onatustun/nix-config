@@ -1,8 +1,4 @@
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   home-manager.sharedModules = [
     {
       programs = {
@@ -19,16 +15,6 @@
           extraConfig = {
             init.defaultBranch = "main";
             safe.directory = "~/nix";
-          };
-        };
-
-        jujutsu = {
-          enable = true;
-          package = inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
-          settings.user = {
-            name = "onatustun";
-            email = "o@ust.sh";
           };
         };
       };
