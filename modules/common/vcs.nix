@@ -1,4 +1,8 @@
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   home-manager.sharedModules = [
     {
       programs = {
@@ -18,7 +22,15 @@
           };
         };
 
-        lazygit.enable = true;
+        jujutsu = {
+          enable = true;
+          package = inputs.jujutsu.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+          settings.user = {
+            name = "onatustun";
+            email = "o@ust.sh";
+          };
+        };
       };
     }
   ];

@@ -6,11 +6,10 @@
   inherit (pkgs) writeShellScriptBin;
   inherit (builtins) readFile;
   inherit (inputs) self;
-  inherit (scripts) sessionizer lazygit github;
+  inherit (scripts) sessionizer github;
 
   scripts = {
     sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
-    lazygit = writeShellScriptBin "lazygit" (readFile (self + "/scripts/lazygit.sh"));
     github = writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
   };
 in {
@@ -51,7 +50,6 @@ in {
           bind-key -r L resize-pane -R 5
 
           bind-key f display-popup -w 80% -h 80% -E ${sessionizer}/bin/sessionizer
-          bind G run-shell -b ${lazygit}/bin/lazygit
           bind-key g run-shell -b ${github}/bin/github
 
           bind-key c new-window -c "#{pane_current_path}"

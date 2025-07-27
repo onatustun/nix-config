@@ -21,6 +21,7 @@
           alejandra.packages.default
           deploy-rs.packages.default
           comma.packages.default
+          jujutsu.packages.default
           nh.packages.default
           nixd.packages.default
           nixos-anywhere.packages.default
