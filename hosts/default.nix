@@ -2,7 +2,7 @@
   lib,
   inputs,
 }: let
-  inherit (lib) mkNixos mkDroid;
+  inherit (lib) mkNixos;
 in {
   nixosConfigurations = {
     desktop = mkNixos {
@@ -121,19 +121,19 @@ in {
     };
   };
 
-  nixOnDroidConfigurations.pixel = mkDroid {
-    hostName = "pixel";
-    system = "aarch64-linux";
-    username = "onat";
+  # nixOnDroidConfigurations.pixel = mkDroid {
+  #   hostName = "pixel";
+  #   system = "aarch64-linux";
+  #   username = "onat";
 
-    modules = [
-      "common/fonts"
-      "common/nh"
-      "common/nix"
-      "nixos/locale"
-      "nixos/user"
-    ];
-  };
+  #   modules = [
+  #     "common/fonts"
+  #     "common/nh"
+  #     "common/nix"
+  #     "nixos/locale"
+  #     "nixos/user"
+  #   ];
+  # };
 
   deploy.nodes.server = {
     hostname = "23.88.34.248";
