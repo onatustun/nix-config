@@ -19,7 +19,6 @@
       ffmpeg-full
       fzf
       git
-      git
       home-manager
       killall
       less

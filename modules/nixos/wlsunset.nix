@@ -1,5 +1,8 @@
 {pkgs, ...}: {
-  environment.systemPackages = [pkgs.wlsunset];
+  environment.systemPackages = with pkgs; [
+    brightnessctl
+    wlsunset
+  ];
 
   home-manager.sharedModules = [
     {

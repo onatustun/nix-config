@@ -56,6 +56,8 @@ in {
         "nixos"
         "common"
       ];
+
+      ignore = ["discord"];
     };
 
     server = mkNixos {
@@ -83,7 +85,6 @@ in {
 
       ignore = [
         "apps"
-        "brave"
         "discord"
         "ghostty"
         "zen"
@@ -113,7 +114,6 @@ in {
 
       ignore = [
         "apps"
-        "brave"
         "discord"
         "ghostty"
         "zen"

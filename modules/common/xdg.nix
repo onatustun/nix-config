@@ -1,4 +1,6 @@
-{
+{pkgs, ...}: {
+  environment.systemPackages = [pkgs.xdg-user-dirs];
+
   home-manager.sharedModules = [
     {
       xdg = {

@@ -5,9 +5,7 @@
   isWsl,
   homeDir,
   ...
-}: let
-  inherit (lib) optionalString;
-in {
+}: {
   programs.fish.enable = true;
 
   users = {
@@ -67,7 +65,9 @@ in {
             set fish_greeting
           '';
 
-          interactiveShellInit = ''
+          interactiveShellInit = let
+            inherit (lib) optionalString;
+          in ''
             if status is-interactive
             and not set -q TMUX
               ${optionalString isWsl "cd ~"}
@@ -90,7 +90,6 @@ in {
             c = "clear";
             cp = "cp -prv";
             ff = "fastfetch";
-            find = "fd";
             melt = "nix-melt";
             md = "mkdir -pv";
             mv = "mv -v";
@@ -141,10 +140,6 @@ in {
             {
               name = "done";
               src = done.src;
-            }
-            {
-              name = "fish-you-should-use";
-              src = fish-you-should-use.src;
             }
             {
               name = "fzf-fish";

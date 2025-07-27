@@ -1,5 +1,5 @@
 {
-  description = "typst environment";
+  description = "c/c++ environment";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -13,6 +13,11 @@
 
     alejandra = {
       url = "github:kamadorueda/alejandra";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    deadnix = {
+      url = "github:astro/deadnix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

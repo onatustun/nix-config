@@ -2,14 +2,14 @@
   pkgs,
   lib,
   ...
-}: let
-  inherit (lib) getExe;
-in {
+}: {
   environment.systemPackages = [pkgs.swayidle];
 
   home-manager.sharedModules = [
     {
-      services.swayidle = {
+      services.swayidle = let
+        inherit (lib) getExe;
+      in {
         enable = true;
 
         events = [

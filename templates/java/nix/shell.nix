@@ -6,13 +6,21 @@
     ...
   }: {
     devShells.default = pkgs.mkShell {
-      name = "empty";
+      name = "java";
       formatter = inputs'.alejandra.packages.default;
       shellHook = config.pre-commit.installationScript;
 
       packages = with pkgs;
-        []
-        ++ (with inputs'; [alejandra.packages.default]);
+        [
+          # gradle
+          jdk
+          jdt-language-server
+          # maven
+        ]
+        ++ (with inputs'; [
+          alejandra.packages.default
+          deadnix.packages.default
+        ]);
     };
   };
 }

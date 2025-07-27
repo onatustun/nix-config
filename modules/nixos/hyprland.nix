@@ -5,10 +5,7 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit (lib) optional;
-  inherit (builtins) concatLists attrValues mapAttrs genList toString;
-in {
+}: {
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -19,7 +16,9 @@ in {
 
   home-manager.sharedModules = [
     {
-      wayland.windowManager.hyprland = {
+      wayland.windowManager.hyprland = let
+        inherit (builtins) concatLists attrValues mapAttrs genList toString;
+      in {
         enable = true;
         xwayland.enable = true;
 
@@ -81,7 +80,9 @@ in {
             "XCURSOR_SIZE,24"
           ];
 
-          exec-once =
+          exec-once = let
+            inherit (lib) optional;
+          in
             [
               "wl-paste --type image --watch cliphist store"
               "wl-paste --type text --watch cliphist store"
@@ -192,7 +193,7 @@ in {
 
               "$mod, S, togglesplit"
               "$mod, C, killactive"
-              "$mod, F, fullscreen, 0"
+              "$mod Shift, F, fullscreen, 0"
               "$mod, V, togglefloating"
               "$mod Shift, E, exit"
             ]

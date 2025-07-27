@@ -15,6 +15,11 @@
       url = "github:kamadorueda/alejandra";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    deadnix = {
+      url = "github:astro/deadnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -24,12 +29,13 @@
   }: let
     inherit (flake-parts.lib) mkFlake;
   in
-    mkFlake {inherit inputs;} {
+    mkFlake {inherit inputs;} ({lib, ...}: {
       systems = import systems;
 
-      imports = [
-        ./dev-shell.nix
-        ./pre-commit-hooks.nix
-      ];
-    };
+      imports = let
+        inherit (lib) filter hasSuffix;
+        inherit (lib.filesystem) listFilesRecursive;
+      in
+        filter (hasSuffix ".nix") (listFilesRecursive ./nix);
+    });
 }

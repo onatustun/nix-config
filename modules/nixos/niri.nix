@@ -4,11 +4,7 @@
   lib,
   pkgs,
   ...
-}: let
-  cursorTheme = "Bibata-Modern-Ice";
-  cursorSize = 24;
-  inherit (lib) getExe;
-in {
+}: {
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache.enable = false;
 
@@ -32,7 +28,9 @@ in {
         configPackages = [pkgs.niri-unstable];
       };
 
-      programs.niri.settings = {
+      programs.niri.settings = let
+        inherit (lib) getExe;
+      in {
         environment = {
           CLUTTER_BACKEND = "wayland";
           DISPLAY = ":0";
@@ -117,6 +115,7 @@ in {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
           "Mod+Q".action.spawn = ["${getExe pkgs.fish}" "-c" "${inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ghostty"];
+          "Mod+Z".action.spawn = "zen-twilight";
 
           "Mod+C".action.close-window = [];
           "Mod+O".action.toggle-overview = [];
@@ -217,7 +216,10 @@ in {
           path = getExe pkgs.xwayland-satellite-unstable;
         };
 
-        cursor = {
+        cursor = let
+          cursorTheme = "Bibata-Modern-Ice";
+          cursorSize = 24;
+        in {
           theme = cursorTheme;
           size = cursorSize;
         };
@@ -226,6 +228,7 @@ in {
           keyboard.xkb.layout = "us";
           mod-key = "Super";
           warp-mouse-to-focus.enable = true;
+
           focus-follows-mouse = {
             enable = true;
             max-scroll-amount = "5%";

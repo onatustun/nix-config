@@ -12,14 +12,16 @@
 
       packages = with pkgs;
         [
-          nodejs
           prettierd
           tailwindcss
           tailwindcss-language-server
           typescript-language-server
           vscode-langservers-extracted
         ]
-        ++ (with inputs'; [alejandra.packages.default]);
+        ++ (with inputs'; [
+          alejandra.packages.default
+          deadnix.packages.default
+        ]);
     };
   };
 }
