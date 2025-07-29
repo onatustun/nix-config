@@ -83,7 +83,6 @@ in {
 
       ignore = [
         "apps"
-        "brave"
         "discord"
         "ghostty"
         "zen"
@@ -113,7 +112,6 @@ in {
 
       ignore = [
         "apps"
-        "brave"
         "discord"
         "ghostty"
         "zen"
