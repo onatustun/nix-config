@@ -56,6 +56,8 @@ in {
         "nixos"
         "common"
       ];
+
+      ignore = ["discord"];
     };
 
     server = mkNixos {
