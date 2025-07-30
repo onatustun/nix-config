@@ -13,12 +13,12 @@
       packages = with pkgs;
         [
           bear
+          clang_17
           cmake
           cppcheck
-          gdb
           gnumake
           lld_17
-          lldb_17
+          ninja
         ]
         ++ (with llvmPackages_17; [
           clang-tools
