@@ -2,9 +2,7 @@
   lib,
   modulesPath,
   ...
-}: let
-  inherit (lib) mkDefault;
-in {
+}: {
   imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
   boot = {
@@ -21,7 +19,11 @@ in {
   };
 
   networking = {
-    useDHCP = mkDefault true;
+    useDHCP = let
+      inherit (lib) mkDefault;
+    in
+      mkDefault true;
+
     firewall.allowedTCPPorts = [80 443];
   };
 }

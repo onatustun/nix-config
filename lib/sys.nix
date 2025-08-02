@@ -20,7 +20,6 @@ inputs: self: super: let
     inherit (super) genAttrs filter flatten splitString optional optionals mkDefault;
     inherit (builtins) elem head elemAt;
     inherit (self) collectNix;
-    inherit (super.strings) hasInfix;
 
     homeDir =
       if systemBuilder == darwinSystem
@@ -42,15 +41,18 @@ inputs: self: super: let
     packageOverlay = final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
     filterIgnored = files: filter (file: !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore))) files;
 
-    processModules = modules:
-      flatten (map (module:
-        if hasInfix "/" module
-        then let
-          parts = splitString "/" module;
-        in
-          inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
-        else collectNix (inputs.self + /modules/${module}) |> filterIgnored)
-      modules);
+    processModules = let
+      inherit (super.strings) hasInfix;
+    in
+      modules:
+        flatten (map (module:
+          if hasInfix "/" module
+          then let
+            parts = splitString "/" module;
+          in
+            inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
+          else collectNix (inputs.self + /modules/${module}) |> filterIgnored)
+        modules);
 
     specialArgs =
       inputs

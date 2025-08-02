@@ -5,6 +5,7 @@
     {
       programs.swaylock = {
         enable = true;
+
         settings = {
           font-size = 50;
           indicator-radius = 100;

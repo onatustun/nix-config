@@ -3,12 +3,11 @@
   inputs,
   ...
 }: let
-  inherit (pkgs) writeShellScriptBin;
-  inherit (builtins) readFile;
-  inherit (inputs) self;
-  inherit (scripts) sessionizer github;
-
-  scripts = {
+  scripts = let
+    inherit (pkgs) writeShellScriptBin;
+    inherit (builtins) readFile;
+    inherit (inputs) self;
+  in {
     sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
     github = writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
   };
@@ -23,7 +22,9 @@ in {
         mouse = true;
         prefix = "C-b";
 
-        extraConfig = ''
+        extraConfig = let
+          inherit (scripts) sessionizer github;
+        in ''
           set -g default-terminal "tmux-256color"
           set -ag terminal-overrides ",xterm-256color:RGB"
 
