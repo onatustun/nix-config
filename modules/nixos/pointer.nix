@@ -9,10 +9,10 @@
     {
       home.pointerCursor = {
         gtk.enable = true;
+        hyprcursor = enabled {size = 24;};
         name = "Bibata-Modern-Ice";
         package = pkgs.bibata-cursors;
         size = 24;
-        hyprcursor = enabled {size = 24;};
       };
 
       gtk = enabled {

@@ -13,4 +13,9 @@ in {
 
   enabled = merge {enable = true;};
   disabled = merge {enable = false;};
+
+  mkLiteral = value: {
+    _type = "literal";
+    inherit value;
+  };
 }

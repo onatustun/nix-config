@@ -33,10 +33,7 @@
         inherit (lib) enabled;
       in {
         command-not-found.enable = true;
-
-        carapace = enabled {
-          enableFishIntegration = true;
-        };
+        carapace = enabled {enableFishIntegration = true;};
 
         zoxide = enabled {
           enableFishIntegration = true;
