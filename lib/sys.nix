@@ -59,7 +59,9 @@ inputs: self: super: let
             parts = splitString "/" module;
           in
             inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
-          else collectNix (inputs.self + /modules/${module}) |> filterIgnored)
+          else
+            collectNix (inputs.self + /modules/${module})
+            |> filterIgnored)
         modules);
 
     specialArgs =
