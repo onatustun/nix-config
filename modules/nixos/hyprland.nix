@@ -126,13 +126,15 @@ in {
               inactive_opacity = 1;
               blur.enabled = false;
 
-              shadow = enabled {
+              shadow = {
+                enabled = true;
                 range = 8;
                 render_power = 3;
               };
             };
 
-            animations = enabled {
+            animations = {
+              enabled = true;
               first_launch_animation = true;
               workspace_wraparound = true;
 
