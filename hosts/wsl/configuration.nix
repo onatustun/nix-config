@@ -1,6 +1,7 @@
 {
-  username,
   inputs,
+  username,
+  lib,
   pkgs,
   ...
 }: {
@@ -13,17 +14,19 @@
     "wheel"
   ];
 
-  wsl = {
-    enable = true;
-    defaultUser = username;
-    startMenuLaunchers = true;
+  wsl = let
+    inherit (lib) enabled;
+  in
+    enabled {
+      defaultUser = username;
+      startMenuLaunchers = true;
 
-    wslConf = {
-      automount.root = "/mnt";
-      interop.appendWindowsPath = false;
-      network.generateHosts = false;
+      wslConf = {
+        automount.root = "/mnt";
+        interop.appendWindowsPath = false;
+        network.generateHosts = false;
+      };
     };
-  };
 
   environment.systemPackages = with pkgs; [
     curl

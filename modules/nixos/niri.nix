@@ -4,14 +4,12 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (lib) enabled;
+in {
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache.enable = false;
-
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-  };
+  programs.niri = enabled {package = pkgs.niri-unstable;};
 
   environment.systemPackages = with pkgs; [
     gnome-keyring
@@ -84,10 +82,7 @@
           default-column-width = {proportion = 0.5;};
           gaps = 16;
 
-          border = {
-            enable = true;
-            width = 2;
-          };
+          border = enabled {width = 2;};
 
           preset-window-heights = [
             {proportion = 1.0 / 3.0;}
@@ -211,10 +206,7 @@
           hide-not-bound = true;
         };
 
-        xwayland-satellite = {
-          enable = true;
-          path = getExe pkgs.xwayland-satellite-unstable;
-        };
+        xwayland-satellite = enabled {path = getExe pkgs.xwayland-satellite-unstable;};
 
         cursor = let
           cursorTheme = "Bibata-Modern-Ice";
@@ -228,11 +220,7 @@
           keyboard.xkb.layout = "us";
           mod-key = "Super";
           warp-mouse-to-focus.enable = true;
-
-          focus-follows-mouse = {
-            enable = true;
-            max-scroll-amount = "5%";
-          };
+          focus-follows-mouse = enabled {max-scroll-amount = "5%";};
         };
       };
     }

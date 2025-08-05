@@ -29,23 +29,21 @@
 
   home-manager.sharedModules = [
     {
-      programs = {
+      programs = let
+        inherit (lib) enabled;
+      in {
         command-not-found.enable = true;
 
-        carapace = {
-          enable = true;
+        carapace = enabled {
           enableFishIntegration = true;
         };
 
-        zoxide = {
-          enable = true;
+        zoxide = enabled {
           enableFishIntegration = true;
           options = ["--cmd cd"];
         };
 
-        fish = {
-          enable = true;
-
+        fish = enabled {
           shellInit = ''
             set -g fish_term24bit 1
             fish_vi_key_bindings

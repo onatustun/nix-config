@@ -1,21 +1,21 @@
-{pkgs, ...}: {
-  home-manager.sharedModules = [
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  home-manager.sharedModules = let
+    inherit (lib) enabled;
+  in [
     {
       home.pointerCursor = {
         gtk.enable = true;
         name = "Bibata-Modern-Ice";
         package = pkgs.bibata-cursors;
         size = 24;
-
-        hyprcursor = {
-          enable = true;
-          size = 24;
-        };
+        hyprcursor = enabled {size = 24;};
       };
 
-      gtk = {
-        enable = true;
-
+      gtk = enabled {
         cursorTheme = {
           name = "Bibata-Modern-Ice";
           package = pkgs.bibata-cursors;

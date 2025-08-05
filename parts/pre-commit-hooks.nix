@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [inputs.pre-commit-hooks.flakeModule];
 
   perSystem = {inputs', ...}: {
@@ -8,10 +12,10 @@
       settings = {
         excludes = ["flake.lock"];
 
-        hooks.alejandra = {
-          enable = true;
-          package = inputs'.alejandra.packages.default;
-        };
+        hooks.alejandra = let
+          inherit (lib) enabled;
+        in
+          enabled {package = inputs'.alejandra.packages.default;};
       };
     };
   };

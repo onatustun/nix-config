@@ -1,6 +1,6 @@
-{
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-  };
+{lib, ...}: {
+  services.displayManager.gdm = let
+    inherit (lib) enabled;
+  in
+    enabled {wayland = true;};
 }

@@ -1,6 +1,8 @@
-{
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+{lib, ...}: {
+  hardware.graphics = let
+    inherit (lib) enabled;
+  in
+    enabled {
+      enable32Bit = true;
+    };
 }

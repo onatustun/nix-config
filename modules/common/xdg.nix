@@ -1,18 +1,20 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   environment.systemPackages = [pkgs.xdg-user-dirs];
 
   home-manager.sharedModules = [
     {
-      xdg = {
-        enable = true;
-        userDirs.createDirectories = true;
-        mime.enable = true;
-
-        mimeApps = {
-          enable = true;
-          defaultApplications."inode/directory" = "thunar.desktop";
+      xdg = let
+        inherit (lib) enabled;
+      in
+        enabled {
+          userDirs.createDirectories = true;
+          mime.enable = true;
+          mimeApps = enabled {defaultApplications."inode/directory" = "thunar.desktop";};
         };
-      };
     }
   ];
 }

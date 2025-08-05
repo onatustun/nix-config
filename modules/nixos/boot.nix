@@ -1,6 +1,7 @@
 {
   pkgs,
   isServer,
+  lib,
   ...
 }: {
   boot = {
@@ -24,12 +25,14 @@
       efi.canTouchEfiVariables = !isServer;
       timeout = 3;
 
-      grub = {
-        enable = true;
-        efiSupport = true;
-        device = "nodev";
-        useOSProber = true;
-      };
+      grub = let
+        inherit (lib) enabled;
+      in
+        enabled {
+          efiSupport = true;
+          device = "nodev";
+          useOSProber = true;
+        };
     };
   };
 }

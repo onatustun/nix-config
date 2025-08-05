@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   ...
@@ -6,10 +7,10 @@
   programs = {
     nix-index-database.comma.enable = true;
 
-    nix-index = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    nix-index = let
+      inherit (lib) enabled;
+    in
+      enabled {enableFishIntegration = true;};
   };
 
   environment.systemPackages = with pkgs;
