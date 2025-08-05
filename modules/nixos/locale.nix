@@ -3,22 +3,26 @@
 
   i18n = let
     locale = "en_GB.UTF-8";
-
-    lcVars = [
-      "ADDRESS"
-      "IDENTIFICATION"
-      "MEASUREMENT"
-      "MONETARY"
-      "NAME"
-      "NUMERIC"
-      "PAPER"
-      "TELEPHONE"
-      "TIME"
-    ];
-
-    inherit (lib) genAttrs;
   in {
     defaultLocale = locale;
-    extraLocaleSettings = genAttrs (map (v: "LC_${v}") lcVars) (_: locale);
+
+    extraLocaleSettings = let
+      inherit (lib) genAttrs const;
+
+      lcSuffixes = [
+        "ADDRESS"
+        "IDENTIFICATION"
+        "MEASUREMENT"
+        "MONETARY"
+        "NAME"
+        "NUMERIC"
+        "PAPER"
+        "TELEPHONE"
+        "TIME"
+      ];
+    in
+      lcSuffixes
+      |> map (suffix: "LC_${suffix}")
+      |> (names: genAttrs names (const locale));
   };
 }
