@@ -17,8 +17,6 @@ inputs: self: super: let
     modules ? [],
     ignore ? [],
   }: let
-    inherit (super) genAttrs filter flatten splitString optional optionals mkDefault;
-    inherit (builtins) elem head elemAt;
     inherit (self) collectNix;
 
     homeDir =
@@ -38,16 +36,26 @@ inputs: self: super: let
       isDroid = systemBuilder == nixOnDroidConfiguration;
     };
 
-    packageOverlay = final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
-    filterIgnored = files: filter (file: !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore))) files;
+    packageOverlay = let
+      inherit (super) genAttrs;
+    in
+      final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
+
+    filterIgnored = let
+      inherit (super) filter;
+      inherit (builtins) elem;
+    in
+      files: filter (file: !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore))) files;
 
     processModules = let
+      inherit (super) flatten splitString;
       inherit (super.strings) hasInfix;
     in
       modules:
         flatten (map (module:
           if hasInfix "/" module
           then let
+            inherit (builtins) head elemAt;
             parts = splitString "/" module;
           in
             inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
@@ -66,24 +74,35 @@ inputs: self: super: let
       [
         {
           nixpkgs = {
-            hostPlatform = mkDefault system;
-            overlays = overlays ++ optional (packages != []) packageOverlay;
+            hostPlatform = let
+              inherit (super) mkDefault;
+            in
+              mkDefault system;
+
+            overlays = let
+              inherit (super) optional;
+            in
+              overlays
+              ++ optional (packages != []) packageOverlay;
           };
         }
       ]
       ++ collectNix (inputs.self + /hosts/${hostName})
       ++ processModules modules;
 
-    homeManagerModule = optionals (homeVer != null) [
-      {
-        home-manager = {
-          users.${username}.home.stateVersion = homeVer;
-          useUserPackages = true;
-          backupFileExtension = "backup";
-          extraSpecialArgs = specialArgs;
-        };
-      }
-    ];
+    homeManagerModule = let
+      inherit (super) optionals;
+    in
+      optionals (homeVer != null) [
+        {
+          home-manager = {
+            users.${username}.home.stateVersion = homeVer;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+            extraSpecialArgs = specialArgs;
+          };
+        }
+      ];
   in
     systemBuilder {
       inherit specialArgs system;
