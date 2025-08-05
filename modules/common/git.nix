@@ -1,14 +1,8 @@
-{pkgs, ...}: {
-  services = {
-    gnome.gnome-keyring.enable = true;
-    dbus.packages = [pkgs.gnome-keyring];
-  };
-
+{
   home-manager.sharedModules = [
     {
       programs.git = {
         enable = true;
-        lfs.enable = true;
         userName = "onatustun";
         userEmail = "o@ust.sh";
 
