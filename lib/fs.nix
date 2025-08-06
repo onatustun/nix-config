@@ -1,7 +1,7 @@
 _: self: _: {
   collectNix = let
-    inherit (self.filesystem) listFilesRecursive;
-    inherit (self) filter hasSuffix;
+    inherit (self) filesystem filter hasSuffix;
+    inherit (filesystem) listFilesRecursive;
   in
     path:
       path
