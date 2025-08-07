@@ -2,7 +2,7 @@
   inherit (lib) mapAttrs;
   inherit (builtins) readDir;
 in {
-  templates =
+  flake.templates =
     readDir ./.
     |> mapAttrs (name: _type: {
       path = ./${name};

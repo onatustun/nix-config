@@ -39,17 +39,22 @@ inputs: self: super: let
     packageOverlay = let
       inherit (super) genAttrs;
     in
-      final: prev: genAttrs packages (name: final.callPackage (inputs.self + /pkgs/${name}.nix) {});
+      final: prev:
+        genAttrs packages (name:
+          final.callPackage (inputs.self + /pkgs/${name}.nix) {});
 
     filterIgnored = let
       inherit (super) filter;
       inherit (builtins) elem;
     in
-      files: filter (file: !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore))) files;
+      files:
+        filter (file:
+          !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore)))
+        files;
 
     processModules = let
-      inherit (super) flatten splitString;
-      inherit (super.strings) hasInfix;
+      inherit (super) strings flatten splitString;
+      inherit (strings) hasInfix;
     in
       modules:
         flatten (map (module:

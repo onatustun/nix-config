@@ -21,17 +21,20 @@
 
     inherit (lib) mkFlake;
   in
-    mkFlake {inherit inputs;} {
+    mkFlake {
+      inherit inputs;
+      specialArgs = {inherit lib;};
+    } {
       systems = import systems;
-
-      flake =
-        import ./hosts {inherit inputs lib;}
-        // import ./templates {inherit lib;};
 
       imports = let
         inherit (lib) collectNix;
       in
-        collectNix ./parts;
+        collectNix ./parts
+        ++ [
+          ./hosts
+          ./templates
+        ];
     };
 
   inputs = {
