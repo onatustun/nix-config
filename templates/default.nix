@@ -1,10 +1,10 @@
-{lib, ...}: let
-  inherit (lib) mapAttrs;
-  inherit (builtins) readDir;
-in {
-  flake.templates =
+{lib, ...}: {
+  flake.templates = let
+    inherit (builtins) readDir;
+    inherit (lib) mapAttrs;
+  in
     readDir ./.
-    |> mapAttrs (name: _type: {
+    |> mapAttrs (name: _: {
       path = ./${name};
       description = name;
     });

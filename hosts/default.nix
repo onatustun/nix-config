@@ -2,11 +2,11 @@
   lib,
   inputs,
   ...
-}: let
-  inherit (lib) mkNixos;
-in {
+}: {
   flake = {
-    nixosConfigurations = {
+    nixosConfigurations = let
+      inherit (lib) mkNixos;
+    in {
       desktop = mkNixos {
         hostName = "desktop";
         system = "x86_64-linux";
