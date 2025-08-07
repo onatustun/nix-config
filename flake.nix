@@ -1,42 +1,6 @@
 {
   description = "nix config";
 
-  outputs = inputs @ {
-    nixpkgs,
-    flake-parts,
-    systems,
-    nix-darwin,
-    system-manager,
-    nix-on-droid,
-    home-manager,
-    ...
-  }: let
-    lib = (((((nixpkgs.lib
-      .extend (_: _: flake-parts.lib))
-      .extend (_: _: nix-darwin.lib))
-      .extend (_: _: system-manager.lib))
-      .extend (_: _: nix-on-droid.lib))
-      .extend (_: _: home-manager.lib))
-    .extend <| import ./lib inputs;
-
-    inherit (lib) mkFlake;
-  in
-    mkFlake {
-      inherit inputs;
-      specialArgs = {inherit lib;};
-    } {
-      systems = import systems;
-
-      imports = let
-        inherit (lib) collectNix;
-      in
-        collectNix ./parts
-        ++ [
-          ./hosts
-          ./templates
-        ];
-    };
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -237,4 +201,50 @@
       };
     };
   };
+
+  outputs = inputs @ {
+    nixpkgs,
+    systems,
+    ...
+  }: let
+    inherit (builtins) foldl';
+    inherit (nixpkgs.lib) const;
+
+    libInputs = with inputs; [
+      flake-parts
+      nix-darwin
+      system-manager
+      nix-on-droid
+      home-manager
+    ];
+
+    lib' =
+      nixpkgs.lib
+      |> (acc:
+        foldl' (acc: input:
+          acc.extend (const
+            <| const
+            <| input.lib))
+        acc
+        libInputs);
+
+    lib =
+      lib'.extend
+      <| import ./lib inputs;
+
+    inherit (lib) mkFlake collectNix;
+  in
+    mkFlake {
+      inherit inputs;
+      specialArgs = {inherit lib;};
+    } {
+      systems = import systems;
+
+      imports =
+        collectNix ./parts
+        ++ [
+          ./hosts
+          ./templates
+        ];
+    };
 }
