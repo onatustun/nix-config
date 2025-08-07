@@ -1,10 +1,12 @@
 {
+  lib,
   inputs,
   username,
-  lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (lib) enabled;
+in {
   imports = [inputs.nixos-wsl.nixosModules.default];
 
   users.users.${username}.extraGroups = [
@@ -14,19 +16,16 @@
     "wheel"
   ];
 
-  wsl = let
-    inherit (lib) enabled;
-  in
-    enabled {
-      defaultUser = username;
-      startMenuLaunchers = true;
+  wsl = enabled {
+    defaultUser = username;
+    startMenuLaunchers = true;
 
-      wslConf = {
-        automount.root = "/mnt";
-        interop.appendWindowsPath = false;
-        network.generateHosts = false;
-      };
+    wslConf = {
+      automount.root = "/mnt";
+      interop.appendWindowsPath = false;
+      network.generateHosts = false;
     };
+  };
 
   environment.systemPackages = with pkgs; [
     curl

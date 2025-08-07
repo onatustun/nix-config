@@ -1,11 +1,9 @@
-{lib, ...}: {
+{lib, ...}: let
+  inherit (lib) mkDefault;
+in {
   disko.devices.disk.main = {
     type = "disk";
-
-    device = let
-      inherit (lib) mkDefault;
-    in
-      mkDefault "/dev/sda";
+    device = mkDefault "/dev/sda";
 
     content = {
       type = "gpt";

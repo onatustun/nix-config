@@ -1,10 +1,9 @@
-_: self: _: {
-  collectNix = let
-    inherit (self) filesystem filter hasSuffix;
-    inherit (filesystem) listFilesRecursive;
-  in
-    path:
-      path
-      |> listFilesRecursive
-      |> filter (hasSuffix ".nix");
+_: self: _: let
+  inherit (self) filesystem filter hasSuffix;
+  inherit (filesystem) listFilesRecursive;
+in {
+  collectNix = path:
+    path
+    |> listFilesRecursive
+    |> filter (hasSuffix ".nix");
 }

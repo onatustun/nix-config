@@ -1,11 +1,11 @@
 {
-  pkgs,
   lib,
+  pkgs,
   ...
-}: {
-  home-manager.sharedModules = let
-    inherit (lib) enabled;
-  in [
+}: let
+  inherit (lib) enabled;
+in {
+  home-manager.sharedModules = [
     {
       home.pointerCursor = {
         gtk.enable = true;

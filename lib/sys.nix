@@ -1,5 +1,9 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
+  inherit (self) collectNix;
+  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals;
+  inherit (builtins) elem head elemAt;
+  inherit (strings) hasInfix;
 
   mkSystem = systemBuilder: {
     hostName,
@@ -17,8 +21,6 @@ inputs: self: super: let
     modules ? [],
     ignore ? [],
   }: let
-    inherit (self) collectNix;
-
     homeDir =
       if systemBuilder == darwinSystem
       then "/Users/${username}"
@@ -36,38 +38,26 @@ inputs: self: super: let
       isDroid = systemBuilder == nixOnDroidConfiguration;
     };
 
-    packageOverlay = let
-      inherit (super) genAttrs;
-    in
-      final: prev:
-        genAttrs packages (name:
-          final.callPackage (inputs.self + /pkgs/${name}.nix) {});
+    packageOverlay = final: prev:
+      genAttrs packages (name:
+        final.callPackage (inputs.self + /pkgs/${name}.nix) {});
 
-    filterIgnored = let
-      inherit (super) filter;
-      inherit (builtins) elem;
-    in
-      files:
-        filter (file:
-          !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore)))
-        files;
+    filterIgnored = files:
+      filter (file:
+        !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore)))
+      files;
 
-    processModules = let
-      inherit (super) strings flatten splitString;
-      inherit (strings) hasInfix;
-    in
-      modules:
-        flatten (map (module:
-          if hasInfix "/" module
-          then let
-            inherit (builtins) head elemAt;
-            parts = splitString "/" module;
-          in
-            inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
-          else
-            collectNix (inputs.self + /modules/${module})
-            |> filterIgnored)
-        modules);
+    processModules = modules:
+      flatten (map (module:
+        if hasInfix "/" module
+        then let
+          parts = splitString "/" module;
+        in
+          inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
+        else
+          collectNix (inputs.self + /modules/${module})
+          |> filterIgnored)
+      modules);
 
     specialArgs =
       inputs
@@ -81,14 +71,9 @@ inputs: self: super: let
       [
         {
           nixpkgs = {
-            hostPlatform = let
-              inherit (super) mkDefault;
-            in
-              mkDefault system;
+            hostPlatform = mkDefault system;
 
-            overlays = let
-              inherit (super) optional;
-            in
+            overlays =
               overlays
               ++ optional (packages != []) packageOverlay;
           };
@@ -97,19 +82,16 @@ inputs: self: super: let
       ++ collectNix (inputs.self + /hosts/${hostName})
       ++ processModules modules;
 
-    homeManagerModule = let
-      inherit (super) optionals;
-    in
-      optionals (homeVer != null) [
-        {
-          home-manager = {
-            users.${username}.home.stateVersion = homeVer;
-            useUserPackages = true;
-            backupFileExtension = "backup";
-            extraSpecialArgs = specialArgs;
-          };
-        }
-      ];
+    homeManagerModule = optionals (homeVer != null) [
+      {
+        home-manager = {
+          users.${username}.home.stateVersion = homeVer;
+          useUserPackages = true;
+          backupFileExtension = "backup";
+          extraSpecialArgs = specialArgs;
+        };
+      }
+    ];
   in
     systemBuilder {
       inherit specialArgs system;

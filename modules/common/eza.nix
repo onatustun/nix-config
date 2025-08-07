@@ -1,15 +1,14 @@
-{lib, ...}: {
+{lib, ...}: let
+  inherit (lib) enabled;
+in {
   home-manager.sharedModules = [
     {
-      programs.eza = let
-        inherit (lib) enabled;
-      in
-        enabled {
-          enableFishIntegration = true;
-          colors = "auto";
-          git = true;
-          icons = "auto";
-        };
+      programs.eza = enabled {
+        enableFishIntegration = true;
+        colors = "auto";
+        git = true;
+        icons = "auto";
+      };
     }
   ];
 }

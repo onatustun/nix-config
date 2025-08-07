@@ -18,26 +18,15 @@
   };
 
   outputs = inputs @ {
-    nixpkgs,
     flake-parts,
     systems,
     ...
-  }: let
-    lib = nixpkgs.lib
-      .extend (_: _: flake-parts.lib);
-
-    inherit (lib) mkFlake;
-  in
-    mkFlake {
-      inherit inputs;
-      specialArgs = {inherit lib;};
-    } {
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} ({lib, ...}: let
+      inherit (lib) filesystem filter hasSuffix;
+      inherit (filesystem) listFilesRecursive;
+    in {
       systems = import systems;
-
-      imports = let
-        inherit (lib) filesystem filter hasSuffix;
-        inherit (filesystem) listFilesRecursive;
-      in
-        filter (hasSuffix ".nix") (listFilesRecursive ./nix);
-    };
+      imports = filter (hasSuffix ".nix") (listFilesRecursive ./nix);
+    });
 }

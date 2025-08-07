@@ -3,14 +3,12 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  inherit (lib) enabled;
+in {
   programs = {
     nix-index-database.comma.enable = true;
-
-    nix-index = let
-      inherit (lib) enabled;
-    in
-      enabled {enableFishIntegration = true;};
+    nix-index = enabled {enableFishIntegration = true;};
   };
 
   environment.systemPackages = with pkgs;

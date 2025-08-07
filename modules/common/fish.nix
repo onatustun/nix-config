@@ -5,7 +5,9 @@
   isWsl,
   homeDir,
   ...
-}: {
+}: let
+  inherit (lib) enabled optionalString;
+in {
   programs.fish.enable = true;
 
   users = {
@@ -29,9 +31,7 @@
 
   home-manager.sharedModules = [
     {
-      programs = let
-        inherit (lib) enabled;
-      in {
+      programs = {
         command-not-found.enable = true;
         carapace = enabled {enableFishIntegration = true;};
 
@@ -60,9 +60,7 @@
             set fish_greeting
           '';
 
-          interactiveShellInit = let
-            inherit (lib) optionalString;
-          in ''
+          interactiveShellInit = ''
             if status is-interactive
             and not set -q TMUX
               ${optionalString isWsl "cd ~"}

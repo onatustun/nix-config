@@ -1,11 +1,11 @@
 {
+  lib,
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled getExe;
 in {
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache.enable = false;
@@ -26,9 +26,7 @@ in {
         configPackages = [pkgs.niri-unstable];
       };
 
-      programs.niri.settings = let
-        inherit (lib) getExe;
-      in {
+      programs.niri.settings = {
         environment = {
           CLUTTER_BACKEND = "wayland";
           DISPLAY = ":0";

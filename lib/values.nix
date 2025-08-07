@@ -1,9 +1,7 @@
 _: self: _: let
-  inherit (self) merge;
+  inherit (self) merge mkMerge;
 in {
-  merge = let
-    inherit (self) mkMerge;
-  in
+  merge =
     mkMerge []
     // {
       __functor = self: next:

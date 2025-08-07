@@ -4,7 +4,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  inherit (lib) enabled;
+in {
   environment.sessionVariables = {
     EDITOR = "hx";
     VISUAL = "hx";
@@ -12,233 +14,230 @@
 
   home-manager.sharedModules = [
     {
-      programs.helix = let
-        inherit (lib) enabled;
-      in
-        enabled {
-          package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
-          defaultEditor = true;
+      programs.helix = enabled {
+        package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        defaultEditor = true;
 
-          languages = {
-            language = [
-              {
-                name = "tsx";
-                auto-format = true;
+        languages = {
+          language = [
+            {
+              name = "tsx";
+              auto-format = true;
 
-                formatter = {
-                  command = "prettier";
+              formatter = {
+                command = "prettier";
 
-                  args = [
-                    "--parser"
-                    "typescript"
-                  ];
-                };
-
-                language-servers = [
-                  "tailwindcss-ls"
-                  "typescript-language-server"
-                  "uwu-colors"
+                args = [
+                  "--parser"
+                  "typescript"
                 ];
-              }
+              };
 
-              {
-                name = "jsx";
-                auto-format = true;
+              language-servers = [
+                "tailwindcss-ls"
+                "typescript-language-server"
+                "uwu-colors"
+              ];
+            }
 
-                formatter = {
-                  command = "prettier";
+            {
+              name = "jsx";
+              auto-format = true;
 
-                  args = [
-                    "--parser"
-                    "typescript"
-                  ];
-                };
+              formatter = {
+                command = "prettier";
 
-                language-servers = [
-                  "tailwindcss-ls"
-                  "typescript-language-server"
-                  "uwu-colors"
+                args = [
+                  "--parser"
+                  "typescript"
                 ];
-              }
+              };
 
-              {
-                name = "html";
-                auto-format = true;
+              language-servers = [
+                "tailwindcss-ls"
+                "typescript-language-server"
+                "uwu-colors"
+              ];
+            }
 
-                formatter = {
-                  command = "prettier";
+            {
+              name = "html";
+              auto-format = true;
 
-                  args = [
-                    "--parser"
-                    "html"
-                  ];
-                };
+              formatter = {
+                command = "prettier";
 
-                language-servers = [
-                  "tailwindcss-ls"
-                  "vscode-html-language-server"
-                  "vscode-css-language-server"
-                  "typescript-language-server"
-                  "uwu-colors"
+                args = [
+                  "--parser"
+                  "html"
                 ];
-              }
+              };
 
-              {
-                name = "css";
-                auto-format = true;
+              language-servers = [
+                "tailwindcss-ls"
+                "vscode-html-language-server"
+                "vscode-css-language-server"
+                "typescript-language-server"
+                "uwu-colors"
+              ];
+            }
 
-                formatter = {
-                  command = "prettier";
+            {
+              name = "css";
+              auto-format = true;
 
-                  args = [
-                    "--parser"
-                    "css"
-                  ];
-                };
+              formatter = {
+                command = "prettier";
 
-                language-servers = [
-                  "tailwindcss-ls"
-                  "vscode-css-language-server"
-                  "uwu-colors"
+                args = [
+                  "--parser"
+                  "css"
                 ];
-              }
+              };
 
-              {
-                name = "typst";
-                auto-format = true;
-                formatter.command = "typstyle";
+              language-servers = [
+                "tailwindcss-ls"
+                "vscode-css-language-server"
+                "uwu-colors"
+              ];
+            }
 
-                language-servers = [
-                  "tinymist"
-                  "uwu-colors"
-                ];
-              }
+            {
+              name = "typst";
+              auto-format = true;
+              formatter.command = "typstyle";
 
-              {
-                name = "nix";
-                auto-format = true;
-                formatter.command = "alejandra";
+              language-servers = [
+                "tinymist"
+                "uwu-colors"
+              ];
+            }
 
-                language-servers = [
-                  "nixd"
-                  "uwu-colors"
-                ];
-              }
+            {
+              name = "nix";
+              auto-format = true;
+              formatter.command = "alejandra";
+
+              language-servers = [
+                "nixd"
+                "uwu-colors"
+              ];
+            }
+          ];
+
+          language-server = {
+            uwu-colors.command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
+            nixd.command = "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
+          };
+        };
+
+        settings = {
+          theme = "${config.stylix.base16Scheme.name}";
+
+          editor = {
+            true-color = true;
+            default-yank-register = "+";
+            middle-click-paste = false;
+
+            shell = [
+              "bash"
+              "-c"
             ];
 
-            language-server = {
-              uwu-colors.command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
-              nixd.command = "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
+            line-number = "relative";
+            cursorline = true;
+            continue-comments = false;
+            auto-format = false;
+            idle-timeout = 0;
+            completion-replace = true;
+            bufferline = "multiple";
+            color-modes = true;
+            insert-final-newline = false;
+            end-of-line-diagnostics = "warning";
+            clipboard-provider = "wayland";
+            lsp.display-inlay-hints = true;
+            cursor-shape.insert = "bar";
+            file-picker.hidden = false;
+            auto-pairs = true;
+            auto-save = false;
+            inline-diagnostics.cursor-line = "warning";
+
+            statusline = {
+              left = [
+                "mode"
+                "spinner"
+                "file-name"
+                "read-only-indicator"
+                "file-modification-indicator"
+              ];
+
+              right = [
+                "version-control"
+                "diagnostics"
+                "selections"
+                "position"
+                "total-line-numbers"
+              ];
+
+              mode = {
+                normal = "N";
+                insert = "I";
+                select = "S";
+              };
+            };
+
+            whitespace = {
+              render.tab = "all";
+              characters.tab = "→";
+            };
+
+            indent-guides = {
+              render = true;
+              character = "▏";
+              skip-levels = 1;
+            };
+
+            gutters = {
+              layout = [
+                "diagnostics"
+                "spacer"
+                "line-numbers"
+                "spacer"
+                "diff"
+              ];
+
+              line-numbers.min-width = 1;
             };
           };
 
-          settings = {
-            theme = "${config.stylix.base16Scheme.name}";
+          keys = {
+            normal = {
+              x = "select_line_below";
+              X = "select_line_above";
 
-            editor = {
-              true-color = true;
-              default-yank-register = "+";
-              middle-click-paste = false;
-
-              shell = [
-                "bash"
-                "-c"
-              ];
-
-              line-number = "relative";
-              cursorline = true;
-              continue-comments = false;
-              auto-format = false;
-              idle-timeout = 0;
-              completion-replace = true;
-              bufferline = "multiple";
-              color-modes = true;
-              insert-final-newline = false;
-              end-of-line-diagnostics = "warning";
-              clipboard-provider = "wayland";
-              lsp.display-inlay-hints = true;
-              cursor-shape.insert = "bar";
-              file-picker.hidden = false;
-              auto-pairs = true;
-              auto-save = false;
-              inline-diagnostics.cursor-line = "warning";
-
-              statusline = {
-                left = [
-                  "mode"
-                  "spinner"
-                  "file-name"
-                  "read-only-indicator"
-                  "file-modification-indicator"
-                ];
-
-                right = [
-                  "version-control"
-                  "diagnostics"
-                  "selections"
-                  "position"
-                  "total-line-numbers"
-                ];
-
-                mode = {
-                  normal = "N";
-                  insert = "I";
-                  select = "S";
-                };
+              G = {
+                j = "@vgj<esc>";
+                k = "@vgk<esc>";
               };
 
-              whitespace = {
-                render.tab = "all";
-                characters.tab = "→";
-              };
-
-              indent-guides = {
-                render = true;
-                character = "▏";
-                skip-levels = 1;
-              };
-
-              gutters = {
-                layout = [
-                  "diagnostics"
-                  "spacer"
-                  "line-numbers"
-                  "spacer"
-                  "diff"
-                ];
-
-                line-numbers.min-width = 1;
+              g = {
+                j = "goto_last_line";
+                k = "goto_file_start";
               };
             };
 
-            keys = {
-              normal = {
-                x = "select_line_below";
-                X = "select_line_above";
+            select = {
+              x = "select_line_below";
+              X = "select_line_above";
 
-                G = {
-                  j = "@vgj<esc>";
-                  k = "@vgk<esc>";
-                };
-
-                g = {
-                  j = "goto_last_line";
-                  k = "goto_file_start";
-                };
-              };
-
-              select = {
-                x = "select_line_below";
-                X = "select_line_above";
-
-                g = {
-                  j = "goto_last_line";
-                  k = "goto_file_start";
-                };
+              g = {
+                j = "goto_last_line";
+                k = "goto_file_start";
               };
             };
           };
         };
+      };
 
       home.file = {
         ".ignore".text = ''

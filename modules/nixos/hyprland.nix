@@ -1,12 +1,13 @@
 {
+  lib,
   inputs,
   isDesktop,
   isLaptop,
-  lib,
   pkgs,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled optional mkMerge mkIf;
+  inherit (builtins) concatMap attrValues concatLists genList;
 in {
   programs.hyprland = enabled {
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -26,8 +27,6 @@ in {
         };
 
         settings = let
-          inherit (builtins) concatMap;
-
           navigation = {
             left = {
               key = "H";
@@ -55,14 +54,11 @@ in {
             };
           };
 
-          makeBinds = let
-            inherit (builtins) attrValues;
-          in
-            mod: action: fn:
-              concatMap (nav: [
-                "${mod}, ${nav.arrow}, ${action nav}, ${fn nav}"
-                "${mod}, ${nav.key},   ${action nav}, ${fn nav}"
-              ]) (attrValues navigation);
+          makeBinds = mod: action: fn:
+            concatMap (nav: [
+              "${mod}, ${nav.arrow}, ${action nav}, ${fn nav}"
+              "${mod}, ${nav.key},   ${action nav}, ${fn nav}"
+            ]) (attrValues navigation);
         in {
           env = [
             "ELECTRON_OZONE_PLATFORM_HINT,auto"
@@ -77,9 +73,7 @@ in {
             "XCURSOR_SIZE,24"
           ];
 
-          exec-once = let
-            inherit (lib) optional;
-          in
+          exec-once =
             [
               "wl-paste --type image --watch cliphist store"
               "wl-paste --type text --watch cliphist store"
@@ -87,19 +81,16 @@ in {
             ]
             ++ optional isLaptop "swayidle";
 
-          monitor = let
-            inherit (lib) mkMerge mkIf;
-          in
-            mkMerge [
-              (mkIf isDesktop [
-                "DP-2, 1920x1080@240, 0x0, 1, transform, 2"
-                "HDMI-A-1, 1920x1080@240, auto-down, 1"
-              ])
-              (mkIf isLaptop [
-                "eDP-1, 2256x1504@60, 0x0, 1.5667"
-                "DP-3, 3840x2400, auto-down, 2.4"
-              ])
-            ];
+          monitor = mkMerge [
+            (mkIf isDesktop [
+              "DP-2, 1920x1080@240, 0x0, 1, transform, 2"
+              "HDMI-A-1, 1920x1080@240, auto-down, 1"
+            ])
+            (mkIf isLaptop [
+              "eDP-1, 2256x1504@60, 0x0, 1.5667"
+              "DP-3, 3840x2400, auto-down, 2.4"
+            ])
+          ];
 
           dwindle = {
             force_split = 2;
@@ -194,16 +185,15 @@ in {
               "$mod, V, togglefloating"
               "$mod Shift, E, exit"
             ]
-            ++ (let
-              inherit (builtins) concatLists genList;
-            in
+            ++ (
               concatLists (genList (x: let
                   ws = toString (x + 1 - (((x + 1) / 10) * 10));
                 in [
                   "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
                   "$mod, ${ws}, workspace, ${toString (x + 1)}"
                 ])
-                10));
+                10)
+            );
 
           bindm = [
             "$mod, mouse:272, movewindow"

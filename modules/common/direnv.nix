@@ -1,13 +1,12 @@
-{lib, ...}: {
+{lib, ...}: let
+  inherit (lib) enabled;
+in {
   home-manager.sharedModules = [
     {
-      programs.direnv = let
-        inherit (lib) enabled;
-      in
-        enabled {
-          nix-direnv.enable = true;
-          silent = true;
-        };
+      programs.direnv = enabled {
+        nix-direnv.enable = true;
+        silent = true;
+      };
     }
   ];
 }

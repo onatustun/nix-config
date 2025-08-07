@@ -1,8 +1,10 @@
 {
-  inputs,
   lib,
+  inputs,
   ...
-}: {
+}: let
+  inherit (lib) enabled;
+in {
   imports = [inputs.pre-commit-hooks.flakeModule];
 
   perSystem = {inputs', ...}: {
@@ -11,13 +13,7 @@
 
       settings = {
         excludes = ["flake.lock"];
-
-        hooks.alejandra = let
-          inherit (lib) enabled;
-        in
-          enabled {
-            package = inputs'.alejandra.packages.default;
-          };
+        hooks.alejandra = enabled {package = inputs'.alejandra.packages.default;};
       };
     };
   };

@@ -1,9 +1,11 @@
 {
+  lib,
   username,
   pkgs,
-  lib,
   ...
-}: {
+}: let
+  inherit (lib) enabled;
+in {
   users.users = {
     root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZjRC59/OYgy+zxrcTPVxhLjlvascA7KAzybIOb0XvS o@ust.sh"];
 
@@ -24,18 +26,15 @@
     jellyfin-web
   ];
 
-  services = let
-    inherit (lib) enabled;
-  in {
+  services = {
     openssh.enable = true;
+    jellyfin = enabled {user = "onat";};
 
     caddy = enabled {
       virtualHosts."https://jellyfin.ust.sh".extraConfig = ''
         reverse_proxy 127.0.0.1:8096
       '';
     };
-
-    jellyfin = enabled {user = "onat";};
   };
 
   system.stateVersion = "24.11";
