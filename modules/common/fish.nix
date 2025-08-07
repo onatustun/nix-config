@@ -112,7 +112,7 @@ in {
             cpp = "cp -prv $argv ..";
             flakeinit = "nix flake init -t '${homeDir}/nix#'\$argv";
             mvp = "mv -v $argv ..";
-            rebuild = "nh os switch -H $argv";
+            rebuild = "nh os switch -H $argv --accept-flake-config";
             shot = "grim -g \"$(slurp)\" ${homeDir}/Pictures/$argv.png";
 
             toggle-editor = ''
