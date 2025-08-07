@@ -218,18 +218,15 @@
       home-manager
     ];
 
-    lib' =
-      nixpkgs.lib
-      |> (acc:
-        foldl' (acc: input:
-          acc.extend (const
-            <| const
-            <| input.lib))
-        acc
-        libInputs);
-
     lib =
-      lib'.extend
+      (nixpkgs.lib
+        |> (acc:
+          foldl' (acc: input:
+            acc.extend (const
+              <| const
+              <| input.lib))
+          acc
+          libInputs)).extend
       <| import ./lib inputs;
 
     inherit (lib) mkFlake collectNix;
