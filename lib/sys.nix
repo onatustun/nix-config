@@ -38,6 +38,19 @@ inputs: self: super: let
       isDroid = systemBuilder == nixOnDroidConfiguration;
     };
 
+    nixPath = let
+      inherit (hostTypes) isNixos isDarwin isLinux isDroid;
+    in
+      if isNixos
+      then "nixos"
+      else if isDarwin
+      then "darwin"
+      else if isLinux
+      then "linux"
+      else if isDroid
+      then "droid"
+      else throw "unknown systemBuilder";
+
     packageOverlay = final: prev:
       genAttrs packages (name:
         final.callPackage (inputs.self + /pkgs/${name}.nix) {});
@@ -79,7 +92,7 @@ inputs: self: super: let
           };
         }
 
-        (inputs.self + "/hosts/${hostName}")
+        (inputs.self + "/hosts/${nixPath}/${hostName}")
       ]
       ++ processModules modules;
 
