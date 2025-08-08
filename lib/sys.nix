@@ -1,18 +1,39 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
-  inherit (self) collectNix;
   inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals;
+  inherit (self) collectNix;
   inherit (builtins) elem head elemAt;
   inherit (strings) hasInfix;
 
-  mkSystem = systemBuilder: {
+  systems = {
+    nixos = {
+      platform = "x86_64-linux";
+      builder = nixosSystem;
+      homeDir = username: "/home/${username}";
+    };
+
+    darwin = {
+      platform = "aarch64-darwin";
+      builder = darwinSystem;
+      homeDir = username: "/Users/${username}";
+    };
+
+    linux = {
+      platform = "x86_64-linux";
+      builder = makeSystemConfig;
+      homeDir = username: "/home/${username}";
+    };
+
+    droid = {
+      platform = "aarch64-linux";
+      builder = nixOnDroidConfiguration;
+      homeDir = username: "/home/${username}";
+    };
+  };
+
+  mkSystem = type: {
     hostName,
-    system ?
-      if systemBuilder == darwinSystem
-      then "aarch64-darwin"
-      else if systemBuilder == nixOnDroidConfiguration
-      then "aarch64-linux"
-      else "x86_64-linux",
+    system ? systems.${type}.platform,
     username ? "onat",
     homeVer ? null,
     packages ? [],
@@ -21,10 +42,9 @@ inputs: self: super: let
     modules ? [],
     ignore ? [],
   }: let
-    homeDir =
-      if systemBuilder == darwinSystem
-      then "/Users/${username}"
-      else "/home/${username}";
+    cfg = systems.${type} or (throw "Unknown type: ${type}");
+    systemBuilder = cfg.builder;
+    homeDir = cfg.homeDir username;
 
     hostTypes = {
       isDesktop = hostName == "desktop";
@@ -32,24 +52,11 @@ inputs: self: super: let
       isServer = hostName == "server";
       isWsl = hostName == "wsl";
 
-      isNixos = systemBuilder == nixosSystem;
-      isDarwin = systemBuilder == darwinSystem;
-      isLinux = systemBuilder == makeSystemConfig;
-      isDroid = systemBuilder == nixOnDroidConfiguration;
+      isNixos = type == "nixos";
+      isDarwin = type == "darwin";
+      isLinux = type == "linux";
+      isDroid = type == "droid";
     };
-
-    nixPath = let
-      inherit (hostTypes) isNixos isDarwin isLinux isDroid;
-    in
-      if isNixos
-      then "nixos"
-      else if isDarwin
-      then "darwin"
-      else if isLinux
-      then "linux"
-      else if isDroid
-      then "droid"
-      else throw "unknown systemBuilder";
 
     packageOverlay = final: prev:
       genAttrs packages (name:
@@ -85,14 +92,11 @@ inputs: self: super: let
         {
           nixpkgs = {
             hostPlatform = mkDefault system;
-
-            overlays =
-              overlays
-              ++ optional (packages != []) packageOverlay;
+            overlays = overlays ++ optional (packages != []) packageOverlay;
           };
         }
 
-        (inputs.self + "/hosts/${nixPath}/${hostName}")
+        (inputs.self + "/hosts/${type}/${hostName}")
       ]
       ++ processModules modules;
 
@@ -107,7 +111,7 @@ inputs: self: super: let
       }
     ];
   in
-    systemBuilder {
+    cfg.builder {
       inherit specialArgs system;
 
       modules =
@@ -116,8 +120,8 @@ inputs: self: super: let
         ++ inputModules;
     };
 in {
-  mkNixos = mkSystem nixosSystem;
-  mkDarwin = mkSystem darwinSystem;
-  mkLinux = mkSystem makeSystemConfig;
-  mkDroid = mkSystem nixOnDroidConfiguration;
+  mkNixos = mkSystem "nixos";
+  mkDarwin = mkSystem "darwin";
+  mkLinux = mkSystem "linux";
+  mkDroid = mkSystem "droid";
 }
