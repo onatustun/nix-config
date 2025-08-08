@@ -3,18 +3,18 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled disabled;
 in {
-  security.rtkit.enable = true;
+  security.rtkit = enabled;
 
   services = {
-    pulseaudio.enable = false;
+    pulseaudio = disabled;
 
     pipewire = enabled {
       alsa = enabled {support32Bit = true;};
-      jack.enable = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
+      jack = enabled;
+      pulse = enabled;
+      wireplumber = enabled;
     };
   };
 

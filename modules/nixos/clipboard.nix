@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) enabled;
+in {
   environment.systemPackages = with pkgs; [
     cliphist
     wl-clipboard
@@ -7,7 +13,7 @@
 
   home-manager.sharedModules = [
     {
-      services.cliphist.enable = true;
+      services.cliphist = enabled;
     }
   ];
 }

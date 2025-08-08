@@ -1,10 +1,12 @@
-{
+{lib, ...}: let
+  inherit (lib) disabled;
+in {
   home-manager.sharedModules = [
     {
       manual = {
-        html.enable = false;
-        json.enable = false;
-        manpages.enable = false;
+        html = disabled;
+        json = disabled;
+        manpages = disabled;
       };
     }
   ];

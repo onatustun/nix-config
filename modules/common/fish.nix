@@ -8,7 +8,7 @@
 }: let
   inherit (lib) enabled optionalString;
 in {
-  programs.fish.enable = true;
+  programs.fish = enabled;
 
   users = {
     defaultUserShell = pkgs.fish;
@@ -32,7 +32,7 @@ in {
   home-manager.sharedModules = [
     {
       programs = {
-        command-not-found.enable = true;
+        command-not-found = enabled;
         carapace = enabled {enableFishIntegration = true;};
 
         zoxide = enabled {

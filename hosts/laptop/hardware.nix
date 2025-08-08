@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkDefault;
+  inherit (lib) mkDefault enabled;
 in {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -51,8 +51,8 @@ in {
   };
 
   services = {
-    fwupd.enable = true;
-    power-profiles-daemon.enable = true;
+    fwupd = enabled;
+    power-profiles-daemon = enabled;
   };
 
   environment.systemPackages = with pkgs; [

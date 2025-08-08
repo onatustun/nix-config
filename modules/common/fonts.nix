@@ -1,7 +1,13 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) enabled;
+in {
   fonts = {
-    fontDir.enable = true;
-    fontconfig.enable = true;
+    fontDir = enabled;
+    fontconfig = enabled;
 
     packages = with pkgs; [
       font-awesome

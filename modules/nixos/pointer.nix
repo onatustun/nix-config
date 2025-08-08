@@ -8,7 +8,7 @@ in {
   home-manager.sharedModules = [
     {
       home.pointerCursor = {
-        gtk.enable = true;
+        gtk = enabled;
         hyprcursor = enabled {size = 24;};
         name = "Bibata-Modern-Ice";
         package = pkgs.bibata-cursors;

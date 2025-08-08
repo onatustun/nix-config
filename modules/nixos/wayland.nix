@@ -1,7 +1,13 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) enabled;
+in {
   home-manager.sharedModules = [
     {
-      services.dunst.enable = true;
+      services.dunst = enabled;
     }
   ];
 

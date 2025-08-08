@@ -1,6 +1,12 @@
-{hostName, ...}: {
+{
+  lib,
+  hostName,
+  ...
+}: let
+  inherit (lib) enabled;
+in {
   networking = {
-    networkmanager.enable = true;
+    networkmanager = enabled;
     hostName = hostName;
     firewall.allowedTCPPorts = [57621];
   };

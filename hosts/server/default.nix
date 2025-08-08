@@ -31,7 +31,7 @@ in {
   ];
 
   services = {
-    openssh.enable = true;
+    openssh = enabled;
     jellyfin = enabled {user = "onat";};
 
     caddy = enabled {

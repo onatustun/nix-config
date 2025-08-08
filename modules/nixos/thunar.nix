@@ -5,7 +5,7 @@
 }: let
   inherit (lib) enabled;
 in {
-  services.tumbler.enable = true;
+  services.tumbler = enabled;
 
   programs.thunar = enabled {
     plugins = with pkgs.xfce; [

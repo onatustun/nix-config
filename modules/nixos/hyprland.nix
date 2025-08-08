@@ -19,7 +19,7 @@ in {
   home-manager.sharedModules = [
     {
       wayland.windowManager.hyprland = enabled {
-        xwayland.enable = true;
+        xwayland = enabled;
 
         systemd = enabled {
           enableXdgAutostart = true;

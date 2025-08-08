@@ -4,7 +4,7 @@ in {
   home-manager.sharedModules = [
     {
       programs.direnv = enabled {
-        nix-direnv.enable = true;
+        nix-direnv = enabled;
         silent = true;
       };
     }

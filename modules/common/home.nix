@@ -1,11 +1,14 @@
 {
+  lib,
   username,
   homeDir,
   ...
-}: {
+}: let
+  inherit (lib) enabled;
+in {
   home-manager.sharedModules = [
     {
-      programs.home-manager.enable = true;
+      programs.home-manager = enabled;
 
       home = {
         username = username;

@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled disabled;
 
   solarized = {
     name = "solarized";
@@ -121,12 +121,12 @@ in {
   home-manager.sharedModules = [
     {
       stylix.targets = {
-        helix.enable = false;
-        nixcord.enable = false;
-        rofi.enable = false;
-        spicetify.enable = false;
-        waybar.enable = false;
-        zen-browser.enable = false;
+        helix = disabled;
+        nixcord = disabled;
+        rofi = disabled;
+        spicetify = disabled;
+        waybar = disabled;
+        zen-browser = disabled;
       };
     }
   ];

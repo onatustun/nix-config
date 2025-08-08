@@ -7,7 +7,7 @@
   inherit (lib) enabled;
 in {
   programs = {
-    nix-index-database.comma.enable = true;
+    nix-index-database.comma = enabled;
     nix-index = enabled {enableFishIntegration = true;};
   };
 

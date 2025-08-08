@@ -6,14 +6,14 @@
   inherit (lib) enabled;
 in {
   services = {
-    gnome.gnome-keyring.enable = true;
+    gnome.gnome-keyring = enabled;
     dbus.packages = [pkgs.gnome-keyring];
   };
 
   home-manager.sharedModules = [
     {
       programs.git = enabled {
-        lfs.enable = true;
+        lfs = enabled;
         userName = "onatustun";
         userEmail = "o@ust.sh";
 

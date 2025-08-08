@@ -14,14 +14,14 @@ in {
           enableReactDevtools = true;
 
           plugins = {
-            blurNSFW.enable = true;
-            clearURLs.enable = true;
-            experiments.enable = true;
-            fakeNitro.enable = true;
-            noTypingAnimation.enable = true;
-            silentTyping.enable = true;
-            translate.enable = true;
-            youtubeAdblock.enable = true;
+            blurNSFW = enabled;
+            clearURLs = enabled;
+            experiments = enabled;
+            fakeNitro = enabled;
+            noTypingAnimation = enabled;
+            silentTyping = enabled;
+            translate = enabled;
+            youtubeAdblock = enabled;
           };
         };
       };

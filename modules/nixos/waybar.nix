@@ -10,7 +10,7 @@ in {
   home-manager.sharedModules = [
     {
       programs.waybar = enabled {
-        systemd.enable = true;
+        systemd = enabled;
 
         settings = [
           {

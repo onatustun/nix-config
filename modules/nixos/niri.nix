@@ -5,10 +5,10 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled getExe;
+  inherit (lib) enabled disabled getExe;
 in {
   imports = [inputs.niri.nixosModules.niri];
-  niri-flake.cache.enable = false;
+  niri-flake.cache = disabled;
   programs.niri = enabled {package = pkgs.niri-unstable;};
 
   environment.systemPackages = with pkgs; [
@@ -217,7 +217,7 @@ in {
         input = {
           keyboard.xkb.layout = "us";
           mod-key = "Super";
-          warp-mouse-to-focus.enable = true;
+          warp-mouse-to-focus = enabled;
           focus-follows-mouse = enabled {max-scroll-amount = "5%";};
         };
       };

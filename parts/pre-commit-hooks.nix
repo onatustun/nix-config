@@ -9,7 +9,7 @@ in {
 
   perSystem = {inputs', ...}: {
     pre-commit = {
-      check.enable = true;
+      check = enabled;
 
       settings = {
         excludes = ["flake.lock"];

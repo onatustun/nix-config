@@ -11,7 +11,7 @@ in {
     {
       xdg = enabled {
         userDirs.createDirectories = true;
-        mime.enable = true;
+        mime = enabled;
         mimeApps = enabled {defaultApplications."inode/directory" = "thunar.desktop";};
       };
     }
