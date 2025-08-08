@@ -78,8 +78,9 @@ inputs: self: super: let
               ++ optional (packages != []) packageOverlay;
           };
         }
+
+        (inputs.self + "/hosts/${hostName}")
       ]
-      ++ collectNix (inputs.self + /hosts/${hostName})
       ++ processModules modules;
 
     homeManagerModule = optionals (homeVer != null) [

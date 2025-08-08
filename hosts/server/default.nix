@@ -4,8 +4,12 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) collectNix remove enabled;
 in {
+  imports =
+    collectNix ./.
+    |> remove ./default.nix;
+
   users.users = {
     root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZjRC59/OYgy+zxrcTPVxhLjlvascA7KAzybIOb0XvS o@ust.sh"];
 
