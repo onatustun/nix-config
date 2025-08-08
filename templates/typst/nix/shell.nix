@@ -16,7 +16,10 @@
           typst
           typstyle
         ]
-        ++ (with inputs'; [alejandra.packages.default]);
+        ++ (with inputs'; [
+          alejandra.packages.default
+          deadnix.packages.default
+        ]);
     };
   };
 }

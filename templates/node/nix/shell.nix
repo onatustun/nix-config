@@ -12,7 +12,7 @@
 
       packages = with pkgs;
         [
-          prettierd
+          prettier
           tailwindcss
           tailwindcss-language-server
           typescript-language-server
