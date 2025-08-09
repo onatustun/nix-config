@@ -6,14 +6,12 @@
   isDarwin,
   ...
 }: let
-  inherit (lib) enabled mkIf;
+  inherit (lib) enabled;
 in {
-  # environment = mkIf (!isDarwin) {
-  #   sessionVariables = {
-  #     EDITOR = "hx";
-  #     VISUAL = "hx";
-  #   };
-  # };
+  environment.sessionVariables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
+  };
 
   home-manager.sharedModules = [
     {

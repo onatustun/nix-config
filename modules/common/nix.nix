@@ -43,6 +43,8 @@
       trusted-users = [
         "@admin"
         "@build"
+        "@onat"
+        "onat"
         "root"
         "@wheel"
       ];
