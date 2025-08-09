@@ -19,11 +19,11 @@
         ]
         ++ (with inputs'; [
           alejandra.packages.default
-          deploy-rs.packages.default
+          # deploy-rs.packages.default
           comma.packages.default
           nh.packages.default
-          nixd.packages.default
-          nixos-anywhere.packages.default
+          # nixd.packages.default
+          # nixos-anywhere.packages.default
         ]);
     };
   };

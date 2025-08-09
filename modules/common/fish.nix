@@ -11,24 +11,23 @@
 in {
   programs.fish = enabled;
 
-  users = mkIf (!isDarwin) {
-    defaultUserShell = pkgs.fish;
+  # users = mkIf (!isDarwin) {
+  #   defaultUserShell = pkgs.fish;
 
-    users.${username} = {
-      shell = pkgs.fish;
-      useDefaultShell = true;
-    };
+  #   users.${username} = {
+  #     shell = pkgs.fish;
+  #     useDefaultShell = true;
+  #   };
+  # };
+
+  environment = {
+    systemPackages = with pkgs; [
+      carapace
+      inshellisense
+      zsh
+    ];
   };
-
-  environment =
-    {
-      systemPackages = with pkgs; [
-        carapace
-        inshellisense
-        zsh
-      ];
-    }
-    // mkIf (!isDarwin) {sessionVariables.SHELL = "fish";};
+  # // mkIf (!isDarwin) {sessionVariables.SHELL = "fish";};
 
   home-manager.sharedModules = [
     {

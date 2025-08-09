@@ -8,19 +8,19 @@
 }: let
   inherit (lib) enabled mkIf;
 in {
-  environment = mkIf (!isDarwin) {
-    sessionVariables = {
-      EDITOR = "hx";
-      VISUAL = "hx";
-    };
-  };
+  # environment = mkIf (!isDarwin) {
+  #   sessionVariables = {
+  #     EDITOR = "hx";
+  #     VISUAL = "hx";
+  #   };
+  # };
 
   home-manager.sharedModules = [
     {
       programs.helix = enabled {
         package =
           if isDarwin
-          then null
+          then pkgs.helix
           else inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
         defaultEditor = true;
@@ -134,7 +134,7 @@ in {
 
           language-server = {
             uwu-colors.command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
-            nixd.command = "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
+            # nixd.command = "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
           };
         };
 
