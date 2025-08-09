@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkDarwin;
 in {
-  darwinConfigurations = {
+  flake.darwinConfigurations = {
     mini = mkDarwin {
       hostName = "mini";
       system = "aarch64-darwin";

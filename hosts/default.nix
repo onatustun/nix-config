@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) collectNix;
 in {
-  flake.imports =
+  imports =
     collectNix ./deploy
     ++ [
       ./darwin
