@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake.deploy.nodes.server = {
+  deploy.nodes.server = {
     hostname = "23.88.34.248";
 
     profiles.system = {

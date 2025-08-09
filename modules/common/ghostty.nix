@@ -1,20 +1,23 @@
 {
   lib,
+  isDarwin,
   inputs,
   pkgs,
   ...
 }: let
   inherit (lib) enabled;
 in {
-  environment.systemPackages = [inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default];
-
   home-manager.sharedModules = [
     {
       programs.ghostty = enabled {
-        package = inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package =
+          if isDarwin
+          then null
+          else inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
         enableFishIntegration = true;
-        installBatSyntax = true;
-        installVimSyntax = true;
+        installBatSyntax = !isDarwin;
+        installVimSyntax = !isDarwin;
 
         settings = {
           bold-is-bright = true;

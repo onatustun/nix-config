@@ -41,6 +41,7 @@ inputs: self: super: let
     inputModules ? [],
     modules ? [],
     ignore ? [],
+    extraModules ? [],
   }: let
     cfg = systems.${type} or (throw "Unknown type: ${type}");
     systemBuilder = cfg.builder;
@@ -83,7 +84,7 @@ inputs: self: super: let
       inputs
       // hostTypes
       // {
-        inherit inputs system systemBuilder hostName username homeDir homeVer;
+        inherit inputs system systemBuilder hostName username homeDir homeVer type;
         lib = self;
       };
 
@@ -92,7 +93,10 @@ inputs: self: super: let
         {
           nixpkgs = {
             hostPlatform = mkDefault system;
-            overlays = overlays ++ optional (packages != []) packageOverlay;
+
+            overlays =
+              overlays
+              ++ optional (packages != []) packageOverlay;
           };
         }
 
@@ -103,7 +107,13 @@ inputs: self: super: let
     homeManagerModule = optionals (homeVer != null) [
       {
         home-manager = {
-          users.${username}.home.stateVersion = homeVer;
+          sharedModules = [{programs.home-manager.enable = true;}];
+
+          users.${username}.home = {
+            homeDirectory = homeDir;
+            stateVersion = homeVer;
+          };
+
           useUserPackages = true;
           backupFileExtension = "backup";
           extraSpecialArgs = specialArgs;
@@ -117,7 +127,8 @@ inputs: self: super: let
       modules =
         baseModules
         ++ homeManagerModule
-        ++ inputModules;
+        ++ inputModules
+        ++ extraModules;
     };
 in {
   mkNixos = mkSystem "nixos";

@@ -1,29 +1,31 @@
 {
-  lib,
+  # lib,
   pkgs,
   inputs,
   ...
-}: let
-  inherit (lib) enabled;
-in {
-  programs = {
-    nix-index-database.comma = enabled;
-    nix-index = enabled {enableFishIntegration = true;};
-  };
+}:
+#   let
+#   inherit (lib) enabled;
+# in
+{
+  # programs = {
+  #   nix-index-database.comma = enabled;
+  #   nix-index = enabled {enableFishIntegration = true;};
+  # };
 
   environment.systemPackages = with pkgs;
     [
       bottom
       fd
-      ffmpeg-full
+      # ffmpeg-full
       fzf
       git
-      home-manager
+      # home-manager
       killall
       less
       nixos-rebuild
-      nix-search-cli
-      nix-search-tv
+      # nix-search-cli
+      # nix-search-tv
       prettyping
       ripgrep
       scdl
@@ -36,10 +38,10 @@ in {
     ++ (with inputs; [
       alejandra.packages.${pkgs.stdenv.hostPlatform.system}.default
       comma.packages.${pkgs.stdenv.hostPlatform.system}.default
-      deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.default
       nh.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nixd.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # nixd.packages.${pkgs.stdenv.hostPlatform.system}.default
       nix-melt.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nixos-anywhere.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # nixos-anywhere.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]);
 }

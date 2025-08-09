@@ -3,19 +3,26 @@
   inputs,
   pkgs,
   config,
+  isDarwin,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled mkIf;
 in {
-  environment.sessionVariables = {
-    EDITOR = "hx";
-    VISUAL = "hx";
+  environment = mkIf (!isDarwin) {
+    sessionVariables = {
+      EDITOR = "hx";
+      VISUAL = "hx";
+    };
   };
 
   home-manager.sharedModules = [
     {
       programs.helix = enabled {
-        package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package =
+          if isDarwin
+          then null
+          else inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
         defaultEditor = true;
 
         languages = {

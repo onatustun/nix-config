@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkNixos;
 in {
-  flake.nixosConfigurations = {
+  nixosConfigurations = {
     desktop = mkNixos {
       hostName = "desktop";
       system = "x86_64-linux";
