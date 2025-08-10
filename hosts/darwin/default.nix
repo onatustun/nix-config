@@ -36,6 +36,8 @@ in {
         "common/starship"
         "common/stylix"
         "common/tmux"
+        "darwin/homebrew"
+        "darwin/menu"
       ];
 
       extraModules = [
