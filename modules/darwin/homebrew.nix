@@ -21,8 +21,9 @@ in {
     user = "${username}";
 
     taps = {
-      "homebrew/homebrew-core" = inputs.homebrew-core;
+      "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
       "homebrew/homebrew-cask" = inputs.homebrew-cask;
+      "homebrew/homebrew-core" = inputs.homebrew-core;
     };
 
     autoMigrate = true;
