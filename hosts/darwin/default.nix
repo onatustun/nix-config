@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkDarwin;
+  inherit (lib) mkDarwin disabled;
 in {
   flake.darwinConfigurations = {
     mini = mkDarwin {
@@ -19,12 +19,9 @@ in {
         inputs.stylix.darwinModules.stylix
       ];
 
-      overlays = [inputs.nur.overlays.default];
-
       modules = [
         "common"
-        "darwin/homebrew"
-        "darwin/menu"
+        "darwin"
       ];
 
       ignore = [
@@ -32,9 +29,7 @@ in {
         "zen"
       ];
 
-      extraModules = [
-        {nix.enable = false;}
-      ];
+      extraModules = [{nix = disabled;}];
     };
   };
 }

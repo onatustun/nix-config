@@ -1,15 +1,6 @@
-{
-  lib,
-  # pkgs,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib) enabled;
 in {
-  # services = {
-  #   gnome.gnome-keyring = enabled;
-  #   dbus.packages = [pkgs.gnome-keyring];
-  # };
-
   home-manager.sharedModules = [
     {
       programs.git = enabled {

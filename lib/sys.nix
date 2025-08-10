@@ -1,7 +1,7 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
   inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals;
-  inherit (self) collectNix;
+  inherit (self) collectNix enabled;
   inherit (builtins) elem head elemAt;
   inherit (strings) hasInfix;
 
@@ -113,7 +113,7 @@ inputs: self: super: let
         home-manager = {
           sharedModules = [
             {
-              programs.home-manager.enable = true;
+              programs.home-manager = enabled;
               home.sessionVariables.FLAKE = "${homeDir}/nix";
             }
           ];
