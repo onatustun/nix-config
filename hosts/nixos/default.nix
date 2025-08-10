@@ -88,7 +88,6 @@ in {
       ];
 
       ignore = [
-        "apps"
         "discord"
         "ghostty"
         "zen"
@@ -118,7 +117,6 @@ in {
       ];
 
       ignore = [
-        "apps"
         "discord"
         "ghostty"
         "zen"

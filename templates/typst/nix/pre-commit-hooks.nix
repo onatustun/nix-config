@@ -6,6 +6,7 @@
       check.enable = true;
 
       settings = {
+        package = inputs'.pre-commit-hooks.packages.default;
         excludes = ["flake.lock"];
 
         hooks = {
