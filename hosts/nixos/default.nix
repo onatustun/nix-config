@@ -10,6 +10,7 @@ in {
       hostName = "desktop";
       system = "x86_64-linux";
       username = "onat";
+      stateVer = "24.11";
       homeVer = "24.11";
       packages = ["bibata-hyprcursor"];
 
@@ -38,6 +39,7 @@ in {
       hostName = "laptop";
       system = "x86_64-linux";
       username = "onat";
+      stateVer = "24.11";
       homeVer = "24.11";
       packages = ["bibata-hyprcursor"];
 
@@ -65,6 +67,7 @@ in {
       hostName = "server";
       system = "x86_64-linux";
       username = "onat";
+      stateVer = "24.11";
       homeVer = "24.11";
 
       inputModules = [
@@ -96,6 +99,7 @@ in {
       hostName = "wsl";
       system = "x86_64-linux";
       username = "onat";
+      stateVer = "24.11";
       homeVer = "24.11";
 
       inputModules = [

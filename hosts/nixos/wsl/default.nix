@@ -35,6 +35,4 @@ in {
     wslu
     wsl-vpnkit
   ];
-
-  system.stateVersion = "24.11";
 }

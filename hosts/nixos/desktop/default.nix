@@ -19,6 +19,4 @@ in {
     "video"
     "wheel"
   ];
-
-  system.stateVersion = "24.11";
 }

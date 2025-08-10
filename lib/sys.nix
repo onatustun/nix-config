@@ -35,6 +35,7 @@ inputs: self: super: let
     hostName,
     system ? systems.${type}.platform,
     username ? "onat",
+    stateVer ? null,
     homeVer ? null,
     packages ? [],
     overlays ? [],
@@ -91,6 +92,9 @@ inputs: self: super: let
     baseModules =
       [
         {
+          users.users.${username}.home = homeDir;
+          system.stateVersion = stateVer;
+
           nixpkgs = {
             hostPlatform = mkDefault system;
 

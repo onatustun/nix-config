@@ -2,7 +2,7 @@
   inherit (lib) collectNix;
 in {
   imports =
-    collectNix ./deploy
+    collectNix ./nodes
     ++ [
       ./darwin
       ./nixos
