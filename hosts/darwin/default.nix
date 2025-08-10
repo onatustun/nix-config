@@ -19,13 +19,18 @@ in {
       ];
 
       modules = [
+        "common/archivers"
+        "common/bat"
         "common/cli"
         "common/direnv"
         "common/eza"
         "common/fastfetch"
         "common/fish"
         "common/ghostty"
+        "common/git"
         "common/helix"
+        "common/man"
+        "common/nh"
         "common/nixpkgs"
         "common/starship"
         "common/stylix"

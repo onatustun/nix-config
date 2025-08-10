@@ -8,13 +8,13 @@
 }: let
   inherit (lib) enabled;
 in {
-  environment.sessionVariables = {
-    EDITOR = "hx";
-    VISUAL = "hx";
-  };
-
   home-manager.sharedModules = [
     {
+      home.sessionVariables = {
+        EDITOR = "hx";
+        VISUAL = "hx";
+      };
+
       programs.helix = enabled {
         package =
           if isDarwin
@@ -132,7 +132,11 @@ in {
 
           language-server = {
             uwu-colors.command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
-            # nixd.command = "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
+
+            nixd.command =
+              if isDarwin
+              then "${pkgs.nixd}/bin/nixd"
+              else "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
           };
         };
 
@@ -159,7 +163,7 @@ in {
             color-modes = true;
             insert-final-newline = false;
             end-of-line-diagnostics = "warning";
-            clipboard-provider = "wayland";
+            clipboard-provider = "pasteboard";
             lsp.display-inlay-hints = true;
             cursor-shape.insert = "bar";
             file-picker.hidden = false;

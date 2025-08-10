@@ -9,18 +9,10 @@
   inherit (lib) enabled optionalString;
 in {
   programs.fish = enabled;
-
-  users = {
-    defaultUserShell = pkgs.fish;
-
-    users.${username} = {
-      shell = pkgs.fish;
-      useDefaultShell = true;
-    };
-  };
+  users.users.${username}.shell = pkgs.fish;
 
   environment = {
-    sessionVariables.SHELL = "fish";
+    shells = [pkgs.fish];
 
     systemPackages = with pkgs; [
       carapace
@@ -31,8 +23,9 @@ in {
 
   home-manager.sharedModules = [
     {
+      home.sessionVariables.SHELL = "fish";
+
       programs = {
-        command-not-found = enabled;
         carapace = enabled {enableFishIntegration = true;};
 
         zoxide = enabled {
