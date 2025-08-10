@@ -14,9 +14,9 @@
         [
           git
           home-manager
+          nixd
           nixos-rebuild
           vim
-          nixd
         ]
         ++ (with inputs'; [
           alejandra.packages.default

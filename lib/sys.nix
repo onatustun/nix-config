@@ -84,7 +84,7 @@ inputs: self: super: let
       inputs
       // hostTypes
       // {
-        inherit inputs system systemBuilder hostName username homeDir homeVer type;
+        inherit inputs system type systemBuilder hostName username homeDir homeVer;
         lib = self;
       };
 
@@ -107,7 +107,12 @@ inputs: self: super: let
     homeManagerModule = optionals (homeVer != null) [
       {
         home-manager = {
-          sharedModules = [{programs.home-manager.enable = true;}];
+          sharedModules = [
+            {
+              programs.home-manager.enable = true;
+              home.sessionVariables.FLAKE = "${homeDir}/nix";
+            }
+          ];
 
           users.${username}.home = {
             homeDirectory = homeDir;

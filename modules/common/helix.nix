@@ -163,7 +163,10 @@ in {
             color-modes = true;
             insert-final-newline = false;
             end-of-line-diagnostics = "warning";
-            clipboard-provider = "pasteboard";
+            clipboard-provider =
+              if isDarwin
+              then "pasteboard"
+              else "wayland";
             lsp.display-inlay-hints = true;
             cursor-shape.insert = "bar";
             file-picker.hidden = false;

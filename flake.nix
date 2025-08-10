@@ -44,8 +44,6 @@
     trusted-users = [
       "@admin"
       "@build"
-      "@onat"
-      "onat"
       "root"
       "@wheel"
     ];
@@ -198,6 +196,18 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
       };
+    };
+
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
     };
 
     stylix = {
