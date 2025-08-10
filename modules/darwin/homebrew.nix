@@ -7,6 +7,7 @@
   inherit (lib) enabled;
 in {
   imports = [inputs.nix-homebrew.darwinModules.nix-homebrew];
+  system.primaryUser = "${username}";
 
   homebrew = enabled {
     casks = [
@@ -16,7 +17,6 @@ in {
   };
 
   nix-homebrew = enabled {
-    enableRosetta = true;
     user = "${username}";
 
     taps = {

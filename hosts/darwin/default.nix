@@ -19,6 +19,8 @@ in {
         inputs.stylix.darwinModules.stylix
       ];
 
+      overlays = [inputs.nur.overlays.default];
+
       modules = [
         "common"
         "darwin/homebrew"
@@ -26,10 +28,7 @@ in {
       ];
 
       ignore = [
-        "apps"
         "discord"
-        "fonts"
-        "xdg"
         "zen"
       ];
 
