@@ -1,9 +1,9 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
-  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals;
+  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any;
   inherit (self) collectNix enabled;
-  inherit (builtins) elem head elemAt;
-  inherit (strings) hasInfix;
+  inherit (builtins) elemAt baseNameOf toString pathExists length;
+  inherit (strings) hasInfix hasSuffix hasPrefix removePrefix removeSuffix;
 
   systems = {
     nixos = {
@@ -64,22 +64,69 @@ inputs: self: super: let
       genAttrs packages (name:
         final.callPackage (inputs.self + /pkgs/${name}.nix) {});
 
-    filterIgnored = files:
-      filter (file:
-        !(elem (baseNameOf (toString file)) (map (name: "${name}.nix") ignore)))
-      files;
+    modulesRoot = inputs.self + "/modules";
 
-    processModules = modules:
-      flatten (map (module:
-        if hasInfix "/" module
-        then let
-          parts = splitString "/" module;
-        in
-          inputs.self + /modules/${head parts}/${elemAt parts 1}.nix
-        else
-          collectNix (inputs.self + /modules/${module})
-          |> filterIgnored)
-      modules);
+    relPath = file:
+      toString file
+      |> removePrefix "${toString modulesRoot}/";
+
+    normalizeSpec = s:
+      if hasSuffix "/" s
+      then removeSuffix "/" s
+      else s;
+
+    mkIgnorePredicate = spec: let
+      s =
+        toString spec
+        |> normalizeSpec;
+    in
+      if hasSuffix ".nix" s
+      then let
+        parts = splitString "/" s;
+        fname = elemAt parts (length parts - 1);
+
+        dirPrefix =
+          if hasInfix "/" s
+          then removeSuffix "/${fname}" s
+          else null;
+      in
+        file:
+          baseNameOf file == fname && (dirPrefix == null || hasPrefix (dirPrefix + "/") (relPath file))
+      else
+        file:
+          hasPrefix (s + "/") (relPath file);
+
+    filterIgnored = files:
+      ignore
+      |> map mkIgnorePredicate
+      |> (preds:
+        files
+        |> filter (file:
+          !(any (p:
+            p file)
+          preds)));
+
+    resolveModuleSpec = spec: let
+      s =
+        toString spec
+        |> normalizeSpec;
+      p = modulesRoot + "/${s}";
+    in
+      if hasSuffix ".nix" s
+      then
+        if pathExists p
+        then [p]
+        else throw "Module file not found: ${s}"
+      else if pathExists p
+      then collectNix p
+      else throw "Module directory not found: ${s}";
+
+    processModules = moduleSpecs:
+      moduleSpecs
+      |> map resolveModuleSpec
+      |> flatten
+      |> filterIgnored
+      |> unique;
 
     specialArgs =
       inputs

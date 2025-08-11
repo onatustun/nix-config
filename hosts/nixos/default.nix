@@ -29,9 +29,9 @@ in {
       ];
 
       ignore = [
-        "niri"
-        "swayidle"
-        "xwayland"
+        "niri.nix"
+        "swayidle.nix"
+        "xwayland.nix"
       ];
     };
 
@@ -60,7 +60,7 @@ in {
         "common"
       ];
 
-      ignore = ["discord"];
+      ignore = ["discord.nix"];
     };
 
     server = mkNixos {
@@ -80,17 +80,17 @@ in {
 
       modules = [
         "common"
-        "nixos/boot"
-        "nixos/clipboard"
-        "nixos/locale"
-        "nixos/networking"
-        "nixos/user"
+        "nixos/boot.nix"
+        "nixos/clipboard.nix"
+        "nixos/locale.nix"
+        "nixos/networking.nix"
+        "nixos/user.nix"
       ];
 
       ignore = [
-        "discord"
-        "ghostty"
-        "zen"
+        "discord.nix"
+        "ghostty.nix"
+        "zen.nix"
       ];
     };
 
@@ -110,16 +110,16 @@ in {
 
       modules = [
         "common"
-        "nixos/clipboard"
-        "nixos/locale"
-        "nixos/networking"
-        "nixos/user"
+        "nixos/clipboard.nix"
+        "nixos/locale.nix"
+        "nixos/networking.nix"
+        "nixos/user.nix"
       ];
 
       ignore = [
-        "discord"
-        "ghostty"
-        "zen"
+        "discord.nix"
+        "ghostty.nix"
+        "zen.nix"
       ];
     };
   };

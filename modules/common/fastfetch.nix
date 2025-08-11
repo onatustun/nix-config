@@ -1,11 +1,21 @@
-{lib, ...}: let
+{
+  lib,
+  isDarwin,
+  isDroid,
+  ...
+}: let
   inherit (lib) enabled;
 in {
   home-manager.sharedModules = [
     {
       programs.fastfetch = enabled {
         settings = {
-          logo.source = "nixos";
+          logo.source =
+            if isDarwin
+            then "macos"
+            else if isDroid
+            then "android"
+            else "nixos";
 
           display.size = {
             maxPrefix = "MB";

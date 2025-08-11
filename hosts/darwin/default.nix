@@ -25,8 +25,8 @@ in {
       ];
 
       ignore = [
-        "discord"
-        "zen"
+        "discord.nix"
+        "zen.nix"
       ];
 
       extraModules = [{nix = disabled;}];
