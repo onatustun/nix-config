@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  inputs,
+  ...
+}: let
   inherit (lib) nixosGenerate';
 in {
   flake = {
@@ -8,7 +12,14 @@ in {
       username = "onat";
       stateVer = "24.11";
       format = "iso";
-      modules = ["common/system"];
+
+      inputModules = [inputs.determinate.nixosModules.default];
+
+      modules = [
+        "common/system"
+        "nixos/system/user.nix"
+      ];
+
       ignore = ["nixpkgs.nix"];
     };
   };

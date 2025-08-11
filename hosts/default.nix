@@ -5,7 +5,7 @@ in {
     collectNix ./nodes
     ++ [
       ./darwin
-      ./generators
+      ./generator
       ./nixos
     ];
 }
