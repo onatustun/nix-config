@@ -1,7 +1,7 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
-  inherit (inputs) nixosGenerate;
-  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any optionalAttrs;
+  inherit (inputs.nixos-generators) nixosGenerate;
+  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any;
   inherit (self) collectNix enabled;
   inherit (builtins) elemAt baseNameOf toString pathExists length;
   inherit (strings) hasInfix hasSuffix hasPrefix removePrefix removeSuffix;
@@ -192,20 +192,26 @@ inputs: self: super: let
       }
     ];
   in
-    cfg.builder {
-      inherit specialArgs system;
+    cfg.builder (
+      (
+        if format != null
+        then {format = "${format}";}
+        else {}
+      )
+      // {
+        inherit specialArgs system;
 
-      modules =
-        baseModules
-        ++ homeManagerModule
-        ++ inputModules
-        ++ extraModules;
-    }
-    // optionalAttrs (format != null) {format = "${format}";};
+        modules =
+          baseModules
+          ++ homeManagerModule
+          ++ inputModules
+          ++ extraModules;
+      }
+    );
 in {
   nixosSystem' = mkSystem "nixos";
   darwinSystem' = mkSystem "darwin";
   makeSystemConfig' = mkSystem "linux";
   nixOnDroidConfiguration' = mkSystem "droid";
-  nixosGenerate' = mkSystem "generate";
+  nixosGenerate' = mkSystem "generator";
 }
