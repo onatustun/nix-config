@@ -169,6 +169,15 @@
       };
     };
 
+    nix-direnv = {
+      url = "github:nix-community/nix-direnv";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
