@@ -19,8 +19,6 @@ in {
         "common/system"
         "nixos/system/user.nix"
       ];
-
-      ignore = ["nixpkgs.nix"];
     };
   };
 }

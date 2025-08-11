@@ -177,6 +177,12 @@ inputs: self: super: let
             {
               programs.home-manager = enabled;
               home.sessionVariables.FLAKE = "${homeDir}/nix";
+
+              nixpkgs.config = {
+                allowUnfree = true;
+                allowBroken = true;
+                allowUnfreePredicate = _: true;
+              };
             }
           ];
 
