@@ -3,10 +3,10 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkDarwin disabled;
+  inherit (lib) darwinSystem' disabled;
 in {
   flake.darwinConfigurations = {
-    mini = mkDarwin {
+    mini = darwinSystem' {
       hostName = "mini";
       system = "aarch64-darwin";
       username = "onat";

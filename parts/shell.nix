@@ -23,6 +23,7 @@
           comma.packages.default
           nh.packages.default
           nixos-anywhere.packages.default
+          nixos-generators.packages.default
         ]);
     };
   };

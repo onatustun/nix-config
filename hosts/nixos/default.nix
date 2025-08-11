@@ -3,10 +3,10 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkNixos;
+  inherit (lib) nixosSystem';
 in {
   flake.nixosConfigurations = {
-    desktop = mkNixos {
+    desktop = nixosSystem' {
       hostName = "desktop";
       system = "x86_64-linux";
       username = "onat";
@@ -35,7 +35,7 @@ in {
       ];
     };
 
-    laptop = mkNixos {
+    laptop = nixosSystem' {
       hostName = "laptop";
       system = "x86_64-linux";
       username = "onat";
@@ -63,7 +63,7 @@ in {
       ignore = ["discord.nix"];
     };
 
-    server = mkNixos {
+    server = nixosSystem' {
       hostName = "server";
       system = "x86_64-linux";
       username = "onat";
@@ -87,7 +87,7 @@ in {
       ignore = ["common/apps"];
     };
 
-    wsl = mkNixos {
+    wsl = nixosSystem' {
       hostName = "wsl";
       system = "x86_64-linux";
       username = "onat";

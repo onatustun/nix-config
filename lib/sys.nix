@@ -1,6 +1,7 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
-  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any;
+  inherit (inputs) nixosGenerate;
+  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any optionalAttrs;
   inherit (self) collectNix enabled;
   inherit (builtins) elemAt baseNameOf toString pathExists length;
   inherit (strings) hasInfix hasSuffix hasPrefix removePrefix removeSuffix;
@@ -29,11 +30,18 @@ inputs: self: super: let
       builder = nixOnDroidConfiguration;
       homeDir = username: "/home/${username}";
     };
+
+    generator = {
+      platform = "x86_64-linux";
+      builder = nixosGenerate;
+      homeDir = username: "/home/${username}";
+    };
   };
 
   mkSystem = type: {
     hostName,
     system ? systems.${type}.platform,
+    format ? null,
     username ? "onat",
     stateVer ? null,
     homeVer ? null,
@@ -58,6 +66,7 @@ inputs: self: super: let
       isDarwin = type == "darwin";
       isLinux = type == "linux";
       isDroid = type == "droid";
+      isGenerate = type == "generate";
     };
 
     packageOverlay = final: prev:
@@ -191,10 +200,12 @@ inputs: self: super: let
         ++ homeManagerModule
         ++ inputModules
         ++ extraModules;
-    };
+    }
+    // optionalAttrs (format != null) {format = "${format}";};
 in {
-  mkNixos = mkSystem "nixos";
-  mkDarwin = mkSystem "darwin";
-  mkLinux = mkSystem "linux";
-  mkDroid = mkSystem "droid";
+  nixosSystem' = mkSystem "nixos";
+  darwinSystem' = mkSystem "darwin";
+  makeSystemConfig' = mkSystem "linux";
+  nixOnDroidConfiguration' = mkSystem "droid";
+  nixosGenerate' = mkSystem "generate";
 }
