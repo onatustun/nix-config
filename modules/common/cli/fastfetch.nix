@@ -1,7 +1,9 @@
 {
   lib,
   isDarwin,
+  isLinux,
   isDroid,
+  isWsl,
   ...
 }: let
   inherit (lib) enabled;
@@ -13,8 +15,12 @@ in {
           logo.source =
             if isDarwin
             then "macos"
+            else if isLinux
+            then "linux"
             else if isDroid
             then "android"
+            else if isWsl
+            then "window 11"
             else "nixos";
 
           display.size = {
