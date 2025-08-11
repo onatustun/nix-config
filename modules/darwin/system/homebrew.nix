@@ -12,7 +12,6 @@ in {
   homebrew = enabled {
     casks = [
       "ghostty"
-      "karabiner-elements"
       "orion"
     ];
   };
