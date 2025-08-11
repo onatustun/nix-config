@@ -8,13 +8,7 @@
 in {
   imports = [inputs.nix-homebrew.darwinModules.nix-homebrew];
   system.primaryUser = "${username}";
-
-  homebrew = enabled {
-    casks = [
-      "ghostty"
-      "orion"
-    ];
-  };
+  homebrew = enabled;
 
   nix-homebrew = enabled {
     user = "${username}";
