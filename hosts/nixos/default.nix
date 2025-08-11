@@ -80,18 +80,11 @@ in {
 
       modules = [
         "common"
-        "nixos/boot.nix"
-        "nixos/clipboard.nix"
-        "nixos/locale.nix"
-        "nixos/networking.nix"
-        "nixos/user.nix"
+        "nixos/cli/clipboard.nix"
+        "nixos/system"
       ];
 
-      ignore = [
-        "discord.nix"
-        "ghostty.nix"
-        "zen.nix"
-      ];
+      ignore = ["common/apps"];
     };
 
     wsl = mkNixos {
@@ -110,16 +103,14 @@ in {
 
       modules = [
         "common"
-        "nixos/clipboard.nix"
-        "nixos/locale.nix"
-        "nixos/networking.nix"
-        "nixos/user.nix"
+        "nixos/cli/clipboard.nix"
+        "nixos/system"
       ];
 
       ignore = [
-        "discord.nix"
-        "ghostty.nix"
-        "zen.nix"
+        "common/apps"
+        "boot.nix"
+        "xdg.nix"
       ];
     };
   };

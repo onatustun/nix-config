@@ -7,6 +7,8 @@
 }: let
   inherit (lib) enabled;
 in {
+  environment.systemPackages = [inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default];
+
   home-manager.sharedModules = [
     {
       programs.nh = enabled {

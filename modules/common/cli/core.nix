@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    appimage-run
-    dconf
-    geoclue2
-    polkit
-    zmkBATx
+    bottom
+    git
+    killall
+    less
+    vim
   ];
 }
