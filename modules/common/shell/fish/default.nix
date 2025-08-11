@@ -3,7 +3,6 @@
   pkgs,
   username,
   isWsl,
-  homeDir,
   ...
 }: let
   inherit (lib) enabled optionalString;
@@ -100,54 +99,6 @@ in {
             sl = "eza -al";
             tree = "eza -T";
           };
-
-          functions = {
-            cpp = "cp -prv $argv ..";
-            flakeinit = "nix flake init -t '${homeDir}/nix#'\$argv";
-            mvp = "mv -v $argv ..";
-            rebuild = "nh os switch -H $argv --accept-flake-config";
-            shot = "grim -g \"$(slurp)\" ${homeDir}/Pictures/$argv.png";
-
-            toggle-editor = ''
-              if jobs -q
-                sleep 0.1
-                fg 2>/dev/null
-              else
-                hx .
-              end
-            '';
-          };
-
-          plugins = with pkgs.fishPlugins; [
-            {
-              name = "autopair";
-              src = autopair.src;
-            }
-            {
-              name = "done";
-              src = done.src;
-            }
-            {
-              name = "fzf-fish";
-              src = fzf-fish.src;
-            }
-            {
-              name = "plugin-git";
-              src = plugin-git.src;
-            }
-            {
-              name = "plugin-sudope";
-              src = plugin-sudope.src;
-            }
-            {
-              name = "puffer";
-              src = puffer.src;
-            }
-            {
-              name = "sponge";
-              src = sponge.src;
-            }
-          ];
         };
       };
     }
