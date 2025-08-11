@@ -105,6 +105,7 @@ in {
         "common"
         "nixos/cli/clipboard.nix"
         "nixos/system"
+        "nixos/ui"
       ];
 
       ignore = [
