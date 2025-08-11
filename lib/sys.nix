@@ -86,15 +86,21 @@ inputs: self: super: let
         fname = elemAt parts (length parts - 1);
 
         dirPrefix =
-          if hasInfix "/" s
+          if length parts > 1
           then removeSuffix "/${fname}" s
           else null;
       in
         file:
           baseNameOf file == fname && (dirPrefix == null || hasPrefix (dirPrefix + "/") (relPath file))
-      else
-        file:
-          hasPrefix (s + "/") (relPath file);
+      else let
+        hasSlash = hasInfix "/" s;
+      in
+        file: let
+          rp = relPath file;
+        in
+          if hasSlash
+          then hasPrefix (s + "/") rp
+          else hasPrefix (s + "/") rp || hasInfix ("/" + s + "/") rp;
 
     filterIgnored = files:
       ignore
