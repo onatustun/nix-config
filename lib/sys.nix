@@ -1,5 +1,5 @@
 inputs: self: super: let
-  inherit (super) nixosSystem darwinSystem makeSystemConfig nixOnDroidConfiguration;
+  inherit (super) nixosSystem darwinSystem makeSystemConfig;
   inherit (inputs.nixos-generators) nixosGenerate;
   inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any;
   inherit (self) collectNix enabled;
@@ -22,12 +22,6 @@ inputs: self: super: let
     linux = {
       platform = "x86_64-linux";
       builder = makeSystemConfig;
-      homeDir = username: "/home/${username}";
-    };
-
-    droid = {
-      platform = "aarch64-linux";
-      builder = nixOnDroidConfiguration;
       homeDir = username: "/home/${username}";
     };
 
@@ -65,7 +59,6 @@ inputs: self: super: let
       isNixos = type == "nixos";
       isDarwin = type == "darwin";
       isLinux = type == "linux";
-      isDroid = type == "droid";
       isGenerate = type == "generate";
     };
 
@@ -218,6 +211,5 @@ in {
   nixosSystem' = mkSystem "nixos";
   darwinSystem' = mkSystem "darwin";
   makeSystemConfig' = mkSystem "linux";
-  nixOnDroidConfiguration' = mkSystem "droid";
   nixosGenerate' = mkSystem "generator";
 }

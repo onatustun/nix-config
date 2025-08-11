@@ -2,7 +2,6 @@
   lib,
   isDarwin,
   isLinux,
-  isDroid,
   isWsl,
   ...
 }: let
@@ -17,8 +16,6 @@ in {
             then "macos"
             else if isLinux
             then "linux"
-            else if isDroid
-            then "android"
             else if isWsl
             then "window 11"
             else "nixos";
