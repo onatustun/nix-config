@@ -1,7 +1,13 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  ...
+}: {
   imports = [inputs.pre-commit-hooks.flakeModule];
 
   perSystem = {inputs', ...}: {
+    checks.pre-commit = config.pre-commit-check;
+
     pre-commit = {
       check.enable = true;
 
