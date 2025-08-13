@@ -15,11 +15,11 @@ in {
           then null
           else inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-        enableFishIntegration = true;
         installBatSyntax = !isDarwin;
         installVimSyntax = !isDarwin;
 
         settings = {
+          command = "nu";
           bold-is-bright = true;
           confirm-close-surface = false;
           gtk-titlebar = false;
