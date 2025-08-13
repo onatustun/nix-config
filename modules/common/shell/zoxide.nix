@@ -3,10 +3,9 @@
 in {
   home-manager.sharedModules = [
     {
-      programs.eza = enabled {
-        colors = "auto";
-        git = true;
-        icons = "auto";
+      programs.zoxide = enabled {
+        enableNushellIntegration = true;
+        options = ["--cmd cd"];
       };
     }
   ];

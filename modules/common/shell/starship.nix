@@ -4,9 +4,7 @@ in {
   home-manager.sharedModules = [
     {
       programs.starship = enabled {
-        enableFishIntegration = true;
-        enableInteractive = true;
-        enableTransience = true;
+        enableNushellIntegration = true;
 
         settings = {
           add_newline = false;
