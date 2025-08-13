@@ -11,3 +11,25 @@ $env.config = {
   use_ansi_coloring: true
   use_kitty_protocol: true
 }
+
+def toggle-editor [] {
+  if ((job list) | length) > 0 {
+    sleep 100ms
+    job unfreeze
+  } else {
+    hx .
+  }
+}
+
+$env.config.keybindings = [
+  {
+    name: toggle_editor
+    modifier: control
+    keycode: char_z
+    mode: [emacs, vi_insert, vi_normal]
+    event: {
+      send: executehostcommand
+      cmd: "toggle-editor"
+    }
+  }
+]

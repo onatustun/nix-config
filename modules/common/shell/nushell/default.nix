@@ -77,6 +77,8 @@ in {
 
         extraConfig =
           readFile ./extraConfig.nu
+          + "\n"
+          + "\n"
           + ''
             source "${homeDir}/.config/nushell/carapace.nu"
           '';

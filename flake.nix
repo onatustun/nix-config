@@ -321,6 +321,7 @@
       inherit inputs;
       specialArgs = {inherit lib;};
     } {
+      debug = true;
       systems = import systems;
 
       imports =
