@@ -9,27 +9,13 @@
   inherit (builtins) readFile;
 in {
   users.users.${username}.shell = pkgs.nushell;
-
-  environment = {
-    shells = [pkgs.nushell];
-
-    systemPackages = with pkgs; [
-      nufmt
-      nushell
-    ];
-  };
+  environment.shells = [pkgs.nushell];
 
   home-manager.sharedModules = [
     {
       home.sessionVariables.SHELL = "${pkgs.nushell}/bin/nu";
 
       programs.nushell = enabled {
-        plugins = with pkgs.nushellPlugins; [
-          gstat
-          polars
-          query
-        ];
-
         shellAliases = {
           c = "clear";
           cp = "cp -prv";
@@ -60,28 +46,15 @@ in {
           zi = "cdi";
         };
 
-        environmentVariables = {
-          PROMPT_INDICATOR_VI_INSERT = "";
-          PROMPT_INDICATOR_VI_NORMAL = "";
-          PROMPT_COMMAND = "";
-          PROMPT_COMMAND_RIGHT = "";
-          NIXPKGS_ALLOW_UNFREE = "1";
-          NIXPKGS_ALLOW_INSECURE = "1";
-          SHELL = "${pkgs.nushell}/bin/nu";
-          EDITOR = "hx";
-          VISUAL = "hx";
-          CARAPACE_BRIDGES = "inshellisense,carapace,zsh,fish,bash";
-        };
+        extraEnv = ''
+          ${readFile ./extraEnv.nu}
+        '';
 
-        extraEnv = "$env.CARAPACE_BRIDGES = 'inshellisense,carapace,zsh,fish,bash'";
+        extraConfig = ''
+          ${readFile ./extraConfig.nu}
 
-        extraConfig =
-          readFile ./extraConfig.nu
-          + "\n"
-          + "\n"
-          + ''
-            source "${homeDir}/.config/nushell/carapace.nu"
-          '';
+          source "${homeDir}/.config/nushell/carapace.nu"
+        '';
       };
     }
   ];
