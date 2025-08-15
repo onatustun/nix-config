@@ -11,7 +11,7 @@
 
   scripts = {
     sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
-    github = writeShellScriptBin "github" (readFile (self + "/scripts/github.nu"));
+    github = writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
   };
 
   inherit (scripts) sessionizer github;
