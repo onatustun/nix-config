@@ -2,10 +2,10 @@
   lib,
   username,
   pkgs,
-  homeDir,
+  isWsl,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled optionalString;
   inherit (builtins) readFile;
 in {
   users.users.${username}.shell = pkgs.nushell;
@@ -53,7 +53,31 @@ in {
         extraConfig = ''
           ${readFile ./extraConfig.nu}
 
-          source "${homeDir}/.config/nushell/carapace.nu"
+          if (
+            $nu.is-interactive
+            and (which tmux | length) > 0
+            and (($env.TMUX? | default "" | str length) == 0)
+          ) {
+            ${optionalString isWsl "cd ~"}
+
+            let session = "${username}"
+
+            tmux new-session -A -s $session
+
+            if $env.LAST_EXIT_CODE == 0 {
+              exit
+            }
+          }
+
+          ${optionalString isWsl ''
+            let-env PATH = (
+              $env.PATH
+              | split row (char PATH_SEP)
+              | append "/mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"
+              | uniq
+              | str join (char PATH_SEP)
+            )
+          ''}
         '';
       };
     }

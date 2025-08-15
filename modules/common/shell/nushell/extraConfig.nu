@@ -1,3 +1,8 @@
+$env.config.history.file_format = "sqlite"
+$env.config.history.isolation = false
+$env.config.history.max_size = 10_000_000
+$env.config.history.sync_on_enter = true
+
 $env.config.show_banner = false
 
 $env.config.edit_mode = "vi"
@@ -12,6 +17,8 @@ $env.config.completions.case_sensitive = false
 $env.config.completions.quick = true
 $env.config.completions.partial = true
 $env.config.completions.use_ls_colors = true
+$env.config.ls.use_ls_colors = true
+$env.config.ls.clickable_links = true
 
 $env.config.use_kitty_protocol = true
 
@@ -65,3 +72,5 @@ $env.config.keybindings = [
     }
   }
 ]
+
+source "~/.config/nushell/carapace.nu"
