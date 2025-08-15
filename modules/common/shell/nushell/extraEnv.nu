@@ -12,4 +12,4 @@ $env.NIXPKGS_ALLOW_UNFREE = "1";
 $env.SHELL = "nu";
 $env.EDITOR = "hx";
 $env.VISUAL = "hx";
-$env.CARAPACE_BRIDGES = "inshellisense,carapace,zsh,fish,bash";
+$env.CARAPACE_BRIDGES = "inshellisense,zsh,fish,bash";
