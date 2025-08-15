@@ -67,6 +67,7 @@
     inherit (filesystem) listFilesRecursive;
   in
     mkFlake {inherit inputs;} {
+      debug = true;
       systems = import systems;
 
       imports =

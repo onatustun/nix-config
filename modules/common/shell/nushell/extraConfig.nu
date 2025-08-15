@@ -1,50 +1,53 @@
-$env.config.history.file_format = "sqlite"
-$env.config.history.isolation = false
-$env.config.history.max_size = 10_000_000
-$env.config.history.sync_on_enter = true
+$env.config.cursor_shape = {
+  emacs: line
+  vi_insert: line
+  vi_normal: block
+}
 
 $env.config.show_banner = false
+$env.config.use_ansi_coloring = true
+$env.config.error_style = "fancy"
+$env.config.footer_mode = 25
+$env.config.float_precision = 2
+$env.config.render_right_prompt_on_last_line = false
+$env.config.datetime_format = {}
+$env.config.rm.always_trash = false
 
-$env.config.edit_mode = "vi"
+$env.config.history = {
+  file_format: sqlite
+  isolation: false
+  max_size: 1_000_000
+  sync_on_enter: true
+}
 
-$env.config.cursor_shape.emacs = "line"
-$env.config.cursor_shape.vi_insert = "line"
-$env.config.cursor_shape.vi_normal = "block"
+$env.config.completions = {
+  algorithm: substring
+  case_sensitive: false
+  partial: true
+  quick: true
+  sort: smart
+  use_ls_colors: true
+}
 
-$env.config.completions.algorithm = "substring"
-$env.config.completions.sort = "smart"
-$env.config.completions.case_sensitive = false
-$env.config.completions.quick = true
-$env.config.completions.partial = true
-$env.config.completions.use_ls_colors = true
-$env.config.ls.use_ls_colors = true
-$env.config.ls.clickable_links = true
+$env.config.ls = {
+  use_ls_colors: true
+  clickable_links: true
+}
 
 $env.config.use_kitty_protocol = true
-
-$env.config.shell_integration.osc2 = false
-$env.config.shell_integration.osc7 = true
-$env.config.shell_integration.osc8 = true
-$env.config.shell_integration.osc9_9 = false
-$env.config.shell_integration.osc133 = true
-$env.config.shell_integration.osc633 = true
-$env.config.shell_integration.reset_application_mode = true
+$env.config.shell_integration = {
+  osc2: false
+  osc7: true
+  osc8: true
+  osc9_9: false
+  osc133: true
+  osc633: true
+  reset_application_mode: true
+}
 
 $env.config.bracketed_paste = true
-
+$env.config.edit_mode = "vi"
 $env.config.buffer_editor = "hx"
-
-$env.config.use_ansi_coloring = true
-
-$env.config.error_style = "fancy"
-
-$env.config.footer_mode = 25
-
-$env.config.datetime_format = {}
-
-$env.config.render_right_prompt_on_last_line = false
-
-$env.config.float_precision = 2
 
 def toggle-editor [] {
   let hx_frozen = (
@@ -74,3 +77,12 @@ $env.config.keybindings = [
 ]
 
 source "~/.config/nushell/carapace.nu"
+
+if (
+  $nu.is-interactive
+  and (which tmux | length) > 0
+  and (($env.TMUX? | default "" | str length) == 0)
+) {
+  let session = $env.USER
+  tmux new-session -A -s $session
+}

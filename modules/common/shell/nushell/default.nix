@@ -2,10 +2,9 @@
   lib,
   username,
   pkgs,
-  isWsl,
   ...
 }: let
-  inherit (lib) enabled optionalString;
+  inherit (lib) enabled;
   inherit (builtins) readFile;
 in {
   users.users.${username}.shell = pkgs.nushell;
@@ -16,6 +15,24 @@ in {
       home.sessionVariables.SHELL = "${pkgs.nushell}/bin/nu";
 
       programs.nushell = enabled {
+        environmentVariables = {
+          SHELL = "${pkgs.nushell}/bin/nu";
+          CARAPACE_BRIDGES = "inshellisense,zsh,fish,bash";
+          EDITOR = "hx";
+          VISUAL = "hx";
+          NIXPKGS_ALLOW_UNFREE = "1";
+          PROMPT_COMMAND = "";
+          PROMPT_COMMAND_RIGHT = "";
+          PROMPT_INDICATOR_VI_INSERT = "";
+          PROMPT_INDICATOR_VI_NORMAL = "";
+          TRANSIENT_PROMPT_COMMAND = "";
+          TRANSIENT_PROMPT_COMMAND_RIGHT = "";
+          TRANSIENT_PROMPT_INDICATOR = "";
+          TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = "";
+          TRANSIENT_PROMPT_INDICATOR_VI_INSERT = "";
+          TRANSIENT_PROMPT_MULTILINE_INDICATOR = "";
+        };
+
         shellAliases = {
           c = "clear";
           cp = "cp -prv";
@@ -46,38 +63,8 @@ in {
           zi = "cdi";
         };
 
-        extraEnv = ''
-          ${readFile ./extraEnv.nu}
-        '';
-
         extraConfig = ''
           ${readFile ./extraConfig.nu}
-
-          if (
-            $nu.is-interactive
-            and (which tmux | length) > 0
-            and (($env.TMUX? | default "" | str length) == 0)
-          ) {
-            ${optionalString isWsl "cd ~"}
-
-            let session = "${username}"
-
-            tmux new-session -A -s $session
-
-            if $env.LAST_EXIT_CODE == 0 {
-              exit
-            }
-          }
-
-          ${optionalString isWsl ''
-            let-env PATH = (
-              $env.PATH
-              | split row (char PATH_SEP)
-              | append "/mnt/c/Users/onatu/scoop/apps/win32yank/0.1.1"
-              | uniq
-              | str join (char PATH_SEP)
-            )
-          ''}
         '';
       };
     }
