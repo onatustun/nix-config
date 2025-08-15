@@ -11,7 +11,7 @@
 
   scripts = {
     sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
-    github = writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
+    github = writeShellScriptBin "github" (readFile (self + "/scripts/github.nu"));
   };
 
   inherit (scripts) sessionizer github;
@@ -53,7 +53,7 @@ in {
 
           bind-key f display-popup -w 80% -h 80% -E ${sessionizer}/bin/sessionizer
           bind-key g run-shell -b ${github}/bin/github
-          bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' fish -l
+          bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' nu -l
 
           bind-key c new-window -c "#{pane_current_path}"
           bind-key % split-window -h -c "#{pane_current_path}"
