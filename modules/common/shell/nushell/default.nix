@@ -1,25 +1,35 @@
 {
   lib,
-  username,
+  isDarwin,
   pkgs,
+  inputs,
+  username,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled getExe;
   inherit (builtins) readFile;
+
+  helixDrv =
+    if isDarwin
+    then pkgs.helix
+    else inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+  helixExe = getExe helixDrv;
+  nushellExe = getExe pkgs.nushell;
 in {
   users.users.${username}.shell = pkgs.nushell;
   environment.shells = [pkgs.nushell];
 
   home-manager.sharedModules = [
     {
-      home.sessionVariables.SHELL = "${pkgs.nushell}/bin/nu";
+      home.sessionVariables.SHELL = nushellExe;
 
       programs.nushell = enabled {
         environmentVariables = {
-          SHELL = "${pkgs.nushell}/bin/nu";
-          CARAPACE_BRIDGES = "inshellisense,zsh,fish,bash";
-          EDITOR = "hx";
-          VISUAL = "hx";
+          SHELL = nushellExe;
+          CARAPACE_BRIDGES = "inshellisense,carapace,zsh,fish,bash";
+          EDITOR = helixExe;
+          VISUAL = helixExe;
           NIXPKGS_ALLOW_UNFREE = "1";
           PROMPT_COMMAND = "";
           PROMPT_COMMAND_RIGHT = "";
@@ -46,7 +56,6 @@ in {
           md = "mkdir -v";
           melt = "nix-melt";
           mv = "mv -v";
-          nsf = "nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history";
           ns = "nix-search";
           rmf = "rm -frv";
           rm = "rm -rv";

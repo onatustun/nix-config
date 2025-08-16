@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) enabled getExe;
   inherit (pkgs) writeShellScriptBin;
   inherit (builtins) readFile;
   inherit (inputs) self;
@@ -51,9 +51,9 @@ in {
           bind-key -r K resize-pane -U 5
           bind-key -r L resize-pane -R 5
 
-          bind-key f display-popup -w 80% -h 80% -E ${sessionizer}/bin/sessionizer
-          bind-key g run-shell -b ${github}/bin/github
-          bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' nu -l
+          bind-key f display-popup -w 80% -h 80% -E ${getExe sessionizer}
+          bind-key g run-shell -b ${getExe github}
+          bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${getExe pkgs.nushell} -l
 
           bind-key c new-window -c "#{pane_current_path}"
           bind-key % split-window -h -c "#{pane_current_path}"

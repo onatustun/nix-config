@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) getExe;
+in {
   environment.systemPackages = with pkgs; [
     xwayland
     xwayland-satellite
@@ -18,7 +24,7 @@
         Service = {
           Type = "notify";
           NotifyAccess = "all";
-          ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+          ExecStart = "${getExe pkgs.xwayland-satellite}";
           StandardOutput = "journal";
         };
       };

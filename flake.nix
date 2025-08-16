@@ -178,6 +178,11 @@
       };
     };
 
+    nuenv = {
+      url = "https://flakehub.com/f/DeterminateSystems/nuenv/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

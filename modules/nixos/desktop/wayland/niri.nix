@@ -107,7 +107,7 @@ in {
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = ["${getExe pkgs.fish}" "-c" "${inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/ghostty"];
+          "Mod+Q".action.spawn = ["${getExe pkgs.fish}" "-c" "${getExe inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}"];
           "Mod+Z".action.spawn = "zen-twilight";
 
           "Mod+C".action.close-window = [];
@@ -173,10 +173,10 @@ in {
 
           "XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
           "XF86AudioMicMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
-          "XF86AudioPlay".action.spawn = ["${pkgs.playerctl}/bin/playerctl" "play-pause"];
-          "XF86AudioStop".action.spawn = ["${pkgs.playerctl}/bin/playerctl" "pause"];
-          "XF86AudioPrev".action.spawn = ["${pkgs.playerctl}/bin/playerctl" "previous"];
-          "XF86AudioNext".action.spawn = ["${pkgs.playerctl}/bin/playerctl" "next"];
+          "XF86AudioPlay".action.spawn = ["${getExe pkgs.playerctl}" "play-pause"];
+          "XF86AudioStop".action.spawn = ["${getExe pkgs.playerctl}" "pause"];
+          "XF86AudioPrev".action.spawn = ["${getExe pkgs.playerctl}" "previous"];
+          "XF86AudioNext".action.spawn = ["${getExe pkgs.playerctl}" "next"];
           "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"];
           "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"];
         };

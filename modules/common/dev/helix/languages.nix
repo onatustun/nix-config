@@ -2,8 +2,11 @@
   inputs,
   pkgs,
   isDarwin,
+  lib,
   ...
-}: {
+}: let
+  inherit (lib) getExe getExe';
+in {
   home-manager.sharedModules = [
     {
       programs.helix.languages = {
@@ -114,12 +117,12 @@
         ];
 
         language-server = {
-          uwu-colors.command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
+          uwu-colors.command = "${getExe' inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default "uwu_colors"}";
 
           nixd.command =
             if isDarwin
-            then "${pkgs.nixd}/bin/nixd"
-            else "${inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nixd";
+            then "${getExe pkgs.nixd}"
+            else "${getExe inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}";
         };
       };
     }

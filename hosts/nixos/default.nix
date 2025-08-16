@@ -21,7 +21,10 @@ in {
         inputs.stylix.nixosModules.stylix
       ];
 
-      overlays = [inputs.nur.overlays.default];
+      overlays = [
+        inputs.nur.overlays.default
+        inputs.nuenv.overlays.nuenv
+      ];
 
       modules = [
         "nixos"
