@@ -15,7 +15,7 @@ in {
 
   home-manager.sharedModules = [
     {
-      xdg.configFile."nushell/carapace.nu".source =
+      home.file.".config/nushell/carapace.nu".source =
         pkgs.runCommand "carapace-nushell-config.nu" {
           nativeBuildInputs = with pkgs; [
             carapace

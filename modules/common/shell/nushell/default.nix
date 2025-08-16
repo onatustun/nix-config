@@ -6,7 +6,7 @@
   username,
   ...
 }: let
-  inherit (lib) enabled getExe;
+  inherit (lib) enabled getExe';
   inherit (builtins) readFile;
 
   helixDrv =
@@ -14,8 +14,8 @@
     then pkgs.helix
     else inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-  helixExe = getExe helixDrv;
-  nushellExe = getExe pkgs.nushell;
+  helixExe = getExe' helixDrv "hx";
+  nushellExe = getExe' pkgs.nushell "nu";
 in {
   users.users.${username}.shell = pkgs.nushell;
   environment.shells = [pkgs.nushell];
