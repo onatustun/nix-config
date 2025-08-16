@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) getExe enabled;
+  inherit (lib) getExe' getExe enabled;
 in {
   environment.systemPackages = with pkgs; [
     bash
@@ -17,11 +17,16 @@ in {
     {
       xdg.configFile."nushell/carapace.nu".source =
         pkgs.runCommand "carapace-nushell-config.nu" {
-          nativeBuildInputs = [pkgs.carapace pkgs.gnused];
+          nativeBuildInputs = with pkgs; [
+            carapace
+            nushell
+          ];
         } ''
-          set -euo pipefail
-          ${getExe pkgs.carapace} _carapace nushell > $out
-          sed -E -i 's/\bget -i\b/get -o/g' $out
+          ${getExe' pkgs.nushell "nu"} --no-config-file -c '
+            ^${getExe pkgs.carapace} _carapace nushell
+            | str replace --all --regex "\\bget -i\\b" "get -o"
+            | save --raw --force $env.out
+          '
         '';
 
       programs = {
