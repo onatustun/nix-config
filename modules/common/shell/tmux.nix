@@ -4,14 +4,16 @@
   lib,
   ...
 }: let
-  inherit (pkgs) writeShellScriptBin nuenv;
-  inherit (nuenv) writeScriptBin;
+  inherit (pkgs.nuenv) writeScriptBin;
   inherit (builtins) readFile;
   inherit (inputs) self;
   inherit (lib) enabled getExe;
 
   scripts = {
-    sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
+    sessionizer = writeScriptBin {
+      name = "sessionizer";
+      script = readFile (self + "/scripts/sessionizer.nu");
+    };
 
     github = writeScriptBin {
       name = "github";
