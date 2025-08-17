@@ -179,7 +179,7 @@
     };
 
     nuenv = {
-      url = "https://flakehub.com/f/DeterminateSystems/nuenv/*.tar.gz";
+      url = "github:determinatesystems/nuenv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

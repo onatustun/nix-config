@@ -16,6 +16,7 @@
           home-manager
           nixos-rebuild
           vim
+          jq
         ]
         ++ (with inputs'; [
           alejandra.packages.default

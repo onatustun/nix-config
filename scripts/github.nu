@@ -5,14 +5,12 @@ cd $dir
 
 if ((try { git rev-parse --git-dir | ignore; true } catch { false }) == false) {
   tmux display-message "Not in a git repository"
-  exit 0
 }
 
 let url = (try { git remote get-url origin | str trim } catch { "" })
 
 if $url == "" {
   tmux display-message "No origin remote found"
-  exit 0
 }
 
 let web_url = (if ($url | str starts-with "git@github.com:") {

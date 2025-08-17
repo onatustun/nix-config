@@ -1,27 +1,25 @@
 {
-  lib,
   pkgs,
   inputs,
+  lib,
   ...
 }: let
-  inherit (lib) enabled getExe;
+  inherit (pkgs) writeShellScriptBin nuenv;
+  inherit (nuenv) writeScriptBin;
   inherit (builtins) readFile;
   inherit (inputs) self;
+  inherit (lib) enabled getExe;
 
   scripts = {
-    sessionizer = pkgs.writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
-    github = pkgs.writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
+    sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
 
-    github-nu = pkgs.nuenv.writeShellScriptBin {
-      name = "github-nu";
-
-      script = ''
-        (readFile (self + "/scripts/github.nu"))
-      '';
+    github = writeScriptBin {
+      name = "github";
+      script = readFile (self + "/scripts/github.nu");
     };
   };
 
-  inherit (scripts) sessionizer github github-nu;
+  inherit (scripts) sessionizer github;
 in {
   home-manager.sharedModules = [
     {
@@ -60,7 +58,6 @@ in {
 
           bind-key f display-popup -w 80% -h 80% -E ${getExe sessionizer}
           bind-key g run-shell -b ${getExe github}
-          bind-key i run-shell -b ${getExe github-nu}
           bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${getExe pkgs.nushell} -l
 
           bind-key c new-window -c "#{pane_current_path}"
