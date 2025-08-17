@@ -17,10 +17,13 @@ def main [selected?: string] {
                 | each { |dir| 
                     ^fd --max-depth 1 --type d . $dir 
                 } 
+                | flatten
+                | each { |path| 
+                    $path | str replace $"($env.HOME)/" ""
+                }
                 | str join "\n"
             
             let selected_relative = $dirs_output
-                | ^sed $"s|^($env.HOME)/||"
                 | ^sk --margin 10% --color=bw
 
             if ($selected_relative | is-not-empty) {
