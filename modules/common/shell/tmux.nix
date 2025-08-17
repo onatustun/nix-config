@@ -5,16 +5,23 @@
   ...
 }: let
   inherit (lib) enabled getExe;
-  inherit (pkgs) writeShellScriptBin;
   inherit (builtins) readFile;
   inherit (inputs) self;
 
   scripts = {
-    sessionizer = writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
-    github = writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
+    sessionizer = pkgs.writeShellScriptBin "sessionizer" (readFile (self + "/scripts/sessionizer.sh"));
+    github = pkgs.writeShellScriptBin "github" (readFile (self + "/scripts/github.sh"));
+
+    github-nu = pkgs.nuenv.writeShellScriptBin {
+      name = "github-nu";
+
+      script = ''
+        (readFile (self + "/scripts/github.nu"))
+      '';
+    };
   };
 
-  inherit (scripts) sessionizer github;
+  inherit (scripts) sessionizer github github-nu;
 in {
   home-manager.sharedModules = [
     {
@@ -53,6 +60,7 @@ in {
 
           bind-key f display-popup -w 80% -h 80% -E ${getExe sessionizer}
           bind-key g run-shell -b ${getExe github}
+          bind-key i run-shell -b ${getExe github-nu}
           bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${getExe pkgs.nushell} -l
 
           bind-key c new-window -c "#{pane_current_path}"
