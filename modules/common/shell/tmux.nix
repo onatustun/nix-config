@@ -10,18 +10,18 @@
   inherit (lib) enabled getExe;
 
   scripts = {
-    sessionizer = writeScriptBin {
-      name = "sessionizer";
-      script = readFile (self + "/scripts/sessionizer.nu");
-    };
-
     github = writeScriptBin {
       name = "github";
       script = readFile (self + "/scripts/github.nu");
     };
+
+    sessionizer = writeScriptBin {
+      name = "sessionizer";
+      script = readFile (self + "/scripts/sessionizer.nu");
+    };
   };
 
-  inherit (scripts) sessionizer github;
+  inherit (scripts) github sessionizer;
 in {
   home-manager.sharedModules = [
     {
