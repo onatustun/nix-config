@@ -1,7 +1,7 @@
 inputs: self: super: let
   inherit (super) nixosSystem darwinSystem makeSystemConfig;
   inherit (inputs.nixos-generators) nixosGenerate;
-  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any;
+  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any optionalAttrs;
   inherit (self) collectNix enabled;
   inherit (builtins) elemAt baseNameOf toString pathExists length;
   inherit (strings) hasInfix hasSuffix hasPrefix removePrefix removeSuffix;
@@ -141,6 +141,8 @@ inputs: self: super: let
       // hostTypes
       // {
         inherit inputs system type systemBuilder hostName username homeDir homeVer;
+
+        keys = import (inputs.self + /keys.nix);
         lib = self;
       };
 
@@ -191,13 +193,7 @@ inputs: self: super: let
       }
     ];
   in
-    cfg.builder (
-      (
-        if format != null
-        then {format = "${format}";}
-        else {}
-      )
-      // {
+    cfg.builder ({
         inherit specialArgs system;
 
         modules =
@@ -206,7 +202,7 @@ inputs: self: super: let
           ++ inputModules
           ++ extraModules;
       }
-    );
+      // optionalAttrs (format != null) {format = format;});
 in {
   nixosSystem' = mkSystem "nixos";
   darwinSystem' = mkSystem "darwin";
