@@ -81,13 +81,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
-
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
-    };
-
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -98,240 +91,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wsl = {
-      url = "github:nix-community/nixos-wsl";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur = {
-      url = "github:nix-community/nur";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    hardware.url = "github:nixos/nixos-hardware";
-
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-images = {
-      url = "github:nix-community/nixos-images";
-
-      inputs = {
-        nixos-stable.follows = "nixpkgs-stable";
-        nixos-unstable.follows = "nixpkgs";
-      };
-    };
-
-    nix-vm-test = {
-      url = "github:numtide/nix-vm-test";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-anywhere = {
-      url = "github:nix-community/nixos-anywhere";
-
-      inputs = {
-        disko.follows = "disko";
-        flake-parts.follows = "flake-parts";
-        nixos-images.follows = "nixos-images";
-        nixos-stable.follows = "nixpkgs-stable";
-        nixpkgs.follows = "nixpkgs";
-        nix-vm-test.follows = "nix-vm-test";
-        treefmt-nix.follows = "treefmt-nix";
-      };
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "flake-utils";
-      };
-    };
-
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    naersk = {
-      url = "github:nix-community/naersk";
-      inputs = {
-        fenix.follows = "fenix";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    crane.url = "github:ipetkov/crane";
-
-    nuenv = {
-      url = "github:determinatesystems/nuenv";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
-    pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        gitignore.follows = "gitignore";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    flake-root.url = "github:srid/flake-root";
-
-    nixd = {
-      url = "github:nix-community/nixd";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        flake-root.follows = "flake-root";
-        nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
-      };
-    };
-
-    nix-direnv = {
-      url = "github:nix-community/nix-direnv";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
-      };
-    };
-
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    comma = {
-      url = "github:nix-community/comma";
-
-      inputs = {
-        flake-compat.follows = "flake-compat";
-        naersk.follows = "naersk";
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "flake-utils";
-      };
-    };
-
-    nix-melt = {
-      url = "github:nix-community/nix-melt";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nh = {
-      url = "github:nix-community/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    stylix = {
-      url = "github:danth/stylix";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-        nur.follows = "nur";
-        systems.follows = "systems";
-      };
-    };
-
-    helix = {
-      url = "github:helix-editor/helix";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
-    alejandra = {
-      url = "github:kamadorueda/alejandra";
-
-      inputs = {
-        fenix.follows = "fenix";
-        flakeCompat.follows = "flake-compat";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    deadnix = {
-      url = "github:astro/deadnix";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "flake-utils";
-      };
-    };
-
-    uwu-colors = {
-      url = "github:q60/uwu_colors";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "flake-utils";
-      };
     };
 
     impermanence.url = "github:nix-community/impermanence";
@@ -365,6 +132,192 @@
       };
     };
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+      };
+    };
+
+    nixos-anywhere = {
+      url = "github:nix-community/nixos-anywhere";
+
+      inputs = {
+        disko.follows = "disko";
+        flake-parts.follows = "flake-parts";
+        nixos-images.follows = "nixos-images";
+        nixos-stable.follows = "nixpkgs-stable";
+        nixpkgs.follows = "nixpkgs";
+        nix-vm-test.follows = "nix-vm-test";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-images = {
+      url = "github:nix-community/nixos-images";
+
+      inputs = {
+        nixos-stable.follows = "nixpkgs-stable";
+        nixos-unstable.follows = "nixpkgs";
+      };
+    };
+
+    nix-vm-test = {
+      url = "github:numtide/nix-vm-test";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+
+    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
+
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-root.url = "github:srid/flake-root";
+
+    nix-direnv = {
+      url = "github:nix-community/nix-direnv";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nh = {
+      url = "github:nix-community/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    comma = {
+      url = "github:nix-community/comma";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        naersk.follows = "naersk";
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+      };
+    };
+
+    nix-melt = {
+      url = "github:nix-community/nix-melt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixd = {
+      url = "github:nix-community/nixd";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        flake-root.follows = "flake-root";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    alejandra = {
+      url = "github:kamadorueda/alejandra";
+
+      inputs = {
+        fenix.follows = "fenix";
+        flakeCompat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        gitignore.follows = "gitignore";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    deadnix = {
+      url = "github:astro/deadnix";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+      };
+    };
+
+    crane.url = "github:ipetkov/crane";
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    naersk = {
+      url = "github:nix-community/naersk";
+      inputs = {
+        fenix.follows = "fenix";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    zig = {
+      url = "github:mitchellh/zig-overlay";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    zon2nix = {
+      url = "github:jcollie/zon2nix";
+
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    nuenv = {
+      url = "github:determinatesystems/nuenv";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
+
     hyprland = {
       url = "github:hyprwm/hyprland";
 
@@ -381,6 +334,19 @@
         pre-commit-hooks.follows = "pre-commit-hooks";
         systems.follows = "systems";
         xdph.follows = "xdg-portal-hyprland";
+      };
+    };
+
+    xdg-portal-hyprland = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland";
+
+      inputs = {
+        hyprland-protocols.follows = "hyprland-protocols";
+        hyprlang.follows = "hyprlang";
+        hyprutils.follows = "hyprutils";
+        hyprwayland-scanner.follows = "hyprwayland-scanner";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
 
@@ -403,15 +369,6 @@
       };
     };
 
-    hyprland-protocols = {
-      url = "github:hyprwm/hyprland-protocols";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
     hyprwayland-scanner = {
       url = "github:hyprwm/hyprwayland-scanner";
 
@@ -421,18 +378,10 @@
       };
     };
 
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "hyprland/nixpkgs";
-    };
-
-    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
-
-    hyprland-qt-support = {
-      url = "github:hyprwm/hyprland-qt-support";
+    hyprland-protocols = {
+      url = "github:hyprwm/hyprland-protocols";
 
       inputs = {
-        hyprlang.follows = "hyprlang";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
@@ -469,18 +418,17 @@
       };
     };
 
-    xdg-portal-hyprland = {
-      url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    hyprland-qt-support = {
+      url = "github:hyprwm/hyprland-qt-support";
 
       inputs = {
-        hyprland-protocols.follows = "hyprland-protocols";
         hyprlang.follows = "hyprlang";
-        hyprutils.follows = "hyprutils";
-        hyprwayland-scanner.follows = "hyprwayland-scanner";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
     };
+
+    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -490,6 +438,11 @@
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
+    };
+
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
 
     xwayland-satellite = {
@@ -512,22 +465,69 @@
       };
     };
 
-    zig = {
-      url = "github:mitchellh/zig-overlay";
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
 
       inputs = {
         flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
     };
 
-    zon2nix = {
-      url = "github:jcollie/zon2nix";
+    hardware.url = "github:nixos/nixos-hardware";
+
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+
+    nur = {
+      url = "github:nix-community/nur";
 
       inputs = {
-        flake-utils.follows = "flake-utils";
+        flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        nur.follows = "nur";
+        systems.follows = "systems";
+      };
+    };
+
+    helix = {
+      url = "github:helix-editor/helix";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
+
+    uwu-colors = {
+      url = "github:q60/uwu_colors";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
       };
     };
 
