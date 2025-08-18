@@ -76,8 +76,6 @@ $env.config.keybindings = [
   }
 ]
 
-source "~/.config/nushell/carapace.nu"
-
 if (
   $nu.is-interactive
   and (which tmux | length) > 0

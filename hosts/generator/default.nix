@@ -17,7 +17,13 @@ in {
 
       modules = [
         "common/system"
-        "nixos/system/user.nix"
+        "nixos/system"
+      ];
+
+      ignore = [
+        "boot.nix"
+        "keyring.nix"
+        "xdg.nix"
       ];
     };
   };
