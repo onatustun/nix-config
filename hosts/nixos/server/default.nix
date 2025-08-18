@@ -12,7 +12,7 @@ in {
     |> remove ./default.nix;
 
   users.users = {
-    root.openssh.authorizedKeys.keys = keys.nixos-desktop // ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIzxmJcUMSUM32Ng9yrDnA8twvn1rRoKYc+A/oLrdFcp onat@nixos"];
+    root.openssh.authorizedKeys.keys = keys.all;
 
     ${username}.extraGroups = [
       "input"
