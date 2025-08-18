@@ -55,6 +55,7 @@ in {
 
       overlays = [
         inputs.niri.overlays.niri
+        inputs.nuenv.overlays.nuenv
         inputs.nur.overlays.default
       ];
 
@@ -81,6 +82,8 @@ in {
         inputs.disko.nixosModules.disko
       ];
 
+      overlays = [inputs.nuenv.overlays.nuenv];
+
       modules = [
         "common"
         "nixos/cli/clipboard.nix"
@@ -103,6 +106,8 @@ in {
         inputs.nix-index-database.nixosModules.nix-index
         inputs.stylix.nixosModules.stylix
       ];
+
+      overlays = [inputs.nuenv.overlays.nuenv];
 
       modules = [
         "common"

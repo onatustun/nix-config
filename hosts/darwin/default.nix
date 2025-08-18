@@ -19,6 +19,8 @@ in {
         inputs.stylix.darwinModules.stylix
       ];
 
+      overlays = [inputs.nuenv.overlays.nuenv];
+
       modules = [
         "common"
         "darwin"
