@@ -284,6 +284,7 @@
 
     naersk = {
       url = "github:nix-community/naersk";
+
       inputs = {
         fenix.follows = "fenix";
         nixpkgs.follows = "nixpkgs";
