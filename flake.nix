@@ -447,7 +447,7 @@
     };
 
     xwayland-satellite = {
-      url = "github:Supreeeme/xwayland-satellite";
+      url = "github:supreeeme/xwayland-satellite";
 
       inputs = {
         flake-utils.follows = "flake-utils";
