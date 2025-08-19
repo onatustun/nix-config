@@ -419,16 +419,6 @@
       };
     };
 
-    hyprland-qt-support = {
-      url = "github:hyprwm/hyprland-qt-support";
-
-      inputs = {
-        hyprlang.follows = "hyprlang";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
     hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
 
     hyprland-plugins = {
