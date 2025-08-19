@@ -10,5 +10,5 @@ in {
     scdl
   ];
 
-  home-manager.sharedModules = [{yt-dlp = enabled;}];
+  home-manager.sharedModules = [{programs.yt-dlp = enabled;}];
 }
