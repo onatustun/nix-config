@@ -22,6 +22,7 @@
       "https://pre-commit-hooks.cachix.org"
       "https://stylix.cachix.org"
       "https://system-manager.cachix.org"
+      "https://yazi.cachix.org"
     ];
 
     extra-trusted-public-keys = [
@@ -44,6 +45,7 @@
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
       "stylix.cachix.org-1:iTycMb+viP8aTqhRDvV5qjs1jtNJKH9Jjvqyg4DYxhw="
       "system-manager.cachix.org-1:9ey5QCB09mkShIdY7nKIOj9Gpdzgtd0ssFeq18eCGns="
+      "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
     ];
 
     experimental-features = [
