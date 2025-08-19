@@ -13,10 +13,16 @@ in {
 
       settings = {
         package = inputs'.pre-commit-hooks.packages.default;
-        excludes = ["flake.lock"];
+
+        excludes = [
+          "\\.envrc$"
+          "flake\\.lock$"
+          "^templates/"
+        ];
 
         hooks = {
           alejandra = enabled {package = inputs'.alejandra.packages.default;};
+          shellcheck = enabled;
           treefmt = enabled;
         };
       };
