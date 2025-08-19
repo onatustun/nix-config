@@ -90,7 +90,10 @@ in {
         "nixos/system"
       ];
 
-      ignore = ["common/apps"];
+      ignore = [
+        "common/apps"
+        "toolchains"
+      ];
     };
 
     wsl = nixosSystem' {
@@ -117,8 +120,8 @@ in {
       ];
 
       ignore = [
-        "common/apps"
         "boot.nix"
+        "common/apps"
         "xdg.nix"
       ];
     };
