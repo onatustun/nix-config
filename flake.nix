@@ -534,6 +534,16 @@
       };
     };
 
+    yazi = {
+      url = "github:sxyazi/yazi";
+
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
 

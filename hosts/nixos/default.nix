@@ -22,8 +22,8 @@ in {
       ];
 
       overlays = [
-        inputs.nur.overlays.default
         inputs.nuenv.overlays.nuenv
+        inputs.nur.overlays.default
       ];
 
       modules = [

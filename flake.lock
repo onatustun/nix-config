@@ -1779,6 +1779,7 @@
         "uwu-colors": "uwu-colors",
         "xdg-portal-hyprland": "xdg-portal-hyprland",
         "xwayland-satellite": "xwayland-satellite",
+        "yazi": "yazi",
         "zen-browser": "zen-browser",
         "zig": "zig",
         "zon2nix": "zon2nix"
@@ -2130,6 +2131,32 @@
         "owner": "Supreeeme",
         "ref": "v0.6",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "yazi": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755611937,
+        "narHash": "sha256-RL4tLLQfDJcUlFtT9lrI7D1TI74bv49HvvnfHWcU0vQ=",
+        "owner": "sxyazi",
+        "repo": "yazi",
+        "rev": "84907297a010633f74c59e38ed4c9b9e992ea1d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sxyazi",
+        "repo": "yazi",
         "type": "github"
       }
     },
