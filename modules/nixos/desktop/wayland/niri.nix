@@ -204,7 +204,7 @@ in {
           hide-not-bound = true;
         };
 
-        xwayland-satellite = enabled {path = getExe pkgs.xwayland-satellite-unstable;};
+        xwayland-satellite = enabled {path = getExe inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite;};
 
         cursor = let
           cursorTheme = "Bibata-Modern-Ice";

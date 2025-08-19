@@ -1,13 +1,14 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   inherit (lib) getExe;
 in {
-  environment.systemPackages = with pkgs; [
-    xwayland
-    xwayland-satellite
+  environment.systemPackages = [
+    pkgs.xwayland
+    inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite
   ];
 
   home-manager.sharedModules = [
@@ -24,7 +25,7 @@ in {
         Service = {
           Type = "notify";
           NotifyAccess = "all";
-          ExecStart = "${getExe pkgs.xwayland-satellite}";
+          ExecStart = "${getExe inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite}";
           StandardOutput = "journal";
         };
       };

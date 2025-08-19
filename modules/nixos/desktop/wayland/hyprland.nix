@@ -11,10 +11,13 @@
 in {
   programs.hyprland = enabled {
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage = inputs.xdg-portal-hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  environment.systemPackages = [pkgs.hyprcursor];
+  environment.systemPackages = [
+    inputs.hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.hyprcursor
+    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+  ];
 
   home-manager.sharedModules = [
     {
