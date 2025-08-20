@@ -15,6 +15,7 @@ in {
       packages = ["bibata-hyprcursor"];
 
       inputModules = [
+        inputs.agenix.nixosModules.default
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
@@ -47,6 +48,7 @@ in {
       packages = ["bibata-hyprcursor"];
 
       inputModules = [
+        inputs.agenix.nixosModules.default
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
@@ -75,6 +77,7 @@ in {
       homeVer = "24.11";
 
       inputModules = [
+        inputs.agenix.nixosModules.default
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
