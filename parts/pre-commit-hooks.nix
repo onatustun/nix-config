@@ -22,6 +22,7 @@ in {
 
         hooks = {
           alejandra = enabled {package = inputs'.alejandra.packages.default;};
+          deadnix = enabled {package = inputs'.deadnix.packages.default;};
           shellcheck = enabled;
           treefmt = enabled;
         };

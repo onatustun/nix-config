@@ -14,9 +14,11 @@
     ++ (with inputs; [
       alejandra.packages.${pkgs.stdenv.hostPlatform.system}.default
       comma.packages.${pkgs.stdenv.hostPlatform.system}.default
+      deadnix.packages.${pkgs.stdenv.hostPlatform.system}.default
       deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.default
       nix-melt.packages.${pkgs.stdenv.hostPlatform.system}.default
       nixos-anywhere.packages.${pkgs.stdenv.hostPlatform.system}.default
+      nixos-generators.packages.${pkgs.stdenv.hostPlatform.system}.default
     ])
     ++ (
       if !isDarwin

@@ -62,7 +62,7 @@ inputs: self: super: let
       isGenerate = type == "generate";
     };
 
-    packageOverlay = final: prev:
+    packageOverlay = final: _:
       genAttrs packages (name:
         final.callPackage (inputs.self + /pkgs/${name}.nix) {});
 
