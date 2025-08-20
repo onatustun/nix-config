@@ -118,16 +118,16 @@
     #   };
     # };
 
-    agenix = {
-      url = "github:ryantm/agenix";
+    # agenix = {
+    #   url = "github:ryantm/agenix";
 
-      inputs = {
-        darwin.follows = "nix-darwin";
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
+    #   inputs = {
+    #     darwin.follows = "nix-darwin";
+    #     home-manager.follows = "home-manager";
+    #     nixpkgs.follows = "nixpkgs";
+    #     systems.follows = "systems";
+    #   };
+    # };
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";

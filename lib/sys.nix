@@ -146,24 +146,22 @@ inputs: self: super: let
         lib = self;
       };
 
-    baseModules =
-      [
-        {
-          users.users.${username}.home = homeDir;
-          system.stateVersion = stateVer;
+    baseModules = [
+      {
+        users.users.${username}.home = homeDir;
+        system.stateVersion = stateVer;
 
-          nixpkgs = {
-            hostPlatform = mkDefault system;
+        nixpkgs = {
+          hostPlatform = mkDefault system;
 
-            overlays =
-              overlays
-              ++ optional (packages != []) packageOverlay;
-          };
-        }
+          overlays =
+            overlays
+            ++ optional (packages != []) packageOverlay;
+        };
+      }
 
-        (inputs.self + "/hosts/${type}/${hostName}")
-      ]
-      ++ processModules modules;
+      (inputs.self + "/hosts/${type}/${hostName}")
+    ];
 
     homeManagerModule = optionals (homeVer != null) [
       {
@@ -200,6 +198,7 @@ inputs: self: super: let
           baseModules
           ++ homeManagerModule
           ++ inputModules
+          ++ processModules modules
           ++ extraModules;
       }
       // optionalAttrs (format != null) {format = format;});

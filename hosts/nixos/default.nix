@@ -15,7 +15,6 @@ in {
       packages = ["bibata-hyprcursor"];
 
       inputModules = [
-        inputs.agenix.nixosModules.default
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
@@ -48,7 +47,6 @@ in {
       packages = ["bibata-hyprcursor"];
 
       inputModules = [
-        inputs.agenix.nixosModules.default
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
@@ -77,7 +75,6 @@ in {
       homeVer = "24.11";
 
       inputModules = [
-        inputs.agenix.nixosModules.default
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
         inputs.nix-index-database.nixosModules.nix-index
@@ -89,11 +86,12 @@ in {
 
       modules = [
         "common"
-        "nixos/cli/clipboard.nix"
         "nixos/system"
+        "nixos/ui"
       ];
 
       ignore = [
+        "audio.nix"
         "common/apps"
         "toolchains"
       ];
