@@ -2,6 +2,7 @@
   lib,
   keys,
   username,
+  # config,
   pkgs,
   ...
 }: let
@@ -31,8 +32,18 @@ in {
     jellyfin-web
   ];
 
+  # age.secrets.hostkey.file = ./hostkey.age;
+
   services = {
-    openssh = enabled;
+    openssh = enabled {
+      # hostKeys = [
+      #   {
+      #     type = "ed25519";
+      #     path = config.age.secrets.hostkey.path;
+      #   }
+      # ];
+    };
+
     jellyfin = enabled {user = "onat";};
 
     caddy = enabled {

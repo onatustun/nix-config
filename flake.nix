@@ -13,7 +13,7 @@
       "https://helix.cachix.org"
       "https://hercules-ci.cachix.org"
       "https://hyprland.cachix.org"
-      "https://lanzaboote.cachix.org"
+      # "https://lanzaboote.cachix.org"
       "https://naersk.cachix.org"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
@@ -36,7 +36,7 @@
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
       "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
+      # "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
       "naersk.cachix.org-1:RPZZukECF/0Uq52CdDZq8QDU2z7hUO66jlLTR7LT9W0="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -103,25 +103,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence.url = "github:nix-community/impermanence";
+    # impermanence.url = "github:nix-community/impermanence";
 
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote";
 
-      inputs = {
-        crane.follows = "crane";
-        flake-compat.follows = "flake-compat";
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-        pre-commit-hooks-nix.follows = "pre-commit-hooks";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
-    sops-nix = {
-      url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #   inputs = {
+    #     crane.follows = "crane";
+    #     flake-compat.follows = "flake-compat";
+    #     flake-parts.follows = "flake-parts";
+    #     nixpkgs.follows = "nixpkgs";
+    #     pre-commit-hooks-nix.follows = "pre-commit-hooks";
+    #     rust-overlay.follows = "rust-overlay";
+    #   };
+    # };
 
     agenix = {
       url = "github:ryantm/agenix";

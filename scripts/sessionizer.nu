@@ -15,7 +15,7 @@ def main [selected?: string] {
         if ($search_dirs | is-not-empty) {
             let dirs_output = $search_dirs 
                 | each { |dir| 
-                    ^fd --max-depth 1 --type d . $dir 
+                    ^fd -d 1 -t d -H . $dir 
                 } 
                 | flatten
                 | each { |path| 

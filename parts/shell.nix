@@ -19,6 +19,7 @@
           vim
         ]
         ++ (with inputs'; [
+          agenix.packages.default
           alejandra.packages.default
           comma.packages.default
           deadnix.packages.default
