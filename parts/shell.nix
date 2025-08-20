@@ -26,6 +26,7 @@
           nh.packages.default
           nixos-anywhere.packages.default
           nixos-generators.packages.default
+          statix.packages.default
         ]);
     };
   };

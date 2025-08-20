@@ -20,6 +20,7 @@
       "https://nix-darwin.cachix.org"
       "https://numtide.cachix.org"
       "https://pre-commit-hooks.cachix.org"
+      "https://statix.cachix.org"
       "https://stylix.cachix.org"
       "https://system-manager.cachix.org"
       "https://yazi.cachix.org"
@@ -43,6 +44,7 @@
       "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
       "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+      "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
       "stylix.cachix.org-1:iTycMb+viP8aTqhRDvV5qjs1jtNJKH9Jjvqyg4DYxhw="
       "system-manager.cachix.org-1:9ey5QCB09mkShIdY7nKIOj9Gpdzgtd0ssFeq18eCGns="
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
@@ -264,6 +266,16 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         utils.follows = "flake-utils";
+      };
+    };
+
+    statix = {
+      url = "github:oppiliappan/statix";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
 

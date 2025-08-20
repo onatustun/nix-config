@@ -1689,6 +1689,7 @@
         "nur": "nur",
         "pre-commit-hooks": "pre-commit-hooks",
         "rust-overlay": "rust-overlay",
+        "statix": "statix",
         "stylix": "stylix",
         "system-manager": "system-manager",
         "systems": "systems_2",
@@ -1736,6 +1737,32 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "statix": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755417409,
+        "narHash": "sha256-gaVVLMy/9VPH2rQyFq3LwoBDSizOZo1PhulWvq0ZI4Q=",
+        "owner": "oppiliappan",
+        "repo": "statix",
+        "rev": "1eb930ce8dfb3ff483d0417a8cd1f0c89952e6eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oppiliappan",
+        "repo": "statix",
         "type": "github"
       }
     },
