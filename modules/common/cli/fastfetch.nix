@@ -1,7 +1,6 @@
 {
   lib,
   isDarwin,
-  isLinux,
   isWsl,
   ...
 }: let
@@ -14,8 +13,6 @@ in {
           logo.source =
             if isDarwin
             then "macos"
-            else if isLinux
-            then "linux"
             else if isWsl
             then "window 11"
             else "nixos";

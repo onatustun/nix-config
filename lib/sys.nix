@@ -1,5 +1,5 @@
 inputs: self: super: let
-  inherit (super) nixosSystem darwinSystem makeSystemConfig;
+  inherit (super) nixosSystem darwinSystem;
   inherit (inputs.nixos-generators) nixosGenerate;
   inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any optionalAttrs;
   inherit (self) collectNix enabled;
@@ -17,12 +17,6 @@ inputs: self: super: let
       platform = "aarch64-darwin";
       builder = darwinSystem;
       homeDir = username: "/Users/${username}";
-    };
-
-    linux = {
-      platform = "x86_64-linux";
-      builder = makeSystemConfig;
-      homeDir = username: "/home/${username}";
     };
 
     generator = {
@@ -58,7 +52,6 @@ inputs: self: super: let
 
       isNixos = type == "nixos";
       isDarwin = type == "darwin";
-      isLinux = type == "linux";
       isGenerate = type == "generate";
     };
 
@@ -205,6 +198,5 @@ inputs: self: super: let
 in {
   nixosSystem' = mkSystem "nixos";
   darwinSystem' = mkSystem "darwin";
-  makeSystemConfig' = mkSystem "linux";
   nixosGenerate' = mkSystem "generator";
 }

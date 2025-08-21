@@ -22,7 +22,6 @@
       "https://pre-commit-hooks.cachix.org"
       "https://statix.cachix.org"
       "https://stylix.cachix.org"
-      "https://system-manager.cachix.org"
       "https://yazi.cachix.org"
     ];
 
@@ -46,7 +45,6 @@
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
       "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
       "stylix.cachix.org-1:iTycMb+viP8aTqhRDvV5qjs1jtNJKH9Jjvqyg4DYxhw="
-      "system-manager.cachix.org-1:9ey5QCB09mkShIdY7nKIOj9Gpdzgtd0ssFeq18eCGns="
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
     ];
 
@@ -87,11 +85,6 @@
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    system-manager = {
-      url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -584,7 +577,6 @@
     libInputs = with inputs; [
       flake-parts
       nix-darwin
-      system-manager
       home-manager
     ];
 
@@ -613,9 +605,6 @@
 
       imports =
         collectNix ./parts
-        ++ [
-          ./hosts
-          ./templates
-        ];
+        ++ [./hosts];
     };
 }
