@@ -19,6 +19,7 @@
       nix-melt.packages.${pkgs.stdenv.hostPlatform.system}.default
       nixos-anywhere.packages.${pkgs.stdenv.hostPlatform.system}.default
       nixos-generators.packages.${pkgs.stdenv.hostPlatform.system}.default
+      statix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ])
     ++ (
       if !isDarwin
