@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled disabled;
+  inherit (lib) enabled disabled genAttrs;
 
   # latte = {
   #   name = "latte";
@@ -51,7 +51,7 @@
 in {
   stylix = enabled {
     base16Scheme = current;
-    polarity = current.polarity;
+    inherit (current) polarity;
 
     fonts = {
       monospace = {
@@ -78,14 +78,14 @@ in {
 
   home-manager.sharedModules = [
     {
-      stylix.targets = {
-        helix = disabled;
-        nixcord = disabled;
-        rofi = disabled;
-        spicetify = disabled;
-        waybar = disabled;
-        zen-browser = disabled;
-      };
+      stylix.targets = genAttrs [
+        "helix"
+        "nixcord"
+        "rofi"
+        "spicetify"
+        "waybar"
+        "zen-browser"
+      ] (_: disabled);
     }
   ];
 }

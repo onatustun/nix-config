@@ -201,7 +201,7 @@ inputs: self: super: let
           ++ processModules modules
           ++ extraModules;
       }
-      // optionalAttrs (format != null) {format = format;});
+      // optionalAttrs (format != null) {inherit format;});
 in {
   nixosSystem' = mkSystem "nixos";
   darwinSystem' = mkSystem "darwin";

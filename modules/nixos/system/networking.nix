@@ -7,6 +7,6 @@
 in {
   networking = {
     networkmanager = enabled;
-    hostName = hostName;
+    inherit hostName;
   };
 }

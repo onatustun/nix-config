@@ -129,8 +129,8 @@ in {
                 myWaybarIcons
               )}
             '';
-          in {waybarIconsDir = waybarIconsDir;};
-          iconsPath = "${icons.waybarIconsDir}";
+          in {inherit waybarIconsDir;};
+          inherit (icons) waybarIconsDir;
         in ''
           * {
             background: none;
@@ -204,7 +204,7 @@ in {
           }
 
           #custom-keyboard {
-            background-image: url("${iconsPath}/keyboard.svg");
+            background-image: url("${waybarIconsDir}/keyboard.svg");
           }
 
           #custom-keyboard.disabled {
@@ -212,11 +212,11 @@ in {
           }
 
           #network {
-            background-image: url("${iconsPath}/network-default.svg");
+            background-image: url("${waybarIconsDir}/network-default.svg");
           }
 
           #network.ethernet {
-            background-image: url("${iconsPath}/network-ethernet.svg");
+            background-image: url("${waybarIconsDir}/network-ethernet.svg");
           }
 
           #network.disabled,
@@ -225,7 +225,7 @@ in {
           }
 
           #wireplumber {
-            background-image: url("${iconsPath}/wireplumber-default.svg");
+            background-image: url("${waybarIconsDir}/wireplumber-default.svg");
           }
 
           #wireplumber.muted {
