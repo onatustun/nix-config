@@ -15,7 +15,6 @@
           git
           home-manager
           nixos-rebuild
-          shellcheck
           vim
         ]
         ++ (with inputs'; [
