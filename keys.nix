@@ -9,5 +9,14 @@ let
 in
   keys
   // {
+    nixos = [
+      keys.nixos-desktop
+      keys.nixos-laptop
+      keys.nixos-sever
+    ];
+
+    # darwin = [];
+    # wsl = [];
+
     all = attrValues keys;
   }
