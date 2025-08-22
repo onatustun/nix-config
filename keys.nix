@@ -12,7 +12,7 @@ in
     nixos = [
       keys.nixos-desktop
       keys.nixos-laptop
-      keys.nixos-sever
+      keys.nixos-server
     ];
 
     # darwin = [];
