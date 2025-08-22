@@ -16,6 +16,11 @@ in
     ];
 
     # darwin = [];
+    # windows = [];
+
+    # desktop = [];
+    # laptop = [];
+    # mini = [];
     # wsl = [];
 
     all = attrValues keys;
