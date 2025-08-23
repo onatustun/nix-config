@@ -13,6 +13,7 @@ in {
       cargo-fuzz
       cargo-nextest
       cargo-watch
+      evcxr
     ]
     ++ (with fenixPkgs; [
       cargo

@@ -3,9 +3,8 @@
     hostname = "23.88.34.248";
 
     profiles.system = {
-      sshUser = "root";
       user = "root";
-      magicRollback = false;
+      sshUser = "root";
 
       path =
         inputs.deploy-rs.lib.x86_64-linux.activate.nixos

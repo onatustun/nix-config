@@ -5,7 +5,6 @@
 }: {
   environment.systemPackages = with pkgs;
     [
-      lldb
       zls
     ]
     ++ (with inputs; [
