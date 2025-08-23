@@ -8,12 +8,13 @@
       "https://cachix.cachix.org"
       "https://crane.cachix.org"
       "https://deadnix.cachix.org"
+      "https://devenv.cachix.org"
       "https://flake-parts.cachix.org"
       "https://ghostty.cachix.org"
       "https://helix.cachix.org"
       "https://hercules-ci.cachix.org"
       "https://hyprland.cachix.org"
-      # "https://lanzaboote.cachix.org"
+      "https://lanzaboote.cachix.org"
       "https://naersk.cachix.org"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
@@ -31,12 +32,13 @@
       "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
       "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
       "deadnix.cachix.org-1:R7kK+K1CLDbLrGph/vSDVxUslAmq8vhpbcz6SH9haJE="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "flake-parts.cachix.org-1:IlewuHm3lWYND+tOeQC9nySl7JpzTZ4sqkb1eJMafow="
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
       "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      # "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
+      "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
       "naersk.cachix.org-1:RPZZukECF/0Uq52CdDZq8QDU2z7hUO66jlLTR7LT9W0="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -48,12 +50,20 @@
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
     ];
 
+    builders-use-substitutes = true;
+
     experimental-features = [
       "cgroups"
       "flakes"
       "nix-command"
       "pipe-operators"
     ];
+
+    flake-registry = "";
+    http-connections = 50;
+    lazy-trees = true;
+    show-trace = true;
+    use-cgroups = true;
 
     trusted-users = [
       "@admin"
@@ -62,12 +72,6 @@
       "@wheel"
     ];
 
-    builders-use-substitutes = true;
-    flake-registry = "";
-    http-connections = 50;
-    lazy-trees = true;
-    show-trace = true;
-    use-cgroups = true;
     warn-dirty = false;
   };
 
@@ -98,31 +102,47 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # impermanence.url = "github:nix-community/impermanence";
+    impermanence.url = "github:nix-community/impermanence";
 
-    # lanzaboote = {
-    #   url = "github:nix-community/lanzaboote";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
 
-    #   inputs = {
-    #     crane.follows = "crane";
-    #     flake-compat.follows = "flake-compat";
-    #     flake-parts.follows = "flake-parts";
-    #     nixpkgs.follows = "nixpkgs";
-    #     pre-commit-hooks-nix.follows = "pre-commit-hooks";
-    #     rust-overlay.follows = "rust-overlay";
-    #   };
-    # };
+      inputs = {
+        crane.follows = "crane";
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        pre-commit-hooks-nix.follows = "pre-commit-hooks";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
 
-    # agenix = {
-    #   url = "github:ryantm/agenix";
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    #   inputs = {
-    #     darwin.follows = "nix-darwin";
-    #     home-manager.follows = "home-manager";
-    #     nixpkgs.follows = "nixpkgs";
-    #     systems.follows = "systems";
-    #   };
-    # };
+    agenix = {
+      url = "github:ryantm/agenix";
+
+      inputs = {
+        darwin.follows = "nix-darwin";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        pre-commit-hooks.follows = "pre-commit-hooks";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
 
     deploy-rs = {
       url = "github:serokell/deploy-rs";
@@ -196,9 +216,53 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    cachix = {
+      url = "github:cachix/cachix";
+
+      inputs = {
+        devenv.follows = "devenv";
+        flake-compat.follows = "flake-compat";
+        git-hooks.follows = "pre-commit-hooks";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    devenv = {
+      url = "github:cachix/devenv";
+
+      inputs = {
+        cachix.follows = "cachix";
+        flake-compat.follows = "flake-compat";
+        git-hooks.follows = "pre-commit-hooks";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     nh = {
       url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-filter.url = "github:numtide/nix-filter";
+
+    nix-search-tv = {
+      url = "github:3timeslazy/nix-search-tv";
+
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    nix-search-cli = {
+      url = "github:peterldowns/nix-search-cli";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-utils.follows = "flake-utils";
+        nix-filter.follows = "nix-filter";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     comma = {

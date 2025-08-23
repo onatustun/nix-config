@@ -13,15 +13,18 @@
       packages = with pkgs;
         [
           git
-          home-manager
           nixos-rebuild
           vim
         ]
         ++ (with inputs'; [
+          agenix.packages.default
           alejandra.packages.default
+          cachix.packages.default
           comma.packages.default
           deadnix.packages.default
           deploy-rs.packages.default
+          devshell.packages.default
+          home-manager.packages.default
           nh.packages.default
           nixos-anywhere.packages.default
           nixos-generators.packages.default
