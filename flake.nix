@@ -569,12 +569,15 @@
   outputs = inputs @ {
     nixpkgs,
     systems,
+    flake-parts,
+    nix-darwin,
+    home-manager,
     ...
   }: let
     inherit (builtins) foldl';
     inherit (nixpkgs.lib) const;
 
-    libInputs = with inputs; [
+    libInputs = [
       flake-parts
       nix-darwin
       home-manager

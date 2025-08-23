@@ -17,7 +17,6 @@ in {
         excludes = [
           "\\.envrc$"
           "flake\\.lock$"
-          "^templates/"
         ];
 
         hooks = {

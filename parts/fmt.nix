@@ -21,7 +21,6 @@ in {
       settings.global.excludes = [
         "*.envrc"
         "flake.lock"
-        "templates"
       ];
 
       programs = {
