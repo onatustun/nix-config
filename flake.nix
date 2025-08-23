@@ -568,10 +568,10 @@
 
   outputs = inputs @ {
     nixpkgs,
-    systems,
     flake-parts,
     nix-darwin,
     home-manager,
+    systems,
     ...
   }: let
     inherit (builtins) foldl';

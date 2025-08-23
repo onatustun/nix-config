@@ -16,13 +16,13 @@ in {
 
       inputModules = [
         inputs.determinate.nixosModules.default
-        inputs.home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
         inputs.stylix.nixosModules.stylix
       ];
 
       overlays = [
-        inputs.nuenv.overlays.nuenv
+        inputs.nuenv.overlays.default
         inputs.nur.overlays.default
       ];
 
@@ -48,14 +48,14 @@ in {
 
       inputModules = [
         inputs.determinate.nixosModules.default
-        inputs.home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
         inputs.stylix.nixosModules.stylix
       ];
 
       overlays = [
         inputs.niri.overlays.niri
-        inputs.nuenv.overlays.nuenv
+        inputs.nuenv.overlays.default
         inputs.nur.overlays.default
       ];
 
@@ -76,13 +76,13 @@ in {
 
       inputModules = [
         inputs.determinate.nixosModules.default
-        inputs.home-manager.nixosModules.home-manager
+        inputs.disko.nixosModules.default
+        inputs.home-manager.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
         inputs.stylix.nixosModules.stylix
-        inputs.disko.nixosModules.disko
       ];
 
-      overlays = [inputs.nuenv.overlays.nuenv];
+      overlays = [inputs.nuenv.overlays.default];
 
       modules = [
         "common"
@@ -106,12 +106,12 @@ in {
 
       inputModules = [
         inputs.determinate.nixosModules.default
-        inputs.home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
-        inputs.stylix.nixosModules.stylix
+        inputs.stylix.nixosModules.default
       ];
 
-      overlays = [inputs.nuenv.overlays.nuenv];
+      overlays = [inputs.nuenv.overlays.default];
 
       modules = [
         "common"
