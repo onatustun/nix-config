@@ -14,12 +14,12 @@ in {
       homeVer = "24.11";
 
       inputModules = [
-        inputs.home-manager.darwinModules.home-manager
+        inputs.home-manager.darwinModules.default
         inputs.nix-index-database.darwinModules.nix-index
         inputs.stylix.darwinModules.stylix
       ];
 
-      overlays = [inputs.nuenv.overlays.nuenv];
+      overlays = [inputs.nuenv.overlays.default];
 
       modules = [
         "common"
