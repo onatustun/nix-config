@@ -122,6 +122,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    tailscale = {
+      url = "github:tailscale/tailscale";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+
     agenix = {
       url = "github:ryantm/agenix";
 

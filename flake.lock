@@ -2037,6 +2037,7 @@
         "statix": "statix",
         "stylix": "stylix",
         "systems": "systems_2",
+        "tailscale": "tailscale",
         "treefmt-nix": "treefmt-nix",
         "uwu-colors": "uwu-colors",
         "xdg-portal-hyprland": "xdg-portal-hyprland",
@@ -2177,6 +2178,32 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tailscale": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755996743,
+        "narHash": "sha256-eSEJYPU9DOMPcBFn1X3sATfD920y9jhNACTnyBrFoTo=",
+        "owner": "tailscale",
+        "repo": "tailscale",
+        "rev": "4236a759f3a1c2ae1e78729d677b2bb33c26232b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tailscale",
+        "repo": "tailscale",
         "type": "github"
       }
     },
