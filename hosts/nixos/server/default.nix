@@ -14,14 +14,18 @@ in {
   users.users = {
     root.openssh.authorizedKeys.keys = keys.userKeys;
 
-    ${username}.extraGroups = [
-      "input"
-      "libvirt"
-      "networkmanager"
-      "power"
-      "storage"
-      "wheel"
-    ];
+    ${username} = {
+      openssh.authorizedKeys.keys = keys.userKeys;
+
+      extraGroups = [
+        "input"
+        "libvirt"
+        "networkmanager"
+        "power"
+        "storage"
+        "wheel"
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
