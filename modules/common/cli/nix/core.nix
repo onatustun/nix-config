@@ -6,7 +6,6 @@
 }: {
   environment.systemPackages = with inputs;
     [
-      agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
       alejandra.packages.${pkgs.stdenv.hostPlatform.system}.default
       cachix.packages.${pkgs.stdenv.hostPlatform.system}.default
       comma.packages.${pkgs.stdenv.hostPlatform.system}.default
