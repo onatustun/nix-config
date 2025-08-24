@@ -12,7 +12,7 @@ in {
     |> remove ./default.nix;
 
   users.users = {
-    root.openssh.authorizedKeys.keys = [keys.all];
+    root.openssh.authorizedKeys.keys = keys.userKeys;
 
     ${username}.extraGroups = [
       "input"
