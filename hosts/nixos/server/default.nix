@@ -12,7 +12,7 @@ in {
     |> remove ./default.nix;
 
   users.users = {
-    root.openssh.authorizedKeys.keys = keys.all;
+    root.openssh.authorizedKeys.keys = [keys.all];
 
     ${username}.extraGroups = [
       "input"
@@ -32,7 +32,6 @@ in {
   ];
 
   services = {
-    openssh = enabled;
     jellyfin = enabled {user = "onat";};
 
     caddy = enabled {

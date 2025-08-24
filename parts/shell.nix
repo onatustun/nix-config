@@ -12,6 +12,7 @@
 
       packages = with pkgs;
         [
+          age
           git
           nixos-rebuild
           vim

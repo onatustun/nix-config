@@ -108,7 +108,7 @@ in {
         inputs.determinate.nixosModules.default
         inputs.home-manager.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
-        inputs.stylix.nixosModules.default
+        inputs.stylix.nixosModules.stylix
       ];
 
       overlays = [inputs.nuenv.overlays.default];
