@@ -59,6 +59,7 @@ inputs: self: super: let
       genAttrs packages (name:
         final.callPackage (inputs.self + /pkgs/${name}.nix) {});
 
+    secretsDir = "${inputs.self}/secrets";
     modulesRoot = inputs.self + "/modules";
 
     relPath = file:
@@ -133,7 +134,7 @@ inputs: self: super: let
       inputs
       // hostTypes
       // {
-        inherit inputs system type systemBuilder hostName username homeDir homeVer;
+        inherit inputs system type systemBuilder hostName username homeDir homeVer secretsDir;
 
         keys = import (inputs.self + /keys.nix);
         lib = self;
