@@ -1,6 +1,7 @@
 {
   lib,
   username,
+  keys,
   ...
 }: let
   inherit (lib) collectNix remove;
@@ -19,4 +20,6 @@ in {
     "video"
     "wheel"
   ];
+
+  users.users.root.openssh.authorizedKeys.keys = keys.all;
 }
