@@ -16,6 +16,7 @@ let
     host = {
       nixos = {
         desktop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOkTg+eQtVPavIgeaEig6kz6uRVxkRxm1VTc4Bg/Z0lt host/nixos/desktop";
+        laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFVULgggFJuA5qbNN2KuSBFCkN6JLIVgO1YIqk0/Povi host/nixos/laptop";
         server = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK0BhVNZimXHrzRFVXJU9jDfAoXniVTTjuc1JyJkwQy1 host/nixos/server";
       };
 
