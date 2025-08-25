@@ -19,10 +19,12 @@ in {
 
   services.tailscale = enabled {
     inherit interfaceName package;
+    authKeyFile = config.age.secrets."tailscale-authkey".path;
     useRoutingFeatures = "both";
     openFirewall = true;
     extraUpFlags = ["--ssh"];
-    authKeyFile = config.age.secrets."tailscale-authkey".path;
+    extraSetFlags = ["--advertise-exit-node"];
+    disableTaildrop = false;
   };
 
   networking.firewall = enabled {
