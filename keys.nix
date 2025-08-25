@@ -18,7 +18,7 @@ let
 
       windows = {
         desktop = "";
-        laptop = "";
+        laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMFzR7clrDd6vcRIztyNzC7g+L/K/QEvRIqYiWpMJLAT host/windows/laptop";
       };
     };
 
@@ -38,7 +38,7 @@ let
 
       windows = {
         desktop = "";
-        laptop = "";
+        laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPaPv4aW5YSl4YxjvPn+eJ/ogGFy0RzhbdyztYVc/GZb onat@DESKTOP-7AV75V2";
       };
     };
   };
