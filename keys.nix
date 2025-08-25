@@ -1,26 +1,6 @@
 let
   inherit (builtins) foldl' attrValues;
 
-  getAttrFromPath = path: set:
-    path
-    |> foldl' (s: k: s.${k}) set;
-
-  at = path:
-    keys
-    |> getAttrFromPath path;
-
-  valuesAt = path:
-    at path
-    |> attrValues;
-
-  roleKeys = os: role: [
-    (["host" os role]
-      |> at)
-
-    (["user" os role]
-      |> at)
-  ];
-
   keys = {
     host = {
       nixos = {
@@ -63,17 +43,119 @@ let
     };
   };
 
+  getAttrFromPath = path: set:
+    path
+    |> foldl' (s: k: s.${k}) set;
+
+  at = path:
+    keys
+    |> getAttrFromPath path;
+
+  valuesAt = path:
+    at path
+    |> attrValues;
+
+  roleKeys = os: role:
+    ["host" "user"]
+    |> map (scope:
+      [scope os role]
+      |> at);
+
+  mkRole = role: oses: let
+    host = map (os: at ["host" os role]) oses;
+    user = map (os: at ["user" os role]) oses;
+  in {
+    inherit host user;
+
+    all =
+      user
+      ++ host;
+  };
+
+  desktopGroup = mkRole "desktop" ["nixos" "wsl" "windows"];
+  laptopGroup = mkRole "laptop" ["nixos" "wsl" "windows"];
+  serverGroup = mkRole "server" ["nixos"];
+  miniGroup = mkRole "mini" ["darwin"];
+
   nixosHostKeys = valuesAt ["host" "nixos"];
   nixosUserKeys = valuesAt ["user" "nixos"];
+
+  nixosKeys =
+    nixosHostKeys
+    ++ nixosUserKeys;
+
+  nixosDesktopKeys = roleKeys "nixos" "desktop";
+  nixosLaptopKeys = roleKeys "nixos" "laptop";
+  nixosServerKeys = roleKeys "nixos" "server";
 
   darwinHostKeys = valuesAt ["host" "darwin"];
   darwinUserKeys = valuesAt ["user" "darwin"];
 
+  darwinKeys =
+    darwinHostKeys
+    ++ darwinUserKeys;
+
+  darwinMiniKeys = roleKeys "darwin" "mini";
+
   wslHostKeys = valuesAt ["host" "wsl"];
   wslUserKeys = valuesAt ["user" "wsl"];
 
+  wslKeys =
+    wslHostKeys
+    ++ wslUserKeys;
+
+  wslDesktopKeys = roleKeys "wsl" "desktop";
+  wslLaptopKeys = roleKeys "wsl" "laptop";
+
   windowsHostKeys = valuesAt ["host" "windows"];
   windowsUserKeys = valuesAt ["user" "windows"];
+
+  windowsKeys =
+    windowsHostKeys
+    ++ windowsUserKeys;
+
+  windowsDesktopKeys = roleKeys "windows" "desktop";
+  windowsLaptopKeys = roleKeys "windows" "laptop";
+
+  desktopHostKeys = desktopGroup.host;
+  desktopUserKeys = desktopGroup.user;
+
+  desktopKeys =
+    desktopUserKeys
+    ++ desktopHostKeys;
+
+  laptopHostKeys = laptopGroup.host;
+  laptopUserKeys = laptopGroup.user;
+
+  laptopKeys =
+    laptopUserKeys
+    ++ laptopHostKeys;
+
+  serverHostKeys = serverGroup.host;
+  serverUserKeys = serverGroup.user;
+
+  serverKeys =
+    serverUserKeys
+    ++ serverHostKeys;
+
+  miniHostKeys = miniGroup.host;
+  miniUserKeys = miniGroup.user;
+
+  miniKeys =
+    miniUserKeys
+    ++ miniHostKeys;
+
+  adminHostKeys =
+    desktopHostKeys
+    ++ laptopHostKeys;
+
+  adminUserKeys =
+    desktopUserKeys
+    ++ laptopUserKeys;
+
+  adminKeys =
+    adminUserKeys
+    ++ adminHostKeys;
 
   hostKeys =
     nixosHostKeys
@@ -86,43 +168,44 @@ let
     ++ darwinUserKeys
     ++ wslUserKeys
     ++ windowsUserKeys;
+
+  allKeys =
+    hostKeys
+    ++ userKeys;
 in
   keys
   // {
-    inherit hostKeys userKeys;
-    allKeys =
-      hostKeys
-      ++ userKeys;
-
     inherit nixosHostKeys nixosUserKeys;
-    nixosKeys =
-      nixosHostKeys
-      ++ nixosUserKeys;
-
-    nixosDesktopKeys = roleKeys "nixos" "desktop";
-    nixosLaptopKeys = roleKeys "nixos" "laptop";
-    nixosServerKeys = roleKeys "nixos" "server";
+    inherit nixosKeys;
+    inherit nixosDesktopKeys nixosLaptopKeys nixosServerKeys;
 
     inherit darwinHostKeys darwinUserKeys;
-    darwinKeys =
-      darwinHostKeys
-      ++ darwinUserKeys;
-
-    darwinMiniKeys = roleKeys "darwin" "mini";
+    inherit darwinKeys;
+    inherit darwinMiniKeys;
 
     inherit wslHostKeys wslUserKeys;
-    wslKeys =
-      wslHostKeys
-      ++ wslUserKeys;
-
-    wslDesktopKeys = roleKeys "wsl" "desktop";
-    wslLaptopKeys = roleKeys "wsl" "laptop";
+    inherit wslKeys;
+    inherit wslDesktopKeys wslLaptopKeys;
 
     inherit windowsHostKeys windowsUserKeys;
-    windowsKeys =
-      windowsHostKeys
-      ++ windowsUserKeys;
+    inherit windowsKeys;
+    inherit windowsDesktopKeys windowsLaptopKeys;
 
-    windowsDesktopKeys = roleKeys "windows" "desktop";
-    windowsLaptopKeys = roleKeys "windows" "laptop";
+    inherit desktopHostKeys desktopUserKeys;
+    inherit desktopKeys;
+
+    inherit laptopHostKeys laptopUserKeys;
+    inherit laptopKeys;
+
+    inherit serverHostKeys serverUserKeys;
+    inherit serverKeys;
+
+    inherit miniHostKeys miniUserKeys;
+    inherit miniKeys;
+
+    inherit adminHostKeys adminUserKeys;
+    inherit adminKeys;
+
+    inherit hostKeys userKeys;
+    inherit allKeys;
   }

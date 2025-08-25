@@ -6,17 +6,17 @@
   ...
 }: let
   inherit (lib) collectNix remove enabled;
-  inherit (keys) nixosUserKeys;
+  inherit (keys) adminUserKeys;
 in {
   imports =
     collectNix ./.
     |> remove ./default.nix;
 
   users.users = {
-    root.openssh.authorizedKeys.keys = nixosUserKeys;
+    root.openssh.authorizedKeys.keys = adminUserKeys;
 
     ${username} = {
-      openssh.authorizedKeys.keys = nixosUserKeys;
+      openssh.authorizedKeys.keys = adminUserKeys;
 
       extraGroups = [
         "input"

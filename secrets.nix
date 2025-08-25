@@ -1,5 +1,7 @@
 let
-  inherit (import ./keys.nix) allKeys;
+  inherit (import ./keys.nix) adminKeys serverKeys;
 in {
-  "secrets/tailscale-authkey.age".publicKeys = allKeys;
+  "secrets/tailscale-authkey.age".publicKeys =
+    adminKeys
+    ++ serverKeys;
 }
