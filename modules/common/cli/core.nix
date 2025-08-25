@@ -23,10 +23,12 @@ in {
     killall
     less
     lsof
+    ouch
     procps
     psmisc
     vim
     wget
     which
+    yq-go
   ];
 }
