@@ -16,7 +16,6 @@ def main --wrapped [
   let nh_flags = [
     $flake
     "--hostname" $host
-    "--bypass-root-check"
     "--show-trace"
   ] | append ($args_split | get 0 | where { $in != "" })
 
@@ -25,5 +24,5 @@ def main --wrapped [
     "--extra-experimental-features" "pipe-operators"
   ] | append ($args_split | get -o 1 | default [])
 
-  sudo NH_NO_CHECKS=true nh $system_type switch ...$nh_flags -- ...$nix_flags
+  sudo nh $system_type switch ...$nh_flags -- ...$nix_flags
 }
