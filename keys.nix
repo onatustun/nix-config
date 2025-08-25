@@ -11,11 +11,6 @@ let
 
       darwin.mini = "";
 
-      wsl = {
-        desktop = "";
-        laptop = "";
-      };
-
       windows = {
         desktop = "";
         laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMFzR7clrDd6vcRIztyNzC7g+L/K/QEvRIqYiWpMJLAT host/windows/laptop";
@@ -31,14 +26,9 @@ let
 
       darwin.mini = "";
 
-      wsl = {
-        desktop = "";
-        laptop = "";
-      };
-
       windows = {
         desktop = "";
-        laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPaPv4aW5YSl4YxjvPn+eJ/ogGFy0RzhbdyztYVc/GZb onat@DESKTOP-7AV75V2";
+        laptop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPaPv4aW5YSl4YxjvPn+eJ/ogGFy0RzhbdyztYVc/GZb user/windows/laptop";
       };
     };
   };
@@ -72,8 +62,8 @@ let
       ++ host;
   };
 
-  desktopGroup = mkRole "desktop" ["nixos" "wsl" "windows"];
-  laptopGroup = mkRole "laptop" ["nixos" "wsl" "windows"];
+  desktopGroup = mkRole "desktop" ["nixos" "windows"];
+  laptopGroup = mkRole "laptop" ["nixos" "windows"];
   serverGroup = mkRole "server" ["nixos"];
   miniGroup = mkRole "mini" ["darwin"];
 
@@ -96,16 +86,6 @@ let
     ++ darwinUserKeys;
 
   darwinMiniKeys = roleKeys "darwin" "mini";
-
-  wslHostKeys = valuesAt ["host" "wsl"];
-  wslUserKeys = valuesAt ["user" "wsl"];
-
-  wslKeys =
-    wslHostKeys
-    ++ wslUserKeys;
-
-  wslDesktopKeys = roleKeys "wsl" "desktop";
-  wslLaptopKeys = roleKeys "wsl" "laptop";
 
   windowsHostKeys = valuesAt ["host" "windows"];
   windowsUserKeys = valuesAt ["user" "windows"];
@@ -160,13 +140,11 @@ let
   hostKeys =
     nixosHostKeys
     ++ darwinHostKeys
-    ++ wslHostKeys
     ++ windowsHostKeys;
 
   userKeys =
     nixosUserKeys
     ++ darwinUserKeys
-    ++ wslUserKeys
     ++ windowsUserKeys;
 
   allKeys =
@@ -182,10 +160,6 @@ in
     inherit darwinHostKeys darwinUserKeys;
     inherit darwinKeys;
     inherit darwinMiniKeys;
-
-    inherit wslHostKeys wslUserKeys;
-    inherit wslKeys;
-    inherit wslDesktopKeys wslLaptopKeys;
 
     inherit windowsHostKeys windowsUserKeys;
     inherit windowsKeys;
