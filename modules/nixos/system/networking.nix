@@ -1,14 +1,13 @@
 {
   lib,
+  pkgs,
   hostName,
   ...
 }: let
   inherit (lib) enabled;
 in {
-  services = {
-    network-manager-applet = enabled;
-    resolved = enabled;
-  };
+  services.resolved = enabled;
+  environment.systemPackages = [pkgs.networkmanagerapplet];
 
   networking = {
     inherit hostName;
