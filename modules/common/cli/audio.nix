@@ -1,14 +1,7 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     ffmpeg-full
     scdl
+    yt-dlp
   ];
-
-  home-manager.sharedModules = [{programs.yt-dlp = enabled;}];
 }
