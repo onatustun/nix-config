@@ -1,14 +1,14 @@
 {
   lib,
-  isDarwin,
   pkgs,
   inputs,
+  isDarwin,
   username,
   ...
 }: let
-  inherit (lib) enabled getExe' getExe;
-  inherit (builtins) readFile;
+  inherit (lib) getExe' enabled getExe;
   inherit (pkgs.nuenv) writeScriptBin;
+  inherit (builtins) readFile;
   inherit (inputs) self;
 
   helixDrv =
