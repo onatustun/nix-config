@@ -25,6 +25,10 @@ in {
     authKeyFile = config.age.secrets."tailscale-authkey".path;
   };
 
-  networking.firewall = enabled {trustedInterfaces = [interfaceName];};
+  networking.firewall = enabled {
+    trustedInterfaces = [interfaceName];
+    allowedUDPPorts = [config.services.tailscale.port];
+  };
+
   environment.systemPackages = [package];
 }

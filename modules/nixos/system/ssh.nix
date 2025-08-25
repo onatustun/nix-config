@@ -1,6 +1,5 @@
-{
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
+{lib, ...}: let
+  inherit (lib) enabled;
+in {
+  services.openssh = enabled {settings.PasswordAuthentication = false;};
 }
