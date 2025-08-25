@@ -24,5 +24,5 @@ def main --wrapped [
     "--extra-experimental-features" "pipe-operators"
   ] | append ($args_split | get -o 1 | default [])
 
-  sudo nh $system_type switch ...$nh_flags -- ...$nix_flags
+  nh $system_type switch ...$nh_flags -- ...$nix_flags
 }
