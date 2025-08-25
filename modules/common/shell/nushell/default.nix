@@ -6,8 +6,10 @@
   username,
   ...
 }: let
-  inherit (lib) enabled getExe';
+  inherit (lib) enabled getExe' getExe;
   inherit (builtins) readFile;
+  inherit (pkgs.nuenv) writeScriptBin;
+  inherit (inputs) self;
 
   helixDrv =
     if isDarwin
@@ -16,6 +18,11 @@
 
   helixExe = getExe' helixDrv "hx";
   nushellExe = getExe' pkgs.nushell "nu";
+
+  rebuild = writeScriptBin {
+    name = "rebuild";
+    script = readFile (self + "/scripts/rebuild.nu");
+  };
 in {
   users.users.${username}.shell = pkgs.nushell;
   environment.shells = [pkgs.nushell];
@@ -74,6 +81,10 @@ in {
 
         extraConfig = ''
           ${readFile ./extraConfig.nu}
+
+          def --wrapped rebuild [...args]: nothing -> nothing {
+            ${getExe rebuild} ...$args
+          }
         '';
       };
     }
