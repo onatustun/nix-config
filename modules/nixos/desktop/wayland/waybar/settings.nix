@@ -1,9 +1,15 @@
-{lib, ...}: let
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}: let
   inherit (lib) enabled;
 in {
   home-manager.sharedModules = [
     {
       programs.waybar = enabled {
+        package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.default;
         systemd = enabled;
 
         settings = [

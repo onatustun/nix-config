@@ -646,6 +646,15 @@
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
 
+    waybar = {
+      url = "github:alexays/waybar";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     ghostty = {
       url = "github:ghostty-org/ghostty";
 

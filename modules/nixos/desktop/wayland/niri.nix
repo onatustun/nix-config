@@ -9,7 +9,7 @@
 in {
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache = disabled;
-  programs.niri = enabled {package = pkgs.niri-unstable;};
+  programs.niri = enabled {package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.default;};
 
   environment.systemPackages = with pkgs; [
     gnome-keyring

@@ -2013,6 +2013,7 @@
         "tailscale": "tailscale",
         "treefmt-nix": "treefmt-nix",
         "uwu-colors": "uwu-colors",
+        "waybar": "waybar",
         "xdg-portal-hyprland": "xdg-portal-hyprland",
         "xwayland-satellite": "xwayland-satellite",
         "yazi": "yazi",
@@ -2286,6 +2287,29 @@
       "original": {
         "owner": "q60",
         "repo": "uwu_colors",
+        "type": "github"
+      }
+    },
+    "waybar": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754637322,
+        "narHash": "sha256-mGiBZjfvtZZkSHrha4UF2l1Ogbij8J//r2h4gcZAJ6w=",
+        "owner": "alexays",
+        "repo": "waybar",
+        "rev": "41de8964f1e3278edf07902ad68ca5e01e7abeeb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alexays",
+        "repo": "waybar",
         "type": "github"
       }
     },
