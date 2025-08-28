@@ -3,6 +3,5 @@
     dconf
     geoclue2
     polkit
-    zmkBATx
   ];
 }
