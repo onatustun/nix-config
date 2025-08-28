@@ -327,7 +327,15 @@
       };
     };
 
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    brew-src = {
+      url = "github:homebrew/brew";
+      flake = false;
+    };
+
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+      inputs.brew-src.follows = "brew-src";
+    };
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -351,9 +359,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rust-analyzer-src = {
+      url = "github:rust-lang/rust-analyzer";
+      flake = false;
+    };
+
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        rust-analyzer-src.follows = "rust-analyzer-src";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     naersk = {
@@ -486,6 +503,39 @@
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
+      };
+    };
+
+    advisory-db = {
+      url = "github:rustsec/advisory-db";
+      flake = false;
+    };
+
+    powertest = {
+      url = "github:eza-community/powertest";
+
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        naersk.follows = "naersk";
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
+    eza = {
+      url = "github:eza-community/eza";
+
+      inputs = {
+        advisory-db.follows = "advisory-db";
+        flake-utils.follows = "flake-utils";
+        naersk.follows = "naersk";
+        nixpkgs.follows = "nixpkgs";
+        powertest.follows = "powertest";
+        pre-commit-hooks.follows = "pre-commit-hooks";
+        rust-overlay.follows = "rust-overlay";
+        systems.follows = "systems";
+        treefmt-nix.follows = "treefmt-nix";
       };
     };
 

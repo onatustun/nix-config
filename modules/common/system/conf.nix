@@ -1,6 +1,7 @@
 {
   lib,
   isDarwin,
+  inputs,
   ...
 }: let
   inherit (lib) disabled merge mkDefault optionalAttrs optionals;
@@ -20,6 +21,7 @@ in {
 
     nixPath = ["nixpkgs=flake:nixpkgs"];
     optimise.automatic = !isDarwin;
+    registry.nixpkgs.flake = inputs.nixpkgs;
 
     settings =
       {

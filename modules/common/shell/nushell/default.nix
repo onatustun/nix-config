@@ -74,7 +74,6 @@ in {
           tree = "eza -T --git-ignore --group-directories-first";
           "x." = "hx .";
           x = "hx";
-          yz = "yazi";
           z = "cd";
           zi = "cdi";
         };

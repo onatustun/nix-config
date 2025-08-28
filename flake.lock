@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "advisory-db": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756294590,
+        "narHash": "sha256-CyhicqYGMUCtBAbsyMKIuQVYl5D7m+yh/E0wonouF+A=",
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "rev": "11793a852bab94279ef3efc26d69face55a9e2ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "type": "github"
+      }
+    },
     "agenix": {
       "inputs": {
         "darwin": [
@@ -221,16 +237,15 @@
     "brew-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1753461463,
-        "narHash": "sha256-kGc7pRH0diLzKmOHsEFA8sZ9NJpgT+tqxAMsuqNd5Po=",
-        "owner": "Homebrew",
+        "lastModified": 1756403994,
+        "narHash": "sha256-HT0o5IYETmuY9vr6KHBB895nqN6FO5KGeEmQAM+Lvco=",
+        "owner": "homebrew",
         "repo": "brew",
-        "rev": "4d14be89e99a45181c18e96a5f19a5b43343cc0f",
+        "rev": "b95c3613bcda0a9a4c8b2f461e402991e7a5f330",
         "type": "github"
       },
       "original": {
-        "owner": "Homebrew",
-        "ref": "4.5.13",
+        "owner": "homebrew",
         "repo": "brew",
         "type": "github"
       }
@@ -491,12 +506,58 @@
         "type": "github"
       }
     },
+    "eza": {
+      "inputs": {
+        "advisory-db": [
+          "advisory-db"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "powertest": [
+          "powertest"
+        ],
+        "pre-commit-hooks": [
+          "pre-commit-hooks"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ],
+        "systems": [
+          "systems"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752897133,
+        "narHash": "sha256-lktsG+QwPZGj56DJcRn3/z6Uay9vY3qGF3cDWSxiVg8=",
+        "owner": "eza-community",
+        "repo": "eza",
+        "rev": "97f9f3600187d4704cb5f104b99a2b23847569f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eza-community",
+        "repo": "eza",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ],
-        "rust-analyzer-src": "rust-analyzer-src"
+        "rust-analyzer-src": [
+          "rust-analyzer-src"
+        ]
       },
       "locked": {
         "lastModified": 1755499663,
@@ -1435,7 +1496,9 @@
     },
     "nix-homebrew": {
       "inputs": {
-        "brew-src": "brew-src"
+        "brew-src": [
+          "brew-src"
+        ]
       },
       "locked": {
         "lastModified": 1754250993,
@@ -1914,6 +1977,38 @@
         "type": "github"
       }
     },
+    "powertest": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1700124898,
+        "narHash": "sha256-+5jKG/KmYOopvHwBAGu5iPVFqoug16Bkyk/InwB40tc=",
+        "owner": "eza-community",
+        "repo": "powertest",
+        "rev": "c7b7d3038036d24dd5c77286e69a3d4b119bae81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eza-community",
+        "repo": "powertest",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": [
@@ -1942,11 +2037,13 @@
     },
     "root": {
       "inputs": {
+        "advisory-db": "advisory-db",
         "agenix": "agenix",
         "agenix-rekey": "agenix-rekey",
         "agenix-shell": "agenix-shell",
         "alejandra": "alejandra",
         "aquamarine": "aquamarine",
+        "brew-src": "brew-src",
         "cachix": "cachix",
         "comma": "comma",
         "crane": "crane",
@@ -1956,6 +2053,7 @@
         "devenv": "devenv",
         "devshell": "devshell",
         "disko": "disko",
+        "eza": "eza",
         "fenix": "fenix",
         "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts_3",
@@ -2005,7 +2103,9 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nuenv": "nuenv",
         "nur": "nur",
+        "powertest": "powertest",
         "pre-commit-hooks": "pre-commit-hooks",
+        "rust-analyzer-src": "rust-analyzer-src",
         "rust-overlay": "rust-overlay",
         "statix": "statix",
         "stylix": "stylix",
@@ -2025,16 +2125,15 @@
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1755004716,
-        "narHash": "sha256-TbhPR5Fqw5LjAeI3/FOPhNNFQCF3cieKCJWWupeZmiA=",
+        "lastModified": 1756399119,
+        "narHash": "sha256-MsMvv/KLZ8/yubQdhuGM6kH86EJJu4h+cumbO46z5E0=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
-        "rev": "b2a58b8c6eff3c3a2c8b5c70dbf69ead78284194",
+        "rev": "6e59defe113522a412d33cff1d8eb5d46f31e298",
         "type": "github"
       },
       "original": {
         "owner": "rust-lang",
-        "ref": "nightly",
         "repo": "rust-analyzer",
         "type": "github"
       }
