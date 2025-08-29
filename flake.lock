@@ -485,6 +485,32 @@
         "type": "github"
       }
     },
+    "direnv": {
+      "inputs": {
+        "gomod2nix": [
+          "gomod2nix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755186951,
+        "narHash": "sha256-svsB2cqE/YrLPG7yj0OAVtCr7XyKTpLUb6h+nVURHgc=",
+        "owner": "direnv",
+        "repo": "direnv",
+        "rev": "5ffdaec7eed3ac7d6bdfe2dd098437233c78d0dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "direnv",
+        "repo": "direnv",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -823,6 +849,29 @@
         "owner": "GNOME",
         "ref": "48.2",
         "repo": "gnome-shell",
+        "type": "github"
+      }
+    },
+    "gomod2nix": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756047880,
+        "narHash": "sha256-JeuGh9kA1SPL70fnvpLxkIkCWpTjtoPaus3jzvdna0k=",
+        "owner": "nix-community",
+        "repo": "gomod2nix",
+        "rev": "47d628dc3b506bd28632e47280c6b89d3496909d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "gomod2nix",
         "type": "github"
       }
     },
@@ -2052,6 +2101,7 @@
         "determinate": "determinate",
         "devenv": "devenv",
         "devshell": "devshell",
+        "direnv": "direnv",
         "disko": "disko",
         "eza": "eza",
         "fenix": "fenix",
@@ -2061,6 +2111,7 @@
         "flake-utils": "flake-utils",
         "ghostty": "ghostty",
         "gitignore": "gitignore",
+        "gomod2nix": "gomod2nix",
         "hardware": "hardware",
         "helix": "helix",
         "home-manager": "home-manager",

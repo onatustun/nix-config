@@ -199,6 +199,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    direnv = {
+      url = "github:direnv/direnv";
+
+      inputs = {
+        gomod2nix.follows = "gomod2nix";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+
     nix-direnv = {
       url = "github:nix-community/nix-direnv";
 
@@ -394,6 +404,15 @@
 
     zon2nix = {
       url = "github:jcollie/zon2nix";
+
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    gomod2nix = {
+      url = "github:nix-community/gomod2nix";
 
       inputs = {
         flake-utils.follows = "flake-utils";

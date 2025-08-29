@@ -4,9 +4,9 @@ in {
   home-manager.sharedModules = [
     {
       programs.git = enabled {
-        lfs = enabled;
         userName = "onatustun";
         userEmail = "o@ust.sh";
+        lfs = enabled;
 
         ignores = [
           ".direnv"
@@ -15,6 +15,7 @@ in {
 
         extraConfig = {
           init.defaultBranch = "main";
+          commit.verbose = true;
           safe.directory = "~/nix";
         };
       };

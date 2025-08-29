@@ -70,7 +70,6 @@ in {
           s = "sudo -E";
           "sx." = "sudo -E hx .";
           sx = "sudo -E hx";
-          syz = "sudo -E yazi";
           tree = "eza -T --git-ignore --group-directories-first";
           "x." = "hx .";
           x = "hx";
