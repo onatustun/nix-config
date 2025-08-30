@@ -599,6 +599,31 @@
         "type": "github"
       }
     },
+    "fh": {
+      "inputs": {
+        "crane": [
+          "crane"
+        ],
+        "fenix": [
+          "fenix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754442828,
+        "narHash": "sha256-YVtFzJMdHpshtRqBDVw3Kr88psAPfcdOI0XVDGnFkq0=",
+        "rev": "e3b574c59803ee6b240b6a92b7ebb41a51d8cbcc",
+        "revCount": 745,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/DeterminateSystems/fh/0.1.25/01987cf2-841b-7000-a88c-cec765d7071c/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/DeterminateSystems/fh/%2A"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -2181,6 +2206,7 @@
         "disko": "disko",
         "eza": "eza",
         "fenix": "fenix",
+        "fh": "fh",
         "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts_3",
         "flake-root": "flake-root",

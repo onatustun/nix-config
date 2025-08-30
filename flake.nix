@@ -96,6 +96,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    fh = {
+      url = "https://flakehub.com/f/DeterminateSystems/fh/*";
+
+      inputs = {
+        crane.follows = "crane";
+        fenix.follows = "fenix";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
