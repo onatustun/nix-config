@@ -19,6 +19,7 @@
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
       "https://nix-darwin.cachix.org"
+      "https://nixpkgs-wayland.cachix.org"
       "https://numtide.cachix.org"
       "https://pre-commit-hooks.cachix.org"
       "https://statix.cachix.org"
@@ -43,6 +44,7 @@
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
+      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
       "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
@@ -78,6 +80,16 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+
+    lib-aggregate = {
+      url = "github:nix-community/lib-aggregate";
+
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs-lib.follows = "nixpkgs-lib";
+      };
+    };
 
     determinate = {
       url = "https://flakehub.com/f/determinatesystems/determinate/*";
@@ -117,7 +129,11 @@
       };
     };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
+    };
+
     systems.url = "github:nix-systems/default";
 
     nix-darwin = {
@@ -127,7 +143,11 @@
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixlib.follows = "nixpkgs-lib";
+      };
     };
 
     deploy-rs = {
@@ -146,6 +166,7 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
+    preservation.url = "github:nix-community/preservation";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -286,6 +307,15 @@
         devenv.follows = "devenv";
         flake-compat.follows = "flake-compat";
         git-hooks.follows = "pre-commit-hooks";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    nix-index = {
+      url = "github:nix-community/nix-index";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -555,6 +585,16 @@
         rust-overlay.follows = "rust-overlay";
         systems.follows = "systems";
         treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        lib-aggregate.follows = "lib-aggregate";
+        nixpkgs.follows = "nixpkgs";
       };
     };
 

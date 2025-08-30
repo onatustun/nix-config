@@ -32,6 +32,7 @@
           deploy-rs.packages.default
           home-manager.packages.default
           nh.packages.default
+          nix-index.packages.default
           nixos-anywhere.packages.default
           nixos-generators.packages.default
           statix.packages.default

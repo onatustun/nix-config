@@ -1,10 +1,12 @@
 {
   lib,
+  inputs,
   pkgs,
   ...
 }: let
   inherit (lib) enabled;
+  package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.dunst;
 in {
-  environment.systemPackages = [pkgs.dunst];
-  home-manager.sharedModules = [{services.dunst = enabled;}];
+  environment.systemPackages = [package];
+  home-manager.sharedModules = [{services.dunst = enabled {inherit package;};}];
 }
