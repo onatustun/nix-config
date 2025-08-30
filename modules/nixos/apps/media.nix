@@ -1,8 +1,13 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    haruna
-    imv
-    jellyfin-media-player
-    mpv
-  ];
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  environment.systemPackages = with pkgs;
+    [
+      haruna
+      jellyfin-media-player
+      mpv
+    ]
+    ++ [inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.imv];
 }

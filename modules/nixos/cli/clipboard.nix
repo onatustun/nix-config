@@ -1,15 +1,17 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   inherit (lib) enabled;
 in {
-  environment.systemPackages = with pkgs; [
-    cliphist
-    wl-clipboard
-    wl-clip-persist
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      cliphist
+      wl-clip-persist
+    ]
+    ++ [inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wl-clipboard];
 
   home-manager.sharedModules = [
     {
