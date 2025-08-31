@@ -5,7 +5,7 @@ in {
     {
       programs.git = enabled {
         userName = "onatustun";
-        userEmail = "o@ust.sh";
+        userEmail = "git@onatustun.com";
         lfs = enabled;
 
         ignores = [
