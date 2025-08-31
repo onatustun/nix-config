@@ -41,6 +41,7 @@ in {
 
           bold-is-bright = true;
           confirm-close-surface = false;
+          font-size = 14;
           gtk-titlebar = false;
           mouse-hide-while-typing = true;
           shell-integration-features = "no-cursor";
