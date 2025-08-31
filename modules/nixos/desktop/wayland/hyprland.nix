@@ -106,8 +106,8 @@ in {
 
           general = {
             border_size = 2;
-            gaps_in = 6;
-            gaps_out = 12;
+            gaps_in = -2;
+            gaps_out = 0;
             layout = "dwindle";
             resize_on_border = true;
           };
@@ -117,12 +117,7 @@ in {
             active_opacity = 1;
             inactive_opacity = 1;
             blur.enabled = false;
-
-            shadow = {
-              enabled = true;
-              range = 8;
-              render_power = 3;
-            };
+            shadow.enabled = false;
           };
 
           animations = {
@@ -187,6 +182,7 @@ in {
               "$mod Shift, F, fullscreen, 0"
               "$mod, V, togglefloating"
               "$mod Shift, E, exit"
+              "$mod, W, exec, pkill -SIGUSR1 waybar"
             ]
             ++ (
               concatLists (genList (x: let
