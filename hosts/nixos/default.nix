@@ -32,7 +32,6 @@ in {
       ];
 
       ignore = [
-        "bluetooth.nix"
         "niri.nix"
         "swayidle.nix"
         "xwayland.nix"
