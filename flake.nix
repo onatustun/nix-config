@@ -598,6 +598,17 @@
       };
     };
 
+    rip2 = {
+      url = "github:milescranmer/rip2";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        naersk.follows = "naersk";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
 

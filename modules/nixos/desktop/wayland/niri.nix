@@ -6,10 +6,11 @@
   ...
 }: let
   inherit (lib) enabled disabled getExe;
+  package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
 in {
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache = disabled;
-  programs.niri = enabled {package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.default;};
+  programs.niri = enabled {inherit package;};
 
   environment.systemPackages = with pkgs; [
     gnome-keyring
@@ -23,7 +24,7 @@ in {
 
       xdg.portal = {
         extraPortals = [pkgs.xdg-desktop-portal-gtk];
-        configPackages = [pkgs.niri-unstable];
+        configPackages = [package];
       };
 
       programs.niri.settings = {
@@ -58,7 +59,6 @@ in {
           (makeCommand "wl-paste --type text --watch cliphist store")
           (makeCommand "wl-clip-persist --clipboard both")
           (makeCommand "brightness -r")
-          (makeCommand "swayidle")
         ];
 
         outputs = {
@@ -107,7 +107,7 @@ in {
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = ["${getExe pkgs.fish}" "-c" "${getExe inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}"];
+          "Mod+Q".action.spawn = "${getExe inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}";
           "Mod+Z".action.spawn = "zen-twilight";
 
           "Mod+C".action.close-window = [];

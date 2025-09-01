@@ -24,6 +24,7 @@
       nixos-generators.packages.${pkgs.stdenv.hostPlatform.system}.default
       nix-search-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
       nix-search-tv.packages.${pkgs.stdenv.hostPlatform.system}.default
+      rip2.packages.${pkgs.stdenv.hostPlatform.system}.default
       statix.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ (

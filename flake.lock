@@ -2185,6 +2185,35 @@
         "type": "github"
       }
     },
+    "rip2": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756659363,
+        "narHash": "sha256-VVEoPHWszHUX8rrTuTap54fPm0r0gsDa20KNr08VfUU=",
+        "owner": "milescranmer",
+        "repo": "rip2",
+        "rev": "71c222c95393d30bb1921a75005600df2ac7d3d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "milescranmer",
+        "repo": "rip2",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "advisory-db": "advisory-db",
@@ -2263,6 +2292,7 @@
         "powertest": "powertest",
         "pre-commit-hooks": "pre-commit-hooks",
         "preservation": "preservation",
+        "rip2": "rip2",
         "rust-analyzer-src": "rust-analyzer-src",
         "rust-overlay": "rust-overlay",
         "statix": "statix",
