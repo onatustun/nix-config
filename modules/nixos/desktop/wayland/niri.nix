@@ -13,7 +13,6 @@ in {
   programs.niri = enabled {inherit package;};
 
   environment.systemPackages = with pkgs; [
-    gnome-keyring
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk
   ];

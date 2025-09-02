@@ -1,16 +1,8 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     openvpn
     protonvpn-cli
     protonvpn-gui
     wireguard-tools
   ];
-
-  security.polkit = enabled;
 }
