@@ -6,11 +6,14 @@
   inherit (lib) enabled;
 in {
   environment.systemPackages = with pkgs; [
+    age-plugin-yubikey
     fido2-manage
     pamtester
     pam_u2f
+    yubikey-agent
     yubikey-manager
     yubikey-personalization
+    yubikey-touch-detector
     yubioath-flutter
   ];
 
@@ -64,6 +67,7 @@ in {
 
     udev.packages = with pkgs; [
       libfido2
+      libu2f-host
       yubikey-personalization
     ];
   };
