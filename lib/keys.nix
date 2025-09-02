@@ -1,5 +1,5 @@
-let
-  inherit (builtins) foldl' attrValues;
+super: let
+  inherit (super) foldl' attrValues;
 
   getAttrFromPath = path: set:
     path

@@ -1,10 +1,9 @@
-inputs: self: super: let
+super: inputs: self: let
   inherit (super) nixosSystem darwinSystem;
   inherit (inputs.nixos-generators) nixosGenerate;
-  inherit (super) genAttrs filter strings flatten splitString mkDefault optional optionals unique any optionalAttrs;
+  inherit (super) genAttrs removePrefix hasSuffix removeSuffix splitString elemAt length hasPrefix hasInfix filter any pathExists flatten unique mkDefault optional optionals optionalAttrs;
+  inherit (builtins) baseNameOf toString;
   inherit (self) collectNix enabled;
-  inherit (builtins) elemAt baseNameOf toString pathExists length;
-  inherit (strings) hasInfix hasSuffix hasPrefix removePrefix removeSuffix;
 
   systems = {
     nixos = {
@@ -135,7 +134,6 @@ inputs: self: super: let
       // hostTypes
       // {
         inherit inputs system type systemBuilder hostName username homeDir homeVer secretsDir;
-
         lib = self;
       };
 

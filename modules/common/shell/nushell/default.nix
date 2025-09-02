@@ -6,9 +6,8 @@
   username,
   ...
 }: let
-  inherit (lib) getExe' enabled getExe;
+  inherit (lib) getExe' readFile enabled getExe;
   inherit (pkgs.nuenv) writeScriptBin;
-  inherit (builtins) readFile;
   inherit (inputs) self;
 
   helixDrv =

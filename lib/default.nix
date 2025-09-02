@@ -1,7 +1,7 @@
 inputs: self: super: let
   fs = import ./fs.nix self;
-  keys = import ./keys.nix;
-  sys = import ./sys.nix inputs self super;
+  keys = import ./keys.nix super;
+  sys = import ./sys.nix super inputs self;
   values = import ./values.nix self;
 in
   fs

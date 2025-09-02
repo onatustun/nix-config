@@ -9,7 +9,7 @@
 }: let
   inherit (lib) concatStringsSep getExe enabled;
 
-  guiPath = concatStringsSep ":" [
+  guiPathDirs = [
     "/nix/var/nix/profiles/default/bin"
     "/etc/profiles/per-user/${username}/bin"
     "${homeDir}/.nix-profile/bin"
@@ -19,6 +19,10 @@
     "/usr/sbin"
     "/sbin"
   ];
+
+  guiPath =
+    guiPathDirs
+    |> concatStringsSep ":";
 
   nuExe = getExe pkgs.nushell;
 in {

@@ -6,7 +6,11 @@ in {
     // {
       __functor = self: next:
         self
-        // {contents = self.contents ++ [next];};
+        // {
+          contents =
+            self.contents
+            ++ [next];
+        };
     };
 
   enabled = merge {enable = true;};

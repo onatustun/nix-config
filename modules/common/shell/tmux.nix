@@ -5,9 +5,8 @@
   ...
 }: let
   inherit (pkgs.nuenv) writeScriptBin;
-  inherit (builtins) readFile;
+  inherit (lib) readFile enabled getExe;
   inherit (inputs) self;
-  inherit (lib) enabled getExe;
 
   scripts = {
     github = writeScriptBin {

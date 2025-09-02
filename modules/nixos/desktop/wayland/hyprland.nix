@@ -6,8 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled optional mkMerge mkIf;
-  inherit (builtins) concatMap attrValues concatLists genList;
+  inherit (lib) enabled concatMap attrValues optional mkMerge mkIf concatLists genList;
 in {
   programs.hyprland = enabled {
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;

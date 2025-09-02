@@ -822,8 +822,7 @@
     systems,
     ...
   }: let
-    inherit (builtins) foldl';
-    inherit (nixpkgs.lib) const;
+    inherit (nixpkgs.lib) foldl' const;
 
     libInputs = with inputs; [
       flake-parts

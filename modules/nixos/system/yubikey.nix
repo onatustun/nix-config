@@ -4,8 +4,7 @@
   username,
   ...
 }: let
-  inherit (lib) u2fKeys enabled;
-  inherit (builtins) concatStringsSep;
+  inherit (lib) u2fKeys concatStringsSep enabled;
   inherit (pkgs) writeText;
 
   authfile =
