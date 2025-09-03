@@ -22,6 +22,7 @@ in {
       ];
 
       overlays = [
+        inputs.nix-index-database.overlays.nix-index
         inputs.nuenv.overlays.default
         inputs.nur.overlays.default
       ];
@@ -55,6 +56,7 @@ in {
 
       overlays = [
         inputs.niri.overlays.niri
+        inputs.nix-index-database.overlays.nix-index
         inputs.nuenv.overlays.default
         inputs.nur.overlays.default
       ];
@@ -82,7 +84,10 @@ in {
         inputs.stylix.nixosModules.stylix
       ];
 
-      overlays = [inputs.nuenv.overlays.default];
+      overlays = [
+        inputs.nix-index-database.overlays.nix-index
+        inputs.nuenv.overlays.default
+      ];
 
       modules = [
         "common"
@@ -110,7 +115,10 @@ in {
         inputs.stylix.nixosModules.stylix
       ];
 
-      overlays = [inputs.nuenv.overlays.default];
+      overlays = [
+        inputs.nix-index-database.overlays.nix-index
+        inputs.nuenv.overlays.default
+      ];
 
       modules = [
         "common"
