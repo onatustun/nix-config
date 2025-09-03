@@ -218,10 +218,6 @@ in {
           background-image: url("${waybarIconsDir}/battery-half.svg");
         }
 
-        #battery.p55 {
-          background-image: url("${waybarIconsDir}/battery-5.svg");
-        }
-
         #battery.p65 {
           background-image: url("${waybarIconsDir}/battery-6.svg");
         }
