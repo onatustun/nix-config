@@ -170,6 +170,16 @@
       };
     };
 
+    nix-output-monitor = {
+      url = "github:maralorn/nix-output-monitor";
+
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        git-hooks.follows = "pre-commit-hooks";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     dix = {
       url = "github:faukah/dix";
 

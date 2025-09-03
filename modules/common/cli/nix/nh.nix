@@ -9,14 +9,14 @@
   package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
   environment.systemPackages =
-    [
-      inputs.dix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    (with inputs; [
+      dix.packages.${pkgs.stdenv.hostPlatform.system}.default
+      nix-output-monitor.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ])
+    ++ [
       package
-    ]
-    ++ (with pkgs; [
-      nix-output-monitor
-      nvd
-    ]);
+      pkgs.nvd
+    ];
 
   home-manager.sharedModules = [
     {

@@ -1702,6 +1702,32 @@
         "type": "github"
       }
     },
+    "nix-output-monitor": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "git-hooks": [
+          "pre-commit-hooks"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756560267,
+        "narHash": "sha256-Qc5+l4srn2xKUo8o6UWaCwk0toLTpHiEXQLoWOOgks4=",
+        "owner": "maralorn",
+        "repo": "nix-output-monitor",
+        "rev": "05e1b3cba2fa328a1781390a4e4515e9c432229e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "maralorn",
+        "repo": "nix-output-monitor",
+        "type": "github"
+      }
+    },
     "nix-search-cli": {
       "inputs": {
         "flake-compat": [
@@ -2301,6 +2327,7 @@
         "nix-index": "nix-index",
         "nix-index-database": "nix-index-database",
         "nix-melt": "nix-melt",
+        "nix-output-monitor": "nix-output-monitor",
         "nix-search-cli": "nix-search-cli",
         "nix-search-tv": "nix-search-tv",
         "nix-vm-test": "nix-vm-test",
