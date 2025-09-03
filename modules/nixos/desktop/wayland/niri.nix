@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled disabled getExe;
+  inherit (lib) enabled disabled getExe' getExe;
   package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
 in {
   imports = [inputs.niri.nixosModules.niri];
@@ -13,6 +13,7 @@ in {
   programs.niri = enabled {inherit package;};
 
   environment.systemPackages = with pkgs; [
+    gnome-keyring
     xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk
   ];
@@ -77,7 +78,7 @@ in {
           always-center-single-column = true;
           center-focused-column = "on-overflow";
           default-column-width = {proportion = 0.5;};
-          gaps = 16;
+          gaps = 0;
 
           border = enabled {width = 2;};
 
@@ -94,11 +95,11 @@ in {
           ];
 
           struts = let
-            str = 0;
+            str = 16;
           in {
             left = str;
-            bottom = str;
-            top = str;
+            bottom = 0;
+            top = 0;
             right = str;
           };
         };
@@ -106,8 +107,9 @@ in {
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = "${getExe inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}";
+          "Mod+Q".action.spawn = ["${getExe' pkgs.nushell "nu"}" "-c" "${getExe inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}"];
           "Mod+Z".action.spawn = "zen-twilight";
+          "Mod+W".action.spawn = ["pkill" "-SIGUSR1" "waybar"];
 
           "Mod+C".action.close-window = [];
           "Mod+O".action.toggle-overview = [];
