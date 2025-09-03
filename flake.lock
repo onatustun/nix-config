@@ -532,6 +532,32 @@
         "type": "github"
       }
     },
+    "dix": {
+      "inputs": {
+        "fenix": [
+          "fenix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756645118,
+        "narHash": "sha256-X+yFRLorfq9jvyMCvVCYUCh1pVN207XqTDr2FM1C+QE=",
+        "owner": "faukah",
+        "repo": "dix",
+        "rev": "ba315562f8c4a957dc9c058d75a43419e3307f63",
+        "type": "github"
+      },
+      "original": {
+        "owner": "faukah",
+        "repo": "dix",
+        "type": "github"
+      }
+    },
     "eza": {
       "inputs": {
         "advisory-db": [
@@ -2233,6 +2259,7 @@
         "devshell": "devshell",
         "direnv": "direnv",
         "disko": "disko",
+        "dix": "dix",
         "eza": "eza",
         "fenix": "fenix",
         "fh": "fh",

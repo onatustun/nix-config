@@ -37,7 +37,7 @@ in {
   };
 
   services = {
-    pcscd.enable = true;
+    pcscd = enabled;
 
     udev.packages = with pkgs; [
       libfido2

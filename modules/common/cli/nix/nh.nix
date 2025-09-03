@@ -6,13 +6,22 @@
   ...
 }: let
   inherit (lib) enabled;
+  package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
-  environment.systemPackages = [inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default];
+  environment.systemPackages =
+    [
+      inputs.dix.packages.${pkgs.stdenv.hostPlatform.system}.default
+      package
+    ]
+    ++ (with pkgs; [
+      nix-output-monitor
+      nvd
+    ]);
 
   home-manager.sharedModules = [
     {
       programs.nh = enabled {
-        package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        inherit package;
         flake = "${homeDir}/nix";
         clean = enabled {extraArgs = "--keep-since 4d --keep 3";};
       };
