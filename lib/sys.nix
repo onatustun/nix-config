@@ -2,7 +2,6 @@ super: inputs: self: let
   inherit (super) nixosSystem darwinSystem;
   inherit (inputs.nixos-generators) nixosGenerate;
   inherit (super) genAttrs removePrefix hasSuffix removeSuffix splitString elemAt length hasPrefix hasInfix filter any pathExists flatten unique mkDefault optional optionals optionalAttrs;
-  inherit (builtins) baseNameOf toString;
   inherit (self) collectNix enabled;
 
   systems = {
@@ -59,11 +58,11 @@ super: inputs: self: let
         final.callPackage (inputs.self + /pkgs/${name}.nix) {});
 
     secretsDir = "${inputs.self}/secrets";
-    modulesRoot = inputs.self + "/modules";
+    modulesRoot = "${inputs.self}/modules";
 
     relPath = file:
       toString file
-      |> removePrefix "${toString modulesRoot}/";
+      |> removePrefix "${modulesRoot}/";
 
     normalizeSpec = s:
       if hasSuffix "/" s
@@ -111,7 +110,7 @@ super: inputs: self: let
       s =
         toString spec
         |> normalizeSpec;
-      p = modulesRoot + "/${s}";
+      p = "${modulesRoot}/${s}";
     in
       if hasSuffix ".nix" s
       then
@@ -151,7 +150,7 @@ super: inputs: self: let
         };
       }
 
-      (inputs.self + "/hosts/${type}/${hostName}")
+      "${inputs.self}/hosts/${type}/${hostName}"
     ];
 
     homeManagerModule = optionals (homeVer != null) [
