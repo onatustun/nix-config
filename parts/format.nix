@@ -15,7 +15,7 @@ in {
     formatter = config.treefmt.build.wrapper;
 
     treefmt = {
-      projectRootFile = "flake.nix";
+      inherit (config.flake-root) projectRootFile;
       enableDefaultExcludes = true;
 
       settings.global.excludes = [

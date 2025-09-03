@@ -854,7 +854,8 @@
       systems = import systems;
 
       imports =
-        collectNix ./parts
+        [inputs.flake-root.flakeModule]
+        ++ collectNix ./parts
         ++ [./hosts];
     };
 }
