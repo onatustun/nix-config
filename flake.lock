@@ -234,6 +234,29 @@
         "type": "github"
       }
     },
+    "blueprint": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755332143,
+        "narHash": "sha256-jaiZPA5ND7HPJ4U/bzp+BKGOYR14+rIe9tC6XA4jBHU=",
+        "owner": "numtide",
+        "repo": "blueprint",
+        "rev": "3c8bf84e28df2be19cc6623cb3ceeb6fc0839b91",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "blueprint",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -2274,6 +2297,7 @@
         "agenix-shell": "agenix-shell",
         "alejandra": "alejandra",
         "aquamarine": "aquamarine",
+        "blueprint": "blueprint",
         "brew-src": "brew-src",
         "cachix": "cachix",
         "comma": "comma",
@@ -2353,6 +2377,7 @@
         "stylix": "stylix",
         "systems": "systems",
         "tailscale": "tailscale",
+        "treefmt": "treefmt",
         "treefmt-nix": "treefmt-nix",
         "uwu-colors": "uwu-colors",
         "waybar": "waybar",
@@ -2585,6 +2610,38 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
+        "type": "github"
+      }
+    },
+    "treefmt": {
+      "inputs": {
+        "blueprint": [
+          "blueprint"
+        ],
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "nix-filter": [
+          "nix-filter"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756653607,
+        "narHash": "sha256-3qbCQKtpbSm8ycIZXVuykzvida7Hj67iziMwD5W1d18=",
+        "owner": "numtide",
+        "repo": "treefmt",
+        "rev": "33175b745b67c722cedd7dda8f390dbd5c9ed827",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt",
         "type": "github"
       }
     },

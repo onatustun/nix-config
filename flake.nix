@@ -310,9 +310,30 @@
       };
     };
 
+    blueprint = {
+      url = "github:numtide/blueprint";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    treefmt = {
+      url = "github:numtide/treefmt";
+
+      inputs = {
+        blueprint.follows = "blueprint";
+        flake-compat.follows = "flake-compat";
+        nix-filter.follows = "nix-filter";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
     };
 
     pre-commit-hooks = {
