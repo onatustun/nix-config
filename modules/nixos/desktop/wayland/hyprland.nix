@@ -6,7 +6,14 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled concatMap attrValues optional mkMerge mkIf concatLists genList;
+  inherit (lib) readFile enabled concatMap attrValues optional mkMerge mkIf concatLists genList getExe;
+  inherit (pkgs.nuenv) writeScriptBin;
+  inherit (inputs) self;
+
+  hyprland = writeScriptBin {
+    name = "hyprland";
+    script = readFile (self + "/scripts/hyprland.nu");
+  };
 in {
   programs.hyprland = enabled {
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -181,7 +188,7 @@ in {
               "$mod Shift, F, fullscreen, 0"
               "$mod, V, togglefloating"
               "$mod Shift, E, exit"
-              "$mod, W, exec, pkill -SIGUSR1 waybar"
+              "$mod, W, exec, nu ${getExe hyprland}"
             ]
             ++ (
               concatLists (genList (x: let
