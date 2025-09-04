@@ -112,8 +112,8 @@ in {
 
           general = {
             border_size = 2;
-            gaps_in = -2;
-            gaps_out = 0;
+            gaps_in = 8;
+            gaps_out = 8;
             layout = "dwindle";
             resize_on_border = true;
           };
