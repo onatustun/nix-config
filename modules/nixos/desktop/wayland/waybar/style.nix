@@ -200,6 +200,10 @@ in {
           background-image: url("${waybarIconsDir}/wireplumber.svg");
         }
 
+        #battery.critical-empty {
+          background-image: url("${waybarIconsDir}/battery-critical.svg");
+        }
+
         #battery.critical {
           background-image: url("${waybarIconsDir}/battery-critical.svg");
         }
@@ -241,6 +245,10 @@ in {
         }
 
         #battery.full {
+          background-image: url("${waybarIconsDir}/battery-full.svg");
+        }
+
+        #battery.fu {
           background-image: url("${waybarIconsDir}/battery-full.svg");
         }
 

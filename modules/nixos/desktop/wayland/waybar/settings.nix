@@ -70,6 +70,7 @@ in {
               tooltip-format = "{capacity}% {time}";
 
               states = {
+                critical-empty = 5;
                 critical = 5;
                 empty = 10;
                 p15 = 15;
@@ -81,6 +82,7 @@ in {
                 p75 = 75;
                 p85 = 85;
                 full = 90;
+                fu = 100;
               };
             };
 
