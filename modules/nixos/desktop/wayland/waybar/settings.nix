@@ -96,7 +96,7 @@ in {
             "custom/power" = {
               format = " ";
               tooltip = false;
-              on-click = "wlogout --protocol layer-shell";
+              on-click = "wlogout -b 2 --protocol layer-shell";
             };
 
             "custom/keyboard" = {

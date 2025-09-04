@@ -1,33 +1,53 @@
 {
   lib,
-  config,
+  pkgs,
   ...
 }: let
   inherit (lib) mkDefault;
 in {
+  environment.systemPackages = [pkgs.wleave];
+
   home-manager.sharedModules = [
     {
       programs.wlogout.style = mkDefault ''
         * {
           background-image: none;
-          font-size: 20px;
+          box-shadow: none;
+        }
+
+        window {
+          background-color: transparent;
         }
 
         button {
-          color: ${config.stylix.base16Scheme.base07};
-          color: ${config.stylix.base16Scheme.base00};
+          border-radius: 0;
           border-style: solid;
-          border-radius: 0px;
+          border-width: 1px;
           background-repeat: no-repeat;
           background-position: center;
-          background-size: 15%;
+          background-size: 25%;
         }
 
         button:focus,
         button:active,
         button:hover {
-          background-color: ${config.stylix.base16Scheme.base0D};
           outline-style: none;
+        }
+
+        #lock {
+          background-image: image(url("${pkgs.wleave}/share/wleave/icons/lock.svg"));
+        }
+
+        #logout {
+          background-image: image(url("${pkgs.wleave}/share/wleave/icons/logout.svg"));
+        }
+
+        #shutdown {
+          background-image: image(url("${pkgs.wleave}/share/wleave/icons/shutdown.svg"));
+        }
+
+        #reboot {
+          background-image: image(url("${pkgs.wleave}/share/wleave/icons/reboot.svg"));
         }
       '';
     }
