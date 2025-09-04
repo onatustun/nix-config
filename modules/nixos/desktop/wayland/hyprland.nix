@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) readFile enabled concatMap attrValues optional mkMerge mkIf concatLists genList getExe;
+  inherit (lib) readFile enabled concatMap attrValues optional mkMerge mkIf concatLists getExe genList;
   inherit (pkgs.nuenv) writeScriptBin;
   inherit (inputs) self;
 

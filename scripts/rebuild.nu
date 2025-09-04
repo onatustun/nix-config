@@ -3,7 +3,7 @@
 def main --wrapped [
   ...arguments
 ]: nothing -> nothing {
-  let is_macos = (($nu.os-info | get name) == "macos")
+  let is_macos = ($nu.os-info | get name) == "macos"
 
   let system_type = if $is_macos {
     "darwin"
@@ -11,15 +11,17 @@ def main --wrapped [
     "os"
   }
 
-  let flake = ($nu.home-path | path join "nix")
+  let flake = $nu.home-path | path join "nix"
 
   let host = if $is_macos {
-    (scutil --get LocalHostName | str trim)
+    scutil --get LocalHostName | str trim
   } else {
-    (hostname | str trim)
+    hostname | str trim
   }
 
-  let args_split = $arguments | prepend "" | split list "--"
+  let args_split = $arguments
+    | prepend ""
+    | split list "--"
 
   let nh_flags = [
     $flake
