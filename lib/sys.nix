@@ -50,7 +50,7 @@ super: inputs: self: let
 
       isNixos = type == "nixos";
       isDarwin = type == "darwin";
-      isGenerate = type == "generate";
+      isGenerator = type == "generator";
     };
 
     packageOverlay = final: _:
