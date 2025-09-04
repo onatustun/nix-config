@@ -3,8 +3,10 @@
   pkgs,
   ...
 }: {
-  environment.systemPackages = with inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}; [
-    grim
-    slurp
-  ];
+  environment.systemPackages = with inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system};
+    [
+      grim
+      slurp
+    ]
+    ++ [pkgs.wvkbd];
 }

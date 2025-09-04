@@ -59,6 +59,7 @@ in {
           (makeCommand "wl-paste --type text --watch cliphist store")
           (makeCommand "wl-clip-persist --clipboard both")
           (makeCommand "brightness -r")
+          (makeCommand "wvkbd-mobintl --hidden")
         ];
 
         outputs = {

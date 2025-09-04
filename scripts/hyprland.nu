@@ -13,7 +13,7 @@ let gapsIn =  hyprctl -j getoption general:gaps_in
   | into int
 
 match $gapsIn {
-  -2 => { set-gaps 8 8 }
+  -2 => { set-gaps 8 16 }
   _  => { set-gaps -2 0 }
 }
 

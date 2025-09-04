@@ -25,6 +25,7 @@ in {
             ];
 
             modules-right = [
+              "custom/keyboard"
               "network"
               "wireplumber"
               "battery"
@@ -94,6 +95,12 @@ in {
               format = " ";
               tooltip = false;
               on-click = "wlogout --protocol layer-shell";
+            };
+
+            "custom/keyboard" = {
+              format = " ";
+              tooltip = false;
+              on-click = "pkill -SIGRTMIN -x wvkbd-mobintl";
             };
           }
         ];
