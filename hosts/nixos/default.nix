@@ -91,6 +91,7 @@ in {
 
       modules = [
         "common"
+        "nixos/security"
         "nixos/system"
         "nixos/ui"
       ];
@@ -123,6 +124,7 @@ in {
       modules = [
         "common"
         "nixos/cli/clipboard.nix"
+        "nixos/security"
         "nixos/system"
         "nixos/ui"
       ];

@@ -16,11 +16,11 @@ in {
       inputModules = [inputs.determinate.nixosModules.default];
 
       modules = [
-        "boot.nix"
         "common/system"
-        "kernel.nix"
-        "locale.nix"
-        "ssh.nix"
+        "nixos/security/ssh.nix"
+        "nixos/system/boot.nix"
+        "nixos/system/kernel.nix"
+        "nixos/system/locale.nix"
       ];
 
       ignore = [
