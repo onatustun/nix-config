@@ -87,6 +87,7 @@ in {
             "wl-paste --type text --watch cliphist store"
             "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
             "wvkbd-mobintl --hidden"
+            "yubikey-touch-detector"
           ];
 
           monitor = mkMerge [

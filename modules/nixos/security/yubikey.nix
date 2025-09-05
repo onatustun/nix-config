@@ -45,7 +45,7 @@ in {
     ];
   };
 
-  programs.yubikey-touch-detector = enabled;
+  programs.yubikey-touch-detector = enabled {libnotify = true;};
 
   environment.systemPackages = with pkgs; [
     age-plugin-yubikey

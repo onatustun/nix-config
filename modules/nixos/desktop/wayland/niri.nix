@@ -60,6 +60,7 @@ in {
           (makeCommand "wl-clip-persist --clipboard both")
           (makeCommand "brightness -r")
           (makeCommand "wvkbd-mobintl --hidden")
+          (makeCommand "yubikey-touch-detector")
         ];
 
         outputs = {
