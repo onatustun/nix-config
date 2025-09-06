@@ -23,7 +23,7 @@ in {
         };
       };
 
-      home.file.".local/share/icons/hypr_Bibata-Modern-Ice" = {
+      xdg.dataFile."icons/hypr_Bibata-Modern-Ice" = {
         source = "${pkgs.bibata-hyprcursor}/share/icons/hypr_Bibata-Modern-Ice";
         recursive = true;
       };

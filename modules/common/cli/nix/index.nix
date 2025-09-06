@@ -10,7 +10,7 @@ in {
 
   home-manager.sharedModules = [
     {
-      home.file.".cache/nix-index/files".source =
+      xdg.cacheFile."nix-index/files".source =
         inputs.nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.nix-index-database;
 
       programs.nix-index = enabled {
