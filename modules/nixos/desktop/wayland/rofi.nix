@@ -16,7 +16,7 @@ in {
 
         theme = mkForce {
           "*" = {
-            "accent-color" = mkLiteral "${config.stylix.base16Scheme.base0D}";
+            "accent-color" = mkLiteral "${config.stylix.base16Scheme.base0A}";
             bg0 = mkLiteral "${config.stylix.base16Scheme.base00}";
             fg0 = mkLiteral "${config.stylix.base16Scheme.base05}";
             "background-color" = mkLiteral "transparent";

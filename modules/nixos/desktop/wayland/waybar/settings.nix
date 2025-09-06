@@ -25,7 +25,12 @@ in {
             ];
 
             modules-right = [
+              "temperature"
+              "disk"
+              "memory"
+              "cpu"
               "custom/keyboard"
+              "bluetooth"
               "network"
               "wireplumber"
               "battery"
@@ -41,6 +46,36 @@ in {
             "hyprland/workspaces" = {
               format = "{icon}";
               tooltip = false;
+            };
+
+            memory = {
+              format = " ";
+              tooltip = true;
+              tooltip-format = "{used}/{total} {percentage}%";
+            };
+
+            cpu = {
+              format = " ";
+              tooltip = true;
+              tooltip-format = "{usage}%";
+            };
+
+            disk = {
+              format = " ";
+              tooltip = true;
+              tooltip-format = "{used}/{total}";
+            };
+
+            temperature = {
+              format = " ";
+              tooltip = true;
+              tooltip-format = "{temperatureC} °C";
+            };
+
+            bluetooth = {
+              format = " ";
+              tooltip = true;
+              tooltip-format = "{status} {device_alias}";
             };
 
             network = {
@@ -88,7 +123,7 @@ in {
 
             clock = {
               interval = 1;
-              format = "{:%H:%M}";
+              format = "{:%H:%M %d/%m}";
               tooltip = true;
               tooltip-format = "{:%a %d %b}";
             };
