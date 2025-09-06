@@ -1,6 +1,8 @@
 {
   services.openssh.settings = {
-    KbdInteractiveAuthentication = false;
+    AuthenticationMethods = "publickey keyboard-interactive:pam";
     PasswordAuthentication = false;
   };
+
+  programs.ssh.startAgent = false;
 }

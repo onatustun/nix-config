@@ -11,7 +11,10 @@ in {
   };
 
   services = {
-    gnome.gnome-keyring = enabled;
+    gnome = {
+      gcr-ssh-agent = enabled;
+      gnome-keyring = enabled;
+    };
 
     dbus.packages = with pkgs; [
       gcr
