@@ -12,14 +12,9 @@ in {
       programs.waybar.style = let
         icons = let
           myWaybarIcons = {
-            power = {
-              path = "M8.205 4.844a1 1 0 0 1 .844 1.813A6.997 6.997 0 0 0 12 20a6.998 6.998 0 0 0 2.965-13.336 1 1 0 0 1 .848-1.812A8.996 8.996 0 0 1 21 13.003C21 17.973 16.97 22 12 22s-9-4.028-9-8.996a8.996 8.996 0 0 1 5.205-8.16ZM12 2a1 1 0 0 1 .993.883L13 3v7a1 1 0 0 1-1.993.118L11 10V3a1 1 0 0 1 1-1Z";
+            temperature = {
+              path = "M12 2a4 4 0 0 1 3.995 3.8L16 6l.001 6.728.055.058a5.482 5.482 0 0 1 1.416 3.16l.021.276.007.278a5.5 5.5 0 1 1-9.734-3.511l.179-.205.054-.057L8 6a4 4 0 0 1 3.597-3.98l.203-.015L12 2Zm0 2a2 2 0 0 0-1.995 1.85L10 6v7.593l-.333.298a3.5 3.5 0 1 0 4.82.146l-.153-.145-.333-.298L14 6a2 2 0 0 0-2-2Zm0 4a1 1 0 0 1 1 1v5.208a2.5 2.5 0 1 1-2 0V9a1 1 0 0 1 1-1Z";
               viewbox = "24";
-            };
-
-            memory = {
-              path = "M232,56H24A16,16,0,0,0,8,72V200a8,8,0,0,0,16,0V184H40v16a8,8,0,0,0,16,0V184H72v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V72A16,16,0,0,0,232,56ZM208,96v48H144V96Zm-96,0v48H48V96Z";
-              viewbox = "256";
             };
 
             disk = {
@@ -27,23 +22,8 @@ in {
               viewbox = "256";
             };
 
-            bluetooth = {
-              path = "M196.8,169.6,141.33,128,196.8,86.4a8,8,0,0,0,0-12.8l-64-48A8,8,0,0,0,120,32v80L68.8,73.6a8,8,0,0,0-9.6,12.8L114.67,128,59.2,169.6a8,8,0,1,0,9.6,12.8L120,144v80a8,8,0,0,0,12.8,6.4l64-48a8,8,0,0,0,0-12.8ZM136,48l42.67,32L136,112Zm0,160V144l42.67,32Z";
-              viewbox = "256";
-            };
-
-            temperature = {
-              path = "M12 2a4 4 0 0 1 3.995 3.8L16 6l.001 6.728.055.058a5.482 5.482 0 0 1 1.416 3.16l.021.276.007.278a5.5 5.5 0 1 1-9.734-3.511l.179-.205.054-.057L8 6a4 4 0 0 1 3.597-3.98l.203-.015L12 2Zm0 2a2 2 0 0 0-1.995 1.85L10 6v7.593l-.333.298a3.5 3.5 0 1 0 4.82.146l-.153-.145-.333-.298L14 6a2 2 0 0 0-2-2Zm0 4a1 1 0 0 1 1 1v5.208a2.5 2.5 0 1 1-2 0V9a1 1 0 0 1 1-1Z";
-              viewbox = "24";
-            };
-
-            bluetooth-connected = {
-              path = "M196.8,169.6,141.33,128,196.8,86.4a8,8,0,0,0,0-12.8l-64-48A8,8,0,0,0,120,32v80L68.8,73.6a8,8,0,0,0-9.6,12.8L114.67,128,59.2,169.6a8,8,0,1,0,9.6,12.8L120,144v80a8,8,0,0,0,12.8,6.4l64-48a8,8,0,0,0,0-12.8ZM136,48l42.67,32L136,112Zm0,160V144l42.67,32ZM60,140a12,12,0,1,1,12-12A12,12,0,0,1,60,140Zm156-12a12,12,0,1,1-12-12A12,12,0,0,1,216,128Z";
-              viewbox = "256";
-            };
-
-            bluetooth-off = {
-              path = "M221.92,210.62l-160-176A8,8,0,0,0,50.08,45.38l70.84,77.93L59.2,169.6a8,8,0,1,0,9.6,12.8L120,144v80a8,8,0,0,0,12.8,6.4l50.83-38.12,26.45,29.1a8,8,0,1,0,11.84-10.76ZM136,208V144l11.73,8.8,25.08,27.59ZM120,71.63V32a8,8,0,0,1,12.8-6.4l64,48a8,8,0,0,1,0,12.8l-33.53,25.15a8,8,0,0,1-9.6-12.8l25-18.75L136,48V71.63a8,8,0,0,1-16,0Z";
+            memory = {
+              path = "M232,56H24A16,16,0,0,0,8,72V200a8,8,0,0,0,16,0V184H40v16a8,8,0,0,0,16,0V184H72v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V184h16v16a8,8,0,0,0,16,0V72A16,16,0,0,0,232,56ZM208,96v48H144V96Zm-96,0v48H48V96Z";
               viewbox = "256";
             };
 
@@ -55,6 +35,31 @@ in {
             keyboard = {
               path = "M19.745 5a2.25 2.25 0 0 1 2.25 2.25v9.505a2.25 2.25 0 0 1-2.25 2.25H4.25A2.25 2.25 0 0 1 2 16.755V7.25A2.25 2.25 0 0 1 4.25 5h15.495Zm-2.495 9.5H6.75l-.102.007a.75.75 0 0 0 0 1.486L6.75 16h10.5l.102-.007a.75.75 0 0 0 0-1.486l-.102-.007ZM16.5 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-2.995 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-3 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-3 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM6 8a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm2.995 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm3 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm3 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm3 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z";
               viewbox = "24";
+            };
+
+            wireplumber = {
+              path = "M15 4.25v15.496c0 1.078-1.274 1.65-2.08.934l-4.492-3.994a.75.75 0 0 0-.498-.19H4.25A2.25 2.25 0 0 1 2 14.247V9.75a2.25 2.25 0 0 1 2.25-2.25h3.68a.75.75 0 0 0 .498-.19l4.491-3.993C13.726 2.599 15 3.17 15 4.25Zm3.992 1.647a.75.75 0 0 1 1.049.157A9.959 9.959 0 0 1 22 12a9.96 9.96 0 0 1-1.96 5.946.75.75 0 0 1-1.205-.892A8.459 8.459 0 0 0 20.5 12a8.459 8.459 0 0 0-1.665-5.054.75.75 0 0 1 .157-1.049ZM17.143 8.37a.75.75 0 0 1 1.017.303c.536.99.84 2.125.84 3.328a6.973 6.973 0 0 1-.84 3.328.75.75 0 0 1-1.32-.714c.42-.777.66-1.666.66-2.614s-.24-1.837-.66-2.614a.75.75 0 0 1 .303-1.017Z";
+              viewbox = "24";
+            };
+
+            wireplumber-muted = {
+              path = "M15 4.25c0-1.079-1.274-1.65-2.08-.934L8.427 7.309a.75.75 0 0 1-.498.19H4.25A2.25 2.25 0 0 0 2 9.749v4.497a2.25 2.25 0 0 0 2.25 2.25h3.68a.75.75 0 0 1 .498.19l4.491 3.994c.806.716 2.081.144 2.081-.934V4.25ZM16.22 9.22a.75.75 0 0 1 1.06 0L19 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L20.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L19 13.06l-1.72 1.72a.75.75 0 1 1-1.06-1.06L17.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z";
+              viewbox = "24";
+            };
+
+            bluetooth = {
+              path = "M196.8,169.6,141.33,128,196.8,86.4a8,8,0,0,0,0-12.8l-64-48A8,8,0,0,0,120,32v80L68.8,73.6a8,8,0,0,0-9.6,12.8L114.67,128,59.2,169.6a8,8,0,1,0,9.6,12.8L120,144v80a8,8,0,0,0,12.8,6.4l64-48a8,8,0,0,0,0-12.8ZM136,48l42.67,32L136,112Zm0,160V144l42.67,32Z";
+              viewbox = "256";
+            };
+
+            bluetooth-connected = {
+              path = "M196.8,169.6,141.33,128,196.8,86.4a8,8,0,0,0,0-12.8l-64-48A8,8,0,0,0,120,32v80L68.8,73.6a8,8,0,0,0-9.6,12.8L114.67,128,59.2,169.6a8,8,0,1,0,9.6,12.8L120,144v80a8,8,0,0,0,12.8,6.4l64-48a8,8,0,0,0,0-12.8ZM136,48l42.67,32L136,112Zm0,160V144l42.67,32ZM60,140a12,12,0,1,1,12-12A12,12,0,0,1,60,140Zm156-12a12,12,0,1,1-12-12A12,12,0,0,1,216,128Z";
+              viewbox = "256";
+            };
+
+            bluetooth-off = {
+              path = "M221.92,210.62l-160-176A8,8,0,0,0,50.08,45.38l70.84,77.93L59.2,169.6a8,8,0,1,0,9.6,12.8L120,144v80a8,8,0,0,0,12.8,6.4l50.83-38.12,26.45,29.1a8,8,0,1,0,11.84-10.76ZM136,208V144l11.73,8.8,25.08,27.59ZM120,71.63V32a8,8,0,0,1,12.8-6.4l64,48a8,8,0,0,1,0,12.8l-33.53,25.15a8,8,0,0,1-9.6-12.8l25-18.75L136,48V71.63a8,8,0,0,1-16,0Z";
+              viewbox = "256";
             };
 
             network = {
@@ -137,13 +142,8 @@ in {
               viewbox = "24";
             };
 
-            wireplumber-muted = {
-              path = "M15 4.25c0-1.079-1.274-1.65-2.08-.934L8.427 7.309a.75.75 0 0 1-.498.19H4.25A2.25 2.25 0 0 0 2 9.749v4.497a2.25 2.25 0 0 0 2.25 2.25h3.68a.75.75 0 0 1 .498.19l4.491 3.994c.806.716 2.081.144 2.081-.934V4.25ZM16.22 9.22a.75.75 0 0 1 1.06 0L19 10.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L20.06 12l1.72 1.72a.75.75 0 1 1-1.06 1.06L19 13.06l-1.72 1.72a.75.75 0 1 1-1.06-1.06L17.94 12l-1.72-1.72a.75.75 0 0 1 0-1.06Z";
-              viewbox = "24";
-            };
-
-            wireplumber = {
-              path = "M15 4.25v15.496c0 1.078-1.274 1.65-2.08.934l-4.492-3.994a.75.75 0 0 0-.498-.19H4.25A2.25 2.25 0 0 1 2 14.247V9.75a2.25 2.25 0 0 1 2.25-2.25h3.68a.75.75 0 0 0 .498-.19l4.491-3.993C13.726 2.599 15 3.17 15 4.25Zm3.992 1.647a.75.75 0 0 1 1.049.157A9.959 9.959 0 0 1 22 12a9.96 9.96 0 0 1-1.96 5.946.75.75 0 0 1-1.205-.892A8.459 8.459 0 0 0 20.5 12a8.459 8.459 0 0 0-1.665-5.054.75.75 0 0 1 .157-1.049ZM17.143 8.37a.75.75 0 0 1 1.017.303c.536.99.84 2.125.84 3.328a6.973 6.973 0 0 1-.84 3.328.75.75 0 0 1-1.32-.714c.42-.777.66-1.666.66-2.614s-.24-1.837-.66-2.614a.75.75 0 0 1 .303-1.017Z";
+            power = {
+              path = "M8.205 4.844a1 1 0 0 1 .844 1.813A6.997 6.997 0 0 0 12 20a6.998 6.998 0 0 0 2.965-13.336 1 1 0 0 1 .848-1.812A8.996 8.996 0 0 1 21 13.003C21 17.973 16.97 22 12 22s-9-4.028-9-8.996a8.996 8.996 0 0 1 5.205-8.16ZM12 2a1 1 0 0 1 .993.883L13 3v7a1 1 0 0 1-1.993.118L11 10V3a1 1 0 0 1 1-1Z";
               viewbox = "24";
             };
           };
@@ -152,7 +152,7 @@ in {
             mkdir -p "$out"
             ${concatStringsSep "\n" (mapAttrsToList (name: icon: ''
                 cat > "$out/${name}.svg" <<EOF
-                <svg xmlns="http://www.w3.org/2000/svg" fill="${config.stylix.base16Scheme.base0D}" viewBox="0 0 ${icon.viewbox} ${icon.viewbox}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="${config.stylix.base16Scheme.base05}" viewBox="0 0 ${icon.viewbox} ${icon.viewbox}">
                   <path d="${icon.path}"/>
                 </svg>
                 EOF
@@ -189,7 +189,7 @@ in {
           padding: 0;
           margin: 0;
           background-color: ${config.stylix.base16Scheme.base00};
-          color: ${config.stylix.base16Scheme.base0D};
+          color: ${config.stylix.base16Scheme.base05};
           border-width: 0px;
           border-radius: 6px;
         }
@@ -198,45 +198,104 @@ in {
           padding: 0;
           margin: 0;
           background-color: inherit;
-          color: ${config.stylix.base16Scheme.base0D};
+          color: ${config.stylix.base16Scheme.base05};
         }
 
-        #network,
-        #wireplumber,
-        #battery,
-        #clock,
+        #workspaces button,
+        #temperature,
+        #disk,
         #memory,
         #cpu,
-        #disk,
-        #bluetooth,
-        #temperature,
-        #custom-power,
         #custom-keyboard,
-        #workspaces button,
-        #taskbar button {
+        #wireplumber,
+        #bluetooth,
+        #network,
+        #battery,
+        #clock,
+        #custom-power {
           min-width: 14px;
           min-height: 14px;
           padding: 1px 3px;
-          color: ${config.stylix.base16Scheme.base0D};
+          color: ${config.stylix.base16Scheme.base05};
           background-repeat: no-repeat;
           background-position: center;
           background-size: 14px;
         }
 
-        #custom-power {
-          background-image: url("${waybarIconsDir}/power.svg");
+        #workspaces button {
+          opacity: 0.5;
+          background-image: none;
+        }
+
+        #workspaces button.active {
+          opacity: 1;
+          background-color: ${config.stylix.base16Scheme.base0D};
+          color: ${config.stylix.base16Scheme.base00};
+        }
+
+        #workspaces button.active.visible {
+          opacity: 1;
+          background-color: ${config.stylix.base16Scheme.base0D};
+          color: ${config.stylix.base16Scheme.base00};
+        }
+
+        #workspaces button.visible {
+          opacity: 1;
+          color: ${config.stylix.base16Scheme.base0D};
+        }
+
+        #temperature {
+          background-image: url("${waybarIconsDir}/temperature.svg");
+        }
+
+        #disk {
+          background-image: url("${waybarIconsDir}/disk.svg");
+        }
+
+        #memory {
+          background-image: url("${waybarIconsDir}/memory.svg");
+        }
+
+        #cpu {
+          background-image: url("${waybarIconsDir}/cpu.svg");
         }
 
         #custom-keyboard {
           background-image: url("${waybarIconsDir}/keyboard.svg");
         }
 
+        #wireplumber {
+          background-image: url("${waybarIconsDir}/wireplumber.svg");
+        }
+
         #wireplumber.muted {
           background-image: url("${waybarIconsDir}/wireplumber-muted.svg");
         }
 
-        #wireplumber {
-          background-image: url("${waybarIconsDir}/wireplumber.svg");
+        #bluetooth {
+          background-image: url("${waybarIconsDir}/bluetooth.svg");
+        }
+
+        #bluetooth.connected {
+          background-image: url("${waybarIconsDir}/bluetooth-connected.svg");
+        }
+
+        #bluetooth.off,
+        #bluetooth.disabled,
+        #bluetooth.no-controller {
+          background-image: url("${waybarIconsDir}/bluetooth-off.svg");
+        }
+
+        #network, #network.wifi {
+          background-image: url("${waybarIconsDir}/network.svg");
+        }
+
+        #network.ethernet {
+          background-image: url("${waybarIconsDir}/network-ethernet.svg");
+        }
+
+        #network.disabled, #network.disconnected {
+          background-image: url("${waybarIconsDir}/network-off.svg");
         }
 
         #battery.critical-empty {
@@ -295,68 +354,8 @@ in {
           background-image: url("${waybarIconsDir}/battery-charge.svg");
         }
 
-        #memory {
-          background-image: url("${waybarIconsDir}/memory.svg");
-        }
-
-        #temperature {
-          background-image: url("${waybarIconsDir}/temperature.svg");
-        }
-
-        #bluetooth {
-          background-image: url("${waybarIconsDir}/bluetooth.svg");
-        }
-
-        #bluetooth.connected {
-          background-image: url("${waybarIconsDir}/bluetooth-connected.svg");
-        }
-
-        #bluetooth.off,
-        #bluetooth.disabled,
-        #bluetooth.no-controller {
-          background-image: url("${waybarIconsDir}/bluetooth-off.svg");
-        }
-
-        #cpu {
-          background-image: url("${waybarIconsDir}/cpu.svg");
-        }
-
-        #disk {
-          background-image: url("${waybarIconsDir}/disk.svg");
-        }
-
-        #network, #network.wifi {
-          background-image: url("${waybarIconsDir}/network.svg");
-        }
-
-        #network.ethernet {
-          background-image: url("${waybarIconsDir}/network-ethernet.svg");
-        }
-
-        #network.disabled, #network.disconnected {
-          background-image: url("${waybarIconsDir}/network-off.svg");
-        }
-
-        #workspaces button {
-          opacity: 0.5;
-          background-image: none;
-        }
-
-        #workspaces button.active {
-          opacity: 1;
-          background-color: ${config.stylix.base16Scheme.base0A};
-          color: ${config.stylix.base16Scheme.base00};
-        }
-
-        #workspaces button.active.visible {
-          opacity: 1;
-          background-color: ${config.stylix.base16Scheme.base0A};
-          color: ${config.stylix.base16Scheme.base00};
-        }
-
-        #workspaces button.visible {
-          opacity: 1;
-          color: ${config.stylix.base16Scheme.base04};
+        #custom-power {
+          background-image: url("${waybarIconsDir}/power.svg");
         }
       '';
     }

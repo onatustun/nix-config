@@ -30,9 +30,9 @@ in {
               "memory"
               "cpu"
               "custom/keyboard"
+              "wireplumber"
               "bluetooth"
               "network"
-              "wireplumber"
               "battery"
               "clock"
               "custom/power"
@@ -48,6 +48,18 @@ in {
               tooltip = false;
             };
 
+            temperature = {
+              format = " ";
+              tooltip = true;
+              tooltip-format = "{temperatureC} °C";
+            };
+
+            disk = {
+              format = " ";
+              tooltip = true;
+              tooltip-format = "{used}/{total}";
+            };
+
             memory = {
               format = " ";
               tooltip = true;
@@ -60,30 +72,10 @@ in {
               tooltip-format = "{usage}%";
             };
 
-            disk = {
+            "custom/keyboard" = {
               format = " ";
-              tooltip = true;
-              tooltip-format = "{used}/{total}";
-            };
-
-            temperature = {
-              format = " ";
-              tooltip = true;
-              tooltip-format = "{temperatureC} °C";
-            };
-
-            bluetooth = {
-              format = " ";
-              tooltip = true;
-              tooltip-format = "{status} {device_alias}";
-            };
-
-            network = {
-              interval = 5;
-              format = " ";
-              on-click = "nm-connection-editor";
-              tooltip = true;
-              tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
+              tooltip = false;
+              on-click = "pkill -SIGRTMIN -x wvkbd-mobintl";
             };
 
             wireplumber = {
@@ -94,6 +86,21 @@ in {
               on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
               scroll-step = 5;
               max-volume = 100.0;
+            };
+
+            bluetooth = {
+              format = " ";
+              on-click = "blueberry";
+              tooltip = true;
+              tooltip-format = "{status} {device_alias}";
+            };
+
+            network = {
+              interval = 5;
+              format = " ";
+              on-click = "nm-connection-editor";
+              tooltip = true;
+              tooltip-format = "{ifname}:{ipaddr}/{cidr} {essid} ({signalStrength}%)";
             };
 
             battery = {
@@ -132,12 +139,6 @@ in {
               format = " ";
               tooltip = false;
               on-click = "wlogout -b 2 --protocol layer-shell";
-            };
-
-            "custom/keyboard" = {
-              format = " ";
-              tooltip = false;
-              on-click = "pkill -SIGRTMIN -x wvkbd-mobintl";
             };
           }
         ];
