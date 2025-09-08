@@ -78,8 +78,23 @@
   };
 
   inputs = {
+    nix-src = {
+      url = "github:determinatesystems/nix-src";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        git-hooks-nix.follows = "pre-commit-hooks";
+        nixpkgs-23-11.follows = "nixpkgs-23-11";
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-regression.follows = "nixpkgs-regression";
+      };
+    };
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-23-11.url = "github:nixos/nixpkgs/a62e6edd6d5e1fa0329b8653c801147986f8d446?narHash=sha256-oamiKNfr2MS6yH64rUn99mIZjc45nGJlj9eGth/3Xuw%3D";
+    nixpkgs-regression.url = "github:nixos/nixpkgs/215d4d0fd80ca5163643b03a33fde804a29cc1e2?narHash=sha256-uGJ0VXIhWKGXxkeNnq4TvV3CIOkUJ3PAoLZ3HMzNVMw%3D";
+
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
 
     lib-aggregate = {
@@ -93,7 +108,11 @@
 
     determinate = {
       url = "https://flakehub.com/f/determinatesystems/determinate/*";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        nix.follows = "nix-src";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     fh = {
@@ -567,14 +586,31 @@
       };
     };
 
+    fromYaml = {
+      url = "github:senchopens/fromyaml";
+      flake = false;
+    };
+
+    base16 = {
+      url = "github:senchopens/base16.nix";
+      inputs.fromYaml.follows = "fromYaml";
+    };
+
+    tinted-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
+
     stylix = {
       url = "github:danth/stylix";
 
       inputs = {
+        base16.follows = "base16";
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
         nur.follows = "nur";
         systems.follows = "systems";
+        tinted-schemes.follows = "tinted-schemes";
       };
     };
 
