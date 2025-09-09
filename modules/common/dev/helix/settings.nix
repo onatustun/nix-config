@@ -32,8 +32,8 @@ in {
             middle-click-paste = false;
 
             shell = [
-              "bash"
-              "-c"
+              "nu"
+              "--commands"
             ];
 
             line-number = "relative";
