@@ -136,6 +136,9 @@ in {
           "Mod+Up".action.focus-window-or-workspace-up = [];
           "Mod+Right".action.focus-column-right = [];
 
+          "Mod+BracketLeft".action.focus-column-first = [];
+          "Mod+BracketRight".action.focus-column-last = [];
+
           "Mod+Ctrl+H".action.move-column-left = [];
           "Mod+Ctrl+J".action.move-window-down-or-to-workspace-down = [];
           "Mod+Ctrl+K".action.move-window-up-or-to-workspace-up = [];
