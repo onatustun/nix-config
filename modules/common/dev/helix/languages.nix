@@ -53,7 +53,6 @@ in {
 
           {
             name = "html";
-            auto-format = true;
 
             formatter = {
               command = "prettier";
@@ -75,7 +74,6 @@ in {
 
           {
             name = "css";
-            auto-format = true;
 
             formatter = {
               command = "prettier";
@@ -113,6 +111,15 @@ in {
               "nixd"
               "uwu-colors"
             ];
+          }
+
+          {
+            name = "nu";
+
+            indent = {
+              tab-width = 2;
+              unit = "  ";
+            };
           }
         ];
 
