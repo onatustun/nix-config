@@ -164,6 +164,28 @@
     };
 
     systems.url = "github:nix-systems/default";
+    flake-schemas.url = "https://flakehub.com/f/determinatesystems/flake-schemas/=0.1.5.tar.gz";
+
+    jovian = {
+      url = "github:jovian-experiments/jovian-nixos";
+
+      inputs = {
+        nix-github-actions.follows = "nix-github-actions";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    chaotic = {
+      url = "github:chaotic-cx/nyx";
+
+      inputs = {
+        flake-schemas.follows = "flake-schemas";
+        home-manager.follows = "home-manager";
+        jovian.follows = "jovian";
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
+    };
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -240,7 +262,11 @@
       inputs.systems.follows = "systems";
     };
 
-    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+
     flake-root.url = "github:srid/flake-root";
 
     gitignore = {
