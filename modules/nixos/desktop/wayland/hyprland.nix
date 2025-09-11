@@ -20,9 +20,9 @@ in {
     portalPackage = inputs.xdg-portal-hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  environment.systemPackages = [
-    inputs.hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.hyprcursor
-    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+  environment.systemPackages = with inputs; [
+    hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.hyprcursor
+    hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
   ];
 
   home-manager.sharedModules = [

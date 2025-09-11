@@ -8,5 +8,9 @@
       grim
       slurp
     ]
-    ++ [pkgs.wvkbd];
+    ++ (with pkgs; [
+      wlr-randr
+      wlrctl
+      wvkbd
+    ]);
 }
