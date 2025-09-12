@@ -923,9 +923,11 @@
   outputs = inputs @ {
     nixpkgs,
     systems,
+    flake-root,
     ...
   }: let
-    inherit (nixpkgs.lib) foldl' const;
+    nixpkgsLib = nixpkgs.lib;
+    inherit (nixpkgsLib) foldl' const;
 
     libInputs = with inputs; [
       flake-parts
@@ -934,7 +936,7 @@
     ];
 
     lib' =
-      nixpkgs.lib
+      nixpkgsLib
       |> (acc:
         foldl' (acc: input:
           acc.extend (const
@@ -957,7 +959,7 @@
       systems = import systems;
 
       imports =
-        [inputs.flake-root.flakeModule]
+        [flake-root.flakeModule]
         ++ collectNix ./parts
         ++ [./hosts];
     };
