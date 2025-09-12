@@ -6,7 +6,12 @@
   inherit (lib) enabled;
 in {
   services.resolved = enabled;
-  environment.systemPackages = [pkgs.networkmanagerapplet];
+
+  environment.systemPackages = with pkgs; [
+    geteduroam
+    geteduroam-cli
+    networkmanagerapplet
+  ];
 
   networking = {
     networkmanager = enabled {
