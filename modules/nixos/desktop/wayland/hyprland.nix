@@ -23,6 +23,7 @@ in {
   environment.systemPackages = with inputs; [
     hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.hyprcursor
     hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+    hyprmon.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home-manager.sharedModules = [

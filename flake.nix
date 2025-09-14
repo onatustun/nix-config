@@ -879,6 +879,8 @@
       inputs.nixpkgs.follows = "hyprland/nixpkgs";
     };
 
+    hyprmon.url = "github:onatustun/hyprmon";
+
     waybar = {
       url = "github:alexays/waybar";
 
