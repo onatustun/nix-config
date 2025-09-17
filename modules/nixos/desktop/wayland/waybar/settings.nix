@@ -130,9 +130,9 @@ in {
 
             clock = {
               interval = 1;
-              format = "{:%H:%M %d/%m}";
+              format = "{:%a %d %b %R}";
               tooltip = true;
-              tooltip-format = "{:%a %d %b}";
+              tooltip-format = "{:%a %b %d %m %Y %R}";
             };
 
             "custom/power" = {

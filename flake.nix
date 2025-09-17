@@ -928,8 +928,7 @@
     flake-root,
     ...
   }: let
-    nixpkgsLib = nixpkgs.lib;
-    inherit (nixpkgsLib) foldl' const;
+    inherit (nixpkgs.lib) foldl' const;
 
     libInputs = with inputs; [
       flake-parts
@@ -938,7 +937,7 @@
     ];
 
     lib' =
-      nixpkgsLib
+      nixpkgs.lib
       |> (acc:
         foldl' (acc: input:
           acc.extend (const
