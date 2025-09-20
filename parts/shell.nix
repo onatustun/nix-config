@@ -1,4 +1,6 @@
-{
+{lib, ...}: let
+  inherit (lib) concatLists;
+in {
   perSystem = {
     pkgs,
     config,
@@ -6,7 +8,7 @@
     ...
   }: {
     devShells.default = pkgs.mkShell {
-      name = "nix-config-shell";
+      name = "nix-config-dev";
 
       shellHook = ''
         export RULES="$(git rev-parse --show-toplevel)/secrets/secrets.nix";
@@ -18,15 +20,16 @@
         treefmt.build.devShell
       ];
 
-      packages = with pkgs;
-        [
+      packages = concatLists [
+        (with pkgs; [
           age
           git
           nixos-rebuild
           ssh-to-age
           vim
-        ]
-        ++ (with inputs'; [
+        ])
+
+        (with inputs'; [
           agenix.packages.default
           alejandra.packages.default
           cachix.packages.default
@@ -42,7 +45,8 @@
           nixos-anywhere.packages.default
           nixos-generators.packages.default
           statix.packages.default
-        ]);
+        ])
+      ];
     };
   };
 }
