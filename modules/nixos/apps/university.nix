@@ -25,8 +25,16 @@ in {
   programs.vscode = enabled {
     extensions = with pkgs.vscode-extensions; [
       jdinhlife.gruvbox
+      ms-dotnettools.csdevkit
       ms-dotnettools.csharp
+      visualstudiotoolsforunity.vstuc
       vscjava.vscode-java-pack
     ];
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-runtime-6.0.36"
+    "dotnet-sdk-6.0.428"
+    "libxml2-2.13.8"
+  ];
 }
