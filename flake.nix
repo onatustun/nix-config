@@ -936,15 +936,19 @@
       home-manager
     ];
 
+    libs =
+      libInputs
+      |> map (input:
+        input.lib);
+
     lib' =
-      nixpkgs.lib
-      |> (acc:
-        foldl' (acc: input:
-          acc.extend (const
-            <| const
-            <| input.lib))
-        acc
-        libInputs);
+      libs
+      |> foldl' (acc: lib:
+        acc.extend
+        <| const
+        <| const
+        <| lib)
+      nixpkgs.lib;
 
     lib =
       lib'.extend
