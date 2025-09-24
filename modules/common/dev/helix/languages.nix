@@ -125,6 +125,7 @@ in {
 
         language-server = {
           uwu-colors.command = "${getExe' inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default "uwu_colors"}";
+          jdtls.config.java.project.sourcePaths = ["src"];
 
           nixd.command =
             if isDarwin
