@@ -199,6 +199,16 @@
       };
     };
 
+    flake-checker = {
+      url = "github:determinatesystems/flake-checker";
+
+      inputs = {
+        fenix.follows = "fenix";
+        naersk.follows = "naersk";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     statix = {
       url = "github:oppiliappan/statix";
 

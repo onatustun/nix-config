@@ -613,6 +613,32 @@
         "type": "github"
       }
     },
+    "flake-checker": {
+      "inputs": {
+        "fenix": [
+          "fenix"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758127596,
+        "narHash": "sha256-MKzM9eYWsXY9SuB4kUrrobZx5WG+da3XMgiYs2iB+Vc=",
+        "owner": "determinatesystems",
+        "repo": "flake-checker",
+        "rev": "9753d4abc2d0667989bdad360a7974a4cf953a78",
+        "type": "github"
+      },
+      "original": {
+        "owner": "determinatesystems",
+        "repo": "flake-checker",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -2314,6 +2340,7 @@
         "disko": "disko",
         "eza": "eza",
         "fenix": "fenix",
+        "flake-checker": "flake-checker",
         "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts_3",
         "flake-root": "flake-root",

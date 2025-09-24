@@ -25,7 +25,7 @@ in {
 
       programs = {
         alejandra = enabled {package = inputs'.alejandra.packages.default;};
-        deadnix = enabled {package = inputs'.deadnix.packages.default;};
+        deadnix = enabled {package = config.packages.deadnix;};
       };
     };
   };

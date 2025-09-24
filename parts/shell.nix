@@ -34,10 +34,10 @@ in {
           alejandra.packages.default
           cachix.packages.default
           comma.packages.default
-          deadnix.packages.default
           deploy-rs.packages.default
           determinate.packages.default
           disko.packages.default
+          flake-checker.packages.default
           home-manager.packages.default
           nh.packages.default
           nix-index.packages.default
@@ -45,6 +45,8 @@ in {
           nixos-generators.packages.default
           statix.packages.default
         ])
+
+        [config.packages.deadnix]
       ];
     };
   };
