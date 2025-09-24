@@ -942,13 +942,13 @@
         input.lib);
 
     lib' =
-      libs
-      |> foldl' (acc: lib:
+      foldl' (acc: lib:
         acc.extend
         <| const
         <| const
         <| lib)
-      nixpkgs.lib;
+      nixpkgs.lib
+      libs;
 
     lib =
       lib'.extend
