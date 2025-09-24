@@ -10,7 +10,6 @@ in {
     {
       programs.yazi = enabled {
         package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.default;
-        enableNushellIntegration = true;
         shellWrapperName = "y";
 
         settings = {

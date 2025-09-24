@@ -10,17 +10,18 @@
   inherit (pkgs.nuenv) writeScriptBin;
   inherit (inputs) self;
 
+  nushellExe = getExe' pkgs.nushell "nu";
+
   helixDrv =
     if isDarwin
     then pkgs.helix
     else inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
   helixExe = getExe' helixDrv "hx";
-  nushellExe = getExe' pkgs.nushell "nu";
 
   rebuild = writeScriptBin {
     name = "rebuild";
-    script = readFile (self + "/scripts/rebuild.nu");
+    script = readFile "${self}/scripts/rebuild.nu";
   };
 in {
   users.users.${username}.shell = pkgs.nushell;
@@ -28,12 +29,15 @@ in {
 
   home-manager.sharedModules = [
     {
-      home.sessionVariables.SHELL = nushellExe;
+      home = {
+        sessionVariables.SHELL = nushellExe;
+        shell.enableShellIntegration = true;
+      };
 
       programs.nushell = enabled {
         environmentVariables = {
           SHELL = nushellExe;
-          CARAPACE_BRIDGES = "inshellisense,carapace,zsh,fish,bash";
+          CARAPACE_BRIDGES = "carapace,zsh,fish,bash";
           EDITOR = helixExe;
           VISUAL = helixExe;
           NIXPKGS_ALLOW_UNFREE = "1";
@@ -74,15 +78,10 @@ in {
           x = "hx";
           z = "cd";
           zi = "cdi";
+          rebuild = "${getExe rebuild}";
         };
 
-        extraConfig = ''
-          ${readFile ./extraConfig.nu}
-
-          def --wrapped rebuild [...args]: nothing -> nothing {
-            ${getExe rebuild} ...$args
-          }
-        '';
+        extraConfig = readFile ./extraConfig.nu;
       };
     }
   ];

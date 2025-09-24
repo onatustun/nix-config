@@ -4,8 +4,6 @@ in {
   home-manager.sharedModules = [
     {
       programs.starship = enabled {
-        enableNushellIntegration = true;
-
         settings = {
           add_newline = false;
           fill.symbol = " ";

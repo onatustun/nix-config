@@ -38,7 +38,7 @@ super: inputs: self: let
     ignore ? [],
     extraModules ? [],
   }: let
-    cfg = systems.${type} or (throw "Unknown type: ${type}");
+    cfg = systems.${type};
     systemBuilder = cfg.builder;
     homeDir = cfg.homeDir username;
 

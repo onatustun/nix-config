@@ -7,7 +7,11 @@
 in {
   imports = [inputs.pre-commit-hooks.flakeModule];
 
-  perSystem = {inputs', ...}: {
+  perSystem = {
+    inputs',
+    config,
+    ...
+  }: {
     pre-commit = {
       check = enabled;
 
@@ -21,7 +25,8 @@ in {
 
         hooks = {
           alejandra = enabled {package = inputs'.alejandra.packages.default;};
-          deadnix = enabled {package = inputs'.deadnix.packages.default;};
+          deadnix = enabled {package = config.packages.deadnix;};
+          # flake-checker = enabled {package = inputs'.flake-checker.packages.default;};
           treefmt = enabled;
         };
       };

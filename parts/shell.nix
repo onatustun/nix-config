@@ -34,18 +34,18 @@ in {
           alejandra.packages.default
           cachix.packages.default
           comma.packages.default
-          deadnix.packages.default
           deploy-rs.packages.default
           determinate.packages.default
           disko.packages.default
-          fh.packages.default
+          flake-checker.packages.default
           home-manager.packages.default
           nh.packages.default
           nix-index.packages.default
           nixos-anywhere.packages.default
           nixos-generators.packages.default
-          statix.packages.default
         ])
+
+        [config.packages.deadnix]
       ];
     };
   };
