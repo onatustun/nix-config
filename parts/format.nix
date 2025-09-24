@@ -15,7 +15,6 @@ in {
     formatter = config.treefmt.build.wrapper;
 
     treefmt = {
-      package = inputs'.treefmt.packages.default;
       inherit (config.flake-root) projectRootFile;
       enableDefaultExcludes = true;
 

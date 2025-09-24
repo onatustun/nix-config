@@ -38,7 +38,6 @@ in {
           deploy-rs.packages.default
           determinate.packages.default
           disko.packages.default
-          fh.packages.default
           home-manager.packages.default
           nh.packages.default
           nix-index.packages.default

@@ -8,15 +8,7 @@
   inherit (lib) enabled;
   package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
-  environment.systemPackages =
-    (with inputs; [
-      dix.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nix-output-monitor.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ])
-    ++ [
-      package
-      pkgs.nvd
-    ];
+  environment.systemPackages = [package];
 
   home-manager.sharedModules = [
     {
