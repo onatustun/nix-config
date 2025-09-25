@@ -16,7 +16,6 @@
       "https://nix-darwin.cachix.org"
       "https://nixpkgs-wayland.cachix.org"
       "https://pre-commit-hooks.cachix.org"
-      "https://statix.cachix.org"
       "https://stylix.cachix.org"
       "https://yazi.cachix.org"
     ];
@@ -35,7 +34,6 @@
       "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
       "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-      "statix.cachix.org-1:Z9E/g1YjCjU117QOOt07OjhljCoRZddiAm4VVESvais="
       "stylix.cachix.org-1:iTycMb+viP8aTqhRDvV5qjs1jtNJKH9Jjvqyg4DYxhw="
       "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
     ];
@@ -67,7 +65,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
 
     determinate = {
@@ -86,7 +83,6 @@
       inputs = {
         disko.follows = "disko";
         flake-parts.follows = "flake-parts";
-        nixos-stable.follows = "nixpkgs-stable";
         nixpkgs.follows = "nixpkgs";
         treefmt-nix.follows = "treefmt-nix";
       };
@@ -206,16 +202,6 @@
         fenix.follows = "fenix";
         naersk.follows = "naersk";
         nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    statix = {
-      url = "github:oppiliappan/statix";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
       };
     };
 
@@ -477,45 +463,7 @@
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "nixpkgs-stable";
         xwayland-satellite-unstable.follows = "xwayland-satellite";
-      };
-    };
-
-    hyprutils = {
-      url = "github:hyprwm/hyprutils";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
-    hyprwayland-scanner = {
-      url = "github:hyprwm/hyprwayland-scanner";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
-    hyprland-protocols = {
-      url = "github:hyprwm/hyprland-protocols";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
-    hyprlang = {
-      url = "github:hyprwm/hyprlang";
-
-      inputs = {
-        hyprutils.follows = "hyprutils";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
       };
     };
 
@@ -523,12 +471,8 @@
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
       inputs = {
-        hyprland-protocols.follows = "hyprland-protocols";
-        hyprlang.follows = "hyprlang";
-        hyprutils.follows = "hyprutils";
-        hyprwayland-scanner.follows = "hyprwayland-scanner";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
       };
     };
 
@@ -536,20 +480,8 @@
       url = "github:hyprwm/hyprcursor";
 
       inputs = {
-        hyprlang.follows = "hyprlang";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
-    aquamarine = {
-      url = "github:hyprwm/aquamarine";
-
-      inputs = {
-        hyprutils.follows = "hyprutils";
-        hyprwayland-scanner.follows = "hyprwayland-scanner";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
       };
     };
 
@@ -557,12 +489,7 @@
       url = "github:hyprwm/hyprland";
 
       inputs = {
-        aquamarine.follows = "aquamarine";
         hyprcursor.follows = "hyprcursor";
-        hyprland-protocols.follows = "hyprland-protocols";
-        hyprlang.follows = "hyprlang";
-        hyprutils.follows = "hyprutils";
-        hyprwayland-scanner.follows = "hyprwayland-scanner";
         nixpkgs.follows = "nixpkgs";
         pre-commit-hooks.follows = "pre-commit-hooks";
         systems.follows = "systems";
@@ -575,8 +502,8 @@
 
       inputs = {
         hyprland.follows = "hyprland";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
+        nixpkgs.follows = "hyprland/nixpkgs";
+        systems.follows = "hyprland/systems";
       };
     };
 
