@@ -1,10 +1,4 @@
-{
-  lib,
-  inputs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{inputs, ...}: {
   imports = [inputs.treefmt-nix.flakeModule];
 
   perSystem = {
@@ -24,8 +18,15 @@ in {
       ];
 
       programs = {
-        alejandra = enabled {package = inputs'.alejandra.packages.default;};
-        deadnix = enabled {package = config.packages.deadnix;};
+        alejandra = {
+          enable = true;
+          package = inputs'.alejandra.packages.default;
+        };
+
+        deadnix = {
+          enable = true;
+          package = config.packages.deadnix;
+        };
       };
     };
   };

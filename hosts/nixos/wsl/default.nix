@@ -1,12 +1,9 @@
 {
-  lib,
   inputs,
   username,
   pkgs,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   imports = [inputs.nixos-wsl.nixosModules.default];
 
   users.users.${username}.extraGroups = [
@@ -16,7 +13,8 @@ in {
     "wheel"
   ];
 
-  wsl = enabled {
+  wsl = {
+    enable = true;
     defaultUser = username;
     startMenuLaunchers = true;
 

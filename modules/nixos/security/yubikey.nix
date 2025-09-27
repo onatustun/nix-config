@@ -4,7 +4,7 @@
   username,
   ...
 }: let
-  inherit (lib) u2fKeys concatStringsSep enabled;
+  inherit (lib) u2fKeys concatStringsSep;
   inherit (pkgs) writeText;
 
   authfile =
@@ -14,7 +14,9 @@
     |> writeText "u2f-keys";
 in {
   security.pam = {
-    u2f = enabled {
+    u2f = {
+      enable = true;
+
       settings = {
         cue = true;
         interactive = true;
@@ -36,7 +38,7 @@ in {
   };
 
   services = {
-    pcscd = enabled;
+    pcscd.enable = true;
 
     udev.packages = with pkgs; [
       libfido2
@@ -45,7 +47,10 @@ in {
     ];
   };
 
-  programs.yubikey-touch-detector = enabled {libnotify = true;};
+  programs.yubikey-touch-detector = {
+    enable = true;
+    libnotify = true;
+  };
 
   environment.systemPackages = with pkgs; [
     age-plugin-yubikey

@@ -1,19 +1,17 @@
 {
-  lib,
   inputs,
   pkgs,
   username,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   home-manager.sharedModules = [
     inputs.zen-browser.homeModules.twilight
 
     {
       home.sessionVariables."BROWSER" = "zen-twilight";
 
-      programs.zen-browser = enabled {
+      programs.zen-browser = {
+        enable = true;
         nativeMessagingHosts = [pkgs.ff2mpv-rust];
 
         profiles.default = {

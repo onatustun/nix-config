@@ -1,7 +1,7 @@
-{lib, ...}: let
-  inherit (lib) enabled;
-in {
-  services.aerospace = enabled {
+{
+  services.aerospace = {
+    enable = true;
+
     settings = {
       after-login-command = [];
       after-startup-command = [];

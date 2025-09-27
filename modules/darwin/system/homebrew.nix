@@ -1,16 +1,14 @@
 {
-  lib,
   inputs,
   username,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   imports = [inputs.nix-homebrew.darwinModules.nix-homebrew];
   system.primaryUser = "${username}";
-  homebrew = enabled;
+  homebrew.enable = true;
 
-  nix-homebrew = enabled {
+  nix-homebrew = {
+    enable = true;
     user = "${username}";
 
     taps = {

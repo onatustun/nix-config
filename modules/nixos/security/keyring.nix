@@ -1,10 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{pkgs, ...}: {
   security.pam.services = {
     gdm-password.enableGnomeKeyring = true;
     login.enableGnomeKeyring = true;
@@ -12,8 +6,8 @@ in {
 
   services = {
     gnome = {
-      gcr-ssh-agent = enabled;
-      gnome-keyring = enabled;
+      gcr-ssh-agent.enable = true;
+      gnome-keyring.enable = true;
     };
 
     dbus.packages = with pkgs; [
@@ -22,5 +16,5 @@ in {
     ];
   };
 
-  programs.seahorse = enabled;
+  programs.seahorse.enable = true;
 }

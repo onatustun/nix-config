@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkDefault enabled;
+  inherit (lib) mkDefault;
 in {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
@@ -43,7 +43,7 @@ in {
     cpu.intel.updateMicrocode = mkDefault config.hardware.enableRedistributableFirmware;
 
     nvidia = {
-      modesetting = enabled;
+      modesetting.enable = true;
       open = false;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };

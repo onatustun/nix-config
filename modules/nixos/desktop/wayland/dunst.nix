@@ -1,22 +1,16 @@
 {
-  lib,
   inputs,
   pkgs,
   config,
   ...
-}: let
-  inherit (lib) enabled;
-  package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.dunst;
-in {
-  environment.systemPackages = [
-    package
-    pkgs.libnotify
-  ];
+}: {
+  environment.systemPackages = [pkgs.libnotify];
 
   home-manager.sharedModules = [
     {
-      services.dunst = enabled {
-        inherit package;
+      services.dunst = {
+        enable = true;
+        package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.dunst;
 
         settings.global = {
           follow = "none";

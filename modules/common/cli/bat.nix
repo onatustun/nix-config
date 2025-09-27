@@ -1,13 +1,8 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{pkgs, ...}: {
   home-manager.sharedModules = [
     {
-      programs.bat = enabled {
+      programs.bat = {
+        enable = true;
         config.pager = "less -FR";
 
         extraPackages = with pkgs.bat-extras; [

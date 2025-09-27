@@ -1,12 +1,11 @@
-{lib, ...}: let
-  inherit (lib) enabled;
-in {
+{
   home-manager.sharedModules = [
     {
-      programs.git = enabled {
+      programs.git = {
+        enable = true;
         userName = "onatustun";
         userEmail = "git@onatustun.com";
-        lfs = enabled;
+        lfs.enable = true;
 
         ignores = [
           ".direnv"

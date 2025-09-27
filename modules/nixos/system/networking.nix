@@ -1,11 +1,5 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
-  services.resolved = enabled;
+{pkgs, ...}: {
+  services.resolved.enable = true;
 
   environment.systemPackages = with pkgs; [
     geteduroam
@@ -14,7 +8,8 @@ in {
   ];
 
   networking = {
-    networkmanager = enabled {
+    networkmanager = {
+      enable = true;
       wifi.powersave = false;
       dns = "systemd-resolved";
     };

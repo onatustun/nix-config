@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) darwinSystem' disabled;
+  inherit (lib) darwinSystem';
 in {
   flake.darwinConfigurations = {
     mini = darwinSystem' {
@@ -31,7 +31,7 @@ in {
         "zen.nix"
       ];
 
-      extraModules = [{nix = disabled;}];
+      extraModules = [{nix.enable = false;}];
     };
   };
 }

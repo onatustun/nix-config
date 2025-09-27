@@ -4,10 +4,10 @@
   inputs,
   ...
 }: let
-  inherit (lib) disabled merge mkDefault optionalAttrs optionals;
+  inherit (lib) merge mkDefault optionalAttrs optionals;
 in {
   nix = {
-    channel = disabled;
+    channel.enable = false;
 
     gc =
       merge {

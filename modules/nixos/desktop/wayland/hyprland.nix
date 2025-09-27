@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) readFile enabled concatMap attrValues mkMerge mkIf concatLists getExe genList;
+  inherit (lib) readFile concatMap attrValues mkMerge mkIf concatLists getExe genList;
   inherit (pkgs.nuenv) writeScriptBin;
   inherit (inputs) self;
 
@@ -15,7 +15,8 @@
     script = readFile (self + "/scripts/hyprland.nu");
   };
 in {
-  programs.hyprland = enabled {
+  programs.hyprland = {
+    enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.xdg-portal-hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
@@ -28,10 +29,12 @@ in {
 
   home-manager.sharedModules = [
     {
-      wayland.windowManager.hyprland = enabled {
-        xwayland = enabled;
+      wayland.windowManager.hyprland = {
+        enable = true;
+        xwayland.enable = true;
 
-        systemd = enabled {
+        systemd = {
+          enable = true;
           enableXdgAutostart = true;
           variables = ["--all"];
         };

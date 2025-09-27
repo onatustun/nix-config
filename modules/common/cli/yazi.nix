@@ -1,14 +1,12 @@
 {
-  lib,
   inputs,
   pkgs,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   home-manager.sharedModules = [
     {
-      programs.yazi = enabled {
+      programs.yazi = {
+        enable = true;
         package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.default;
         shellWrapperName = "y";
 

@@ -1,10 +1,8 @@
 {
-  lib,
   secretsDir,
   config,
   ...
 }: let
-  inherit (lib) enabled;
   interfaceName = "tailscale0";
 in {
   age.secrets."tailscale-authkey" = {
@@ -23,7 +21,8 @@ in {
     extraSetFlags = ["--advertise-exit-node"];
   };
 
-  networking.firewall = enabled {
+  networking.firewall = {
+    enable = true;
     trustedInterfaces = [interfaceName];
     allowedUDPPorts = [config.services.tailscale.port];
   };

@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) concatLists enabled;
+  inherit (lib) concatLists;
 in {
   environment.systemPackages = concatLists [
     (with pkgs; [
@@ -22,7 +22,9 @@ in {
     ])
   ];
 
-  programs.vscode = enabled {
+  programs.vscode = {
+    enable = true;
+
     extensions = with pkgs.vscode-extensions; [
       jdinhlife.gruvbox
       ms-dotnettools.csdevkit

@@ -1,21 +1,15 @@
 {
-  lib,
   inputs,
   pkgs,
   ...
-}: let
-  inherit (lib) enabled;
-  package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wlsunset;
-in {
-  environment.systemPackages = [
-    pkgs.brightnessctl
-    package
-  ];
+}: {
+  environment.systemPackages = [pkgs.brightnessctl];
 
   home-manager.sharedModules = [
     {
-      services.wlsunset = enabled {
-        inherit package;
+      services.wlsunset = {
+        enable = true;
+        package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wlsunset;
 
         gamma = 0.8;
         latitude = -57.149651;

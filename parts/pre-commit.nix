@@ -1,10 +1,4 @@
-{
-  lib,
-  inputs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{inputs, ...}: {
   imports = [inputs.pre-commit-hooks.flakeModule];
 
   perSystem = {
@@ -13,7 +7,7 @@ in {
     ...
   }: {
     pre-commit = {
-      check = enabled;
+      check.enable = true;
 
       settings = {
         package = inputs'.pre-commit-hooks.packages.default;
@@ -24,10 +18,24 @@ in {
         ];
 
         hooks = {
-          alejandra = enabled {package = inputs'.alejandra.packages.default;};
-          deadnix = enabled {package = config.packages.deadnix;};
-          # flake-checker = enabled {package = inputs'.flake-checker.packages.default;};
-          treefmt = enabled;
+          alejandra = {
+            enable = true;
+            package = inputs'.alejandra.packages.default;
+          };
+
+          deadnix = {
+            enable = true;
+            package = config.packages.deadnix;
+          };
+
+          /*
+          flake-checker = {
+            enable = true;
+            package = inputs'.flake-checker.packages.default;
+          };
+          */
+
+          treefmt.enable = true;
         };
       };
     };

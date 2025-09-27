@@ -1,13 +1,9 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
-  services.tumbler = enabled;
+{pkgs, ...}: {
+  services.tumbler.enable = true;
 
-  programs.thunar = enabled {
+  programs.thunar = {
+    enable = true;
+
     plugins = with pkgs.xfce; [
       thunar-archive-plugin
       thunar-media-tags-plugin

@@ -1,13 +1,11 @@
-{lib, ...}: let
-  inherit (lib) enabled;
-in {
+{
   home-manager.sharedModules = [
     {
       programs = {
-        skim = enabled;
-        ripgrep = enabled;
-        fd = enabled;
-        fzf = enabled;
+        skim.enable = true;
+        ripgrep.enable = true;
+        fd.enable = true;
+        fzf.enable = true;
       };
     }
   ];

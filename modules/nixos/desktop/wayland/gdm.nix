@@ -1,5 +1,6 @@
-{lib, ...}: let
-  inherit (lib) enabled;
-in {
-  services.displayManager.gdm = enabled {wayland = true;};
+{
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
 }

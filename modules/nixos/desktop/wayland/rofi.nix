@@ -4,11 +4,12 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled mkForce mkLiteral;
+  inherit (lib) mkForce mkLiteral;
 in {
   home-manager.sharedModules = [
     {
-      programs.rofi = enabled {
+      programs.rofi = {
+        enable = true;
         package = pkgs.rofi-wayland;
         extraConfig.modi = mkForce "drun";
         font = mkForce "JetBrainsMono Nerd Font Mono 12";

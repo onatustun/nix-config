@@ -1,11 +1,5 @@
-{
-  lib,
-  username,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
-  networking.networkmanager = enabled;
+{username, ...}: {
+  networking.networkmanager.enable = true;
 
   users.users.${username} = {
     isNormalUser = true;

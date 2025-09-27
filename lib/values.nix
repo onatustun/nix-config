@@ -1,5 +1,5 @@
 self: let
-  inherit (self) merge mkMerge;
+  inherit (self) mkMerge;
 in {
   merge =
     mkMerge []
@@ -12,9 +12,6 @@ in {
             ++ [next];
         };
     };
-
-  enabled = merge {enable = true;};
-  disabled = merge {enable = false;};
 
   mkLiteral = value: {
     _type = "literal";

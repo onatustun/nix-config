@@ -3,12 +3,15 @@
   inputs,
   ...
 }: let
-  inherit (lib) collectNix remove foldl';
+  inherit (lib) filesystem filter hasSuffix remove foldl';
+  inherit (filesystem) listFilesRecursive;
 in {
   flake.deploy.nodes =
-    collectNix ./.
+    listFilesRecursive ./.
+    |> filter (hasSuffix ".nix")
     |> remove ./default.nix
     |> foldl'
     (acc: path:
-      acc // (import path {inherit inputs;})) {};
+      acc
+      // (import path {inherit inputs;})) {};
 }

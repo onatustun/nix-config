@@ -1,11 +1,8 @@
 {
-  lib,
   pkgs,
   inputs,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   environment.systemPackages = with pkgs;
     [
       cliphist
@@ -13,9 +10,5 @@ in {
     ]
     ++ [inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wl-clipboard];
 
-  home-manager.sharedModules = [
-    {
-      services.cliphist = enabled;
-    }
-  ];
+  home-manager.sharedModules = [{services.cliphist.enable = true;}];
 }

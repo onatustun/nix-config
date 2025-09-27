@@ -1,17 +1,19 @@
 {
-  lib,
   inputs,
   pkgs,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   home-manager.sharedModules = [
     {
-      programs.direnv = enabled {
+      programs.direnv = {
+        enable = true;
         package = inputs.direnv.packages.${pkgs.stdenv.hostPlatform.system}.default;
-        nix-direnv = enabled {package = inputs.nix-direnv.packages.${pkgs.stdenv.hostPlatform.system}.default;};
         silent = true;
+
+        nix-direnv = {
+          enable = true;
+          package = inputs.nix-direnv.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        };
       };
     }
   ];

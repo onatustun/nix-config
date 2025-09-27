@@ -1,8 +1,6 @@
-{lib, ...}: let
-  inherit (lib) enabled;
-in {
+{
   fonts = {
-    fontDir = enabled;
-    fontconfig = enabled;
+    fontDir.enable = true;
+    fontconfig.enable = true;
   };
 }

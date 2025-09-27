@@ -1,20 +1,15 @@
-{
-  lib,
-  isServer,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{isServer, ...}: {
   boot = {
     consoleLogLevel = 0;
     initrd.verbose = false;
-    plymouth = enabled;
+    plymouth.enable = true;
 
     loader = {
       efi.canTouchEfiVariables = !isServer;
       timeout = 3;
 
-      grub = enabled {
+      grub = {
+        enable = true;
         efiSupport = true;
         device = "nodev";
         useOSProber = true;

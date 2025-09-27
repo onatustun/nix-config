@@ -3,10 +3,12 @@
   username,
   ...
 }: let
-  inherit (lib) collectNix remove adminUserKeys;
+  inherit (lib) filesystem filter hasSuffix remove adminUserKeys;
+  inherit (filesystem) listFilesRecursive;
 in {
   imports =
-    collectNix ./.
+    listFilesRecursive ./.
+    |> filter (hasSuffix ".nix")
     |> remove ./default.nix;
 
   users.users = {

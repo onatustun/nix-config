@@ -1,9 +1,9 @@
-{lib, ...}: let
-  inherit (lib) enabled;
-in {
+{
   home-manager.sharedModules = [
     {
-      programs.starship = enabled {
+      programs.starship = {
+        enable = true;
+
         settings = {
           add_newline = false;
           fill.symbol = " ";

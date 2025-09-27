@@ -3,26 +3,30 @@
   inputs,
   ...
 }: let
-  inherit (lib) enabled;
+  inherit (lib) genAttrs const;
 in {
   home-manager.sharedModules = [
     inputs.nixcord.homeModules.nixcord
 
     {
-      programs.nixcord = enabled {
+      programs.nixcord = {
+        enable = true;
+
         config = {
           enableReactDevtools = true;
 
-          plugins = {
-            blurNSFW = enabled;
-            clearURLs = enabled;
-            experiments = enabled;
-            fakeNitro = enabled;
-            noTypingAnimation = enabled;
-            silentTyping = enabled;
-            translate = enabled;
-            youtubeAdblock = enabled;
-          };
+          plugins =
+            genAttrs [
+              "blurNSFW"
+              "clearURLs"
+              "experiments"
+              "fakeNitro"
+              "noTypingAnimation"
+              "silentTyping"
+              "translate"
+              "youtubeAdblock"
+            ]
+            <| const {enable = true;};
         };
       };
     }

@@ -1,18 +1,13 @@
 {
-  lib,
   inputs,
   pkgs,
   ...
-}: let
-  inherit (lib) enabled;
-  package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.swaylock;
-in {
-  environment.systemPackages = [package];
-
+}: {
   home-manager.sharedModules = [
     {
-      programs.swaylock = enabled {
-        inherit package;
+      programs.swaylock = {
+        enable = true;
+        package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.swaylock;
 
         settings = {
           font-size = 50;

@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled disabled genAttrs;
+  inherit (lib) genAttrs const;
 
   gruber = {
     name = "gruber-darker";
@@ -26,7 +26,8 @@
     base0F = "#cc8c3c";
   };
 in {
-  stylix = enabled {
+  stylix = {
+    enable = true;
     base16Scheme = gruber;
     inherit (gruber) polarity;
 
@@ -55,14 +56,16 @@ in {
 
   home-manager.sharedModules = [
     {
-      stylix.targets = genAttrs [
-        "helix"
-        "nixcord"
-        "rofi"
-        "spicetify"
-        "waybar"
-        "zen-browser"
-      ] (_: disabled);
+      stylix.targets =
+        genAttrs [
+          "helix"
+          "nixcord"
+          "rofi"
+          "spicetify"
+          "waybar"
+          "zen-browser"
+        ]
+        <| const {enable = false;};
     }
   ];
 }

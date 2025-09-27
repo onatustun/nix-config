@@ -21,6 +21,9 @@ in {
     extraLocaleSettings =
       lcSuffixes
       |> map (suffix: "LC_${suffix}")
-      |> (names: genAttrs names (const locale));
+      |> (names:
+        genAttrs names
+        <| const
+        <| locale);
   };
 }

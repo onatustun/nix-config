@@ -587,7 +587,8 @@
       lib'.extend
       <| import ./lib inputs;
 
-    inherit (lib) mkFlake collectNix;
+    inherit (lib) mkFlake concatLists filesystem filter hasSuffix;
+    inherit (filesystem) listFilesRecursive;
   in
     mkFlake {
       inherit inputs;
@@ -596,9 +597,11 @@
       debug = true;
       systems = import systems;
 
-      imports =
+      imports = concatLists [
         [flake-root.flakeModule]
-        ++ collectNix ./parts
-        ++ [./hosts];
+        (listFilesRecursive ./parts
+          |> filter (hasSuffix ".nix"))
+        [./hosts]
+      ];
     };
 }

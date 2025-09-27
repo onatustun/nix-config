@@ -7,7 +7,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) concatStringsSep getExe enabled;
+  inherit (lib) concatStringsSep getExe;
 
   guiPathDirs = [
     "/nix/var/nix/profiles/default/bin"
@@ -28,7 +28,9 @@
 in {
   home-manager.sharedModules = [
     {
-      programs.ghostty = enabled {
+      programs.ghostty = {
+        enable = true;
+
         package =
           if isDarwin
           then null

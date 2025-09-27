@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (pkgs.nuenv) writeScriptBin;
-  inherit (lib) readFile enabled getExe;
+  inherit (lib) readFile getExe;
   inherit (inputs) self;
 
   scripts = {
@@ -24,7 +24,8 @@
 in {
   home-manager.sharedModules = [
     {
-      programs.tmux = enabled {
+      programs.tmux = {
+        enable = true;
         baseIndex = 1;
         escapeTime = 0;
         keyMode = "vi";

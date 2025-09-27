@@ -5,12 +5,16 @@
   pkgs,
   ...
 }: let
-  inherit (lib) enabled disabled getExe' getExe;
+  inherit (lib) getExe' getExe;
   package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
 in {
   imports = [inputs.niri.nixosModules.niri];
-  niri-flake.cache = disabled;
-  programs.niri = enabled {inherit package;};
+  niri-flake.cache.enable = false;
+
+  programs.niri = {
+    enable = true;
+    inherit package;
+  };
 
   environment.systemPackages = with pkgs; [
     gnome-keyring
@@ -82,7 +86,10 @@ in {
           default-column-width = {proportion = 0.5;};
           gaps = 0;
 
-          border = enabled {width = 2;};
+          border = {
+            enable = true;
+            width = 2;
+          };
 
           preset-window-heights = [
             {proportion = 1.0 / 3.0;}
@@ -210,7 +217,10 @@ in {
           hide-not-bound = true;
         };
 
-        xwayland-satellite = enabled {path = getExe inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite;};
+        xwayland-satellite = {
+          enable = true;
+          path = getExe inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite;
+        };
 
         cursor = let
           cursorTheme = "Bibata-Modern-Ice";
@@ -223,8 +233,12 @@ in {
         input = {
           keyboard.xkb.layout = "us";
           mod-key = "Super";
-          warp-mouse-to-focus = enabled;
-          focus-follows-mouse = enabled {max-scroll-amount = "5%";};
+          warp-mouse-to-focus.enable = true;
+
+          focus-follows-mouse = {
+            enable = true;
+            max-scroll-amount = "5%";
+          };
         };
       };
     }

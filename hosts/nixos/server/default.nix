@@ -4,10 +4,12 @@
   pkgs,
   ...
 }: let
-  inherit (lib) collectNix remove adminUserKeys enabled;
+  inherit (lib) filesystem filter hasSuffix remove adminUserKeys;
+  inherit (filesystem) listFilesRecursive;
 in {
   imports =
-    collectNix ./.
+    listFilesRecursive ./.
+    |> filter (hasSuffix ".nix")
     |> remove ./default.nix;
 
   users.users = {
@@ -35,9 +37,14 @@ in {
   ];
 
   services = {
-    jellyfin = enabled {user = "onat";};
+    jellyfin = {
+      enable = true;
+      user = "onat";
+    };
 
-    caddy = enabled {
+    caddy = {
+      enable = true;
+
       virtualHosts."https://jellyfin.ust.sh".extraConfig = ''
         reverse_proxy 127.0.0.1:8096
       '';

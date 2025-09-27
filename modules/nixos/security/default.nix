@@ -1,8 +1,6 @@
-{lib, ...}: let
-  inherit (lib) enabled;
-in {
+{
   security = {
-    polkit = enabled;
-    rtkit = enabled;
+    polkit.enable = true;
+    rtkit.enable = true;
   };
 }

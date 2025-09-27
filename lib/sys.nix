@@ -1,8 +1,8 @@
 super: inputs: self: let
   inherit (super) nixosSystem darwinSystem;
   inherit (inputs.nixos-generators) nixosGenerate;
-  inherit (super) genAttrs removePrefix hasSuffix removeSuffix splitString elemAt length hasPrefix hasInfix filter any pathExists flatten unique mkDefault optional optionals optionalAttrs;
-  inherit (self) collectNix enabled;
+  inherit (super) genAttrs removePrefix filesystem hasSuffix removeSuffix splitString elemAt length hasPrefix hasInfix filter any pathExists flatten unique mkDefault optional optionals optionalAttrs;
+  inherit (filesystem) listFilesRecursive;
 
   systems = {
     nixos = {
@@ -118,7 +118,9 @@ super: inputs: self: let
         then [p]
         else throw "Module file not found: ${s}"
       else if pathExists p
-      then collectNix p
+      then
+        listFilesRecursive p
+        |> filter (hasSuffix ".nix")
       else throw "Module directory not found: ${s}";
 
     processModules = moduleSpecs:
@@ -158,7 +160,7 @@ super: inputs: self: let
         home-manager = {
           sharedModules = [
             {
-              programs.home-manager = enabled;
+              programs.home-manager.enable = true;
               home.sessionVariables.FLAKE = "${homeDir}/nix";
 
               nixpkgs.config = {

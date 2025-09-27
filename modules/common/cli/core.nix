@@ -4,10 +4,10 @@
   isDarwin,
   ...
 }: let
-  inherit (lib) optionalAttrs disabled optionals;
+  inherit (lib) optionalAttrs optionals;
 in {
   programs = optionalAttrs (!isDarwin) {
-    nano = disabled;
+    nano.enable = false;
   };
 
   environment.systemPackages = with pkgs;

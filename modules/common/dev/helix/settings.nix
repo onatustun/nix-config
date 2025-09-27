@@ -1,13 +1,10 @@
 {
-  lib,
   inputs,
   pkgs,
   config,
   isDarwin,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   home-manager.sharedModules = [
     {
       home.sessionVariables = {
@@ -15,7 +12,9 @@ in {
         VISUAL = "hx";
       };
 
-      programs.helix = enabled {
+      programs.helix = {
+        enable = true;
+
         package =
           if isDarwin
           then pkgs.helix

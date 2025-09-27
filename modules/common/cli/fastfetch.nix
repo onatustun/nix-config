@@ -1,14 +1,13 @@
 {
-  lib,
   isDarwin,
   isWsl,
   ...
-}: let
-  inherit (lib) enabled;
-in {
+}: {
   home-manager.sharedModules = [
     {
-      programs.fastfetch = enabled {
+      programs.fastfetch = {
+        enable = true;
+
         settings = {
           logo.source =
             if isDarwin

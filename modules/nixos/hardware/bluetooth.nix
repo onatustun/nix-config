@@ -1,19 +1,16 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
-  inherit (lib) enabled;
-in {
+{pkgs, ...}: {
   services = {
-    blueman = enabled;
+    blueman.enable = true;
 
-    avahi = enabled {
+    avahi = {
+      enable = true;
       nssmdns4 = true;
       openFirewall = true;
     };
 
-    printing = enabled {
+    printing = {
+      enable = true;
+
       drivers = with pkgs; [
         cups-filters
         cups-browsed
@@ -21,6 +18,10 @@ in {
     };
   };
 
-  hardware.bluetooth = enabled {powerOnBoot = true;};
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   environment.systemPackages = [pkgs.blueberry];
 }

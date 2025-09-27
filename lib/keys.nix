@@ -20,8 +20,13 @@ super: let
       |> at);
 
   mkRole = role: oses: let
-    host = map (os: at ["host" os role]) oses;
-    user = map (os: at ["user" os role]) oses;
+    mk = field:
+      map (os:
+        at [field os role])
+      oses;
+
+    host = mk "host";
+    user = mk "user";
   in {
     inherit host user;
 
