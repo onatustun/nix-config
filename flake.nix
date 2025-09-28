@@ -561,7 +561,8 @@
     flake-root,
     ...
   }: let
-    inherit (nixpkgs.lib) foldl' const;
+    inherit (nixpkgs.lib) filesystem const composeManyExtensions filter hasSuffix;
+    inherit (filesystem) listFilesRecursive;
 
     libInputs = with inputs; [
       flake-parts
@@ -576,19 +577,18 @@
 
     lib' =
       libs
-      |> foldl' (acc: lib:
-        acc.extend
-        <| const
+      |> map (lib:
+        const
         <| const
         <| lib)
-      nixpkgs.lib;
+      |> composeManyExtensions
+      |> nixpkgs.lib.extend;
 
     lib =
       lib'.extend
       <| import ./lib inputs;
 
-    inherit (lib) mkFlake concatLists filesystem filter hasSuffix;
-    inherit (filesystem) listFilesRecursive;
+    inherit (lib) mkFlake concatLists;
   in
     mkFlake {
       inherit inputs;
@@ -599,8 +599,11 @@
 
       imports = concatLists [
         [flake-root.flakeModule]
-        (listFilesRecursive ./parts
+
+        (./parts
+          |> listFilesRecursive
           |> filter (hasSuffix ".nix"))
+
         [./hosts]
       ];
     };
