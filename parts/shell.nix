@@ -1,6 +1,13 @@
-{lib, ...}: let
-  inherit (lib) concatLists;
+{
+  lib,
+  inputs,
+  ...
+}: let
+  inherit (lib) getExe concatLists;
 in {
+  imports = [inputs.agenix-shell.flakeModules.default];
+  agenix-shell.secrets."github-token".file = ../secrets/common/common/github-token.age;
+
   perSystem = {
     pkgs,
     config,
@@ -12,6 +19,8 @@ in {
 
       shellHook = ''
         export RULES="$(git rev-parse --show-toplevel)/secrets/secrets.nix";
+        source ${getExe config.agenix-shell.installationScript}
+        export NIX_CONFIG="access-tokens = github.com=$github__token"
         ${config.pre-commit.installationScript}
       '';
 
@@ -31,6 +40,7 @@ in {
 
         (with inputs'; [
           agenix.packages.default
+          agenix-shell.packages.installationScript
           alejandra.packages.default
           cachix.packages.default
           comma.packages.default

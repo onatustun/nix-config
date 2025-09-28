@@ -351,6 +351,18 @@
       };
     };
 
+    agenix-shell = {
+      url = "github:aciceri/agenix-shell";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        flake-root.follows = "flake-root";
+        git-hooks-nix.follows = "pre-commit-hooks";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
     tailscale = {
       url = "github:tailscale/tailscale";
 
