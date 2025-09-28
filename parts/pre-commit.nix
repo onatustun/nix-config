@@ -28,12 +28,10 @@
             package = config.packages.deadnix;
           };
 
-          /*
           flake-checker = {
-            enable = true;
+            enable = false;
             package = inputs'.flake-checker.packages.default;
           };
-          */
 
           treefmt.enable = true;
         };

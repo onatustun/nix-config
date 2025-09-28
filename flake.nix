@@ -466,6 +466,7 @@
       url = "github:hyprwm/hyprcursor";
 
       inputs = {
+        hyprlang.follows = "hyprland/hyprlang";
         nixpkgs.follows = "hyprland/nixpkgs";
         systems.follows = "hyprland/systems";
       };
@@ -547,8 +548,7 @@
     flake-root,
     ...
   }: let
-    inherit (nixpkgs.lib) filesystem const composeManyExtensions filter hasSuffix;
-    inherit (filesystem) listFilesRecursive;
+    inherit (nixpkgs.lib) const composeManyExtensions;
 
     libInputs = with inputs; [
       flake-parts
@@ -574,7 +574,19 @@
       lib'.extend
       <| import ./lib inputs;
 
-    inherit (lib) mkFlake concatLists;
+    inherit (lib) filesystem filter hasSuffix attrNames mkFlake concatLists;
+    inherit (filesystem) listFilesRecursive;
+    inherit (builtins) readDir;
+
+    parts =
+      listFilesRecursive ./parts
+      |> filter (hasSuffix ".nix");
+
+    hosts =
+      readDir ./hosts
+      |> attrNames
+      |> map (scope:
+        ./hosts/${scope});
   in
     mkFlake {
       inherit inputs;
@@ -585,11 +597,8 @@
 
       imports = concatLists [
         [flake-root.flakeModule]
-
-        (listFilesRecursive ./parts
-          |> filter (hasSuffix ".nix"))
-
-        [./hosts]
+        parts
+        hosts
       ];
     };
 }
