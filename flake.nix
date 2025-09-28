@@ -89,6 +89,7 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
+    import-tree.url = "github:vic/import-tree";
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -558,6 +559,7 @@
     nixpkgs,
     systems,
     flake-root,
+    import-tree,
     ...
   }: let
     inherit (nixpkgs.lib) const composeManyExtensions;
@@ -586,13 +588,8 @@
       lib'.extend
       <| import ./lib inputs;
 
-    inherit (lib) filesystem filter hasSuffix attrNames mkFlake concatLists;
-    inherit (filesystem) listFilesRecursive;
     inherit (builtins) readDir;
-
-    parts =
-      listFilesRecursive ./parts
-      |> filter (hasSuffix ".nix");
+    inherit (lib) attrNames mkFlake concatLists;
 
     hosts =
       readDir ./hosts
@@ -609,7 +606,7 @@
 
       imports = concatLists [
         [flake-root.flakeModule]
-        parts
+        [(import-tree ./parts)]
         hosts
       ];
     };

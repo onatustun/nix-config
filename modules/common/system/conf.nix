@@ -4,17 +4,17 @@
   inputs,
   ...
 }: let
-  inherit (lib) merge mkDefault optionalAttrs optionals;
+  inherit (lib) mkDefault optionalAttrs optionals;
 in {
   nix = {
     channel.enable = false;
 
     gc =
-      merge {
+      {
         automatic = !isDarwin;
         options = "--delete-older-than 3d";
       }
-      <| optionalAttrs (!isDarwin) {
+      // optionalAttrs (!isDarwin) {
         dates = "weekly";
         persistent = true;
       };

@@ -1,6 +1,6 @@
 super: inputs: self: let
   inherit (super) nixosSystem darwinSystem;
-  inherit (super) genAttrs removePrefix filesystem hasSuffix removeSuffix splitString elemAt length hasPrefix hasInfix filter any pathExists flatten unique mkDefault optional optionals;
+  inherit (super) const flip genAttrs removePrefix filesystem hasSuffix removeSuffix hasPrefix hasInfix filter any flatten unique mkDefault optional optionals;
   inherit (filesystem) listFilesRecursive;
 
   systems = {
@@ -44,48 +44,47 @@ super: inputs: self: let
       isDarwin = type == "darwin";
     };
 
-    packageOverlay = final: _:
-      genAttrs packages (name:
-        final.callPackage (inputs.self + /pkgs/${name}.nix) {});
+    root = inputs.self;
+    pkgsDir = "${root}/pkgs";
+    modulesRoot = "${root}/modules";
+    secretsDir = "${root}/secrets";
 
-    secretsDir = "${inputs.self}/secrets";
-    modulesRoot = "${inputs.self}/modules";
+    packageOverlay = final:
+      const
+      <| genAttrs packages (name:
+        "${pkgsDir}/${name}.nix"
+        |> flip final.callPackage {});
 
     relPath = file:
       toString file
       |> removePrefix "${modulesRoot}/";
 
-    normalizeSpec = s:
-      if hasSuffix "/" s
-      then removeSuffix "/" s
-      else s;
+    normalizeSpec = spec:
+      if hasSuffix "/" spec
+      then removeSuffix "/" spec
+      else spec;
 
-    mkIgnorePredicate = spec: let
-      s =
-        toString spec
-        |> normalizeSpec;
-    in
-      if hasSuffix ".nix" s
-      then let
-        parts = splitString "/" s;
-        fname = elemAt parts (length parts - 1);
-
-        dirPrefix =
-          if length parts > 1
-          then removeSuffix "/${fname}" s
+    mkIgnorePredicate = spec:
+      toString spec
+      |> normalizeSpec
+      |> (specStr: let
+        hasSlash = hasInfix "/" specStr;
+        base = baseNameOf specStr;
+        prefix = specStr + "/";
+        dirPref =
+          if hasSlash
+          then removeSuffix "/${base}" specStr + "/"
           else null;
-      in
-        file:
-          baseNameOf file == fname && (dirPrefix == null || hasPrefix (dirPrefix + "/") (relPath file))
-      else let
-        hasSlash = hasInfix "/" s;
       in
         file: let
           rp = relPath file;
+          startsWithPrefix = hasPrefix prefix rp;
         in
-          if hasSlash
-          then hasPrefix (s + "/") rp
-          else hasPrefix (s + "/") rp || hasInfix ("/" + s + "/") rp;
+          if hasSuffix ".nix" specStr
+          then baseNameOf file == base && (dirPref == null || hasPrefix dirPref rp)
+          else if hasSlash
+          then startsWithPrefix
+          else startsWithPrefix || hasInfix ("/" + specStr + "/") rp);
 
     filterIgnored = files:
       ignore
@@ -97,22 +96,17 @@ super: inputs: self: let
             p file)
           preds)));
 
-    resolveModuleSpec = spec: let
-      s =
-        toString spec
-        |> normalizeSpec;
-      p = "${modulesRoot}/${s}";
-    in
-      if hasSuffix ".nix" s
-      then
-        if pathExists p
-        then [p]
-        else throw "Module file not found: ${s}"
-      else if pathExists p
-      then
-        listFilesRecursive p
-        |> filter (hasSuffix ".nix")
-      else throw "Module directory not found: ${s}";
+    resolveModuleSpec = spec:
+      toString spec
+      |> normalizeSpec
+      |> (specStr: let
+        modulePath = "${modulesRoot}/${specStr}";
+      in
+        if hasSuffix ".nix" specStr
+        then [modulePath]
+        else
+          listFilesRecursive modulePath
+          |> filter (hasSuffix ".nix"));
 
     processModules = moduleSpecs:
       moduleSpecs
@@ -125,7 +119,7 @@ super: inputs: self: let
       inputs
       // hostTypes
       // {
-        inherit inputs system type systemBuilder hostName username homeDir homeVer secretsDir;
+        inherit inputs system type systemBuilder hostName username homeDir homeVer root pkgsDir modulesRoot secretsDir;
         lib = self;
       };
 
@@ -143,7 +137,7 @@ super: inputs: self: let
         };
       }
 
-      "${inputs.self}/hosts/${type}/${hostName}"
+      "${root}/hosts/${type}/${hostName}"
     ];
 
     homeManagerModule = optionals (homeVer != null) [

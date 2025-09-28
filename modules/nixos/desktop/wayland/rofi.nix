@@ -1,10 +1,12 @@
 {
   lib,
   config,
+  username,
   pkgs,
   ...
 }: let
-  inherit (lib) mkForce mkLiteral;
+  inherit (lib) mkForce;
+  inherit (config.home-manager.users.${username}.lib.formats.rasi) mkLiteral;
 in {
   home-manager.sharedModules = [
     {

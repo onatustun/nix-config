@@ -1,9 +1,11 @@
 let
   inherit (builtins) foldl' attrValues;
 
-  getAttrFromPath = path: set:
+  getAttrFromPath = path: rootAttrs:
     path
-    |> foldl' (s: k: s.${k}) set;
+    |> foldl' (attrs: key:
+      attrs.${key})
+    rootAttrs;
 
   at = path:
     keys
@@ -21,9 +23,9 @@ let
 
   mkRole = role: oses: let
     mk = field:
-      map (os:
-        at [field os role])
-      oses;
+      oses
+      |> map (os:
+        at [field os role]);
 
     host = mk "host";
     user = mk "user";

@@ -1,15 +1,17 @@
 {
   lib,
+  import-tree,
   username,
   ...
 }: let
-  inherit (lib) filesystem filter hasSuffix remove adminUserKeys;
-  inherit (filesystem) listFilesRecursive;
+  inherit (builtins) baseNameOf;
+  inherit (lib) adminUserKeys;
 in {
-  imports =
-    listFilesRecursive ./.
-    |> filter (hasSuffix ".nix")
-    |> remove ./default.nix;
+  imports = [
+    (import-tree.filterNot (path:
+      baseNameOf path == "default.nix")
+    ./.)
+  ];
 
   users.users = {
     root.openssh.authorizedKeys.keys = adminUserKeys;
