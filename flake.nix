@@ -65,7 +65,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
 
     determinate = {
       url = "https://flakehub.com/f/determinatesystems/determinate/*";
@@ -88,25 +87,12 @@
       };
     };
 
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
-    };
-
+    flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nixlib.follows = "nixpkgs-lib";
-      };
     };
 
     deploy-rs = {
@@ -600,8 +586,7 @@
       imports = concatLists [
         [flake-root.flakeModule]
 
-        (./parts
-          |> listFilesRecursive
+        (listFilesRecursive ./parts
           |> filter (hasSuffix ".nix"))
 
         [./hosts]

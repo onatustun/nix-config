@@ -18,7 +18,6 @@
       nix-index.packages.${pkgs.stdenv.hostPlatform.system}.default
       nix-melt.packages.${pkgs.stdenv.hostPlatform.system}.default
       nixos-anywhere.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nixos-generators.packages.${pkgs.stdenv.hostPlatform.system}.default
       nix-search-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
       rip2.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]

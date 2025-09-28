@@ -42,7 +42,6 @@ in {
           nh.packages.default
           nix-index.packages.default
           nixos-anywhere.packages.default
-          nixos-generators.packages.default
         ])
 
         [config.packages.deadnix]

@@ -1,7 +1,6 @@
 super: inputs: self: let
   inherit (super) nixosSystem darwinSystem;
-  inherit (inputs.nixos-generators) nixosGenerate;
-  inherit (super) genAttrs removePrefix filesystem hasSuffix removeSuffix splitString elemAt length hasPrefix hasInfix filter any pathExists flatten unique mkDefault optional optionals optionalAttrs;
+  inherit (super) genAttrs removePrefix filesystem hasSuffix removeSuffix splitString elemAt length hasPrefix hasInfix filter any pathExists flatten unique mkDefault optional optionals;
   inherit (filesystem) listFilesRecursive;
 
   systems = {
@@ -16,18 +15,11 @@ super: inputs: self: let
       builder = darwinSystem;
       homeDir = username: "/Users/${username}";
     };
-
-    generator = {
-      platform = "x86_64-linux";
-      builder = nixosGenerate;
-      homeDir = username: "/home/${username}";
-    };
   };
 
   mkSystem = type: {
     hostName,
     system ? systems.${type}.platform,
-    format ? null,
     username ? "onat",
     stateVer ? null,
     homeVer ? null,
@@ -50,7 +42,6 @@ super: inputs: self: let
 
       isNixos = type == "nixos";
       isDarwin = type == "darwin";
-      isGenerator = type == "generator";
     };
 
     packageOverlay = final: _:
@@ -183,19 +174,17 @@ super: inputs: self: let
       }
     ];
   in
-    cfg.builder ({
-        inherit specialArgs system;
+    cfg.builder {
+      inherit specialArgs system;
 
-        modules =
-          baseModules
-          ++ homeManagerModule
-          ++ inputModules
-          ++ processModules modules
-          ++ extraModules;
-      }
-      // optionalAttrs (format != null) {inherit format;});
+      modules =
+        baseModules
+        ++ homeManagerModule
+        ++ inputModules
+        ++ processModules modules
+        ++ extraModules;
+    };
 in {
   nixosSystem' = mkSystem "nixos";
   darwinSystem' = mkSystem "darwin";
-  nixosGenerate' = mkSystem "generator";
 }
