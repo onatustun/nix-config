@@ -20,7 +20,7 @@ in {
       shellHook = ''
         export RULES="$(git rev-parse --show-toplevel)/secrets/secrets.nix";
         source ${getExe config.agenix-shell.installationScript}
-        export NIX_CONFIG="access-tokens = github.com=$github__token"
+        export NIX_CONFIG="access-tokens = github.com=$github__token extra-experimental-features = pipe-operators"
         ${config.pre-commit.installationScript}
       '';
 

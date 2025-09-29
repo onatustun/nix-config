@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  lib,
+  inputs,
+  ...
+}: {
   mini = {
     hostname = "mini";
 
@@ -7,7 +11,7 @@
       sshUser = "root";
 
       path =
-        inputs.deploy-rs.lib.x86_64-darwin.activate.darwin
+        lib.x86_64-darwin.activate
         inputs.self.darwinConfigurations.mini;
     };
   };

@@ -565,9 +565,10 @@
     inherit (nixpkgs.lib) const composeManyExtensions;
 
     libInputs = with inputs; [
+      deploy-rs
       flake-parts
-      nix-darwin
       home-manager
+      nix-darwin
     ];
 
     libs =
