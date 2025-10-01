@@ -29,7 +29,7 @@
           };
 
           flake-checker = {
-            enable = false;
+            enable = true;
             package = inputs'.flake-checker.packages.default;
           };
 

@@ -2,7 +2,6 @@
   lib,
   config,
   username,
-  pkgs,
   ...
 }: let
   inherit (lib) mkForce;
@@ -12,7 +11,6 @@ in {
     {
       programs.rofi = {
         enable = true;
-        package = pkgs.rofi-wayland;
         extraConfig.modi = mkForce "drun";
         font = mkForce "JetBrainsMono Nerd Font Mono 12";
         location = mkForce "center";

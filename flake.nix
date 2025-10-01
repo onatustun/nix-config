@@ -132,15 +132,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    direnv = {
-      url = "github:direnv/direnv";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
     nix-direnv = {
       url = "github:nix-community/nix-direnv";
 
@@ -313,11 +304,7 @@
 
     zon2nix = {
       url = "github:jcollie/zon2nix";
-
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nuenv = {
@@ -348,18 +335,6 @@
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
-      };
-    };
-
-    agenix-shell = {
-      url = "github:aciceri/agenix-shell";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        flake-root.follows = "flake-root";
-        git-hooks-nix.follows = "pre-commit-hooks";
-        nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
       };
     };
 
@@ -469,8 +444,8 @@
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
       inputs = {
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
 
@@ -479,8 +454,8 @@
 
       inputs = {
         hyprlang.follows = "hyprland/hyprlang";
-        nixpkgs.follows = "hyprland/nixpkgs";
-        systems.follows = "hyprland/systems";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
 
@@ -492,7 +467,6 @@
         nixpkgs.follows = "nixpkgs";
         pre-commit-hooks.follows = "pre-commit-hooks";
         systems.follows = "systems";
-        xdph.follows = "xdg-portal-hyprland";
       };
     };
 

@@ -7,7 +7,6 @@
     {
       programs.direnv = {
         enable = true;
-        package = inputs.direnv.packages.${pkgs.stdenv.hostPlatform.system}.default;
         silent = true;
 
         nix-direnv = {
