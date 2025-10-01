@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) readFile concatMap attrValues mkMerge mkIf concatLists getExe genList;
+  inherit (lib) readFile concatMap attrValues mkMerge mkIf concatLists getExe genList const;
   inherit (pkgs.nuenv) writeScriptBin;
   inherit (inputs) self;
 
@@ -186,7 +186,7 @@ in {
               "$mod, D, exec, rofi -show"
               "$mod, E, exec, thunar"
               "$mod, Q, exec, ghostty"
-              "$mod, Z, exec, zen-twilight"
+              "$mod, Z, exec, zen-beta"
               "$mod, S, togglesplit"
               "$mod, C, killactive"
               "$mod Shift, F, fullscreen, 0"
@@ -224,9 +224,12 @@ in {
           ];
 
           binde =
-            makeBinds "$mod ALT" (_: "resizeactive") (nav: nav.amt)
-            ++ makeBinds "$mod CTRL" (_: "movewindow") (nav: nav.dir)
-            ++ makeBinds "$mod" (_: "movefocus") (nav: nav.dir);
+            makeBinds "$mod ALT" (const
+              <| "resizeactive") (nav: nav.amt)
+            ++ makeBinds "$mod CTRL" (const
+              <| "movewindow") (nav: nav.dir)
+            ++ makeBinds "$mod" (const
+              <| "movefocus") (nav: nav.dir);
 
           layerrule = ["noanim, rofi"];
 

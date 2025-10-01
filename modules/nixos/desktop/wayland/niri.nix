@@ -117,7 +117,7 @@ in {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
           "Mod+Q".action.spawn = ["${getExe' pkgs.nushell "nu"}" "-c" "${getExe inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}"];
-          "Mod+Z".action.spawn = "zen-twilight";
+          "Mod+Z".action.spawn = "zen-beta";
           "Mod+W".action.spawn = ["pkill" "-SIGUSR1" "waybar"];
 
           "Mod+C".action.close-window = [];

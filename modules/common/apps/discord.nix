@@ -1,13 +1,7 @@
-{
-  lib,
-  inputs,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib) genAttrs const;
 in {
   home-manager.sharedModules = [
-    inputs.nixcord.homeModules.nixcord
-
     {
       programs.nixcord = {
         enable = true;

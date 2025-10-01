@@ -1,24 +1,34 @@
 super: inputs: self: let
+  inherit (super) attrValues filter hasAttrByPath getAttrFromPath const genAttrs flip unique optional mkDefault optionals mapAttrs;
+  inherit (self) collectNix;
   inherit (super) nixosSystem darwinSystem;
-  inherit (super) const flip genAttrs removePrefix filesystem hasSuffix removeSuffix hasPrefix hasInfix filter any flatten unique mkDefault optional optionals;
-  inherit (filesystem) listFilesRecursive;
+  inherit (builtins) readDir;
+
+  collectInputs = path:
+    inputs
+    |> attrValues
+    |> filter (hasAttrByPath path)
+    |> map (getAttrFromPath path);
 
   systems = {
     nixos = {
       platform = "x86_64-linux";
       builder = nixosSystem;
       homeDir = username: "/home/${username}";
+      osModules = collectNix (inputs.self + "/modules/nixos");
+      osInputModules = collectInputs ["nixosModules" "default"];
     };
 
     darwin = {
       platform = "aarch64-darwin";
       builder = darwinSystem;
       homeDir = username: "/Users/${username}";
+      osModules = collectNix (inputs.self + "/modules/darwin");
+      osInputModules = collectInputs ["darwinModules" "default"];
     };
   };
 
-  mkSystem = type: {
-    hostName,
+  buildSystem = type: hostName: {
     system ? systems.${type}.platform,
     username ? "onat",
     stateVer ? null,
@@ -26,12 +36,9 @@ super: inputs: self: let
     packages ? [],
     overlays ? [],
     inputModules ? [],
-    modules ? [],
-    ignore ? [],
     module,
   }: let
     cfg = systems.${type};
-    systemBuilder = cfg.builder;
     homeDir = cfg.homeDir username;
 
     hostTypes = {
@@ -44,84 +51,38 @@ super: inputs: self: let
       isDarwin = type == "darwin";
     };
 
-    root = inputs.self;
-    pkgsDir = "${root}/pkgs";
-    modulesRoot = "${root}/modules";
-    secretsDir = "${root}/secrets";
-
-    packageOverlay = final:
-      const
-      <| genAttrs packages (name:
-        "${pkgsDir}/${name}.nix"
-        |> flip final.callPackage {});
-
-    relPath = file:
-      toString file
-      |> removePrefix "${modulesRoot}/";
-
-    normalizeSpec = spec:
-      if hasSuffix "/" spec
-      then removeSuffix "/" spec
-      else spec;
-
-    mkIgnorePredicate = spec:
-      toString spec
-      |> normalizeSpec
-      |> (specStr: let
-        hasSlash = hasInfix "/" specStr;
-        base = baseNameOf specStr;
-        prefix = specStr + "/";
-        dirPref =
-          if hasSlash
-          then removeSuffix "/${base}" specStr + "/"
-          else null;
-      in
-        file: let
-          rp = relPath file;
-          startsWithPrefix = hasPrefix prefix rp;
-        in
-          if hasSuffix ".nix" specStr
-          then baseNameOf file == base && (dirPref == null || hasPrefix dirPref rp)
-          else if hasSlash
-          then startsWithPrefix
-          else startsWithPrefix || hasInfix ("/" + specStr + "/") rp);
-
-    filterIgnored = files:
-      ignore
-      |> map mkIgnorePredicate
-      |> (preds:
-        files
-        |> filter (file:
-          !(any (p:
-            p file)
-          preds)));
-
-    resolveModuleSpec = spec:
-      toString spec
-      |> normalizeSpec
-      |> (specStr: let
-        modulePath = "${modulesRoot}/${specStr}";
-      in
-        if hasSuffix ".nix" specStr
-        then [modulePath]
-        else
-          listFilesRecursive modulePath
-          |> filter (hasSuffix ".nix"));
-
-    processModules = moduleSpecs:
-      moduleSpecs
-      |> map resolveModuleSpec
-      |> flatten
-      |> filterIgnored
-      |> unique;
+    secretsDir = "${inputs.self}/secrets";
 
     specialArgs =
       inputs
       // hostTypes
       // {
-        inherit inputs system type systemBuilder hostName username homeDir homeVer root pkgsDir modulesRoot secretsDir;
+        inherit inputs system hostName username homeDir secretsDir;
         lib = self;
       };
+
+    allowAllUnfree = {
+      allowUnfree = true;
+      allowBroken = true;
+
+      allowUnfreePredicate =
+        const
+        <| true;
+    };
+
+    inputOverlays = collectInputs ["overlays" "default"];
+
+    packageOverlay = final:
+      const
+      <| genAttrs packages (name:
+        "${inputs.self}/pkgs/${name}.nix"
+        |> flip final.callPackage {});
+
+    overlays' =
+      inputOverlays
+      ++ overlays
+      ++ optional (packages != []) packageOverlay
+      |> unique;
 
     baseModules = [
       {
@@ -130,29 +91,28 @@ super: inputs: self: let
 
         nixpkgs = {
           hostPlatform = mkDefault system;
-
-          overlays =
-            overlays
-            ++ optional (packages != []) packageOverlay;
+          config = allowAllUnfree;
+          overlays = overlays';
         };
       }
     ];
 
+    inputHomeModules = collectInputs ["homeModules" "default"];
+
+    hmShared =
+      inputHomeModules
+      ++ [
+        {
+          programs.home-manager.enable = true;
+          home.sessionVariables.FLAKE = "${homeDir}/nix";
+          nixpkgs.config = allowAllUnfree;
+        }
+      ];
+
     homeManagerModule = optionals (homeVer != null) [
       {
         home-manager = {
-          sharedModules = [
-            {
-              programs.home-manager.enable = true;
-              home.sessionVariables.FLAKE = "${homeDir}/nix";
-
-              nixpkgs.config = {
-                allowUnfree = true;
-                allowBroken = true;
-                allowUnfreePredicate = _: true;
-              };
-            }
-          ];
+          sharedModules = hmShared;
 
           users.${username}.home = {
             homeDirectory = homeDir;
@@ -165,18 +125,29 @@ super: inputs: self: let
         };
       }
     ];
+
+    commonModules = collectNix (inputs.self + "/modules/common");
   in
     cfg.builder {
       inherit specialArgs system;
 
       modules =
-        [module]
-        ++ baseModules
+        baseModules
+        ++ [module]
         ++ homeManagerModule
-        ++ inputModules
-        ++ processModules modules;
+        ++ cfg.osInputModules
+        ++ commonModules
+        ++ cfg.osModules
+        ++ inputModules;
     };
 in {
-  nixosSystem' = mkSystem "nixos";
-  darwinSystem' = mkSystem "darwin";
+  mkHostSet = dir:
+    readDir dir
+    |> mapAttrs (name:
+      const
+      <| (dir
+        + "/${name}"
+        |> (path:
+          import path inputs)
+        |> buildSystem (baseNameOf dir) name));
 }

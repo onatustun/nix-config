@@ -587,18 +587,11 @@
       lib'.extend
       <| import ./lib inputs;
 
-    inherit (builtins) readDir;
-    inherit (lib) mapAttrs attrsToList nameValuePair listToAttrs mkFlake collectNix;
-
-    importHosts = dir:
-      readDir dir
-      |> mapAttrs (name:
-        const
-        <| import (dir + "/${name}") lib inputs);
+    inherit (lib) mkHostSet mapAttrs attrsToList nameValuePair listToAttrs mkFlake collectNix;
 
     hostsByType = {
-      nixosConfigurations = importHosts ./hosts/nixos;
-      darwinConfigurations = importHosts ./hosts/darwin;
+      nixosConfigurations = mkHostSet ./hosts/nixos;
+      darwinConfigurations = mkHostSet ./hosts/darwin;
     };
 
     hostConfigs =
@@ -632,7 +625,7 @@
         // hostsByType.darwinConfigurations)
       |> mkNodes;
   in
-    {inherit libInputs libs lib' lib importHosts hostsByType hostConfigs mkNodes nodes;}
+    {inherit libInputs libs lib' lib hostsByType hostConfigs mkNodes nodes;}
     // mkFlake {
       inherit inputs;
       specialArgs = {inherit lib;};

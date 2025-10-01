@@ -1,37 +1,29 @@
-lib: inputs:
-lib.nixosSystem' {
-  hostName = "wsl";
+inputs: {
   system = "x86_64-linux";
   username = "onat";
   stateVer = "24.11";
   homeVer = "24.11";
-
-  overlays = [
-    inputs.nix-index-database.overlays.nix-index
-    inputs.nuenv.overlays.default
-  ];
+  overlays = [inputs.nix-index-database.overlays.nix-index];
 
   inputModules = [
-    inputs.determinate.nixosModules.default
-    inputs.home-manager.nixosModules.default
     inputs.nix-index-database.nixosModules.nix-index
     inputs.stylix.nixosModules.stylix
   ];
 
-  modules = [
-    "common"
-    "nixos/cli/clipboard.nix"
-    "nixos/security"
-    "nixos/system"
-    "nixos/ui"
-  ];
+  # modules = [
+  #   "common"
+  #   "nixos/cli/clipboard.nix"
+  #   "nixos/security"
+  #   "nixos/system"
+  #   "nixos/ui"
+  # ];
 
-  ignore = [
-    "apps"
-    "boot.nix"
-    "kernel.nix"
-    "tmp.nix"
-  ];
+  # ignore = [
+  #   "apps"
+  #   "boot.nix"
+  #   "kernel.nix"
+  #   "tmp.nix"
+  # ];
 
   module = {
     inputs,

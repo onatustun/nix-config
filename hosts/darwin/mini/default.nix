@@ -1,26 +1,12 @@
-lib: inputs:
-lib.darwinSystem' {
-  hostName = "mini";
+inputs: {
   system = "aarch64-darwin";
   username = "onat";
   stateVer = 6;
   homeVer = "24.11";
-  overlays = [inputs.nuenv.overlays.default];
 
   inputModules = [
-    inputs.home-manager.darwinModules.default
     inputs.nix-index-database.darwinModules.nix-index
     inputs.stylix.darwinModules.stylix
-  ];
-
-  modules = [
-    "common"
-    "darwin"
-  ];
-
-  ignore = [
-    "discord.nix"
-    "zen.nix"
   ];
 
   module = {

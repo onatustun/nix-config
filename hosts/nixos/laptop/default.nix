@@ -1,6 +1,4 @@
-lib: inputs:
-lib.nixosSystem' {
-  hostName = "laptop";
+inputs: {
   system = "x86_64-linux";
   username = "onat";
   stateVer = "24.11";
@@ -10,23 +8,12 @@ lib.nixosSystem' {
   overlays = [
     inputs.niri.overlays.niri
     inputs.nix-index-database.overlays.nix-index
-    inputs.nuenv.overlays.default
-    inputs.nur.overlays.default
   ];
 
   inputModules = [
-    inputs.determinate.nixosModules.default
-    inputs.home-manager.nixosModules.default
     inputs.nix-index-database.nixosModules.nix-index
     inputs.stylix.nixosModules.stylix
   ];
-
-  modules = [
-    "nixos"
-    "common"
-  ];
-
-  ignore = ["discord.nix"];
 
   module = {
     lib,

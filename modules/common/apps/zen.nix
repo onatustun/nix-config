@@ -1,12 +1,9 @@
 {
-  inputs,
   pkgs,
   username,
   ...
 }: {
   home-manager.sharedModules = [
-    inputs.zen-browser.homeModules.twilight
-
     {
       home.sessionVariables."BROWSER" = "zen-twilight";
 

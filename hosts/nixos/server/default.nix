@@ -1,35 +1,26 @@
-lib: inputs:
-lib.nixosSystem' {
-  hostName = "server";
+inputs: {
   system = "x86_64-linux";
   username = "onat";
   stateVer = "24.11";
   homeVer = "24.11";
-
-  overlays = [
-    inputs.nix-index-database.overlays.nix-index
-    inputs.nuenv.overlays.default
-  ];
+  overlays = [inputs.nix-index-database.overlays.nix-index];
 
   inputModules = [
-    inputs.determinate.nixosModules.default
-    inputs.disko.nixosModules.default
-    inputs.home-manager.nixosModules.default
     inputs.nix-index-database.nixosModules.nix-index
     inputs.stylix.nixosModules.stylix
   ];
 
-  modules = [
-    "common"
-    "nixos/security"
-    "nixos/system"
-    "nixos/ui"
-  ];
+  # modules = [
+  #   "common"
+  #   "nixos/security"
+  #   "nixos/system"
+  #   "nixos/ui"
+  # ];
 
-  ignore = [
-    "apps"
-    "toolchains"
-  ];
+  # ignore = [
+  #   "apps"
+  #   "toolchains"
+  # ];
 
   module = {
     lib,
