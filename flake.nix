@@ -625,8 +625,7 @@
         // hostsByType.darwinConfigurations)
       |> mkNodes;
   in
-    {inherit libInputs libs lib' lib hostsByType hostConfigs mkNodes nodes;}
-    // mkFlake {
+    mkFlake {
       inherit inputs;
       specialArgs = {inherit lib;};
     } {

@@ -2,7 +2,6 @@
 
 !.envrc
 !flake.lock
-!.gitattributes
 !.gitignore
 
 !*.age
