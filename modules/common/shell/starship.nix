@@ -9,6 +9,7 @@
           fill.symbol = " ";
           format = "$directory$nix_shell$direnv$fill$git_branch$git_status$line_break$character";
           nix_shell.format = "via [$state nix-shell]($style)";
+          command_timeout = 2000;
 
           direnv = {
             disabled = false;
