@@ -24,11 +24,11 @@ super: inputs: self: let
     stateVer ? null,
     homeVer ? null,
     packages ? [],
-    inputModules ? [],
     overlays ? [],
+    inputModules ? [],
     modules ? [],
     ignore ? [],
-    extraModules ? [],
+    module,
   }: let
     cfg = systems.${type};
     systemBuilder = cfg.builder;
@@ -136,8 +136,6 @@ super: inputs: self: let
             ++ optional (packages != []) packageOverlay;
         };
       }
-
-      "${root}/hosts/${type}/${hostName}"
     ];
 
     homeManagerModule = optionals (homeVer != null) [
@@ -172,11 +170,11 @@ super: inputs: self: let
       inherit specialArgs system;
 
       modules =
-        baseModules
+        [module]
+        ++ baseModules
         ++ homeManagerModule
         ++ inputModules
-        ++ processModules modules
-        ++ extraModules;
+        ++ processModules modules;
     };
 in {
   nixosSystem' = mkSystem "nixos";

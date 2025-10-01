@@ -1,36 +1,72 @@
-{
-  inputs,
-  username,
-  pkgs,
-  ...
-}: {
-  imports = [inputs.nixos-wsl.nixosModules.default];
+lib: inputs:
+lib.nixosSystem' {
+  hostName = "wsl";
+  system = "x86_64-linux";
+  username = "onat";
+  stateVer = "24.11";
+  homeVer = "24.11";
 
-  users.users.${username}.extraGroups = [
-    "input"
-    "libvirt"
-    "storage"
-    "wheel"
+  overlays = [
+    inputs.nix-index-database.overlays.nix-index
+    inputs.nuenv.overlays.default
   ];
 
-  wsl = {
-    enable = true;
-    defaultUser = username;
-    startMenuLaunchers = true;
+  inputModules = [
+    inputs.determinate.nixosModules.default
+    inputs.home-manager.nixosModules.default
+    inputs.nix-index-database.nixosModules.nix-index
+    inputs.stylix.nixosModules.stylix
+  ];
 
-    wslConf = {
-      automount.root = "/mnt";
-      interop.appendWindowsPath = false;
-      network.generateHosts = false;
+  modules = [
+    "common"
+    "nixos/cli/clipboard.nix"
+    "nixos/security"
+    "nixos/system"
+    "nixos/ui"
+  ];
+
+  ignore = [
+    "apps"
+    "boot.nix"
+    "kernel.nix"
+    "tmp.nix"
+  ];
+
+  module = {
+    inputs,
+    username,
+    pkgs,
+    ...
+  }: {
+    imports = [inputs.nixos-wsl.nixosModules.default];
+
+    users.users.${username}.extraGroups = [
+      "input"
+      "libvirt"
+      "storage"
+      "wheel"
+    ];
+
+    wsl = {
+      enable = true;
+      defaultUser = username;
+      startMenuLaunchers = true;
+
+      wslConf = {
+        automount.root = "/mnt";
+        interop.appendWindowsPath = false;
+        network.generateHosts = false;
+      };
     };
-  };
 
-  environment.systemPackages = with pkgs; [
-    curl
-    procps
-    wget
-    wsl-open
-    wslu
-    wsl-vpnkit
-  ];
+    environment.systemPackages = with pkgs; [
+      curl
+      procps
+      wget
+      wsl-open
+      wslu
+      wsl-vpnkit
+    ];
+  };
 }

@@ -89,7 +89,6 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
-    import-tree.url = "github:vic/import-tree";
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -559,7 +558,6 @@
     nixpkgs,
     systems,
     flake-root,
-    import-tree,
     ...
   }: let
     inherit (nixpkgs.lib) const composeManyExtensions;
@@ -590,13 +588,49 @@
       <| import ./lib inputs;
 
     inherit (builtins) readDir;
-    inherit (lib) attrNames mkFlake concatLists;
+    inherit (lib) mapAttrs attrsToList nameValuePair listToAttrs mkFlake collectNix;
 
-    hosts =
-      readDir ./hosts
-      |> attrNames
-      |> map (scope:
-        ./hosts/${scope});
+    importHosts = dir:
+      readDir dir
+      |> mapAttrs (name:
+        const
+        <| import (dir + "/${name}") lib inputs);
+
+    hostsByType = {
+      nixosConfigurations = importHosts ./hosts/nixos;
+      darwinConfigurations = importHosts ./hosts/darwin;
+    };
+
+    hostConfigs =
+      hostsByType.nixosConfigurations
+      // hostsByType.darwinConfigurations
+      |> attrsToList
+      |> map ({
+        name,
+        value,
+      }:
+        nameValuePair name value.config)
+      |> listToAttrs;
+
+    mkNodes = hosts:
+      hosts
+      |> mapAttrs (name: cfg: {
+        hostname = name;
+
+        profiles.system = {
+          user = "root";
+          sshUser = "root";
+
+          path =
+            lib."${cfg.pkgs.system}".activate."${cfg.class}"
+            cfg;
+        };
+      });
+
+    nodes =
+      (hostsByType.nixosConfigurations
+        // hostsByType.darwinConfigurations)
+      |> mkNodes;
   in
     mkFlake {
       inherit inputs;
@@ -605,10 +639,13 @@
       debug = true;
       systems = import systems;
 
-      imports = concatLists [
+      imports =
         [flake-root.flakeModule]
-        [(import-tree ./parts)]
-        hosts
-      ];
+        ++ collectNix ./parts;
+
+      flake =
+        hostsByType
+        // hostConfigs
+        // {deploy.nodes = nodes;};
     };
 }
