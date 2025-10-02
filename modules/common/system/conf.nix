@@ -1,11 +1,20 @@
 {
   lib,
+  secretsDir,
   isDarwin,
   inputs,
+  config,
   ...
 }: let
   inherit (lib) mkDefault optionalAttrs optionals;
 in {
+  age.secrets."github-token" = {
+    file = "${secretsDir}/common/common/github-token.age";
+    owner = "root";
+    group = "root";
+    mode = "0400";
+  };
+
   nix = {
     channel.enable = false;
 
@@ -22,6 +31,10 @@ in {
     nixPath = ["nixpkgs=flake:nixpkgs"];
     optimise.automatic = !isDarwin;
     registry.nixpkgs.flake = inputs.nixpkgs;
+
+    extraOptions = ''
+      !include ${config.age.secrets."github-token".path}
+    '';
 
     settings =
       {

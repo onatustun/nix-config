@@ -12,6 +12,7 @@ in {
 
       shellHook = ''
         export RULES="$(git rev-parse --show-toplevel)/secrets/secrets.nix";
+        export NIX_CONFIG="extra-experimental-features = pipe-operators"
         ${config.pre-commit.installationScript}
       '';
 
