@@ -1,8 +1,10 @@
 *
 
+!LICENSE
+!README.md
+!.gitignore
 !.envrc
 !flake.lock
-!.gitignore
 
 !*.age
 !*.nix
