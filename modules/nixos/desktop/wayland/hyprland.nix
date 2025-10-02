@@ -131,7 +131,6 @@ in {
 
           animations = {
             enabled = true;
-            first_launch_animation = true;
             workspace_wraparound = true;
 
             bezier = [
@@ -168,8 +167,6 @@ in {
             accel_profile = "flat";
             touchpad.natural_scroll = false;
           };
-
-          gestures.workspace_swipe = false;
 
           misc = {
             disable_hyprland_logo = true;
