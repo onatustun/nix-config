@@ -1,9 +1,13 @@
 {
+  secretsDir,
   inputs,
   pkgs,
   ...
 }: {
-  age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  age = {
+    identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    inherit secretsDir;
+  };
 
   environment.systemPackages =
     [inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default]
