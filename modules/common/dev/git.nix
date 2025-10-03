@@ -13,7 +13,7 @@
         ];
 
         extraConfig = {
-          init.defaultBranch = "main";
+          init.defaultBranch = "master";
           commit.verbose = true;
           safe.directory = "~/nix";
         };
