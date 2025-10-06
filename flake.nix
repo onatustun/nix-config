@@ -1,7 +1,7 @@
 {
   description = "nix config";
 
-  nixConfig = rec {
+  nixConfig = {
     extra-substituters = [
       "https://alejandra.cachix.org"
       "https://cachix.cachix.org"
@@ -19,8 +19,6 @@
       "https://stylix.cachix.org"
       "https://yazi.cachix.org"
     ];
-
-    extra-trusted-substituters = extra-substituters;
 
     extra-trusted-public-keys = [
       "alejandra.cachix.org-1:NjZ8kI0mf4HCq8yPnBfiTurb96zp1TBWl8EC54Pzjm0="

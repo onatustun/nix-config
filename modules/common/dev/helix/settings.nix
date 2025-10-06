@@ -55,6 +55,7 @@
             auto-pairs = true;
             auto-save = false;
             inline-diagnostics.cursor-line = "warning";
+            jump-label-alphabet = "jkl;hfdsagbceimnopqrtuvwxyz";
 
             statusline = {
               left = [
@@ -118,6 +119,8 @@
                 j = "goto_last_line";
                 k = "goto_file_start";
               };
+
+              space.b = ":sh git show -s --date=format-local:%%d/%%m/%%y --format=\"%%h (%%cn %%cd) %%s\" (git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | lines | first | split words | first)";
             };
 
             select = {
@@ -135,7 +138,6 @@
 
       home.file.".ignore".text = ''
         .direnv
-        .github
         node_modules
         .pre-commit-config.yaml
         result
