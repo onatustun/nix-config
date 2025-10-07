@@ -5,15 +5,8 @@
   };
 
   services = {
-    gnome = {
-      gcr-ssh-agent.enable = true;
-      gnome-keyring.enable = true;
-    };
-
-    dbus.packages = with pkgs; [
-      gcr
-      gnome-keyring
-    ];
+    gnome.gnome-keyring.enable = true;
+    dbus.packages = [pkgs.gnome-keyring];
   };
 
   programs.seahorse.enable = true;
