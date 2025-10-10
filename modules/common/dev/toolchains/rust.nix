@@ -5,16 +5,15 @@
   isDarwin,
   ...
 }: let
-  inherit (lib) mkIf makeLibraryPath;
-  fenixPkgs = inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete;
+  inherit (lib) mkIf makeLibraryPath concatLists;
 in {
   environment = {
     variables.LIBRARY_PATH =
       mkIf isDarwin
       <| makeLibraryPath [pkgs.libiconv];
 
-    systemPackages = with pkgs;
-      [
+    systemPackages = concatLists [
+      (with pkgs; [
         cargo-audit
         cargo-deny
         cargo-expand
@@ -23,8 +22,9 @@ in {
         cargo-watch
         evcxr
         taplo
-      ]
-      ++ (with fenixPkgs; [
+      ])
+
+      (with inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete; [
         cargo
         clippy
         llvm-tools
@@ -32,6 +32,7 @@ in {
         rustc
         rustfmt
         rust-src
-      ]);
+      ])
+    ];
   };
 }

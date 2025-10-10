@@ -2,9 +2,7 @@
   secretsDir,
   config,
   ...
-}: let
-  interfaceName = "tailscale0";
-in {
+}: {
   age.secrets."tailscale-authkey" = {
     file = "${secretsDir}/nixos/common/tailscale-authkey.age";
     owner = "root";
@@ -13,7 +11,7 @@ in {
   };
 
   services.tailscale = {
-    inherit interfaceName;
+    interfaceName = "tailscale0";
     authKeyFile = config.age.secrets."tailscale-authkey".path;
     useRoutingFeatures = "both";
     openFirewall = true;
@@ -21,9 +19,9 @@ in {
     extraSetFlags = ["--advertise-exit-node"];
   };
 
-  networking.firewall = {
+  networking.firewall = with config.services.tailscale; {
     enable = true;
     trustedInterfaces = [interfaceName];
-    allowedUDPPorts = [config.services.tailscale.port];
+    allowedUDPPorts = [port];
   };
 }

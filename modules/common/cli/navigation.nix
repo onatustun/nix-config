@@ -1,12 +1,16 @@
-{
+{lib, ...}: let
+  inherit (lib) genAttrs const;
+in {
   home-manager.sharedModules = [
     {
-      programs = {
-        skim.enable = true;
-        ripgrep.enable = true;
-        fd.enable = true;
-        fzf.enable = true;
-      };
+      programs =
+        genAttrs [
+          "fd"
+          "fzf"
+          "ripgrep"
+          "skim"
+        ]
+        <| const {enable = true;};
     }
   ];
 }

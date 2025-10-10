@@ -1,30 +1,31 @@
 super: inputs: self: let
-  inherit (super) attrValues filter hasAttrByPath getAttrFromPath const genAttrs flip unique optional mkDefault optionals mapAttrs;
+  inherit (super) nixosSystem darwinSystem attrValues filter hasAttrByPath getAttrFromPath const genAttrs flip unique optional mkDefault optionals mapAttrs concatLists;
   inherit (self) collectNix;
-  inherit (super) nixosSystem darwinSystem;
   inherit (builtins) readDir;
-
-  collectInputs = path:
-    inputs
-    |> attrValues
-    |> filter (hasAttrByPath path)
-    |> map (getAttrFromPath path);
 
   systems = {
     nixos = {
       platform = "x86_64-linux";
       builder = nixosSystem;
-      homeDir = username: "/home/${username}";
-      osModules = collectNix (inputs.self + "/modules/nixos");
-      osInputModules = collectInputs ["nixosModules" "default"];
+      homePrefix = "home";
+      modulesPath = "/modules/nixos";
+
+      inputModules = [
+        "nixosModules"
+        "default"
+      ];
     };
 
     darwin = {
       platform = "aarch64-darwin";
       builder = darwinSystem;
-      homeDir = username: "/Users/${username}";
-      osModules = collectNix (inputs.self + "/modules/darwin");
-      osInputModules = collectInputs ["darwinModules" "default"];
+      homePrefix = "Users";
+      modulesPath = "/modules/darwin";
+
+      inputModules = [
+        "darwinModules"
+        "default"
+      ];
     };
   };
 
@@ -38,20 +39,19 @@ super: inputs: self: let
     inputModules ? [],
     module,
   }: let
-    cfg = systems.${type};
-    homeDir = cfg.homeDir username;
-
     hostTypes = {
+      isNixos = type == "nixos";
+      isDarwin = type == "darwin";
       isDesktop = hostName == "desktop";
       isLaptop = hostName == "laptop";
       isServer = hostName == "server";
       isWsl = hostName == "wsl";
-
-      isNixos = type == "nixos";
-      isDarwin = type == "darwin";
+      isOnat = username == "onat";
     };
 
-    secretsDir = "${inputs.self}/secrets";
+    cfg = systems.${type};
+    homeDir = "/${cfg.homePrefix}/${username}";
+    secretsDir = inputs.self + "/secrets";
 
     specialArgs =
       inputs
@@ -64,13 +64,18 @@ super: inputs: self: let
     allowAllUnfree = {
       allowUnfree = true;
       allowBroken = true;
-
-      allowUnfreePredicate =
-        const
-        <| true;
+      allowUnfreePredicate = const true;
     };
 
-    inputOverlays = collectInputs ["overlays" "default"];
+    collectInputs = path:
+      attrValues inputs
+      |> filter (hasAttrByPath path)
+      |> map (getAttrFromPath path);
+
+    inputOverlays = collectInputs [
+      "overlays"
+      "default"
+    ];
 
     packageOverlay = final:
       const
@@ -97,7 +102,10 @@ super: inputs: self: let
       }
     ];
 
-    inputHomeModules = collectInputs ["homeModules" "default"];
+    inputHomeModules = collectInputs [
+      "homeModules"
+      "default"
+    ];
 
     hmShared =
       inputHomeModules
@@ -127,27 +135,30 @@ super: inputs: self: let
     ];
 
     commonModules = collectNix (inputs.self + "/modules/common");
+    osModules = collectNix (inputs.self + cfg.modulesPath);
+    osInputModules = collectInputs cfg.inputModules;
   in
     cfg.builder {
       inherit specialArgs system;
 
-      modules =
+      modules = concatLists [
         baseModules
-        ++ [module]
-        ++ homeManagerModule
-        ++ cfg.osInputModules
-        ++ commonModules
-        ++ cfg.osModules
-        ++ inputModules;
+        [module]
+        homeManagerModule
+        osInputModules
+        commonModules
+        osModules
+        inputModules
+      ];
     };
 in {
   mkHostSet = dir:
     readDir dir
     |> mapAttrs (name:
-      const
-      <| (dir
-        + "/${name}"
-        |> (path:
-          import path inputs)
-        |> buildSystem (baseNameOf dir) name));
+      dir
+      + "/${name}"
+      |> (path:
+        import path inputs)
+      |> buildSystem (baseNameOf dir) name
+      |> const);
 }

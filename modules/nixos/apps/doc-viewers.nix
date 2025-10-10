@@ -1,6 +1,1 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    calibre
-    zathura
-  ];
-}
+{pkgs, ...}: {environment.systemPackages = [pkgs.zathura];}

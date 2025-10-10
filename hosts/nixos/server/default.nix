@@ -25,7 +25,6 @@ inputs: {
   module = {
     lib,
     username,
-    pkgs,
     ...
   }: let
     inherit (lib) collectNix remove adminUserKeys;
@@ -50,13 +49,6 @@ inputs: {
         ];
       };
     };
-
-    environment.systemPackages = with pkgs; [
-      caddy
-      jellyfin
-      jellyfin-ffmpeg
-      jellyfin-web
-    ];
 
     services = {
       jellyfin = {

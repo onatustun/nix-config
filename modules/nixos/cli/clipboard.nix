@@ -1,14 +1,12 @@
 {
-  pkgs,
   inputs,
+  pkgs,
   ...
 }: {
-  environment.systemPackages = with pkgs;
-    [
-      cliphist
-      wl-clip-persist
-    ]
-    ++ [inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wl-clipboard];
+  environment.systemPackages = [
+    inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wl-clipboard
+    pkgs.wl-clip-persist
+  ];
 
   home-manager.sharedModules = [{services.cliphist.enable = true;}];
 }
