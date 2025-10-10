@@ -23,15 +23,12 @@ in {
 
       packages = concatLists [
         (with pkgs; [
-          age
           git
-          nixos-rebuild
-          ssh-to-age
+          rage
           vim
         ])
 
         (with inputs'; [
-          agenix.packages.default
           alejandra.packages.default
           cachix.packages.default
           comma.packages.default
@@ -43,6 +40,7 @@ in {
           nh.packages.default
           nix-index.packages.default
           nixos-anywhere.packages.default
+          ragenix.packages.default
         ])
 
         [config.packages.deadnix]
