@@ -220,12 +220,9 @@ in {
           ];
 
           binde =
-            makeBinds "$mod ALT" (const
-              <| "resizeactive") (nav: nav.amt)
-            ++ makeBinds "$mod CTRL" (const
-              <| "movewindow") (nav: nav.dir)
-            ++ makeBinds "$mod" (const
-              <| "movefocus") (nav: nav.dir);
+            makeBinds "$mod ALT" (const "resizeactive") (nav: nav.amt)
+            ++ makeBinds "$mod CTRL" (const "movewindow") (nav: nav.dir)
+            ++ makeBinds "$mod" (const "movefocus") (nav: nav.dir);
 
           layerrule = ["noanim, rofi"];
 
