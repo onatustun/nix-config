@@ -6,8 +6,8 @@ def main [selected?: string] {
   } else {
     let potential_dirs = [
       $env.HOME
-      ($env.HOME | path join "Documents" "code" "git")
-      ($env.HOME | path join "Documents" "code")
+      ($env.HOME | path join "code")
+      ($env.HOME | path join "Documents")
     ]
 
     let search_dirs = $potential_dirs | where { |dir| $dir | path exists }
