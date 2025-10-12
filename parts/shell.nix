@@ -2,49 +2,62 @@
   inherit (lib) concatLists;
 in {
   perSystem = {
+    self',
     pkgs,
     config,
     inputs',
     ...
   }: {
-    devShells.default = pkgs.mkShell {
-      name = "nix-config-dev";
+    devShells = {
+      default = self'.devShells.nix-config;
 
-      shellHook = ''
-        export RULES="$(git rev-parse --show-toplevel)/secrets/secrets.nix";
-        export NIX_CONFIG="extra-experimental-features = pipe-operators"
-        ${config.pre-commit.installationScript}
-      '';
+      nix-config = pkgs.mkShell {
+        name = "nix-config-dev";
 
-      inputsFrom = with config; [
-        flake-root.devShell
-        treefmt.build.devShell
-      ];
+        shellHook = ''
+          export RULES="$(git rev-parse --show-toplevel)/secrets/secrets.nix";
+          export NIX_CONFIG="extra-experimental-features = pipe-operators"
+          ${config.pre-commit.installationScript}
+        '';
 
-      packages = concatLists [
-        (with pkgs; [
-          git
-          rage
-          vim
-        ])
+        inputsFrom = concatLists [
+          (with config; [
+            flake-root.devShell
+            pre-commit.devShell
+            treefmt.build.devShell
+          ])
 
-        (with inputs'; [
-          alejandra.packages.default
-          cachix.packages.default
-          comma.packages.default
-          deploy-rs.packages.default
-          determinate.packages.default
-          disko.packages.default
-          flake-checker.packages.default
-          home-manager.packages.default
-          nh.packages.default
-          nix-index.packages.default
-          nixos-anywhere.packages.default
-          ragenix.packages.default
-        ])
+          (with inputs'; [
+            deadnix.devShells
+            flake-checker.devShells
+          ])
+        ];
 
-        [config.packages.deadnix]
-      ];
+        packages = concatLists [
+          (with inputs'; [
+            alejandra.packages.default
+            cachix.packages.default
+            comma.packages.default
+            deploy-rs.packages.default
+            determinate.packages.default
+            disko.packages.default
+            flake-checker.packages.default
+            home-manager.packages.default
+            nh.packages.default
+            nix-index.packages.default
+            nixos-anywhere.packages.default
+            ragenix.packages.default
+          ])
+
+          [config.packages.deadnix]
+
+          (with pkgs; [
+            git
+            rage
+            vim
+          ])
+        ];
+      };
     };
   };
 }

@@ -1,11 +1,7 @@
 {inputs, ...}: {
   imports = [inputs.pre-commit-hooks.flakeModule];
 
-  perSystem = {
-    inputs',
-    config,
-    ...
-  }: {
+  perSystem = {inputs', ...}: {
     pre-commit = {
       check.enable = true;
 
@@ -18,16 +14,6 @@
         ];
 
         hooks = {
-          alejandra = {
-            enable = true;
-            package = inputs'.alejandra.packages.default;
-          };
-
-          deadnix = {
-            enable = true;
-            package = config.packages.deadnix;
-          };
-
           flake-checker = {
             enable = true;
             package = inputs'.flake-checker.packages.default;
