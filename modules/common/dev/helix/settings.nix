@@ -120,7 +120,7 @@
                 k = "goto_file_start";
               };
 
-              space.b = ":sh git show -s --date=format-local:%%d/%%m/%%y --format=\"%%h (%%cn %%cd) %%s\" (git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | lines | first | split words | first)";
+              space.B = ":sh git show -s --date=format-local:%%d/%%m/%%y --format=\"%%h (%%cn %%cd) %%s\" (git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | lines | first | split words | first)";
             };
 
             select = {

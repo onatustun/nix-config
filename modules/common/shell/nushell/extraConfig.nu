@@ -52,14 +52,24 @@ $env.config.buffer_editor = "hx"
 def toggle-editor [] {
   let hx_frozen = (
     job list
-    | where { |r| ($r.tag | default '') == 'hx'
-    and ($r.type | default '') == 'frozen' }
+    | where { |r| ($r.tag
+      | default '') == 'hx' and ($r.type
+        | default '') == 'frozen' }
   )
 
-  if ($hx_frozen | is-empty) {
+  if (
+    $hx_frozen
+    | is-empty
+  ) {
     hx .
   } else {
-    job unfreeze
+    let id = (
+      $hx_frozen
+      | get id
+      | math max
+    )
+
+    job unfreeze $id
   }
 }
 
