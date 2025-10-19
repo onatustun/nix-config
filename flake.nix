@@ -410,6 +410,28 @@
       };
     };
 
+    scooter = {
+      url = "github:thomasschafer/scooter";
+
+      inputs = {
+        fenix.follows = "fenix";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    lazygit = {
+      url = "github:jesseduffield/lazygit";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
     xwayland-satellite = {
       url = "github:supreeeme/xwayland-satellite";
 

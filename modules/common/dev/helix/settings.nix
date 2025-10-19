@@ -120,7 +120,23 @@
                 k = "goto_file_start";
               };
 
-              space.B = ":sh git show -s --date=format-local:%%d/%%m/%%y --format=\"%%h (%%cn %%cd) %%s\" (git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | lines | first | split words | first)";
+              space = {
+                B = ":sh git show -s --date=format-local:%%d/%%m/%%y --format=\"%%h (%%cn %%cd) %%s\" (git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | lines | first | split words | first)";
+
+                e = [
+                  ":sh rm -f /tmp/unique-file-u41ae14"
+                  ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/unique-file-u41ae14"
+                  ":open %sh{try { cat /tmp/unique-file-u41ae14 } catch { '' }}"
+                  ":redraw"
+                ];
+
+                E = [
+                  ":sh rm -f /tmp/unique-file-h21a434"
+                  ":insert-output yazi '%{workspace_directory}' --chooser-file=/tmp/unique-file-h21a434"
+                  ":open %sh{try { cat /tmp/unique-file-h21a434 } catch { '' }}"
+                  ":redraw"
+                ];
+              };
             };
 
             select = {
