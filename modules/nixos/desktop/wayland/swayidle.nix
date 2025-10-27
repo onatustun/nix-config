@@ -1,11 +1,10 @@
 {
   lib,
-  inputs,
-  pkgs,
+  inputs',
   ...
 }: let
   inherit (lib) getExe;
-  package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.swayidle;
+  package = inputs'.nixpkgs-wayland.packages.swayidle;
 in {
   environment.systemPackages = [package];
 

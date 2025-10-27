@@ -1,6 +1,5 @@
 {
-  inputs,
-  pkgs,
+  inputs',
   homeDir,
   ...
 }: {
@@ -8,7 +7,7 @@
     {
       programs.nh = {
         enable = true;
-        package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package = inputs'.nh.packages.default;
         flake = "${homeDir}/nix";
 
         clean = {

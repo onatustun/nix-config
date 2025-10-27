@@ -4,7 +4,7 @@
   homeDir,
   pkgs,
   isDarwin,
-  inputs,
+  inputs',
   ...
 }: let
   inherit (lib) concatStringsSep getExe;
@@ -34,7 +34,7 @@ in {
         package =
           if isDarwin
           then null
-          else inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          else inputs'.ghostty.packages.default;
 
         installBatSyntax = !isDarwin;
         installVimSyntax = !isDarwin;

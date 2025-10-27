@@ -1,13 +1,9 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs', ...}: {
   home-manager.sharedModules = [
     {
       programs.yazi = {
         enable = true;
-        package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package = inputs'.yazi.packages.default;
         shellWrapperName = "y";
 
         settings = {

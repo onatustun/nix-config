@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs', ...}: {
   home-manager.sharedModules = [
     {
       programs.direnv = {
@@ -11,7 +7,7 @@
 
         nix-direnv = {
           enable = true;
-          package = inputs.nix-direnv.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          package = inputs'.nix-direnv.packages.default;
         };
       };
     }

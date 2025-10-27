@@ -1,6 +1,6 @@
 {
   lib,
-  inputs,
+  inputs',
   pkgs,
   isDarwin,
   ...
@@ -24,7 +24,7 @@ in {
         taplo
       ])
 
-      (with inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.complete; [
+      (with inputs'.fenix.packages.complete; [
         cargo
         clippy
         llvm-tools

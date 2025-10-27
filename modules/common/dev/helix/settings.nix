@@ -1,5 +1,5 @@
 {
-  inputs,
+  inputs',
   pkgs,
   config,
   isDarwin,
@@ -18,7 +18,7 @@
         package =
           if isDarwin
           then pkgs.helix
-          else inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+          else inputs'.helix.packages.default;
 
         defaultEditor = true;
 

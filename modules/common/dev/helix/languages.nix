@@ -1,8 +1,8 @@
 {
-  inputs,
   pkgs,
   isDarwin,
   lib,
+  inputs',
   ...
 }: let
   inherit (lib) getExe getExe';
@@ -124,12 +124,12 @@ in {
         ];
 
         language-server = {
-          uwu-colors.command = "${getExe' inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default "uwu_colors"}";
+          uwu-colors.command = "${getExe' inputs'.uwu-colors.packages.default "uwu_colors"}";
 
           nixd.command =
             if isDarwin
             then "${getExe pkgs.nixd}"
-            else "${getExe inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default}";
+            else "${getExe inputs'.nixd.packages.default}";
         };
       };
     }

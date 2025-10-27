@@ -1,6 +1,6 @@
 {
-  inputs,
   pkgs,
+  inputs',
   config,
   ...
 }: {
@@ -10,7 +10,7 @@
     {
       services.dunst = {
         enable = true;
-        package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.dunst;
+        package = inputs'.nixpkgs-wayland.packages.dunst;
 
         settings.global = {
           follow = "none";

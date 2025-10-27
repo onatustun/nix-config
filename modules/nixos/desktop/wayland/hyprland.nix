@@ -1,6 +1,7 @@
 {
   lib,
   inputs,
+  inputs',
   isDesktop,
   isLaptop,
   pkgs,
@@ -17,13 +18,13 @@
 in {
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.xdg-portal-hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = inputs'.hyprland.packages.default;
+    portalPackage = inputs'.xdg-portal-hyprland.packages.default;
   };
 
-  environment.systemPackages = with inputs; [
-    hyprcursor.packages.${pkgs.stdenv.hostPlatform.system}.hyprcursor
-    hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+  environment.systemPackages = with inputs'; [
+    hyprcursor.packages.default
+    hyprland-contrib.packages.grimblast
   ];
 
   home-manager.sharedModules = [

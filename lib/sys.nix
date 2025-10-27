@@ -1,6 +1,6 @@
 super: inputs: self: let
-  inherit (super) nixosSystem darwinSystem attrValues filter hasAttrByPath getAttrFromPath const genAttrs flip unique optional mkDefault optionals mapAttrs concatLists;
-  inherit (self) collectNix;
+  inherit (super) nixosSystem darwinSystem mapAttrs attrValues filter hasAttrByPath getAttrFromPath const genAttrs flip unique optional mkDefault optionals concatLists;
+  inherit (self) evalFlakeModule collectNix;
   inherit (builtins) readDir;
 
   systems = {
@@ -53,11 +53,15 @@ super: inputs: self: let
     homeDir = "/${cfg.homePrefix}/${username}";
     secretsDir = inputs.self + "/secrets";
 
+    flakeModule = evalFlakeModule {inherit inputs;} {};
+    inputs' = mapAttrs (const (flakeModule.config.perInput system)) inputs;
+
     specialArgs =
       inputs
+      // inputs'
       // hostTypes
       // {
-        inherit inputs system hostName username homeDir secretsDir;
+        inherit inputs inputs' system hostName username homeDir secretsDir;
         lib = self;
       };
 

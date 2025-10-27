@@ -1,12 +1,13 @@
 {
   lib,
-  config,
+  inputs',
   inputs,
   pkgs,
+  config,
   ...
 }: let
   inherit (lib) getExe' getExe;
-  package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+  package = inputs'.niri.packages.niri-unstable;
 in {
   imports = [inputs.niri.nixosModules.niri];
   niri-flake.cache.enable = false;
@@ -116,7 +117,7 @@ in {
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = ["${getExe' pkgs.nushell "nu"}" "-c" "${getExe inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default}"];
+          "Mod+Q".action.spawn = ["${getExe' pkgs.nushell "nu"}" "-c" "${getExe inputs'.ghostty.packages.default}"];
           "Mod+Z".action.spawn = "zen-beta";
           "Mod+W".action.spawn = ["pkill" "-SIGUSR1" "waybar"];
 
@@ -219,7 +220,7 @@ in {
 
         xwayland-satellite = {
           enable = true;
-          path = getExe inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite;
+          path = getExe inputs'.xwayland-satellite.packages.xwayland-satellite;
         };
 
         cursor = let

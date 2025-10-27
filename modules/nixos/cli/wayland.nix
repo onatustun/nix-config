@@ -1,13 +1,13 @@
 {
   lib,
-  inputs,
+  inputs',
   pkgs,
   ...
 }: let
   inherit (lib) concatLists;
 in {
   environment.systemPackages = concatLists [
-    (with inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}; [
+    (with inputs'.nixpkgs-wayland.packages; [
       grim
       slurp
     ])

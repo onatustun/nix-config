@@ -1,18 +1,12 @@
 {
-  lib,
+  inputs',
   pkgs,
-  inputs,
   ...
-}: let
-  inherit (lib) concatLists;
-in {
-  environment.systemPackages = concatLists [
-    (with pkgs; [
-      gh
-      github-desktop
-    ])
-
-    [inputs.lazygit.packages.${pkgs.stdenv.hostPlatform.system}.default]
+}: {
+  environment.systemPackages = [
+    inputs'.lazygit.packages.default
+    pkgs.gh
+    pkgs.github-desktop
   ];
 
   home-manager.sharedModules = [

@@ -1,10 +1,6 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs', ...}: {
   services.tailscale = {
     enable = true;
-    package = inputs.tailscale.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    package = inputs'.tailscale.packages.default;
   };
 }

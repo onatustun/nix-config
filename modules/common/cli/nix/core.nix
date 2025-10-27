@@ -1,29 +1,29 @@
 {
-  inputs,
+  inputs',
   pkgs,
   isDarwin,
   ...
 }: {
-  environment.systemPackages = with inputs;
+  environment.systemPackages = with inputs';
     [
-      alejandra.packages.${pkgs.stdenv.hostPlatform.system}.default
-      cachix.packages.${pkgs.stdenv.hostPlatform.system}.default
-      comma.packages.${pkgs.stdenv.hostPlatform.system}.default
-      deadnix.packages.${pkgs.stdenv.hostPlatform.system}.default
-      deploy-rs.packages.${pkgs.stdenv.hostPlatform.system}.default
-      determinate.packages.${pkgs.stdenv.hostPlatform.system}.default
-      disko.packages.${pkgs.stdenv.hostPlatform.system}.default
-      home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nix-index.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nix-melt.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nixos-anywhere.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nix-search-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
-      rip2.packages.${pkgs.stdenv.hostPlatform.system}.default
-      scooter.packages.${pkgs.stdenv.hostPlatform.system}.default
+      alejandra.packages.default
+      cachix.packages.default
+      comma.packages.default
+      deadnix.packages.default
+      deploy-rs.packages.default
+      determinate.packages.default
+      disko.packages.default
+      home-manager.packages.default
+      nix-index.packages.default
+      nix-melt.packages.default
+      nixos-anywhere.packages.default
+      nix-search-cli.packages.default
+      rip2.packages.default
+      scooter.packages.default
     ]
     ++ (
       if !isDarwin
-      then [inputs.nixd.packages.${pkgs.stdenv.hostPlatform.system}.default]
+      then [inputs'.nixd.packages.default]
       else [pkgs.nixd]
     );
 }

@@ -2,6 +2,7 @@
   lib,
   pkgs,
   inputs,
+  inputs',
   isDarwin,
   username,
   ...
@@ -15,7 +16,7 @@
   helixDrv =
     if isDarwin
     then pkgs.helix
-    else inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    else inputs'.helix.packages.default;
 
   helixExe = getExe' helixDrv "hx";
 

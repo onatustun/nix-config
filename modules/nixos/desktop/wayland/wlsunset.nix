@@ -1,6 +1,6 @@
 {
-  inputs,
   pkgs,
+  inputs',
   ...
 }: {
   environment.systemPackages = [pkgs.brightnessctl];
@@ -9,7 +9,7 @@
     {
       services.wlsunset = {
         enable = true;
-        package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wlsunset;
+        package = inputs'.nixpkgs-wayland.packages.wlsunset;
 
         gamma = 0.8;
         latitude = -57.149651;

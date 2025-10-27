@@ -1,13 +1,9 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs', ...}: {
   home-manager.sharedModules = [
     {
       programs.wlogout = {
         enable = true;
-        package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wlogout;
+        package = inputs'.nixpkgs-wayland.packages.wlogout;
 
         layout = [
           {

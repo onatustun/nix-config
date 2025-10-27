@@ -1,11 +1,11 @@
 {
   lib,
+  inputs',
   pkgs,
-  inputs,
   ...
 }: let
   inherit (lib) getExe;
-  package = inputs.xwayland-satellite.packages.${pkgs.stdenv.hostPlatform.system}.xwayland-satellite;
+  package = inputs'.xwayland-satellite.packages.default;
 in {
   environment.systemPackages = [
     pkgs.xwayland

@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  inputs',
   ...
 }: let
   inherit (pkgs.nuenv) writeScriptBin;
@@ -58,9 +59,9 @@ in {
           bind-key -r K resize-pane -U 5
           bind-key -r L resize-pane -R 5
 
-          bind-key e display-popup -w 80% -h 80% ${getExe inputs.scooter.packages.${pkgs.stdenv.hostPlatform.system}.default}
+          bind-key e display-popup -w 80% -h 80% ${getExe inputs'.scooter.packages.default}
           bind-key f display-popup -w 80% -h 80% -E ${getExe sessionizer}
-          bind-key g display-popup -w 80% -h 80% ${getExe inputs.lazygit.packages.${pkgs.stdenv.hostPlatform.system}.default}
+          bind-key g display-popup -w 80% -h 80% ${getExe inputs'.lazygit.packages.default}
           bind-key G run-shell -b ${getExe github}
           bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${getExe pkgs.nushell} -l
 

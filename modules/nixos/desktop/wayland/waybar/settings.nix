@@ -1,13 +1,9 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs', ...}: {
   home-manager.sharedModules = [
     {
       programs.waybar = {
         enable = true;
-        package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package = inputs'.waybar.packages.default;
         systemd.enable = true;
 
         settings = [

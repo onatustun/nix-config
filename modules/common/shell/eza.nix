@@ -1,13 +1,9 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs', ...}: {
   home-manager.sharedModules = [
     {
       programs.eza = {
         enable = true;
-        package = inputs.eza.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package = inputs'.eza.packages.default;
         colors = "auto";
         git = true;
         icons = "auto";

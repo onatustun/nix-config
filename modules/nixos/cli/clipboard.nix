@@ -1,10 +1,10 @@
 {
-  inputs,
+  inputs',
   pkgs,
   ...
 }: {
   environment.systemPackages = [
-    inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.wl-clipboard
+    inputs'.nixpkgs-wayland.packages.wl-clipboard
     pkgs.wl-clip-persist
   ];
 

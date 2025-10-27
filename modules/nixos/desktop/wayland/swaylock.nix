@@ -1,13 +1,9 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{inputs', ...}: {
   home-manager.sharedModules = [
     {
       programs.swaylock = {
         enable = true;
-        package = inputs.nixpkgs-wayland.packages.${pkgs.stdenv.hostPlatform.system}.swaylock;
+        package = inputs'.nixpkgs-wayland.packages.swaylock;
 
         settings = {
           font-size = 50;
