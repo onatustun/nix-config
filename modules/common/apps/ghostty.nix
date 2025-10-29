@@ -45,13 +45,16 @@ in {
             then "/usr/bin/env PATH=${guiPath} ${nuExe} --login"
             else "${nuExe} --login";
 
-          bold-is-bright = true;
           confirm-close-surface = false;
-          font-size = 14;
-          gtk-titlebar = false;
           mouse-hide-while-typing = true;
           shell-integration-features = "no-cursor";
+
+          bold-is-bright = true;
+          font-size = 14;
+          gtk-titlebar = false;
           window-decoration = "auto";
+          window-padding-x = 0;
+          window-padding-y = 0;
 
           font-feature = [
             "-calt"

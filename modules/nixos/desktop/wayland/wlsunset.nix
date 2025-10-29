@@ -2,22 +2,27 @@
   pkgs,
   inputs',
   ...
-}: {
-  environment.systemPackages = [pkgs.brightnessctl];
+}: let
+  package = inputs'.nixpkgs-wayland.packages.wlsunset;
+in {
+  environment.systemPackages = [
+    package
+    pkgs.brightnessctl
+  ];
 
   home-manager.sharedModules = [
     {
       services.wlsunset = {
         enable = true;
-        package = inputs'.nixpkgs-wayland.packages.wlsunset;
+        inherit package;
 
-        gamma = 0.8;
+        gamma = 0.7;
         latitude = -57.149651;
         longitude = -2.099075;
 
         temperature = {
-          day = 5500;
-          night = 3750;
+          day = 3750;
+          night = 2250;
         };
       };
     }

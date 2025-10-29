@@ -7,7 +7,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) readFile concatMap attrValues mkMerge mkIf concatLists getExe genList const;
+  inherit (lib) readFile concatMap attrValues mkMerge mkIf concatLists getExe genList const optional;
   inherit (pkgs.nuenv) writeScriptBin;
   inherit (inputs) self;
 
@@ -86,13 +86,15 @@ in {
             "XCURSOR_SIZE,24"
           ];
 
-          exec-once = [
-            "wl-paste --type image --watch cliphist store"
-            "wl-paste --type text --watch cliphist store"
-            "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
-            "wvkbd-mobintl --hidden"
-            "yubikey-touch-detector"
-          ];
+          exec-once =
+            [
+              "wl-paste --type image --watch cliphist store"
+              "wl-paste --type text --watch cliphist store"
+              "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
+              "wvkbd-mobintl --hidden"
+              "yubikey-touch-detector"
+            ]
+            ++ optional isLaptop "swayidle";
 
           monitor = mkMerge [
             (mkIf isDesktop [
