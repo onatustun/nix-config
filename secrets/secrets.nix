@@ -1,27 +1,23 @@
 let
-  inherit (import ../lib/keys.nix) adminKeys nixosKeys desktopKeys laptopKeys serverKeys;
-  inherit (builtins) foldl' elem;
+  keys = import ../lib/keys.nix;
 
-  unique = foldl' (acc: e:
-    if elem e acc
+  unique = builtins.foldl' (acc: e:
+    if builtins.elem e acc
     then acc
     else acc ++ [e]) [];
 in {
-  "common/common/github-token.age".publicKeys = adminKeys;
-  "nixos/common/tailscale-authkey.age".publicKeys = nixosKeys;
+  "common/common/github-token.age".publicKeys = keys.adminKeys;
+  "nixos/common/tailscale-authkey.age".publicKeys = keys.nixosKeys;
 
   "nixos/desktop/password.age".publicKeys =
-    adminKeys
-    ++ desktopKeys
-    |> unique;
+    unique (keys.adminKeys
+      ++ keys.desktopKeys);
 
   "nixos/laptop/password.age".publicKeys =
-    adminKeys
-    ++ laptopKeys
-    |> unique;
+    unique (keys.adminKeys
+      ++ keys.laptopKeys);
 
   "nixos/server/password.age".publicKeys =
-    adminKeys
-    ++ serverKeys
-    |> unique;
+    unique (keys.adminKeys
+      ++ keys.serverKeys);
 }

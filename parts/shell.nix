@@ -1,6 +1,4 @@
-{lib, ...}: let
-  inherit (lib) concatLists;
-in {
+{
   perSystem = {
     self',
     pkgs,
@@ -13,49 +11,34 @@ in {
 
       nix-config = pkgs.mkShell {
         name = "nix-config-dev";
+        shellHook = config.pre-commit.installationScript;
 
-        shellHook = ''
-          export RULES="$(git rev-parse --show-toplevel)/secrets/secrets.nix";
-          export NIX_CONFIG="extra-experimental-features = pipe-operators"
-          ${config.pre-commit.installationScript}
-        '';
-
-        inputsFrom = concatLists [
-          (with config; [
-            flake-root.devShell
-            pre-commit.devShell
-            treefmt.build.devShell
-          ])
-
-          (with inputs'; [
-            deadnix.devShells
-            flake-checker.devShells
-          ])
+        inputsFrom = [
+          config.flake-root.devShell
+          config.pre-commit.devShell
+          config.treefmt.build.devShell
         ];
 
-        packages = concatLists [
-          (with inputs'; [
-            alejandra.packages.default
-            cachix.packages.default
-            comma.packages.default
-            deploy-rs.packages.default
-            determinate.packages.default
-            disko.packages.default
-            flake-checker.packages.default
-            home-manager.packages.default
-            nh.packages.default
-            nix-index.packages.default
-            nixos-anywhere.packages.default
-            ragenix.packages.default
-          ])
-
-          [config.packages.deadnix]
-
-          (with pkgs; [
-            git
-            rage
-            vim
-          ])
+        packages = [
+          config.packages.deadnix
+          inputs'.alejandra.packages.default
+          inputs'.deploy-rs.packages.default
+          inputs'.determinate.packages.default
+          inputs'.disko.packages.default
+          inputs'.flake-checker.packages.default
+          inputs'.home-manager.packages.default
+          inputs'.nh.packages.default
+          inputs'.nix-direnv.packages.default
+          inputs'.nixos-anywhere.packages.default
+          inputs'.pre-commit-hooks.packages.default
+          inputs'.pre-commit-hooks.packages.pre-commit-hooks
+          inputs'.ragenix.packages.default
+          inputs'.statix.packages.default
+          pkgs.direnv
+          pkgs.git
+          pkgs.nixos-rebuild
+          pkgs.rage
+          pkgs.vim
         ];
       };
     };

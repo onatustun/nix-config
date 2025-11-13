@@ -31,7 +31,6 @@ def main --wrapped [
 
   let nix_flags = [
     "--accept-flake-config"
-    "--extra-experimental-features" "pipe-operators"
   ] | append ($args_split | get -o 1 | default [])
 
   nh $system_type switch ...$nh_flags -- ...$nix_flags

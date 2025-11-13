@@ -1,5 +1,12 @@
 {
-  description = "nix-config";
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;}
+    (inputs.import-tree [
+      ./hosts
+      ./lib
+      ./modules
+      ./parts
+    ]);
 
   nixConfig = {
     extra-substituters = [
@@ -44,7 +51,6 @@
       "cgroups"
       "flakes"
       "nix-command"
-      "pipe-operators"
     ];
 
     flake-registry = "";
@@ -64,16 +70,13 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    determinate = {
-      url = "https://flakehub.com/f/determinatesystems/determinate/*";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+
     systems.url = "github:nix-systems/default";
     flake-root.url = "github:srid/flake-root";
+
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -83,6 +86,11 @@
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
+    };
+
+    determinate = {
+      url = "https://flakehub.com/f/determinatesystems/determinate/*";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     pre-commit-hooks = {
@@ -116,6 +124,16 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         utils.follows = "flake-utils";
+      };
+    };
+
+    statix = {
+      url = "github:oppiliappan/statix";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
 
@@ -305,15 +323,6 @@
     zon2nix = {
       url = "github:jcollie/zon2nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nuenv = {
-      url = "github:determinatesystems/nuenv";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
-      };
     };
 
     ragenix = {
@@ -545,92 +554,4 @@
       };
     };
   };
-
-  outputs = inputs @ {
-    nixpkgs,
-    systems,
-    flake-root,
-    ...
-  }: let
-    inherit (nixpkgs.lib) const composeManyExtensions;
-
-    libInputs = with inputs; [
-      deploy-rs
-      flake-parts
-      home-manager
-      nix-darwin
-    ];
-
-    libs =
-      libInputs
-      |> map (input:
-        input.lib);
-
-    lib' =
-      libs
-      |> map (lib:
-        const
-        <| const
-        <| lib)
-      |> composeManyExtensions
-      |> nixpkgs.lib.extend;
-
-    lib =
-      lib'.extend
-      <| import ./lib inputs;
-
-    inherit (lib) mkHostSet mapAttrs attrsToList nameValuePair listToAttrs mkFlake collectNix;
-
-    hostsByType = {
-      nixosConfigurations = mkHostSet ./hosts/nixos;
-      darwinConfigurations = mkHostSet ./hosts/darwin;
-    };
-
-    hostConfigs =
-      hostsByType.nixosConfigurations
-      // hostsByType.darwinConfigurations
-      |> attrsToList
-      |> map ({
-        name,
-        value,
-      }:
-        nameValuePair name value.config)
-      |> listToAttrs;
-
-    mkNodes = hosts:
-      hosts
-      |> mapAttrs (name: cfg: {
-        hostname = name;
-
-        profiles.system = {
-          user = "root";
-          sshUser = "root";
-
-          path =
-            lib."${cfg.pkgs.system}".activate."${cfg.class}"
-            cfg;
-        };
-      });
-
-    nodes =
-      (hostsByType.nixosConfigurations
-        // hostsByType.darwinConfigurations)
-      |> mkNodes;
-  in
-    mkFlake {
-      inherit inputs;
-      specialArgs = {inherit lib;};
-    } {
-      debug = true;
-      systems = import systems;
-
-      imports =
-        [flake-root.flakeModule]
-        ++ collectNix ./parts;
-
-      flake =
-        hostsByType
-        // hostConfigs
-        // {deploy.nodes = nodes;};
-    };
 }
