@@ -2,7 +2,7 @@
   flake.diskoConfigurations.server = {lib, ...}: {
     disko.devices.disk.main = {
       type = "disk";
-      device = lib.mkDefault "/dev/sda";
+      device = lib.modules.mkDefault "/dev/sda";
 
       content = {
         type = "gpt";

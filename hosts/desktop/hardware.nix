@@ -36,10 +36,10 @@
     };
 
     swapDevices = [{device = "/dev/disk/by-uuid/f21c6765-340e-4bbd-8a13-d902376a5430";}];
-    networking.useDHCP = lib.mkDefault true;
+    networking.useDHCP = lib.modules.mkDefault true;
 
     hardware = {
-      cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+      cpu.intel.updateMicrocode = lib.modules.mkDefault config.hardware.enableRedistributableFirmware;
 
       nvidia = {
         modesetting.enable = true;

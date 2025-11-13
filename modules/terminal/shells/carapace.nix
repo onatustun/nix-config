@@ -8,11 +8,11 @@
       carapace.enable = true;
 
       nushell.environmentVariables.CARAPACE_BRIDGES =
-        lib.concatStringsSep ","
+        lib.strings.concatStringsSep ","
         (["carapace"]
-          ++ lib.optionals config.programs.zsh.enable ["zsh"]
-          ++ lib.optionals config.programs.fish.enable ["fish"]
-          ++ lib.optionals config.programs.bash.enable ["bash"]);
+          ++ lib.lists.optional config.programs.zsh.enable "zsh"
+          ++ lib.lists.optional config.programs.fish.enable "fish"
+          ++ lib.lists.optional config.programs.bash.enable "bash");
     };
   };
 }

@@ -10,7 +10,7 @@
       packages = [package];
 
       sessionVariables = {
-        EDITOR = lib.getExe' package "hx";
+        EDITOR = lib.meta.getExe' package "hx";
         VISUAL = config.home.sessionVariables.EDITOR;
       };
     };
@@ -220,8 +220,8 @@
           ];
 
           language-server = {
-            uwu-colors.command = "${lib.getExe' inputs'.uwu-colors.packages.default "uwu_colors"}";
-            nixd.command = "${lib.getExe inputs'.nixd.packages.default}";
+            uwu-colors.command = "${lib.meta.getExe' inputs'.uwu-colors.packages.default "uwu_colors"}";
+            nixd.command = "${lib.meta.getExe inputs'.nixd.packages.default}";
           };
         };
 

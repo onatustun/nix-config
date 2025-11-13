@@ -15,18 +15,18 @@
       events = [
         {
           event = "before-sleep";
-          command = "${lib.getExe package} -defF";
+          command = "${lib.meta.getExe package} -defF";
         }
         {
           event = "lock";
-          command = "${lib.getExe package} -defF";
+          command = "${lib.meta.getExe package} -defF";
         }
       ];
 
       timeouts = [
         {
           timeout = 200;
-          command = "${lib.getExe package} -defF";
+          command = "${lib.meta.getExe package} -defF";
         }
       ];
     };

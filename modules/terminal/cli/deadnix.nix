@@ -6,6 +6,6 @@
   perSystem = {inputs', ...}: {
     packages.deadnix =
       inputs'.deadnix.packages.default.overrideAttrs
-      (lib.const {meta.mainProgram = "deadnix";});
+      (lib.trivial.const {meta.mainProgram = "deadnix";});
   };
 }

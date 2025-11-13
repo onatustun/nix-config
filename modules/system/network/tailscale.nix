@@ -35,6 +35,6 @@
   perSystem = {inputs', ...}: {
     packages.tailscale =
       inputs'.tailscale.packages.default.overrideAttrs
-      (lib.const {meta.mainProgram = "tailscale";});
+      (lib.trivial.const {meta.mainProgram = "tailscale";});
   };
 }

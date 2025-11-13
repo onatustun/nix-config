@@ -137,7 +137,7 @@
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = ["${lib.getExe' pkgs.nushell "nu"}" "-c" "${lib.getExe inputs'.ghostty.packages.default}"];
+          "Mod+Q".action.spawn = ["${lib.meta.getExe' pkgs.nushell "nu"}" "-c" "${lib.meta.getExe inputs'.ghostty.packages.default}"];
           "Mod+Z".action.spawn = "zen-beta";
           "Mod+W".action.spawn = ["pkill" "-SIGUSR1" "waybar"];
 
@@ -207,10 +207,10 @@
 
           "XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
           "XF86AudioMicMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
-          "XF86AudioPlay".action.spawn = ["${lib.getExe pkgs.playerctl}" "play-pause"];
-          "XF86AudioStop".action.spawn = ["${lib.getExe pkgs.playerctl}" "pause"];
-          "XF86AudioPrev".action.spawn = ["${lib.getExe pkgs.playerctl}" "previous"];
-          "XF86AudioNext".action.spawn = ["${lib.getExe pkgs.playerctl}" "next"];
+          "XF86AudioPlay".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "play-pause"];
+          "XF86AudioStop".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "pause"];
+          "XF86AudioPrev".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "previous"];
+          "XF86AudioNext".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "next"];
           "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"];
           "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"];
         };
@@ -240,7 +240,7 @@
 
         xwayland-satellite = {
           enable = true;
-          path = lib.getExe inputs'.xwayland-satellite.packages.xwayland-satellite;
+          path = lib.meta.getExe inputs'.xwayland-satellite.packages.xwayland-satellite;
         };
 
         cursor = let

@@ -21,11 +21,11 @@
       self,
       ...
     }: let
-      nushellExe = lib.getExe' pkgs.nushell "nu";
+      nushellExe = lib.meta.getExe' pkgs.nushell "nu";
 
       rebuild =
         pkgs.writers.writeNuBin "rebuild"
-        (lib.readFile (self + "/scripts/rebuild.nu"));
+        (lib.strings.readFile (self + "/scripts/rebuild.nu"));
     in {
       home = {
         packages = [pkgs.nushell];
@@ -84,10 +84,10 @@
             x = "hx";
             z = "cd";
             zi = "cdi";
-            rebuild = "${lib.getExe rebuild}";
+            rebuild = "${lib.meta.getExe rebuild}";
           };
 
-          extraConfig = lib.readFile ./extraConfig.nu;
+          extraConfig = lib.strings.readFile ./extraConfig.nu;
         };
       };
     };

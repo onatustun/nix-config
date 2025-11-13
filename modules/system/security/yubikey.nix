@@ -7,8 +7,8 @@
     ...
   }: let
     authfile =
-      pkgs.writeText "u2f-keys"
-      ("${username}:" + lib.concatStringsSep ":" keys.u2fKeys);
+      pkgs.writers.writeText "u2f-keys"
+      ("${username}:" + lib.strings.concatStringsSep ":" keys.u2fKeys);
   in {
     security.pam = {
       u2f = {

@@ -42,10 +42,10 @@
     };
 
     swapDevices = [{device = "/dev/disk/by-uuid/f2ce709b-e968-4dbd-b4ce-f8b6f8b81afd";}];
-    networking.useDHCP = lib.mkDefault true;
+    networking.useDHCP = lib.modules.mkDefault true;
 
     hardware = {
-      cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+      cpu.amd.updateMicrocode = lib.modules.mkDefault config.hardware.enableRedistributableFirmware;
       framework.enableKmod = true;
     };
 

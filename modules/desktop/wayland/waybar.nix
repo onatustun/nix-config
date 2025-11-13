@@ -283,7 +283,7 @@
 
           waybarIconsDir = pkgs.runCommand "waybar-icons" {} ''
             mkdir -p "$out"
-            ${lib.concatStringsSep "\n" (lib.mapAttrsToList (name: icon: ''
+            ${lib.strings.concatStringsSep "\n" (lib.attrsets.mapAttrsToList (name: icon: ''
                 cat > "$out/${name}.svg" <<EOF
                 <svg xmlns="http://www.w3.org/2000/svg" fill="${config.stylix.base16Scheme.base05}" viewBox="0 0 ${icon.viewbox} ${icon.viewbox}">
                   <path d="${icon.path}"/>

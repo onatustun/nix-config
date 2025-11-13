@@ -10,11 +10,11 @@
     scripts = {
       github =
         pkgs.writers.writeNuBin "github"
-        (lib.readFile (self + "/scripts/github.nu"));
+        (lib.strings.readFile (self + "/scripts/github.nu"));
 
       sessionizer =
         pkgs.writers.writeNuBin "sessionizer"
-        (lib.readFile (self + "/scripts/sessionizer.nu"));
+        (lib.strings.readFile (self + "/scripts/sessionizer.nu"));
     };
   in {
     programs.tmux = {
@@ -51,11 +51,11 @@
         bind-key -r K resize-pane -U 5
         bind-key -r L resize-pane -R 5
 
-        bind-key e display-popup -w 80% -h 80% ${lib.getExe self'.packages.scooter}
-        bind-key f display-popup -w 80% -h 80% -E ${lib.getExe scripts.sessionizer}
-        bind-key g display-popup -w 80% -h 80% ${lib.getExe inputs'.lazygit.packages.default}
-        bind-key G run-shell -b ${lib.getExe scripts.github}
-        bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${lib.getExe' pkgs.nushell "nu"} --login
+        bind-key e display-popup -w 80% -h 80% ${lib.meta.getExe self'.packages.scooter}
+        bind-key f display-popup -w 80% -h 80% -E ${lib.meta.getExe scripts.sessionizer}
+        bind-key g display-popup -w 80% -h 80% ${lib.meta.getExe inputs'.lazygit.packages.default}
+        bind-key G run-shell -b ${lib.meta.getExe scripts.github}
+        bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${lib.meta.getExe' pkgs.nushell "nu"} --login
 
         bind-key c new-window -c "#{pane_current_path}"
         bind-key % split-window -h -c "#{pane_current_path}"

@@ -34,7 +34,7 @@
         }
       ];
 
-      style = lib.mkDefault ''
+      style = lib.modules.mkDefault ''
         * {
           background-image: none;
           box-shadow: none;

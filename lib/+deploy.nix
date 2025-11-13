@@ -1,10 +1,10 @@
 let
   opt = {lib, ...}: {
-    options.flake.deploy = lib.mkOption {
+    options.flake.deploy = lib.options.mkOption {
       default = {};
 
       type = lib.types.submodule {
-        options.nodes = lib.mkOption {
+        options.nodes = lib.options.mkOption {
           default = {};
 
           type =

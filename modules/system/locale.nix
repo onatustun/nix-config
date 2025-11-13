@@ -8,7 +8,7 @@
       defaultLocale = locale;
 
       extraLocaleSettings =
-        lib.genAttrs (builtins.map (suffix: "LC_${suffix}") [
+        lib.attrsets.genAttrs (lib.lists.map (suffix: "LC_${suffix}") [
           "ADDRESS"
           "IDENTIFICATION"
           "MEASUREMENT"
@@ -19,7 +19,7 @@
           "TELEPHONE"
           "TIME"
         ])
-        (lib.const locale);
+        (lib.trivial.const locale);
     };
   };
 }

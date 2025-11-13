@@ -6,11 +6,11 @@
   }: {
     programs.rofi = {
       enable = true;
-      extraConfig.modi = lib.mkForce "drun";
-      font = lib.mkForce "JetBrainsMono Nerd Font Mono 12";
-      location = lib.mkForce "center";
+      extraConfig.modi = lib.modules.mkForce "drun";
+      font = lib.modules.mkForce "JetBrainsMono Nerd Font Mono 12";
+      location = lib.modules.mkForce "center";
 
-      theme = lib.mkForce {
+      theme = lib.modules.mkForce {
         "*" = {
           "accent-color" = config.lib.formats.rasi.mkLiteral "${config.stylix.base16Scheme.base0D}";
           bg0 = config.lib.formats.rasi.mkLiteral "${config.stylix.base16Scheme.base00}";

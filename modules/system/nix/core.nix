@@ -37,7 +37,7 @@
       settings = {
         auto-optimise-store = true;
         builders-use-substitutes = true;
-        cores = lib.mkDefault 0;
+        cores = lib.modules.mkDefault 0;
 
         experimental-features = [
           "flakes"
@@ -48,7 +48,7 @@
         flake-registry = "";
         http-connections = 50;
         lazy-trees = true;
-        max-jobs = lib.mkDefault "auto";
+        max-jobs = lib.modules.mkDefault "auto";
         show-trace = true;
 
         trusted-users = [

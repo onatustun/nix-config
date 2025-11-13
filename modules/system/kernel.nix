@@ -38,7 +38,7 @@
           "lsm=landlock,lockdown,yama,integrity,apparmor,bpf,tomoyo,selinux"
           "fbcon=nodefer"
         ]
-        ++ (lib.optional (!isServer) "quiet")
+        ++ (lib.lists.optional (!isServer) "quiet")
         ++ [
           "loglevel=${builtins.toString (
             if isServer
@@ -49,7 +49,7 @@
           "udev.log_level=3"
           "rd.udev.log_level=3"
         ]
-        ++ (lib.optional (!isServer) "vt.global_cursor_default=0");
+        ++ (lib.lists.optional (!isServer) "vt.global_cursor_default=0");
 
       blacklistedKernelModules = [
         "af_802154"

@@ -13,7 +13,7 @@
         config = {
           allowUnfree = true;
           allowBroken = true;
-          allowUnfreePredicate = lib.const true;
+          allowUnfreePredicate = lib.trivial.const true;
         };
       };
     };

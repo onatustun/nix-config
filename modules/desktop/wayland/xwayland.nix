@@ -24,7 +24,7 @@
       Service = {
         Type = "notify";
         NotifyAccess = "all";
-        ExecStart = "${lib.getExe package}";
+        ExecStart = "${lib.meta.getExe package}";
         StandardOutput = "journal";
       };
     };

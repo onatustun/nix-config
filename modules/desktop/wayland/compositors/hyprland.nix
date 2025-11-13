@@ -30,7 +30,7 @@
     }: let
       hyprland =
         pkgs.writers.writeNuBin "hyprland"
-        (lib.readFile (self + "/scripts/hyprland.nu"));
+        (lib.strings.readFile (self + "/scripts/hyprland.nu"));
     in {
       wayland.windowManager.hyprland = {
         enable = true;
@@ -71,10 +71,10 @@
           };
 
           makeBinds = mod: action: fn:
-            lib.concatMap (nav: [
+            lib.lists.concatMap (nav: [
               "${mod}, ${nav.arrow}, ${action nav}, ${fn nav}"
               "${mod}, ${nav.key},   ${action nav}, ${fn nav}"
-            ]) (lib.attrValues navigation);
+            ]) (lib.attrsets.attrValues navigation);
         in {
           env = [
             "ELECTRON_OZONE_PLATFORM_HINT,auto"
@@ -97,14 +97,14 @@
               "wvkbd-mobintl --hidden"
               "yubikey-touch-detector"
             ]
-            ++ lib.optional isLaptop "swayidle";
+            ++ lib.lists.optional isLaptop "swayidle";
 
           monitor =
-            lib.optionals isDesktop [
+            lib.lists.optionals isDesktop [
               "DP-2, 1920x1080@240, 0x0, 1, transform, 2"
               "HDMI-A-1, 1920x1080@240, auto-down, 1"
             ]
-            ++ lib.optionals isLaptop [
+            ++ lib.lists.optionals isLaptop [
               "eDP-1, 2256x1504@60, 0x0, 1.5667"
               "DP-3, 3840x2400, auto-down, 2.4"
             ];
@@ -193,14 +193,14 @@
               "$mod Shift, F, fullscreen, 0"
               "$mod, V, togglefloating"
               "$mod Shift, E, exit"
-              "$mod, W, exec, nu ${lib.getExe hyprland}"
+              "$mod, W, exec, nu ${lib.meta.getExe hyprland}"
             ]
             ++ (
-              lib.concatLists (lib.genList (x: let
-                  ws = toString (x + 1 - (((x + 1) / 10) * 10));
+              lib.lists.concatLists (lib.lists.genList (x: let
+                  ws = builtins.toString (x + 1 - (((x + 1) / 10) * 10));
                 in [
-                  "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-                  "$mod, ${ws}, workspace, ${toString (x + 1)}"
+                  "$mod SHIFT, ${ws}, movetoworkspace, ${builtins.toString (x + 1)}"
+                  "$mod, ${ws}, workspace, ${builtins.toString (x + 1)}"
                 ])
                 10)
             );
@@ -225,9 +225,9 @@
           ];
 
           binde =
-            makeBinds "$mod ALT" (lib.const "resizeactive") (nav: nav.amt)
-            ++ makeBinds "$mod CTRL" (lib.const "movewindow") (nav: nav.dir)
-            ++ makeBinds "$mod" (lib.const "movefocus") (nav: nav.dir);
+            makeBinds "$mod ALT" (lib.trivial.const "resizeactive") (nav: nav.amt)
+            ++ makeBinds "$mod CTRL" (lib.trivial.const "movewindow") (nav: nav.dir)
+            ++ makeBinds "$mod" (lib.trivial.const "movefocus") (nav: nav.dir);
 
           layerrule = ["noanim, rofi"];
 

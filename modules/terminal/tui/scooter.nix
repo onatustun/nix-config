@@ -6,6 +6,6 @@
   perSystem = {inputs', ...}: {
     packages.scooter =
       inputs'.scooter.packages.default.overrideAttrs
-      (lib.const {meta.mainProgram = "scooter";});
+      (lib.trivial.const {meta.mainProgram = "scooter";});
   };
 }

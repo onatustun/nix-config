@@ -42,12 +42,12 @@
     };
 
     packageOverlay = final:
-      lib.const (lib.genAttrs packages (name:
+      lib.trivial.const (lib.attrsets.genAttrs packages (name:
           final.callPackage (self + "/pkgs/${name}.nix") {}));
 
     overlays' =
       overlays
-      ++ lib.optional (packages != []) packageOverlay;
+      ++ lib.lists.optional (packages != []) packageOverlay;
 
     cfg = systems.${type};
     homeDir = "/${cfg.homePrefix}/${username}";
@@ -75,12 +75,12 @@
 
       imports =
         modules
-        ++ lib.optionals (homeVersion != null) [self.modules.${type}.home-manager]
+        ++ lib.lists.optional (homeVersion != null) self.modules.${type}.home-manager
         ++ [module];
     };
   };
 in {
-  options.mk-os = lib.mkOption {
+  options.mk-os = lib.options.mkOption {
     type = lib.types.unspecified;
     default = mk-os;
   };
