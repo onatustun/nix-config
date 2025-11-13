@@ -1,13 +1,13 @@
 let
-  keys = import ../lib/keys.nix;
+  keys = import ../lib/_keys.nix;
 
   unique = builtins.foldl' (acc: e:
     if builtins.elem e acc
     then acc
     else acc ++ [e]) [];
 in {
-  "common/common/github-token.age".publicKeys = keys.adminKeys;
-  "nixos/common/tailscale-authkey.age".publicKeys = keys.nixosKeys;
+  "common/common/github-token.age".publicKeys = unique keys.nixosKeys;
+  "nixos/common/tailscale-authkey.age".publicKeys = unique keys.nixosKeys;
 
   "nixos/desktop/password.age".publicKeys =
     unique (keys.adminKeys
