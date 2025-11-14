@@ -1,20 +1,25 @@
 {
   flake.modules = {
     nixos = {
-      niri = {self, ...}: {
-        imports = [self.modules.nixos.niri'];
+      niri = {
+        self,
+        type,
+        ...
+      }: {
+        imports = [self.modules.${type}.niri'];
         home-manager.sharedModules = [self.modules.homeManager.niri];
       };
 
       niri' = {
         inputs',
         niri,
+        type,
         pkgs,
         ...
       }: let
         package = inputs'.niri.packages.niri-unstable;
       in {
-        imports = [niri.nixosModules.niri];
+        imports = [niri."${type}Modules".niri];
         niri-flake.cache.enable = false;
 
         programs.niri = {

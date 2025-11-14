@@ -1,18 +1,23 @@
 {
   flake.modules = {
     nixos = {
-      stylix = {self, ...}: {
-        imports = [self.modules.nixos.stylix'];
+      stylix = {
+        self,
+        type,
+        ...
+      }: {
+        imports = [self.modules.${type}.stylix'];
         home-manager.sharedModules = [self.modules.homeManager.stylix];
       };
 
       stylix' = {
         stylix,
+        type,
         config,
         pkgs,
         ...
       }: {
-        imports = [stylix.nixosModules.stylix];
+        imports = [stylix."${type}Modules".stylix];
 
         stylix = {
           enable = true;

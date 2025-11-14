@@ -1,13 +1,14 @@
 {
   flake.modules.nixos.nix-core = {
     determinate,
+    type,
     secretsDir,
     config,
     nixpkgs,
     lib,
     ...
   }: {
-    imports = [determinate.nixosModules.default];
+    imports = [determinate."${type}Modules".default];
 
     age.secrets."github-token" = {
       file = "${secretsDir}/common/common/github-token.age";

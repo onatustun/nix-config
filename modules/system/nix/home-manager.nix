@@ -4,6 +4,7 @@
   flake.modules = {
     nixos.home-manager = {
       home-manager,
+      type,
       inputs',
       config,
       hmModules,
@@ -11,7 +12,7 @@
       self,
       ...
     }: {
-      imports = [home-manager.nixosModules.home-manager];
+      imports = [home-manager."${type}Modules".home-manager];
       environment.systemPackages = [inputs'.home-manager.packages.default];
 
       home-manager = {

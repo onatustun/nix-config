@@ -1,8 +1,12 @@
 {
   flake.modules = {
     nixos = {
-      nushell = {self, ...}: {
-        imports = [self.modules.nixos.nushell'];
+      nushell = {
+        self,
+        type,
+        ...
+      }: {
+        imports = [self.modules.${type}.nushell'];
         home-manager.sharedModules = [self.modules.homeManager.nushell];
       };
 

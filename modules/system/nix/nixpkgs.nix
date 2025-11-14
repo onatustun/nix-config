@@ -1,6 +1,12 @@
 {inputs, ...}: {
   flake.modules.nixos = {
-    nur.imports = [inputs.nur.modules.nixos.default];
+    nur = {
+      nur,
+      type,
+      ...
+    }: {
+      imports = [nur.modules.${type}.default];
+    };
 
     nixpkgs = {
       overlays',

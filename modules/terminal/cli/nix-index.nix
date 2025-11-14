@@ -1,17 +1,22 @@
 {
   flake.modules = {
     nixos = {
-      nix-index = {self, ...}: {
-        imports = [self.modules.nixos.nix-index'];
+      nix-index = {
+        self,
+        type,
+        ...
+      }: {
+        imports = [self.modules.${type}.nix-index'];
         home-manager.sharedModules = [self.modules.homeManager.nix-index];
       };
 
       nix-index' = {
         nix-index-database,
+        type,
         inputs',
         ...
       }: {
-        imports = [nix-index-database.nixosModules.nix-index];
+        imports = [nix-index-database."${type}Modules".nix-index];
         environment.systemPackages = [inputs'.nix-index.packages.default];
         programs.nix-index-database.comma.enable = true;
       };
