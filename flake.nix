@@ -11,13 +11,11 @@
   nixConfig = {
     extra-substituters = [
       "https://alejandra.cachix.org"
-      "https://cachix.cachix.org"
+      "https://chaotic-nyx.cachix.org"
       "https://deadnix.cachix.org"
-      "https://flake-parts.cachix.org"
       "https://ghostty.cachix.org"
       "https://helix.cachix.org"
       "https://hyprland.cachix.org"
-      "https://naersk.cachix.org"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
       "https://nix-darwin.cachix.org"
@@ -28,13 +26,11 @@
 
     extra-trusted-public-keys = [
       "alejandra.cachix.org-1:NjZ8kI0mf4HCq8yPnBfiTurb96zp1TBWl8EC54Pzjm0="
-      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "deadnix.cachix.org-1:R7kK+K1CLDbLrGph/vSDVxUslAmq8vhpbcz6SH9haJE="
-      "flake-parts.cachix.org-1:IlewuHm3lWYND+tOeQC9nySl7JpzTZ4sqkb1eJMafow="
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "naersk.cachix.org-1:RPZZukECF/0Uq52CdDZq8QDU2z7hUO66jlLTR7LT9W0="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
@@ -192,6 +188,15 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    chaotic = {
+      url = "github:chaotic-cx/nyx";
+
+      inputs = {
+        home-manager.follows = "home-manager";
+        rust-overlay.follows = "rust-overlay";
       };
     };
 

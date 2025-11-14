@@ -14,16 +14,15 @@
 
     overlays = [
       inputs.deploy-rs.overlays.default
-      inputs.niri.overlays.niri
       inputs.nix-index-database.overlays.nix-index
       inputs.nur.overlays.default
       inputs.ragenix.overlays.default
     ];
 
     modules = [
-      self.modules.nixos.compositors
       self.modules.nixos.desktop
       self.modules.nixos.hardware-desktop
+      self.modules.nixos.hyprland
       self.modules.nixos.system
       self.modules.nixos.terminal
       self.modules.nixos.ui

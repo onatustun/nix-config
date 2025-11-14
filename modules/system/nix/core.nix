@@ -29,10 +29,7 @@
       nixPath = ["nixpkgs=flake:nixpkgs"];
       optimise.automatic = true;
       registry.nixpkgs.flake = nixpkgs;
-
-      extraOptions = ''
-        !include ${config.age.secrets."github-token".path}
-      '';
+      extraOptions = "!include ${config.age.secrets.github-token.path}";
 
       settings = {
         auto-optimise-store = true;

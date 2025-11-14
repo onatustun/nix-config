@@ -1,15 +1,21 @@
 {
   flake.modules.nixos.kernel = {
+    chaotic,
     isServer,
+    isDesktop,
     pkgs,
     lib,
     ...
   }: {
+    imports = [chaotic.nixosModules.default];
+
     boot = {
       kernelPackages =
         if isServer
         then pkgs.linuxPackages_latest
-        else pkgs.linuxKernel.packages.linux_zen;
+        else if isDesktop
+        then pkgs.linuxKernel.packages.linux_zen
+        else pkgs.linuxPackages_cachyos;
 
       kernel.sysctl = {
         "kernel.sysrq" = 0;
