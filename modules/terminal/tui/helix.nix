@@ -2,6 +2,7 @@
   flake.modules.homeManager.helix = {
     inputs',
     config,
+    pkgs,
     ...
   }: let
     package = inputs'.helix.packages.default;
@@ -220,7 +221,7 @@
           ];
 
           language-server = {
-            uwu-colors.command = "${lib.meta.getExe' inputs'.uwu-colors.packages.default "uwu_colors"}";
+            uwu-colors.command = "${lib.meta.getExe' pkgs.uwu-colors "uwu_colors"}";
             nixd.command = "${lib.meta.getExe inputs'.nixd.packages.default}";
           };
         };

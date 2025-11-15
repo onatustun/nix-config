@@ -1,6 +1,5 @@
 {
   flake.modules.homeManager.waybar = {
-    inputs',
     config,
     lib,
     pkgs,
@@ -8,7 +7,6 @@
   }: {
     programs.waybar = {
       enable = true;
-      package = inputs'.waybar.packages.default;
       systemd.enable = true;
 
       settings = [

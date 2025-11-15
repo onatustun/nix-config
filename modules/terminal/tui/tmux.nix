@@ -3,8 +3,6 @@
     pkgs,
     lib,
     self,
-    self',
-    inputs',
     ...
   }: let
     scripts = {
@@ -51,9 +49,9 @@
         bind-key -r K resize-pane -U 5
         bind-key -r L resize-pane -R 5
 
-        bind-key e display-popup -w 80% -h 80% ${lib.meta.getExe self'.packages.scooter}
+        bind-key e display-popup -w 80% -h 80% ${lib.meta.getExe pkgs.scooter}
         bind-key f display-popup -w 80% -h 80% -E ${lib.meta.getExe scripts.sessionizer}
-        bind-key g display-popup -w 80% -h 80% ${lib.meta.getExe inputs'.lazygit.packages.default}
+        bind-key g display-popup -w 80% -h 80% ${lib.meta.getExe pkgs.lazygit}
         bind-key G run-shell -b ${lib.meta.getExe scripts.github}
         bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${lib.meta.getExe' pkgs.nushell "nu"} --login
 

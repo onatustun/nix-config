@@ -6,7 +6,11 @@
         home-manager.sharedModules = [self.modules.homeManager.hyprland];
       };
 
-      hyprland' = {inputs', ...}: {
+      hyprland' = {
+        inputs',
+        pkgs,
+        ...
+      }: {
         programs.hyprland = {
           enable = true;
           package = inputs'.hyprland.packages.default;
@@ -15,7 +19,7 @@
 
         environment.systemPackages = [
           inputs'.hyprcursor.packages.default
-          inputs'.hyprland-contrib.packages.grimblast
+          pkgs.grimblast
         ];
       };
     };

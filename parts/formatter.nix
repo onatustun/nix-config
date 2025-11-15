@@ -1,11 +1,7 @@
 {inputs, ...}: {
   imports = [inputs.treefmt-nix.flakeModule];
 
-  perSystem = {
-    config,
-    inputs',
-    ...
-  }: {
+  perSystem = {config, ...}: {
     formatter = config.treefmt.build.wrapper;
 
     treefmt = {
@@ -19,20 +15,9 @@
       ];
 
       programs = {
-        alejandra = {
-          enable = true;
-          package = inputs'.alejandra.packages.default;
-        };
-
-        deadnix = {
-          enable = true;
-          package = config.packages.deadnix;
-        };
-
-        statix = {
-          enable = true;
-          package = inputs'.statix.packages.default;
-        };
+        alejandra.enable = true;
+        deadnix.enable = true;
+        statix.enable = true;
       };
     };
   };

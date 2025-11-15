@@ -1,12 +1,8 @@
 {
-  flake.modules.homeManager.wayland-core = {
-    inputs',
-    pkgs,
-    ...
-  }: {
+  flake.modules.homeManager.wayland-core = {pkgs, ...}: {
     home.packages = [
-      inputs'.nixpkgs-wayland.packages.grim
-      inputs'.nixpkgs-wayland.packages.slurp
+      pkgs.grim
+      pkgs.slurp
       pkgs.wlrctl
       pkgs.wlr-randr
       pkgs.wvkbd

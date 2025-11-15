@@ -1,11 +1,7 @@
 {
-  flake.modules.homeManager.wl-clipboard = {
-    inputs',
-    pkgs,
-    ...
-  }: {
+  flake.modules.homeManager.wl-clipboard = {pkgs, ...}: {
     home.packages = [
-      inputs'.nixpkgs-wayland.packages.wl-clipboard
+      pkgs.wl-clipboard
       pkgs.wl-clip-persist
     ];
 

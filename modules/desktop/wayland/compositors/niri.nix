@@ -142,7 +142,7 @@
         binds = {
           "Mod+D".action.spawn = ["rofi" "-show"];
           "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = ["${lib.meta.getExe' pkgs.nushell "nu"}" "-c" "${lib.meta.getExe inputs'.ghostty.packages.default}"];
+          "Mod+Q".action.spawn = ["${lib.meta.getExe' pkgs.nushell "nu"}" "-c" "${lib.meta.getExe pkgs.ghostty}"];
           "Mod+Z".action.spawn = "zen-beta";
           "Mod+W".action.spawn = ["pkill" "-SIGUSR1" "waybar"];
 

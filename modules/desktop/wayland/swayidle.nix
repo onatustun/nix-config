@@ -1,16 +1,15 @@
 {
   flake.modules.homeManager.swayidle = {
-    inputs',
+    pkgs,
     lib,
     ...
   }: let
-    package = inputs'.nixpkgs-wayland.packages.swayidle;
+    package = pkgs.swayidle;
   in {
     home.packages = [package];
 
     services.swayidle = {
       enable = true;
-      inherit package;
 
       events = [
         {

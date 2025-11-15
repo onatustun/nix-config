@@ -1,11 +1,10 @@
 {
   flake.modules.homeManager.dunst = {
-    inputs',
     pkgs,
     config,
     ...
   }: let
-    package = inputs'.nixpkgs-wayland.packages.dunst;
+    package = pkgs.dunst;
   in {
     home.packages = [
       package
@@ -14,7 +13,6 @@
 
     services.dunst = {
       enable = true;
-      inherit package;
 
       settings.global = {
         follow = "none";

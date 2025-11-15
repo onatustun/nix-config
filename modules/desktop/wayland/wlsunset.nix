@@ -1,21 +1,13 @@
 {
-  flake.modules.homeManager.wlsunset = {
-    pkgs,
-    inputs',
-    ...
-  }: let
-    package = inputs'.nixpkgs-wayland.packages.wlsunset;
-  in {
+  flake.modules.homeManager.wlsunset = {pkgs, ...}: {
     home.packages = [
-      package
       pkgs.brightnessctl
       pkgs.geoclue2
+      pkgs.wlsunset
     ];
 
     services.wlsunset = {
       enable = true;
-      inherit package;
-
       gamma = 0.7;
       latitude = -57.149651;
       longitude = -2.099075;

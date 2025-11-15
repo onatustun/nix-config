@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.lazygit = {inputs', ...}: {
-    home.packages = [inputs'.lazygit.packages.default];
+  flake.modules.homeManager.lazygit = {pkgs, ...}: {
+    home.packages = [pkgs.lazygit];
   };
 }

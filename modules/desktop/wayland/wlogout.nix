@@ -1,7 +1,6 @@
 {
   flake.modules.homeManager.wlogout = {
     pkgs,
-    inputs',
     lib,
     ...
   }: {
@@ -9,7 +8,6 @@
 
     programs.wlogout = {
       enable = true;
-      package = inputs'.nixpkgs-wayland.packages.wlogout;
 
       layout = [
         {

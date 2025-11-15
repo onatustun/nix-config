@@ -1,12 +1,7 @@
 {
-  flake.modules.homeManager.nh = {
-    inputs',
-    homeDir,
-    ...
-  }: {
+  flake.modules.homeManager.nh = {homeDir, ...}: {
     programs.nh = {
       enable = true;
-      package = inputs'.nh.packages.default;
       flake = "${homeDir}/nix";
 
       clean = {

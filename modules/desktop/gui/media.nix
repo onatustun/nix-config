@@ -1,12 +1,8 @@
 {
-  flake.modules.homeManager.media = {
-    inputs',
-    pkgs,
-    ...
-  }: {
+  flake.modules.homeManager.media = {pkgs, ...}: {
     home.packages = [
-      inputs'.nixpkgs-wayland.packages.imv
       pkgs.haruna
+      pkgs.imv
       pkgs.mpv
     ];
   };
