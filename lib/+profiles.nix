@@ -48,6 +48,7 @@
 
       nix = {self, ...}: {
         imports = [
+          self.modules.nixos.chaotic
           self.modules.nixos.nix-core
           self.modules.nixos.nixpkgs
           self.modules.nixos.nur

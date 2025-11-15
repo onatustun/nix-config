@@ -1,14 +1,11 @@
 {
   flake.modules.nixos.kernel = {
-    chaotic,
     isServer,
     isDesktop,
     pkgs,
     lib,
     ...
   }: {
-    imports = [chaotic.nixosModules.default];
-
     boot = {
       kernelPackages =
         if isServer

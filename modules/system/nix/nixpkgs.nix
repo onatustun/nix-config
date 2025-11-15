@@ -8,6 +8,14 @@
       imports = [nur.modules.${type}.default];
     };
 
+    chaotic = {
+      chaotic,
+      type,
+      ...
+    }: {
+      imports = [chaotic."${type}Modules".default];
+    };
+
     nixpkgs = {
       overlays',
       lib,

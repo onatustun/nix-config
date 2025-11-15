@@ -190,13 +190,11 @@
           packages = [
             pkgs.nur.repos.rycee.firefox-addons.kagi-search
             pkgs.nur.repos.rycee.firefox-addons.proton-pass
-            pkgs.nur.repos.rycee.firefox-addons.return-youtube-dislikes
             pkgs.nur.repos.rycee.firefox-addons.sponsorblock
             pkgs.nur.repos.rycee.firefox-addons.ublock-origin
             pkgs.nur.repos.rycee.firefox-addons.unpaywall
             pkgs.nur.repos.rycee.firefox-addons.vimium-c
             pkgs.nur.repos.rycee.firefox-addons.violentmonkey
-            pkgs.nur.repos.rycee.firefox-addons.youtube-shorts-block
           ];
         };
       };
