@@ -222,7 +222,7 @@
 
           language-server = {
             uwu-colors.command = "${lib.meta.getExe' pkgs.uwu-colors "uwu_colors"}";
-            nixd.command = "${lib.meta.getExe inputs'.nixd.packages.default}";
+            nixd.command = "${lib.meta.getExe pkgs.nixd}";
           };
         };
 

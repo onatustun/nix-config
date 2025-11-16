@@ -73,11 +73,6 @@
 
     hardware.url = "github:nixos/nixos-hardware";
 
-    nix-index = {
-      url = "github:nix-community/nix-index";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -114,11 +109,6 @@
 
     helix = {
       url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixd = {
-      url = "github:nix-community/nixd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
