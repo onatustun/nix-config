@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.lazygit = {pkgs, ...}: {
-    home.packages = [pkgs.lazygit];
+  flake.modules.homeManager.lazygit = {
+    programs.lazygit.enable = true;
   };
 }

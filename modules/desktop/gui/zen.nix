@@ -1,12 +1,14 @@
 {
   flake.modules.homeManager.zen = {
     zen-browser,
+    lib,
+    inputs',
     pkgs,
     username,
     ...
   }: {
     imports = [zen-browser.homeModules.beta];
-    home.sessionVariables."BROWSER" = "zen-beta";
+    home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta";
 
     programs.zen-browser = {
       enable = true;

@@ -25,6 +25,8 @@
     };
 
     homeManager.hyprland = {
+      config,
+      inputs',
       pkgs,
       lib,
       self,
@@ -54,18 +56,21 @@
               dir = "l";
               amt = "-80 0";
             };
+
             down = {
               key = "J";
               arrow = "down";
               dir = "d";
               amt = "0 80";
             };
+
             up = {
               key = "K";
               arrow = "up";
               dir = "u";
               amt = "0 -80";
             };
+
             right = {
               key = "L";
               arrow = "right";
@@ -86,22 +91,23 @@
             "MOZ_ENABLE_WAYLAND, 1"
             "QT_QPA_PLATFORM,wayland"
             "XDG_SESSION_TYPE,wayland"
-            "HYPRCURSOR_SIZE,24"
-            "HYPRCURSOR_THEME,hypr_Bibata-Modern-Ice"
+            "HYPRCURSOR_SIZE,${builtins.toString config.home.pointerCursor.hyprcursor.size}"
+            "HYPRCURSOR_THEME,hypr_${config.home.pointerCursor.name}"
             "WLR_NO_HARDWARE_CURSORS,1"
             "WLR_RENDERER_ALLOW_SOFTWARE,1"
-            "XCURSOR_SIZE,24"
+            "XCURSOR_SIZE,${builtins.toString config.home.pointerCursor.size}"
           ];
 
           exec-once =
             [
-              "wl-paste --type image --watch cliphist store"
-              "wl-paste --type text --watch cliphist store"
-              "hyprctl setcursor hypr_Bibata-Modern-Ice 24"
-              "wvkbd-mobintl --hidden"
-              "yubikey-touch-detector"
+              "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --watch cliphist store"
+              "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store"
+              "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store"
+              "${lib.meta.getExe' inputs'.hyprland.packages.default "hyprctl"} setcursor hypr_${config.home.pointerCursor.name} ${builtins.toString config.home.pointerCursor.hyprcursor.size}"
+              "${lib.meta.getExe' pkgs.wvkbd "wvkbd-mobintl"} --hidden"
+              (lib.meta.getExe pkgs.yubikey-touch-detector)
             ]
-            ++ lib.lists.optional isLaptop "swayidle";
+            ++ lib.lists.optional isLaptop (lib.meta.getExe pkgs.swayidle);
 
           monitor =
             lib.lists.optionals isDesktop [
@@ -188,26 +194,24 @@
 
           bind =
             [
-              "$mod, D, exec, rofi -show"
-              "$mod, E, exec, thunar"
-              "$mod, Q, exec, ghostty"
-              "$mod, Z, exec, zen-beta"
+              "$mod, D, exec, ${lib.meta.getExe config.programs.rofi.package} -show"
+              "$mod, E, exec, ${lib.meta.getExe pkgs.xfce.thunar}"
+              "$mod, Q, exec, ${lib.meta.getExe config.programs.ghostty.package}"
+              "$mod, Z, exec, ${lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta"}"
               "$mod, S, togglesplit"
               "$mod, C, killactive"
               "$mod Shift, F, fullscreen, 0"
               "$mod, V, togglefloating"
               "$mod Shift, E, exit"
-              "$mod, W, exec, nu ${lib.meta.getExe hyprland}"
+              "$mod, W, exec, ${lib.meta.getExe' pkgs.nushell "nu"} ${lib.meta.getExe hyprland}"
             ]
-            ++ (
-              lib.lists.concatLists (lib.lists.genList (x: let
-                  ws = builtins.toString (x + 1 - (((x + 1) / 10) * 10));
-                in [
-                  "$mod SHIFT, ${ws}, movetoworkspace, ${builtins.toString (x + 1)}"
-                  "$mod, ${ws}, workspace, ${builtins.toString (x + 1)}"
-                ])
-                10)
-            );
+            ++ (lib.lists.concatLists (lib.lists.genList (x: let
+                ws = builtins.toString (x + 1 - (((x + 1) / 10) * 10));
+              in [
+                "$mod SHIFT, ${ws}, movetoworkspace, ${builtins.toString (x + 1)}"
+                "$mod, ${ws}, workspace, ${builtins.toString (x + 1)}"
+              ])
+              10));
 
           bindm = [
             "$mod, mouse:272, movewindow"
@@ -215,17 +219,17 @@
           ];
 
           bindel = [
-            ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
-            ",XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
-            ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-            ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+            ",XF86AudioRaiseVolume, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
+            ",XF86AudioLowerVolume, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
+            ",XF86AudioMute, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ",XF86AudioMicMute, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
           ];
 
           bindl = [
-            ", XF86AudioNext, exec, playerctl next"
-            ", XF86AudioPause, exec, playerctl play-pause"
-            ", XF86AudioPlay, exec, playerctl play-pause"
-            ", XF86AudioPrev, exec, playerctl previous "
+            ", XF86AudioNext, exec, ${lib.meta.getExe pkgs.playerctl} next"
+            ", XF86AudioPause, exec, ${lib.meta.getExe pkgs.playerctl} play-pause"
+            ", XF86AudioPlay, exec, ${lib.meta.getExe pkgs.playerctl} play-pause"
+            ", XF86AudioPrev, exec, ${lib.meta.getExe pkgs.playerctl} previous "
           ];
 
           binde =

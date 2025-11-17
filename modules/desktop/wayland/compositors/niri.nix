@@ -73,30 +73,29 @@
           WLR_NO_HARDWARE_CURSORS = "1";
           WLR_RENDERER_ALLOW_SOFTWARE = "1";
 
-          HYPRCURSOR_SIZE = "24";
-          HYPRCURSOR_THEME = "hypr_Bibata-Modern-Ice";
-          XCURSOR_SIZE = "24";
+          HYPRCURSOR_SIZE = "${builtins.toString config.home.pointerCursor.hyprcursor.size}";
+          HYPRCURSOR_THEME = "hypr_${config.home.pointerCursor.name}";
+          XCURSOR_SIZE = "${builtins.toString config.home.pointerCursor.size}";
 
           XDG_CURRENT_DESKTOP = "niri";
           XDG_SESSION_TYPE = "wayland";
         };
 
-        spawn-at-startup = let
-          makeCommand = command: {command = [command];};
-        in [
-          (makeCommand "xwayland-satellite")
-          (makeCommand "wl-paste --type image --watch cliphist store")
-          (makeCommand "wl-paste --type text --watch cliphist store")
-          (makeCommand "wl-clip-persist --clipboard both")
-          (makeCommand "brightness -r")
-          (makeCommand "wvkbd-mobintl --hidden")
-          (makeCommand "yubikey-touch-detector")
-          (makeCommand "swayidle")
+        spawn-at-startup = [
+          {command = [(lib.meta.getExe inputs'.xwayland-satellite.packages.xwayland-satellite)];}
+          {command = [(lib.meta.getExe' pkgs.wl-clipboard "wl-paste") "--watch" "cliphist" "store"];}
+          {command = [(lib.meta.getExe' pkgs.wl-clipboard "wl-paste") "--type" "image" "--watch" "cliphist" "store"];}
+          {command = [(lib.meta.getExe' pkgs.wl-clipboard "wl-paste") "--type" "text" "--watch" "cliphist" "store"];}
+          {command = [(lib.meta.getExe pkgs.wl-clip-persist) "--clipboard" "both"];}
+          {command = [(lib.meta.getExe pkgs.brightnessctl) "-r"];}
+          {command = [(lib.meta.getExe' pkgs.wvkbd "wvkbd-mobintl") "--hidden"];}
+          {command = [(lib.meta.getExe pkgs.yubikey-touch-detector)];}
+          {command = [(lib.meta.getExe config.services.swayidle.package)];}
         ];
 
-        outputs."eDP-1" = {
+        outputs.eDP-1 = {
           focus-at-startup = true;
-          background-color = "${config.stylix.base16Scheme.base00}";
+          background-color = config.stylix.base16Scheme.base00;
           scale = 1.5;
 
           mode = {
@@ -109,7 +108,7 @@
         layout = {
           always-center-single-column = true;
           center-focused-column = "on-overflow";
-          default-column-width = {proportion = 0.5;};
+          default-column-width.proportion = 0.5;
           gaps = 0;
 
           border = {
@@ -140,11 +139,11 @@
         };
 
         binds = {
-          "Mod+D".action.spawn = ["rofi" "-show"];
-          "Mod+E".action.spawn = "thunar";
-          "Mod+Q".action.spawn = ["${lib.meta.getExe' pkgs.nushell "nu"}" "-c" "${lib.meta.getExe pkgs.ghostty}"];
-          "Mod+Z".action.spawn = "zen-beta";
-          "Mod+W".action.spawn = ["pkill" "-SIGUSR1" "waybar"];
+          "Mod+D".action.spawn = [(lib.meta.getExe config.programs.rofi.package) "-show"];
+          "Mod+E".action.spawn = lib.meta.getExe pkgs.xfce.thunar;
+          "Mod+Q".action.spawn = [(lib.meta.getExe' pkgs.nushell "nu") "-c" (lib.meta.getExe config.programs.ghostty.package)];
+          "Mod+Z".action.spawn = lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta";
+          "Mod+W".action.spawn = [(lib.meta.getExe' pkgs.procps "pkill") "-SIGUSR1" (lib.meta.getExe config.programs.waybar.package)];
 
           "Mod+C".action.close-window = [];
           "Mod+O".action.toggle-overview = [];
@@ -210,14 +209,14 @@
           "Mod+Shift+8".action.move-column-to-workspace = 8;
           "Mod+Shift+0".action.move-column-to-workspace = 10;
 
-          "XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
-          "XF86AudioMicMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
-          "XF86AudioPlay".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "play-pause"];
-          "XF86AudioStop".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "pause"];
-          "XF86AudioPrev".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "previous"];
-          "XF86AudioNext".action.spawn = ["${lib.meta.getExe pkgs.playerctl}" "next"];
-          "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"];
-          "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"];
+          "XF86AudioMute".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
+          "XF86AudioMicMute".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
+          "XF86AudioPlay".action.spawn = [(lib.meta.getExe pkgs.playerctl) "play-pause"];
+          "XF86AudioStop".action.spawn = [(lib.meta.getExe pkgs.playerctl) "pause"];
+          "XF86AudioPrev".action.spawn = [(lib.meta.getExe pkgs.playerctl) "previous"];
+          "XF86AudioNext".action.spawn = [(lib.meta.getExe pkgs.playerctl) "next"];
+          "XF86AudioRaiseVolume".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"];
+          "XF86AudioLowerVolume".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"];
         };
 
         window-rules = [
@@ -248,12 +247,9 @@
           path = lib.meta.getExe inputs'.xwayland-satellite.packages.xwayland-satellite;
         };
 
-        cursor = let
-          cursorTheme = "Bibata-Modern-Ice";
-          cursorSize = 24;
-        in {
-          theme = cursorTheme;
-          size = cursorSize;
+        cursor = {
+          theme = config.home.pointerCursor.name;
+          inherit (config.home.pointerCursor) size;
         };
 
         input = {

@@ -5,15 +5,13 @@
     self,
     ...
   }: let
-    scripts = {
-      github =
-        pkgs.writers.writeNuBin "github"
-        (lib.strings.readFile (self + "/scripts/github.nu"));
+    github =
+      pkgs.writers.writeNuBin "github"
+      (lib.strings.readFile (self + "/scripts/github.nu"));
 
-      sessionizer =
-        pkgs.writers.writeNuBin "sessionizer"
-        (lib.strings.readFile (self + "/scripts/sessionizer.nu"));
-    };
+    sessionizer =
+      pkgs.writers.writeNuBin "sessionizer"
+      (lib.strings.readFile (self + "/scripts/sessionizer.nu"));
   in {
     programs.tmux = {
       enable = true;
@@ -50,9 +48,9 @@
         bind-key -r L resize-pane -R 5
 
         bind-key e display-popup -w 80% -h 80% ${lib.meta.getExe pkgs.scooter}
-        bind-key f display-popup -w 80% -h 80% -E ${lib.meta.getExe scripts.sessionizer}
+        bind-key f display-popup -w 80% -h 80% -E ${lib.meta.getExe sessionizer}
         bind-key g display-popup -w 80% -h 80% ${lib.meta.getExe pkgs.lazygit}
-        bind-key G run-shell -b ${lib.meta.getExe scripts.github}
+        bind-key G run-shell -b ${lib.meta.getExe github}
         bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${lib.meta.getExe' pkgs.nushell "nu"} --login
 
         bind-key c new-window -c "#{pane_current_path}"
