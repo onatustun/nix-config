@@ -29,6 +29,8 @@
 
         environment.systemPackages = [
           pkgs.gnome-keyring
+          pkgs.remmina
+          pkgs.wayvnc
           pkgs.xdg-desktop-portal-gnome
           pkgs.xdg-desktop-portal-gtk
         ];
@@ -36,16 +38,19 @@
     };
 
     homeManager.niri = {
-      lib,
       inputs',
       pkgs,
       config,
+      lib,
+      hostName,
       ...
     }: let
       package = inputs'.niri.packages.niri-unstable;
     in {
       home.packages = [
         pkgs.gnome-keyring
+        pkgs.remmina
+        pkgs.wayvnc
         pkgs.xdg-desktop-portal-gnome
         pkgs.xdg-desktop-portal-gtk
       ];
@@ -91,6 +96,7 @@
           {command = [(lib.meta.getExe' pkgs.wvkbd "wvkbd-mobintl") "--hidden"];}
           {command = [(lib.meta.getExe pkgs.yubikey-touch-detector)];}
           {command = [(lib.meta.getExe config.services.swayidle.package)];}
+          {command = [(lib.meta.getExe pkgs.wayvnc) "-Linfo" "-o" "eDP-1" "${hostName}.tail32e3ea.ts.net" "5901"];}
         ];
 
         outputs.eDP-1 = {

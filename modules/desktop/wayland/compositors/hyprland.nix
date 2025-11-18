@@ -20,16 +20,19 @@
         environment.systemPackages = [
           inputs'.hyprcursor.packages.default
           pkgs.grimblast
+          pkgs.remmina
+          pkgs.wayvnc
         ];
       };
     };
 
     homeManager.hyprland = {
-      config,
-      inputs',
       pkgs,
       lib,
       self,
+      config,
+      inputs',
+      hostName,
       isDesktop,
       isLaptop,
       ...
@@ -98,7 +101,12 @@
             "XCURSOR_SIZE,${builtins.toString config.home.pointerCursor.size}"
           ];
 
-          exec-once =
+          exec-once = let
+            output =
+              if isDesktop
+              then "HDMI-A-1"
+              else "eDP-1";
+          in
             [
               "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --watch cliphist store"
               "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store"
@@ -106,6 +114,7 @@
               "${lib.meta.getExe' inputs'.hyprland.packages.default "hyprctl"} setcursor hypr_${config.home.pointerCursor.name} ${builtins.toString config.home.pointerCursor.hyprcursor.size}"
               "${lib.meta.getExe' pkgs.wvkbd "wvkbd-mobintl"} --hidden"
               (lib.meta.getExe pkgs.yubikey-touch-detector)
+              "${lib.meta.getExe pkgs.wayvnc} -Linfo -o ${output} ${hostName}.tail32e3ea.ts.net 5901"
             ]
             ++ lib.lists.optional isLaptop (lib.meta.getExe pkgs.swayidle);
 
