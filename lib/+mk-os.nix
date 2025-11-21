@@ -58,25 +58,56 @@
       inputs
       // hostPredicates
       // {inherit inputs system type hostName username overlays' homeVersion hmModules homeDir secretsDir keys;};
-  in {
-    "${type}Configurations".${hostName} = inputs.${cfg.input}.lib."${type}System" {
-      inherit system specialArgs;
-      modules = [self.modules.${type}."host-${hostName}"];
-    };
 
-    modules.${type}."host-${hostName}" = {
-      system = {inherit stateVersion;};
-
+    perSystemArgs = {
       _module.args = withSystem system ({
         self',
         inputs',
         ...
       }: {inherit self' inputs';});
+    };
+
+    os = inputs.${cfg.input}.lib."${type}System" {
+      inherit system specialArgs;
+      modules = [self.modules.${type}."host-${hostName}"];
+    };
+
+    osConfig = os.config;
+  in {
+    "${type}Configurations".${hostName} = os;
+
+    modules.${type}."host-${hostName}" = {
+      system = {inherit stateVersion;};
 
       imports =
-        modules
+        [perSystemArgs]
+        ++ modules
         ++ lib.lists.optional (homeVersion != null) self.modules.${type}.home-manager
         ++ [module];
+    };
+
+    homeConfigurations = lib.modules.mkIf (homeVersion != null) {
+      "${username}@${hostName}" = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import inputs.${cfg.input} {
+          inherit system;
+          inherit (osConfig.nixpkgs) config overlays;
+        };
+
+        extraSpecialArgs =
+          specialArgs
+          // {
+            inherit osConfig;
+            isStandalone = true;
+          };
+
+        modules =
+          [
+            perSystemArgs
+            self.modules.homeManager.home-manager
+          ]
+          ++ hmModules
+          ++ osConfig.home-manager.sharedModules;
+      };
     };
   };
 in {

@@ -31,15 +31,22 @@
     };
 
     homeManager.home-manager = {
+      lib,
+      isStandalone,
       osConfig,
+      username,
       homeDir,
       homeVersion,
       ...
     }: {
       programs.home-manager.enable = true;
-      nixpkgs = {inherit (osConfig.nixpkgs) config overlays;};
+
+      nixpkgs = lib.modules.mkIf (!isStandalone) {
+        inherit (osConfig.nixpkgs) config overlays;
+      };
 
       home = {
+        inherit username;
         sessionVariables.FLAKE = "${homeDir}/nix";
         homeDirectory = homeDir;
         stateVersion = homeVersion;
