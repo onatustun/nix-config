@@ -18,11 +18,12 @@
         };
 
         environment.systemPackages = [
-          inputs'.hyprcursor.packages.default
           pkgs.grimblast
           pkgs.remmina
           pkgs.wayvnc
         ];
+
+        xdg.portal.wlr.enable = true;
       };
     };
 
@@ -94,11 +95,11 @@
             "MOZ_ENABLE_WAYLAND, 1"
             "QT_QPA_PLATFORM,wayland"
             "XDG_SESSION_TYPE,wayland"
-            "HYPRCURSOR_SIZE,${builtins.toString config.home.pointerCursor.hyprcursor.size}"
+            "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.hyprcursor.size}"
             "HYPRCURSOR_THEME,hypr_${config.home.pointerCursor.name}"
             "WLR_NO_HARDWARE_CURSORS,1"
             "WLR_RENDERER_ALLOW_SOFTWARE,1"
-            "XCURSOR_SIZE,${builtins.toString config.home.pointerCursor.size}"
+            "XCURSOR_SIZE,${toString config.home.pointerCursor.size}"
           ];
 
           exec-once = let
@@ -111,7 +112,7 @@
               "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --watch cliphist store"
               "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store"
               "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store"
-              "${lib.meta.getExe' inputs'.hyprland.packages.default "hyprctl"} setcursor hypr_${config.home.pointerCursor.name} ${builtins.toString config.home.pointerCursor.hyprcursor.size}"
+              "${lib.meta.getExe' inputs'.hyprland.packages.default "hyprctl"} setcursor hypr_${config.home.pointerCursor.name} ${toString config.home.pointerCursor.hyprcursor.size}"
               "${lib.meta.getExe' pkgs.wvkbd "wvkbd-mobintl"} --hidden"
               (lib.meta.getExe pkgs.yubikey-touch-detector)
               "${lib.meta.getExe pkgs.wayvnc} -Linfo -o ${output} ${hostName}.tail32e3ea.ts.net 5901"
@@ -215,10 +216,10 @@
               "$mod, W, exec, ${lib.meta.getExe' pkgs.nushell "nu"} ${lib.meta.getExe hyprland}"
             ]
             ++ (lib.lists.concatLists (lib.lists.genList (x: let
-                ws = builtins.toString (x + 1 - (((x + 1) / 10) * 10));
+                ws = toString (x + 1 - (((x + 1) / 10) * 10));
               in [
-                "$mod SHIFT, ${ws}, movetoworkspace, ${builtins.toString (x + 1)}"
-                "$mod, ${ws}, workspace, ${builtins.toString (x + 1)}"
+                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+                "$mod, ${ws}, workspace, ${toString (x + 1)}"
               ])
               10));
 

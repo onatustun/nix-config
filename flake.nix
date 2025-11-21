@@ -18,7 +18,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
+      url = "github:onatustun/git-hooks.nix/rm-typstfmt";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -109,6 +109,11 @@
 
     helix = {
       url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixd = {
+      url = "github:nix-community/nixd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

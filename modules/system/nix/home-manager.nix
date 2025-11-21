@@ -21,7 +21,7 @@
           ++ hmModules;
 
         useUserPackages = true;
-        backupFileExtension = "backup";
+        backupFileExtension = "hmBackup";
 
         extraSpecialArgs =
           config._module.args

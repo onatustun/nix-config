@@ -8,7 +8,11 @@
     package = inputs'.helix.packages.default;
   in {
     home = {
-      packages = [package];
+      packages = [
+        inputs'.nixd.packages.default
+        package
+        pkgs.uwu-colors
+      ];
 
       sessionVariables = {
         EDITOR = lib.meta.getExe' package "hx";
@@ -127,80 +131,6 @@
         languages = {
           language = [
             {
-              name = "tsx";
-              auto-format = true;
-
-              formatter = {
-                command = "prettier";
-
-                args = [
-                  "--parser"
-                  "typescript"
-                ];
-              };
-
-              language-servers = [
-                "tailwindcss-ls"
-                "typescript-language-server"
-                "uwu-colors"
-              ];
-            }
-            {
-              name = "jsx";
-              auto-format = true;
-
-              formatter = {
-                command = "prettier";
-
-                args = [
-                  "--parser"
-                  "typescript"
-                ];
-              };
-
-              language-servers = [
-                "tailwindcss-ls"
-                "typescript-language-server"
-                "uwu-colors"
-              ];
-            }
-            {
-              name = "html";
-              formatter = {
-                command = "prettier";
-
-                args = [
-                  "--parser"
-                  "html"
-                ];
-              };
-
-              language-servers = [
-                "tailwindcss-ls"
-                "vscode-html-language-server"
-                "vscode-css-language-server"
-                "typescript-language-server"
-                "uwu-colors"
-              ];
-            }
-            {
-              name = "css";
-              formatter = {
-                command = "prettier";
-
-                args = [
-                  "--parser"
-                  "css"
-                ];
-              };
-
-              language-servers = [
-                "tailwindcss-ls"
-                "vscode-css-language-server"
-                "uwu-colors"
-              ];
-            }
-            {
               name = "nix";
               auto-format = true;
               formatter.command = "alejandra";
@@ -222,15 +152,16 @@
 
           language-server = {
             uwu-colors.command = "${lib.meta.getExe' pkgs.uwu-colors "uwu_colors"}";
-            nixd.command = "${lib.meta.getExe pkgs.nixd}";
+            nixd.command = "${lib.meta.getExe inputs'.nixd.packages.default}";
           };
         };
 
         ignores = [
-          ".direnv"
-          "node_modules"
+          ".direnv/"
+          "node_modules/"
           ".pre-commit-config.yaml"
-          "result"
+          "result/"
+          "target/"
         ];
       };
     };

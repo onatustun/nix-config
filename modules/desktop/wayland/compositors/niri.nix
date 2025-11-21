@@ -21,6 +21,7 @@
       in {
         imports = [niri."${type}Modules".niri];
         niri-flake.cache.enable = false;
+        xdg.portal.wlr.enable = true;
 
         programs.niri = {
           enable = true;
@@ -78,9 +79,9 @@
           WLR_NO_HARDWARE_CURSORS = "1";
           WLR_RENDERER_ALLOW_SOFTWARE = "1";
 
-          HYPRCURSOR_SIZE = "${builtins.toString config.home.pointerCursor.hyprcursor.size}";
+          HYPRCURSOR_SIZE = "${toString config.home.pointerCursor.hyprcursor.size}";
           HYPRCURSOR_THEME = "hypr_${config.home.pointerCursor.name}";
-          XCURSOR_SIZE = "${builtins.toString config.home.pointerCursor.size}";
+          XCURSOR_SIZE = "${toString config.home.pointerCursor.size}";
 
           XDG_CURRENT_DESKTOP = "niri";
           XDG_SESSION_TYPE = "wayland";

@@ -1,16 +1,19 @@
 {
-  flake.modules.homeManager.cli-core = {pkgs, ...}: {
+  flake.modules.homeManager.cli-utils = {pkgs, ...}: {
     programs = {
       fd.enable = true;
       fzf.enable = true;
+      # grep.enable = true;
+      jq.enable = true;
+      less.enable = true;
       ripgrep.enable = true;
       skim.enable = true;
+      vim.enable = true;
     };
 
     home.packages = [
       pkgs.appimage-run
       pkgs.binutils
-      pkgs.bottom
       pkgs.coreutils-full
       pkgs.curl
       pkgs.diffutils
@@ -20,13 +23,11 @@
       pkgs.gawk
       pkgs.gnugrep
       pkgs.gnused
-      pkgs.jq
       pkgs.killall
-      pkgs.less
       pkgs.lsof
       pkgs.ouch
       pkgs.procps
-      pkgs.vim
+      pkgs.rip2
       pkgs.wget
       pkgs.which
       pkgs.yq-go

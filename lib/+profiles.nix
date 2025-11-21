@@ -115,9 +115,8 @@
         imports = [
           self.modules.homeManager.archivers
           self.modules.homeManager.bat
-          self.modules.homeManager.cli-core
+          self.modules.homeManager.cli-utils
           self.modules.homeManager.cli-nix
-          self.modules.homeManager.deadnix
           self.modules.homeManager.eza
           self.modules.homeManager.fastfetch
           self.modules.homeManager.gh
@@ -159,9 +158,8 @@
       tui = {self, ...}: {
         imports = [
           self.modules.homeManager.helix
-          self.modules.homeManager.lazygit
-          self.modules.homeManager.scooter
           self.modules.homeManager.tmux
+          self.modules.homeManager.tui-utils
           self.modules.homeManager.yazi
         ];
       };
@@ -173,7 +171,7 @@
           self.modules.homeManager.swayidle
           self.modules.homeManager.swaylock
           self.modules.homeManager.waybar
-          self.modules.homeManager.wayland-core
+          self.modules.homeManager.wayland-utils
           self.modules.homeManager.wl-clipboard
           self.modules.homeManager.wlogout
           self.modules.homeManager.wlsunset

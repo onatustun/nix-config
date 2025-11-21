@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.wayland-core = {pkgs, ...}: {
+  flake.modules.homeManager.wayland-utils = {pkgs, ...}: {
     home.packages = [
       pkgs.grim
       pkgs.slurp

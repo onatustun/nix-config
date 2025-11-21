@@ -1,5 +1,3 @@
 {
-  flake.modules.homeManager.zathura = {pkgs, ...}: {
-    home.packages = [pkgs.zathura];
-  };
+  flake.modules.homeManager.zathura.programs.zathura.enable = true;
 }

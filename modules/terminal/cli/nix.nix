@@ -1,18 +1,11 @@
 {
-  flake.modules.homeManager.cli-nix = {
-    inputs',
-    pkgs,
-    ...
-  }: {
+  flake.modules.homeManager.cli-nix = {pkgs, ...}: {
     home.packages = [
-      inputs'.deploy-rs.packages.default
-      inputs'.determinate.packages.default
-      inputs'.nixos-anywhere.packages.default
       pkgs.alejandra
-      pkgs.nixd
+      pkgs.deadnix
       pkgs.nix-melt
       pkgs.nix-search-cli
-      pkgs.rip2
+      pkgs.statix
     ];
   };
 }

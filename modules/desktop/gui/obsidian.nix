@@ -1,5 +1,3 @@
 {
-  flake.modules.homeManager.obsidian = {pkgs, ...}: {
-    home.packages = [pkgs.obsidian];
-  };
+  flake.modules.homeManager.obsidian.programs.obsidian.enable = true;
 }

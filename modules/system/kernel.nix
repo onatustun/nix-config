@@ -43,7 +43,7 @@
         ]
         ++ (lib.lists.optional (!isServer) "quiet")
         ++ [
-          "loglevel=${builtins.toString (
+          "loglevel=${toString (
             if isServer
             then 4
             else 3

@@ -13,16 +13,10 @@
       nix-index' = {
         nix-index-database,
         type,
-        pkgs,
         ...
       }: {
         imports = [nix-index-database."${type}Modules".nix-index];
         programs.nix-index-database.comma.enable = true;
-
-        environment.systemPackages = [
-          pkgs.comma
-          pkgs.nix-index
-        ];
       };
     };
 
