@@ -3,7 +3,7 @@
     programs = {
       fd.enable = true;
       fzf.enable = true;
-      # grep.enable = true;
+      grep.enable = true;
       jq.enable = true;
       less.enable = true;
       ripgrep.enable = true;
@@ -21,7 +21,6 @@
       pkgs.file
       pkgs.findutils
       pkgs.gawk
-      pkgs.gnugrep
       pkgs.gnused
       pkgs.killall
       pkgs.lsof

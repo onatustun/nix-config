@@ -14,11 +14,7 @@
         ];
 
         hooks = {
-          # flake-checker = {
-          #   enable = true;
-          #   package = inputs'.flake-checker.packages.default;
-          # };
-
+          flake-checker.enable = true;
           treefmt.enable = true;
         };
       };
