@@ -68,7 +68,7 @@
     };
 
     os = inputs.${cfg.input}.lib."${type}System" {
-      inherit system specialArgs;
+      inherit specialArgs;
       modules = [self.modules.${type}."host-${hostName}"];
     };
 
@@ -89,7 +89,7 @@
     homeConfigurations = lib.modules.mkIf (homeVersion != null) {
       "${username}@${hostName}" = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = import inputs.nixpkgs {
-          inherit system;
+          hostPlatform = {inherit system;};
           inherit (osConfig.nixpkgs) config overlays;
         };
 
