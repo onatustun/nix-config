@@ -1,26 +1,26 @@
 let
-  getAttrFromPath = path: rootAttrs:
+  getAttrFromPath = attrPath: rootAttrs:
     builtins.foldl' (attrs: key:
       attrs.${key})
     rootAttrs
-    path;
+    attrPath;
 
-  at = path:
-    getAttrFromPath path
+  at = attrPath:
+    getAttrFromPath attrPath
     keys;
 
-  valuesAt = path:
+  valuesAt = attrPath:
     builtins.attrValues
-    (at path);
+    (at attrPath);
 
   roleKeys = os: role:
-    builtins.map (scope:
+    map (scope:
       at [scope os role])
     ["host" "user"];
 
   mkRole = role: oses: let
     mk = field:
-      builtins.map (os:
+      map (os:
         at [field os role])
       oses;
 

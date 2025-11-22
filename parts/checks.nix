@@ -3,9 +3,9 @@
   self,
   ...
 }: {
-  perSystem = {system, ...}: {
+  perSystem = {pkgs, ...}: {
     checks =
-      inputs.deploy-rs.lib.${system}.deployChecks
+      inputs.deploy-rs.lib.${pkgs.stdenv.hostPlatform.system}.deployChecks
       self.deploy;
   };
 }
