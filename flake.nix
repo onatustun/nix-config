@@ -9,13 +9,16 @@
     ]);
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
     import-tree.url = "github:vic/import-tree";
-
-    systems.url = "github:nix-systems/default-linux";
+    systems.url = "github:nix-systems/default";
     flake-root.url = "github:srid/flake-root";
-
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     pre-commit-hooks = {
       url = "github:onatustun/git-hooks.nix/rm-typstfmt";
@@ -43,7 +46,7 @@
     };
 
     disko = {
-      url = "github:nix-community/disko/latest";
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
