@@ -12,7 +12,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
 
-    systems.url = "github:nix-systems/default";
+    systems.url = "github:nix-systems/default-linux";
     flake-root.url = "github:srid/flake-root";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -68,7 +68,11 @@
 
     chaotic = {
       url = "github:chaotic-cx/nyx";
-      inputs.home-manager.follows = "home-manager";
+
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     hardware.url = "github:nixos/nixos-hardware";

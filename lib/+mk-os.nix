@@ -88,7 +88,7 @@
 
     homeConfigurations = lib.modules.mkIf (homeVersion != null) {
       "${username}@${hostName}" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import inputs.${cfg.input} {
+        pkgs = import inputs.nixpkgs {
           inherit system;
           inherit (osConfig.nixpkgs) config overlays;
         };

@@ -17,11 +17,13 @@
     };
 
     nixpkgs = {
+      system,
       overlays',
       lib,
       ...
     }: {
       nixpkgs = {
+        hostPlatform = {inherit system;};
         overlays = overlays';
 
         config = {

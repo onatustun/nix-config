@@ -1,19 +1,22 @@
 {
   flake.modules.homeManager.git.programs.git = {
     enable = true;
-    userName = "onatustun";
-    userEmail = "git@onatustun.com";
     lfs.enable = true;
+
+    settings = {
+      user = {
+        email = "git@onatustun.com";
+        name = "onatustun";
+      };
+
+      commit.verbose = true;
+      init.defaultBranch = "master";
+      safe.directory = "~/nix";
+    };
 
     ignores = [
       ".direnv"
       ".envrc"
     ];
-
-    extraConfig = {
-      init.defaultBranch = "master";
-      commit.verbose = true;
-      safe.directory = "~/nix";
-    };
   };
 }

@@ -9,8 +9,8 @@
         enableReactDevtools = true;
 
         plugins = {
-          blurNSFW.enable = true;
-          clearURLs.enable = true;
+          blurNsfw.enable = true;
+          clearUrLs.enable = true;
           experiments.enable = true;
           fakeNitro.enable = true;
           noTypingAnimation.enable = true;
