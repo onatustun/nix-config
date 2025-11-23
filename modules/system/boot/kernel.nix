@@ -6,11 +6,6 @@
     lib,
     ...
   }: {
-    services.scx = {
-      enable = true;
-      scheduler = "scx_rusty";
-    };
-
     boot = {
       kernelPackages =
         if isServer

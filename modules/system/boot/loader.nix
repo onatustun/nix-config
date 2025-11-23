@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.boot = {isServer, ...}: {
+  flake.modules.nixos.loader = {isServer, ...}: {
     boot = {
       consoleLogLevel =
         if isServer

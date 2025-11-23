@@ -1,6 +1,14 @@
 {
   flake.modules = {
     nixos = {
+      boot = {self, ...}: {
+        imports = [
+          self.modules.nixos.loader
+          self.modules.nixos.kernel
+          self.modules.nixos.scx
+        ];
+      };
+
       cli = {self, ...}: {
         imports = [self.modules.nixos.nix-index];
         home-manager.sharedModules = [self.modules.homeManager.cli];
@@ -74,7 +82,6 @@
         imports = [
           self.modules.nixos.boot
           self.modules.nixos.hardware
-          self.modules.nixos.kernel
           self.modules.nixos.locale
           self.modules.nixos.network
           self.modules.nixos.nix
