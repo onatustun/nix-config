@@ -100,9 +100,8 @@
           {command = [(lib.meta.getExe pkgs.wayvnc) "-Linfo" "-o" "eDP-1" "${hostName}.tail32e3ea.ts.net" "5901"];}
         ];
 
-        outputs.eDP-1 = {
+        outputs."eDP-1" = {
           focus-at-startup = true;
-          background-color = config.stylix.base16Scheme.base00;
           scale = 1.5;
 
           mode = {
@@ -114,6 +113,7 @@
 
         layout = {
           always-center-single-column = true;
+          background-color = config.stylix.base16Scheme.base00;
           center-focused-column = "on-overflow";
           default-column-width.proportion = 0.5;
           gaps = 0;

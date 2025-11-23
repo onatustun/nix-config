@@ -6,13 +6,19 @@
     lib,
     ...
   }: {
+    services.scx = {
+      enable = true;
+      scheduler = "scx_rusty";
+      package = pkgs.scx_git.full;
+    };
+
     boot = {
       kernelPackages =
         if isServer
         then pkgs.linuxPackages_latest
         else if isDesktop
         then pkgs.linuxKernel.packages.linux_zen
-        else pkgs.linuxPackages_cachyos;
+        else pkgs.linuxPackages_cachyos-lto;
 
       kernel.sysctl = {
         "kernel.sysrq" = 0;
