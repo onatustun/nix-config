@@ -33,6 +33,10 @@
         ];
       };
 
+      emulators = {self, ...}: {
+        imports = [self.modules.nixos.ghostty];
+      };
+
       gui = {self, ...}: {
         imports = [self.modules.nixos.thunar];
         home-manager.sharedModules = [self.modules.homeManager.gui];
@@ -60,7 +64,6 @@
           self.modules.nixos.nix-core
           self.modules.nixos.nixpkgs
           self.modules.nixos.nur
-          self.modules.nixos.substituters
         ];
       };
 
@@ -96,12 +99,14 @@
         imports = [
           self.modules.nixos.cli
           self.modules.nixos.shells
+          self.modules.nixos.tui
+          self.modules.nixos.emulators
         ];
+      };
 
-        home-manager.sharedModules = [
-          self.modules.homeManager.emulators
-          self.modules.homeManager.tui
-        ];
+      tui = {self, ...}: {
+        imports = [self.modules.nixos.helix];
+        home-manager.sharedModules = [self.modules.homeManager.tui];
       };
 
       ui = {self, ...}: {
@@ -133,10 +138,6 @@
         ];
       };
 
-      emulators = {self, ...}: {
-        imports = [self.modules.homeManager.ghostty];
-      };
-
       gui = {self, ...}: {
         imports = [
           self.modules.homeManager.discord
@@ -164,7 +165,6 @@
 
       tui = {self, ...}: {
         imports = [
-          self.modules.homeManager.helix
           self.modules.homeManager.tmux
           self.modules.homeManager.tui-utils
           self.modules.homeManager.yazi

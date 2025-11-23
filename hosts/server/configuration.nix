@@ -21,14 +21,12 @@
       self.modules.nixos.scx
       self.modules.nixos.security
       self.modules.nixos.shells
+      self.modules.nixos.tui
       self.modules.nixos.ui
       self.modules.nixos.users
     ];
 
-    hmModules = [
-      self.modules.homeManager.tui
-      self.modules.homeManager.xdg
-    ];
+    hmModules = [self.modules.homeManager.xdg];
 
     module = {
       keys,

@@ -22,9 +22,6 @@ result/
 !parts/
 !parts/**/
 
-!pkgs/
-!pkgs/**/
-
 !scripts/
 !scripts/**/
 

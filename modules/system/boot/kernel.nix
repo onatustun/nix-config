@@ -17,7 +17,7 @@
       kernel.sysctl = {
         "kernel.sysrq" = 0;
         "kernel.kptr_restrict" = 2;
-        "net.core.bpf_jit_enable" = false;
+        "net.core.bpf_jit_enable" = 1;
         "kernel.ftrace_enabled" = false;
         "kernel.dmesg_restrict" = 1;
         "fs.protected_fifos" = 2;
@@ -33,7 +33,7 @@
           "vsyscall=none"
           "slab_nomerge"
           "module.sig_enforce=1"
-          "lockdown=confidentiality"
+          "lockdown=integrity"
           "page_poison=1"
           "page_alloc.shuffle=1"
           "sysrq_always_enabled=0"

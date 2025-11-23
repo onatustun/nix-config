@@ -37,6 +37,16 @@
         builders-use-substitutes = true;
         cores = lib.modules.mkDefault 0;
 
+        extra-substituters = [
+          "https://nix-community.cachix.org"
+          "https://nix-darwin.cachix.org"
+        ];
+
+        extra-trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
+        ];
+
         experimental-features = [
           "flakes"
           "nix-command"
