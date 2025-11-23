@@ -15,6 +15,7 @@
         type,
         ...
       }: {
+        nixpkgs.overlays = [nix-index-database.overlays.nix-index];
         imports = [nix-index-database."${type}Modules".nix-index];
         programs.nix-index-database.comma.enable = true;
       };

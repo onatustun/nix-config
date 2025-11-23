@@ -1,36 +1,16 @@
 {inputs, ...}: {
-  flake.modules.nixos = {
-    nur = {
-      nur,
-      type,
-      ...
-    }: {
-      imports = [nur.modules.${type}.default];
-    };
-
-    chaotic = {
-      chaotic,
-      type,
-      ...
-    }: {
-      imports = [chaotic."${type}Modules".default];
-    };
-
+  flake.modules.nixos.nixpkgs = {
+    system,
+    lib,
+    ...
+  }: {
     nixpkgs = {
-      system,
-      overlays',
-      lib,
-      ...
-    }: {
-      nixpkgs = {
-        hostPlatform = {inherit system;};
-        overlays = overlays';
+      hostPlatform = {inherit system;};
 
-        config = {
-          allowUnfree = true;
-          allowBroken = true;
-          allowUnfreePredicate = lib.trivial.const true;
-        };
+      config = {
+        allowUnfree = true;
+        allowBroken = true;
+        allowUnfreePredicate = lib.trivial.const true;
       };
     };
   };

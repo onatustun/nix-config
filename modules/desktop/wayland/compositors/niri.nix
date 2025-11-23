@@ -19,6 +19,7 @@
       }: let
         package = inputs'.niri.packages.niri-unstable;
       in {
+        nixpkgs.overlays = [niri.overlays.niri];
         imports = [niri."${type}Modules".niri];
         niri-flake.cache.enable = false;
         xdg.portal.wlr.enable = true;

@@ -24,8 +24,6 @@
     username ? "onat",
     stateVersion ? null,
     homeVersion ? null,
-    packages ? [],
-    overlays ? [],
     modules ? [],
     hmModules ? [],
     module ? {},
@@ -41,14 +39,6 @@
       isOnat = username == "onat";
     };
 
-    packageOverlay = final:
-      lib.trivial.const (lib.attrsets.genAttrs packages (name:
-          final.callPackage (self + "/pkgs/${name}.nix") {}));
-
-    overlays' =
-      overlays
-      ++ lib.lists.optional (packages != []) packageOverlay;
-
     cfg = systems.${type};
     homeDir = "/${cfg.homePrefix}/${username}";
     secretsDir = self + "/secrets";
@@ -57,7 +47,7 @@
     specialArgs =
       inputs
       // hostPredicates
-      // {inherit inputs system type hostName username overlays' homeVersion hmModules homeDir secretsDir keys;};
+      // {inherit inputs system type hostName username homeVersion hmModules homeDir secretsDir keys;};
 
     perSystemArgs = {
       _module.args = withSystem system ({

@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   self,
   ...
 }: {
@@ -9,13 +8,6 @@
     username = "onat";
     stateVersion = "24.11";
     homeVersion = "24.11";
-
-    overlays = [
-      inputs.deploy-rs.overlays.default
-      inputs.nix-index-database.overlays.nix-index
-      inputs.nur.overlays.default
-      inputs.ragenix.overlays.default
-    ];
 
     modules = [
       self.modules.nixos.boot
