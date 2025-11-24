@@ -1,20 +1,16 @@
 {
   flake.modules.homeManager.wlsunset = {pkgs, ...}: {
-    home.packages = [
-      pkgs.brightnessctl
-      pkgs.geoclue2
-      pkgs.wlsunset
-    ];
+    home.packages = [pkgs.wlsunset];
 
     services.wlsunset = {
       enable = true;
-      gamma = 0.7;
+      gamma = 0.8;
       latitude = -57.149651;
       longitude = -2.099075;
 
       temperature = {
-        day = 3750;
-        night = 2250;
+        day = 4250;
+        night = 2750;
       };
     };
   };

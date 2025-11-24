@@ -9,11 +9,6 @@
       flakeCheck = true;
       enableDefaultExcludes = true;
 
-      settings.global.excludes = [
-        "*.envrc"
-        "flake.lock"
-      ];
-
       programs = {
         alejandra.enable = true;
         deadnix.enable = true;
