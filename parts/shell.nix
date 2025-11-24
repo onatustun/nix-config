@@ -25,8 +25,8 @@
           inputs'.disko.packages.default
           inputs'.home-manager.packages.default
           inputs'.nixos-anywhere.packages.default
-          inputs'.pre-commit-hooks.packages.default
-          inputs'.pre-commit-hooks.packages.pre-commit-hooks
+          inputs'.git-hooks.packages.default
+          inputs'.git-hooks.packages.pre-commit-hooks
           inputs'.ragenix.packages.default
           pkgs.alejandra
           pkgs.deadnix

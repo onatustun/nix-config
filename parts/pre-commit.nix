@@ -1,12 +1,12 @@
 {inputs, ...}: {
-  imports = [inputs.pre-commit-hooks.flakeModule];
+  imports = [inputs.git-hooks.flakeModule];
 
   perSystem = {inputs', ...}: {
     pre-commit = {
       check.enable = true;
 
       settings = {
-        package = inputs'.pre-commit-hooks.packages.default;
+        package = inputs'.git-hooks.packages.default;
 
         excludes = [
           "\\.envrc$"

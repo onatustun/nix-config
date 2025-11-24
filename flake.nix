@@ -20,8 +20,8 @@
     systems.url = "github:nix-systems/default";
     flake-root.url = "github:srid/flake-root";
 
-    pre-commit-hooks = {
-      url = "github:onatustun/git-hooks.nix/rm-typstfmt";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
