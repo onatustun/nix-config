@@ -26,7 +26,10 @@
         extraSpecialArgs =
           config._module.args
           // config._module.specialArgs
-          // {osConfig = config;};
+          // {
+            osConfig = config;
+            isStandalone = false;
+          };
       };
     };
 
