@@ -1,9 +1,5 @@
 {
-  flake.modules.homeManager.wlogout = {
-    pkgs,
-    lib,
-    ...
-  }: {
+  flake.modules.homeManager.wlogout = {pkgs, ...}: {
     home.packages = [pkgs.wleave];
 
     programs.wlogout = {
@@ -32,7 +28,7 @@
         }
       ];
 
-      style = lib.modules.mkDefault ''
+      style = ''
         * {
           background-image: none;
           box-shadow: none;

@@ -537,21 +537,6 @@
         "type": "github"
       }
     },
-    "flake-root_2": {
-      "locked": {
-        "lastModified": 1723604017,
-        "narHash": "sha256-rBtQ8gg+Dn4Sx/s+pvjdq3CB2wQNzx9XGFq/JVGCB6k=",
-        "owner": "srid",
-        "repo": "flake-root",
-        "rev": "b759a56851e10cb13f6b8e5698af7b59c44be26e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srid",
-        "repo": "flake-root",
-        "type": "github"
-      }
-    },
     "flake-schemas": {
       "locked": {
         "lastModified": 1721999734,
@@ -768,21 +753,6 @@
         "ref": "gnome-49",
         "repo": "gnome-shell",
         "type": "gitlab"
-      }
-    },
-    "hardware": {
-      "locked": {
-        "lastModified": 1762847253,
-        "narHash": "sha256-BWWnUUT01lPwCWUvS0p6Px5UOBFeXJ8jR+ZdLX8IbrU=",
-        "owner": "nixos",
-        "repo": "nixos-hardware",
-        "rev": "899dc449bc6428b9ee6b3b8f771ca2b0ef945ab9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixos-hardware",
-        "type": "github"
       }
     },
     "helix": {
@@ -1450,7 +1420,7 @@
     "nixd": {
       "inputs": {
         "flake-parts": "flake-parts_4",
-        "flake-root": "flake-root_2",
+        "flake-root": "flake-root",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -1495,6 +1465,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixos-anywhere",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1762847253,
+        "narHash": "sha256-BWWnUUT01lPwCWUvS0p6Px5UOBFeXJ8jR+ZdLX8IbrU=",
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "rev": "899dc449bc6428b9ee6b3b8f771ca2b0ef945ab9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixos-hardware",
         "type": "github"
       }
     },
@@ -1732,10 +1717,8 @@
         "determinate": "determinate",
         "disko": "disko",
         "flake-parts": "flake-parts_2",
-        "flake-root": "flake-root",
         "ghostty": "ghostty",
         "git-hooks": "git-hooks",
-        "hardware": "hardware",
         "helix": "helix",
         "home-manager": "home-manager",
         "hyprcursor": "hyprcursor",
@@ -1747,6 +1730,7 @@
         "nixcord": "nixcord",
         "nixd": "nixd",
         "nixos-anywhere": "nixos-anywhere",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "nur": "nur",
         "ragenix": "ragenix",

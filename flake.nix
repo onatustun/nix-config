@@ -1,12 +1,20 @@
 {
   outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;}
-    (inputs.import-tree [
-      ./hosts
-      ./lib
-      ./modules
-      ./parts
-    ]);
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      debug = true;
+      systems = import inputs.systems;
+
+      imports = [
+        inputs.flake-parts.flakeModules.modules
+
+        (inputs.import-tree [
+          ./hosts
+          ./lib
+          ./modules
+          ./parts
+        ])
+      ];
+    };
 
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
@@ -16,9 +24,8 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    import-tree.url = "github:vic/import-tree";
     systems.url = "github:nix-systems/default";
-    flake-root.url = "github:srid/flake-root";
+    import-tree.url = "github:vic/import-tree";
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
@@ -78,7 +85,7 @@
       };
     };
 
-    hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
