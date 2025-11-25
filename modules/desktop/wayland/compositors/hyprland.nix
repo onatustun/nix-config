@@ -57,43 +57,7 @@
           variables = ["--all"];
         };
 
-        settings = let
-          navigation = {
-            left = {
-              key = "H";
-              arrow = "left";
-              dir = "l";
-              amt = "-80 0";
-            };
-
-            down = {
-              key = "J";
-              arrow = "down";
-              dir = "d";
-              amt = "0 80";
-            };
-
-            up = {
-              key = "K";
-              arrow = "up";
-              dir = "u";
-              amt = "0 -80";
-            };
-
-            right = {
-              key = "L";
-              arrow = "right";
-              dir = "r";
-              amt = "80 0";
-            };
-          };
-
-          makeBinds = mod: action: fn:
-            lib.lists.concatMap (nav: [
-              "${mod}, ${nav.arrow}, ${action nav}, ${fn nav}"
-              "${mod}, ${nav.key},   ${action nav}, ${fn nav}"
-            ]) (lib.attrsets.attrValues navigation);
-        in {
+        settings = {
           env = [
             "ELECTRON_OZONE_PLATFORM_HINT,auto"
             "NIXOS_OZONE_WL, 1"
@@ -107,12 +71,7 @@
             "XCURSOR_SIZE,${toString config.home.pointerCursor.size}"
           ];
 
-          exec-once = let
-            output =
-              if isDesktop
-              then "HDMI-A-1"
-              else "eDP-1";
-          in
+          exec-once =
             [
               "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --watch cliphist store"
               "${lib.meta.getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store"
@@ -120,7 +79,11 @@
               "${lib.meta.getExe' inputs'.hyprland.packages.default "hyprctl"} setcursor hypr_${config.home.pointerCursor.name} ${toString config.home.pointerCursor.hyprcursor.size}"
               "${lib.meta.getExe' pkgs.wvkbd "wvkbd-mobintl"} --hidden"
               (lib.meta.getExe pkgs.yubikey-touch-detector)
-              "${lib.meta.getExe pkgs.wayvnc} -Linfo -o ${output} ${hostName}.tail32e3ea.ts.net 5901"
+              "${lib.meta.getExe pkgs.wayvnc} -Linfo -o ${
+                if isDesktop
+                then "HDMI-A-1"
+                else "eDP-1"
+              } ${hostName}.tail32e3ea.ts.net 5901"
             ]
             ++ lib.lists.optional isLaptop (lib.meta.getExe pkgs.swayidle);
 
@@ -205,39 +168,51 @@
             vfr = true;
           };
 
-          "$mod" = "SUPER";
+          bind = [
+            "SUPER, D, exec, ${lib.meta.getExe config.programs.rofi.package} -show"
+            "SUPER, E, exec, ${lib.meta.getExe pkgs.xfce.thunar}"
+            "SUPER, Q, exec, ${lib.meta.getExe config.programs.ghostty.package}"
+            "SUPER, Z, exec, ${lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta"}"
+            "SUPER, S, togglesplit"
+            "SUPER, C, killactive"
+            "SUPER Shift, F, fullscreen, 0"
+            "SUPER, V, togglefloating"
+            "SUPER Shift, E, exit"
+            "SUPER, W, exec, ${lib.meta.getExe' pkgs.nushell "nu"} ${lib.meta.getExe hyprland}"
 
-          bind =
-            [
-              "$mod, D, exec, ${lib.meta.getExe config.programs.rofi.package} -show"
-              "$mod, E, exec, ${lib.meta.getExe pkgs.xfce.thunar}"
-              "$mod, Q, exec, ${lib.meta.getExe config.programs.ghostty.package}"
-              "$mod, Z, exec, ${lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta"}"
-              "$mod, S, togglesplit"
-              "$mod, C, killactive"
-              "$mod Shift, F, fullscreen, 0"
-              "$mod, V, togglefloating"
-              "$mod Shift, E, exit"
-              "$mod, W, exec, ${lib.meta.getExe' pkgs.nushell "nu"} ${lib.meta.getExe hyprland}"
-            ]
-            ++ (lib.lists.concatLists (lib.lists.genList (x: let
-                ws = toString (x + 1 - (((x + 1) / 10) * 10));
-              in [
-                "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-                "$mod, ${ws}, workspace, ${toString (x + 1)}"
-              ])
-              10));
+            "SUPER, 1, workspace, 1"
+            "SUPER, 2, workspace, 2"
+            "SUPER, 3, workspace, 3"
+            "SUPER, 4, workspace, 4"
+            "SUPER, 5, workspace, 5"
+            "SUPER, 6, workspace, 6"
+            "SUPER, 7, workspace, 7"
+            "SUPER, 8, workspace, 8"
+            "SUPER, 9, workspace, 9"
+            "SUPER, 0, workspace, 10"
+
+            "SUPER SHIFT, 1, movetoworkspace, 1"
+            "SUPER SHIFT, 2, movetoworkspace, 2"
+            "SUPER SHIFT, 3, movetoworkspace, 3"
+            "SUPER SHIFT, 4, movetoworkspace, 4"
+            "SUPER SHIFT, 5, movetoworkspace, 5"
+            "SUPER SHIFT, 6, movetoworkspace, 6"
+            "SUPER SHIFT, 7, movetoworkspace, 7"
+            "SUPER SHIFT, 8, movetoworkspace, 8"
+            "SUPER SHIFT, 9, movetoworkspace, 9"
+            "SUPER SHIFT, 0, movetoworkspace, 10"
+          ];
 
           bindm = [
-            "$mod, mouse:272, movewindow"
-            "$mod, mouse:273, resizewindow"
+            "SUPER, mouse:272, movewindow"
+            "SUPER, mouse:273, resizewindow"
           ];
 
           bindel = [
-            ",XF86AudioRaiseVolume, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
-            ",XF86AudioLowerVolume, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
-            ",XF86AudioMute, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle"
-            ",XF86AudioMicMute, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+            ", XF86AudioRaiseVolume, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
+            ", XF86AudioLowerVolume, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-"
+            ", XF86AudioMute, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ", XF86AudioMicMute, exec, ${lib.meta.getExe' pkgs.wireplumber "wpctl"} set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
           ];
 
           bindl = [
@@ -247,10 +222,34 @@
             ", XF86AudioPrev, exec, ${lib.meta.getExe pkgs.playerctl} previous "
           ];
 
-          binde =
-            makeBinds "$mod ALT" (lib.trivial.const "resizeactive") (nav: nav.amt)
-            ++ makeBinds "$mod CTRL" (lib.trivial.const "movewindow") (nav: nav.dir)
-            ++ makeBinds "$mod" (lib.trivial.const "movefocus") (nav: nav.dir);
+          binde = [
+            "SUPER ALT, H, resizeactive, -80 0"
+            "SUPER ALT, J, resizeactive, 0 80"
+            "SUPER ALT, K, resizeactive, 0 -80"
+            "SUPER ALT, L, resizeactive, 80 0"
+            "SUPER ALT, left, resizeactive, -80 0"
+            "SUPER ALT, down, resizeactive, 0 80"
+            "SUPER ALT, up, resizeactive, 0 -80"
+            "SUPER ALT, right, resizeactive, 80 0"
+
+            "SUPER CTRL, H, movewindow, l"
+            "SUPER CTRL, J, movewindow, d"
+            "SUPER CTRL, K, movewindow, u"
+            "SUPER CTRL, L, movewindow, r"
+            "SUPER CTRL, left, movewindow, l"
+            "SUPER CTRL, down, movewindow, d"
+            "SUPER CTRL, up, movewindow, u"
+            "SUPER CTRL, right, movewindow, r"
+
+            "SUPER, H, movefocus, l"
+            "SUPER, J, movefocus, d"
+            "SUPER, K, movefocus, u"
+            "SUPER, L, movefocus, r"
+            "SUPER, left, movefocus, l"
+            "SUPER, down, movefocus, d"
+            "SUPER, up, movefocus, u"
+            "SUPER, right, movefocus, r"
+          ];
 
           layerrule = ["noanim, rofi"];
 
