@@ -162,6 +162,7 @@
         hyprcursor.follows = "hyprcursor";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
+        xdph.follows = "xdg-portal-hyprland";
       };
     };
 
@@ -169,6 +170,10 @@
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
       inputs = {
+        hyprland-protocols.follows = "hyprland/hyprland-protocols";
+        hyprlang.follows = "hyprland/hyprlang";
+        hyprutils.follows = "hyprland/hyprutils";
+        hyprwayland-scanner.follows = "hyprland/hyprwayland-scanner";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
