@@ -3,6 +3,7 @@
     determinate,
     type,
     secretsDir,
+    username,
     config,
     nixpkgs,
     lib,
@@ -21,7 +22,7 @@
       channel.enable = false;
 
       gc = {
-        automatic = !config.programs.nh.enable;
+        automatic = !config.home-manager.users.${username}.programs.nh.clean.enable;
         persistent = true;
         dates = "weekly";
         options = "--delete-older-than 3d";
