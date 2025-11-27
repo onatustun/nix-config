@@ -1,20 +1,12 @@
 {
   outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      debug = true;
-      systems = import inputs.systems;
-
-      imports = [
-        inputs.flake-parts.flakeModules.modules
-
-        (inputs.import-tree [
-          ./hosts
-          ./lib
-          ./modules
-          ./parts
-        ])
-      ];
-    };
+    inputs.flake-parts.lib.mkFlake {inherit inputs;}
+    (inputs.import-tree [
+      ./hosts
+      ./lib
+      ./modules
+      ./parts
+    ]);
 
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
