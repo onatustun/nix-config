@@ -5,7 +5,6 @@ result/
 
 .pre-commit-config.yaml
 
-!LICENSE
 !.gitignore
 !.envrc
 !flake.lock
