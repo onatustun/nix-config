@@ -1,20 +1,13 @@
 {
-  flake.modules.homeManager.cursor = {pkgs, ...}: {
+  flake.modules.homeManager.cursor = {osConfig, ...}: {
     home.pointerCursor = {
+      enable = true;
       gtk.enable = true;
-      name = "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 24;
     };
 
     gtk = {
       enable = true;
-
-      cursorTheme = {
-        name = "Bibata-Modern-Ice";
-        package = pkgs.bibata-cursors;
-        size = 24;
-      };
+      cursorTheme = osConfig.stylix.cursor;
     };
   };
 }

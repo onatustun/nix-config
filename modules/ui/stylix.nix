@@ -67,6 +67,19 @@
               name = "Noto Color Emoji";
             };
           };
+
+          cursor = {
+            package = pkgs.bibata-cursors;
+            name = "Bibata-Modern-Ice";
+            size = 24;
+          };
+
+          icons = {
+            enable = true;
+            package = pkgs.adwaita-icon-theme;
+            dark = "Adwaita-Dark";
+            light = "Adwaita-Light";
+          };
         };
       };
     };
