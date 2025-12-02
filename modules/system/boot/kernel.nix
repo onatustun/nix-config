@@ -1,19 +1,10 @@
 {
   flake.modules.nixos.kernel = {
     isServer,
-    isDesktop,
-    pkgs,
     lib,
     ...
   }: {
     boot = {
-      kernelPackages =
-        if isServer
-        then pkgs.linuxPackages_latest
-        else if isDesktop
-        then pkgs.linuxKernel.packages.linux_zen
-        else pkgs.linuxPackages_cachyos-lto;
-
       kernel.sysctl = {
         "kernel.sysrq" = 0;
         "kernel.kptr_restrict" = 2;

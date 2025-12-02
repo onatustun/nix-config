@@ -14,13 +14,17 @@
 
     environment.systemPackages = [pkgs.tailscale];
 
-    services.tailscale = {
-      enable = true;
-      authKeyFile = config.age.secrets."tailscale-authkey".path;
-      useRoutingFeatures = "both";
-      openFirewall = true;
-      extraUpFlags = ["--ssh"];
-      extraSetFlags = ["--advertise-exit-node"];
+    services = {
+      resolved.domains = ["~."];
+
+      tailscale = {
+        enable = true;
+        authKeyFile = config.age.secrets."tailscale-authkey".path;
+        useRoutingFeatures = "both";
+        openFirewall = true;
+        extraUpFlags = ["--ssh"];
+        extraSetFlags = ["--advertise-exit-node"];
+      };
     };
 
     networking.firewall = {

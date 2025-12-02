@@ -23,13 +23,11 @@
 
       gc = {
         automatic = !config.home-manager.users.${username}.programs.nh.clean.enable;
-        persistent = true;
-        dates = "weekly";
         options = "--delete-older-than 3d";
       };
 
-      nixPath = ["nixpkgs=flake:nixpkgs"];
       optimise.automatic = true;
+      nixPath = ["nixpkgs=flake:nixpkgs"];
       registry.nixpkgs.flake = nixpkgs;
       extraOptions = "!include ${config.age.secrets.github-token.path}";
 

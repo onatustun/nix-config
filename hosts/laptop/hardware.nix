@@ -2,7 +2,6 @@
   flake.modules.nixos.hardware-laptop = {
     modulesPath,
     nixos-hardware,
-    lib,
     config,
     pkgs,
     ...
@@ -13,6 +12,7 @@
     ];
 
     boot = {
+      kernelPackages = pkgs.linuxPackages_cachyos-lto;
       kernelModules = ["kvm-amd"];
 
       initrd.availableKernelModules = [
@@ -42,10 +42,9 @@
     };
 
     swapDevices = [{device = "/dev/disk/by-uuid/f2ce709b-e968-4dbd-b4ce-f8b6f8b81afd";}];
-    networking.useDHCP = lib.modules.mkDefault true;
 
     hardware = {
-      cpu.amd.updateMicrocode = lib.modules.mkDefault config.hardware.enableRedistributableFirmware;
+      cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
       framework.enableKmod = true;
     };
 

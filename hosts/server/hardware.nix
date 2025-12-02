@@ -1,8 +1,13 @@
 {
-  flake.modules.nixos.hardware-server = {modulesPath, ...}: {
+  flake.modules.nixos.hardware-server = {
+    modulesPath,
+    pkgs,
+    ...
+  }: {
     imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
     boot = {
+      kernelPackages = pkgs.linuxPackages_latest;
       loader.grub.efiInstallAsRemovable = true;
 
       initrd.availableKernelModules = [

@@ -1,13 +1,14 @@
 {
   flake.modules.nixos.hardware-desktop = {
     modulesPath,
-    lib,
+    pkgs,
     config,
     ...
   }: {
     imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
     boot = {
+      kernelPackages = pkgs.linuxKernel.packages.linux_zen;
       kernelModules = ["kvm-intel"];
 
       initrd.availableKernelModules = [
@@ -36,10 +37,9 @@
     };
 
     swapDevices = [{device = "/dev/disk/by-uuid/f21c6765-340e-4bbd-8a13-d902376a5430";}];
-    networking.useDHCP = lib.modules.mkDefault true;
 
     hardware = {
-      cpu.intel.updateMicrocode = lib.modules.mkDefault config.hardware.enableRedistributableFirmware;
+      cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
       nvidia = {
         modesetting.enable = true;
