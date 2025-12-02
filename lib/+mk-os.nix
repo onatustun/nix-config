@@ -29,14 +29,9 @@
     module ? {},
   }: let
     hostPredicates = {
-      isDarwin = type == "darwin";
-      isNixos = type == "nixos";
       isDesktop = hostName == "desktop";
       isLaptop = hostName == "laptop";
-      isMini = hostName == "mini";
       isServer = hostName == "server";
-      isWsl = hostName == "wsl";
-      isOnat = username == "onat";
     };
 
     cfg = systems.${type};
