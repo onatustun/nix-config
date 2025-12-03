@@ -9,7 +9,7 @@
     devShells = {
       default = self'.devShells.nix-config;
 
-      nix-config = pkgs.mkShell {
+      nix-config = pkgs.mkShellNoCC {
         name = "nix-config-dev";
         shellHook = config.pre-commit.installationScript;
 
