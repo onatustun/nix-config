@@ -16,12 +16,14 @@
       "https://ghostty.cachix.org"
       "https://helix.cachix.org"
       "https://hyprland.cachix.org"
+      "https://install.determinate.systems"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
       "https://nix-darwin.cachix.org"
     ];
 
     extra-trusted-public-keys = [
+      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="

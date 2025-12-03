@@ -19,6 +19,7 @@
     };
 
     nix = {
+      enable = config.nixpkgs.hostPlatform.isLinux;
       channel.enable = false;
 
       gc = {
@@ -29,7 +30,10 @@
       optimise.automatic = true;
       nixPath = ["nixpkgs=flake:nixpkgs"];
       registry.nixpkgs.flake = nixpkgs;
-      extraOptions = "!include ${config.age.secrets.github-token.path}";
+
+      extraOptions = ''
+        !include ${config.age.secrets.github-token.path}
+      '';
 
       settings = {
         auto-optimise-store = true;
