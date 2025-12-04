@@ -7,7 +7,11 @@
       };
 
       thunar' = {pkgs, ...}: {
-        services.tumbler.enable = true;
+        services = {
+          gvfs.enable = true;
+          tumbler.enable = true;
+          udisks2.enable = true;
+        };
 
         programs.thunar = {
           enable = true;
@@ -20,14 +24,19 @@
         };
 
         environment.systemPackages = [
-          pkgs.kdePackages.ark
           pkgs.ffmpegthumbnailer
+          pkgs.gvfs
+          pkgs.kdePackages.ark
           pkgs.libgsf
+          pkgs.udisks
           pkgs.xfce.tumbler
         ];
       };
     };
 
-    homeManager.thunar.xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
+    homeManager.thunar = {
+      services.udiskie.enable = true;
+      xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
+    };
   };
 }
