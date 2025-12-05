@@ -177,6 +177,7 @@
           self.modules.homeManager.hyprcursor
           self.modules.homeManager.swayidle
           self.modules.homeManager.swaylock
+          self.modules.homeManager.waybar
           self.modules.homeManager.wayland-utils
           self.modules.homeManager.wl-clipboard
           self.modules.homeManager.wlogout

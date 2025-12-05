@@ -13,7 +13,6 @@
       self.modules.nixos.desktop
       self.modules.nixos.hardware-desktop
       self.modules.nixos.hyprland
-      self.modules.nixos.quickshell
       self.modules.nixos.system
       self.modules.nixos.terminal
       self.modules.nixos.ui

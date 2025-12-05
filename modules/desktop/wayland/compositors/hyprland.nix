@@ -35,13 +35,18 @@
     homeManager.hyprland = {
       pkgs,
       lib,
+      self,
       config,
       inputs',
       hostName,
       isDesktop,
       isLaptop,
       ...
-    }: {
+    }: let
+      hyprland =
+        pkgs.writers.writeNuBin "hyprland"
+        (lib.strings.readFile (self + "/scripts/hyprland.nu"));
+    in {
       wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = true;
@@ -79,7 +84,6 @@
                 then "HDMI-A-1"
                 else "eDP-1"
               } ${hostName}.tail32e3ea.ts.net 5901"
-              "${lib.meta.getExe' inputs'.quickshell.packages.default "qs"}"
             ]
             ++ lib.lists.optional isLaptop (lib.meta.getExe pkgs.swayidle);
 
@@ -174,6 +178,7 @@
             "SUPER Shift, F, fullscreen, 0"
             "SUPER, V, togglefloating"
             "SUPER Shift, E, exit"
+            "SUPER, W, exec, ${lib.meta.getExe' pkgs.nushell "nu"} ${lib.meta.getExe hyprland}"
 
             "SUPER, 1, workspace, 1"
             "SUPER, 2, workspace, 2"
