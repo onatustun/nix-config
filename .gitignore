@@ -12,6 +12,7 @@ result/
 !*.age
 !*.nix
 !*.nu
+!*.qml
 
 !hosts/
 !hosts/**/

@@ -18,6 +18,8 @@
       self.modules.nixos.ui
     ];
 
+    hmModules = [self.modules.homeManager.waybar];
+
     module = {
       keys,
       username,
