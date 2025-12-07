@@ -16,9 +16,7 @@
         type,
         pkgs,
         ...
-      }: let
-        package = inputs'.niri.packages.niri-unstable;
-      in {
+      }: {
         nix.settings = {
           extra-substituters = ["https://niri.cachix.org"];
           extra-trusted-public-keys = ["niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
@@ -31,7 +29,7 @@
 
         programs.niri = {
           enable = true;
-          inherit package;
+          package = inputs'.niri.packages.niri-unstable;
         };
 
         environment.systemPackages = [
@@ -51,9 +49,7 @@
       lib,
       hostName,
       ...
-    }: let
-      package = inputs'.niri.packages.niri-unstable;
-    in {
+    }: {
       home.packages = [
         pkgs.gnome-keyring
         pkgs.remmina
@@ -66,7 +62,7 @@
 
       xdg.portal = {
         extraPortals = [pkgs.xdg-desktop-portal-gtk];
-        configPackages = [package];
+        configPackages = [inputs'.niri.packages.niri-unstable];
       };
 
       programs.niri.settings = {
