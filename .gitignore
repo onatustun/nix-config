@@ -12,6 +12,7 @@ result/
 !*.age
 !*.nix
 !*.nu
+!*.scm
 
 !hosts/
 !hosts/**/

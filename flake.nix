@@ -142,7 +142,7 @@
     };
 
     helix = {
-      url = "github:helix-editor/helix";
+      url = "github:mattwparas/helix/steel-event-system";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -10,24 +10,46 @@
         home-manager.sharedModules = [self.modules.homeManager.helix];
       };
 
-      helix'.nix.settings = {
-        extra-substituters = ["https://helix.cachix.org"];
-        extra-trusted-public-keys = ["helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="];
+      helix' = {
+        config,
+        username,
+        ...
+      }: {
+        nix.settings = {
+          extra-substituters = ["https://helix.cachix.org"];
+          extra-trusted-public-keys = ["helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="];
+        };
+
+        environment.sessionVariables = {inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;};
       };
     };
 
     homeManager.helix = {
       inputs',
       config,
+      homeDir,
       pkgs,
       ...
     }: let
-      package = inputs'.helix.packages.default;
+      package =
+        inputs'.helix.packages.default.overrideAttrs
+        (prevAttrs: {
+          cargoBuildFeatures =
+            prevAttrs.cargoBuildFeatures or []
+            ++ ["steel"];
+        });
     in {
+      xdg.configFile = {
+        "helix/helix.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/helix.scm";
+        "helix/init.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/init.scm";
+      };
+
       home = {
         packages = [
           inputs'.nixd.packages.default
           package
+          pkgs.racket
+          pkgs.steel
           pkgs.uwu-colors
         ];
 
@@ -46,23 +68,13 @@
 
           settings = {
             editor = {
-              true-color = true;
               default-yank-register = "+";
-              middle-click-paste = false;
               line-number = "relative";
-              cursorline = true;
-              continue-comments = false;
-              auto-format = false;
               idle-timeout = 0;
-              completion-replace = true;
               bufferline = "multiple";
-              color-modes = true;
-              insert-final-newline = false;
               end-of-line-diagnostics = "warning";
               lsp.display-inlay-hints = true;
               cursor-shape.insert = "bar";
-              file-picker.hidden = false;
-              auto-pairs = true;
               auto-save = false;
               inline-diagnostics.cursor-line = "warning";
               jump-label-alphabet = "jkl;hfdsagbceimnopqrtuvwxyz";
@@ -117,6 +129,9 @@
 
             keys = {
               normal = {
+                C-d = ":page-down-smooth";
+                C-u = ":page-up-smooth";
+
                 x = "select_line_below";
                 X = "select_line_above";
 
