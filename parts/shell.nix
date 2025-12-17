@@ -27,6 +27,8 @@
           inputs'.ragenix.packages.default
           pkgs.git
           pkgs.nh
+          pkgs.racket
+          pkgs.steel
           pkgs.vim
         ];
       };
