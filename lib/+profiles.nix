@@ -127,12 +127,13 @@
         imports = [
           self.modules.homeManager.archivers
           self.modules.homeManager.bat
-          self.modules.homeManager.cli-utils
           self.modules.homeManager.cli-nix
+          self.modules.homeManager.cli-utils
           self.modules.homeManager.eza
           self.modules.homeManager.fastfetch
           self.modules.homeManager.gh
           self.modules.homeManager.git
+          self.modules.homeManager.jujutsu
           self.modules.homeManager.nh
           self.modules.homeManager.zoxide
         ];

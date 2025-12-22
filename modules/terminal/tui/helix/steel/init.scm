@@ -1,7 +1,4 @@
 (require "helix/configuration.scm")
-
-(require "jj/jj.scm")
-(require "showkeys/showkeys.scm")
 (require "smooth-scroll/smooth-scroll.scm")
 
 (define-language "scheme"
