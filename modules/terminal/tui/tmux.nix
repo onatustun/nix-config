@@ -49,7 +49,8 @@
 
         bind-key e display-popup -w 80% -h 80% ${lib.meta.getExe pkgs.scooter}
         bind-key f display-popup -w 80% -h 80% -E ${lib.meta.getExe sessionizer}
-        bind-key g display-popup -w 80% -h 80% ${lib.meta.getExe pkgs.lazygit}
+        bind-key g neww -n "git" -S ${lib.meta.getExe pkgs.lazygit}
+        bind-key j neww -n "jj" -S ${lib.meta.getExe pkgs.jjui}
         bind-key G run-shell -b ${lib.meta.getExe github}
         bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${lib.meta.getExe' pkgs.nushell "nu"} --login
 
