@@ -10,6 +10,14 @@
 
         settings = {
           inherit (config.programs.git.settings) user;
+
+          ui.diff-formatter = [
+            "difft"
+            "--color"
+            "always"
+            "$left"
+            "$right"
+          ];
         };
       };
     };
