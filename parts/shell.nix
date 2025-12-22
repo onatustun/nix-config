@@ -26,8 +26,8 @@
           inputs'.nixos-anywhere.packages.default
           inputs'.ragenix.packages.default
           pkgs.git
+          pkgs.jujutsu
           pkgs.nh
-          pkgs.racket
           pkgs.steel
           pkgs.vim
         ];
