@@ -22,21 +22,21 @@
             pkgs.xfce.thunar-volman
           ];
         };
-
-        environment.systemPackages = [
-          pkgs.ffmpegthumbnailer
-          pkgs.gvfs
-          pkgs.kdePackages.ark
-          pkgs.libgsf
-          pkgs.udisks
-          pkgs.xfce.tumbler
-        ];
       };
     };
 
-    homeManager.thunar = {
+    homeManager.thunar = {pkgs, ...}: {
       services.udiskie.enable = true;
       xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
+
+      home.packages = [
+        pkgs.ffmpegthumbnailer
+        pkgs.gvfs
+        pkgs.kdePackages.ark
+        pkgs.libgsf
+        pkgs.udisks
+        pkgs.xfce.tumbler
+      ];
     };
   };
 }

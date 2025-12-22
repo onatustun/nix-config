@@ -6,6 +6,7 @@
     ...
   }: let
     package = inputs'.xwayland-satellite.packages.default;
+    session = "graphical-session.target";
   in {
     home.packages = [
       pkgs.xwayland
@@ -15,10 +16,10 @@
     systemd.user.services.xwayland-satellite = {
       Unit = {
         Description = "Xwayland outside your Wayland";
-        BindsTo = "graphical-session.target";
-        PartOf = "graphical-session.target";
-        After = "graphical-session.target";
-        Requisite = "graphical-session.target";
+        BindsTo = session;
+        PartOf = session;
+        After = session;
+        Requisite = session;
       };
 
       Service = {
