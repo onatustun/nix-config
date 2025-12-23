@@ -103,8 +103,8 @@
 
           general = {
             border_size = 2;
-            gaps_in = 8;
-            gaps_out = 16;
+            gaps_in = -1;
+            gaps_out = 0;
             layout = "dwindle";
             resize_on_border = true;
           };
