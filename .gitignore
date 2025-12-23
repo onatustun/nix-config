@@ -26,8 +26,5 @@ result/
 !parts/
 !parts/**/
 
-!scripts/
-!scripts/**/
-
 !secrets/
 !secrets/**/

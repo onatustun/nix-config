@@ -2,16 +2,15 @@
   flake.modules.homeManager.tmux = {
     pkgs,
     lib,
-    self,
     ...
   }: let
     github =
       pkgs.writers.writeNuBin "github"
-      (lib.strings.readFile (self + "/scripts/github.nu"));
+      (lib.strings.readFile ./github.nu);
 
     sessionizer =
       pkgs.writers.writeNuBin "sessionizer"
-      (lib.strings.readFile (self + "/scripts/sessionizer.nu"));
+      (lib.strings.readFile ./sessionizer.nu);
   in {
     programs.tmux = {
       enable = true;
