@@ -29,10 +29,8 @@
     };
 
     programs.helix.settings.keys.normal = {
-      C-d = ":half-page-down-smooth";
-      C-u = ":half-page-up-smooth";
-      down = ":half-page-down-smooth";
-      up = ":half-page-up-smooth";
+      C-down = ":half-page-down-smooth";
+      C-up = ":half-page-up-smooth";
     };
   };
 }
