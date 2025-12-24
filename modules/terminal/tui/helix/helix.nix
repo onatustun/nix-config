@@ -7,7 +7,11 @@
         ...
       }: {
         imports = [self.modules.${type}.helix'];
-        home-manager.sharedModules = [self.modules.homeManager.helix];
+
+        home-manager.sharedModules = [
+          self.modules.homeManager.helix
+          self.modules.homeManager.steel
+        ];
       };
 
       helix' = {
@@ -27,65 +31,18 @@
     homeManager.helix = {
       inputs',
       config,
-      homeDir,
       pkgs,
       lib,
       ...
-    }: let
-      package =
-        inputs'.helix.packages.default.overrideAttrs
-        (prevAttrs: {
-          cargoBuildFeatures =
-            prevAttrs.cargoBuildFeatures or []
-            ++ ["steel"];
-        });
-
-      smooth-scroll = pkgs.stdenvNoCC.mkDerivation {
-        pname = "smooth-scroll";
-        version = "0.1.0";
-
-        src = pkgs.fetchFromGitHub {
-          owner = "thomasschafer";
-          repo = "smooth-scroll.hx";
-          rev = "1ed8b088e465fb139389c36ad158ba4a2d9e1bbc";
-          sha256 = "sha256-4lxGZrT4cEcg3jqae3uJGGGCSy4WeVZeJ0hIApMb7jY=";
-        };
-
-        postPatch = ''
-          substituteInPlace smooth-scroll.scm \
-            --replace-fail '(require "src/utils.scm")' \
-                           '(require "smooth-scroll/src/utils.scm")'
-        '';
-
-        installPhase = ''
-          mkdir -p $out/share/steel/cogs/smooth-scroll
-          cp -r . $out/share/steel/cogs/smooth-scroll
-        '';
-      };
-    in {
-      xdg = {
-        configFile = {
-          "helix/helix.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/helix.scm";
-          "helix/init.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/init.scm";
-        };
-
-        dataFile."steel/cogs/smooth-scroll" = {
-          source = "${smooth-scroll}/share/steel/cogs/smooth-scroll";
-          recursive = true;
-        };
-      };
-
+    }: {
       home = {
         packages = [
           inputs'.nixd.packages.default
-          package
-          pkgs.racket
-          pkgs.steel
           pkgs.uwu-colors
         ];
 
         sessionVariables = {
-          EDITOR = lib.meta.getExe' package "hx";
+          EDITOR = lib.meta.getExe' pkgs.helix "hx";
           VISUAL = config.home.sessionVariables.EDITOR;
         };
       };
@@ -95,17 +52,26 @@
 
         helix = {
           enable = true;
-          inherit package;
 
           settings = {
             editor = {
+              true-color = true;
               default-yank-register = "+";
+              middle-click-paste = false;
               line-number = "relative";
+              cursorline = true;
+              continue-comments = false;
+              auto-format = false;
               idle-timeout = 0;
+              completion-replace = true;
               bufferline = "multiple";
+              color-modes = true;
+              insert-final-newline = false;
               end-of-line-diagnostics = "warning";
               lsp.display-inlay-hints = true;
               cursor-shape.insert = "bar";
+              file-picker.hidden = false;
+              auto-pairs = false;
               auto-save = false;
               inline-diagnostics.cursor-line = "warning";
               jump-label-alphabet = "jkl;hfdsagbceimnopqrtuvwxyz";
@@ -160,9 +126,6 @@
 
             keys = {
               normal = {
-                C-d = ":half-page-down-smooth";
-                C-u = ":half-page-up-smooth";
-
                 x = "select_line_below";
                 X = "select_line_above";
 

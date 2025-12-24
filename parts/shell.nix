@@ -28,7 +28,6 @@
           pkgs.git
           pkgs.jujutsu
           pkgs.nh
-          pkgs.steel
           pkgs.vim
         ];
       };
