@@ -8,9 +8,7 @@
         {
           layer = "top";
           position = "bottom";
-          margin = "0 0 0";
           mode = "dock";
-          fixed-center = true;
 
           modules-left = [
             "niri/workspaces"
@@ -18,13 +16,44 @@
           ];
 
           modules-right = [
+            "network"
+            "bluetooth"
+            "wireplumber"
+            "disk"
             "temperature"
             "memory"
             "cpu"
-            "network"
             "battery"
             "clock"
           ];
+
+          network = {
+            format-wifi = "NET:{essid}";
+            format-ethernet = "NET:{ifname}";
+            format-disconnected = "NET:down";
+            tooltip = false;
+          };
+
+          bluetooth = {
+            format = "BT:{status}";
+            format-connected = "BT:{num_connections}";
+            on-click = "blueberry";
+            tooltip = false;
+          };
+
+          wireplumber = {
+            format-muted = "VOL:muted";
+            format = "VOL:{volume}%";
+            on-click-middle = "pwvucontrol";
+            on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            scroll-step = 5;
+            tooltip = false;
+          };
+
+          disk = {
+            format = "DISK:{percentage_used}%";
+            tooltip = false;
+          };
 
           temperature = {
             format = "TEMP:{temperatureC}°C";
@@ -32,19 +61,12 @@
           };
 
           memory = {
-            format = "MEM:{used:0.1f}G";
+            format = "MEM:{percentage}%";
             tooltip = false;
           };
 
           cpu = {
             format = "CPU:{usage}%";
-            tooltip = false;
-          };
-
-          network = {
-            format-wifi = "NET:{essid}";
-            format-ethernet = "NET:{ifname}";
-            format-disconnected = "NET:down";
             tooltip = false;
           };
 
@@ -81,17 +103,15 @@
           background-color: transparent;
         }
 
-        .modules-left,
-        .modules-right {
-          padding: 0 10px;
-        }
-
-        #battery,
-        #clock,
         #network,
-        #cpu,
+        #bluetooth,
+        #wireplumber,
+        #disk,
+        #temperature,
         #memory,
-        #temperature {
+        #cpu,
+        #battery,
+        #clock {
           color: ${config.stylix.base16Scheme.base05};
           margin: 0 4px;
           min-height: 14px;
