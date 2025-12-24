@@ -1,4 +1,4 @@
-{lib, ...}: {
+{
   flake.modules = {
     nixos = {
       helix = {
@@ -29,6 +29,7 @@
       config,
       homeDir,
       pkgs,
+      lib,
       ...
     }: let
       package =
@@ -38,10 +39,40 @@
             prevAttrs.cargoBuildFeatures or []
             ++ ["steel"];
         });
+
+      smooth-scroll = pkgs.stdenvNoCC.mkDerivation {
+        pname = "smooth-scroll";
+        version = "0.1.0";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "thomasschafer";
+          repo = "smooth-scroll.hx";
+          rev = "1ed8b088e465fb139389c36ad158ba4a2d9e1bbc";
+          sha256 = "sha256-4lxGZrT4cEcg3jqae3uJGGGCSy4WeVZeJ0hIApMb7jY=";
+        };
+
+        postPatch = ''
+          substituteInPlace smooth-scroll.scm \
+            --replace-fail '(require "src/utils.scm")' \
+                           '(require "smooth-scroll/src/utils.scm")'
+        '';
+
+        installPhase = ''
+          mkdir -p $out/share/steel/cogs/smooth-scroll
+          cp -r . $out/share/steel/cogs/smooth-scroll
+        '';
+      };
     in {
-      xdg.configFile = {
-        "helix/helix.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/helix.scm";
-        "helix/init.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/init.scm";
+      xdg = {
+        configFile = {
+          "helix/helix.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/helix.scm";
+          "helix/init.scm".source = config.lib.file.mkOutOfStoreSymlink "${homeDir}/nix/modules/terminal/tui/helix/steel/init.scm";
+        };
+
+        dataFile."steel/cogs/smooth-scroll" = {
+          source = "${smooth-scroll}/share/steel/cogs/smooth-scroll";
+          recursive = true;
+        };
       };
 
       home = {
@@ -129,8 +160,8 @@
 
             keys = {
               normal = {
-                C-d = ":page-down-smooth";
-                C-u = ":page-up-smooth";
+                C-d = ":half-page-down-smooth";
+                C-u = ":half-page-up-smooth";
 
                 x = "select_line_below";
                 X = "select_line_above";

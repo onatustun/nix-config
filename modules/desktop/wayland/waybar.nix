@@ -10,6 +10,7 @@
           position = "bottom";
           margin = "0 0 0";
           mode = "dock";
+          fixed-center = true;
 
           modules-left = [
             "niri/workspaces"
@@ -20,16 +21,10 @@
             "temperature"
             "memory"
             "cpu"
+            "network"
             "battery"
             "clock"
           ];
-
-          "hyprland/workspaces".tooltip = false;
-
-          clock = {
-            format = "{:%a-%d | %R}";
-            on-click = "wlogout -b 2 --protocol layer-shell";
-          };
 
           temperature = {
             format = "TEMP:{temperatureC}°C";
@@ -46,11 +41,23 @@
             tooltip = false;
           };
 
+          network = {
+            format-wifi = "NET:{essid}";
+            format-ethernet = "NET:{ifname}";
+            format-disconnected = "NET:down";
+            tooltip = false;
+          };
+
           battery = {
             format = "BAT:{capacity}%";
             format-charging = "BAT:{capacity}% {time}";
             format-time = "{H}h{M}m";
             tooltip = false;
+          };
+
+          clock = {
+            format = "{:%a-%d | %R}";
+            on-click = "wlogout -b 2 --protocol layer-shell";
           };
         }
       ];
@@ -81,6 +88,7 @@
 
         #battery,
         #clock,
+        #network,
         #cpu,
         #memory,
         #temperature {
