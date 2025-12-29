@@ -141,7 +141,6 @@
 
       gui = {self, ...}: {
         imports = [
-          self.modules.homeManager.discord
           self.modules.homeManager.media
           self.modules.homeManager.obsidian
           self.modules.homeManager.proton

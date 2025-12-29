@@ -87,9 +87,7 @@
     homeManager.stylix = {config, ...}: {
       stylix.targets = {
         helix.enable = false;
-        nixcord.enable = false;
         rofi.enable = false;
-        spicetify.enable = false;
         tmux.enable = false;
         waybar.enable = false;
         zen-browser.enable = false;
