@@ -1,35 +1,55 @@
 {
-  flake.modules.homeManager.scooter = {pkgs, ...}: let
-    scooter = pkgs.rustPlatform.buildRustPackage {
-      pname = "scooter.hx";
-      version = "0.1.4";
+  flake.modules.homeManager.scooter = {
+    inputs,
+    pkgs,
+    inputs',
+    ...
+  }: let
+    craneLib =
+      (inputs.crane.mkLib pkgs).overrideToolchain
+      inputs'.fenix.packages.stable.minimalToolchain;
+
+    pname = "scooter.hx";
+    version = "0.1.4";
+
+    commonArgs = {
+      inherit pname version;
 
       src = pkgs.fetchFromGitHub {
         owner = "thomasschafer";
-        repo = "scooter.hx";
-        rev = "36e850cdf782729c2971a3146eec4d662d20409a";
-        sha256 = "sha256-gwQVCOa7ll5yx4T9hgVtuehxf7IF+rbIO9EahU6BfzY=";
+        repo = pname;
+        rev = "v${version}";
+        sha256 = "sha256-QWFv/Uy3x9O05Rrabo1GjHqva3XJRKALKAUk5RLJdHM=";
       };
 
-      cargoHash = "sha256-dGpQXUr+Ny2Kq3S75Qksluy3H8ajec+jsOf/0elSkVs=";
-
-      nativeBuildInputs = [pkgs.autoPatchelfHook];
-
-      buildInputs = [
-        pkgs.glibc
-        pkgs.stdenv.cc.cc.lib
-      ];
-
+      strictDeps = true;
       doCheck = false;
-
-      installPhase = ''
-        mkdir -p $out/lib $out/share/scooter
-        SO_PATH=$(find target -name "libscooter_hx.so" -type f | head -n 1)
-        cp "$SO_PATH" $out/lib/libscooter_hx.so
-        cp -r ./* $out/share/scooter/
-        rm -rf $out/share/scooter/target
-      '';
     };
+
+    scooter = craneLib.buildPackage (commonArgs
+      // {
+        cargoArtifacts = craneLib.buildDepsOnly commonArgs;
+
+        nativeBuildInputs = [
+          pkgs.autoPatchelfHook
+          pkgs.rsync
+        ];
+
+        buildInputs = [pkgs.stdenv.cc.cc.lib];
+
+        installPhase = ''
+          mkdir -p $out/lib $out/share/scooter
+
+          cp target/release/libscooter_hx.so $out/lib/
+
+          rsync -a \
+            --exclude 'target/' \
+            --exclude 'media/' \
+            --exclude 'postBuildInstallFromCargoBuildLogOutTemp*' \
+            --exclude 'cargoBuildLog*.json' \
+            ./ $out/share/scooter/
+        '';
+      });
   in {
     xdg.dataFile = {
       "steel/cogs/scooter" = {
@@ -37,10 +57,7 @@
         recursive = true;
       };
 
-      "steel/native/libscooter_hx.so" = {
-        source = "${scooter}/lib/libscooter_hx.so";
-        recursive = true;
-      };
+      "steel/native/libscooter_hx.so".source = "${scooter}/lib/libscooter_hx.so";
     };
 
     programs.helix.settings.keys = {

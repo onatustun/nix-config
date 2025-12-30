@@ -158,6 +158,21 @@
     },
     "crane": {
       "locked": {
+        "lastModified": 1766774972,
+        "narHash": "sha256-8qxEFpj4dVmIuPn9j9z6NTbU+hrcGjBOvaxTzre5HmM=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "01bc1d404a51a0a07e9d8759cd50a7903e218c82",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
+    "crane_2": {
+      "locked": {
         "lastModified": 1760924934,
         "narHash": "sha256-tuuqY5aU7cUkR71sO2TraVKK2boYrdW3gCSXUkF4i44=",
         "owner": "ipetkov",
@@ -269,6 +284,27 @@
       "original": {
         "owner": "nix-community",
         "repo": "disko",
+        "type": "github"
+      }
+    },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1767077117,
+        "narHash": "sha256-tmVJMQC4aNUCME3ofKP2wWEBizabxwFZfLpZSi0S/4Q=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "f69c299a340f95776ddcfecfc0b1f6183c0c298e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
         "type": "github"
       }
     },
@@ -1558,7 +1594,7 @@
         "agenix": [
           "agenix"
         ],
-        "crane": "crane",
+        "crane": "crane_2",
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
@@ -1583,9 +1619,11 @@
       "inputs": {
         "agenix": "agenix",
         "chaotic": "chaotic",
+        "crane": "crane",
         "deploy-rs": "deploy-rs",
         "determinate": "determinate",
         "disko": "disko",
+        "fenix": "fenix",
         "flake-parts": "flake-parts_2",
         "ghostty": "ghostty",
         "git-hooks": "git-hooks",
@@ -1609,6 +1647,23 @@
         "xdg-portal-hyprland": "xdg-portal-hyprland",
         "xwayland-satellite": "xwayland-satellite",
         "zen-browser": "zen-browser"
+      }
+    },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767028829,
+        "narHash": "sha256-RZ5+NUYTkAZ0rtbR3xBxs3VX0yi0IgYfjL06NBbXipk=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "d7117056a36c0f42a4deea1ac4a8e297db11cbb8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
       }
     },
     "rust-overlay": {
