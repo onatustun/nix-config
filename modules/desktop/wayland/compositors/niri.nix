@@ -149,7 +149,7 @@
 
         binds = {
           "Mod+D".action.spawn = [(lib.meta.getExe config.programs.rofi.package) "-show"];
-          "Mod+E".action.spawn = lib.meta.getExe pkgs.xfce.thunar;
+          "Mod+E".action.spawn = lib.meta.getExe pkgs.thunar;
           "Mod+Q".action.spawn = [(lib.meta.getExe' pkgs.nushell "nu") "-c" (lib.meta.getExe config.programs.ghostty.package)];
           "Mod+Z".action.spawn = lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta";
           "Mod+W".action.spawn = [(lib.meta.getExe' pkgs.procps "pkill") "-SIGUSR1" (lib.meta.getExe config.programs.waybar.package)];

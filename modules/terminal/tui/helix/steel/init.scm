@@ -1,5 +1,0 @@
-(require "helix/configuration.scm")
-(require "helix/keymaps.scm")
-(require (prefix-in navigator. "hx-tmux-navigator/navigator.scm"))
-(require "scooter/scooter.scm")
-(require "smooth-scroll/smooth-scroll.scm")

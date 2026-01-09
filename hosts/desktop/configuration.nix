@@ -6,8 +6,8 @@
   flake = config.mk-os "nixos" "desktop" {
     system = "x86_64-linux";
     username = "onat";
-    stateVersion = "24.11";
-    homeVersion = "24.11";
+    stateVersion = "26.05";
+    homeVersion = "26.05";
 
     modules = [
       self.modules.nixos.desktop

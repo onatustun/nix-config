@@ -144,7 +144,7 @@
     };
 
     helix = {
-      url = "github:mattwparas/helix/steel-event-system";
+      url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -152,13 +152,6 @@
       url = "github:nix-community/nixd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    crane.url = "github:ipetkov/crane";
 
     xwayland-satellite = {
       url = "github:supreeeme/xwayland-satellite";

@@ -165,7 +165,7 @@
 
           bind = [
             "SUPER, D, exec, ${lib.meta.getExe config.programs.rofi.package} -show"
-            "SUPER, E, exec, ${lib.meta.getExe pkgs.xfce.thunar}"
+            "SUPER, E, exec, ${lib.meta.getExe pkgs.thunar}"
             "SUPER, Q, exec, ${lib.meta.getExe config.programs.ghostty.package}"
             "SUPER, Z, exec, ${lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta"}"
             "SUPER, S, togglesplit"
@@ -245,7 +245,7 @@
             "SUPER, right, movefocus, r"
           ];
 
-          layerrule = ["noanim, rofi"];
+          layerrule = ["no_anim on, match:namespace rofi"];
 
           windowrulev2 = [
             "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"

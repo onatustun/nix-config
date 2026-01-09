@@ -7,11 +7,7 @@
         ...
       }: {
         imports = [self.modules.${type}.helix'];
-
-        home-manager.sharedModules = [
-          self.modules.homeManager.helix
-          self.modules.homeManager.steel
-        ];
+        home-manager.sharedModules = [self.modules.homeManager.helix];
       };
 
       helix' = {
@@ -34,7 +30,9 @@
       pkgs,
       lib,
       ...
-    }: {
+    }: let
+      package = inputs'.helix.packages.default;
+    in {
       home = {
         packages = [
           inputs'.nixd.packages.default
@@ -42,7 +40,7 @@
         ];
 
         sessionVariables = {
-          EDITOR = lib.meta.getExe' pkgs.helix "hx";
+          EDITOR = lib.meta.getExe' package "hx";
           VISUAL = config.home.sessionVariables.EDITOR;
         };
       };
@@ -52,6 +50,7 @@
 
         helix = {
           enable = true;
+          inherit package;
 
           settings = {
             editor = {
@@ -126,6 +125,9 @@
 
             keys = {
               normal = {
+                C-down = ["page_cursor_half_down" "align_view_center"];
+                C-up = ["page_cursor_half_up" "align_view_center"];
+
                 x = "select_line_below";
                 X = "select_line_above";
 
@@ -174,6 +176,19 @@
                   unit = "  ";
                 };
               }
+              {
+                name = "haskell";
+                auto-format = true;
+
+                formatter = {
+                  command = "fourmolu";
+
+                  args = [
+                    "--stdin-input-file"
+                    "%{buffer_name}"
+                  ];
+                };
+              }
             ];
 
             language-server = {
@@ -181,14 +196,6 @@
               nixd.command = "${lib.meta.getExe inputs'.nixd.packages.default}";
             };
           };
-
-          ignores = [
-            ".direnv/"
-            "node_modules/"
-            ".pre-commit-config.yaml"
-            "result/"
-            "target/"
-          ];
         };
       };
     };
