@@ -70,9 +70,9 @@
               lsp.display-inlay-hints = true;
               cursor-shape.insert = "bar";
               file-picker.hidden = false;
-              auto-pairs = false;
               auto-save = false;
               inline-diagnostics.cursor-line = "warning";
+              indent-guides.render = false;
               jump-label-alphabet = "jkl;hfdsagbceimnopqrtuvwxyz";
 
               statusline = {
@@ -100,14 +100,15 @@
               };
 
               whitespace = {
-                render.tab = "all";
-                characters.tab = "→";
-              };
+                characters = {
+                  tab = "→";
+                  space = "·";
+                };
 
-              indent-guides = {
-                render = true;
-                character = "▏";
-                skip-levels = 1;
+                render = {
+                  space = "all";
+                  tab = "all";
+                };
               };
 
               gutters = {
@@ -192,8 +193,8 @@
             ];
 
             language-server = {
-              uwu-colors.command = "${lib.meta.getExe' pkgs.uwu-colors "uwu_colors"}";
-              nixd.command = "${lib.meta.getExe inputs'.nixd.packages.default}";
+              uwu-colors.command = "uwu_colors";
+              nixd.command = "nixd";
             };
           };
         };
