@@ -1,45 +1,37 @@
 {
   flake.modules = {
-    nixos = {
-      niri = {
-        self,
-        type,
-        ...
-      }: {
-        imports = [self.modules.${type}.niri'];
-        home-manager.sharedModules = [self.modules.homeManager.niri];
+    nixos.niri = {
+      self,
+      inputs',
+      niri,
+      type,
+      pkgs,
+      ...
+    }: {
+      home-manager.sharedModules = [self.modules.homeManager.niri];
+
+      nix.settings = {
+        extra-substituters = ["https://niri.cachix.org"];
+        extra-trusted-public-keys = ["niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
       };
 
-      niri' = {
-        inputs',
-        niri,
-        type,
-        pkgs,
-        ...
-      }: {
-        nix.settings = {
-          extra-substituters = ["https://niri.cachix.org"];
-          extra-trusted-public-keys = ["niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
-        };
+      nixpkgs.overlays = [niri.overlays.niri];
+      imports = [niri."${type}Modules".niri];
+      niri-flake.cache.enable = false;
+      xdg.portal.wlr.enable = true;
 
-        nixpkgs.overlays = [niri.overlays.niri];
-        imports = [niri."${type}Modules".niri];
-        niri-flake.cache.enable = false;
-        xdg.portal.wlr.enable = true;
-
-        programs.niri = {
-          enable = true;
-          package = inputs'.niri.packages.niri-unstable;
-        };
-
-        environment.systemPackages = [
-          pkgs.gnome-keyring
-          pkgs.remmina
-          pkgs.wayvnc
-          pkgs.xdg-desktop-portal-gnome
-          pkgs.xdg-desktop-portal-gtk
-        ];
+      programs.niri = {
+        enable = true;
+        package = inputs'.niri.packages.niri-unstable;
       };
+
+      environment.systemPackages = [
+        pkgs.gnome-keyring
+        pkgs.remmina
+        pkgs.wayvnc
+        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
+      ];
     };
 
     homeManager.niri = {
@@ -47,6 +39,7 @@
       pkgs,
       config,
       lib,
+      isDesktop,
       hostName,
       ...
     }: {
@@ -81,8 +74,6 @@
           WLR_NO_HARDWARE_CURSORS = "1";
           WLR_RENDERER_ALLOW_SOFTWARE = "1";
 
-          HYPRCURSOR_SIZE = "${toString config.home.pointerCursor.hyprcursor.size}";
-          HYPRCURSOR_THEME = "hypr_${config.home.pointerCursor.name}";
           XCURSOR_SIZE = "${toString config.home.pointerCursor.size}";
 
           XDG_CURRENT_DESKTOP = "niri";
@@ -91,68 +82,89 @@
 
         spawn-at-startup = [
           {command = [(lib.meta.getExe inputs'.xwayland-satellite.packages.xwayland-satellite)];}
-          {command = [(lib.meta.getExe' pkgs.wl-clipboard "wl-paste") "--watch" "cliphist" "store"];}
-          {command = [(lib.meta.getExe' pkgs.wl-clipboard "wl-paste") "--type" "image" "--watch" "cliphist" "store"];}
-          {command = [(lib.meta.getExe' pkgs.wl-clipboard "wl-paste") "--type" "text" "--watch" "cliphist" "store"];}
-          {command = [(lib.meta.getExe pkgs.wl-clip-persist) "--clipboard" "both"];}
-          {command = [(lib.meta.getExe pkgs.brightnessctl) "-r"];}
-          {command = [(lib.meta.getExe' pkgs.wvkbd "wvkbd-mobintl") "--hidden"];}
           {command = [(lib.meta.getExe pkgs.yubikey-touch-detector)];}
-          {command = [(lib.meta.getExe config.services.swayidle.package)];}
-          {command = [(lib.meta.getExe pkgs.wayvnc) "-Linfo" "-o" "eDP-1" "${hostName}.tail32e3ea.ts.net" "5901"];}
+          {
+            command = [
+              (lib.meta.getExe pkgs.wayvnc)
+              "-Linfo"
+              "-o"
+              "${
+                if isDesktop
+                then "HDMI-A-1"
+                else "eDP-1"
+              }"
+              "${hostName}.tail32e3ea.ts.net"
+              "5901"
+            ];
+          }
         ];
 
-        outputs."eDP-1" = {
-          focus-at-startup = true;
-          scale = 1.5;
+        outputs = {
+          "eDP-1" = {
+            focus-at-startup = true;
+            scale = 1.5;
 
-          mode = {
-            width = 2256;
-            height = 1504;
-            refresh = 60.000000;
+            mode = {
+              width = 2256;
+              height = 1504;
+              refresh = 60.000000;
+            };
+          };
+
+          "DP-2" = {
+            scale = 1;
+
+            mode = {
+              width = 1920;
+              height = 1080;
+              refresh = 240.000000;
+            };
+
+            transform.rotation = 180;
+
+            position = {
+              x = 0;
+              y = -1080;
+            };
+          };
+
+          "HDMI-A-1" = {
+            focus-at-startup = true;
+            scale = 1;
+
+            mode = {
+              width = 1920;
+              height = 1080;
+              refresh = 240.000000;
+            };
+
+            position = {
+              x = 0;
+              y = 0;
+            };
           };
         };
 
         layout = {
           always-center-single-column = true;
+          border.width = 3;
           background-color = config.stylix.base16Scheme.base00;
           center-focused-column = "on-overflow";
           default-column-width.proportion = 0.5;
-          gaps = 0;
 
-          border = {
-            enable = true;
-            width = 2;
-          };
-
-          preset-window-heights = [
-            {proportion = 1.0 / 3.0;}
-            {proportion = 1.0 / 2.0;}
-            {proportion = 1.0 / 1.5;}
-          ];
-
-          preset-column-widths = [
-            {proportion = 1.0 / 3.0;}
-            {proportion = 1.0 / 2.0;}
-            {proportion = 1.0 / 1.5;}
-          ];
-
-          struts = let
-            str = 16;
-          in {
-            left = str;
-            bottom = 0;
+          struts = {
+            left = 16;
+            right = 16;
             top = 0;
-            right = str;
+            bottom = 0;
           };
         };
 
         binds = {
-          "Mod+D".action.spawn = [(lib.meta.getExe config.programs.rofi.package) "-show"];
+          "Mod+D".action.spawn = ["noctalia-shell" "ipc" "call" "launcher" "toggle"];
           "Mod+E".action.spawn = lib.meta.getExe pkgs.thunar;
           "Mod+Q".action.spawn = [(lib.meta.getExe' pkgs.nushell "nu") "-c" (lib.meta.getExe config.programs.ghostty.package)];
           "Mod+Z".action.spawn = lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta";
-          "Mod+W".action.spawn = [(lib.meta.getExe' pkgs.procps "pkill") "-SIGUSR1" (lib.meta.getExe config.programs.waybar.package)];
 
           "Mod+C".action.close-window = [];
           "Mod+O".action.toggle-overview = [];
@@ -189,6 +201,24 @@
           "Mod+Ctrl+Up".action.move-column-to-workspace-up = [];
           "Mod+Ctrl+Right".action.move-column-right = [];
 
+          "Super+Shift+H".action.focus-monitor-left = [];
+          "Super+Shift+J".action.focus-monitor-down = [];
+          "Super+Shift+K".action.focus-monitor-up = [];
+          "Super+Shift+L".action.focus-monitor-right = [];
+          "Super+Shift+Left".action.focus-monitor-left = [];
+          "Super+Shift+Down".action.focus-monitor-down = [];
+          "Super+Shift+Up".action.focus-monitor-up = [];
+          "Super+Shift+Right".action.focus-monitor-right = [];
+
+          "Mod+Ctrl+Shift+H".action.move-column-to-monitor-left = [];
+          "Mod+Ctrl+Shift+J".action.move-column-to-monitor-down = [];
+          "Mod+Ctrl+Shift+K".action.move-column-to-monitor-up = [];
+          "Mod+Ctrl+Shift+L".action.move-column-to-monitor-right = [];
+          "Mod+Ctrl+Shift+Left".action.move-column-to-monitor-left = [];
+          "Mod+Ctrl+Shift+Down".action.move-column-to-monitor-down = [];
+          "Mod+Ctrl+Shift+Up".action.move-column-to-monitor-up = [];
+          "Mod+Ctrl+Shift+Right".action.move-column-to-monitor-right = [];
+
           "Super+Alt+H".action.set-column-width = "-25%";
           "Super+Alt+J".action.set-window-height = "+25%";
           "Super+Alt+K".action.set-window-height = "-25%";
@@ -218,14 +248,15 @@
           "Mod+Shift+8".action.move-column-to-workspace = 8;
           "Mod+Shift+0".action.move-column-to-workspace = 10;
 
-          "XF86AudioMute".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
+          "Mod+Shift+L".action.spawn = ["noctalia-shell" "ipc" "call" "lockScreen" "lock"];
+          "XF86AudioMute".action.spawn = ["noctalia-shell" "ipc" "call" "volume" "muteOutput"];
           "XF86AudioMicMute".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
           "XF86AudioPlay".action.spawn = [(lib.meta.getExe pkgs.playerctl) "play-pause"];
           "XF86AudioStop".action.spawn = [(lib.meta.getExe pkgs.playerctl) "pause"];
           "XF86AudioPrev".action.spawn = [(lib.meta.getExe pkgs.playerctl) "previous"];
           "XF86AudioNext".action.spawn = [(lib.meta.getExe pkgs.playerctl) "next"];
-          "XF86AudioRaiseVolume".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"];
-          "XF86AudioLowerVolume".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"];
+          "XF86AudioRaiseVolume".action.spawn = ["noctalia-shell" "ipc" "call" "volume" "increase"];
+          "XF86AudioLowerVolume".action.spawn = ["noctalia-shell" "ipc" "call" "volume" "decrease"];
         };
 
         window-rules = [
@@ -233,13 +264,11 @@
             clip-to-geometry = true;
             draw-border-with-background = false;
 
-            geometry-corner-radius = let
-              radius = 0.0;
-            in {
-              bottom-left = radius;
-              bottom-right = radius;
-              top-left = radius;
-              top-right = radius;
+            geometry-corner-radius = {
+              bottom-left = 8.0;
+              bottom-right = 8.0;
+              top-left = 8.0;
+              top-right = 8.0;
             };
           }
         ];

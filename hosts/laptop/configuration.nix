@@ -10,13 +10,15 @@
     homeVersion = "26.05";
 
     modules = [
-      self.modules.nixos.compositors
       self.modules.nixos.desktop
       self.modules.nixos.hardware-laptop
+      self.modules.nixos.niri
       self.modules.nixos.system
       self.modules.nixos.terminal
       self.modules.nixos.ui
     ];
+
+    hmModules = [self.modules.homeManager.noctalia];
 
     module = {
       keys,

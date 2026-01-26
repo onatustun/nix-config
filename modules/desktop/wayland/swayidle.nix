@@ -2,27 +2,43 @@
   flake.modules.homeManager.swayidle = {
     pkgs,
     lib,
+    inputs',
+    config,
     ...
-  }: let
-    package = pkgs.swayidle;
-    command = "${lib.meta.getExe package} -defF";
-  in {
-    home.packages = [package];
+  }: {
+    home.packages = [
+      pkgs.sway-audio-idle-inhibit
+      pkgs.swayidle
+    ];
 
     services.swayidle = {
       enable = true;
 
-      events = {
-        before-sleep = command;
-        lock = command;
-      };
-
       timeouts = [
         {
-          timeout = 200;
-          inherit command;
+          timeout = 300;
+          command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call lockScreen lock";
+        }
+        {
+          timeout = 500;
+          command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call sessionMenu lockAndSuspend";
         }
       ];
+    };
+
+    systemd.user.services.sway-audio-idle-inhibit = {
+      Unit = {
+        After = [config.wayland.systemd.target];
+        PartOf = [config.wayland.systemd.target];
+      };
+
+      Service = {
+        ExecStart = lib.meta.getExe pkgs.sway-audio-idle-inhibit;
+        Slice = "app.slice";
+        Restart = "on-failure";
+      };
+
+      Install.WantedBy = [config.wayland.systemd.target];
     };
   };
 }

@@ -14,27 +14,13 @@
         home-manager.sharedModules = [self.modules.homeManager.cli];
       };
 
-      compositors = {self, ...}: {
-        imports = [
-          self.modules.nixos.hyprland
-          self.modules.nixos.niri
-        ];
-      };
-
       desktop = {self, ...}: {
         imports = [
           self.modules.nixos.gui
           self.modules.nixos.wayland
         ];
 
-        home-manager.sharedModules = [
-          self.modules.homeManager.cursor
-          self.modules.homeManager.rofi
-        ];
-      };
-
-      emulators = {self, ...}: {
-        imports = [self.modules.nixos.ghostty];
+        home-manager.sharedModules = [self.modules.homeManager.cursor];
       };
 
       gui = {self, ...}: {
@@ -98,9 +84,9 @@
       terminal = {self, ...}: {
         imports = [
           self.modules.nixos.cli
+          self.modules.nixos.ghostty
           self.modules.nixos.shells
           self.modules.nixos.tui
-          self.modules.nixos.emulators
         ];
       };
 
@@ -171,15 +157,9 @@
 
       wayland = {self, ...}: {
         imports = [
-          self.modules.homeManager.dunst
-          self.modules.homeManager.hyprcursor
           self.modules.homeManager.swayidle
-          self.modules.homeManager.swaylock
-          self.modules.homeManager.waybar
           self.modules.homeManager.wayland-utils
           self.modules.homeManager.wl-clipboard
-          self.modules.homeManager.wlogout
-          self.modules.homeManager.wlsunset
           self.modules.homeManager.xwayland
         ];
       };

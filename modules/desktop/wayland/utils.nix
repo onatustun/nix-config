@@ -5,7 +5,6 @@
       pkgs.slurp
       pkgs.wlrctl
       pkgs.wlr-randr
-      pkgs.wvkbd
     ];
   };
 }

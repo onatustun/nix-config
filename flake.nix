@@ -16,7 +16,6 @@
       "https://crane.cachix.org"
       "https://ghostty.cachix.org"
       "https://helix.cachix.org"
-      "https://hyprland.cachix.org"
       "https://install.determinate.systems"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
@@ -28,7 +27,6 @@
       "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -167,38 +165,9 @@
       };
     };
 
-    hyprcursor = {
-      url = "github:hyprwm/hyprcursor";
-
-      inputs = {
-        hyprlang.follows = "hyprland/hyprlang";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
-    hyprland = {
-      url = "github:hyprwm/hyprland";
-
-      inputs = {
-        hyprcursor.follows = "hyprcursor";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        xdph.follows = "xdg-portal-hyprland";
-      };
-    };
-
-    xdg-portal-hyprland = {
-      url = "github:hyprwm/xdg-desktop-portal-hyprland";
-
-      inputs = {
-        hyprland-protocols.follows = "hyprland/hyprland-protocols";
-        hyprlang.follows = "hyprland/hyprlang";
-        hyprutils.follows = "hyprland/hyprutils";
-        hyprwayland-scanner.follows = "hyprland/hyprwayland-scanner";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ghostty = {

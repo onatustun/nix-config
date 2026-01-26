@@ -12,11 +12,13 @@
     modules = [
       self.modules.nixos.desktop
       self.modules.nixos.hardware-desktop
-      self.modules.nixos.hyprland
+      self.modules.nixos.niri
       self.modules.nixos.system
       self.modules.nixos.terminal
       self.modules.nixos.ui
     ];
+
+    hmModules = [self.modules.homeManager.noctalia];
 
     module = {
       keys,
