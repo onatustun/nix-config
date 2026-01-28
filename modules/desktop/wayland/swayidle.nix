@@ -19,10 +19,6 @@
           timeout = 300;
           command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call lockScreen lock";
         }
-        {
-          timeout = 500;
-          command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call sessionMenu lockAndSuspend";
-        }
       ];
     };
 
