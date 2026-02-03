@@ -160,26 +160,7 @@
           languages = {
             language = [
               {
-                name = "nix";
-                auto-format = true;
-                formatter.command = "alejandra";
-
-                language-servers = [
-                  "nixd"
-                  "uwu-colors"
-                ];
-              }
-              {
-                name = "nu";
-
-                indent = {
-                  tab-width = 2;
-                  unit = "  ";
-                };
-              }
-              {
                 name = "haskell";
-                auto-format = true;
 
                 formatter = {
                   command = "fourmolu";
@@ -190,11 +171,25 @@
                   ];
                 };
               }
+              {
+                name = "nix";
+                formatter.command = "alejandra";
+
+                language-servers = [
+                  "nixd"
+                  "uwu-colors"
+                ];
+              }
             ];
 
             language-server = {
               uwu-colors.command = "uwu_colors";
-              nixd.command = "nixd";
+
+              rust-analyzer.config = {
+                cargo.features = "all";
+                check.command = "clippy";
+                completion.callable.snippets = "add_parentheses";
+              };
             };
           };
         };
