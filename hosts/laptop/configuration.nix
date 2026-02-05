@@ -18,7 +18,11 @@
       self.modules.nixos.ui
     ];
 
-    hmModules = [self.modules.homeManager.noctalia];
+    hmModules = [
+      self.modules.homeManager.noctalia
+      self.modules.homeManager.wayvnc
+      self.modules.homeManager.zmkBATx
+    ];
 
     module = {
       keys,

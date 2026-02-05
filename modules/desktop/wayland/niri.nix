@@ -5,7 +5,6 @@
       inputs',
       niri,
       type,
-      pkgs,
       ...
     }: {
       home-manager.sharedModules = [self.modules.homeManager.niri];
@@ -24,14 +23,6 @@
         enable = true;
         package = inputs'.niri.packages.niri-unstable;
       };
-
-      environment.systemPackages = [
-        pkgs.gnome-keyring
-        pkgs.remmina
-        pkgs.wayvnc
-        pkgs.xdg-desktop-portal-gnome
-        pkgs.xdg-desktop-portal-gtk
-      ];
     };
 
     homeManager.niri = {
@@ -39,14 +30,10 @@
       pkgs,
       config,
       lib,
-      isDesktop,
-      hostName,
       ...
     }: {
       home.packages = [
         pkgs.gnome-keyring
-        pkgs.remmina
-        pkgs.wayvnc
         pkgs.xdg-desktop-portal-gnome
         pkgs.xdg-desktop-portal-gtk
       ];
@@ -79,25 +66,6 @@
           XDG_CURRENT_DESKTOP = "niri";
           XDG_SESSION_TYPE = "wayland";
         };
-
-        spawn-at-startup = [
-          {command = [(lib.meta.getExe inputs'.xwayland-satellite.packages.xwayland-satellite)];}
-          {command = [(lib.meta.getExe pkgs.yubikey-touch-detector)];}
-          {
-            command = [
-              (lib.meta.getExe pkgs.wayvnc)
-              "-Linfo"
-              "-o"
-              "${
-                if isDesktop
-                then "HDMI-A-1"
-                else "eDP-1"
-              }"
-              "${hostName}.tail32e3ea.ts.net"
-              "5901"
-            ];
-          }
-        ];
 
         outputs = {
           "eDP-1" = {
