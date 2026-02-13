@@ -68,6 +68,7 @@
         };
 
         outputs = {
+          # Framework 13
           "eDP-1" = {
             focus-at-startup = true;
             scale = 1.5;
@@ -77,8 +78,30 @@
               height = 1504;
               refresh = 60.000000;
             };
+
+            position = {
+              x = 0;
+              y = -1080;
+            };
           };
 
+          # Xreal
+          "DP-3" = {
+            scale = 1.6;
+
+            mode = {
+              width = 1920;
+              height = 1200;
+              refresh = 90.000000;
+            };
+
+            position = {
+              x = -152;
+              y = -1830;
+            };
+          };
+
+          # Desktop monitors
           "DP-2" = {
             scale = 1;
 
