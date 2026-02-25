@@ -10,7 +10,7 @@
       };
 
       commit.verbose = true;
-      init.defaultBranch = "master";
+      init.defaultBranch = "main";
       safe.directory = "~/nix";
     };
 

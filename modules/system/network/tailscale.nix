@@ -15,7 +15,7 @@
     environment.systemPackages = [pkgs.tailscale];
 
     services = {
-      resolved.domains = ["~."];
+      resolved.settings.Resolve.Domains = ["~."];
 
       tailscale = {
         enable = true;

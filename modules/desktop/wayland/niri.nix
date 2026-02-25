@@ -108,7 +108,7 @@
             mode = {
               width = 1920;
               height = 1080;
-              refresh = 240.000000;
+              refresh = 240.299;
             };
 
             transform.rotation = 180;
@@ -126,7 +126,7 @@
             mode = {
               width = 1920;
               height = 1080;
-              refresh = 240.000000;
+              refresh = 239.761;
             };
 
             position = {
@@ -155,7 +155,7 @@
           "Mod+D".action.spawn = ["noctalia-shell" "ipc" "call" "launcher" "toggle"];
           "Mod+E".action.spawn = lib.meta.getExe pkgs.thunar;
           "Mod+Q".action.spawn = [(lib.meta.getExe' pkgs.nushell "nu") "-c" (lib.meta.getExe config.programs.ghostty.package)];
-          "Mod+Z".action.spawn = lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta";
+          "Mod+Z".action.spawn = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
 
           "Mod+C".action.close-window = [];
           "Mod+O".action.toggle-overview = [];

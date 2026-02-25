@@ -7,12 +7,13 @@
     username,
     ...
   }: {
-    imports = [zen-browser.homeModules.beta];
-    home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.beta "zen-beta";
+    imports = [zen-browser.homeModules.twilight];
+    home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
 
     programs.zen-browser = {
       enable = true;
       nativeMessagingHosts = [pkgs.ff2mpv-rust];
+      suppressXdgMigrationWarning = true;
 
       profiles.default = {
         id = 0;

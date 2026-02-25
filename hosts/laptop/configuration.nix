@@ -21,7 +21,7 @@
     hmModules = [
       self.modules.homeManager.noctalia
       self.modules.homeManager.wayvnc
-      self.modules.homeManager.zmkBATx
+      self.modules.homeManager.zmkbatx
     ];
 
     module = {

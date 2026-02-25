@@ -1,13 +1,11 @@
 let
-  getAttrFromPath = attrPath: rootAttrs:
-    builtins.foldl' (attrs: key:
-      attrs.${key})
-    rootAttrs
-    attrPath;
-
   at = attrPath:
-    getAttrFromPath attrPath
-    keys;
+    builtins.foldl' (
+      attrs: key:
+        attrs.${key}
+    )
+    keys
+    attrPath;
 
   valuesAt = attrPath:
     builtins.attrValues
@@ -26,12 +24,12 @@ let
 
     host = mk "host";
     user = mk "user";
-  in {
-    inherit host user;
 
     all =
       user
       ++ host;
+  in {
+    inherit host user all;
   };
 
   keys = {
