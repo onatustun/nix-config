@@ -1,16 +1,9 @@
 {
   description = "Nix config";
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;}
-    (inputs.import-tree [
-      ./hosts
-      ./lib
-      ./modules
-      ./parts
-    ]);
+  nixConfig = rec {
+    commit-lockfile-summary = "nix: update `flake.lock`";
 
-  nixConfig = {
     extra-substituters = [
       "https://chaotic-nyx.cachix.org"
       "https://crane.cachix.org"
@@ -21,6 +14,8 @@
       "https://nix-community.cachix.org"
       "https://nix-darwin.cachix.org"
     ];
+
+    extra-trusted-substituters = extra-substituters;
 
     extra-trusted-public-keys = [
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
@@ -33,52 +28,82 @@
       "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
     ];
 
-    extra-experimental-features = "nix-command flakes";
+    extra-experimental-features = [
+      "flakes"
+      "nix-command"
+    ];
   };
 
   inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    nixpkgs = {
+      type = "tarball";
+      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    };
 
     flake-parts = {
-      url = "github:hercules-ci/flake-parts";
+      type = "github";
+      owner = "hercules-ci";
+      repo = "flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    systems.url = "github:nix-systems/default";
-    import-tree.url = "github:vic/import-tree";
+    systems = {
+      type = "github";
+      owner = "nix-systems";
+      repo = "default";
+    };
+
+    import-tree = {
+      type = "github";
+      owner = "vic";
+      repo = "import-tree";
+    };
 
     git-hooks = {
-      url = "github:cachix/git-hooks.nix";
+      type = "github";
+      owner = "cachix";
+      repo = "git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
+      type = "github";
+      owner = "numtide";
+      repo = "treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     determinate = {
-      url = "https://flakehub.com/f/determinatesystems/determinate/*";
+      type = "tarball";
+      url = "https://flakehub.com/f/determinatesystems/determinate/%2A";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin";
+      type = "github";
+      owner = "nix-darwin";
+      repo = "nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      type = "github";
+      owner = "nix-community";
+      repo = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     disko = {
-      url = "github:nix-community/disko";
+      type = "github";
+      owner = "nix-community";
+      repo = "disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-anywhere = {
-      url = "github:nix-community/nixos-anywhere";
+      type = "github";
+      owner = "nix-community";
+      repo = "nixos-anywhere";
 
       inputs = {
         disko.follows = "disko";
@@ -87,17 +112,23 @@
     };
 
     deploy-rs = {
-      url = "github:serokell/deploy-rs";
+      type = "github";
+      owner = "serokell";
+      repo = "deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nur = {
-      url = "github:nix-community/nur";
+      type = "github";
+      owner = "nix-community";
+      repo = "nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     chaotic = {
-      url = "github:chaotic-cx/nyx";
+      type = "github";
+      owner = "chaotic-cx";
+      repo = "nyx";
 
       inputs = {
         home-manager.follows = "home-manager";
@@ -105,15 +136,23 @@
       };
     };
 
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware = {
+      type = "github";
+      owner = "nixos";
+      repo = "nixos-hardware";
+    };
 
     nix-index-database = {
-      url = "github:nix-community/nix-index-database";
+      type = "github";
+      owner = "nix-community";
+      repo = "nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     agenix = {
-      url = "github:ryantm/agenix";
+      type = "github";
+      owner = "ryantm";
+      repo = "agenix";
 
       inputs = {
         darwin.follows = "nix-darwin";
@@ -124,7 +163,9 @@
     };
 
     ragenix = {
-      url = "github:yaxitech/ragenix";
+      type = "github";
+      owner = "yaxitech";
+      repo = "ragenix";
 
       inputs = {
         agenix.follows = "agenix";
@@ -133,7 +174,9 @@
     };
 
     stylix = {
-      url = "github:danth/stylix";
+      type = "github";
+      owner = "danth";
+      repo = "stylix";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -142,22 +185,30 @@
     };
 
     helix = {
-      url = "github:helix-editor/helix";
+      type = "github";
+      owner = "helix-editor";
+      repo = "helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixd = {
-      url = "github:nix-community/nixd";
+      type = "github";
+      owner = "nix-community";
+      repo = "nixd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     xwayland-satellite = {
-      url = "github:supreeeme/xwayland-satellite";
+      type = "github";
+      owner = "supreeeme";
+      repo = "xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     niri = {
-      url = "github:sodiboo/niri-flake";
+      type = "github";
+      owner = "sodiboo";
+      repo = "niri-flake";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -166,17 +217,23 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      type = "github";
+      owner = "noctalia-dev";
+      repo = "noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     ghostty = {
-      url = "github:ghostty-org/ghostty";
+      type = "github";
+      owner = "ghostty-org";
+      repo = "ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
+      type = "github";
+      owner = "0xc000022070";
+      repo = "zen-browser-flake";
 
       inputs = {
         home-manager.follows = "home-manager";
@@ -184,4 +241,13 @@
       };
     };
   };
+
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;}
+    (inputs.import-tree [
+      ./hosts
+      ./lib
+      ./modules
+      ./parts
+    ]);
 }
