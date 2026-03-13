@@ -1,22 +1,13 @@
 {
   flake.modules = {
-    nixos = {
-      nushell = {
-        self,
-        type,
-        ...
-      }: {
-        imports = [self.modules.${type}.nushell'];
-        home-manager.sharedModules = [self.modules.homeManager.nushell];
-      };
-
-      nushell' = {
-        username,
-        pkgs,
-        ...
-      }: {
-        users.users.${username}.shell = pkgs.nushell;
-      };
+    nixos.nushell = {
+      username,
+      pkgs,
+      self,
+      ...
+    }: {
+      users.users.${username}.shell = pkgs.nushell;
+      home-manager.sharedModules = [self.modules.homeManager.nushell];
     };
 
     homeManager.nushell = {

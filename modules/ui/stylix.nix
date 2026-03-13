@@ -1,87 +1,79 @@
 {
   flake.modules = {
-    nixos = {
+    nixos.stylix = {
+      stylix,
+      type,
+      config,
+      pkgs,
+      self,
+      ...
+    }: {
+      imports = [stylix."${type}Modules".stylix];
+
       stylix = {
-        self,
-        type,
-        ...
-      }: {
-        imports = [self.modules.${type}.stylix'];
-        home-manager.sharedModules = [self.modules.homeManager.stylix];
-      };
+        enable = true;
+        inherit (config.stylix.base16Scheme) polarity;
 
-      stylix' = {
-        stylix,
-        type,
-        config,
-        pkgs,
-        ...
-      }: {
-        imports = [stylix."${type}Modules".stylix];
+        base16Scheme = {
+          name = "gruber-darker";
+          polarity = "dark";
+          base00 = "#181818";
+          base01 = "#453d41";
+          base02 = "#484848";
+          base03 = "#52494e";
+          base04 = "#e4e4ef";
+          base05 = "#f4f4ff";
+          base06 = "#f5f5f5";
+          base07 = "#e4e4ef";
+          base08 = "#f43841";
+          base09 = "#c73c3f";
+          base0A = "#ffdd33";
+          base0B = "#73c936";
+          base0C = "#95a99f";
+          base0D = "#96a6c8";
+          base0E = "#9e95c7";
+          base0F = "#cc8c3c";
+        };
 
-        stylix = {
-          enable = true;
-          inherit (config.stylix.base16Scheme) polarity;
+        fonts = {
+          sizes.terminal = 14;
 
-          base16Scheme = {
-            name = "gruber-darker";
-            polarity = "dark";
-            base00 = "#181818";
-            base01 = "#453d41";
-            base02 = "#484848";
-            base03 = "#52494e";
-            base04 = "#e4e4ef";
-            base05 = "#f4f4ff";
-            base06 = "#f5f5f5";
-            base07 = "#e4e4ef";
-            base08 = "#f43841";
-            base09 = "#c73c3f";
-            base0A = "#ffdd33";
-            base0B = "#73c936";
-            base0C = "#95a99f";
-            base0D = "#96a6c8";
-            base0E = "#9e95c7";
-            base0F = "#cc8c3c";
+          monospace = {
+            package = pkgs.nerd-fonts.jetbrains-mono;
+            name = "JetBrainsMono Nerd Font Mono";
           };
 
-          fonts = {
-            sizes.terminal = 14;
-
-            monospace = {
-              package = pkgs.nerd-fonts.jetbrains-mono;
-              name = "JetBrainsMono Nerd Font Mono";
-            };
-
-            sansSerif = {
-              package = pkgs.dejavu_fonts;
-              name = "DejaVu Sans";
-            };
-
-            serif = {
-              package = pkgs.dejavu_fonts;
-              name = "DejaVu Serif";
-            };
-
-            emoji = {
-              package = pkgs.noto-fonts-color-emoji;
-              name = "Noto Color Emoji";
-            };
+          sansSerif = {
+            package = pkgs.dejavu_fonts;
+            name = "DejaVu Sans";
           };
 
-          cursor = {
-            package = pkgs.bibata-cursors;
-            name = "Bibata-Modern-Ice";
-            size = 24;
+          serif = {
+            package = pkgs.dejavu_fonts;
+            name = "DejaVu Serif";
           };
 
-          icons = {
-            enable = true;
-            package = pkgs.adwaita-icon-theme;
-            dark = "Adwaita-Dark";
-            light = "Adwaita-Light";
+          emoji = {
+            package = pkgs.noto-fonts-color-emoji;
+            name = "Noto Color Emoji";
           };
         };
+
+        cursor = {
+          package = pkgs.bibata-cursors;
+          name = "Bibata-Modern-Ice";
+          size = 24;
+        };
+
+        icons = {
+          enable = true;
+          package = pkgs.adwaita-icon-theme;
+          dark = "Adwaita-Dark";
+          light = "Adwaita-Light";
+        };
       };
+
+      home-manager.sharedModules = [self.modules.homeManager.stylix];
     };
 
     homeManager.stylix = {config, ...}: {

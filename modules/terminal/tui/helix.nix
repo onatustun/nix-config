@@ -1,27 +1,18 @@
 {
   flake.modules = {
-    nixos = {
-      helix = {
-        self,
-        type,
-        ...
-      }: {
-        imports = [self.modules.${type}.helix'];
-        home-manager.sharedModules = [self.modules.homeManager.helix];
+    nixos.helix = {
+      config,
+      username,
+      self,
+      ...
+    }: {
+      nix.settings = {
+        extra-substituters = ["https://helix.cachix.org"];
+        extra-trusted-public-keys = ["helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="];
       };
 
-      helix' = {
-        config,
-        username,
-        ...
-      }: {
-        nix.settings = {
-          extra-substituters = ["https://helix.cachix.org"];
-          extra-trusted-public-keys = ["helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="];
-        };
-
-        environment.sessionVariables = {inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;};
-      };
+      environment.sessionVariables = {inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;};
+      home-manager.sharedModules = [self.modules.homeManager.helix];
     };
 
     homeManager.helix = {

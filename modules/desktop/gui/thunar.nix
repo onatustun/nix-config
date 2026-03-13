@@ -1,28 +1,27 @@
 {
   flake.modules = {
-    nixos = {
-      thunar = {self, ...}: {
-        imports = [self.modules.nixos.thunar'];
-        home-manager.sharedModules = [self.modules.homeManager.thunar];
+    nixos.thunar = {
+      pkgs,
+      self,
+      ...
+    }: {
+      services = {
+        gvfs.enable = true;
+        tumbler.enable = true;
+        udisks2.enable = true;
       };
 
-      thunar' = {pkgs, ...}: {
-        services = {
-          gvfs.enable = true;
-          tumbler.enable = true;
-          udisks2.enable = true;
-        };
+      programs.thunar = {
+        enable = true;
 
-        programs.thunar = {
-          enable = true;
-
-          plugins = [
-            pkgs.thunar-archive-plugin
-            pkgs.thunar-media-tags-plugin
-            pkgs.thunar-volman
-          ];
-        };
+        plugins = [
+          pkgs.thunar-archive-plugin
+          pkgs.thunar-media-tags-plugin
+          pkgs.thunar-volman
+        ];
       };
+
+      home-manager.sharedModules = [self.modules.homeManager.thunar];
     };
 
     homeManager.thunar = {pkgs, ...}: {
