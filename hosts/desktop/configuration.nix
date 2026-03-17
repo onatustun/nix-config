@@ -1,51 +1,55 @@
 {
   config,
   self,
+  lib,
   ...
-}: {
-  flake = config.mk-os "nixos" "desktop" {
+}: let
+  type = "nixos";
+in {
+  flake = config.mk-os type {
     system = "x86_64-linux";
+    hostName = "desktop";
     username = "onat";
     stateVersion = "26.05";
     homeVersion = "26.05";
 
-    modules = [
-      self.modules.nixos.desktop
-      self.modules.nixos.hardware-desktop
-      self.modules.nixos.niri
-      self.modules.nixos.system
-      self.modules.nixos.terminal
-      self.modules.nixos.ui
-    ];
+    modules =
+      (lib.lists.map (module: self.modules.${type}.${module}) [
+        "desktop"
+        "hardware-desktop"
+        "niri"
+        "system"
+        "terminal"
+        "ui"
+      ])
+      ++ lib.lists.singleton ({
+        keys,
+        username,
+        ...
+      }: {
+        users.users = {
+          root.openssh.authorizedKeys.keys = keys.adminUserKeys;
 
-    hmModules = [
-      self.modules.homeManager.noctalia
-      self.modules.homeManager.wayvnc
-    ];
+          ${username} = {
+            openssh.authorizedKeys.keys = keys.adminUserKeys;
 
-    module = {
-      keys,
-      username,
-      ...
-    }: {
-      users.users = {
-        root.openssh.authorizedKeys.keys = keys.adminUserKeys;
-
-        ${username} = {
-          openssh.authorizedKeys.keys = keys.adminUserKeys;
-
-          extraGroups = [
-            "audio"
-            "input"
-            "libvirt"
-            "networkmanager"
-            "power"
-            "storage"
-            "video"
-            "wheel"
-          ];
+            extraGroups = [
+              "audio"
+              "input"
+              "libvirt"
+              "networkmanager"
+              "power"
+              "storage"
+              "video"
+              "wheel"
+            ];
+          };
         };
-      };
-    };
+      });
+
+    hmModules = lib.lists.map (module: self.modules.homeManager.${module}) [
+      "noctalia"
+      "wayvnc"
+    ];
   };
 }
