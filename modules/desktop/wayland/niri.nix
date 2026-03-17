@@ -2,9 +2,9 @@
   flake.modules = {
     nixos.niri = {
       self,
-      inputs',
-      niri,
+      inputs,
       type,
+      inputs',
       ...
     }: {
       home-manager.sharedModules = [self.modules.homeManager.niri];
@@ -14,8 +14,8 @@
         extra-trusted-public-keys = ["niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
       };
 
-      nixpkgs.overlays = [niri.overlays.niri];
-      imports = [niri."${type}Modules".niri];
+      nixpkgs.overlays = [inputs.niri.overlays.niri];
+      imports = [inputs.niri."${type}Modules".niri];
       niri-flake.cache.enable = false;
       xdg.portal.wlr.enable = true;
 
@@ -26,8 +26,8 @@
     };
 
     homeManager.niri = {
-      inputs',
       pkgs,
+      inputs',
       config,
       lib,
       ...

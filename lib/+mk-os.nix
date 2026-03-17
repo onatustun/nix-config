@@ -39,20 +39,18 @@
           ...
         }:
           inputs.${systems.${type}.input}.lib."${type}System" {
-            specialArgs =
-              inputs
-              // {
-                inherit (config) apps checks devShells formatter legacyPackages packages;
-                inherit inputs self inputs' self' type hostName system username homeVersion hmModules;
+            specialArgs = {
+              inherit (config) apps checks devShells formatter legacyPackages packages;
+              inherit inputs self inputs' self' type hostName system username homeVersion hmModules;
 
-                isDesktop = hostName == "desktop";
-                isLaptop = hostName == "laptop";
-                isServer = hostName == "server";
+              isDesktop = hostName == "desktop";
+              isLaptop = hostName == "laptop";
+              isServer = hostName == "server";
 
-                homeDir = "/${systems.${type}.homePrefix}/${username}";
-                secretsDir = self + "/secrets";
-                keys = import ./_keys.nix;
-              };
+              homeDir = "/${systems.${type}.homePrefix}/${username}";
+              secretsDir = self + "/secrets";
+              keys = import ./_keys.nix;
+            };
 
             modules = [self.modules.${type}."host-${hostName}"];
           });

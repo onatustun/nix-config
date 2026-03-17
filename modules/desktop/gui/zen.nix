@@ -1,13 +1,13 @@
 {
   flake.modules.homeManager.zen = {
-    zen-browser,
+    inputs,
     lib,
     inputs',
     pkgs,
     username,
     ...
   }: {
-    imports = [zen-browser.homeModules.twilight];
+    imports = [inputs.zen-browser.homeModules.twilight];
     home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
 
     programs.zen-browser = {

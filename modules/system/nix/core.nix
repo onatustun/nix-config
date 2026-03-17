@@ -1,15 +1,14 @@
 {
   flake.modules.nixos.nix-core = {
-    determinate,
+    inputs,
     type,
     secretsDir,
     username,
     config,
-    nixpkgs,
     lib,
     ...
   }: {
-    imports = [determinate."${type}Modules".default];
+    imports = [inputs.determinate."${type}Modules".default];
 
     age.secrets."github-token" = {
       file = "${secretsDir}/common/common/github-token.age";
@@ -29,7 +28,7 @@
 
       optimise.automatic = true;
       nixPath = ["nixpkgs=flake:nixpkgs"];
-      registry.nixpkgs.flake = nixpkgs;
+      registry.nixpkgs.flake = inputs.nixpkgs;
 
       extraOptions = ''
         !include ${config.age.secrets.github-token.path}

@@ -1,14 +1,14 @@
 {
   flake.modules = {
     nixos.stylix = {
-      stylix,
+      inputs,
       type,
       config,
       pkgs,
       self,
       ...
     }: {
-      imports = [stylix."${type}Modules".stylix];
+      imports = [inputs.stylix."${type}Modules".stylix];
 
       stylix = {
         enable = true;

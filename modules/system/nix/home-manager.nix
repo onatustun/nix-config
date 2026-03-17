@@ -1,7 +1,7 @@
 {
   flake.modules = {
     nixos.home-manager = {
-      home-manager,
+      inputs,
       type,
       inputs',
       config,
@@ -10,7 +10,7 @@
       self,
       ...
     }: {
-      imports = [home-manager."${type}Modules".home-manager];
+      imports = [inputs.home-manager."${type}Modules".home-manager];
       environment.systemPackages = [inputs'.home-manager.packages.default];
 
       home-manager = {

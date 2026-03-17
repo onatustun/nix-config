@@ -1,13 +1,13 @@
 {
   flake.modules = {
     nixos.nix-index = {
-      nix-index-database,
-      self,
+      inputs,
       type,
+      self,
       ...
     }: {
-      nixpkgs.overlays = [nix-index-database.overlays.nix-index];
-      imports = [nix-index-database."${type}Modules".nix-index];
+      nixpkgs.overlays = [inputs.nix-index-database.overlays.nix-index];
+      imports = [inputs.nix-index-database."${type}Modules".nix-index];
       programs.nix-index-database.comma.enable = true;
       home-manager.sharedModules = [self.modules.homeManager.nix-index];
     };
