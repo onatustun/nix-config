@@ -13,13 +13,11 @@
         nixos = {
           platform = "x86_64-linux";
           input = "nixpkgs";
-          homePrefix = "home";
         };
 
         darwin = {
           platform = "aarch64-darwin";
           input = "nix-darwin";
-          homePrefix = "Users";
         };
       };
     in
@@ -47,7 +45,12 @@
               isLaptop = hostName == "laptop";
               isServer = hostName == "server";
 
-              homeDir = "/${systems.${type}.homePrefix}/${username}";
+              homeDir = "/${
+                if lib.strings.hasSuffix "darwin" system
+                then "Users"
+                else "home"
+              }/${username}";
+
               secretsDir = self + "/secrets";
               keys = import ./_keys.nix;
             };

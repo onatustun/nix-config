@@ -24,13 +24,13 @@
 
     homeManager.ragenix = {
       inputs,
-      homeDir,
+      config,
       inputs',
       pkgs,
       ...
     }: {
       imports = [inputs.ragenix.homeManagerModules.default];
-      age.identityPaths = ["${homeDir}/.ssh/id_ed25519"];
+      age.identityPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
 
       home.packages = [
         inputs'.ragenix.packages.default

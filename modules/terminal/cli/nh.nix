@@ -1,8 +1,8 @@
 {
-  flake.modules.homeManager.nh = {homeDir, ...}: {
+  flake.modules.homeManager.nh = {config, ...}: {
     programs.nh = {
       enable = true;
-      flake = "${homeDir}/nix";
+      flake = "${config.home.homeDirectory}/nix";
 
       clean = {
         enable = true;
