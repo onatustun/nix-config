@@ -26,14 +26,11 @@
           // config._module.specialArgs
           // {
             osConfig = config;
-            isStandalone = false;
           };
       };
     };
 
     homeManager.home-manager = {
-      lib,
-      isStandalone,
       osConfig,
       username,
       homeDir,
@@ -42,7 +39,7 @@
     }: {
       programs.home-manager.enable = true;
 
-      nixpkgs = lib.modules.mkIf (!isStandalone) {
+      nixpkgs = {
         inherit (osConfig.nixpkgs) config overlays;
       };
 
