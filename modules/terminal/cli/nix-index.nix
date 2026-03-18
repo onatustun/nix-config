@@ -1,15 +1,27 @@
 {
   flake.modules = {
-    nixos.nix-index = {
-      inputs,
-      type,
-      self,
-      ...
-    }: {
-      nixpkgs.overlays = [inputs.nix-index-database.overlays.nix-index];
-      imports = [inputs.nix-index-database."${type}Modules".nix-index];
-      programs.nix-index-database.comma.enable = true;
-      home-manager.sharedModules = [self.modules.homeManager.nix-index];
+    nixos = {
+      cli = {
+        lib,
+        self,
+        type,
+        ...
+      }: {
+        imports = lib.lists.singleton self.modules.${type}.nix-index;
+      };
+
+      nix-index = {
+        lib,
+        inputs,
+        type,
+        self,
+        ...
+      }: {
+        nixpkgs.overlays = lib.lists.singleton inputs.nix-index-database.overlays.nix-index;
+        imports = lib.lists.singleton inputs.nix-index-database."${type}Modules".nix-index;
+        programs.nix-index-database.comma.enable = true;
+        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.nix-index;
+      };
     };
 
     homeManager.nix-index = {inputs', ...}: {

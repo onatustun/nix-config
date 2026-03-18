@@ -8,8 +8,12 @@
       imports = lib.lists.singleton self.modules.homeManager.obsidian;
     };
 
-    obsidian = {pkgs, ...}: {
-      home.packages = [pkgs.obsidian];
+    obsidian = {
+      lib,
+      pkgs,
+      ...
+    }: {
+      home.packages = lib.lists.singleton pkgs.obsidian;
     };
   };
 }

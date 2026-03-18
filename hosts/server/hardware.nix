@@ -1,10 +1,11 @@
 {
   flake.modules.nixos.hardware-server = {
+    lib,
     modulesPath,
     pkgs,
     ...
   }: {
-    imports = [(modulesPath + "/profiles/qemu-guest.nix")];
+    imports = lib.lists.singleton (modulesPath + "/profiles/qemu-guest.nix");
 
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;

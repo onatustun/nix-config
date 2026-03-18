@@ -1,77 +1,94 @@
 {
-  flake.modules.nixos.nix-core = {
-    inputs,
-    type,
-    self,
-    username,
-    config,
-    lib,
-    ...
-  }: {
-    imports = [inputs.determinate."${type}Modules".default];
-
-    age.secrets."github-token" = {
-      file = "${self}/secrets/common/common/github-token.age";
-      owner = "root";
-      group = "root";
-      mode = "0400";
+  flake.modules.nixos = {
+    core = {stateVersion, ...}: {
+      system = {
+        inherit stateVersion;
+      };
     };
 
     nix = {
-      enable = config.nixpkgs.hostPlatform.isLinux;
-      channel.enable = false;
+      lib,
+      self,
+      type,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.${type}.nix-core;
+    };
 
-      gc = {
-        automatic = !config.home-manager.users.${username}.programs.nh.clean.enable;
-        options = "--delete-older-than 3d";
+    nix-core = {
+      lib,
+      inputs,
+      type,
+      self,
+      username,
+      config,
+      ...
+    }: {
+      imports = lib.lists.singleton inputs.determinate."${type}Modules".default;
+
+      age.secrets."github-token" = {
+        file = "${self}/secrets/common/common/github-token.age";
+        owner = "root";
+        group = "root";
+        mode = "0400";
       };
 
-      optimise.automatic = true;
-      nixPath = ["nixpkgs=flake:nixpkgs"];
-      registry.nixpkgs.flake = inputs.nixpkgs;
+      nix = {
+        enable = config.nixpkgs.hostPlatform.isLinux;
+        channel.enable = false;
 
-      extraOptions = ''
-        !include ${config.age.secrets.github-token.path}
-      '';
+        gc = {
+          automatic = !config.home-manager.users.${username}.programs.nh.clean.enable;
+          options = "--delete-older-than 3d";
+        };
 
-      settings = {
-        auto-optimise-store = true;
-        builders-use-substitutes = true;
-        cores = lib.modules.mkDefault 0;
+        optimise.automatic = true;
+        nixPath = lib.lists.singleton "nixpkgs=flake:nixpkgs";
+        registry.nixpkgs.flake = inputs.nixpkgs;
 
-        extra-substituters = [
-          "https://nix-community.cachix.org"
-          "https://nix-darwin.cachix.org"
-        ];
+        extraOptions = ''
+          !include ${config.age.secrets.github-token.path}
+        '';
 
-        extra-trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
-        ];
+        settings = {
+          auto-optimise-store = true;
+          builders-use-substitutes = true;
+          cores = lib.modules.mkDefault 0;
 
-        experimental-features = [
-          "flakes"
-          "nix-command"
-          "cgroups"
-        ];
+          extra-substituters = [
+            "https://nix-community.cachix.org"
+            "https://nix-darwin.cachix.org"
+          ];
 
-        flake-registry = "";
-        http-connections = 50;
-        lazy-trees = true;
-        max-jobs = lib.modules.mkDefault "auto";
-        show-trace = true;
+          extra-trusted-public-keys = [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+            "nix-darwin.cachix.org-1:LxMyKzQk7Uqkc1Pfq5uhm9GSn07xkERpy+7cpwc006A="
+          ];
 
-        trusted-users = [
-          "@build"
-          "@wheel"
-          "root"
-          "@admin"
-        ];
+          experimental-features = [
+            "flakes"
+            "nix-command"
+            "cgroups"
+          ];
 
-        warn-dirty = false;
-        keep-derivations = true;
-        keep-outputs = true;
-        use-cgroups = true;
+          flake-registry = "";
+          http-connections = 50;
+          lazy-trees = true;
+          max-jobs = lib.modules.mkDefault "auto";
+          show-trace = true;
+
+          trusted-users = [
+            "@build"
+            "@wheel"
+            "root"
+            "@admin"
+          ];
+
+          warn-dirty = false;
+          keep-derivations = true;
+          keep-outputs = true;
+          use-cgroups = true;
+        };
       };
     };
   };

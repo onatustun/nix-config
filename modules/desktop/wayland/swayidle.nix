@@ -23,18 +23,16 @@
       services.swayidle = {
         enable = true;
 
-        timeouts = [
-          {
-            timeout = 300;
-            command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call lockScreen lock";
-          }
-        ];
+        timeouts = lib.lists.singleton {
+          timeout = 300;
+          command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call lockScreen lock";
+        };
       };
 
       systemd.user.services.sway-audio-idle-inhibit = {
         Unit = {
-          After = [config.wayland.systemd.target];
-          PartOf = [config.wayland.systemd.target];
+          After = lib.lists.singleton config.wayland.systemd.target;
+          PartOf = lib.lists.singleton config.wayland.systemd.target;
         };
 
         Service = {
@@ -43,7 +41,7 @@
           Restart = "on-failure";
         };
 
-        Install.WantedBy = [config.wayland.systemd.target];
+        Install.WantedBy = lib.lists.singleton config.wayland.systemd.target;
       };
     };
   };

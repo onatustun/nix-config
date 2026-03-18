@@ -5,6 +5,15 @@
         _module.args.homeDir = "/home/${username}";
       };
 
+      system = {
+        lib,
+        self,
+        type,
+        ...
+      }: {
+        imports = lib.lists.singleton self.modules.${type}.users;
+      };
+
       users = {
         self,
         hostName,

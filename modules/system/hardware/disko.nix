@@ -3,14 +3,15 @@
     inputs,
     self,
     hostName,
+    lib,
     inputs',
     ...
   }: {
     imports = [
       inputs.disko.nixosModules.default
-      self.diskoConfigurations."${hostName}"
+      self.diskoConfigurations.${hostName}
     ];
 
-    environment.systemPackages = [inputs'.disko.packages.default];
+    environment.systemPackages = lib.lists.singleton inputs'.disko.packages.default;
   };
 }

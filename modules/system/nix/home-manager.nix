@@ -1,6 +1,7 @@
 {
   flake.modules = {
     nixos.home-manager = {
+      lib,
       inputs,
       type,
       inputs',
@@ -10,12 +11,12 @@
       self,
       ...
     }: {
-      imports = [inputs.home-manager."${type}Modules".home-manager];
-      environment.systemPackages = [inputs'.home-manager.packages.default];
+      imports = lib.lists.singleton inputs.home-manager."${type}Modules".home-manager;
+      environment.systemPackages = lib.lists.singleton inputs'.home-manager.packages.default;
 
       home-manager = {
         users.${username}.imports =
-          [self.modules.homeManager.home-manager]
+          lib.lists.singleton self.modules.homeManager.home-manager
           ++ hmModules;
 
         useUserPackages = true;

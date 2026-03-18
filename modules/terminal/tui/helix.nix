@@ -1,18 +1,33 @@
 {
   flake.modules = {
-    nixos.helix = {
-      config,
-      username,
-      self,
-      ...
-    }: {
-      nix.settings = {
-        extra-substituters = ["https://helix.cachix.org"];
-        extra-trusted-public-keys = ["helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="];
+    nixos = {
+      tui = {
+        lib,
+        self,
+        type,
+        ...
+      }: {
+        imports = lib.lists.singleton self.modules.${type}.helix;
       };
 
-      environment.sessionVariables = {inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;};
-      home-manager.sharedModules = [self.modules.homeManager.helix];
+      helix = {
+        lib,
+        config,
+        username,
+        self,
+        ...
+      }: {
+        nix.settings = {
+          extra-substituters = lib.lists.singleton "https://helix.cachix.org";
+          extra-trusted-public-keys = lib.lists.singleton "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs=";
+        };
+
+        environment.sessionVariables = {
+          inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;
+        };
+
+        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.helix;
+      };
     };
 
     homeManager.helix = {
@@ -37,7 +52,9 @@
       };
 
       programs = {
-        nushell.environmentVariables = {inherit (config.home.sessionVariables) EDITOR VISUAL;};
+        nushell.environmentVariables = {
+          inherit (config.home.sessionVariables) EDITOR VISUAL;
+        };
 
         helix = {
           enable = true;
@@ -117,8 +134,15 @@
 
             keys = {
               normal = {
-                C-down = ["page_cursor_half_down" "align_view_center"];
-                C-up = ["page_cursor_half_up" "align_view_center"];
+                C-down = [
+                  "page_cursor_half_down"
+                  "align_view_center"
+                ];
+
+                C-up = [
+                  "page_cursor_half_up"
+                  "align_view_center"
+                ];
 
                 x = "select_line_below";
                 X = "select_line_above";

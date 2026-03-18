@@ -1,75 +1,86 @@
 {
   flake.modules = {
-    nixos.yubikey = {
-      pkgs,
-      lib,
-      keys,
-      username,
-      self,
-      ...
-    }: {
-      security.pam = {
-        u2f = {
-          enable = true;
+    nixos = {
+      security = {
+        lib,
+        self,
+        type,
+        ...
+      }: {
+        imports = lib.lists.singleton self.modules.${type}.yubikey;
+      };
 
-          settings = {
-            cue = true;
-            interactive = true;
-            control = "sufficient";
-            origin = "pam://u2f";
-            appid = "pam://u2f";
+      yubikey = {
+        pkgs,
+        lib,
+        keys,
+        username,
+        self,
+        ...
+      }: {
+        security.pam = {
+          u2f = {
+            enable = true;
 
-            authfile =
-              pkgs.writers.writeText "u2f-keys"
-              ("${username}:" + lib.strings.concatStringsSep ":" keys.u2fKeys);
+            settings = {
+              cue = true;
+              interactive = true;
+              control = "sufficient";
+              origin = "pam://u2f";
+              appid = "pam://u2f";
+
+              authfile =
+                pkgs.writers.writeText "u2f-keys"
+                ("${username}:" + lib.strings.concatStringsSep ":" keys.u2fKeys);
+            };
+          };
+
+          services = {
+            gdm-password.u2fAuth = true;
+            login.u2fAuth = true;
+            polkit-1.u2fAuth = true;
+            sshd.u2fAuth = true;
+            sudo.u2fAuth = true;
+            su.u2fAuth = true;
           };
         };
 
         services = {
-          gdm-password.u2fAuth = true;
-          login.u2fAuth = true;
-          polkit-1.u2fAuth = true;
-          sshd.u2fAuth = true;
-          sudo.u2fAuth = true;
-          su.u2fAuth = true;
+          pcscd.enable = true;
+
+          udev.packages = [
+            pkgs.libfido2
+            pkgs.libu2f-host
+            pkgs.yubikey-personalization
+          ];
         };
-      };
 
-      services = {
-        pcscd.enable = true;
+        programs.yubikey-touch-detector = {
+          enable = true;
+          libnotify = true;
+        };
 
-        udev.packages = [
-          pkgs.libfido2
-          pkgs.libu2f-host
+        environment.systemPackages = [
+          pkgs.age-plugin-yubikey
+          pkgs.cryptsetup
+          pkgs.fido2-manage
+          pkgs.pamtester
+          pkgs.pam_u2f
+          pkgs.yubikey-manager
           pkgs.yubikey-personalization
+          pkgs.yubioath-flutter
         ];
+
+        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.yubikey;
       };
-
-      programs.yubikey-touch-detector = {
-        enable = true;
-        libnotify = true;
-      };
-
-      environment.systemPackages = [
-        pkgs.age-plugin-yubikey
-        pkgs.cryptsetup
-        pkgs.fido2-manage
-        pkgs.pamtester
-        pkgs.pam_u2f
-        pkgs.yubikey-manager
-        pkgs.yubikey-personalization
-        pkgs.yubioath-flutter
-      ];
-
-      home-manager.sharedModules = [self.modules.homeManager.yubikey];
     };
 
     homeManager.yubikey = {
-      pkgs,
       lib,
+      pkgs,
       ...
     }: {
-      home.packages = [pkgs.yubikey-touch-detector];
+      home.packages = lib.lists.singleton pkgs.yubikey-touch-detector;
 
       systemd.user.services.yubikey-touch-detector = {
         Unit = {
@@ -78,7 +89,7 @@
         };
 
         Service.ExecStart = lib.meta.getExe pkgs.yubikey-touch-detector;
-        Install.WantedBy = ["graphical-session.target"];
+        Install.WantedBy = lib.lists.singleton "graphical-session.target";
       };
     };
   };

@@ -1,32 +1,43 @@
 {
-  flake.modules.nixos.bluetooth = {pkgs, ...}: {
-    services = {
-      blueman.enable = true;
-
-      avahi = {
-        enable = true;
-        nssmdns4 = true;
-        openFirewall = true;
-      };
-
-      printing = {
-        enable = true;
-
-        drivers = [
-          pkgs.cups-filters
-          pkgs.cups-browsed
-        ];
-      };
+  flake.modules.nixos = {
+    hardware = {
+      lib,
+      self,
+      type,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.${type}.bluetooth;
     };
 
-    hardware.bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
+    bluetooth = {pkgs, ...}: {
+      services = {
+        blueman.enable = true;
 
-    environment.systemPackages = [
-      pkgs.blueberry
-      pkgs.blueman
-    ];
+        avahi = {
+          enable = true;
+          nssmdns4 = true;
+          openFirewall = true;
+        };
+
+        printing = {
+          enable = true;
+
+          drivers = [
+            pkgs.cups-filters
+            pkgs.cups-browsed
+          ];
+        };
+      };
+
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+      };
+
+      environment.systemPackages = [
+        pkgs.blueberry
+        pkgs.blueman
+      ];
+    };
   };
 }

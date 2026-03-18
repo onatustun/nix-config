@@ -1,17 +1,27 @@
 {
-  flake.modules.homeManager.bat = {pkgs, ...}: {
-    programs = {
-      ghostty.installBatSyntax = true;
+  flake.modules.homeManager = {
+    cli = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.homeManager.bat;
+    };
 
-      bat = {
-        enable = true;
-        config.pager = "less -FR";
+    bat = {pkgs, ...}: {
+      programs = {
+        ghostty.installBatSyntax = true;
 
-        extraPackages = [
-          pkgs.bat-extras.batdiff
-          pkgs.bat-extras.batman
-          pkgs.bat-extras.prettybat
-        ];
+        bat = {
+          enable = true;
+          config.pager = "less -FR";
+
+          extraPackages = [
+            pkgs.bat-extras.batdiff
+            pkgs.bat-extras.batman
+            pkgs.bat-extras.prettybat
+          ];
+        };
       };
     };
   };

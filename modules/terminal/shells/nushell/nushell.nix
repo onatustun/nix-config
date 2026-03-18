@@ -1,13 +1,25 @@
 {
   flake.modules = {
-    nixos.nushell = {
-      username,
-      pkgs,
-      self,
-      ...
-    }: {
-      users.users.${username}.shell = pkgs.nushell;
-      home-manager.sharedModules = [self.modules.homeManager.nushell];
+    nixos = {
+      shells = {
+        lib,
+        self,
+        type,
+        ...
+      }: {
+        imports = lib.lists.singleton self.modules.${type}.nushell;
+      };
+
+      nushell = {
+        username,
+        pkgs,
+        lib,
+        self,
+        ...
+      }: {
+        users.users.${username}.shell = pkgs.nushell;
+        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.nushell;
+      };
     };
 
     homeManager.nushell = {
@@ -18,7 +30,7 @@
       nushellExe = lib.meta.getExe' pkgs.nushell "nu";
     in {
       home = {
-        packages = [pkgs.nushell];
+        packages = lib.lists.singleton pkgs.nushell;
         sessionVariables.SHELL = nushellExe;
         shell.enableShellIntegration = true;
       };

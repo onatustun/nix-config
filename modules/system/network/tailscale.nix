@@ -11,6 +11,7 @@
 
     tailscale = {
       self,
+      lib,
       pkgs,
       config,
       ...
@@ -22,24 +23,24 @@
         mode = "0400";
       };
 
-      environment.systemPackages = [pkgs.tailscale];
+      environment.systemPackages = lib.lists.singleton pkgs.tailscale;
 
       services = {
-        resolved.settings.Resolve.Domains = ["~."];
+        resolved.settings.Resolve.Domains = lib.lists.singleton "~.";
 
         tailscale = {
           enable = true;
           authKeyFile = config.age.secrets."tailscale-authkey".path;
           useRoutingFeatures = "both";
           openFirewall = true;
-          extraUpFlags = ["--ssh"];
-          extraSetFlags = ["--advertise-exit-node"];
+          extraUpFlags = lib.lists.singleton "--ssh";
+          extraSetFlags = lib.lists.singleton "--advertise-exit-node";
         };
       };
 
       networking.firewall = {
-        trustedInterfaces = [config.services.tailscale.interfaceName];
-        allowedUDPPorts = [config.services.tailscale.port];
+        trustedInterfaces = lib.lists.singleton config.services.tailscale.interfaceName;
+        allowedUDPPorts = lib.lists.singleton config.services.tailscale.port;
       };
     };
   };

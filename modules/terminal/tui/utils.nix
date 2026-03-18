@@ -8,13 +8,17 @@
       imports = lib.lists.singleton self.modules.homeManager.tui-utils;
     };
 
-    tui-utils = {pkgs, ...}: {
+    tui-utils = {
+      lib,
+      pkgs,
+      ...
+    }: {
       programs = {
         bottom.enable = true;
         btop.enable = true;
       };
 
-      home.packages = [pkgs.scooter];
+      home.packages = lib.lists.singleton pkgs.scooter;
     };
   };
 }

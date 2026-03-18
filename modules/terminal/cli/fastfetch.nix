@@ -1,34 +1,44 @@
 {
-  flake.modules.homeManager.fastfetch.programs.fastfetch = {
-    enable = true;
+  flake.modules.homeManager = {
+    cli = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.homeManager.fastfetch;
+    };
 
-    settings = {
-      logo.source = "none";
+    fastfetch.programs.fastfetch = {
+      enable = true;
 
-      display.size = {
-        maxPrefix = "MB";
-        ndigits = 0;
+      settings = {
+        logo.source = "none";
+
+        display.size = {
+          maxPrefix = "MB";
+          ndigits = 0;
+        };
+
+        modules = [
+          "title"
+          "os"
+          "host"
+          "bios"
+          "kernel"
+          "uptime"
+          "packages"
+          "cpu"
+          "gpu"
+          "swap"
+          "disk"
+          "display"
+          "wm"
+          "brightness"
+          "shell"
+          "terminal"
+          "colors"
+        ];
       };
-
-      modules = [
-        "title"
-        "os"
-        "host"
-        "bios"
-        "kernel"
-        "uptime"
-        "packages"
-        "cpu"
-        "gpu"
-        "swap"
-        "disk"
-        "display"
-        "wm"
-        "brightness"
-        "shell"
-        "terminal"
-        "colors"
-      ];
     };
   };
 }

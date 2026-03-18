@@ -10,12 +10,13 @@
     };
 
     networking = {
+      lib,
       pkgs,
       hostName,
       ...
     }: {
       services.resolved.enable = true;
-      environment.systemPackages = [pkgs.networkmanagerapplet];
+      environment.systemPackages = lib.lists.singleton pkgs.networkmanagerapplet;
 
       networking = {
         inherit hostName;

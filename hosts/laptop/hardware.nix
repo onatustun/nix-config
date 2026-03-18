@@ -2,8 +2,9 @@
   flake.modules.nixos.hardware-laptop = {
     modulesPath,
     inputs,
-    config,
     pkgs,
+    lib,
+    config,
     ...
   }: {
     imports = [
@@ -13,7 +14,7 @@
 
     boot = {
       kernelPackages = pkgs.linuxPackages_cachyos-lto;
-      kernelModules = ["kvm-amd"];
+      kernelModules = lib.lists.singleton "kvm-amd";
 
       initrd.availableKernelModules = [
         "nvme"
@@ -41,7 +42,9 @@
       };
     };
 
-    swapDevices = [{device = "/dev/disk/by-uuid/f2ce709b-e968-4dbd-b4ce-f8b6f8b81afd";}];
+    swapDevices = lib.lists.singleton {
+      device = "/dev/disk/by-uuid/f2ce709b-e968-4dbd-b4ce-f8b6f8b81afd";
+    };
 
     hardware = {
       cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;

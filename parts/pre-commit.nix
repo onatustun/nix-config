@@ -1,5 +1,9 @@
-{inputs, ...}: {
-  imports = [inputs.git-hooks.flakeModule];
+{
+  lib,
+  inputs,
+  ...
+}: {
+  imports = lib.lists.singleton inputs.git-hooks.flakeModule;
 
   perSystem.pre-commit = {
     check.enable = true;

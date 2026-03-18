@@ -1,5 +1,9 @@
-{inputs, ...}: {
-  imports = [inputs.treefmt-nix.flakeModule];
+{
+  lib,
+  inputs,
+  ...
+}: {
+  imports = lib.lists.singleton inputs.treefmt-nix.flakeModule;
 
   perSystem.treefmt = {
     enableDefaultExcludes = true;

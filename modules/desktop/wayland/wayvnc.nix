@@ -1,8 +1,8 @@
 {
   flake.modules.homeManager.wayvnc = {
     pkgs,
-    config,
     lib,
+    config,
     isDesktop,
     hostName,
     ...
@@ -14,8 +14,8 @@
 
     systemd.user.services.wayvnc = {
       Unit = {
-        After = [config.wayland.systemd.target];
-        PartOf = [config.wayland.systemd.target];
+        After = lib.lists.singleton config.wayland.systemd.target;
+        PartOf = lib.lists.singleton config.wayland.systemd.target;
       };
 
       Service = {
@@ -29,7 +29,7 @@
         RestartSec = "1m";
       };
 
-      Install.WantedBy = [config.wayland.systemd.target];
+      Install.WantedBy = lib.lists.singleton config.wayland.systemd.target;
     };
   };
 }

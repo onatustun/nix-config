@@ -1,10 +1,11 @@
 {
   flake.modules.homeManager.noctalia = {
+    lib,
     inputs,
     pkgs,
     ...
   }: {
-    imports = [inputs.noctalia.homeModules.default];
+    imports = lib.lists.singleton inputs.noctalia.homeModules.default;
 
     home.packages = [
       pkgs.brightnessctl

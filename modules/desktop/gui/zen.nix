@@ -9,19 +9,19 @@
     };
 
     zen = {
-      inputs,
       lib,
+      inputs,
       inputs',
       pkgs,
       username,
       ...
     }: {
-      imports = [inputs.zen-browser.homeModules.twilight];
+      imports = lib.lists.singleton inputs.zen-browser.homeModules.twilight;
       home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
 
       programs.zen-browser = {
         enable = true;
-        nativeMessagingHosts = [pkgs.ff2mpv-rust];
+        nativeMessagingHosts = lib.lists.singleton pkgs.ff2mpv-rust;
         suppressXdgMigrationWarning = true;
 
         profiles.default = {
@@ -129,63 +129,65 @@
               "google".metaData.alias = "!g";
 
               "Nix Packages" = {
-                definedAliases = ["!np"];
+                definedAliases = lib.lists.singleton "!np";
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 
-                urls = [
-                  {
-                    template = "https://search.nixos.org/packages";
+                urls = lib.lists.singleton {
+                  template = "https://search.nixos.org/packages";
 
-                    params = [
-                      {
-                        name = "type";
-                        value = "packages";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                };
               };
 
               "NixOS Options" = {
-                definedAliases = ["!no"];
+                definedAliases = lib.lists.singleton "!no";
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 
-                urls = [
-                  {
-                    template = "https://search.nixos.org/options";
+                urls = lib.lists.singleton {
+                  template = "https://search.nixos.org/options";
 
-                    params = [
-                      {
-                        name = "type";
-                        value = "packages";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                };
               };
 
               "NixOS Wiki" = {
                 icon = "https://nixos.wiki/favicon.png";
-                definedAliases = ["!nw"];
-                urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+                definedAliases = lib.lists.singleton "!nw";
+
+                urls = lib.lists.singleton {
+                  template = "https://nixos.wiki/index.php?search={searchTerms}";
+                };
+
                 updateInterval = 24 * 60 * 60 * 1000;
               };
 
               "Kagi" = {
-                definedAliases = ["!k"];
+                definedAliases = lib.lists.singleton "!k";
                 icon = "https://kagi.com/asset/80be37f/favicon-32x32.png?v=f6272da653e54e2a660a4d2bd696947a903fb130";
                 updateInterval = 24 * 60 * 60 * 1000;
 
                 urls = [
-                  {template = "https://kagi.com/search?q={searchTerms}";}
+                  {
+                    template = "https://kagi.com/search?q={searchTerms}";
+                  }
 
                   {
                     type = "application/x-suggestions+json";

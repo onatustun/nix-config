@@ -1,15 +1,16 @@
 {
   flake.modules.nixos.hardware-desktop = {
+    lib,
     modulesPath,
     pkgs,
     config,
     ...
   }: {
-    imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+    imports = lib.lists.singleton (modulesPath + "/installer/scan/not-detected.nix");
 
     boot = {
       kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-      kernelModules = ["kvm-intel"];
+      kernelModules = lib.lists.singleton "kvm-intel";
 
       initrd.availableKernelModules = [
         "xhci_pci"
@@ -36,7 +37,9 @@
       };
     };
 
-    swapDevices = [{device = "/dev/disk/by-uuid/f21c6765-340e-4bbd-8a13-d902376a5430";}];
+    swapDevices = lib.lists.singleton {
+      device = "/dev/disk/by-uuid/f21c6765-340e-4bbd-8a13-d902376a5430";
+    };
 
     hardware = {
       cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
@@ -48,6 +51,6 @@
       };
     };
 
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = lib.lists.singleton "nvidia";
   };
 }

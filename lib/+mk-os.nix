@@ -1,8 +1,8 @@
 {
   lib,
+  withSystem,
   inputs,
   self,
-  withSystem,
   ...
 }: {
   options.mk-os = lib.options.mkOption {
@@ -30,15 +30,12 @@
         }.lib."${type}System" {
           specialArgs = {
             inherit (config) apps checks devShells formatter legacyPackages packages;
-            inherit inputs self inputs' self' type system hostName username homeVersion hmModules;
+            inherit inputs self inputs' self' type system hostName username stateVersion homeVersion hmModules;
             keys = import ./_keys.nix;
           };
 
           modules =
-            [
-              {system = {inherit stateVersion;};}
-              self.modules.${type}.core
-            ]
+            lib.lists.singleton self.modules.${type}.core
             ++ modules
             ++ lib.lists.optional (homeVersion != null) self.modules.${type}.home-manager;
         });

@@ -1,23 +1,33 @@
 {
-  flake.modules.homeManager.jujutsu = {config, ...}: {
-    programs = {
-      difftastic.enable = true;
-      jjui.enable = true;
-      mergiraf.enable = true;
+  flake.modules.homeManager = {
+    cli = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.homeManager.jujutsu;
+    };
 
-      jujutsu = {
-        enable = true;
+    jujutsu = {config, ...}: {
+      programs = {
+        difftastic.enable = true;
+        jjui.enable = true;
+        mergiraf.enable = true;
 
-        settings = {
-          inherit (config.programs.git.settings) user;
+        jujutsu = {
+          enable = true;
 
-          ui.diff-formatter = [
-            "difft"
-            "--color"
-            "always"
-            "$left"
-            "$right"
-          ];
+          settings = {
+            inherit (config.programs.git.settings) user;
+
+            ui.diff-formatter = [
+              "difft"
+              "--color"
+              "always"
+              "$left"
+              "$right"
+            ];
+          };
         };
       };
     };

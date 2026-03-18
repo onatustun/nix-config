@@ -1,35 +1,45 @@
 {
-  flake.modules.homeManager.cli-utils = {pkgs, ...}: {
-    programs = {
-      fd.enable = true;
-      fzf.enable = true;
-      grep.enable = true;
-      jq.enable = true;
-      less.enable = true;
-      ripgrep.enable = true;
-      skim.enable = true;
-      vim.enable = true;
+  flake.modules.homeManager = {
+    cli = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.homeManager.cli-utils;
     };
 
-    home.packages = [
-      pkgs.appimage-run
-      pkgs.binutils
-      pkgs.coreutils-full
-      pkgs.curl
-      pkgs.diffutils
-      pkgs.dust
-      pkgs.file
-      pkgs.findutils
-      pkgs.gawk
-      pkgs.gnused
-      pkgs.killall
-      pkgs.lsof
-      pkgs.ouch
-      pkgs.procps
-      pkgs.rip2
-      pkgs.wget
-      pkgs.which
-      pkgs.yq-go
-    ];
+    cli-utils = {pkgs, ...}: {
+      programs = {
+        fd.enable = true;
+        fzf.enable = true;
+        grep.enable = true;
+        jq.enable = true;
+        less.enable = true;
+        ripgrep.enable = true;
+        skim.enable = true;
+        vim.enable = true;
+      };
+
+      home.packages = [
+        pkgs.appimage-run
+        pkgs.binutils
+        pkgs.coreutils-full
+        pkgs.curl
+        pkgs.diffutils
+        pkgs.dust
+        pkgs.file
+        pkgs.findutils
+        pkgs.gawk
+        pkgs.gnused
+        pkgs.killall
+        pkgs.lsof
+        pkgs.ouch
+        pkgs.procps
+        pkgs.rip2
+        pkgs.wget
+        pkgs.which
+        pkgs.yq-go
+      ];
+    };
   };
 }

@@ -8,7 +8,7 @@
     type = "nixos";
   in
     lib.attrsets.recursiveUpdate {
-      modules.nixos.core = {hostName, ...}: {
+      modules.${type}.core = {hostName, ...}: {
         _module.args.isDesktop = hostName == "desktop";
       };
     }

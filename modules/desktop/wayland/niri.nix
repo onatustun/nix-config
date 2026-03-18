@@ -1,21 +1,22 @@
 {
   flake.modules = {
     nixos.niri = {
+      lib,
       self,
       inputs,
       type,
       inputs',
       ...
     }: {
-      home-manager.sharedModules = [self.modules.homeManager.niri];
+      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.niri;
 
       nix.settings = {
-        extra-substituters = ["https://niri.cachix.org"];
-        extra-trusted-public-keys = ["niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
+        extra-substituters = lib.lists.singleton "https://niri.cachix.org";
+        extra-trusted-public-keys = lib.lists.singleton "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=";
       };
 
-      nixpkgs.overlays = [inputs.niri.overlays.niri];
-      imports = [inputs.niri."${type}Modules".niri];
+      nixpkgs.overlays = lib.lists.singleton inputs.niri.overlays.niri;
+      imports = lib.lists.singleton inputs.niri."${type}Modules".niri;
       niri-flake.cache.enable = false;
       xdg.portal.wlr.enable = true;
 
@@ -27,9 +28,9 @@
 
     homeManager.niri = {
       pkgs,
+      lib,
       inputs',
       config,
-      lib,
       ...
     }: {
       home.packages = [
@@ -38,11 +39,11 @@
         pkgs.xdg-desktop-portal-gtk
       ];
 
-      systemd.user.services.xwayland-satellite.Install.WantedBy = ["niri.service"];
+      systemd.user.services.xwayland-satellite.Install.WantedBy = lib.lists.singleton "niri.service";
 
       xdg.portal = {
-        extraPortals = [pkgs.xdg-desktop-portal-gtk];
-        configPackages = [inputs'.niri.packages.niri-unstable];
+        extraPortals = lib.lists.singleton pkgs.xdg-desktop-portal-gtk;
+        configPackages = lib.lists.singleton inputs'.niri.packages.niri-unstable;
       };
 
       programs.niri.settings = {
@@ -152,9 +153,21 @@
         };
 
         binds = {
-          "Mod+D".action.spawn = ["noctalia-shell" "ipc" "call" "launcher" "toggle"];
+          "Mod+D".action.spawn = [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "launcher"
+            "toggle"
+          ];
+
+          "Mod+Q".action.spawn = [
+            (lib.meta.getExe' pkgs.nushell "nu")
+            "-c"
+            (lib.meta.getExe config.programs.ghostty.package)
+          ];
+
           "Mod+E".action.spawn = lib.meta.getExe pkgs.thunar;
-          "Mod+Q".action.spawn = [(lib.meta.getExe' pkgs.nushell "nu") "-c" (lib.meta.getExe config.programs.ghostty.package)];
           "Mod+Z".action.spawn = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
 
           "Mod+C".action.close-window = [];
@@ -239,30 +252,77 @@
           "Mod+Shift+8".action.move-column-to-workspace = 8;
           "Mod+Shift+0".action.move-column-to-workspace = 10;
 
-          "Mod+Shift+L".action.spawn = ["noctalia-shell" "ipc" "call" "lockScreen" "lock"];
-          "XF86AudioMute".action.spawn = ["noctalia-shell" "ipc" "call" "volume" "muteOutput"];
-          "XF86AudioMicMute".action.spawn = [(lib.meta.getExe' pkgs.wireplumber "wpctl") "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
-          "XF86AudioPlay".action.spawn = [(lib.meta.getExe pkgs.playerctl) "play-pause"];
-          "XF86AudioStop".action.spawn = [(lib.meta.getExe pkgs.playerctl) "pause"];
-          "XF86AudioPrev".action.spawn = [(lib.meta.getExe pkgs.playerctl) "previous"];
-          "XF86AudioNext".action.spawn = [(lib.meta.getExe pkgs.playerctl) "next"];
-          "XF86AudioRaiseVolume".action.spawn = ["noctalia-shell" "ipc" "call" "volume" "increase"];
-          "XF86AudioLowerVolume".action.spawn = ["noctalia-shell" "ipc" "call" "volume" "decrease"];
+          "Mod+Shift+L".action.spawn = [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "lockScreen"
+            "lock"
+          ];
+
+          "XF86AudioMute".action.spawn = [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "volume"
+            "muteOutput"
+          ];
+
+          "XF86AudioMicMute".action.spawn = [
+            (lib.meta.getExe' pkgs.wireplumber "wpctl")
+            "set-mute"
+            "@DEFAULT_AUDIO_SOURCE@"
+            "toggle"
+          ];
+
+          "XF86AudioPlay".action.spawn = [
+            (lib.meta.getExe pkgs.playerctl)
+            "play-pause"
+          ];
+
+          "XF86AudioStop".action.spawn = [
+            (lib.meta.getExe pkgs.playerctl)
+            "pause"
+          ];
+
+          "XF86AudioPrev".action.spawn = [
+            (lib.meta.getExe pkgs.playerctl)
+            "previous"
+          ];
+
+          "XF86AudioNext".action.spawn = [
+            (lib.meta.getExe pkgs.playerctl)
+            "next"
+          ];
+
+          "XF86AudioRaiseVolume".action.spawn = [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "volume"
+            "increase"
+          ];
+
+          "XF86AudioLowerVolume".action.spawn = [
+            "noctalia-shell"
+            "ipc"
+            "call"
+            "volume"
+            "decrease"
+          ];
         };
 
-        window-rules = [
-          {
-            clip-to-geometry = true;
-            draw-border-with-background = false;
+        window-rules = lib.lists.singleton {
+          clip-to-geometry = true;
+          draw-border-with-background = false;
 
-            geometry-corner-radius = {
-              bottom-left = 8.0;
-              bottom-right = 8.0;
-              top-left = 8.0;
-              top-right = 8.0;
-            };
-          }
-        ];
+          geometry-corner-radius = {
+            bottom-left = 8.0;
+            bottom-right = 8.0;
+            top-left = 8.0;
+            top-right = 8.0;
+          };
+        };
 
         prefer-no-csd = true;
 
