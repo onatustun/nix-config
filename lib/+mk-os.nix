@@ -34,14 +34,13 @@
             keys = import ./_keys.nix;
           };
 
-          modules = {
-            system = {inherit stateVersion;};
-
-            imports =
-              lib.lists.singleton self.modules.${type}.core
-              ++ modules
-              ++ lib.lists.optional (homeVersion != null) self.modules.${type}.home-manager;
-          };
+          modules =
+            [
+              {system = {inherit stateVersion;};}
+              self.modules.${type}.core
+            ]
+            ++ modules
+            ++ lib.lists.optional (homeVersion != null) self.modules.${type}.home-manager;
         });
     };
   };

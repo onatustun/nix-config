@@ -1,14 +1,14 @@
 {
   flake.modules.nixos.hardware-laptop = {
     modulesPath,
-    nixos-hardware,
+    inputs,
     config,
     pkgs,
     ...
   }: {
     imports = [
       (modulesPath + "/installer/scan/not-detected.nix")
-      nixos-hardware.nixosModules.framework-13-7040-amd
+      inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ];
 
     boot = {

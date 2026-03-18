@@ -1,13 +1,13 @@
 {
   flake.modules.nixos.disko = {
-    disko,
+    inputs,
     self,
     hostName,
     inputs',
     ...
   }: {
     imports = [
-      disko.nixosModules.default
+      inputs.disko.nixosModules.default
       self.diskoConfigurations."${hostName}"
     ];
 
