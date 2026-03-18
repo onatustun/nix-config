@@ -1,12 +1,12 @@
 {
   flake.modules.nixos.tailscale = {
-    secretsDir,
+    self,
     pkgs,
     config,
     ...
   }: {
     age.secrets."tailscale-authkey" = {
-      file = "${secretsDir}/nixos/common/tailscale-authkey.age";
+      file = "${self}/secrets/nixos/common/tailscale-authkey.age";
       owner = "root";
       group = "root";
       mode = "0400";

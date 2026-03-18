@@ -1,52 +1,62 @@
 {
+  lib,
   config,
   self,
   ...
 }: {
-  flake = config.mk-os "nixos" "laptop" {
-    system = "x86_64-linux";
-    username = "onat";
-    stateVersion = "26.05";
-    homeVersion = "26.05";
-
-    modules = [
-      self.modules.nixos.desktop
-      self.modules.nixos.hardware-laptop
-      self.modules.nixos.niri
-      self.modules.nixos.system
-      self.modules.nixos.terminal
-      self.modules.nixos.ui
-    ];
-
-    hmModules = [
-      self.modules.homeManager.noctalia
-      self.modules.homeManager.wayvnc
-      self.modules.homeManager.zmkbatx
-    ];
-
-    module = {
-      keys,
-      username,
-      ...
-    }: {
-      users.users = {
-        root.openssh.authorizedKeys.keys = keys.adminUserKeys;
-
-        ${username} = {
-          openssh.authorizedKeys.keys = keys.adminUserKeys;
-
-          extraGroups = [
-            "audio"
-            "input"
-            "libvirt"
-            "networkmanager"
-            "power"
-            "storage"
-            "video"
-            "wheel"
-          ];
-        };
+  flake = let
+    type = "nixos";
+  in
+    lib.attrsets.recursiveUpdate {
+      modules.nixos.core = {hostName, ...}: {
+        _module.args.isLaptop = hostName == "laptop";
       };
-    };
-  };
+    }
+    (config.mk-os type {
+      system = "x86_64-linux";
+      hostName = "laptop";
+      username = "onat";
+      stateVersion = "26.05";
+      homeVersion = "26.05";
+
+      modules =
+        (lib.lists.map (module: self.modules.${type}.${module}) [
+          "desktop"
+          "hardware-laptop"
+          "niri"
+          "system"
+          "terminal"
+          "ui"
+        ])
+        ++ lib.lists.singleton ({
+          keys,
+          username,
+          ...
+        }: {
+          users.users = {
+            root.openssh.authorizedKeys.keys = keys.adminUserKeys;
+
+            ${username} = {
+              openssh.authorizedKeys.keys = keys.adminUserKeys;
+
+              extraGroups = [
+                "audio"
+                "input"
+                "libvirt"
+                "networkmanager"
+                "power"
+                "storage"
+                "video"
+                "wheel"
+              ];
+            };
+          };
+        });
+
+      hmModules = lib.lists.map (module: self.modules.homeManager.${module}) [
+        "noctalia"
+        "wayvnc"
+        "zmkbatx"
+      ];
+    });
 }

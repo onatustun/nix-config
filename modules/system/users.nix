@@ -1,31 +1,43 @@
 {
-  flake.modules.nixos.users = {
-    config,
-    username,
-    homeDir,
-    secretsDir,
-    hostName,
-    ...
-  }: {
-    age.secrets.password = {
-      file = "${secretsDir}/nixos/${hostName}/password.age";
-      owner = "root";
-      group = "root";
-      mode = "0400";
-    };
-
-    users = {
-      mutableUsers = false;
+  flake.modules = {
+    nixos = {
+      core = {username, ...}: {
+        _module.args.homeDir = "/home/${username}";
+      };
 
       users = {
-        root.hashedPasswordFile = config.age.secrets.password.path;
+        self,
+        hostName,
+        config,
+        username,
+        homeDir,
+        ...
+      }: {
+        age.secrets.password = {
+          file = "${self}/secrets/nixos/${hostName}/password.age";
+          owner = "root";
+          group = "root";
+          mode = "0400";
+        };
 
-        ${username} = {
-          hashedPasswordFile = config.age.secrets.password.path;
-          home = homeDir;
-          isNormalUser = true;
+        users = {
+          mutableUsers = false;
+
+          users = {
+            root.hashedPasswordFile = config.age.secrets.password.path;
+
+            ${username} = {
+              hashedPasswordFile = config.age.secrets.password.path;
+              home = homeDir;
+              isNormalUser = true;
+            };
+          };
         };
       };
+    };
+
+    darwin.core = {username, ...}: {
+      _module.args.homeDir = "/Users/${username}";
     };
   };
 }

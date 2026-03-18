@@ -2,7 +2,7 @@
   flake.modules.nixos.nix-core = {
     inputs,
     type,
-    secretsDir,
+    self,
     username,
     config,
     lib,
@@ -11,7 +11,7 @@
     imports = [inputs.determinate."${type}Modules".default];
 
     age.secrets."github-token" = {
-      file = "${secretsDir}/common/common/github-token.age";
+      file = "${self}/secrets/common/common/github-token.age";
       owner = "root";
       group = "root";
       mode = "0400";

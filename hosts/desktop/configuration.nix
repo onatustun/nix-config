@@ -1,55 +1,61 @@
 {
+  lib,
   config,
   self,
-  lib,
   ...
-}: let
-  type = "nixos";
-in {
-  flake = config.mk-os type {
-    system = "x86_64-linux";
-    hostName = "desktop";
-    username = "onat";
-    stateVersion = "26.05";
-    homeVersion = "26.05";
+}: {
+  flake = let
+    type = "nixos";
+  in
+    lib.attrsets.recursiveUpdate {
+      modules.nixos.core = {hostName, ...}: {
+        _module.args.isDesktop = hostName == "desktop";
+      };
+    }
+    (config.mk-os type {
+      system = "x86_64-linux";
+      hostName = "desktop";
+      username = "onat";
+      stateVersion = "26.05";
+      homeVersion = "26.05";
 
-    modules =
-      (lib.lists.map (module: self.modules.${type}.${module}) [
-        "desktop"
-        "hardware-desktop"
-        "niri"
-        "system"
-        "terminal"
-        "ui"
-      ])
-      ++ lib.lists.singleton ({
-        keys,
-        username,
-        ...
-      }: {
-        users.users = {
-          root.openssh.authorizedKeys.keys = keys.adminUserKeys;
+      modules =
+        (lib.lists.map (module: self.modules.${type}.${module}) [
+          "desktop"
+          "hardware-desktop"
+          "niri"
+          "system"
+          "terminal"
+          "ui"
+        ])
+        ++ lib.lists.singleton ({
+          keys,
+          username,
+          ...
+        }: {
+          users.users = {
+            root.openssh.authorizedKeys.keys = keys.adminUserKeys;
 
-          ${username} = {
-            openssh.authorizedKeys.keys = keys.adminUserKeys;
+            ${username} = {
+              openssh.authorizedKeys.keys = keys.adminUserKeys;
 
-            extraGroups = [
-              "audio"
-              "input"
-              "libvirt"
-              "networkmanager"
-              "power"
-              "storage"
-              "video"
-              "wheel"
-            ];
+              extraGroups = [
+                "audio"
+                "input"
+                "libvirt"
+                "networkmanager"
+                "power"
+                "storage"
+                "video"
+                "wheel"
+              ];
+            };
           };
-        };
-      });
+        });
 
-    hmModules = lib.lists.map (module: self.modules.homeManager.${module}) [
-      "noctalia"
-      "wayvnc"
-    ];
-  };
+      hmModules = lib.lists.map (module: self.modules.homeManager.${module}) [
+        "noctalia"
+        "wayvnc"
+      ];
+    });
 }
