@@ -1,14 +1,6 @@
 {
   flake.modules = {
     nixos = {
-      boot = {self, ...}: {
-        imports = [
-          self.modules.nixos.loader
-          self.modules.nixos.kernel
-          self.modules.nixos.scx
-        ];
-      };
-
       cli = {self, ...}: {
         imports = [self.modules.nixos.nix-index];
         home-manager.sharedModules = [self.modules.homeManager.cli];
@@ -33,14 +25,6 @@
           self.modules.nixos.audio
           self.modules.nixos.bluetooth
           self.modules.nixos.graphics
-        ];
-      };
-
-      network = {self, ...}: {
-        imports = [
-          self.modules.nixos.networking
-          self.modules.nixos.ssh
-          self.modules.nixos.tailscale
         ];
       };
 
@@ -122,45 +106,6 @@
           self.modules.homeManager.jujutsu
           self.modules.homeManager.nh
           self.modules.homeManager.zoxide
-        ];
-      };
-
-      gui = {self, ...}: {
-        imports = [
-          self.modules.homeManager.media
-          self.modules.homeManager.obsidian
-          self.modules.homeManager.proton
-          self.modules.homeManager.soulseek
-          self.modules.homeManager.zathura
-          self.modules.homeManager.zen
-        ];
-      };
-
-      shells = {self, ...}: {
-        imports = [
-          self.modules.homeManager.bash
-          self.modules.homeManager.carapace
-          self.modules.homeManager.direnv
-          self.modules.homeManager.fish
-          self.modules.homeManager.starship
-          self.modules.homeManager.zsh
-        ];
-      };
-
-      tui = {self, ...}: {
-        imports = [
-          self.modules.homeManager.tmux
-          self.modules.homeManager.tui-utils
-          self.modules.homeManager.yazi
-        ];
-      };
-
-      wayland = {self, ...}: {
-        imports = [
-          self.modules.homeManager.swayidle
-          self.modules.homeManager.wayland-utils
-          self.modules.homeManager.wl-clipboard
-          self.modules.homeManager.xwayland
         ];
       };
     };

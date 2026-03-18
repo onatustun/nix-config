@@ -1,40 +1,50 @@
 {
-  flake.modules.homeManager.swayidle = {
-    pkgs,
-    lib,
-    inputs',
-    config,
-    ...
-  }: {
-    home.packages = [
-      pkgs.sway-audio-idle-inhibit
-      pkgs.swayidle
-    ];
-
-    services.swayidle = {
-      enable = true;
-
-      timeouts = [
-        {
-          timeout = 300;
-          command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call lockScreen lock";
-        }
-      ];
+  flake.modules.homeManager = {
+    wayland = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.homeManager.swayidle;
     };
 
-    systemd.user.services.sway-audio-idle-inhibit = {
-      Unit = {
-        After = [config.wayland.systemd.target];
-        PartOf = [config.wayland.systemd.target];
+    swayidle = {
+      pkgs,
+      lib,
+      inputs',
+      config,
+      ...
+    }: {
+      home.packages = [
+        pkgs.sway-audio-idle-inhibit
+        pkgs.swayidle
+      ];
+
+      services.swayidle = {
+        enable = true;
+
+        timeouts = [
+          {
+            timeout = 300;
+            command = "${lib.meta.getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call lockScreen lock";
+          }
+        ];
       };
 
-      Service = {
-        ExecStart = lib.meta.getExe pkgs.sway-audio-idle-inhibit;
-        Slice = "app.slice";
-        Restart = "on-failure";
-      };
+      systemd.user.services.sway-audio-idle-inhibit = {
+        Unit = {
+          After = [config.wayland.systemd.target];
+          PartOf = [config.wayland.systemd.target];
+        };
 
-      Install.WantedBy = [config.wayland.systemd.target];
+        Service = {
+          ExecStart = lib.meta.getExe pkgs.sway-audio-idle-inhibit;
+          Slice = "app.slice";
+          Restart = "on-failure";
+        };
+
+        Install.WantedBy = [config.wayland.systemd.target];
+      };
     };
   };
 }

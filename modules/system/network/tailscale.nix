@@ -1,35 +1,46 @@
 {
-  flake.modules.nixos.tailscale = {
-    self,
-    pkgs,
-    config,
-    ...
-  }: {
-    age.secrets."tailscale-authkey" = {
-      file = "${self}/secrets/nixos/common/tailscale-authkey.age";
-      owner = "root";
-      group = "root";
-      mode = "0400";
+  flake.modules.nixos = {
+    network = {
+      lib,
+      self,
+      type,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.${type}.tailscale;
     };
 
-    environment.systemPackages = [pkgs.tailscale];
-
-    services = {
-      resolved.settings.Resolve.Domains = ["~."];
-
-      tailscale = {
-        enable = true;
-        authKeyFile = config.age.secrets."tailscale-authkey".path;
-        useRoutingFeatures = "both";
-        openFirewall = true;
-        extraUpFlags = ["--ssh"];
-        extraSetFlags = ["--advertise-exit-node"];
+    tailscale = {
+      self,
+      pkgs,
+      config,
+      ...
+    }: {
+      age.secrets."tailscale-authkey" = {
+        file = "${self}/secrets/nixos/common/tailscale-authkey.age";
+        owner = "root";
+        group = "root";
+        mode = "0400";
       };
-    };
 
-    networking.firewall = {
-      trustedInterfaces = [config.services.tailscale.interfaceName];
-      allowedUDPPorts = [config.services.tailscale.port];
+      environment.systemPackages = [pkgs.tailscale];
+
+      services = {
+        resolved.settings.Resolve.Domains = ["~."];
+
+        tailscale = {
+          enable = true;
+          authKeyFile = config.age.secrets."tailscale-authkey".path;
+          useRoutingFeatures = "both";
+          openFirewall = true;
+          extraUpFlags = ["--ssh"];
+          extraSetFlags = ["--advertise-exit-node"];
+        };
+      };
+
+      networking.firewall = {
+        trustedInterfaces = [config.services.tailscale.interfaceName];
+        allowedUDPPorts = [config.services.tailscale.port];
+      };
     };
   };
 }

@@ -1,24 +1,35 @@
 {
-  flake.modules.nixos.loader = {isServer, ...}: {
+  flake.modules.nixos = {
     boot = {
-      consoleLogLevel =
-        if isServer
-        then 4
-        else 0;
+      lib,
+      self,
+      type,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.${type}.loader;
+    };
 
-      initrd.verbose = false;
-      plymouth.enable = !isServer;
-      tmp.cleanOnBoot = true;
+    loader = {isServer, ...}: {
+      boot = {
+        consoleLogLevel =
+          if isServer
+          then 4
+          else 0;
 
-      loader = {
-        efi.canTouchEfiVariables = !isServer;
-        timeout = 3;
+        initrd.verbose = false;
+        plymouth.enable = !isServer;
+        tmp.cleanOnBoot = true;
 
-        grub = {
-          enable = true;
-          efiSupport = true;
-          device = "nodev";
-          useOSProber = !isServer;
+        loader = {
+          efi.canTouchEfiVariables = !isServer;
+          timeout = 3;
+
+          grub = {
+            enable = true;
+            efiSupport = true;
+            device = "nodev";
+            useOSProber = !isServer;
+          };
         };
       };
     };

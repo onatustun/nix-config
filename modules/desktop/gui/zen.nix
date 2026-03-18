@@ -1,282 +1,292 @@
 {
-  flake.modules.homeManager.zen = {
-    inputs,
-    lib,
-    inputs',
-    pkgs,
-    username,
-    ...
-  }: {
-    imports = [inputs.zen-browser.homeModules.twilight];
-    home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
+  flake.modules.homeManager = {
+    gui = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.homeManager.zen;
+    };
 
-    programs.zen-browser = {
-      enable = true;
-      nativeMessagingHosts = [pkgs.ff2mpv-rust];
-      suppressXdgMigrationWarning = true;
+    zen = {
+      inputs,
+      lib,
+      inputs',
+      pkgs,
+      username,
+      ...
+    }: {
+      imports = [inputs.zen-browser.homeModules.twilight];
+      home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
 
-      profiles.default = {
-        id = 0;
-        isDefault = true;
-        name = username;
+      programs.zen-browser = {
+        enable = true;
+        nativeMessagingHosts = [pkgs.ff2mpv-rust];
+        suppressXdgMigrationWarning = true;
 
-        settings = {
-          "browser.search.suggest.enabled" = true;
-          "extensions.autoDisableScopes" = 0;
+        profiles.default = {
+          id = 0;
+          isDefault = true;
+          name = username;
 
-          "distribution.searchplugins.defaultLocale" = "en-GB";
-          "general.useragent.locale" = "en-GB";
+          settings = {
+            "browser.search.suggest.enabled" = true;
+            "extensions.autoDisableScopes" = 0;
 
-          "gfx.webrender.all" = true;
-          "media.ffmpeg.vaapi.enabled" = true;
-          "toolkit.telemetry.enabled" = false;
+            "distribution.searchplugins.defaultLocale" = "en-GB";
+            "general.useragent.locale" = "en-GB";
 
-          "breakpad.reportURL" = "";
-          "browser.tabs.crashReporting.sendReport" = false;
+            "gfx.webrender.all" = true;
+            "media.ffmpeg.vaapi.enabled" = true;
+            "toolkit.telemetry.enabled" = false;
 
-          "cookiebanners.service.mode" = 2;
-          "cookiebanners.service.mode.privateBrowsing" = 2;
+            "breakpad.reportURL" = "";
+            "browser.tabs.crashReporting.sendReport" = false;
 
-          "app.update.auto" = false;
+            "cookiebanners.service.mode" = 2;
+            "cookiebanners.service.mode.privateBrowsing" = 2;
 
-          "datareporting.policy.dataSubmissionEnable" = false;
-          "datareporting.policy.dataSubmissionPolicyAcceptedVersion" = 2;
+            "app.update.auto" = false;
 
-          "media.autoplay.default" = 5;
+            "datareporting.policy.dataSubmissionEnable" = false;
+            "datareporting.policy.dataSubmissionPolicyAcceptedVersion" = 2;
 
-          "extensions.getAddons.showPane" = false;
-          "extensions.htmlaboutaddons.recommendations.enabled" = false;
-          "extensions.pocket.enabled" = false;
+            "media.autoplay.default" = 5;
 
-          "browser.bookmarks.restore_default_bookmarks" = false;
-          "browser.contentblocking.category" = "strict";
-          "browser.ctrlTab.recentlyUsedOrder" = false;
-          "browser.discovery.enabled" = true;
-          "browser.safebrowsing.downloads.enabled" = false;
-          "browser.search.defaultenginename" = "Kagi";
-          "browser.search.order.1" = "Kagi";
-          "browser.sessionstore.resume_from_crash" = true;
-          "browser.shell.checkDefaultBrowser" = false;
-          "browser.aboutConfig.showWarning" = false;
+            "extensions.getAddons.showPane" = false;
+            "extensions.htmlaboutaddons.recommendations.enabled" = false;
+            "extensions.pocket.enabled" = false;
 
-          "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
-          "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
-          "browser.newtabpage.activity-stream.discoverystream.recentSaves.enabled" = false;
-          "browser.newtabpage.activity-stream.discoverystream.spocTopsitesPlacement.enabled" = false;
-          "browser.newtabpage.activity-stream.feeds.topsites" = false;
-          "browser.newtabpage.activity-stream.feeds.telemetry" = false;
-          "browser.newtabpage.activity-stream.feeds.snippets" = false;
-          "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
-          "browser.newtabpage.activity-stream.feeds.discoverystreamfeed" = false;
-          "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" = "";
-          "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "";
-          "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
-          "browser.newtabpage.activity-stream.showRecentSaves" = false;
-          "browser.newtabpage.activity-stream.showSponsored" = false;
-          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-          "browser.newtabpage.activity-stream.feeds.system.topsites" = false;
-          "browser.newtabpage.activity-stream.topSitesRows" = false;
-          "browser.newtabpage.pinned" = false;
+            "browser.bookmarks.restore_default_bookmarks" = false;
+            "browser.contentblocking.category" = "strict";
+            "browser.ctrlTab.recentlyUsedOrder" = false;
+            "browser.discovery.enabled" = true;
+            "browser.safebrowsing.downloads.enabled" = false;
+            "browser.search.defaultenginename" = "Kagi";
+            "browser.search.order.1" = "Kagi";
+            "browser.sessionstore.resume_from_crash" = true;
+            "browser.shell.checkDefaultBrowser" = false;
+            "browser.aboutConfig.showWarning" = false;
 
-          "browser.newtabpage.activity-stream.feeds.sections" = false;
-          "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = false;
-          "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
-          "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
-          "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
-          "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
-          "browser.newtabpage.activity-stream.telemetry" = false;
+            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
+            "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
+            "browser.newtabpage.activity-stream.discoverystream.recentSaves.enabled" = false;
+            "browser.newtabpage.activity-stream.discoverystream.spocTopsitesPlacement.enabled" = false;
+            "browser.newtabpage.activity-stream.feeds.topsites" = false;
+            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+            "browser.newtabpage.activity-stream.feeds.snippets" = false;
+            "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+            "browser.newtabpage.activity-stream.feeds.discoverystreamfeed" = false;
+            "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" = "";
+            "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "";
+            "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+            "browser.newtabpage.activity-stream.showRecentSaves" = false;
+            "browser.newtabpage.activity-stream.showSponsored" = false;
+            "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+            "browser.newtabpage.activity-stream.feeds.system.topsites" = false;
+            "browser.newtabpage.activity-stream.topSitesRows" = false;
+            "browser.newtabpage.pinned" = false;
 
-          "browser.protections_panel.infoMessage.seen" = true;
-          "browser.quitShortcut.disabled" = true;
-          "browser.taskbar.lists.enabled" = false;
-          "browser.taskbar.lists.frequent.enabled" = false;
-          "browser.taskbar.lists.recent.enabled" = false;
-          "browser.taskbar.lists.tasks.enabled" = false;
-          "browser.toolbars.bookmarks.visibility" = "never";
-          "browser.urlbar.suggest.openpage" = false;
-          "browser.startup.homepage" = "about:blank";
-          "browser.search.region" = "GB";
-          "browser.search.isUS" = false;
-          "browser.bookmarks.showMobileBookmarks" = false;
-        };
+            "browser.newtabpage.activity-stream.feeds.sections" = false;
+            "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = false;
+            "browser.newtabpage.activity-stream.feeds.section.highlights" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
+            "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
+            "browser.newtabpage.activity-stream.telemetry" = false;
 
-        search = {
-          force = true;
-          default = "Kagi";
+            "browser.protections_panel.infoMessage.seen" = true;
+            "browser.quitShortcut.disabled" = true;
+            "browser.taskbar.lists.enabled" = false;
+            "browser.taskbar.lists.frequent.enabled" = false;
+            "browser.taskbar.lists.recent.enabled" = false;
+            "browser.taskbar.lists.tasks.enabled" = false;
+            "browser.toolbars.bookmarks.visibility" = "never";
+            "browser.urlbar.suggest.openpage" = false;
+            "browser.startup.homepage" = "about:blank";
+            "browser.search.region" = "GB";
+            "browser.search.isUS" = false;
+            "browser.bookmarks.showMobileBookmarks" = false;
+          };
 
-          order = [
-            "Kagi"
-            "ddg"
-            "google"
-          ];
+          search = {
+            force = true;
+            default = "Kagi";
 
-          engines = {
-            "bing".metaData.hidden = true;
-            "bookmarks".metaData.hidden = true;
-            "ebay".metaData.hidden = true;
-            "wikipedia".metaData.hidden = true;
+            order = [
+              "Kagi"
+              "ddg"
+              "google"
+            ];
 
-            "ddg".metaData.alias = "!ddg";
-            "google".metaData.alias = "!g";
+            engines = {
+              "bing".metaData.hidden = true;
+              "bookmarks".metaData.hidden = true;
+              "ebay".metaData.hidden = true;
+              "wikipedia".metaData.hidden = true;
 
-            "Nix Packages" = {
-              definedAliases = ["!np"];
-              icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              "ddg".metaData.alias = "!ddg";
+              "google".metaData.alias = "!g";
 
-              urls = [
-                {
-                  template = "https://search.nixos.org/packages";
+              "Nix Packages" = {
+                definedAliases = ["!np"];
+                icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 
-                  params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
+                urls = [
+                  {
+                    template = "https://search.nixos.org/packages";
+
+                    params = [
+                      {
+                        name = "type";
+                        value = "packages";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+              };
+
+              "NixOS Options" = {
+                definedAliases = ["!no"];
+                icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+
+                urls = [
+                  {
+                    template = "https://search.nixos.org/options";
+
+                    params = [
+                      {
+                        name = "type";
+                        value = "packages";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+              };
+
+              "NixOS Wiki" = {
+                icon = "https://nixos.wiki/favicon.png";
+                definedAliases = ["!nw"];
+                urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+                updateInterval = 24 * 60 * 60 * 1000;
+              };
+
+              "Kagi" = {
+                definedAliases = ["!k"];
+                icon = "https://kagi.com/asset/80be37f/favicon-32x32.png?v=f6272da653e54e2a660a4d2bd696947a903fb130";
+                updateInterval = 24 * 60 * 60 * 1000;
+
+                urls = [
+                  {template = "https://kagi.com/search?q={searchTerms}";}
+
+                  {
+                    type = "application/x-suggestions+json";
+                    template = "https://kagi.com/api/autosuggest?q={searchTerms}";
+                  }
+                ];
+              };
             };
+          };
 
-            "NixOS Options" = {
-              definedAliases = ["!no"];
-              icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          extensions = {
+            force = true;
 
-              urls = [
-                {
-                  template = "https://search.nixos.org/options";
-
-                  params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-            };
-
-            "NixOS Wiki" = {
-              icon = "https://nixos.wiki/favicon.png";
-              definedAliases = ["!nw"];
-              urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
-              updateInterval = 24 * 60 * 60 * 1000;
-            };
-
-            "Kagi" = {
-              definedAliases = ["!k"];
-              icon = "https://kagi.com/asset/80be37f/favicon-32x32.png?v=f6272da653e54e2a660a4d2bd696947a903fb130";
-              updateInterval = 24 * 60 * 60 * 1000;
-
-              urls = [
-                {template = "https://kagi.com/search?q={searchTerms}";}
-
-                {
-                  type = "application/x-suggestions+json";
-                  template = "https://kagi.com/api/autosuggest?q={searchTerms}";
-                }
-              ];
-            };
+            packages = [
+              pkgs.nur.repos.rycee.firefox-addons.kagi-search
+              pkgs.nur.repos.rycee.firefox-addons.proton-pass
+              pkgs.nur.repos.rycee.firefox-addons.sponsorblock
+              pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+              pkgs.nur.repos.rycee.firefox-addons.unpaywall
+              pkgs.nur.repos.rycee.firefox-addons.vimium-c
+              pkgs.nur.repos.rycee.firefox-addons.violentmonkey
+            ];
           };
         };
 
-        extensions = {
-          force = true;
+        policies = {
+          AppAutoUpdate = false;
+          AutofillAddressEnabled = false;
+          AutofillCreditCardEnabled = false;
+          BackgroundAppUpdate = false;
+          DisableAppUpdate = true;
+          DisableBuiltinPDFViewer = true;
+          DisableFeedbackCommands = true;
+          DisableFirefoxAccounts = true;
+          DisableFirefoxScreenshots = true;
+          DisableFirefoxStudies = true;
+          DisableForgetButton = true;
+          DisableFormHistory = true;
+          DisableMasterPasswordCreation = true;
+          DisablePasswordReveal = true;
+          DisablePocket = true;
+          DisableProfileImport = true;
+          DisableProfileRefresh = true;
+          DisableSetDesktopBackground = true;
+          DisableTelemetry = true;
+          DisplayMenuBar = "default-off";
+          DontCheckDefaultBrowser = true;
+          HardwareAcceleration = true;
+          NoDefaultBookmarks = true;
+          OfferToSaveLogins = false;
+          PasswordManagerEnabled = false;
+          SearchSuggestEnabled = true;
+          ShowHomeButton = false;
 
-          packages = [
-            pkgs.nur.repos.rycee.firefox-addons.kagi-search
-            pkgs.nur.repos.rycee.firefox-addons.proton-pass
-            pkgs.nur.repos.rycee.firefox-addons.sponsorblock
-            pkgs.nur.repos.rycee.firefox-addons.ublock-origin
-            pkgs.nur.repos.rycee.firefox-addons.unpaywall
-            pkgs.nur.repos.rycee.firefox-addons.vimium-c
-            pkgs.nur.repos.rycee.firefox-addons.violentmonkey
-          ];
-        };
-      };
+          EnableTrackingProtection = {
+            Value = true;
+            Locked = true;
+            Cryptomining = true;
+            Fingerprinting = true;
+            EmailTracking = true;
+          };
 
-      policies = {
-        AppAutoUpdate = false;
-        AutofillAddressEnabled = false;
-        AutofillCreditCardEnabled = false;
-        BackgroundAppUpdate = false;
-        DisableAppUpdate = true;
-        DisableBuiltinPDFViewer = true;
-        DisableFeedbackCommands = true;
-        DisableFirefoxAccounts = true;
-        DisableFirefoxScreenshots = true;
-        DisableFirefoxStudies = true;
-        DisableForgetButton = true;
-        DisableFormHistory = true;
-        DisableMasterPasswordCreation = true;
-        DisablePasswordReveal = true;
-        DisablePocket = true;
-        DisableProfileImport = true;
-        DisableProfileRefresh = true;
-        DisableSetDesktopBackground = true;
-        DisableTelemetry = true;
-        DisplayMenuBar = "default-off";
-        DontCheckDefaultBrowser = true;
-        HardwareAcceleration = true;
-        NoDefaultBookmarks = true;
-        OfferToSaveLogins = false;
-        PasswordManagerEnabled = false;
-        SearchSuggestEnabled = true;
-        ShowHomeButton = false;
+          EncryptedMediaExtensions = {
+            Enabled = true;
+            Locked = true;
+          };
 
-        EnableTrackingProtection = {
-          Value = true;
-          Locked = true;
-          Cryptomining = true;
-          Fingerprinting = true;
-          EmailTracking = true;
-        };
+          ExtensionUpdate = false;
 
-        EncryptedMediaExtensions = {
-          Enabled = true;
-          Locked = true;
-        };
+          FirefoxHome = {
+            Search = false;
+            TopSites = false;
+            SponsoredTopSites = false;
+            Highlights = false;
+            Pocket = false;
+            SponsoredPocket = false;
+            Snippets = false;
+            Locked = true;
+          };
 
-        ExtensionUpdate = false;
+          FirefoxSuggest = {
+            WebSuggestions = false;
+            SponsoredSuggestions = false;
+            ImproveSuggest = false;
+            Locked = true;
+          };
 
-        FirefoxHome = {
-          Search = false;
-          TopSites = false;
-          SponsoredTopSites = false;
-          Highlights = false;
-          Pocket = false;
-          SponsoredPocket = false;
-          Snippets = false;
-          Locked = true;
-        };
+          SearchEngines = {
+            PreventInstalls = true;
 
-        FirefoxSuggest = {
-          WebSuggestions = false;
-          SponsoredSuggestions = false;
-          ImproveSuggest = false;
-          Locked = true;
-        };
+            Remove = [
+              "bing"
+              "ebay"
+              "wikipedia"
+            ];
+          };
 
-        SearchEngines = {
-          PreventInstalls = true;
-
-          Remove = [
-            "bing"
-            "ebay"
-            "wikipedia"
-          ];
-        };
-
-        Preferences."browser.tabs.warnOnClose" = {
-          "Value" = false;
-          "Status" = "locked";
+          Preferences."browser.tabs.warnOnClose" = {
+            "Value" = false;
+            "Status" = "locked";
+          };
         };
       };
     };

@@ -1,10 +1,20 @@
 {
-  flake.modules.homeManager.media = {pkgs, ...}: {
-    programs.mpv.enable = true;
+  flake.modules.homeManager = {
+    gui = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.homeManager.media;
+    };
 
-    home.packages = [
-      pkgs.haruna
-      pkgs.imv
-    ];
+    media = {pkgs, ...}: {
+      programs.mpv.enable = true;
+
+      home.packages = [
+        pkgs.haruna
+        pkgs.imv
+      ];
+    };
   };
 }

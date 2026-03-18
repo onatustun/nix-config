@@ -1,22 +1,33 @@
 {
-  flake.modules.nixos.networking = {
-    pkgs,
-    hostName,
-    ...
-  }: {
-    services.resolved.enable = true;
-    environment.systemPackages = [pkgs.networkmanagerapplet];
+  flake.modules.nixos = {
+    network = {
+      lib,
+      self,
+      type,
+      ...
+    }: {
+      imports = lib.lists.singleton self.modules.${type}.networking;
+    };
 
     networking = {
-      inherit hostName;
+      pkgs,
+      hostName,
+      ...
+    }: {
+      services.resolved.enable = true;
+      environment.systemPackages = [pkgs.networkmanagerapplet];
 
-      networkmanager = {
-        enable = true;
-        wifi.powersave = false;
-        dns = "systemd-resolved";
+      networking = {
+        inherit hostName;
+
+        networkmanager = {
+          enable = true;
+          wifi.powersave = false;
+          dns = "systemd-resolved";
+        };
+
+        firewall.checkReversePath = "loose";
       };
-
-      firewall.checkReversePath = "loose";
     };
   };
 }
