@@ -1,52 +1,45 @@
 {
-  flake.modules = {
-    nixos = {
-      core = {username, ...}: {
-        _module.args.homeDir = "/home/${username}";
-      };
+  flake.nixosModules = {
+    core = {username, ...}: {
+      _module.args.homeDir = "/home/${username}";
+    };
 
-      system = {
-        lib,
-        self,
-        type,
-        ...
-      }: {
-        imports = lib.lists.singleton self.modules.${type}.users;
+    system = {
+      lib,
+      self,
+      ...
+    }: {
+      imports = lib.lists.singleton self.nixosModules.users;
+    };
+
+    users = {
+      self,
+      hostName,
+      config,
+      username,
+      homeDir,
+      ...
+    }: {
+      age.secrets.password = {
+        file = "${self}/secrets/nixos/${hostName}/password.age";
+        owner = "root";
+        group = "root";
+        mode = "0400";
       };
 
       users = {
-        self,
-        hostName,
-        config,
-        username,
-        homeDir,
-        ...
-      }: {
-        age.secrets.password = {
-          file = "${self}/secrets/nixos/${hostName}/password.age";
-          owner = "root";
-          group = "root";
-          mode = "0400";
-        };
+        mutableUsers = false;
 
         users = {
-          mutableUsers = false;
+          root.hashedPasswordFile = config.age.secrets.password.path;
 
-          users = {
-            root.hashedPasswordFile = config.age.secrets.password.path;
-
-            ${username} = {
-              hashedPasswordFile = config.age.secrets.password.path;
-              home = homeDir;
-              isNormalUser = true;
-            };
+          ${username} = {
+            hashedPasswordFile = config.age.secrets.password.path;
+            home = homeDir;
+            isNormalUser = true;
           };
         };
       };
-    };
-
-    darwin.core = {username, ...}: {
-      _module.args.homeDir = "/Users/${username}";
     };
   };
 }

@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hardware-laptop = {
+  flake.nixosModules.laptop-hardware = {
     modulesPath,
     inputs,
     pkgs,

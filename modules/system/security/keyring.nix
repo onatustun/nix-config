@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     security = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.keyring;
+      imports = lib.lists.singleton self.nixosModules.keyring;
     };
 
     keyring = {

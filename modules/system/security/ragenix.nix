@@ -1,26 +1,23 @@
-{self, ...}: {
-  flake.modules = {
-    nixos = {
+{moduleWithSystem, ...}: {
+  flake = {
+    nixosModules = {
       security = {
         lib,
         self,
-        type,
         ...
       }: {
-        imports = lib.lists.singleton self.modules.${type}.ragenix;
+        imports = lib.lists.singleton self.nixosModules.ragenix;
       };
 
-      ragenix = {
+      ragenix = moduleWithSystem ({inputs', ...}: {
         lib,
         inputs,
-        type,
-        inputs',
         pkgs,
         self,
         ...
       }: {
         nixpkgs.overlays = lib.lists.singleton inputs.ragenix.overlays.default;
-        imports = lib.lists.singleton inputs.ragenix."${type}Modules".default;
+        imports = lib.lists.singleton inputs.ragenix.nixosModules.default;
         age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
 
         environment.systemPackages = [
@@ -28,19 +25,14 @@
           pkgs.rage
         ];
 
-        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.ragenix;
-      };
+        home-manager.sharedModules = lib.lists.singleton self.homeModules.ragenix;
+      });
     };
 
-    darwin = {
-      inherit (self.modules.nixos) ragenix;
-    };
-
-    homeManager.ragenix = {
+    homeModules.ragenix = moduleWithSystem ({inputs', ...}: {
       lib,
       inputs,
       config,
-      inputs',
       pkgs,
       ...
     }: {
@@ -51,6 +43,6 @@
         inputs'.ragenix.packages.default
         pkgs.rage
       ];
-    };
+    });
   };
 }

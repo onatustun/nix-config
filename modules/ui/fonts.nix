@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     ui = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.fonts;
+      imports = lib.lists.singleton self.nixosModules.fonts;
     };
 
     fonts = {pkgs, ...}: {

@@ -1,13 +1,12 @@
 {
-  flake.modules = {
-    nixos = {
+  flake = {
+    nixosModules = {
       security = {
         lib,
         self,
-        type,
         ...
       }: {
-        imports = lib.lists.singleton self.modules.${type}.yubikey;
+        imports = lib.lists.singleton self.nixosModules.yubikey;
       };
 
       yubikey = {
@@ -71,11 +70,11 @@
           pkgs.yubioath-flutter
         ];
 
-        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.yubikey;
+        home-manager.sharedModules = lib.lists.singleton self.homeModules.yubikey;
       };
     };
 
-    homeManager.yubikey = {
+    homeModules.yubikey = {
       lib,
       pkgs,
       ...

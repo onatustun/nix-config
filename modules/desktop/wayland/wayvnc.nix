@@ -1,10 +1,10 @@
 {
-  flake.modules.homeManager.wayvnc = {
+  flake.homeModules.wayvnc = {
     pkgs,
     lib,
     config,
-    isDesktop,
     hostName,
+    isDesktop,
     ...
   }: {
     home.packages = [

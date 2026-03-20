@@ -1,23 +1,23 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     cli = {
       lib,
       self,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.cli;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.cli;
     };
 
     desktop = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.map (module: self.modules.${type}.${module}) [
-        "gui"
-        "wayland"
-      ];
+      imports = lib.attrsets.attrValues (lib.attrsets.getAttrs [
+          "gui"
+          "wayland"
+        ]
+        self.nixosModules);
     };
 
     gui = {
@@ -25,7 +25,7 @@
       self,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.gui;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.gui;
     };
 
     shells = {
@@ -33,35 +33,35 @@
       self,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.shells;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.shells;
     };
 
     system = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.map (module: self.modules.${type}.${module}) [
-        "boot"
-        "hardware"
-        "network"
-        "nix"
-        "security"
-      ];
+      imports = lib.attrsets.attrValues (lib.attrsets.getAttrs [
+          "boot"
+          "hardware"
+          "network"
+          "nix"
+          "security"
+        ]
+        self.nixosModules);
     };
 
     terminal = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.map (module: self.modules.${type}.${module}) [
-        "cli"
-        "shells"
-        "tui"
-      ];
+      imports = lib.attrsets.attrValues (lib.attrsets.getAttrs [
+          "cli"
+          "shells"
+          "tui"
+        ]
+        self.nixosModules);
     };
 
     tui = {
@@ -69,7 +69,7 @@
       self,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.tui;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.tui;
     };
 
     wayland = {
@@ -77,7 +77,7 @@
       self,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.wayland;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.wayland;
     };
   };
 }

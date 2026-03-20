@@ -1,13 +1,12 @@
 {
-  flake.modules = {
-    nixos = {
+  flake = {
+    nixosModules = {
       shells = {
         lib,
         self,
-        type,
         ...
       }: {
-        imports = lib.lists.singleton self.modules.${type}.nushell;
+        imports = lib.lists.singleton self.nixosModules.nushell;
       };
 
       nushell = {
@@ -18,11 +17,11 @@
         ...
       }: {
         users.users.${username}.shell = pkgs.nushell;
-        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.nushell;
+        home-manager.sharedModules = lib.lists.singleton self.homeModules.nushell;
       };
     };
 
-    homeManager.nushell = {
+    homeModules.nushell = {
       lib,
       pkgs,
       ...

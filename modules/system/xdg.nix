@@ -1,14 +1,14 @@
 {
-  flake.modules = {
-    nixos.system = {
+  flake = {
+    nixosModules.system = {
       lib,
       self,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.xdg;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.xdg;
     };
 
-    homeManager.xdg = {
+    homeModules.xdg = {
       lib,
       pkgs,
       ...

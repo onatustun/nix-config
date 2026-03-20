@@ -1,22 +1,20 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     nix = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.nur;
+      imports = lib.lists.singleton self.nixosModules.nur;
     };
 
     nur = {
       lib,
       inputs,
-      type,
       ...
     }: {
       nixpkgs.overlays = lib.lists.singleton inputs.nur.overlays.default;
-      imports = lib.lists.singleton inputs.nur.modules.${type}.default;
+      imports = lib.lists.singleton inputs.nur.modules.nixos.default;
     };
   };
 }

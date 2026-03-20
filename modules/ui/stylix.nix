@@ -1,25 +1,23 @@
 {
-  flake.modules = {
-    nixos = {
+  flake = {
+    nixosModules = {
       ui = {
         lib,
         self,
-        type,
         ...
       }: {
-        imports = lib.lists.singleton self.modules.${type}.stylix;
+        imports = lib.lists.singleton self.nixosModules.stylix;
       };
 
       stylix = {
         lib,
         inputs,
-        type,
         config,
         pkgs,
         self,
         ...
       }: {
-        imports = lib.lists.singleton inputs.stylix."${type}Modules".stylix;
+        imports = lib.lists.singleton inputs.stylix.nixosModules.stylix;
 
         stylix = {
           enable = true;
@@ -84,11 +82,11 @@
           };
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.stylix;
+        home-manager.sharedModules = lib.lists.singleton self.homeModules.stylix;
       };
     };
 
-    homeManager.stylix = {config, ...}: {
+    homeModules.stylix = {config, ...}: {
       stylix.targets = {
         helix.enable = false;
         rofi.enable = false;

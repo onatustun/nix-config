@@ -1,10 +1,9 @@
-{
-  flake.modules.nixos.disko = {
+{moduleWithSystem, ...}: {
+  flake.nixosModules.disko = moduleWithSystem ({inputs', ...}: {
     inputs,
     self,
     hostName,
     lib,
-    inputs',
     ...
   }: {
     imports = [
@@ -13,5 +12,5 @@
     ];
 
     environment.systemPackages = lib.lists.singleton inputs'.disko.packages.default;
-  };
+  });
 }

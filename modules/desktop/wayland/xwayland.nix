@@ -1,15 +1,14 @@
-{
-  flake.modules.homeManager = {
+{moduleWithSystem, ...}: {
+  flake.homeModules = {
     wayland = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.xwayland;
+      imports = lib.lists.singleton self.homeModules.xwayland;
     };
 
-    xwayland = {
-      inputs',
+    xwayland = moduleWithSystem ({inputs', ...}: {
       pkgs,
       config,
       lib,
@@ -36,6 +35,6 @@
           StandardOutput = "journal";
         };
       };
-    };
+    });
   };
 }

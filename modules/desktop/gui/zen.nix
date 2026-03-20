@@ -1,17 +1,16 @@
-{
-  flake.modules.homeManager = {
+{moduleWithSystem, ...}: {
+  flake.homeModules = {
     gui = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.zen;
+      imports = lib.lists.singleton self.homeModules.zen;
     };
 
-    zen = {
+    zen = moduleWithSystem ({inputs', ...}: {
       lib,
       inputs,
-      inputs',
       pkgs,
       username,
       ...
@@ -291,7 +290,7 @@
           };
         };
       };
-    };
+    });
   };
 }
 /*

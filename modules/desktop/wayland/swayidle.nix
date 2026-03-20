@@ -1,17 +1,16 @@
-{
-  flake.modules.homeManager = {
+{moduleWithSystem, ...}: {
+  flake.homeModules = {
     wayland = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.swayidle;
+      imports = lib.lists.singleton self.homeModules.swayidle;
     };
 
-    swayidle = {
+    swayidle = moduleWithSystem ({inputs', ...}: {
       pkgs,
       lib,
-      inputs',
       config,
       ...
     }: {
@@ -43,6 +42,6 @@
 
         Install.WantedBy = lib.lists.singleton config.wayland.systemd.target;
       };
-    };
+    });
   };
 }

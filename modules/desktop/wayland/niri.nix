@@ -1,14 +1,12 @@
-{
-  flake.modules = {
-    nixos.niri = {
+{moduleWithSystem, ...}: {
+  flake = {
+    nixosModules.niri = moduleWithSystem ({inputs', ...}: {
       lib,
       self,
       inputs,
-      type,
-      inputs',
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.niri;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.niri;
 
       nix.settings = {
         extra-substituters = lib.lists.singleton "https://niri.cachix.org";
@@ -16,7 +14,7 @@
       };
 
       nixpkgs.overlays = lib.lists.singleton inputs.niri.overlays.niri;
-      imports = lib.lists.singleton inputs.niri."${type}Modules".niri;
+      imports = lib.lists.singleton inputs.niri.nixosModules.niri;
       niri-flake.cache.enable = false;
       xdg.portal.wlr.enable = true;
 
@@ -24,12 +22,11 @@
         enable = true;
         package = inputs'.niri.packages.niri-unstable;
       };
-    };
+    });
 
-    homeManager.niri = {
+    homeModules.niri = moduleWithSystem ({inputs', ...}: {
       pkgs,
       lib,
-      inputs',
       config,
       ...
     }: {
@@ -352,6 +349,6 @@
           };
         };
       };
-    };
+    });
   };
 }

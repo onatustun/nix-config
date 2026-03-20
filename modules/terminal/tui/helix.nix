@@ -1,13 +1,12 @@
-{
-  flake.modules = {
-    nixos = {
+{moduleWithSystem, ...}: {
+  flake = {
+    nixosModules = {
       tui = {
         lib,
         self,
-        type,
         ...
       }: {
-        imports = lib.lists.singleton self.modules.${type}.helix;
+        imports = lib.lists.singleton self.nixosModules.helix;
       };
 
       helix = {
@@ -26,15 +25,14 @@
           inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.helix;
+        home-manager.sharedModules = lib.lists.singleton self.homeModules.helix;
       };
     };
 
-    homeManager.helix = {
-      inputs',
-      config,
+    homeModules.helix = moduleWithSystem ({inputs', ...}: {
       pkgs,
       lib,
+      config,
       ...
     }: let
       package = inputs'.helix.packages.default;
@@ -209,6 +207,6 @@
           };
         };
       };
-    };
+    });
   };
 }

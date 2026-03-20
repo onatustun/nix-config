@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     shells = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.fish;
+      imports = lib.lists.singleton self.homeModules.fish;
     };
 
     fish.programs.fish = {

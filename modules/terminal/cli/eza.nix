@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     cli = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.eza;
+      imports = lib.lists.singleton self.homeModules.eza;
     };
 
     eza.programs.eza = {

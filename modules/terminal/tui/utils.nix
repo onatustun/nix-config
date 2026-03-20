@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     tui = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.tui-utils;
+      imports = lib.lists.singleton self.homeModules.tui-utils;
     };
 
     tui-utils = {

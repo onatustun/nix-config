@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.zmkbatx = {
+  flake.homeModules.zmkbatx = {
     pkgs,
     lib,
     ...

@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     boot = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.kernel;
+      imports = lib.lists.singleton self.nixosModules.kernel;
     };
 
     kernel = {

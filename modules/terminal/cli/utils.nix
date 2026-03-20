@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     cli = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.cli-utils;
+      imports = lib.lists.singleton self.homeModules.cli-utils;
     };
 
     cli-utils = {pkgs, ...}: {

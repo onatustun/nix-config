@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     wayland = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.wayland-utils;
+      imports = lib.lists.singleton self.homeModules.wayland-utils;
     };
 
     wayland-utils = {pkgs, ...}: {

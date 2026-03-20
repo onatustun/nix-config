@@ -1,29 +1,18 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     nix = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.nixpkgs;
+      imports = lib.lists.singleton self.nixosModules.nixpkgs;
     };
 
-    nixpkgs = {
-      system,
-      lib,
-      ...
-    }: {
-      nixpkgs = {
-        hostPlatform = {
-          inherit system;
-        };
-
-        config = {
-          allowUnfree = true;
-          allowBroken = true;
-          allowUnfreePredicate = lib.trivial.const true;
-        };
+    nixpkgs = {lib, ...}: {
+      nixpkgs.config = {
+        allowUnfree = true;
+        allowBroken = true;
+        allowUnfreePredicate = lib.trivial.const true;
       };
     };
   };

@@ -1,30 +1,22 @@
 {
-  flake.modules.nixos = {
-    core = {stateVersion, ...}: {
-      system = {
-        inherit stateVersion;
-      };
-    };
-
+  flake.nixosModules = {
     nix = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.nix-core;
+      imports = lib.lists.singleton self.nixosModules.nix-core;
     };
 
     nix-core = {
       lib,
       inputs,
-      type,
       self,
       username,
       config,
       ...
     }: {
-      imports = lib.lists.singleton inputs.determinate."${type}Modules".default;
+      imports = lib.lists.singleton inputs.determinate.nixosModules.default;
 
       age.secrets."github-token" = {
         file = "${self}/secrets/common/common/github-token.age";

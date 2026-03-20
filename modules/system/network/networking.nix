@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     network = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.networking;
+      imports = lib.lists.singleton self.nixosModules.networking;
     };
 
     networking = {

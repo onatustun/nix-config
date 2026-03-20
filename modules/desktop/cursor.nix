@@ -1,14 +1,14 @@
 {
-  flake.modules = {
-    nixos.desktop = {
+  flake = {
+    nixosModules.desktop = {
       lib,
       self,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.cursor;
+      home-manager.sharedModules = lib.lists.singleton self.homeModules.cursor;
     };
 
-    homeManager.cursor = {osConfig, ...}: {
+    homeModules.cursor = {osConfig, ...}: {
       home.pointerCursor = {
         enable = true;
         gtk.enable = true;

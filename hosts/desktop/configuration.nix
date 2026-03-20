@@ -1,61 +1,29 @@
 {
   lib,
-  config,
+  inputs,
   self,
+  keys,
   ...
 }: {
-  flake = let
-    type = "nixos";
-  in
-    lib.attrsets.recursiveUpdate {
-      modules.${type}.core = {hostName, ...}: {
-        _module.args.isDesktop = hostName == "desktop";
-      };
-    }
-    (config.mk-os type {
-      system = "x86_64-linux";
+  flake.nixosConfigurations.desktop = lib.nixosSystem {
+    specialArgs = {
+      inherit inputs self keys;
+
       hostName = "desktop";
       username = "onat";
-      stateVersion = "26.05";
-      homeVersion = "26.05";
+    };
 
-      modules =
-        (lib.lists.map (module: self.modules.${type}.${module}) [
-          "desktop"
-          "hardware-desktop"
-          "niri"
-          "system"
-          "terminal"
-          "ui"
-        ])
-        ++ lib.lists.singleton ({
-          keys,
-          username,
-          ...
-        }: {
-          users.users = {
-            root.openssh.authorizedKeys.keys = keys.adminUserKeys;
-
-            ${username} = {
-              openssh.authorizedKeys.keys = keys.adminUserKeys;
-
-              extraGroups = [
-                "audio"
-                "input"
-                "libvirt"
-                "networkmanager"
-                "power"
-                "storage"
-                "video"
-                "wheel"
-              ];
-            };
-          };
-        });
-
-      hmModules = lib.lists.map (module: self.modules.homeManager.${module}) [
-        "noctalia"
-        "wayvnc"
-      ];
-    });
+    modules = lib.attrsets.attrValues (lib.attrsets.getAttrs [
+        "core"
+        "desktop"
+        "desktop-hardware"
+        "desktop-host"
+        "home-manager"
+        "niri"
+        "system"
+        "terminal"
+        "ui"
+      ]
+      self.nixosModules);
+  };
 }

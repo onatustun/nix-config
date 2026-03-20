@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     system = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.locale;
+      imports = lib.lists.singleton self.nixosModules.locale;
     };
 
     locale = {lib, ...}: let

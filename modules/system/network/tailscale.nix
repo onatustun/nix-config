@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     network = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.tailscale;
+      imports = lib.lists.singleton self.nixosModules.tailscale;
     };
 
     tailscale = {

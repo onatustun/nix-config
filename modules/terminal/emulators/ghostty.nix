@@ -1,13 +1,12 @@
-{
-  flake.modules = {
-    nixos = {
+{moduleWithSystem, ...}: {
+  flake = {
+    nixosModules = {
       terminal = {
         lib,
         self,
-        type,
         ...
       }: {
-        imports = lib.lists.singleton self.modules.${type}.ghostty;
+        imports = lib.lists.singleton self.nixosModules.ghostty;
       };
 
       ghostty = {
@@ -20,11 +19,11 @@
           extra-trusted-public-keys = lib.lists.singleton "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns=";
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.ghostty;
+        home-manager.sharedModules = lib.lists.singleton self.homeModules.ghostty;
       };
     };
 
-    homeManager.ghostty = {inputs', ...}: {
+    homeModules.ghostty = moduleWithSystem ({inputs', ...}: {
       programs.ghostty = {
         enable = true;
         package = inputs'.ghostty.packages.default;
@@ -47,6 +46,6 @@
           ];
         };
       };
-    };
+    });
   };
 }

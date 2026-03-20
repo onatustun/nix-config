@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hardware-server = {
+  flake.nixosModules.server-hardware = {
     lib,
     modulesPath,
     pkgs,

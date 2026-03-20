@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     wayland = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.gdm;
+      imports = lib.lists.singleton self.nixosModules.gdm;
     };
 
     gdm.services.displayManager.gdm = {

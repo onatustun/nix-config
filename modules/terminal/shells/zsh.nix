@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     shells = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.zsh;
+      imports = lib.lists.singleton self.homeModules.zsh;
     };
 
     zsh.programs.zsh = {

@@ -1,18 +1,16 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     nix = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.chaotic;
+      imports = lib.lists.singleton self.nixosModules.chaotic;
     };
 
     chaotic = {
       lib,
       inputs,
-      type,
       ...
     }: {
       nix.settings = {
@@ -21,7 +19,7 @@
       };
 
       nixpkgs.overlays = lib.lists.singleton inputs.chaotic.overlays.default;
-      imports = lib.lists.singleton inputs.chaotic."${type}Modules".default;
+      imports = lib.lists.singleton inputs.chaotic.nixosModules.default;
     };
   };
 }

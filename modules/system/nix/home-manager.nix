@@ -1,41 +1,39 @@
 {
-  flake.modules = {
-    nixos.home-manager = {
+  lib,
+  inputs,
+  moduleWithSystem,
+  ...
+}: {
+  imports = lib.lists.singleton inputs.home-manager.flakeModules.home-manager;
+
+  flake = {
+    nixosModules.home-manager = moduleWithSystem ({inputs', ...}: {
       lib,
       inputs,
-      type,
-      inputs',
-      config,
-      hmModules,
-      username,
       self,
+      username,
+      config,
       ...
     }: {
-      imports = lib.lists.singleton inputs.home-manager."${type}Modules".home-manager;
+      imports = lib.lists.singleton inputs.home-manager.nixosModules.home-manager;
       environment.systemPackages = lib.lists.singleton inputs'.home-manager.packages.default;
 
       home-manager = {
-        users.${username}.imports =
-          lib.lists.singleton self.modules.homeManager.home-manager
-          ++ hmModules;
+        users.${username}.imports = lib.lists.singleton self.homeModules.home-manager;
 
         useUserPackages = true;
         backupFileExtension = "hmBackup";
 
         extraSpecialArgs =
           config._module.args
-          // config._module.specialArgs
-          // {
-            osConfig = config;
-          };
+          // config._module.specialArgs;
       };
-    };
+    });
 
-    homeManager.home-manager = {
+    homeModules.home-manager = {
       osConfig,
       username,
       homeDir,
-      homeVersion,
       ...
     }: {
       programs.home-manager.enable = true;
@@ -48,7 +46,6 @@
         inherit username;
         sessionVariables.FLAKE = "${homeDir}/nix";
         homeDirectory = homeDir;
-        stateVersion = homeVersion;
       };
     };
   };

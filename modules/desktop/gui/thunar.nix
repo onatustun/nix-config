@@ -1,13 +1,12 @@
 {
-  flake.modules = {
-    nixos = {
+  flake = {
+    nixosModules = {
       gui = {
         lib,
         self,
-        type,
         ...
       }: {
-        imports = lib.lists.singleton self.modules.${type}.thunar;
+        imports = lib.lists.singleton self.nixosModules.thunar;
       };
 
       thunar = {
@@ -32,11 +31,11 @@
           ];
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.modules.homeManager.thunar;
+        home-manager.sharedModules = lib.lists.singleton self.homeModules.thunar;
       };
     };
 
-    homeManager.thunar = {pkgs, ...}: {
+    homeModules.thunar = {pkgs, ...}: {
       services.udiskie.enable = true;
       xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
 

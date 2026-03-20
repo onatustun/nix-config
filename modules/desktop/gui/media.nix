@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     gui = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.media;
+      imports = lib.lists.singleton self.homeModules.media;
     };
 
     media = {pkgs, ...}: {

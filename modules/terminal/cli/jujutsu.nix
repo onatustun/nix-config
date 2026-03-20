@@ -1,11 +1,11 @@
 {
-  flake.modules.homeManager = {
+  flake.homeModules = {
     cli = {
       lib,
       self,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.homeManager.jujutsu;
+      imports = lib.lists.singleton self.homeModules.jujutsu;
     };
 
     jujutsu = {config, ...}: {

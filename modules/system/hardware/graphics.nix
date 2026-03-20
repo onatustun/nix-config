@@ -1,12 +1,11 @@
 {
-  flake.modules.nixos = {
+  flake.nixosModules = {
     hardware = {
       lib,
       self,
-      type,
       ...
     }: {
-      imports = lib.lists.singleton self.modules.${type}.graphics;
+      imports = lib.lists.singleton self.nixosModules.graphics;
     };
 
     graphics.hardware.graphics = {
