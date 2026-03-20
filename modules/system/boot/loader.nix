@@ -8,27 +8,21 @@
       imports = lib.lists.singleton inputs.self.nixosModules.loader;
     };
 
-    loader = {isServer, ...}: {
-      boot = {
-        consoleLogLevel =
-          if isServer
-          then 4
-          else 0;
+    loader.boot = {
+      consoleLogLevel = 0;
+      initrd.verbose = false;
+      plymouth.enable = true;
+      tmp.cleanOnBoot = true;
 
-        initrd.verbose = false;
-        plymouth.enable = !isServer;
-        tmp.cleanOnBoot = true;
+      loader = {
+        efi.canTouchEfiVariables = true;
+        timeout = 3;
 
-        loader = {
-          efi.canTouchEfiVariables = !isServer;
-          timeout = 3;
-
-          grub = {
-            enable = true;
-            efiSupport = true;
-            device = "nodev";
-            useOSProber = !isServer;
-          };
+        grub = {
+          enable = true;
+          efiSupport = true;
+          device = "nodev";
+          useOSProber = true;
         };
       };
     };

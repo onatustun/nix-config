@@ -17,7 +17,7 @@
       }: {
         nixpkgs.overlays = lib.lists.singleton inputs.ragenix.overlays.default;
         imports = lib.lists.singleton inputs.ragenix.nixosModules.default;
-        age.identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+        age.identityPaths = lib.lists.singleton "/etc/ssh/ssh_host_ed25519_key";
 
         environment.systemPackages = [
           inputs'.ragenix.packages.default

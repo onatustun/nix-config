@@ -24,14 +24,14 @@
         users.users = {
           root = {
             hashedPasswordFile = config.age.secrets.password.path;
-            openssh.authorizedKeys.keys = keys.adminUserKeys;
+            openssh.authorizedKeys.keys = keys.userKeys;
           };
 
           ${username} = {
             hashedPasswordFile = config.age.secrets.password.path;
             home = homeDir;
             isNormalUser = true;
-            openssh.authorizedKeys.keys = keys.adminUserKeys;
+            openssh.authorizedKeys.keys = keys.userKeys;
 
             extraGroups = [
               "audio"
