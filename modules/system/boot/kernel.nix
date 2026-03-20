@@ -2,10 +2,10 @@
   flake.nixosModules = {
     boot = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.kernel;
+      imports = lib.lists.singleton inputs.self.nixosModules.kernel;
     };
 
     kernel = {

@@ -2,11 +2,10 @@
   flake = {
     nixosModules.niri = moduleWithSystem ({inputs', ...}: {
       lib,
-      self,
       inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.niri;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.niri;
 
       nix.settings = {
         extra-substituters = lib.lists.singleton "https://niri.cachix.org";

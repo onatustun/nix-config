@@ -2,10 +2,10 @@
   flake.homeModules = {
     wayland = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.swayidle;
+      imports = lib.lists.singleton inputs.self.homeModules.swayidle;
     };
 
     swayidle = moduleWithSystem ({inputs', ...}: {

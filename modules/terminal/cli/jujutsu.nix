@@ -2,10 +2,10 @@
   flake.homeModules = {
     cli = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.jujutsu;
+      imports = lib.lists.singleton inputs.self.homeModules.jujutsu;
     };
 
     jujutsu = {config, ...}: {

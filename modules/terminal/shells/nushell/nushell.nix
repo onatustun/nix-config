@@ -3,21 +3,21 @@
     nixosModules = {
       shells = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.nushell;
+        imports = lib.lists.singleton inputs.self.nixosModules.nushell;
       };
 
       nushell = {
         username,
         pkgs,
         lib,
-        self,
+        inputs,
         ...
       }: {
         users.users.${username}.shell = pkgs.nushell;
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.nushell;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.nushell;
       };
     };
 

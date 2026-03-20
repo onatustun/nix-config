@@ -10,7 +10,6 @@
     nixosModules.home-manager = moduleWithSystem ({inputs', ...}: {
       lib,
       inputs,
-      self,
       username,
       config,
       ...
@@ -19,7 +18,7 @@
       environment.systemPackages = lib.lists.singleton inputs'.home-manager.packages.default;
 
       home-manager = {
-        users.${username}.imports = lib.lists.singleton self.homeModules.home-manager;
+        users.${username}.imports = lib.lists.singleton inputs.self.homeModules.home-manager;
 
         useUserPackages = true;
         backupFileExtension = "hmBackup";

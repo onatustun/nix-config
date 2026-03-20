@@ -2,10 +2,10 @@
   flake.nixosModules = {
     hardware = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.audio;
+      imports = lib.lists.singleton inputs.self.nixosModules.audio;
     };
 
     audio = {pkgs, ...}: {

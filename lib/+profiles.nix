@@ -2,43 +2,43 @@
   flake.nixosModules = {
     cli = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.cli;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.cli;
     };
 
     desktop = {
       lib,
-      self,
+      inputs,
       ...
     }: {
       imports = lib.attrsets.attrValues (lib.attrsets.getAttrs [
           "gui"
           "wayland"
         ]
-        self.nixosModules);
+        inputs.self.nixosModules);
     };
 
     gui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.gui;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.gui;
     };
 
     shells = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.shells;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.shells;
     };
 
     system = {
       lib,
-      self,
+      inputs,
       ...
     }: {
       imports = lib.attrsets.attrValues (lib.attrsets.getAttrs [
@@ -48,12 +48,12 @@
           "nix"
           "security"
         ]
-        self.nixosModules);
+        inputs.self.nixosModules);
     };
 
     terminal = {
       lib,
-      self,
+      inputs,
       ...
     }: {
       imports = lib.attrsets.attrValues (lib.attrsets.getAttrs [
@@ -61,23 +61,23 @@
           "shells"
           "tui"
         ]
-        self.nixosModules);
+        inputs.self.nixosModules);
     };
 
     tui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.tui;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.tui;
     };
 
     wayland = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.wayland;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.wayland;
     };
   };
 }

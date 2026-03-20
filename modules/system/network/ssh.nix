@@ -2,10 +2,10 @@
   flake.nixosModules = {
     network = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.ssh;
+      imports = lib.lists.singleton inputs.self.nixosModules.ssh;
     };
 
     ssh = {

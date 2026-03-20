@@ -9,7 +9,7 @@
         keys,
         username,
         lib,
-        self,
+        inputs,
         ...
       }: {
         users.users = {
@@ -40,7 +40,7 @@
             "wayvnc"
             "zmkbatx"
           ]
-          self.homeModules);
+          inputs.self.homeModules);
       };
     };
 

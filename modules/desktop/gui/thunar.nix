@@ -3,16 +3,16 @@
     nixosModules = {
       gui = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.thunar;
+        imports = lib.lists.singleton inputs.self.nixosModules.thunar;
       };
 
       thunar = {
         pkgs,
         lib,
-        self,
+        inputs,
         ...
       }: {
         services = {
@@ -31,7 +31,7 @@
           ];
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.thunar;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.thunar;
       };
     };
 

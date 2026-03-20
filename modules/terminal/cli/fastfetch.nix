@@ -2,10 +2,10 @@
   flake.homeModules = {
     cli = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.fastfetch;
+      imports = lib.lists.singleton inputs.self.homeModules.fastfetch;
     };
 
     fastfetch.programs.fastfetch = {

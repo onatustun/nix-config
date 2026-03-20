@@ -2,10 +2,10 @@
   flake.nixosModules = {
     ui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.fonts;
+      imports = lib.lists.singleton inputs.self.nixosModules.fonts;
     };
 
     fonts = {pkgs, ...}: {

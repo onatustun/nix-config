@@ -2,16 +2,15 @@
   flake.nixosModules = {
     nix = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.nix-core;
+      imports = lib.lists.singleton inputs.self.nixosModules.nix-core;
     };
 
     nix-core = {
       lib,
       inputs,
-      self,
       username,
       config,
       ...
@@ -19,7 +18,7 @@
       imports = lib.lists.singleton inputs.determinate.nixosModules.default;
 
       age.secrets."github-token" = {
-        file = "${self}/secrets/common/common/github-token.age";
+        file = "${inputs.self}/secrets/common/common/github-token.age";
         owner = "root";
         group = "root";
         mode = "0400";

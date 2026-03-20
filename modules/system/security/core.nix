@@ -2,10 +2,10 @@
   flake.nixosModules = {
     security = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.security-core;
+      imports = lib.lists.singleton inputs.self.nixosModules.security-core;
     };
 
     security-core.security = {

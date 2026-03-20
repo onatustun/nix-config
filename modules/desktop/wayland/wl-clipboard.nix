@@ -2,10 +2,10 @@
   flake.homeModules = {
     wayland = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.wl-clipboard;
+      imports = lib.lists.singleton inputs.self.homeModules.wl-clipboard;
     };
 
     wl-clipboard = {pkgs, ...}: {

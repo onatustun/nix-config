@@ -2,10 +2,10 @@
   flake.homeModules = {
     tui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.tmux;
+      imports = lib.lists.singleton inputs.self.homeModules.tmux;
     };
 
     tmux = {

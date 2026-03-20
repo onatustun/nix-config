@@ -6,14 +6,14 @@
 
     system = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.users;
+      imports = lib.lists.singleton inputs.self.nixosModules.users;
     };
 
     users = {
-      self,
+      inputs,
       hostName,
       config,
       username,
@@ -21,7 +21,7 @@
       ...
     }: {
       age.secrets.password = {
-        file = "${self}/secrets/nixos/${hostName}/password.age";
+        file = "${inputs.self}/secrets/nixos/${hostName}/password.age";
         owner = "root";
         group = "root";
         mode = "0400";

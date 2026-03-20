@@ -2,10 +2,10 @@
   flake = {
     nixosModules.system = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.xdg;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.xdg;
     };
 
     homeModules.xdg = {

@@ -9,7 +9,7 @@
         keys,
         username,
         lib,
-        self,
+        inputs,
         ...
       }: {
         users.users = {
@@ -39,7 +39,7 @@
             "noctalia"
             "wayvnc"
           ]
-          self.homeModules);
+          inputs.self.homeModules);
       };
     };
 

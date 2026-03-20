@@ -2,10 +2,10 @@
   flake.nixosModules = {
     hardware = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.bluetooth;
+      imports = lib.lists.singleton inputs.self.nixosModules.bluetooth;
     };
 
     bluetooth = {pkgs, ...}: {

@@ -3,10 +3,10 @@
     nixosModules = {
       ui = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.stylix;
+        imports = lib.lists.singleton inputs.self.nixosModules.stylix;
       };
 
       stylix = {
@@ -14,7 +14,6 @@
         inputs,
         config,
         pkgs,
-        self,
         ...
       }: {
         imports = lib.lists.singleton inputs.stylix.nixosModules.stylix;
@@ -82,7 +81,7 @@
           };
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.stylix;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.stylix;
       };
     };
 

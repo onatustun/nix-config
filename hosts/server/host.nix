@@ -9,7 +9,7 @@
         keys,
         username,
         lib,
-        self,
+        inputs,
         ...
       }: {
         users.users = {
@@ -51,7 +51,7 @@
             "server-hm"
             "xdg"
           ]
-          self.homeModules);
+          inputs.self.homeModules);
       };
     };
 

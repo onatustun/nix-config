@@ -2,10 +2,10 @@
   flake.homeModules = {
     cli = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.zoxide;
+      imports = lib.lists.singleton inputs.self.homeModules.zoxide;
     };
 
     zoxide = {lib, ...}: {

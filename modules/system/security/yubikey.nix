@@ -3,10 +3,10 @@
     nixosModules = {
       security = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.yubikey;
+        imports = lib.lists.singleton inputs.self.nixosModules.yubikey;
       };
 
       yubikey = {
@@ -14,7 +14,7 @@
         lib,
         keys,
         username,
-        self,
+        inputs,
         ...
       }: {
         security.pam = {
@@ -70,7 +70,7 @@
           pkgs.yubioath-flutter
         ];
 
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.yubikey;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.yubikey;
       };
     };
 

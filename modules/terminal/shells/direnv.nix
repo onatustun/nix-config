@@ -2,10 +2,10 @@
   flake.homeModules = {
     shells = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.direnv;
+      imports = lib.lists.singleton inputs.self.homeModules.direnv;
     };
 
     direnv.programs.direnv = {

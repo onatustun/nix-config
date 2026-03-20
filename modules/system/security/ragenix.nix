@@ -3,17 +3,16 @@
     nixosModules = {
       security = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.ragenix;
+        imports = lib.lists.singleton inputs.self.nixosModules.ragenix;
       };
 
       ragenix = moduleWithSystem ({inputs', ...}: {
         lib,
         inputs,
         pkgs,
-        self,
         ...
       }: {
         nixpkgs.overlays = lib.lists.singleton inputs.ragenix.overlays.default;
@@ -25,7 +24,7 @@
           pkgs.rage
         ];
 
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.ragenix;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.ragenix;
       });
     };
 

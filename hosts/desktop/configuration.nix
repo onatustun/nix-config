@@ -1,14 +1,13 @@
 {
   lib,
   inputs,
-  self,
   keys,
+  self,
   ...
 }: {
   flake.nixosConfigurations.desktop = lib.nixosSystem {
     specialArgs = {
-      inherit inputs self keys;
-
+      inherit inputs keys;
       hostName = "desktop";
       username = "onat";
     };

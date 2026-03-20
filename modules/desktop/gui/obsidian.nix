@@ -2,10 +2,10 @@
   flake.homeModules = {
     gui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.obsidian;
+      imports = lib.lists.singleton inputs.self.homeModules.obsidian;
     };
 
     obsidian = {

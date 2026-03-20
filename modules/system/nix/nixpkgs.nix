@@ -2,10 +2,10 @@
   flake.nixosModules = {
     nix = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.nixpkgs;
+      imports = lib.lists.singleton inputs.self.nixosModules.nixpkgs;
     };
 
     nixpkgs = {lib, ...}: {

@@ -2,10 +2,10 @@
   flake.homeModules = {
     gui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.zathura;
+      imports = lib.lists.singleton inputs.self.homeModules.zathura;
     };
 
     zathura = {

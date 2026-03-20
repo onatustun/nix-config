@@ -3,17 +3,17 @@
     nixosModules = {
       tui = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.helix;
+        imports = lib.lists.singleton inputs.self.nixosModules.helix;
       };
 
       helix = {
         lib,
         config,
         username,
-        self,
+        inputs,
         ...
       }: {
         nix.settings = {
@@ -25,7 +25,7 @@
           inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.helix;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.helix;
       };
     };
 

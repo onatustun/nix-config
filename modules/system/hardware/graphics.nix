@@ -2,10 +2,10 @@
   flake.nixosModules = {
     hardware = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.graphics;
+      imports = lib.lists.singleton inputs.self.nixosModules.graphics;
     };
 
     graphics.hardware.graphics = {

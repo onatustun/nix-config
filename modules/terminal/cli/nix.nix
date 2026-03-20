@@ -2,10 +2,10 @@
   flake.homeModules = {
     cli = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.cli-nix;
+      imports = lib.lists.singleton inputs.self.homeModules.cli-nix;
     };
 
     cli-nix = {pkgs, ...}: {

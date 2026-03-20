@@ -2,10 +2,10 @@
   flake = {
     nixosModules.desktop = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton self.homeModules.cursor;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.cursor;
     };
 
     homeModules.cursor = {osConfig, ...}: {

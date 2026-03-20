@@ -3,22 +3,21 @@
     nixosModules = {
       cli = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.nix-index;
+        imports = lib.lists.singleton inputs.self.nixosModules.nix-index;
       };
 
       nix-index = {
         lib,
         inputs,
-        self,
         ...
       }: {
         nixpkgs.overlays = lib.lists.singleton inputs.nix-index-database.overlays.nix-index;
         imports = lib.lists.singleton inputs.nix-index-database.nixosModules.nix-index;
         programs.nix-index-database.comma.enable = true;
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.nix-index;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.nix-index;
       };
     };
 

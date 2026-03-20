@@ -2,10 +2,10 @@
   flake.nixosModules = {
     wayland = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.gdm;
+      imports = lib.lists.singleton inputs.self.nixosModules.gdm;
     };
 
     gdm.services.displayManager.gdm = {

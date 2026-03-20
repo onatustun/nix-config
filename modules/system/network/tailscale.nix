@@ -2,21 +2,21 @@
   flake.nixosModules = {
     network = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.nixosModules.tailscale;
+      imports = lib.lists.singleton inputs.self.nixosModules.tailscale;
     };
 
     tailscale = {
-      self,
+      inputs,
       lib,
       pkgs,
       config,
       ...
     }: {
       age.secrets."tailscale-authkey" = {
-        file = "${self}/secrets/nixos/common/tailscale-authkey.age";
+        file = "${inputs.self}/secrets/nixos/common/tailscale-authkey.age";
         owner = "root";
         group = "root";
         mode = "0400";

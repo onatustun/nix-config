@@ -2,10 +2,10 @@
   flake.homeModules = {
     tui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.yazi;
+      imports = lib.lists.singleton inputs.self.homeModules.yazi;
     };
 
     yazi = {

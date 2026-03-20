@@ -2,10 +2,10 @@
   flake.homeModules = {
     gui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.soulseek;
+      imports = lib.lists.singleton inputs.self.homeModules.soulseek;
     };
 
     soulseek = {pkgs, ...}: {

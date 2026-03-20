@@ -2,10 +2,10 @@
   flake.homeModules = {
     gui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.zen;
+      imports = lib.lists.singleton inputs.self.homeModules.zen;
     };
 
     zen = moduleWithSystem ({inputs', ...}: {

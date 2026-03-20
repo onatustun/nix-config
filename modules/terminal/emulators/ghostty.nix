@@ -3,15 +3,15 @@
     nixosModules = {
       terminal = {
         lib,
-        self,
+        inputs,
         ...
       }: {
-        imports = lib.lists.singleton self.nixosModules.ghostty;
+        imports = lib.lists.singleton inputs.self.nixosModules.ghostty;
       };
 
       ghostty = {
         lib,
-        self,
+        inputs,
         ...
       }: {
         nix.settings = {
@@ -19,7 +19,7 @@
           extra-trusted-public-keys = lib.lists.singleton "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns=";
         };
 
-        home-manager.sharedModules = lib.lists.singleton self.homeModules.ghostty;
+        home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.ghostty;
       };
     };
 

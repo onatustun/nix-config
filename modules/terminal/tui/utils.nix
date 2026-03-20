@@ -2,10 +2,10 @@
   flake.homeModules = {
     tui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.tui-utils;
+      imports = lib.lists.singleton inputs.self.homeModules.tui-utils;
     };
 
     tui-utils = {

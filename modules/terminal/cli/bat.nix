@@ -2,10 +2,10 @@
   flake.homeModules = {
     cli = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.bat;
+      imports = lib.lists.singleton inputs.self.homeModules.bat;
     };
 
     bat = {pkgs, ...}: {

@@ -2,10 +2,10 @@
   flake.homeModules = {
     gui = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.media;
+      imports = lib.lists.singleton inputs.self.homeModules.media;
     };
 
     media = {pkgs, ...}: {

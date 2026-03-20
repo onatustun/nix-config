@@ -2,10 +2,10 @@
   flake.homeModules = {
     shells = {
       lib,
-      self,
+      inputs,
       ...
     }: {
-      imports = lib.lists.singleton self.homeModules.fish;
+      imports = lib.lists.singleton inputs.self.homeModules.fish;
     };
 
     fish.programs.fish = {
