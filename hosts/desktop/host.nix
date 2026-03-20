@@ -6,16 +6,31 @@
       };
 
       desktop-host = {
+        config,
         keys,
         username,
+        homeDir,
         lib,
         inputs,
         ...
       }: {
+        age.secrets.password = {
+          file = ./password.age;
+          owner = "root";
+          group = "root";
+          mode = "0400";
+        };
+
         users.users = {
-          root.openssh.authorizedKeys.keys = keys.adminUserKeys;
+          root = {
+            hashedPasswordFile = config.age.secrets.password.path;
+            openssh.authorizedKeys.keys = keys.adminUserKeys;
+          };
 
           ${username} = {
+            hashedPasswordFile = config.age.secrets.password.path;
+            home = homeDir;
+            isNormalUser = true;
             openssh.authorizedKeys.keys = keys.adminUserKeys;
 
             extraGroups = [

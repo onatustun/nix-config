@@ -12,34 +12,6 @@
       imports = lib.lists.singleton inputs.self.nixosModules.users;
     };
 
-    users = {
-      inputs,
-      hostName,
-      config,
-      username,
-      homeDir,
-      ...
-    }: {
-      age.secrets.password = {
-        file = "${inputs.self}/secrets/nixos/${hostName}/password.age";
-        owner = "root";
-        group = "root";
-        mode = "0400";
-      };
-
-      users = {
-        mutableUsers = false;
-
-        users = {
-          root.hashedPasswordFile = config.age.secrets.password.path;
-
-          ${username} = {
-            hashedPasswordFile = config.age.secrets.password.path;
-            home = homeDir;
-            isNormalUser = true;
-          };
-        };
-      };
-    };
+    users.users.mutableUsers = false;
   };
 }

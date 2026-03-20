@@ -18,7 +18,7 @@
       imports = lib.lists.singleton inputs.determinate.nixosModules.default;
 
       age.secrets."github-token" = {
-        file = "${inputs.self}/secrets/common/common/github-token.age";
+        file = ./github-token.age;
         owner = "root";
         group = "root";
         mode = "0400";

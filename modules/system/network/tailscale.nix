@@ -9,14 +9,13 @@
     };
 
     tailscale = {
-      inputs,
       lib,
       pkgs,
       config,
       ...
     }: {
       age.secrets."tailscale-authkey" = {
-        file = "${inputs.self}/secrets/nixos/common/tailscale-authkey.age";
+        file = ./tailscale-authkey.age;
         owner = "root";
         group = "root";
         mode = "0400";
