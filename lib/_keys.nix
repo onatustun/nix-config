@@ -11,36 +11,24 @@ let
     };
   };
 
-  desktopKeys = [
-    keys.user.desktop
-    keys.host.desktop
-  ];
+  forDevice = device: map (type: keys.${type}.${device}) (builtins.attrNames keys);
 
-  laptopKeys = [
-    keys.user.laptop
-    keys.host.laptop
-  ];
+  desktopKeys = forDevice "desktop";
+  laptopKeys = forDevice "laptop";
 
-  userKeys = with keys.user; [
-    desktop
-    laptop
-  ];
+  userKeys = builtins.attrValues keys.user;
+  hostKeys = builtins.attrValues keys.host;
 
-  hostKeys = with keys.host; [
-    desktop
-    laptop
-  ];
+  allKeys = userKeys ++ hostKeys;
 
-  allKeys =
-    userKeys
-    ++ hostKeys;
+  u2f = {
+    primary = "JLXDGTk3Ga2sRBz1cCrARjYbPySed5ZGDVX+T70NBePnAAZsxeAiK0Cl4cBXUjZ+3mx/bicbocJdYBf1WpHClw==,XuyXJU85C9ytixnVMBrx5jRuEujpkQJGxW/dS9ZlhjUXzgKw1q4xivdAaN9eFP9WKmDm0RyGo/t3EtxD4wvq0w==,es256,+presence";
+    secondary = "lzcAIIfjWzUj3lXxYfCmKDMBJ3QnajAS1bjlqyNP3ece+oN75482SS5vXyPDpK1fBF0+qgzRz3BF8wuC1IUwTQ==,JzQBz79Mg9/uVf5r5J9IsrBDOgSI9hbzaEl2qWnfhSAagT+NVbpibGNRguVMtUjbfzo/jGb20xkJy1r87yelGg==,es256,+presence";
+  };
 
-  u2fKeys = [
-    "JLXDGTk3Ga2sRBz1cCrARjYbPySed5ZGDVX+T70NBePnAAZsxeAiK0Cl4cBXUjZ+3mx/bicbocJdYBf1WpHClw==,XuyXJU85C9ytixnVMBrx5jRuEujpkQJGxW/dS9ZlhjUXzgKw1q4xivdAaN9eFP9WKmDm0RyGo/t3EtxD4wvq0w==,es256,+presence" # Primary
-    "lzcAIIfjWzUj3lXxYfCmKDMBJ3QnajAS1bjlqyNP3ece+oN75482SS5vXyPDpK1fBF0+qgzRz3BF8wuC1IUwTQ==,JzQBz79Mg9/uVf5r5J9IsrBDOgSI9hbzaEl2qWnfhSAagT+NVbpibGNRguVMtUjbfzo/jGb20xkJy1r87yelGg==,es256,+presence" # Backup
-  ];
+  u2fKeys = builtins.attrValues u2f;
 in
   keys
   // {
-    inherit desktopKeys laptopKeys userKeys hostKeys allKeys u2fKeys;
+    inherit desktopKeys laptopKeys userKeys hostKeys allKeys u2f u2fKeys;
   }
