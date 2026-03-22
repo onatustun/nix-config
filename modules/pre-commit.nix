@@ -5,12 +5,19 @@
 }: {
   imports = lib.lists.singleton inputs.git-hooks.flakeModule;
 
-  perSystem.pre-commit = {
-    check.enable = true;
+  perSystem = {
+    lib,
+    config,
+    ...
+  }: {
+    make-shells.default = {
+      inputsFrom = lib.lists.singleton config.pre-commit.devShell;
+      shellHook = config.pre-commit.installationScript;
+    };
 
-    settings.hooks = {
-      flake-checker.enable = true;
-      treefmt.enable = true;
+    pre-commit = {
+      check.enable = true;
+      settings.hooks.flake-checker.enable = true;
     };
   };
 }

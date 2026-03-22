@@ -18,6 +18,6 @@
     inputs',
     ...
   }: {
-    make-shells.nix-config.packages = lib.lists.singleton inputs'.deploy-rs.packages.default;
+    make-shells.default.packages = lib.lists.singleton inputs'.deploy-rs.packages.default;
   };
 }

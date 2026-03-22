@@ -59,7 +59,12 @@
       type = "github";
       owner = "cachix";
       repo = "git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        flake-compat.follows = "dep_flake-compat";
+        gitignore.follows = "dep_gitignore";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     treefmt-nix = {
@@ -217,11 +222,24 @@
       inputs.flake-compat.follows = "dep_flake-compat";
     };
 
+    flake-root = {
+      type = "github";
+      owner = "srid";
+      repo = "flake-root";
+    };
+
     dep_flake-compat = {
       type = "github";
       owner = "edolstra";
       repo = "flake-compat";
       flake = false;
+    };
+
+    dep_gitignore = {
+      type = "github";
+      owner = "hercules-ci";
+      repo = "gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     dep_agenix = {

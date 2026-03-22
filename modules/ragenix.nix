@@ -4,7 +4,7 @@
     inputs',
     ...
   }: {
-    make-shells.nix-config.packages = lib.lists.singleton inputs'.ragenix.packages.default;
+    make-shells.default.packages = lib.lists.singleton inputs'.ragenix.packages.default;
   };
 
   flake = {

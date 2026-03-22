@@ -37,5 +37,7 @@
     checks = {
       inherit (self'.packages) firmware flash update;
     };
+
+    make-shells.default.inputsFrom = lib.lists.singleton inputs'.zmk-nix.devShells.default;
   };
 }

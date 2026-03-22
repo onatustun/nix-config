@@ -11,7 +11,7 @@
     inputs',
     ...
   }: {
-    make-shells.nix-config.packages = lib.lists.singleton inputs'.home-manager.packages.default;
+    make-shells.default.packages = lib.lists.singleton inputs'.home-manager.packages.default;
   };
 
   flake = {
