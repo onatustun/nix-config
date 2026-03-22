@@ -1,4 +1,12 @@
 {
+  perSystem = {
+    lib,
+    pkgs,
+    ...
+  }: {
+    make-shells.default.packages = lib.lists.singleton pkgs.vim;
+  };
+
   flake.homeModules.cli-utils = {pkgs, ...}: {
     programs = {
       fd.enable = true;

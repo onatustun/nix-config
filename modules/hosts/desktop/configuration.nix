@@ -20,6 +20,7 @@
           "core"
           "desktop-hardware"
           "desktop-host"
+          "determinate"
           "fonts"
           "gdm"
           "ghostty"

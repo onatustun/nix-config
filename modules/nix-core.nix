@@ -6,8 +6,6 @@
     config,
     ...
   }: {
-    imports = lib.lists.singleton inputs.determinate.nixosModules.default;
-
     age.secrets."github-token" = {
       file = ./github-token.age;
       owner = "root";
@@ -16,7 +14,7 @@
     };
 
     nix = {
-      enable = config.nixpkgs.hostPlatform.isLinux;
+      enable = lib.modules.mkDefault true;
       channel.enable = false;
 
       gc = {

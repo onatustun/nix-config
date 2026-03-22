@@ -18,6 +18,7 @@
           "bluetooth"
           "chaotic"
           "core"
+          "determinate"
           "fonts"
           "gdm"
           "ghostty"
