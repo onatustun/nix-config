@@ -217,5 +217,5 @@
     };
   };
 
-  outputs = inputs: import ./modules/_outputs.nix inputs;
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 }

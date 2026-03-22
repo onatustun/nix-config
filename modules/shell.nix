@@ -12,7 +12,6 @@
       nix-config = pkgs.mkShellNoCC {
         name = "nix-config-dev";
         shellHook = config.pre-commit.installationScript;
-        RULES = ./_secrets.nix;
 
         inputsFrom = [
           config.pre-commit.devShell
