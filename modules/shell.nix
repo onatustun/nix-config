@@ -1,32 +1,32 @@
 {
+  inputs,
+  lib,
+  ...
+}: {
+  imports = lib.lists.singleton inputs.make-shell.flakeModules.default;
+
   perSystem = {
     self',
-    pkgs,
     config,
     inputs',
+    pkgs,
     ...
   }: {
-    devShells = {
-      default = self'.devShells.nix-config;
+    devShells.default = self'.devShells.nix-config;
 
-      nix-config = pkgs.mkShellNoCC {
-        name = "nix-config-dev";
-        shellHook = config.pre-commit.installationScript;
+    make-shells.nix-config = {
+      shellHook = config.pre-commit.installationScript;
 
-        inputsFrom = [
-          config.pre-commit.devShell
-          config.treefmt.build.devShell
-        ];
+      inputsFrom = [
+        config.pre-commit.devShell
+        config.treefmt.build.devShell
+      ];
 
-        packages = [
-          inputs'.deploy-rs.packages.default
-          inputs'.determinate.packages.default
-          inputs'.home-manager.packages.default
-          inputs'.ragenix.packages.default
-          pkgs.git
-          pkgs.vim
-        ];
-      };
+      packages = [
+        inputs'.determinate.packages.default
+        pkgs.git
+        pkgs.vim
+      ];
     };
   };
 }

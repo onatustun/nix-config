@@ -6,6 +6,14 @@
 }: {
   imports = lib.lists.singleton inputs.home-manager.flakeModules.home-manager;
 
+  perSystem = {
+    lib,
+    inputs',
+    ...
+  }: {
+    make-shells.nix-config.packages = lib.lists.singleton inputs'.home-manager.packages.default;
+  };
+
   flake = {
     nixosModules.home-manager = moduleWithSystem ({inputs', ...}: {
       lib,

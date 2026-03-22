@@ -1,4 +1,12 @@
 {moduleWithSystem, ...}: {
+  perSystem = {
+    lib,
+    inputs',
+    ...
+  }: {
+    make-shells.nix-config.packages = lib.lists.singleton inputs'.ragenix.packages.default;
+  };
+
   flake = {
     nixosModules.ragenix = {
       inputs,

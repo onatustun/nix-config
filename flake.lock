@@ -136,6 +136,22 @@
         "type": "github"
       }
     },
+    "dep_flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -679,6 +695,26 @@
         "type": "github"
       }
     },
+    "make-shell": {
+      "inputs": {
+        "flake-compat": [
+          "dep_flake-compat"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733933815,
+        "narHash": "sha256-9JjM7eT66W4NJAXpGUsdyAFXhBxFWR2Z9LZwUa7Hli0=",
+        "owner": "nicknovitski",
+        "repo": "make-shell",
+        "rev": "ffeceae9956df03571ea8e96ef77c2924f13a63c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nicknovitski",
+        "repo": "make-shell",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -1021,6 +1057,7 @@
       "inputs": {
         "chaotic": "chaotic",
         "dep_agenix": "dep_agenix",
+        "dep_flake-compat": "dep_flake-compat",
         "deploy-rs": "deploy-rs",
         "determinate": "determinate",
         "flake-parts": "flake-parts_2",
@@ -1029,6 +1066,7 @@
         "helix": "helix",
         "home-manager": "home-manager_2",
         "import-tree": "import-tree",
+        "make-shell": "make-shell",
         "niri": "niri",
         "nix-index-database": "nix-index-database",
         "nixd": "nixd",

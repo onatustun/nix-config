@@ -12,4 +12,12 @@
       };
     };
   };
+
+  config.perSystem = {
+    lib,
+    inputs',
+    ...
+  }: {
+    make-shells.nix-config.packages = lib.lists.singleton inputs'.deploy-rs.packages.default;
+  };
 }

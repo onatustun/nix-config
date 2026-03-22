@@ -210,6 +210,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    make-shell = {
+      type = "github";
+      owner = "nicknovitski";
+      repo = "make-shell";
+      inputs.flake-compat.follows = "dep_flake-compat";
+    };
+
+    dep_flake-compat = {
+      type = "github";
+      owner = "edolstra";
+      repo = "flake-compat";
+      flake = false;
+    };
+
     dep_agenix = {
       type = "github";
       owner = "ryantm";
