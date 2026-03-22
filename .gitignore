@@ -6,11 +6,15 @@ result/
 .pre-commit-config.yaml
 
 !.envrc
+!flake.lock
 !.gitattributes
 !.gitignore
 
+!**/cradio.conf
+!**/cradio.keymap
+!**/west.yml
+
 !*.age
-!*.lock
 !*.nix
 !*.nu
 

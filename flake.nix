@@ -203,6 +203,13 @@
       };
     };
 
+    zmk-nix = {
+      type = "github";
+      owner = "lilyinstarlight";
+      repo = "zmk-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dep_agenix = {
       type = "github";
       owner = "ryantm";

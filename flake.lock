@@ -1041,7 +1041,8 @@
         "systems": "systems_5",
         "treefmt-nix": "treefmt-nix_2",
         "xwayland-satellite": "xwayland-satellite",
-        "zen-browser": "zen-browser"
+        "zen-browser": "zen-browser",
+        "zmk-nix": "zmk-nix"
       }
     },
     "rust-overlay": {
@@ -1466,6 +1467,26 @@
       "original": {
         "owner": "mitchellh",
         "repo": "zig-overlay",
+        "type": "github"
+      }
+    },
+    "zmk-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774140821,
+        "narHash": "sha256-EBHS0RFmIOAEuvFOwRN36OIFG6i1H0r9haM1EZgpvJU=",
+        "owner": "lilyinstarlight",
+        "repo": "zmk-nix",
+        "rev": "a701c2759f888fc2eb3443647ab81d395b148eec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lilyinstarlight",
+        "repo": "zmk-nix",
         "type": "github"
       }
     },

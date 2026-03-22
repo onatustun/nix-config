@@ -1,0 +1,95 @@
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1200
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
+/ {
+    behaviors {
+        commaqmrk: commaqmrk {
+            compatible = "zmk,behavior-mod-morph";
+            label = "COMMAQMRK";
+            bindings = <&kp COMMA>, <&kp QUESTION>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        dotless: dotless {
+            compatible = "zmk,behavior-mod-morph";
+            label = "DOTLESS";
+            bindings = <&kp PERIOD>, <&kp LESS_THAN>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        slashgreater: slashgreater {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SLASHGREATER";
+            bindings = <&kp SLASH>, <&kp GREATER_THAN>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        stickyhold: stickyhold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKYHOLD";
+            bindings = <&kp>, <&sk>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        base {
+            bindings = <
+&kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y      &kp U  &kp I       &kp O     &kp P
+&kp A  &kp S  &kp D  &kp F  &kp G        &kp H      &kp J  &kp K       &kp L     &kp SEMI
+&kp Z  &kp X  &kp C  &kp V  &kp B        &kp N      &kp M  &commaqmrk  &dotless  &slashgreater
+                     &mo 2  &kp LSHFT    &kp SPACE  &mo 1
+            >;
+        };
+
+        symnum {
+            bindings = <
+&kp GRAVE  &kp APOS  &none   &none   &none     &none   &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT
+&kp N1     &kp N2    &kp N3  &kp N4  &kp N5    &kp N6  &kp N7     &kp N8     &kp N9    &kp N0
+&kp BSLH   &none     &none   &none   &none     &none   &none      &trans     &trans    &trans
+                             &trans  &trans    &trans  &trans
+            >;
+        };
+
+        navmods {
+            bindings = <
+&kp TAB  &stickyhold LEFT_ALT LEFT_ALT  &stickyhold LCTRL LCTRL  &stickyhold LEFT_GUI LEFT_GUI  &none     &none            &kp MINUS       &kp EQUAL     &none            &kp BACKSPACE
+&kp ESC  &mo 3                          &mkp MB4                 &mkp MB5                       &none     &kp LEFT_ARROW   &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &kp ENTER
+&mo 4    &none                          &none                    &none                          &none     &none            &none           &trans        &trans           &trans
+                                                                 &trans                         &trans    &kp RIGHT_SHIFT  &trans
+            >;
+        };
+
+        mouse {
+            bindings = <
+&trans  &trans  &trans    &trans    &trans      &trans          &trans          &trans        &trans           &trans
+&trans  &trans  &mkp MB1  &mkp MB2  &mkp MB3    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &trans
+&trans  &trans  &trans    &trans    &trans      &trans          &trans          &trans        &trans           &trans
+                          &trans    &trans      &trans          &trans
+            >;
+        };
+
+        bltfn {
+            bindings = <
+&kp TAB     &stickyhold LALT LALT  &stickyhold LCTRL LCTRL  &stickyhold LGUI LEFT_GUI  &kp LSHFT    &kp F1  &kp F2   &kp F3   &kp F4   &kp DELETE
+&kp ESCAPE  &none                  &bt BT_PRV               &bt BT_NXT                 &none        &kp F5  &kp F6   &kp F7   &kp F8   &kp RETURN
+&trans      &none                  &bt BT_CLR_ALL           &bt BT_CLR                 &none        &kp F9  &kp F10  &kp F11  &kp F12  &trans
+                                                            &trans                     &trans       &trans  &trans
+            >;
+        };
+    };
+};
