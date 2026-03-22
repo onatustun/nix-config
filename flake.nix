@@ -2,7 +2,7 @@
   description = "Nix config";
 
   nixConfig = rec {
-    commit-lockfile-summary = "nix: update `flake.lock`";
+    commit-lockfile-summary = "chore: update `flake.lock`";
 
     extra-substituters = [
       "https://chaotic-nyx.cachix.org"
@@ -72,7 +72,11 @@
     determinate = {
       type = "tarball";
       url = "https://flakehub.com/f/determinatesystems/determinate/%2A";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        determinate-nixd-aarch64-darwin.follows = "";
+      };
     };
 
     home-manager = {
@@ -120,26 +124,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix = {
-      type = "github";
-      owner = "ryantm";
-      repo = "agenix";
-
-      inputs = {
-        darwin.follows = "";
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
     ragenix = {
       type = "github";
       owner = "yaxitech";
       repo = "ragenix";
 
       inputs = {
-        agenix.follows = "agenix";
+        agenix.follows = "dep_agenix";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -211,7 +202,20 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+
+    dep_agenix = {
+      type = "github";
+      owner = "ryantm";
+      repo = "agenix";
+
+      inputs = {
+        darwin.follows = "";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
+  outputs = inputs: import ./modules/_outputs.nix inputs;
 }
