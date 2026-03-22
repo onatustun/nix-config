@@ -5,25 +5,14 @@ result/
 
 .pre-commit-config.yaml
 
-!.gitignore
 !.envrc
-!flake.lock
+!.gitattributes
+!.gitignore
 
 !*.age
+!*.lock
 !*.nix
 !*.nu
 
-!hosts/
-!hosts/**/
-
-!lib/
-!lib/**/
-
 !modules/
 !modules/**/
-
-!parts/
-!parts/**/
-
-!secrets/
-!secrets/**/
