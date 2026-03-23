@@ -34,6 +34,7 @@
           "nix-core"
           "nix-index"
           "nixpkgs"
+          "noctalia"
           "nur"
           "nushell"
           "ragenix"
@@ -45,6 +46,7 @@
           "thunar"
           "users"
           "yubikey"
+          "zen-browser"
         ]
         self.nixosModules)
       ++ lib.lists.singleton ({
@@ -70,7 +72,6 @@
             "jujutsu"
             "media"
             "nh"
-            "noctalia"
             "obsidian"
             "proton"
             "soulseek"
@@ -85,7 +86,6 @@
             "xwayland"
             "yazi"
             "zathura"
-            "zen"
             "zoxide"
             "zsh"
           ]

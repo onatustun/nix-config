@@ -1,129 +1,144 @@
 {
-  flake.homeModules.noctalia = {
-    lib,
-    inputs,
-    pkgs,
-    ...
-  }: {
-    imports = lib.lists.singleton inputs.noctalia.homeModules.default;
+  flake = {
+    nixosModules.noctalia = {
+      lib,
+      inputs,
+      ...
+    }: {
+      nix.settings = {
+        extra-substituters = lib.lists.singleton "https://noctalia.cachix.org";
+        extra-trusted-public-keys = lib.lists.singleton "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=";
+      };
 
-    home.packages = [
-      pkgs.brightnessctl
-      pkgs.cava
-      pkgs.ddcutil
-      pkgs.quickshell
-      pkgs.wlsunset
-    ];
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.noctalia;
+    };
 
-    programs.noctalia-shell = {
-      enable = true;
-      systemd.enable = true;
+    homeModules.noctalia = {
+      lib,
+      inputs,
+      pkgs,
+      ...
+    }: {
+      imports = lib.lists.singleton inputs.noctalia.homeModules.default;
 
-      settings = {
-        bar = {
-          outerCorners = false;
-          showCapsule = false;
+      home.packages = [
+        pkgs.brightnessctl
+        pkgs.cava
+        pkgs.ddcutil
+        pkgs.quickshell
+        pkgs.wlsunset
+      ];
 
-          widgets = {
-            left = [
-              {
-                id = "Workspace";
-                hideUnoccupied = true;
-              }
-              {
-                id = "ActiveWindow";
-              }
-            ];
+      programs.noctalia-shell = {
+        enable = true;
+        systemd.enable = true;
 
-            center = [
-              {
-                id = "ControlCenter";
-                useDistroLogo = true;
-              }
-              {
-                id = "Clock";
-              }
-            ];
+        settings = {
+          bar = {
+            outerCorners = false;
+            showCapsule = false;
 
-            right = [
+            widgets = {
+              left = [
+                {
+                  id = "Workspace";
+                  hideUnoccupied = true;
+                }
+                {
+                  id = "ActiveWindow";
+                }
+              ];
+
+              center = [
+                {
+                  id = "ControlCenter";
+                  useDistroLogo = true;
+                }
+                {
+                  id = "Clock";
+                }
+              ];
+
+              right = [
+                {
+                  id = "Tray";
+                }
+                {
+                  id = "NotificationHistory";
+                }
+                {
+                  id = "SystemMonitor";
+                }
+                {
+                  id = "Battery";
+                  displayMode = "alwaysShow";
+                }
+              ];
+            };
+          };
+
+          location = {
+            name = "Aberdeen, United Kingdom";
+            weatherShowEffects = false;
+          };
+
+          wallpaper.enabled = false;
+          appLauncher.terminalCommand = "nu -c";
+
+          controlCenter = {
+            position = "top-center";
+
+            shortcuts = {
+              left = [
+                {
+                  id = "Network";
+                }
+                {
+                  id = "Bluetooth";
+                }
+                {
+                  id = "NoctaliaPerformance";
+                }
+              ];
+
+              right = [
+                {
+                  id = "PowerProfile";
+                }
+                {
+                  id = "KeepAwake";
+                }
+                {
+                  id = "NightLight";
+                }
+              ];
+            };
+
+            cards = [
               {
-                id = "Tray";
+                enabled = true;
+                id = "profile-card";
               }
               {
-                id = "NotificationHistory";
+                enabled = true;
+                id = "shortcuts-card";
               }
               {
-                id = "SystemMonitor";
+                enabled = true;
+                id = "audio-card";
               }
               {
-                id = "Battery";
-                displayMode = "alwaysShow";
+                enabled = true;
+                id = "brightness-card";
               }
             ];
           };
-        };
 
-        location = {
-          name = "Aberdeen, United Kingdom";
-          weatherShowEffects = false;
-        };
-
-        wallpaper.enabled = false;
-        appLauncher.terminalCommand = "nu -c";
-
-        controlCenter = {
-          position = "top-center";
-
-          shortcuts = {
-            left = [
-              {
-                id = "Network";
-              }
-              {
-                id = "Bluetooth";
-              }
-              {
-                id = "NoctaliaPerformance";
-              }
-            ];
-
-            right = [
-              {
-                id = "PowerProfile";
-              }
-              {
-                id = "KeepAwake";
-              }
-              {
-                id = "NightLight";
-              }
-            ];
+          nightLight = {
+            enabled = true;
+            nightTemp = "2750";
+            dayTemp = "4250";
           };
-
-          cards = [
-            {
-              enabled = true;
-              id = "profile-card";
-            }
-            {
-              enabled = true;
-              id = "shortcuts-card";
-            }
-            {
-              enabled = true;
-              id = "audio-card";
-            }
-            {
-              enabled = true;
-              id = "brightness-card";
-            }
-          ];
-        };
-
-        nightLight = {
-          enabled = true;
-          nightTemp = "2750";
-          dayTemp = "4250";
         };
       };
     };

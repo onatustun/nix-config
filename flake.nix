@@ -5,19 +5,27 @@
     commit-lockfile-summary = "chore: update `flake.lock`";
 
     extra-substituters = [
+      "https://crane.cachix.org"
       "https://ghostty.cachix.org"
+      "https://git-hooks.cachix.org"
       "https://helix.cachix.org"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
+      "https://noctalia.cachix.org"
+      "https://zen-browser.cachix.org"
     ];
 
     extra-trusted-substituters = extra-substituters;
 
     extra-trusted-public-keys = [
+      "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
+      "git-hooks.cachix.org-1:t3VIYDdXlezkNY1/sRtYKzxMVKTgn+uAR9VWCXHRPeI="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "zen-browser.cachix.org-1:z/QLGrEkiBYF/7zoHX1Hpuv0B26QrmbVBSy9yDD2tSs="
     ];
 
     extra-experimental-features = [
@@ -28,8 +36,10 @@
 
   inputs = {
     nixpkgs = {
-      type = "tarball";
-      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      type = "github";
+      owner = "nixos";
+      repo = "nixpkgs";
+      ref = "nixpkgs-unstable";
     };
 
     flake-parts = {
@@ -39,16 +49,36 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    import-tree = {
+      type = "github";
+      owner = "vic";
+      repo = "import-tree";
+    };
+
     systems = {
       type = "github";
       owner = "nix-systems";
       repo = "default";
     };
 
-    import-tree = {
+    make-shell = {
       type = "github";
-      owner = "vic";
-      repo = "import-tree";
+      owner = "nicknovitski";
+      repo = "make-shell";
+      inputs.flake-compat.follows = "dep_flake-compat";
+    };
+
+    flake-root = {
+      type = "github";
+      owner = "srid";
+      repo = "flake-root";
+    };
+
+    treefmt-nix = {
+      type = "github";
+      owner = "numtide";
+      repo = "treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     git-hooks = {
@@ -63,20 +93,6 @@
       };
     };
 
-    treefmt-nix = {
-      type = "github";
-      owner = "numtide";
-      repo = "treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      type = "github";
-      owner = "nix-community";
-      repo = "home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     deploy-rs = {
       type = "github";
       owner = "serokell";
@@ -89,27 +105,17 @@
       };
     };
 
-    nur = {
+    home-manager = {
       type = "github";
       owner = "nix-community";
-      repo = "nur";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
+      repo = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware = {
+    zmk-nix = {
       type = "github";
-      owner = "nixos";
-      repo = "nixos-hardware";
-    };
-
-    nix-index-database = {
-      type = "github";
-      owner = "nix-community";
-      repo = "nix-index-database";
+      owner = "lilyinstarlight";
+      repo = "zmk-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -124,6 +130,30 @@
         flake-utils.follows = "dep_flake-utils";
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "dep_rust-overlay";
+      };
+    };
+
+    nix-index-database = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware = {
+      type = "github";
+      owner = "nixos";
+      repo = "nixos-hardware";
+    };
+
+    nur = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nur";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
       };
     };
 
@@ -158,7 +188,6 @@
 
       inputs = {
         flake-parts.follows = "flake-parts";
-        flake-root.follows = "flake-root";
         nixpkgs.follows = "nixpkgs";
         treefmt-nix.follows = "treefmt-nix";
       };
@@ -182,6 +211,7 @@
 
       inputs = {
         niri-stable.follows = "";
+        niri-unstable.follows = "dep_niri-unstable";
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "";
         xwayland-satellite-stable.follows = "";
@@ -207,9 +237,9 @@
 
       inputs = {
         flake-compat.follows = "dep_flake-compat";
-        flake-utils.follows = "dep_flake-utils";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
         zig.follows = "dep_zig-overlay";
         zon2nix.follows = "dep_zon2nix";
       };
@@ -226,24 +256,62 @@
       };
     };
 
-    zmk-nix = {
+    dep_flake-compat = {
       type = "github";
-      owner = "lilyinstarlight";
-      repo = "zmk-nix";
+      owner = "edolstra";
+      repo = "flake-compat";
+      flake = false;
+    };
+
+    dep_flake-utils = {
+      type = "github";
+      owner = "numtide";
+      repo = "flake-utils";
+      inputs.systems.follows = "systems";
+    };
+
+    dep_gitignore = {
+      type = "github";
+      owner = "hercules-ci";
+      repo = "gitignore.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    make-shell = {
+    dep_agenix = {
       type = "github";
-      owner = "nicknovitski";
-      repo = "make-shell";
-      inputs.flake-compat.follows = "dep_flake-compat";
+      owner = "ryantm";
+      repo = "agenix";
+
+      inputs = {
+        darwin.follows = "";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
 
-    flake-root = {
+    dep_crane = {
       type = "github";
-      owner = "srid";
-      repo = "flake-root";
+      owner = "ipetkov";
+      repo = "crane";
+    };
+
+    dep_rust-overlay = {
+      type = "github";
+      owner = "oxalica";
+      repo = "rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dep_niri-unstable = {
+      type = "github";
+      owner = "niri-wm";
+      repo = "niri";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "dep_rust-overlay";
+      };
     };
 
     dep_noctalia-qs = {
@@ -256,27 +324,6 @@
         systems.follows = "systems";
         treefmt-nix.follows = "treefmt-nix";
       };
-    };
-
-    dep_flake-compat = {
-      type = "github";
-      owner = "edolstra";
-      repo = "flake-compat";
-      flake = false;
-    };
-
-    dep_gitignore = {
-      type = "github";
-      owner = "hercules-ci";
-      repo = "gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    dep_flake-utils = {
-      type = "github";
-      owner = "numtide";
-      repo = "flake-utils";
-      inputs.systems.follows = "systems";
     };
 
     dep_zig-overlay = {
@@ -300,32 +347,6 @@
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
         zig-overlay.follows = "dep_zig-overlay";
-      };
-    };
-
-    dep_rust-overlay = {
-      type = "github";
-      owner = "oxalica";
-      repo = "rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    dep_crane = {
-      type = "github";
-      owner = "ipetkov";
-      repo = "crane";
-    };
-
-    dep_agenix = {
-      type = "github";
-      owner = "ryantm";
-      repo = "agenix";
-
-      inputs = {
-        darwin.follows = "";
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
       };
     };
   };

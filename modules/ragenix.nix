@@ -17,6 +17,11 @@
       nixpkgs.overlays = lib.lists.singleton inputs.ragenix.overlays.default;
       age.identityPaths = lib.lists.singleton "/etc/ssh/ssh_host_ed25519_key";
       home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.ragenix;
+
+      nix.settings = {
+        extra-substituters = lib.lists.singleton "https://crane.cachix.org";
+        extra-trusted-public-keys = lib.lists.singleton "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk=";
+      };
     };
 
     homeModules.ragenix = moduleWithSystem ({inputs', ...}: {
