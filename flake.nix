@@ -5,10 +5,8 @@
     commit-lockfile-summary = "chore: update `flake.lock`";
 
     extra-substituters = [
-      "https://chaotic-nyx.cachix.org"
       "https://ghostty.cachix.org"
       "https://helix.cachix.org"
-      "https://install.determinate.systems"
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
     ];
@@ -16,10 +14,8 @@
     extra-trusted-substituters = extra-substituters;
 
     extra-trusted-public-keys = [
-      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
       "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
-      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
@@ -74,17 +70,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    determinate = {
-      type = "tarball";
-      url = "https://flakehub.com/f/determinatesystems/determinate/%2A";
-
-      inputs = {
-        determinate-nixd-aarch64-darwin.follows = "";
-        determinate-nixd-aarch64-linux.follows = "";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     home-manager = {
       type = "github";
       owner = "nix-community";
@@ -115,19 +100,6 @@
       };
     };
 
-    chaotic = {
-      type = "github";
-      owner = "chaotic-cx";
-      repo = "nyx";
-
-      inputs = {
-        flake-schemas.follows = "dep_flake-schemas";
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "dep_rust-overlay";
-      };
-    };
-
     nixos-hardware = {
       type = "github";
       owner = "nixos";
@@ -148,6 +120,7 @@
 
       inputs = {
         agenix.follows = "dep_agenix";
+        crane.follows = "dep_crane";
         flake-utils.follows = "dep_flake-utils";
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "dep_rust-overlay";
@@ -220,7 +193,11 @@
       type = "github";
       owner = "noctalia-dev";
       repo = "noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        noctalia-qs.follows = "dep_noctalia-qs";
+      };
     };
 
     ghostty = {
@@ -233,6 +210,8 @@
         flake-utils.follows = "dep_flake-utils";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
+        zig.follows = "dep_zig-overlay";
+        zon2nix.follows = "dep_zon2nix";
       };
     };
 
@@ -267,6 +246,18 @@
       repo = "flake-root";
     };
 
+    dep_noctalia-qs = {
+      type = "github";
+      owner = "noctalia-dev";
+      repo = "noctalia-qs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
+
     dep_flake-compat = {
       type = "github";
       owner = "edolstra";
@@ -288,6 +279,30 @@
       inputs.systems.follows = "systems";
     };
 
+    dep_zig-overlay = {
+      type = "github";
+      owner = "mitchellh";
+      repo = "zig-overlay";
+
+      inputs = {
+        flake-compat.follows = "dep_flake-compat";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+
+    dep_zon2nix = {
+      type = "github";
+      owner = "nix-community";
+      repo = "zon2nix";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        zig-overlay.follows = "dep_zig-overlay";
+      };
+    };
+
     dep_rust-overlay = {
       type = "github";
       owner = "oxalica";
@@ -295,10 +310,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dep_flake-schemas = {
+    dep_crane = {
       type = "github";
-      owner = "DeterminateSystems";
-      repo = "flake-schemas";
+      owner = "ipetkov";
+      repo = "crane";
     };
 
     dep_agenix = {

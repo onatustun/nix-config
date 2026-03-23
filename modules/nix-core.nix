@@ -46,7 +46,6 @@
 
         flake-registry = "";
         http-connections = 50;
-        lazy-trees = true;
         max-jobs = lib.modules.mkDefault "auto";
         show-trace = true;
 
@@ -54,7 +53,6 @@
           "@build"
           "@wheel"
           "root"
-          "@admin"
         ];
 
         warn-dirty = false;

@@ -16,9 +16,7 @@
       lib.attrsets.attrValues (lib.attrsets.getAttrs [
           "audio"
           "bluetooth"
-          "chaotic"
           "core"
-          "determinate"
           "fonts"
           "gdm"
           "ghostty"

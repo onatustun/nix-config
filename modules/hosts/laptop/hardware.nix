@@ -13,7 +13,6 @@
     ];
 
     boot = {
-      kernelPackages = pkgs.linuxPackages_cachyos-lto;
       kernelModules = lib.lists.singleton "kvm-amd";
 
       initrd.availableKernelModules = [

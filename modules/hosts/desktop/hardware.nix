@@ -2,14 +2,12 @@
   flake.nixosModules.desktop-hardware = {
     lib,
     modulesPath,
-    pkgs,
     config,
     ...
   }: {
     imports = lib.lists.singleton (modulesPath + "/installer/scan/not-detected.nix");
 
     boot = {
-      kernelPackages = pkgs.linuxKernel.packages.linux_zen;
       kernelModules = lib.lists.singleton "kvm-intel";
 
       initrd.availableKernelModules = [
