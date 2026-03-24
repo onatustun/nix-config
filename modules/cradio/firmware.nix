@@ -16,7 +16,7 @@
           fileset = lib.fileset.intersection (lib.fileset.gitTracked root) (root + /config);
         };
 
-        board = "nice_nano@2.0.0";
+        board = "nice_nano@2.0.0//zmk";
         shield = "cradio_%PART%";
         zephyrDepsHash = "sha256-XRJSmR9wJlBltW5brG4n+IGDVHjFQeqsHMcr/4tvUyI=";
 
