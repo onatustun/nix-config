@@ -1,15 +1,10 @@
 {moduleWithSystem, ...}: {
   flake.homeModules.xwayland = moduleWithSystem ({inputs', ...}: {
-    pkgs,
     config,
     lib,
+    pkgs,
     ...
   }: {
-    home.packages = [
-      inputs'.xwayland-satellite.packages.default
-      pkgs.xwayland
-    ];
-
     systemd.user.services.xwayland-satellite = {
       Unit = {
         Description = "Xwayland outside your Wayland";
@@ -26,5 +21,10 @@
         StandardOutput = "journal";
       };
     };
+
+    home.packages = [
+      inputs'.xwayland-satellite.packages.default
+      pkgs.xwayland
+    ];
   });
 }

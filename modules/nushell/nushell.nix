@@ -52,29 +52,8 @@
 
           shellAliases = {
             c = "clear";
-            cp = "cp -prv";
             ff = "fastfetch";
-            la = "ls -a";
-            lla = "ls -la";
-            ll = "ls -l";
-            l = "ls";
             lt = "eza -T --git-ignore --group-directories-first";
-            man = "batman";
-            md = "mkdir -v";
-            melt = "nix-melt";
-            mv = "mv -v";
-            ns = "nix-search";
-            rmf = "rm -frv";
-            rm = "rm -rv";
-            sl = "ls";
-            s = "sudo -E";
-            "sx." = "sudo -E hx .";
-            sx = "sudo -E hx";
-            tree = "eza -T --git-ignore --group-directories-first";
-            "x." = "hx .";
-            x = "hx";
-            z = "cd";
-            zi = "cdi";
           };
 
           extraConfig = lib.strings.readFile ./extraConfig.nu;

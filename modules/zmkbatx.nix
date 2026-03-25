@@ -1,11 +1,9 @@
 {
   flake.homeModules.zmkbatx = {
-    pkgs,
     lib,
+    pkgs,
     ...
   }: {
-    home.packages = lib.lists.singleton pkgs.zmkbatx;
-
     systemd.user.services.zmkbatx = {
       Install.WantedBy = lib.lists.singleton "noctalia-shell.service";
       Unit.Description = "zmkbatx";
@@ -18,5 +16,7 @@
         RestartSec = 3;
       };
     };
+
+    home.packages = lib.lists.singleton pkgs.zmkbatx;
   };
 }

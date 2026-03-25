@@ -12,8 +12,6 @@
       mode = "0400";
     };
 
-    environment.systemPackages = lib.lists.singleton pkgs.tailscale;
-
     services = {
       resolved.settings.Resolve.Domains = lib.lists.singleton "~.";
 
@@ -31,5 +29,7 @@
       trustedInterfaces = lib.lists.singleton config.services.tailscale.interfaceName;
       allowedUDPPorts = lib.lists.singleton config.services.tailscale.port;
     };
+
+    environment.systemPackages = lib.lists.singleton pkgs.tailscale;
   };
 }

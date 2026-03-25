@@ -69,8 +69,6 @@
       pkgs,
       ...
     }: {
-      home.packages = lib.lists.singleton pkgs.yubikey-touch-detector;
-
       systemd.user.services.yubikey-touch-detector = {
         Unit = {
           Description = "YubiKey touch detector";
@@ -80,6 +78,8 @@
         Service.ExecStart = lib.meta.getExe pkgs.yubikey-touch-detector;
         Install.WantedBy = lib.lists.singleton "graphical-session.target";
       };
+
+      home.packages = lib.lists.singleton pkgs.yubikey-touch-detector;
     };
   };
 }

@@ -32,11 +32,7 @@
             openssh.authorizedKeys.keys = keys.userKeys;
 
             extraGroups = [
-              "audio"
-              "input"
-              "libvirt"
               "networkmanager"
-              "power"
               "storage"
               "video"
               "wheel"

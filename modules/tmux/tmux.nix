@@ -2,15 +2,11 @@
   flake.homeModules.tmux = {
     pkgs,
     lib,
+    config,
     ...
   }: let
-    github =
-      pkgs.writers.writeNuBin "github"
-      (lib.strings.readFile ./github.nu);
-
-    sessionizer =
-      pkgs.writers.writeNuBin "sessionizer"
-      (lib.strings.readFile ./sessionizer.nu);
+    github = pkgs.writers.writeNuBin "github" (lib.strings.readFile ./github.nu);
+    sessionizer = pkgs.writers.writeNuBin "sessionizer" (lib.strings.readFile ./sessionizer.nu);
   in {
     programs.tmux = {
       enable = true;
@@ -49,7 +45,7 @@
         bind-key f display-popup -w 80% -h 80% -E ${lib.meta.getExe sessionizer}
         bind-key g neww -n "jj" -S ${lib.meta.getExe pkgs.jjui}
         bind-key G run-shell -b ${lib.meta.getExe github}
-        bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${lib.meta.getExe' pkgs.nushell "nu"} --login
+        bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${config.home.sessionVariables.SHELL} --login
 
         bind-key c new-window -c "#{pane_current_path}"
         bind-key % split-window -h -c "#{pane_current_path}"

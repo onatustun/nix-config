@@ -5,22 +5,23 @@
       inputs,
       ...
     }: {
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.niri;
+      imports = lib.lists.singleton inputs.niri.nixosModules.niri;
+      nixpkgs.overlays = lib.lists.singleton inputs.niri.overlays.niri;
 
       nix.settings = {
         extra-substituters = lib.lists.singleton "https://niri.cachix.org";
         extra-trusted-public-keys = lib.lists.singleton "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=";
       };
 
-      nixpkgs.overlays = lib.lists.singleton inputs.niri.overlays.niri;
-      imports = lib.lists.singleton inputs.niri.nixosModules.niri;
       niri-flake.cache.enable = false;
-      xdg.portal.wlr.enable = true;
 
       programs.niri = {
         enable = true;
         package = inputs'.niri.packages.niri-unstable;
       };
+
+      xdg.portal.wlr.enable = true;
+      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.niri;
     });
 
     homeModules.niri = moduleWithSystem ({inputs', ...}: {

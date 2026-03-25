@@ -9,7 +9,6 @@
 
         extraPackages = [
           pkgs.bat-extras.batdiff
-          pkgs.bat-extras.batman
           pkgs.bat-extras.prettybat
         ];
       };

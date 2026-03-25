@@ -1,17 +1,12 @@
 {
   flake.homeModules.wayvnc = {
-    pkgs,
     lib,
     config,
+    pkgs,
     hostName,
     isDesktop,
     ...
   }: {
-    home.packages = [
-      pkgs.remmina
-      pkgs.wayvnc
-    ];
-
     systemd.user.services.wayvnc = {
       Unit = {
         After = lib.lists.singleton config.wayland.systemd.target;
@@ -31,5 +26,10 @@
 
       Install.WantedBy = lib.lists.singleton config.wayland.systemd.target;
     };
+
+    home.packages = [
+      pkgs.remmina
+      pkgs.wayvnc
+    ];
   };
 }

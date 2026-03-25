@@ -1,12 +1,11 @@
 {
   flake.nixosModules.networking = {
+    hostName,
     lib,
     pkgs,
-    hostName,
     ...
   }: {
     services.resolved.enable = true;
-    environment.systemPackages = lib.lists.singleton pkgs.networkmanagerapplet;
 
     networking = {
       inherit hostName;
@@ -19,5 +18,7 @@
 
       firewall.checkReversePath = "loose";
     };
+
+    environment.systemPackages = lib.lists.singleton pkgs.networkmanagerapplet;
   };
 }

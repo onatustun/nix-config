@@ -4,6 +4,11 @@
     lib,
     ...
   }: {
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+
     services = {
       blueman.enable = true;
 
@@ -21,11 +26,6 @@
           pkgs.cups-browsed
         ];
       };
-    };
-
-    hardware.bluetooth = {
-      enable = true;
-      powerOnBoot = true;
     };
 
     environment.systemPackages = lib.lists.singleton pkgs.blueman;

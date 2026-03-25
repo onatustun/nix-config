@@ -1,15 +1,10 @@
 {moduleWithSystem, ...}: {
   flake.homeModules.swayidle = moduleWithSystem ({inputs', ...}: {
-    pkgs,
     lib,
     config,
+    pkgs,
     ...
   }: {
-    home.packages = [
-      pkgs.sway-audio-idle-inhibit
-      pkgs.swayidle
-    ];
-
     services.swayidle = {
       enable = true;
 
@@ -33,5 +28,10 @@
 
       Install.WantedBy = lib.lists.singleton config.wayland.systemd.target;
     };
+
+    home.packages = [
+      pkgs.sway-audio-idle-inhibit
+      pkgs.swayidle
+    ];
   });
 }

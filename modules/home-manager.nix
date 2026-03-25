@@ -23,7 +23,6 @@
       ...
     }: {
       imports = lib.lists.singleton inputs.home-manager.nixosModules.home-manager;
-      environment.systemPackages = lib.lists.singleton inputs'.home-manager.packages.default;
 
       home-manager = {
         users.${username}.imports = lib.lists.singleton inputs.self.homeModules.home-manager;
@@ -35,6 +34,8 @@
           config._module.args
           // config._module.specialArgs;
       };
+
+      environment.systemPackages = lib.lists.singleton inputs'.home-manager.packages.default;
     });
 
     homeModules.home-manager = {
