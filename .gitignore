@@ -9,6 +9,10 @@ result/
 !flake.lock
 !.gitattributes
 !.gitignore
+!LICENSE
+
+!modules/
+!modules/**/
 
 !**/cradio.conf
 !**/cradio.keymap
@@ -17,6 +21,3 @@ result/
 !*.age
 !*.nix
 !*.nu
-
-!modules/
-!modules/**/
