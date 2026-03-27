@@ -1,20 +1,18 @@
 {
   flake.nixosModules.loader.boot = {
     consoleLogLevel = 0;
-    initrd.verbose = false;
     plymouth.enable = true;
     tmp.cleanOnBoot = true;
 
+    initrd = {
+      systemd.enable = true;
+      verbose = false;
+    };
+
     loader = {
       efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
       timeout = 3;
-
-      grub = {
-        enable = true;
-        efiSupport = true;
-        device = "nodev";
-        useOSProber = true;
-      };
     };
   };
 }
