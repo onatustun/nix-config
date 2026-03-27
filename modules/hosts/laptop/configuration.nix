@@ -13,7 +13,9 @@
     };
 
     modules =
-      lib.attrsets.attrValues (lib.attrsets.getAttrs [
+      lib.attrsets.attrValues {
+        inherit
+          (self.nixosModules)
           "audio"
           "bluetooth"
           "core"
@@ -45,14 +47,16 @@
           "users"
           "yubikey"
           "zen-browser"
-        ]
-        self.nixosModules)
+          ;
+      }
       ++ lib.lists.singleton ({
         lib,
         inputs,
         ...
       }: {
-        home-manager.sharedModules = lib.attrsets.attrValues (lib.attrsets.getAttrs [
+        home-manager.sharedModules = lib.attrsets.attrValues {
+          inherit
+            (inputs.self.homeModules)
             "archivers"
             "bash"
             "bat"
@@ -87,8 +91,8 @@
             "zmkbatx"
             "zoxide"
             "zsh"
-          ]
-          inputs.self.homeModules);
+            ;
+        };
       });
   };
 }
