@@ -1,10 +1,6 @@
 {
-  perSystem = {
-    lib,
-    pkgs,
-    ...
-  }: {
-    make-shells.default.packages = lib.lists.singleton pkgs.git;
+  perSystem = {pkgs, ...}: {
+    make-shells.default.packages = [pkgs.git];
   };
 
   flake.homeModules.git.programs.git = {

@@ -1,14 +1,10 @@
 {
-  flake.homeModules.tui-utils = {
-    lib,
-    pkgs,
-    ...
-  }: {
+  flake.homeModules.tui-utils = {pkgs, ...}: {
     programs = {
       bottom.enable = true;
       btop.enable = true;
     };
 
-    home.packages = lib.lists.singleton pkgs.scooter;
+    home.packages = [pkgs.scooter];
   };
 }

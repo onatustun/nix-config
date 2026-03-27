@@ -1,17 +1,9 @@
-{
-  lib,
-  inputs,
-  ...
-}: {
-  imports = lib.lists.singleton inputs.git-hooks.flakeModule;
+{inputs, ...}: {
+  imports = [inputs.git-hooks.flakeModule];
 
-  perSystem = {
-    lib,
-    config,
-    ...
-  }: {
+  perSystem = {config, ...}: {
     make-shells.default = {
-      inputsFrom = lib.lists.singleton config.pre-commit.devShell;
+      inputsFrom = [config.pre-commit.devShell];
       shellHook = config.pre-commit.installationScript;
     };
 

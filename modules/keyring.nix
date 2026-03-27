@@ -1,12 +1,8 @@
 {
-  flake.nixosModules.keyring = {
-    lib,
-    pkgs,
-    ...
-  }: {
+  flake.nixosModules.keyring = {pkgs, ...}: {
     services = {
       gnome.gnome-keyring.enable = true;
-      dbus.packages = lib.lists.singleton pkgs.gnome-keyring;
+      dbus.packages = [pkgs.gnome-keyring];
     };
 
     security.pam.services = {

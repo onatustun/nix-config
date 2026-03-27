@@ -23,7 +23,7 @@
       };
 
       optimise.automatic = true;
-      nixPath = lib.lists.singleton "nixpkgs=flake:nixpkgs";
+      nixPath = ["nixpkgs=flake:nixpkgs"];
       registry.nixpkgs.flake = inputs.nixpkgs;
 
       extraOptions = ''
@@ -35,8 +35,8 @@
         builders-use-substitutes = true;
         cores = lib.modules.mkDefault 0;
 
-        extra-substituters = lib.lists.singleton "https://nix-community.cachix.org";
-        extra-trusted-public-keys = lib.lists.singleton "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+        extra-substituters = ["https://nix-community.cachix.org"];
+        extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
 
         experimental-features = [
           "flakes"

@@ -1,6 +1,5 @@
 {
   flake.nixosModules.tailscale = {
-    lib,
     pkgs,
     config,
     ...
@@ -13,23 +12,23 @@
     };
 
     services = {
-      resolved.settings.Resolve.Domains = lib.lists.singleton "~.";
+      resolved.settings.Resolve.Domains = ["~."];
 
       tailscale = {
         enable = true;
         authKeyFile = config.age.secrets.authkey.path;
         useRoutingFeatures = "both";
         openFirewall = true;
-        extraUpFlags = lib.lists.singleton "--ssh";
-        extraSetFlags = lib.lists.singleton "--advertise-exit-node";
+        extraUpFlags = ["--ssh"];
+        extraSetFlags = ["--advertise-exit-node"];
       };
     };
 
     networking.firewall = {
-      trustedInterfaces = lib.lists.singleton config.services.tailscale.interfaceName;
-      allowedUDPPorts = lib.lists.singleton config.services.tailscale.port;
+      trustedInterfaces = [config.services.tailscale.interfaceName];
+      allowedUDPPorts = [config.services.tailscale.port];
     };
 
-    environment.systemPackages = lib.lists.singleton pkgs.tailscale;
+    environment.systemPackages = [pkgs.tailscale];
   };
 }

@@ -1,31 +1,25 @@
 {
-  lib,
   inputs,
   moduleWithSystem,
   ...
 }: {
-  imports = lib.lists.singleton inputs.home-manager.flakeModules.home-manager;
+  imports = [inputs.home-manager.flakeModules.home-manager];
 
-  perSystem = {
-    lib,
-    inputs',
-    ...
-  }: {
-    make-shells.default.packages = lib.lists.singleton inputs'.home-manager.packages.default;
+  perSystem = {inputs', ...}: {
+    make-shells.default.packages = [inputs'.home-manager.packages.default];
   };
 
   flake = {
     nixosModules.home-manager = moduleWithSystem ({inputs', ...}: {
-      lib,
       inputs,
       username,
       config,
       ...
     }: {
-      imports = lib.lists.singleton inputs.home-manager.nixosModules.home-manager;
+      imports = [inputs.home-manager.nixosModules.home-manager];
 
       home-manager = {
-        users.${username}.imports = lib.lists.singleton inputs.self.homeModules.home-manager;
+        users.${username}.imports = [inputs.self.homeModules.home-manager];
 
         useUserPackages = true;
         backupFileExtension = "hmBackup";
@@ -35,7 +29,7 @@
           // config._module.specialArgs;
       };
 
-      environment.systemPackages = lib.lists.singleton inputs'.home-manager.packages.default;
+      environment.systemPackages = [inputs'.home-manager.packages.default];
     });
 
     homeModules.home-manager = {

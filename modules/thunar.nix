@@ -2,7 +2,6 @@
   flake = {
     nixosModules.thunar = {
       pkgs,
-      lib,
       inputs,
       ...
     }: {
@@ -22,7 +21,7 @@
         ];
       };
 
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.thunar;
+      home-manager.sharedModules = [inputs.self.homeModules.thunar];
     };
 
     homeModules.thunar = {pkgs, ...}: {

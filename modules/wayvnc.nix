@@ -9,8 +9,8 @@
   }: {
     systemd.user.services.wayvnc = {
       Unit = {
-        After = lib.lists.singleton config.wayland.systemd.target;
-        PartOf = lib.lists.singleton config.wayland.systemd.target;
+        After = [config.wayland.systemd.target];
+        PartOf = [config.wayland.systemd.target];
       };
 
       Service = {
@@ -24,7 +24,7 @@
         RestartSec = "1m";
       };
 
-      Install.WantedBy = lib.lists.singleton config.wayland.systemd.target;
+      Install.WantedBy = [config.wayland.systemd.target];
     };
 
     home.packages = [

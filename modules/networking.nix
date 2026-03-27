@@ -1,7 +1,6 @@
 {
   flake.nixosModules.networking = {
     hostName,
-    lib,
     pkgs,
     ...
   }: {
@@ -19,6 +18,6 @@
       firewall.checkReversePath = "loose";
     };
 
-    environment.systemPackages = lib.lists.singleton pkgs.networkmanagerapplet;
+    environment.systemPackages = [pkgs.networkmanagerapplet];
   };
 }

@@ -13,11 +13,7 @@
     };
   };
 
-  config.perSystem = {
-    lib,
-    inputs',
-    ...
-  }: {
-    make-shells.default.packages = lib.lists.singleton inputs'.deploy-rs.packages.default;
+  config.perSystem = {inputs', ...}: {
+    make-shells.default.packages = [inputs'.deploy-rs.packages.default];
   };
 }

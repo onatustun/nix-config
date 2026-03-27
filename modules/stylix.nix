@@ -1,13 +1,12 @@
 {
   flake = {
     nixosModules.stylix = {
-      lib,
       inputs,
       config,
       pkgs,
       ...
     }: {
-      imports = lib.lists.singleton inputs.stylix.nixosModules.stylix;
+      imports = [inputs.stylix.nixosModules.stylix];
 
       stylix = {
         enable = true;
@@ -72,7 +71,7 @@
         };
       };
 
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.stylix;
+      home-manager.sharedModules = [inputs.self.homeModules.stylix];
     };
 
     homeModules.stylix = {config, ...}: {

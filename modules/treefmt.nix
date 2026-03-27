@@ -1,16 +1,8 @@
-{
-  lib,
-  inputs,
-  ...
-}: {
-  imports = lib.lists.singleton inputs.treefmt-nix.flakeModule;
+{inputs, ...}: {
+  imports = [inputs.treefmt-nix.flakeModule];
 
-  perSystem = {
-    lib,
-    config,
-    ...
-  }: {
-    make-shells.default.inputsFrom = lib.lists.singleton config.treefmt.build.devShell;
+  perSystem = {config, ...}: {
+    make-shells.default.inputsFrom = [config.treefmt.build.devShell];
     pre-commit.settings.hooks.treefmt.enable = true;
 
     treefmt = {

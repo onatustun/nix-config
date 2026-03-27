@@ -1,16 +1,12 @@
 {moduleWithSystem, ...}: {
   flake = {
-    nixosModules.ghostty = {
-      lib,
-      inputs,
-      ...
-    }: {
+    nixosModules.ghostty = {inputs, ...}: {
       nix.settings = {
-        extra-substituters = lib.lists.singleton "https://ghostty.cachix.org";
-        extra-trusted-public-keys = lib.lists.singleton "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns=";
+        extra-substituters = ["https://ghostty.cachix.org"];
+        extra-trusted-public-keys = ["ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="];
       };
 
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.ghostty;
+      home-manager.sharedModules = [inputs.self.homeModules.ghostty];
     };
 
     homeModules.ghostty = moduleWithSystem ({inputs', ...}: {

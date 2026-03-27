@@ -2,8 +2,8 @@
   flake.nixosModules.laptop-hardware = {
     modulesPath,
     inputs,
-    pkgs,
     lib,
+    pkgs,
     config,
     ...
   }: {
@@ -13,7 +13,7 @@
     ];
 
     boot = {
-      kernelModules = lib.lists.singleton "kvm-amd";
+      kernelModules = ["kvm-amd"];
 
       initrd.availableKernelModules = [
         "nvme"

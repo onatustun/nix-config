@@ -16,8 +16,8 @@
 
     systemd.user.services.sway-audio-idle-inhibit = {
       Unit = {
-        After = lib.lists.singleton config.wayland.systemd.target;
-        PartOf = lib.lists.singleton config.wayland.systemd.target;
+        After = [config.wayland.systemd.target];
+        PartOf = [config.wayland.systemd.target];
       };
 
       Service = {
@@ -26,7 +26,7 @@
         Restart = "on-failure";
       };
 
-      Install.WantedBy = lib.lists.singleton config.wayland.systemd.target;
+      Install.WantedBy = [config.wayland.systemd.target];
     };
 
     home.packages = [

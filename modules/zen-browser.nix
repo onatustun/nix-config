@@ -1,16 +1,12 @@
 {moduleWithSystem, ...}: {
   flake = {
-    nixosModules.zen-browser = {
-      lib,
-      inputs,
-      ...
-    }: {
+    nixosModules.zen-browser = {inputs, ...}: {
       nix.settings = {
-        extra-substituters = lib.lists.singleton "https://zen-browser.cachix.org";
-        extra-trusted-public-keys = lib.lists.singleton "zen-browser.cachix.org-1:z/QLGrEkiBYF/7zoHX1Hpuv0B26QrmbVBSy9yDD2tSs=";
+        extra-substituters = ["https://zen-browser.cachix.org"];
+        extra-trusted-public-keys = ["zen-browser.cachix.org-1:z/QLGrEkiBYF/7zoHX1Hpuv0B26QrmbVBSy9yDD2tSs="];
       };
 
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.zen-browser;
+      home-manager.sharedModules = [inputs.self.homeModules.zen-browser];
     };
 
     homeModules.zen-browser = moduleWithSystem ({inputs', ...}: {
@@ -20,12 +16,12 @@
       username,
       ...
     }: {
-      imports = lib.lists.singleton inputs.zen-browser.homeModules.twilight;
+      imports = [inputs.zen-browser.homeModules.twilight];
       home.sessionVariables."BROWSER" = lib.meta.getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
 
       programs.zen-browser = {
         enable = true;
-        nativeMessagingHosts = lib.lists.singleton pkgs.ff2mpv-rust;
+        nativeMessagingHosts = [pkgs.ff2mpv-rust];
 
         profiles.default = {
           id = 0;
@@ -132,7 +128,7 @@
               "google".metaData.alias = "!g";
 
               "Nix Packages" = {
-                definedAliases = lib.lists.singleton "!np";
+                definedAliases = ["!np"];
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 
                 urls = lib.lists.singleton {
@@ -152,7 +148,7 @@
               };
 
               "NixOS Options" = {
-                definedAliases = lib.lists.singleton "!no";
+                definedAliases = ["!no"];
                 icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
 
                 urls = lib.lists.singleton {
@@ -173,7 +169,7 @@
 
               "NixOS Wiki" = {
                 icon = "https://nixos.wiki/favicon.png";
-                definedAliases = lib.lists.singleton "!nw";
+                definedAliases = ["!nw"];
 
                 urls = lib.lists.singleton {
                   template = "https://nixos.wiki/index.php?search={searchTerms}";
@@ -183,7 +179,7 @@
               };
 
               "Kagi" = {
-                definedAliases = lib.lists.singleton "!k";
+                definedAliases = ["!k"];
                 icon = "https://kagi.com/asset/80be37f/favicon-32x32.png?v=f6272da653e54e2a660a4d2bd696947a903fb130";
                 updateInterval = 24 * 60 * 60 * 1000;
 

@@ -18,10 +18,7 @@
             control = "sufficient";
             origin = "pam://u2f";
             appid = "pam://u2f";
-
-            authfile =
-              pkgs.writers.writeText "u2f-keys"
-              ("${username}:" + lib.strings.concatStringsSep ":" keys.u2fKeys);
+            authfile = pkgs.writers.writeText "u2f-keys" ("${username}:" + lib.strings.concatStringsSep ":" keys.u2fKeys);
           };
         };
 
@@ -61,7 +58,7 @@
         pkgs.yubioath-flutter
       ];
 
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.yubikey;
+      home-manager.sharedModules = [inputs.self.homeModules.yubikey];
     };
 
     homeModules.yubikey = {
@@ -76,10 +73,10 @@
         };
 
         Service.ExecStart = lib.meta.getExe pkgs.yubikey-touch-detector;
-        Install.WantedBy = lib.lists.singleton "graphical-session.target";
+        Install.WantedBy = ["graphical-session.target"];
       };
 
-      home.packages = lib.lists.singleton pkgs.yubikey-touch-detector;
+      home.packages = [pkgs.yubikey-touch-detector];
     };
   };
 }

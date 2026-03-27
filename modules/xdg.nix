@@ -1,9 +1,5 @@
 {
-  flake.homeModules.xdg = {
-    lib,
-    pkgs,
-    ...
-  }: {
+  flake.homeModules.xdg = {pkgs, ...}: {
     xdg = {
       enable = true;
       userDirs.createDirectories = true;
@@ -11,6 +7,6 @@
       configFile."mimeapps.list".force = true;
     };
 
-    home.packages = lib.lists.singleton pkgs.xdg-user-dirs;
+    home.packages = [pkgs.xdg-user-dirs];
   };
 }

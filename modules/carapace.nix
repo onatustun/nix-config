@@ -9,7 +9,7 @@
 
       nushell.environmentVariables.CARAPACE_BRIDGES =
         lib.strings.concatStringsSep ","
-        (lib.lists.singleton "carapace"
+        (["carapace"]
           ++ lib.lists.optional config.programs.zsh.enable "zsh"
           ++ lib.lists.optional config.programs.fish.enable "fish"
           ++ lib.lists.optional config.programs.bash.enable "bash");

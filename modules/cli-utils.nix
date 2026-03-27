@@ -1,10 +1,6 @@
 {
-  perSystem = {
-    lib,
-    pkgs,
-    ...
-  }: {
-    make-shells.default.packages = lib.lists.singleton pkgs.vim;
+  perSystem = {pkgs, ...}: {
+    make-shells.default.packages = [pkgs.vim];
   };
 
   flake.homeModules.cli-utils = {pkgs, ...}: {

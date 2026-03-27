@@ -3,12 +3,11 @@
     nixosModules.nushell = {
       username,
       pkgs,
-      lib,
       inputs,
       ...
     }: {
       users.users.${username}.shell = pkgs.nushell;
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.nushell;
+      home-manager.sharedModules = [inputs.self.homeModules.nushell];
     };
 
     homeModules.nushell = {
@@ -19,7 +18,7 @@
       nushellExe = lib.meta.getExe' pkgs.nushell "nu";
     in {
       home = {
-        packages = lib.lists.singleton pkgs.nushell;
+        packages = [pkgs.nushell];
         sessionVariables.SHELL = nushellExe;
         shell.enableShellIntegration = true;
       };

@@ -1,22 +1,21 @@
 {moduleWithSystem, ...}: {
   flake = {
     nixosModules.helix = {
-      lib,
       config,
       username,
       inputs,
       ...
     }: {
       nix.settings = {
-        extra-substituters = lib.lists.singleton "https://helix.cachix.org";
-        extra-trusted-public-keys = lib.lists.singleton "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs=";
+        extra-substituters = ["https://helix.cachix.org"];
+        extra-trusted-public-keys = ["helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="];
       };
 
       environment.sessionVariables = {
         inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;
       };
 
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.helix;
+      home-manager.sharedModules = [inputs.self.homeModules.helix];
     };
 
     homeModules.helix = moduleWithSystem ({inputs', ...}: {

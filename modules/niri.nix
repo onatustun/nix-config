@@ -1,16 +1,12 @@
 {moduleWithSystem, ...}: {
   flake = {
-    nixosModules.niri = moduleWithSystem ({inputs', ...}: {
-      lib,
-      inputs,
-      ...
-    }: {
-      imports = lib.lists.singleton inputs.niri.nixosModules.niri;
-      nixpkgs.overlays = lib.lists.singleton inputs.niri.overlays.niri;
+    nixosModules.niri = moduleWithSystem ({inputs', ...}: {inputs, ...}: {
+      imports = [inputs.niri.nixosModules.niri];
+      nixpkgs.overlays = [inputs.niri.overlays.niri];
 
       nix.settings = {
-        extra-substituters = lib.lists.singleton "https://niri.cachix.org";
-        extra-trusted-public-keys = lib.lists.singleton "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=";
+        extra-substituters = ["https://niri.cachix.org"];
+        extra-trusted-public-keys = ["niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
       };
 
       niri-flake.cache.enable = false;
@@ -21,7 +17,7 @@
       };
 
       xdg.portal.wlr.enable = true;
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.niri;
+      home-manager.sharedModules = [inputs.self.homeModules.niri];
     });
 
     homeModules.niri = moduleWithSystem ({inputs', ...}: {
@@ -36,11 +32,11 @@
         pkgs.xdg-desktop-portal-gtk
       ];
 
-      systemd.user.services.xwayland-satellite.Install.WantedBy = lib.lists.singleton "niri.service";
+      systemd.user.services.xwayland-satellite.Install.WantedBy = ["niri.service"];
 
       xdg.portal = {
-        extraPortals = lib.lists.singleton pkgs.xdg-desktop-portal-gtk;
-        configPackages = lib.lists.singleton inputs'.niri.packages.niri-unstable;
+        extraPortals = [pkgs.xdg-desktop-portal-gtk];
+        configPackages = [inputs'.niri.packages.niri-unstable];
       };
 
       programs.niri.settings = {

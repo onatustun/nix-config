@@ -5,7 +5,7 @@
     ...
   }: {
     systemd.user.services.zmkbatx = {
-      Install.WantedBy = lib.lists.singleton "noctalia-shell.service";
+      Install.WantedBy = ["noctalia-shell.service"];
       Unit.Description = "zmkbatx";
 
       Service = {
@@ -17,6 +17,6 @@
       };
     };
 
-    home.packages = lib.lists.singleton pkgs.zmkbatx;
+    home.packages = [pkgs.zmkbatx];
   };
 }

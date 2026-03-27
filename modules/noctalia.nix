@@ -1,25 +1,20 @@
 {
   flake = {
-    nixosModules.noctalia = {
-      lib,
-      inputs,
-      ...
-    }: {
+    nixosModules.noctalia = {inputs, ...}: {
       nix.settings = {
-        extra-substituters = lib.lists.singleton "https://noctalia.cachix.org";
-        extra-trusted-public-keys = lib.lists.singleton "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=";
+        extra-substituters = ["https://noctalia.cachix.org"];
+        extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
       };
 
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.noctalia;
+      home-manager.sharedModules = [inputs.self.homeModules.noctalia];
     };
 
     homeModules.noctalia = {
-      lib,
       inputs,
       pkgs,
       ...
     }: {
-      imports = lib.lists.singleton inputs.noctalia.homeModules.default;
+      imports = [inputs.noctalia.homeModules.default];
 
       home.packages = [
         pkgs.brightnessctl

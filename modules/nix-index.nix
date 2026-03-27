@@ -1,14 +1,10 @@
 {moduleWithSystem, ...}: {
   flake = {
-    nixosModules.nix-index = {
-      lib,
-      inputs,
-      ...
-    }: {
-      imports = lib.lists.singleton inputs.nix-index-database.nixosModules.nix-index;
-      nixpkgs.overlays = lib.lists.singleton inputs.nix-index-database.overlays.nix-index;
+    nixosModules.nix-index = {inputs, ...}: {
+      imports = [inputs.nix-index-database.nixosModules.nix-index];
+      nixpkgs.overlays = [inputs.nix-index-database.overlays.nix-index];
       programs.nix-index-database.comma.enable = true;
-      home-manager.sharedModules = lib.lists.singleton inputs.self.homeModules.nix-index;
+      home-manager.sharedModules = [inputs.self.homeModules.nix-index];
     };
 
     homeModules.nix-index = moduleWithSystem ({inputs', ...}: {
