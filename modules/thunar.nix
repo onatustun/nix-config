@@ -8,7 +8,6 @@
       services = {
         gvfs.enable = true;
         tumbler.enable = true;
-        udisks2.enable = true;
       };
 
       programs.thunar = {
@@ -30,11 +29,8 @@
 
       home.packages = [
         pkgs.ffmpegthumbnailer
-        pkgs.gvfs
         pkgs.kdePackages.ark
         pkgs.libgsf
-        pkgs.tumbler
-        pkgs.udisks
       ];
     };
   };

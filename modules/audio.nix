@@ -1,5 +1,7 @@
 {
   flake.nixosModules.audio = {pkgs, ...}: {
+    security.rtkit.enable = true;
+
     services = {
       pulseaudio.enable = false;
 
@@ -19,11 +21,9 @@
     environment.systemPackages = [
       pkgs.ffmpeg-full
       pkgs.pavucontrol
-      pkgs.pipewire
       pkgs.playerctl
       pkgs.pwvucontrol
       pkgs.scdl
-      pkgs.wireplumber
       pkgs.yt-dlp
     ];
   };

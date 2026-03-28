@@ -1,9 +1,5 @@
 {
-  flake.nixosModules.tailscale = {
-    pkgs,
-    config,
-    ...
-  }: {
+  flake.nixosModules.tailscale = {config, ...}: {
     age.secrets.authkey = {
       file = ./authkey.age;
       owner = "root";
@@ -24,11 +20,6 @@
       };
     };
 
-    networking.firewall = {
-      trustedInterfaces = [config.services.tailscale.interfaceName];
-      allowedUDPPorts = [config.services.tailscale.port];
-    };
-
-    environment.systemPackages = [pkgs.tailscale];
+    networking.firewall.trustedInterfaces = [config.services.tailscale.interfaceName];
   };
 }

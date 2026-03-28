@@ -1,10 +1,10 @@
 {
   flake.homeModules.wayvnc = {
-    lib,
     config,
+    lib,
     pkgs,
-    hostName,
     isDesktop,
+    hostName,
     ...
   }: {
     systemd.user.services.wayvnc = {

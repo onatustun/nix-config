@@ -12,7 +12,6 @@
       networkmanager = {
         enable = true;
         wifi.powersave = false;
-        dns = "systemd-resolved";
       };
 
       firewall.checkReversePath = "loose";

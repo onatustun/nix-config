@@ -29,9 +29,6 @@
       Install.WantedBy = [config.wayland.systemd.target];
     };
 
-    home.packages = [
-      pkgs.sway-audio-idle-inhibit
-      pkgs.swayidle
-    ];
+    home.packages = [pkgs.sway-audio-idle-inhibit];
   });
 }

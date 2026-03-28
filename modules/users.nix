@@ -4,6 +4,20 @@
       _module.args.homeDir = "/home/${username}";
     };
 
-    users.users.mutableUsers = false;
+    users = {
+      username,
+      homeDir,
+      lib,
+      ...
+    }: {
+      users = {
+        users.${username} = {
+          home = homeDir;
+          isNormalUser = lib.modules.mkDefault true;
+        };
+
+        mutableUsers = false;
+      };
+    };
   };
 }

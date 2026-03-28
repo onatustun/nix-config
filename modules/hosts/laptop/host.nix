@@ -9,7 +9,6 @@
         config,
         keys,
         username,
-        homeDir,
         ...
       }: {
         age.secrets.password = {
@@ -27,8 +26,6 @@
 
           ${username} = {
             hashedPasswordFile = config.age.secrets.password.path;
-            home = homeDir;
-            isNormalUser = true;
             openssh.authorizedKeys.keys = keys.userKeys;
 
             extraGroups = [

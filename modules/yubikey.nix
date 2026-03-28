@@ -15,7 +15,6 @@
           settings = {
             cue = true;
             interactive = true;
-            control = "sufficient";
             origin = "pam://u2f";
             appid = "pam://u2f";
             authfile = pkgs.writers.writeText "u2f-keys" ("${username}:" + lib.strings.concatStringsSep ":" keys.u2fKeys);

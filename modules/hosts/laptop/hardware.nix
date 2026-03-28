@@ -58,10 +58,8 @@
 
     environment.systemPackages = [
       pkgs.framework-tool
-      pkgs.fwupd
       pkgs.kmod
       pkgs.microcode-amd
-      pkgs.power-profiles-daemon
     ];
   };
 }
