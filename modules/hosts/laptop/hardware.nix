@@ -1,12 +1,16 @@
 {
   flake.nixosModules.laptop-hardware =
     {
+      lib,
       modulesPath,
       inputs,
       pkgs,
       config,
       ...
     }:
+    let
+      inherit (lib.attrsets) attrValues;
+    in
     {
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
@@ -55,10 +59,12 @@
         upower.enable = true;
       };
 
-      environment.systemPackages = [
-        pkgs.framework-tool
-        pkgs.kmod
-        pkgs.microcode-amd
-      ];
+      environment.systemPackages = attrValues {
+        inherit (pkgs)
+          framework-tool
+          kmod
+          microcode-amd
+          ;
+      };
     };
 }

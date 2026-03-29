@@ -6,7 +6,10 @@
     };
 
   flake.homeModules.cli =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
+    let
+      inherit (lib.attrsets) attrValues;
+    in
     {
       programs = {
         fd.enable = true;
@@ -19,25 +22,27 @@
         vim.enable = true;
       };
 
-      home.packages = [
-        pkgs.appimage-run
-        pkgs.binutils
-        pkgs.coreutils-full
-        pkgs.curl
-        pkgs.diffutils
-        pkgs.dust
-        pkgs.file
-        pkgs.findutils
-        pkgs.gawk
-        pkgs.gnused
-        pkgs.killall
-        pkgs.lsof
-        pkgs.ouch
-        pkgs.procps
-        pkgs.rip2
-        pkgs.wget
-        pkgs.which
-        pkgs.yq-go
-      ];
+      home.packages = attrValues {
+        inherit (pkgs)
+          appimage-run
+          binutils
+          coreutils-full
+          curl
+          diffutils
+          dust
+          file
+          findutils
+          gawk
+          gnused
+          killall
+          lsof
+          ouch
+          procps
+          rip2
+          wget
+          which
+          yq-go
+          ;
+      };
     };
 }

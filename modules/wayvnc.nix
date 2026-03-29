@@ -10,6 +10,7 @@
     }:
     let
       inherit (lib.meta) getExe;
+      inherit (lib.attrsets) attrValues;
     in
     {
       systemd.user.services.wayvnc = {
@@ -30,9 +31,11 @@
         Install.WantedBy = [ config.wayland.systemd.target ];
       };
 
-      home.packages = [
-        pkgs.remmina
-        pkgs.wayvnc
-      ];
+      home.packages = attrValues {
+        inherit (pkgs)
+          remmina
+          wayvnc
+          ;
+      };
     };
 }

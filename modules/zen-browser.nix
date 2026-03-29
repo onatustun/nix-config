@@ -27,6 +27,7 @@
       let
         inherit (lib.meta) getExe';
         inherit (lib.lists) singleton;
+        inherit (lib.attrsets) attrValues;
       in
       {
         imports = [ inputs.zen-browser.homeModules.twilight ];
@@ -193,15 +194,17 @@
             extensions = {
               force = true;
 
-              packages = [
-                pkgs.nur.repos.rycee.firefox-addons.kagi-search
-                pkgs.nur.repos.rycee.firefox-addons.proton-pass
-                pkgs.nur.repos.rycee.firefox-addons.sponsorblock
-                pkgs.nur.repos.rycee.firefox-addons.ublock-origin
-                pkgs.nur.repos.rycee.firefox-addons.unpaywall
-                pkgs.nur.repos.rycee.firefox-addons.vimium-c
-                pkgs.nur.repos.rycee.firefox-addons.violentmonkey
-              ];
+              packages = attrValues {
+                inherit (pkgs.nur.repos.rycee.firefox-addons)
+                  kagi-search
+                  proton-pass
+                  sponsorblock
+                  ublock-origin
+                  unpaywall
+                  vimium-c
+                  violentmonkey
+                  ;
+              };
             };
           };
 

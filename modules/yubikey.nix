@@ -12,6 +12,7 @@
       let
         inherit (pkgs.writers) writeText;
         inherit (lib.strings) concatStringsSep;
+        inherit (lib.attrsets) attrValues;
       in
       {
         security.pam = {
@@ -40,11 +41,13 @@
         services = {
           pcscd.enable = true;
 
-          udev.packages = [
-            pkgs.libfido2
-            pkgs.libu2f-host
-            pkgs.yubikey-personalization
-          ];
+          udev.packages = attrValues {
+            inherit (pkgs)
+              libfido2
+              libu2f-host
+              yubikey-personalization
+              ;
+          };
         };
 
         programs.yubikey-touch-detector = {
@@ -52,16 +55,18 @@
           libnotify = true;
         };
 
-        environment.systemPackages = [
-          pkgs.age-plugin-yubikey
-          pkgs.cryptsetup
-          pkgs.fido2-manage
-          pkgs.pamtester
-          pkgs.pam_u2f
-          pkgs.yubikey-manager
-          pkgs.yubikey-personalization
-          pkgs.yubioath-flutter
-        ];
+        environment.systemPackages = attrValues {
+          inherit (pkgs)
+            age-plugin-yubikey
+            cryptsetup
+            fido2-manage
+            pamtester
+            pam_u2f
+            yubikey-manager
+            yubikey-personalization
+            yubioath-flutter
+            ;
+        };
 
         home-manager.sharedModules = [ inputs.self.homeModules.yubikey ];
       };

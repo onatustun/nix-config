@@ -1,6 +1,9 @@
 {
   flake.homeModules.bat =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
+    let
+      inherit (lib.attrsets) attrValues;
+    in
     {
       programs = {
         ghostty.installBatSyntax = true;
@@ -9,10 +12,12 @@
           enable = true;
           config.pager = "less -FR";
 
-          extraPackages = [
-            pkgs.bat-extras.batdiff
-            pkgs.bat-extras.prettybat
-          ];
+          extraPackages = attrValues {
+            inherit (pkgs.bat-extras)
+              batdiff
+              prettybat
+              ;
+          };
         };
       };
     };

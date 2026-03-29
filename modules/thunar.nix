@@ -1,7 +1,15 @@
 {
   flake = {
     nixosModules.thunar =
-      { pkgs, inputs, ... }:
+      {
+        lib,
+        pkgs,
+        inputs,
+        ...
+      }:
+      let
+        inherit (lib.attrsets) attrValues;
+      in
       {
         services = {
           gvfs.enable = true;
@@ -11,27 +19,34 @@
         programs.thunar = {
           enable = true;
 
-          plugins = [
-            pkgs.thunar-archive-plugin
-            pkgs.thunar-media-tags-plugin
-            pkgs.thunar-volman
-          ];
+          plugins = attrValues {
+            inherit (pkgs)
+              thunar-archive-plugin
+              thunar-media-tags-plugin
+              thunar-volman
+              ;
+          };
         };
 
         home-manager.sharedModules = [ inputs.self.homeModules.thunar ];
       };
 
     homeModules.thunar =
-      { pkgs, ... }:
+      { lib, pkgs, ... }:
+      let
+        inherit (lib.attrsets) attrValues;
+      in
       {
         services.udiskie.enable = true;
         xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
 
-        home.packages = [
-          pkgs.ffmpegthumbnailer
-          pkgs.kdePackages.ark
-          pkgs.libgsf
-        ];
+        home.packages = attrValues {
+          inherit (pkgs)
+            ffmpegthumbnailer
+            libgsf
+            ;
+          inherit (pkgs.kdePackages) ark;
+        };
       };
   };
 }

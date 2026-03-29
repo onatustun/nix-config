@@ -1,12 +1,17 @@
 {
   flake.homeModules.wayland =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
+    let
+      inherit (lib.attrsets) attrValues;
+    in
     {
-      home.packages = [
-        pkgs.grim
-        pkgs.slurp
-        pkgs.wlrctl
-        pkgs.wlr-randr
-      ];
+      home.packages = attrValues {
+        inherit (pkgs)
+          grim
+          slurp
+          wlrctl
+          wlr-randr
+          ;
+      };
     };
 }

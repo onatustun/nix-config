@@ -1,14 +1,19 @@
 {
   flake.homeModules.nix-tools =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
+    let
+      inherit (lib.attrsets) attrValues;
+    in
     {
-      home.packages = [
-        pkgs.deadnix
-        pkgs.nixfmt
-        pkgs.nix-melt
-        pkgs.nix-search-cli
-        pkgs.noogle-search
-        pkgs.statix
-      ];
+      home.packages = attrValues {
+        inherit (pkgs)
+          deadnix
+          nixfmt
+          nix-melt
+          nix-search-cli
+          noogle-search
+          statix
+          ;
+      };
     };
 }

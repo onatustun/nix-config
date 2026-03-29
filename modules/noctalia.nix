@@ -15,17 +15,27 @@
       };
 
     homeModules.noctalia =
-      { inputs, pkgs, ... }:
+      {
+        lib,
+        inputs,
+        pkgs,
+        ...
+      }:
+      let
+        inherit (lib.attrsets) attrValues;
+      in
       {
         imports = [ inputs.noctalia.homeModules.default ];
 
-        home.packages = [
-          pkgs.brightnessctl
-          pkgs.cava
-          pkgs.ddcutil
-          pkgs.quickshell
-          pkgs.wlsunset
-        ];
+        home.packages = attrValues {
+          inherit (pkgs)
+            brightnessctl
+            cava
+            ddcutil
+            quickshell
+            wlsunset
+            ;
+        };
 
         programs.noctalia-shell = {
           enable = true;

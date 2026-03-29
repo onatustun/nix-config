@@ -1,21 +1,26 @@
 {
   flake.homeModules.media =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
+    let
+      inherit (lib.attrsets) attrValues;
+    in
     {
       programs.mpv.enable = true;
 
-      home.packages = [
-        pkgs.ffmpeg-full
-        pkgs.haruna
-        pkgs.imv
-        pkgs.nicotine-plus
-        pkgs.pavucontrol
-        pkgs.playerctl
-        pkgs.pwvucontrol
-        pkgs.scdl
-        pkgs.slsk-batchdl
-        pkgs.slskd
-        pkgs.yt-dlp
-      ];
+      home.packages = attrValues {
+        inherit (pkgs)
+          ffmpeg-full
+          haruna
+          imv
+          nicotine-plus
+          pavucontrol
+          playerctl
+          pwvucontrol
+          scdl
+          slsk-batchdl
+          slskd
+          yt-dlp
+          ;
+      };
     };
 }
