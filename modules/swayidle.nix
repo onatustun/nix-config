@@ -16,6 +16,8 @@
         ;
     in
     {
+      home.packages = [ pkgs.sway-audio-idle-inhibit ];
+
       services.swayidle = {
         enable = true;
 
@@ -39,8 +41,6 @@
 
         Install.WantedBy = [ config.wayland.systemd.target ];
       };
-
-      home.packages = [ pkgs.sway-audio-idle-inhibit ];
     }
   );
 }

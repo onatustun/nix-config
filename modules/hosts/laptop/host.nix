@@ -15,6 +15,9 @@
           ...
         }:
         {
+          nixpkgs.hostPlatform.system = "x86_64-linux";
+          system.stateVersion = "26.05";
+
           age.secrets.password = {
             file = ./password.age;
             owner = "root";
@@ -40,9 +43,6 @@
               ];
             };
           };
-
-          nixpkgs.hostPlatform.system = "x86_64-linux";
-          system.stateVersion = "26.05";
         };
     };
 

@@ -4,14 +4,19 @@
     { inputs', ... }:
     {
       lib,
-      config,
       pkgs,
+      config,
       ...
     }:
     let
       inherit (lib.meta) getExe;
     in
     {
+      home.packages = [
+        inputs'.xwayland-satellite.packages.default
+        pkgs.xwayland
+      ];
+
       systemd.user.services.xwayland-satellite = {
         Unit = {
           Description = "Xwayland outside your Wayland";
@@ -28,11 +33,6 @@
           StandardOutput = "journal";
         };
       };
-
-      home.packages = [
-        inputs'.xwayland-satellite.packages.default
-        pkgs.xwayland
-      ];
     }
   );
 }

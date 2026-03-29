@@ -37,9 +37,6 @@
         inherit (lib.attrsets) attrValues;
       in
       {
-        services.udiskie.enable = true;
-        xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
-
         home.packages = attrValues {
           inherit (pkgs)
             ffmpegthumbnailer
@@ -47,6 +44,9 @@
             ;
           inherit (pkgs.kdePackages) ark;
         };
+
+        services.udiskie.enable = true;
+        xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
       };
   };
 }

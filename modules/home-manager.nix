@@ -19,6 +19,7 @@
       }:
       {
         imports = [ inputs.home-manager.nixosModules.home-manager ];
+        environment.systemPackages = [ inputs'.home-manager.packages.default ];
 
         home-manager = {
           users.${username}.imports = [ inputs.self.homeModules.home-manager ];
@@ -26,8 +27,6 @@
           useUserPackages = true;
           backupFileExtension = "hmBackup";
         };
-
-        environment.systemPackages = [ inputs'.home-manager.packages.default ];
       }
     );
 
@@ -39,8 +38,6 @@
         ...
       }:
       {
-        programs.home-manager.enable = true;
-
         nixpkgs = {
           inherit (osConfig.nixpkgs)
             config
@@ -53,6 +50,8 @@
           sessionVariables.FLAKE = "${homeDir}/nix";
           homeDirectory = homeDir;
         };
+
+        programs.home-manager.enable = true;
       };
   };
 }

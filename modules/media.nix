@@ -5,8 +5,6 @@
       inherit (lib.attrsets) attrValues;
     in
     {
-      programs.mpv.enable = true;
-
       home.packages = attrValues {
         inherit (pkgs)
           ffmpeg-full
@@ -22,5 +20,7 @@
           yt-dlp
           ;
       };
+
+      programs.mpv.enable = true;
     };
 }

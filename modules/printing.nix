@@ -1,9 +1,6 @@
 {
   flake.nixosModules.printing =
-    { lib, pkgs, ... }:
-    let
-      inherit (lib.attrsets) attrValues;
-    in
+    { pkgs, ... }:
     {
       services = {
         avahi = {
@@ -15,12 +12,10 @@
         printing = {
           enable = true;
 
-          drivers = attrValues {
-            inherit (pkgs)
-              cups-browsed
-              cups-filters
-              ;
-          };
+          drivers = [
+            pkgs.cups-browsed
+            pkgs.cups-filters
+          ];
         };
       };
     };

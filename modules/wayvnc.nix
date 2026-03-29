@@ -2,17 +2,21 @@
   flake.homeModules.wayvnc =
     {
       lib,
-      config,
       pkgs,
+      config,
       isDesktop,
       hostName,
       ...
     }:
     let
       inherit (lib.meta) getExe;
-      inherit (lib.attrsets) attrValues;
     in
     {
+      home.packages = [
+        pkgs.remmina
+        pkgs.wayvnc
+      ];
+
       systemd.user.services.wayvnc = {
         Unit = {
           After = [ config.wayland.systemd.target ];
@@ -29,13 +33,6 @@
         };
 
         Install.WantedBy = [ config.wayland.systemd.target ];
-      };
-
-      home.packages = attrValues {
-        inherit (pkgs)
-          remmina
-          wayvnc
-          ;
       };
     };
 }

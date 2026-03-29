@@ -2,8 +2,6 @@
   flake.nixosModules.networking =
     { hostName, pkgs, ... }:
     {
-      services.resolved.enable = true;
-
       networking = {
         inherit hostName;
 
@@ -16,5 +14,6 @@
       };
 
       environment.systemPackages = [ pkgs.networkmanagerapplet ];
+      services.resolved.enable = true;
     };
 }

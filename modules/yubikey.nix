@@ -50,11 +50,6 @@
           };
         };
 
-        programs.yubikey-touch-detector = {
-          enable = true;
-          libnotify = true;
-        };
-
         environment.systemPackages = attrValues {
           inherit (pkgs)
             age-plugin-yubikey
@@ -68,6 +63,11 @@
             ;
         };
 
+        programs.yubikey-touch-detector = {
+          enable = true;
+          libnotify = true;
+        };
+
         home-manager.sharedModules = [ inputs.self.homeModules.yubikey ];
       };
 
@@ -77,6 +77,8 @@
         inherit (lib.meta) getExe;
       in
       {
+        home.packages = [ pkgs.yubikey-touch-detector ];
+
         systemd.user.services.yubikey-touch-detector = {
           Unit = {
             Description = "YubiKey touch detector";
@@ -86,8 +88,6 @@
           Service.ExecStart = getExe pkgs.yubikey-touch-detector;
           Install.WantedBy = [ "graphical-session.target" ];
         };
-
-        home.packages = [ pkgs.yubikey-touch-detector ];
       };
   };
 }

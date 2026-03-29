@@ -5,6 +5,8 @@
       inherit (lib.meta) getExe';
     in
     {
+      home.packages = [ pkgs.zmkbatx ];
+
       systemd.user.services.zmkbatx = {
         Unit = {
           Description = "zmkbatx";
@@ -20,7 +22,5 @@
 
         Install.WantedBy = [ "noctalia-shell.service" ];
       };
-
-      home.packages = [ pkgs.zmkbatx ];
     };
 }

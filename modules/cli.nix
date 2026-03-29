@@ -11,17 +11,6 @@
       inherit (lib.attrsets) attrValues;
     in
     {
-      programs = {
-        fd.enable = true;
-        fzf.enable = true;
-        grep.enable = true;
-        jq.enable = true;
-        less.enable = true;
-        ripgrep.enable = true;
-        skim.enable = true;
-        vim.enable = true;
-      };
-
       home.packages = attrValues {
         inherit (pkgs)
           appimage-run
@@ -43,6 +32,17 @@
           which
           yq-go
           ;
+      };
+
+      programs = {
+        fd.enable = true;
+        fzf.enable = true;
+        grep.enable = true;
+        jq.enable = true;
+        less.enable = true;
+        ripgrep.enable = true;
+        skim.enable = true;
+        vim.enable = true;
       };
     };
 }
