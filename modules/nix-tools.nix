@@ -1,5 +1,5 @@
 {
-  flake.homeModules.cli-nix =
+  flake.homeModules.nix-tools =
     { pkgs, ... }:
     {
       home.packages = [

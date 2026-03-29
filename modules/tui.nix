@@ -1,5 +1,5 @@
 {
-  flake.homeModules.tui-utils =
+  flake.homeModules.tui =
     { pkgs, ... }:
     {
       programs = {

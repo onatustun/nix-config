@@ -1,5 +1,5 @@
 {
-  flake.homeModules.wayland-utils =
+  flake.homeModules.wayland =
     { pkgs, ... }:
     {
       home.packages = [

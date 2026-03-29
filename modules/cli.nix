@@ -5,7 +5,7 @@
       make-shells.default.packages = [ pkgs.vim ];
     };
 
-  flake.homeModules.cli-utils =
+  flake.homeModules.cli =
     { pkgs, ... }:
     {
       programs = {

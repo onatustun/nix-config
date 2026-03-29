@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.nix-core =
+  flake.nixosModules.nix =
     {
       lib,
       inputs,
