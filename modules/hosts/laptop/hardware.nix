@@ -1,65 +1,64 @@
 {
-  flake.nixosModules.laptop-hardware = {
-    modulesPath,
-    inputs,
-    lib,
-    pkgs,
-    config,
-    ...
-  }: {
-    imports = [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    ];
-
-    boot = {
-      kernelModules = ["kvm-amd"];
-
-      initrd.availableKernelModules = [
-        "nvme"
-        "xhci_pci"
-        "thunderbolt"
-        "usb_storage"
-        "sd_mod"
+  flake.nixosModules.laptop-hardware =
+    {
+      modulesPath,
+      inputs,
+      pkgs,
+      config,
+      ...
+    }:
+    {
+      imports = [
+        (modulesPath + "/installer/scan/not-detected.nix")
+        inputs.nixos-hardware.nixosModules.framework-13-7040-amd
       ];
-    };
 
-    fileSystems = {
-      "/" = {
-        device = "/dev/disk/by-uuid/506db6ea-c537-4c30-a710-1aafaef3cf8a";
-        fsType = "ext4";
-      };
+      boot = {
+        kernelModules = [ "kvm-amd" ];
 
-      "/boot" = {
-        device = "/dev/disk/by-uuid/CB13-7E41";
-        fsType = "vfat";
-
-        options = [
-          "fmask=0077"
-          "dmask=0077"
+        initrd.availableKernelModules = [
+          "nvme"
+          "xhci_pci"
+          "thunderbolt"
+          "usb_storage"
+          "sd_mod"
         ];
       };
-    };
 
-    swapDevices = lib.lists.singleton {
-      device = "/dev/disk/by-uuid/f2ce709b-e968-4dbd-b4ce-f8b6f8b81afd";
-    };
+      fileSystems = {
+        "/" = {
+          device = "/dev/disk/by-uuid/506db6ea-c537-4c30-a710-1aafaef3cf8a";
+          fsType = "ext4";
+        };
 
-    hardware = {
-      cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
-      framework.enableKmod = true;
-    };
+        "/boot" = {
+          device = "/dev/disk/by-uuid/CB13-7E41";
+          fsType = "vfat";
 
-    services = {
-      fwupd.enable = true;
-      power-profiles-daemon.enable = true;
-      upower.enable = true;
-    };
+          options = [
+            "fmask=0077"
+            "dmask=0077"
+          ];
+        };
+      };
 
-    environment.systemPackages = [
-      pkgs.framework-tool
-      pkgs.kmod
-      pkgs.microcode-amd
-    ];
-  };
+      swapDevices = [ { device = "/dev/disk/by-uuid/f2ce709b-e968-4dbd-b4ce-f8b6f8b81afd"; } ];
+
+      hardware = {
+        cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+        framework.enableKmod = true;
+      };
+
+      services = {
+        fwupd.enable = true;
+        power-profiles-daemon.enable = true;
+        upower.enable = true;
+      };
+
+      environment.systemPackages = [
+        pkgs.framework-tool
+        pkgs.kmod
+        pkgs.microcode-amd
+      ];
+    };
 }

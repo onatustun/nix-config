@@ -1,10 +1,12 @@
 {
-  flake.homeModules.media = {pkgs, ...}: {
-    programs.mpv.enable = true;
+  flake.homeModules.media =
+    { pkgs, ... }:
+    {
+      programs.mpv.enable = true;
 
-    home.packages = [
-      pkgs.haruna
-      pkgs.imv
-    ];
-  };
+      home.packages = [
+        pkgs.haruna
+        pkgs.imv
+      ];
+    };
 }

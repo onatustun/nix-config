@@ -1,22 +1,20 @@
 {
-  flake.nixosModules.networking = {
-    hostName,
-    pkgs,
-    ...
-  }: {
-    services.resolved.enable = true;
+  flake.nixosModules.networking =
+    { hostName, pkgs, ... }:
+    {
+      services.resolved.enable = true;
 
-    networking = {
-      inherit hostName;
+      networking = {
+        inherit hostName;
 
-      networkmanager = {
-        enable = true;
-        wifi.powersave = false;
+        networkmanager = {
+          enable = true;
+          wifi.powersave = false;
+        };
+
+        firewall.checkReversePath = "loose";
       };
 
-      firewall.checkReversePath = "loose";
+      environment.systemPackages = [ pkgs.networkmanagerapplet ];
     };
-
-    environment.systemPackages = [pkgs.networkmanagerapplet];
-  };
 }

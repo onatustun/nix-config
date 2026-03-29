@@ -1,45 +1,49 @@
 {
   flake = {
     nixosModules = {
-      core = {hostName, ...}: {
-        _module.args.isLaptop = hostName == "laptop";
-      };
-
-      laptop-host = {
-        config,
-        keys,
-        username,
-        ...
-      }: {
-        age.secrets.password = {
-          file = ./password.age;
-          owner = "root";
-          group = "root";
-          mode = "0400";
+      core =
+        { hostName, ... }:
+        {
+          _module.args.isLaptop = hostName == "laptop";
         };
 
-        users.users = {
-          root = {
-            hashedPasswordFile = config.age.secrets.password.path;
-            openssh.authorizedKeys.keys = keys.userKeys;
+      laptop-host =
+        {
+          config,
+          keys,
+          username,
+          ...
+        }:
+        {
+          age.secrets.password = {
+            file = ./password.age;
+            owner = "root";
+            group = "root";
+            mode = "0400";
           };
 
-          ${username} = {
-            hashedPasswordFile = config.age.secrets.password.path;
-            openssh.authorizedKeys.keys = keys.userKeys;
+          users.users = {
+            root = {
+              hashedPasswordFile = config.age.secrets.password.path;
+              openssh.authorizedKeys.keys = keys.userKeys;
+            };
 
-            extraGroups = [
-              "networkmanager"
-              "storage"
-              "video"
-              "wheel"
-            ];
+            ${username} = {
+              hashedPasswordFile = config.age.secrets.password.path;
+              openssh.authorizedKeys.keys = keys.userKeys;
+
+              extraGroups = [
+                "networkmanager"
+                "storage"
+                "video"
+                "wheel"
+              ];
+            };
           };
+
+          nixpkgs.hostPlatform.system = "x86_64-linux";
+          system.stateVersion = "26.05";
         };
-
-        nixpkgs.hostPlatform.system = "x86_64-linux";
-        system.stateVersion = "26.05";
-      };
     };
 
     homeModules.laptop-hm.home.stateVersion = "26.05";

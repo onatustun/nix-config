@@ -1,201 +1,215 @@
-{moduleWithSystem, ...}: {
+{ moduleWithSystem, ... }:
+{
   flake = {
-    nixosModules.helix = {
-      config,
-      username,
-      inputs,
-      ...
-    }: {
-      nix.settings = {
-        extra-substituters = ["https://helix.cachix.org"];
-        extra-trusted-public-keys = ["helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="];
-      };
-
-      environment.sessionVariables = {
-        inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;
-      };
-
-      home-manager.sharedModules = [inputs.self.homeModules.helix];
-    };
-
-    homeModules.helix = moduleWithSystem ({inputs', ...}: {
-      pkgs,
-      lib,
-      config,
-      ...
-    }: let
-      package = inputs'.helix.packages.default;
-    in {
-      home = {
-        packages = [
-          inputs'.nixd.packages.default
-          pkgs.uwu-colors
-        ];
-
-        sessionVariables = {
-          EDITOR = lib.meta.getExe' package "hx";
-          VISUAL = config.home.sessionVariables.EDITOR;
-        };
-      };
-
-      programs = {
-        nushell.environmentVariables = {
-          inherit (config.home.sessionVariables) EDITOR VISUAL;
+    nixosModules.helix =
+      {
+        config,
+        username,
+        inputs,
+        ...
+      }:
+      {
+        nix.settings = {
+          extra-substituters = [ "https://helix.cachix.org" ];
+          extra-trusted-public-keys = [ "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs=" ];
         };
 
-        helix = {
-          enable = true;
-          inherit package;
+        environment.sessionVariables = {
+          inherit (config.home-manager.users.${username}.home.sessionVariables)
+            EDITOR
+            VISUAL
+            ;
+        };
 
-          settings = {
-            editor = {
-              true-color = true;
-              default-yank-register = "+";
-              middle-click-paste = false;
-              line-number = "relative";
-              cursorline = true;
-              continue-comments = false;
-              auto-format = false;
-              idle-timeout = 0;
-              completion-replace = true;
-              bufferline = "multiple";
-              color-modes = true;
-              insert-final-newline = false;
-              end-of-line-diagnostics = "warning";
-              lsp.display-inlay-hints = true;
-              cursor-shape.insert = "bar";
-              file-picker.hidden = false;
-              auto-save = false;
-              inline-diagnostics.cursor-line = "warning";
-              indent-guides.render = false;
-              jump-label-alphabet = "jkl;hfdsagbceimnopqrtuvwxyz";
+        home-manager.sharedModules = [ inputs.self.homeModules.helix ];
+      };
 
-              statusline = {
-                left = [
-                  "mode"
-                  "spinner"
-                  "file-name"
-                  "read-only-indicator"
-                  "file-modification-indicator"
-                ];
+    homeModules.helix = moduleWithSystem (
+      { inputs', ... }:
+      {
+        lib,
+        pkgs,
+        config,
+        ...
+      }:
+      let
+        inherit (lib.meta) getExe';
+        package = inputs'.helix.packages.default;
+      in
+      {
+        home = {
+          packages = [
+            inputs'.nixd.packages.default
+            pkgs.uwu-colors
+          ];
 
-                right = [
-                  "version-control"
-                  "diagnostics"
-                  "selections"
-                  "position"
-                  "total-line-numbers"
-                ];
+          sessionVariables = {
+            EDITOR = getExe' package "hx";
+            VISUAL = config.home.sessionVariables.EDITOR;
+          };
+        };
 
-                mode = {
-                  normal = "N";
-                  insert = "I";
-                  select = "S";
-                };
-              };
-
-              whitespace = {
-                characters = {
-                  tab = "→";
-                  space = "·";
-                };
-
-                render = {
-                  space = "all";
-                  tab = "all";
-                };
-              };
-
-              gutters = {
-                layout = [
-                  "diagnostics"
-                  "spacer"
-                  "line-numbers"
-                  "spacer"
-                  "diff"
-                ];
-
-                line-numbers.min-width = 1;
-              };
-            };
-
-            keys = {
-              normal = {
-                C-down = [
-                  "page_cursor_half_down"
-                  "align_view_center"
-                ];
-
-                C-up = [
-                  "page_cursor_half_up"
-                  "align_view_center"
-                ];
-
-                x = "select_line_below";
-                X = "select_line_above";
-
-                G = {
-                  j = "@vgj<esc>";
-                  k = "@vgk<esc>";
-                };
-
-                g = {
-                  j = "goto_last_line";
-                  k = "goto_file_start";
-                };
-
-                space.B = ":sh git show -s --date=format-local:%%d/%%m/%%y --format=\"%%h (%%cn %%cd) %%s\" (git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | lines | first | split words | first)";
-              };
-
-              select = {
-                x = "select_line_below";
-                X = "select_line_above";
-
-                g = {
-                  j = "goto_last_line";
-                  k = "goto_file_start";
-                };
-              };
-            };
+        programs = {
+          nushell.environmentVariables = {
+            inherit (config.home.sessionVariables)
+              EDITOR
+              VISUAL
+              ;
           };
 
-          languages = {
-            language = [
-              {
-                name = "haskell";
+          helix = {
+            enable = true;
+            inherit package;
 
-                formatter = {
-                  command = "fourmolu";
+            settings = {
+              editor = {
+                true-color = true;
+                default-yank-register = "+";
+                middle-click-paste = false;
+                line-number = "relative";
+                cursorline = true;
+                continue-comments = false;
+                auto-format = false;
+                idle-timeout = 0;
+                completion-replace = true;
+                bufferline = "multiple";
+                color-modes = true;
+                insert-final-newline = false;
+                end-of-line-diagnostics = "warning";
+                lsp.display-inlay-hints = true;
+                cursor-shape.insert = "bar";
+                file-picker.hidden = false;
+                auto-save = false;
+                inline-diagnostics.cursor-line = "warning";
+                indent-guides.render = false;
+                jump-label-alphabet = "jkl;hfdsagbceimnopqrtuvwxyz";
 
-                  args = [
-                    "--stdin-input-file"
-                    "%{buffer_name}"
+                statusline = {
+                  left = [
+                    "mode"
+                    "spinner"
+                    "file-name"
+                    "read-only-indicator"
+                    "file-modification-indicator"
                   ];
+
+                  right = [
+                    "version-control"
+                    "diagnostics"
+                    "selections"
+                    "position"
+                    "total-line-numbers"
+                  ];
+
+                  mode = {
+                    normal = "N";
+                    insert = "I";
+                    select = "S";
+                  };
                 };
-              }
-              {
-                name = "nix";
-                formatter.command = "alejandra";
 
-                language-servers = [
-                  "nixd"
-                  "uwu-colors"
-                ];
-              }
-            ];
+                whitespace = {
+                  characters = {
+                    tab = "→";
+                    space = "·";
+                  };
 
-            language-server = {
-              uwu-colors.command = "uwu_colors";
+                  render = {
+                    space = "all";
+                    tab = "all";
+                  };
+                };
 
-              rust-analyzer.config = {
-                cargo.features = "all";
-                check.command = "clippy";
-                completion.callable.snippets = "add_parentheses";
+                gutters = {
+                  layout = [
+                    "diagnostics"
+                    "spacer"
+                    "line-numbers"
+                    "spacer"
+                    "diff"
+                  ];
+
+                  line-numbers.min-width = 1;
+                };
+              };
+
+              keys = {
+                normal = {
+                  C-down = [
+                    "page_cursor_half_down"
+                    "align_view_center"
+                  ];
+
+                  C-up = [
+                    "page_cursor_half_up"
+                    "align_view_center"
+                  ];
+
+                  x = "select_line_below";
+                  X = "select_line_above";
+
+                  G = {
+                    j = "@vgj<esc>";
+                    k = "@vgk<esc>";
+                  };
+
+                  g = {
+                    j = "goto_last_line";
+                    k = "goto_file_start";
+                  };
+
+                  space.B = ":sh git show -s --date=format-local:%%d/%%m/%%y --format=\"%%h (%%cn %%cd) %%s\" (git blame -L %{cursor_line},%{cursor_line} --porcelain %{buffer_name} | lines | first | split words | first)";
+                };
+
+                select = {
+                  x = "select_line_below";
+                  X = "select_line_above";
+
+                  g = {
+                    j = "goto_last_line";
+                    k = "goto_file_start";
+                  };
+                };
+              };
+            };
+
+            languages = {
+              language = [
+                {
+                  name = "haskell";
+
+                  formatter = {
+                    command = "fourmolu";
+
+                    args = [
+                      "--stdin-input-file"
+                      "%{buffer_name}"
+                    ];
+                  };
+                }
+                {
+                  name = "nix";
+
+                  language-servers = [
+                    "nixd"
+                    "uwu-colors"
+                  ];
+                }
+              ];
+
+              language-server = {
+                uwu-colors.command = "uwu_colors";
+
+                rust-analyzer.config = {
+                  cargo.features = "all";
+                  check.command = "clippy";
+                  completion.callable.snippets = "add_parentheses";
+                };
               };
             };
           };
         };
-      };
-    });
+      }
+    );
   };
 }

@@ -1,141 +1,122 @@
 {
   flake = {
-    nixosModules.noctalia = {inputs, ...}: {
-      nix.settings = {
-        extra-substituters = ["https://noctalia.cachix.org"];
-        extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
+    nixosModules.noctalia =
+      { lib, inputs, ... }:
+      let
+        inherit (lib.lists) singleton;
+      in
+      {
+        nix.settings = {
+          extra-substituters = [ "https://noctalia.cachix.org" ];
+          extra-trusted-public-keys = singleton "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=";
+        };
+
+        home-manager.sharedModules = [ inputs.self.homeModules.noctalia ];
       };
 
-      home-manager.sharedModules = [inputs.self.homeModules.noctalia];
-    };
+    homeModules.noctalia =
+      { inputs, pkgs, ... }:
+      {
+        imports = [ inputs.noctalia.homeModules.default ];
 
-    homeModules.noctalia = {
-      inputs,
-      pkgs,
-      ...
-    }: {
-      imports = [inputs.noctalia.homeModules.default];
+        home.packages = [
+          pkgs.brightnessctl
+          pkgs.cava
+          pkgs.ddcutil
+          pkgs.quickshell
+          pkgs.wlsunset
+        ];
 
-      home.packages = [
-        pkgs.brightnessctl
-        pkgs.cava
-        pkgs.ddcutil
-        pkgs.quickshell
-        pkgs.wlsunset
-      ];
+        programs.noctalia-shell = {
+          enable = true;
+          systemd.enable = true;
 
-      programs.noctalia-shell = {
-        enable = true;
-        systemd.enable = true;
+          settings = {
+            bar = {
+              outerCorners = false;
+              showCapsule = false;
 
-        settings = {
-          bar = {
-            outerCorners = false;
-            showCapsule = false;
+              widgets = {
+                left = [
+                  {
+                    id = "Workspace";
+                    hideUnoccupied = true;
+                  }
+                  { id = "ActiveWindow"; }
+                ];
 
-            widgets = {
-              left = [
-                {
-                  id = "Workspace";
-                  hideUnoccupied = true;
-                }
-                {
-                  id = "ActiveWindow";
-                }
-              ];
+                center = [
+                  {
+                    id = "ControlCenter";
+                    useDistroLogo = true;
+                  }
+                  { id = "Clock"; }
+                ];
 
-              center = [
-                {
-                  id = "ControlCenter";
-                  useDistroLogo = true;
-                }
-                {
-                  id = "Clock";
-                }
-              ];
-
-              right = [
-                {
-                  id = "Tray";
-                }
-                {
-                  id = "NotificationHistory";
-                }
-                {
-                  id = "SystemMonitor";
-                }
-                {
-                  id = "Battery";
-                  displayMode = "alwaysShow";
-                }
-              ];
+                right = [
+                  { id = "Tray"; }
+                  { id = "NotificationHistory"; }
+                  { id = "SystemMonitor"; }
+                  {
+                    id = "Battery";
+                    displayMode = "alwaysShow";
+                  }
+                ];
+              };
             };
-          };
 
-          location = {
-            name = "Aberdeen, United Kingdom";
-            weatherShowEffects = false;
-          };
+            location = {
+              name = "Aberdeen, United Kingdom";
+              weatherShowEffects = false;
+            };
 
-          wallpaper.enabled = false;
-          appLauncher.terminalCommand = "nu -c";
+            wallpaper.enabled = false;
+            appLauncher.terminalCommand = "nu -c";
 
-          controlCenter = {
-            position = "top-center";
+            controlCenter = {
+              position = "top-center";
 
-            shortcuts = {
-              left = [
+              shortcuts = {
+                left = [
+                  { id = "Network"; }
+                  { id = "Bluetooth"; }
+                  { id = "NoctaliaPerformance"; }
+                ];
+
+                right = [
+                  { id = "PowerProfile"; }
+                  { id = "KeepAwake"; }
+                  { id = "NightLight"; }
+                ];
+              };
+
+              cards = [
                 {
-                  id = "Network";
+                  enabled = true;
+                  id = "profile-card";
                 }
                 {
-                  id = "Bluetooth";
+                  enabled = true;
+                  id = "shortcuts-card";
                 }
                 {
-                  id = "NoctaliaPerformance";
-                }
-              ];
-
-              right = [
-                {
-                  id = "PowerProfile";
+                  enabled = true;
+                  id = "audio-card";
                 }
                 {
-                  id = "KeepAwake";
-                }
-                {
-                  id = "NightLight";
+                  enabled = true;
+                  id = "brightness-card";
                 }
               ];
             };
 
-            cards = [
-              {
-                enabled = true;
-                id = "profile-card";
-              }
-              {
-                enabled = true;
-                id = "shortcuts-card";
-              }
-              {
-                enabled = true;
-                id = "audio-card";
-              }
-              {
-                enabled = true;
-                id = "brightness-card";
-              }
-            ];
-          };
-
-          nightLight = {
-            enabled = true;
-            nightTemp = "2750";
-            dayTemp = "4250";
+            nightLight = {
+              enabled = true;
+              nightTemp = "2750";
+              dayTemp = "4250";
+            };
           };
         };
       };
-    };
   };
 }

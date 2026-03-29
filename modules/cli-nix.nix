@@ -1,12 +1,14 @@
 {
-  flake.homeModules.cli-nix = {pkgs, ...}: {
-    home.packages = [
-      pkgs.alejandra
-      pkgs.deadnix
-      pkgs.nix-melt
-      pkgs.nix-search-cli
-      pkgs.noogle-search
-      pkgs.statix
-    ];
-  };
+  flake.homeModules.cli-nix =
+    { pkgs, ... }:
+    {
+      home.packages = [
+        pkgs.deadnix
+        pkgs.nixfmt
+        pkgs.nix-melt
+        pkgs.nix-search-cli
+        pkgs.noogle-search
+        pkgs.statix
+      ];
+    };
 }

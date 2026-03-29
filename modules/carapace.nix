@@ -1,18 +1,20 @@
 {
-  flake.homeModules.carapace = {
-    lib,
-    config,
-    ...
-  }: {
-    programs = {
-      carapace.enable = true;
+  flake.homeModules.carapace =
+    { lib, config, ... }:
+    let
+      inherit (lib.strings) concatStringsSep;
+      inherit (lib.lists) optional;
+    in
+    {
+      programs = {
+        carapace.enable = true;
 
-      nushell.environmentVariables.CARAPACE_BRIDGES =
-        lib.strings.concatStringsSep ","
-        (["carapace"]
-          ++ lib.lists.optional config.programs.zsh.enable "zsh"
-          ++ lib.lists.optional config.programs.fish.enable "fish"
-          ++ lib.lists.optional config.programs.bash.enable "bash");
+        nushell.environmentVariables.CARAPACE_BRIDGES = concatStringsSep "," (
+          [ "carapace" ]
+          ++ optional config.programs.zsh.enable "zsh"
+          ++ optional config.programs.fish.enable "fish"
+          ++ optional config.programs.bash.enable "bash"
+        );
+      };
     };
-  };
 }

@@ -1,13 +1,15 @@
 {
-  flake.homeModules.cursor = {config, ...}: {
-    home.pointerCursor = {
-      enable = true;
-      gtk.enable = true;
-    };
+  flake.homeModules.cursor =
+    { config, ... }:
+    {
+      home.pointerCursor = {
+        enable = true;
+        gtk.enable = true;
+      };
 
-    gtk = {
-      enable = true;
-      cursorTheme = config.stylix.cursor;
+      gtk = {
+        enable = true;
+        cursorTheme = config.stylix.cursor;
+      };
     };
-  };
 }

@@ -1,20 +1,23 @@
-{inputs, ...}: {
-  imports = [inputs.treefmt-nix.flakeModule];
+{ inputs, ... }:
+{
+  imports = [ inputs.treefmt-nix.flakeModule ];
 
-  perSystem = {config, ...}: {
-    make-shells.default.inputsFrom = [config.treefmt.build.devShell];
-    pre-commit.settings.hooks.treefmt.enable = true;
+  perSystem =
+    { config, ... }:
+    {
+      make-shells.default.inputsFrom = [ config.treefmt.build.devShell ];
+      pre-commit.settings.hooks.treefmt.enable = true;
 
-    treefmt = {
-      enableDefaultExcludes = true;
-      flakeCheck = true;
-      flakeFormatter = true;
+      treefmt = {
+        enableDefaultExcludes = true;
+        flakeCheck = true;
+        flakeFormatter = true;
 
-      programs = {
-        alejandra.enable = true;
-        deadnix.enable = true;
-        statix.enable = true;
+        programs = {
+          deadnix.enable = true;
+          nixfmt.enable = true;
+          statix.enable = true;
+        };
       };
     };
-  };
 }

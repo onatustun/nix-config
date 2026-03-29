@@ -1,4 +1,9 @@
 let
+  inherit (builtins)
+    attrNames
+    attrValues
+    ;
+
   keys = {
     host = {
       desktop = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOkTg+eQtVPavIgeaEig6kz6uRVxkRxm1VTc4Bg/Z0lt host/nixos/desktop";
@@ -11,13 +16,13 @@ let
     };
   };
 
-  forDevice = device: map (type: keys.${type}.${device}) (builtins.attrNames keys);
+  forDevice = device: map (type: keys.${type}.${device}) (attrNames keys);
 
   desktopKeys = forDevice "desktop";
   laptopKeys = forDevice "laptop";
 
-  userKeys = builtins.attrValues keys.user;
-  hostKeys = builtins.attrValues keys.host;
+  userKeys = attrValues keys.user;
+  hostKeys = attrValues keys.host;
 
   allKeys = userKeys ++ hostKeys;
 
@@ -26,11 +31,18 @@ let
     secondary = "lzcAIIfjWzUj3lXxYfCmKDMBJ3QnajAS1bjlqyNP3ece+oN75482SS5vXyPDpK1fBF0+qgzRz3BF8wuC1IUwTQ==,JzQBz79Mg9/uVf5r5J9IsrBDOgSI9hbzaEl2qWnfhSAagT+NVbpibGNRguVMtUjbfzo/jGb20xkJy1r87yelGg==,es256,+presence";
   };
 
-  u2fKeys = builtins.attrValues u2f;
-in {
-  _module.args.keys =
-    keys
-    // {
-      inherit desktopKeys laptopKeys userKeys hostKeys allKeys u2f u2fKeys;
-    };
+  u2fKeys = attrValues u2f;
+in
+{
+  _module.args.keys = keys // {
+    inherit
+      desktopKeys
+      laptopKeys
+      userKeys
+      hostKeys
+      allKeys
+      u2f
+      u2fKeys
+      ;
+  };
 }

@@ -1,3 +1,1 @@
-{
-  debug = true;
-}
+{ debug = true; }

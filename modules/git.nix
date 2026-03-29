@@ -1,7 +1,9 @@
 {
-  perSystem = {pkgs, ...}: {
-    make-shells.default.packages = [pkgs.git];
-  };
+  perSystem =
+    { pkgs, ... }:
+    {
+      make-shells.default.packages = [ pkgs.git ];
+    };
 
   flake.homeModules.git.programs.git = {
     enable = true;

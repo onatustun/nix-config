@@ -4,8 +4,14 @@
   keys,
   self,
   ...
-}: {
-  flake.nixosConfigurations.desktop = lib.nixosSystem {
+}:
+let
+  inherit (lib) nixosSystem;
+  inherit (lib.attrsets) attrValues;
+  inherit (lib.lists) singleton;
+in
+{
+  flake.nixosConfigurations.desktop = nixosSystem {
     specialArgs = {
       inherit inputs keys;
       hostName = "desktop";
@@ -13,9 +19,8 @@
     };
 
     modules =
-      lib.attrsets.attrValues {
-        inherit
-          (self.nixosModules)
+      attrValues {
+        inherit (self.nixosModules)
           "audio"
           "bluetooth"
           "core"
@@ -49,49 +54,50 @@
           "zen-browser"
           ;
       }
-      ++ lib.lists.singleton ({
-        lib,
-        inputs,
-        ...
-      }: {
-        home-manager.sharedModules = lib.attrsets.attrValues {
-          inherit
-            (inputs.self.homeModules)
-            "archivers"
-            "bash"
-            "bat"
-            "carapace"
-            "cli-nix"
-            "cli-utils"
-            "cursor"
-            "desktop-hm"
-            "direnv"
-            "eza"
-            "fastfetch"
-            "fish"
-            "gh"
-            "git"
-            "jujutsu"
-            "media"
-            "nh"
-            "obsidian"
-            "proton"
-            "soulseek"
-            "starship"
-            "swayidle"
-            "tmux"
-            "tui-utils"
-            "wayland-utils"
-            "wayvnc"
-            "wl-clipboard"
-            "xdg"
-            "xwayland"
-            "yazi"
-            "zathura"
-            "zoxide"
-            "zsh"
-            ;
-        };
-      });
+      ++ singleton (
+        { lib, inputs, ... }:
+        let
+          inherit (lib.attrsets) attrValues;
+        in
+        {
+          home-manager.sharedModules = attrValues {
+            inherit (inputs.self.homeModules)
+              "archivers"
+              "bash"
+              "bat"
+              "carapace"
+              "cli-nix"
+              "cli-utils"
+              "cursor"
+              "desktop-hm"
+              "direnv"
+              "eza"
+              "fastfetch"
+              "fish"
+              "gh"
+              "git"
+              "jujutsu"
+              "media"
+              "nh"
+              "obsidian"
+              "proton"
+              "soulseek"
+              "starship"
+              "swayidle"
+              "tmux"
+              "tui-utils"
+              "wayland-utils"
+              "wayvnc"
+              "wl-clipboard"
+              "xdg"
+              "xwayland"
+              "yazi"
+              "zathura"
+              "zoxide"
+              "zsh"
+              ;
+          };
+        }
+      );
   };
 }

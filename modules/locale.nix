@@ -1,14 +1,18 @@
 {
-  flake.nixosModules.locale = {lib, ...}: let
-    locale = "en_GB.UTF-8";
-  in {
-    time.timeZone = "Europe/London";
+  flake.nixosModules.locale =
+    { lib, ... }:
+    let
+      locale = "en_GB.UTF-8";
+      inherit (lib.attrsets) genAttrs;
+      inherit (lib.trivial) const;
+    in
+    {
+      time.timeZone = "Europe/London";
 
-    i18n = {
-      defaultLocale = locale;
+      i18n = {
+        defaultLocale = locale;
 
-      extraLocaleSettings =
-        lib.attrsets.genAttrs (lib.lists.map (suffix: "LC_${suffix}") [
+        extraLocaleSettings = genAttrs (map (suffix: "LC_${suffix}") [
           "ADDRESS"
           "IDENTIFICATION"
           "MEASUREMENT"
@@ -18,8 +22,7 @@
           "PAPER"
           "TELEPHONE"
           "TIME"
-        ])
-        (lib.trivial.const locale);
+        ]) (const locale);
+      };
     };
-  };
 }

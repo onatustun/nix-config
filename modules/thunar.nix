@@ -1,37 +1,37 @@
 {
   flake = {
-    nixosModules.thunar = {
-      pkgs,
-      inputs,
-      ...
-    }: {
-      services = {
-        gvfs.enable = true;
-        tumbler.enable = true;
+    nixosModules.thunar =
+      { pkgs, inputs, ... }:
+      {
+        services = {
+          gvfs.enable = true;
+          tumbler.enable = true;
+        };
+
+        programs.thunar = {
+          enable = true;
+
+          plugins = [
+            pkgs.thunar-archive-plugin
+            pkgs.thunar-media-tags-plugin
+            pkgs.thunar-volman
+          ];
+        };
+
+        home-manager.sharedModules = [ inputs.self.homeModules.thunar ];
       };
 
-      programs.thunar = {
-        enable = true;
+    homeModules.thunar =
+      { pkgs, ... }:
+      {
+        services.udiskie.enable = true;
+        xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
 
-        plugins = [
-          pkgs.thunar-archive-plugin
-          pkgs.thunar-media-tags-plugin
-          pkgs.thunar-volman
+        home.packages = [
+          pkgs.ffmpegthumbnailer
+          pkgs.kdePackages.ark
+          pkgs.libgsf
         ];
       };
-
-      home-manager.sharedModules = [inputs.self.homeModules.thunar];
-    };
-
-    homeModules.thunar = {pkgs, ...}: {
-      services.udiskie.enable = true;
-      xdg.mimeApps.defaultApplications."inode/directory" = "thunar.desktop";
-
-      home.packages = [
-        pkgs.ffmpegthumbnailer
-        pkgs.kdePackages.ark
-        pkgs.libgsf
-      ];
-    };
   };
 }

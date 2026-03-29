@@ -1,20 +1,22 @@
 {
-  flake.nixosModules.printing = {pkgs, ...}: {
-    services = {
-      avahi = {
-        enable = true;
-        nssmdns4 = true;
-        openFirewall = true;
-      };
+  flake.nixosModules.printing =
+    { pkgs, ... }:
+    {
+      services = {
+        avahi = {
+          enable = true;
+          nssmdns4 = true;
+          openFirewall = true;
+        };
 
-      printing = {
-        enable = true;
+        printing = {
+          enable = true;
 
-        drivers = [
-          pkgs.cups-filters
-          pkgs.cups-browsed
-        ];
+          drivers = [
+            pkgs.cups-filters
+            pkgs.cups-browsed
+          ];
+        };
       };
     };
-  };
 }
