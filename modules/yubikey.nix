@@ -24,7 +24,7 @@
               interactive = true;
               origin = "pam://u2f";
               appid = "pam://u2f";
-              authfile = writeText "u2f-keys" ("${username}:" + concatStringsSep ":" keys.u2fKeys);
+              authfile = writeText "u2f-keys" "${username}:${concatStringsSep ":" keys.u2fKeys}";
             };
           };
 
