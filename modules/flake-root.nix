@@ -1,11 +1,14 @@
-{ inputs, ... }:
 {
-  imports = [ inputs.flake-root.flakeModule ];
-
-  perSystem =
-    { config, ... }:
+  partitions.dev.module =
+    { inputs, ... }:
     {
-      make-shells.default.inputsFrom = [ config.flake-root.devShell ];
-      treefmt = { inherit (config.flake-root) projectRootFile; };
+      imports = [ inputs.flake-root.flakeModule ];
+
+      perSystem =
+        { config, ... }:
+        {
+          make-shells.default.inputsFrom = [ config.flake-root.devShell ];
+          treefmt = { inherit (config.flake-root) projectRootFile; };
+        };
     };
 }

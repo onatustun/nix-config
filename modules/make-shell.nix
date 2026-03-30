@@ -1,11 +1,14 @@
-{ inputs, ... }:
 {
-  imports = [ inputs.make-shell.flakeModules.default ];
-
-  perSystem =
-    { pkgs, self', ... }:
+  partitions.dev.module =
+    { inputs, ... }:
     {
-      make-shells.default.stdenv = pkgs.stdenvNoCC;
-      devShells.nix-config = self'.devShells.default;
+      imports = [ inputs.make-shell.flakeModules.default ];
+
+      perSystem =
+        { pkgs, self', ... }:
+        {
+          make-shells.default.stdenv = pkgs.stdenvNoCC;
+          devShells.nix-config = self'.devShells.default;
+        };
     };
 }

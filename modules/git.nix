@@ -1,5 +1,5 @@
 {
-  perSystem =
+  partitions.dev.module.perSystem =
     { pkgs, ... }:
     {
       make-shells.default.packages = [ pkgs.git ];

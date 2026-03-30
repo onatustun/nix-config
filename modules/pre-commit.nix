@@ -1,18 +1,21 @@
-{ inputs, ... }:
 {
-  imports = [ inputs.git-hooks.flakeModule ];
-
-  perSystem =
-    { config, ... }:
+  partitions.dev.module =
+    { inputs, ... }:
     {
-      make-shells.default = {
-        inputsFrom = [ config.pre-commit.devShell ];
-        shellHook = config.pre-commit.installationScript;
-      };
+      imports = [ inputs.git-hooks.flakeModule ];
 
-      pre-commit = {
-        check.enable = true;
-        settings.hooks.flake-checker.enable = true;
-      };
+      perSystem =
+        { config, ... }:
+        {
+          make-shells.default = {
+            inputsFrom = [ config.pre-commit.devShell ];
+            shellHook = config.pre-commit.installationScript;
+          };
+
+          pre-commit = {
+            check.enable = true;
+            settings.hooks.flake-checker.enable = true;
+          };
+        };
     };
 }

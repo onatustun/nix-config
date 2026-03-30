@@ -40,7 +40,11 @@
         inherit (inputs'.zmk-nix.packages) update;
         flash = inputs'.zmk-nix.packages.flash.override { inherit (self'.packages) firmware; };
       };
+    };
 
+  partitions.dev.module.perSystem =
+    { self', inputs', ... }:
+    {
       checks = {
         inherit (self'.packages)
           firmware

@@ -60,36 +60,11 @@
       repo = "default";
     };
 
-    make-shell = {
+    flake-compat = {
       type = "github";
-      owner = "nicknovitski";
-      repo = "make-shell";
-      inputs.flake-compat.follows = "";
-    };
-
-    flake-root = {
-      type = "github";
-      owner = "srid";
-      repo = "flake-root";
-    };
-
-    treefmt-nix = {
-      type = "github";
-      owner = "numtide";
-      repo = "treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    git-hooks = {
-      type = "github";
-      owner = "cachix";
-      repo = "git-hooks.nix";
-
-      inputs = {
-        flake-compat.follows = "";
-        gitignore.follows = "dep_gitignore";
-        nixpkgs.follows = "nixpkgs";
-      };
+      owner = "edolstra";
+      repo = "flake-compat";
+      flake = false;
     };
 
     deploy-rs = {
@@ -188,7 +163,7 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "treefmt-nix";
+        treefmt-nix.follows = "dep_treefmt-nix";
       };
     };
 
@@ -262,13 +237,6 @@
       inputs.systems.follows = "systems";
     };
 
-    dep_gitignore = {
-      type = "github";
-      owner = "hercules-ci";
-      repo = "gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     dep_agenix = {
       type = "github";
       owner = "ryantm";
@@ -295,6 +263,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    dep_treefmt-nix = {
+      type = "github";
+      owner = "numtide";
+      repo = "treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     dep_niri-unstable = {
       type = "github";
       owner = "niri-wm";
@@ -314,7 +289,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
-        treefmt-nix.follows = "treefmt-nix";
+        treefmt-nix.follows = "dep_treefmt-nix";
       };
     };
 

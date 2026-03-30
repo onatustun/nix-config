@@ -1,6 +1,6 @@
 { moduleWithSystem, ... }:
 {
-  perSystem =
+  partitions.dev.module.perSystem =
     { inputs', ... }:
     {
       make-shells.default.packages = [ inputs'.ragenix.packages.default ];

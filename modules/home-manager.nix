@@ -2,7 +2,7 @@
 {
   imports = [ inputs.home-manager.flakeModules.home-manager ];
 
-  perSystem =
+  partitions.dev.module.perSystem =
     { inputs', ... }:
     {
       make-shells.default.packages = [ inputs'.home-manager.packages.default ];
