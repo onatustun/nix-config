@@ -293,6 +293,18 @@
         "type": "github"
       }
     },
+    "dev-inputs": {
+      "flake": false,
+      "locked": {
+        "path": "./dev-inputs",
+        "type": "path"
+      },
+      "original": {
+        "path": "./dev-inputs",
+        "type": "path"
+      },
+      "parent": []
+    },
     "filter-deps": {
       "locked": {
         "lastModified": 1774874690,
@@ -667,6 +679,7 @@
         "dep_zig-overlay": "dep_zig-overlay",
         "dep_zon2nix": "dep_zon2nix",
         "deploy-rs": "deploy-rs",
+        "dev-inputs": "dev-inputs",
         "filter-deps": "filter-deps",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",

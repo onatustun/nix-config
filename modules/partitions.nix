@@ -9,5 +9,5 @@
 
   partitions.dev.extraInputs =
     inputs.filter-deps
-      (import inputs.flake-compat { src = ../dev-inputs; }).outputs.inputs;
+      (import inputs.flake-compat { src = inputs.dev-inputs; }).outputs.inputs;
 }

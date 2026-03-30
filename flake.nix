@@ -68,6 +68,12 @@
       flake = false;
     };
 
+    dev-inputs = {
+      type = "path";
+      path = "./dev-inputs";
+      flake = false;
+    };
+
     deploy-rs = {
       type = "github";
       owner = "serokell";
