@@ -110,22 +110,6 @@
         "type": "github"
       }
     },
-    "dep_flake-compat": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1767039857,
-        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
     "dep_flake-utils": {
       "inputs": {
         "systems": [
@@ -237,9 +221,7 @@
     },
     "dep_zig-overlay": {
       "inputs": {
-        "flake-compat": [
-          "dep_flake-compat"
-        ],
+        "flake-compat": [],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -289,9 +271,7 @@
     },
     "deploy-rs": {
       "inputs": {
-        "flake-compat": [
-          "dep_flake-compat"
-        ],
+        "flake-compat": [],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -382,9 +362,7 @@
     },
     "ghostty": {
       "inputs": {
-        "flake-compat": [
-          "dep_flake-compat"
-        ],
+        "flake-compat": [],
         "home-manager": [
           "home-manager"
         ],
@@ -417,9 +395,7 @@
     },
     "git-hooks": {
       "inputs": {
-        "flake-compat": [
-          "dep_flake-compat"
-        ],
+        "flake-compat": [],
         "gitignore": [
           "dep_gitignore"
         ],
@@ -505,9 +481,7 @@
     },
     "make-shell": {
       "inputs": {
-        "flake-compat": [
-          "dep_flake-compat"
-        ]
+        "flake-compat": []
       },
       "locked": {
         "lastModified": 1733933815,
@@ -711,7 +685,6 @@
       "inputs": {
         "dep_agenix": "dep_agenix",
         "dep_crane": "dep_crane",
-        "dep_flake-compat": "dep_flake-compat",
         "dep_flake-utils": "dep_flake-utils",
         "dep_gitignore": "dep_gitignore",
         "dep_niri-unstable": "dep_niri-unstable",

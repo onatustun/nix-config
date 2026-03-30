@@ -59,7 +59,7 @@
       type = "github";
       owner = "nicknovitski";
       repo = "make-shell";
-      inputs.flake-compat.follows = "dep_flake-compat";
+      inputs.flake-compat.follows = "";
     };
 
     flake-root = {
@@ -81,7 +81,7 @@
       repo = "git-hooks.nix";
 
       inputs = {
-        flake-compat.follows = "dep_flake-compat";
+        flake-compat.follows = "";
         gitignore.follows = "dep_gitignore";
         nixpkgs.follows = "nixpkgs";
       };
@@ -93,7 +93,7 @@
       repo = "deploy-rs";
 
       inputs = {
-        flake-compat.follows = "dep_flake-compat";
+        flake-compat.follows = "";
         nixpkgs.follows = "nixpkgs";
         utils.follows = "dep_flake-utils";
       };
@@ -230,7 +230,7 @@
       repo = "ghostty";
 
       inputs = {
-        flake-compat.follows = "dep_flake-compat";
+        flake-compat.follows = "";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
@@ -248,13 +248,6 @@
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
-    };
-
-    dep_flake-compat = {
-      type = "github";
-      owner = "edolstra";
-      repo = "flake-compat";
-      flake = false;
     };
 
     dep_flake-utils = {
@@ -326,7 +319,7 @@
       repo = "zig-overlay";
 
       inputs = {
-        flake-compat.follows = "dep_flake-compat";
+        flake-compat.follows = "";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
