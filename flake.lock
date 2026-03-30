@@ -295,14 +295,18 @@
     },
     "filter-deps": {
       "locked": {
-        "path": "./filter-deps",
-        "type": "path"
+        "lastModified": 1774874690,
+        "narHash": "sha256-xF6TjZqgiKG+shEYyMtUsidintjJ77R+CS3+LYY76A0=",
+        "owner": "onatustun",
+        "repo": "filter-deps",
+        "rev": "d8c346c49319f9d78b9ae5536440e34a34fe029f",
+        "type": "github"
       },
       "original": {
-        "path": "./filter-deps",
-        "type": "path"
-      },
-      "parent": []
+        "owner": "onatustun",
+        "repo": "filter-deps",
+        "type": "github"
+      }
     },
     "firefox-gnome-theme": {
       "flake": false,

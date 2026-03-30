@@ -17,9 +17,6 @@ result/
 !dev-inputs/
 !dev-inputs/**/
 
-!filter-deps/
-!filter-deps/**/
-
 !**/cradio.conf
 !**/cradio.keymap
 !**/west.yml

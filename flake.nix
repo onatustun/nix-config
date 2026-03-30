@@ -50,8 +50,9 @@
     };
 
     filter-deps = {
-      type = "path";
-      path = "./filter-deps";
+      type = "github";
+      owner = "onatustun";
+      repo = "filter-deps";
     };
 
     systems = {
