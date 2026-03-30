@@ -5,22 +5,20 @@ result/
 
 .pre-commit-config.yaml
 
+!dev-inputs/
+
+!modules/
+!modules/**/
+
+!*.age
+!*.nix
+!*.nu
+
+!cradio.conf
+!cradio.keymap
 !.envrc
 !flake.lock
 !.gitattributes
 !.gitignore
 !LICENSE
-
-!modules/
-!modules/**/
-
-!dev-inputs/
-!dev-inputs/**/
-
-!**/cradio.conf
-!**/cradio.keymap
-!**/west.yml
-
-!*.age
-!*.nix
-!*.nu
+!west.yml
