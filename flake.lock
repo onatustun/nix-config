@@ -293,6 +293,17 @@
         "type": "github"
       }
     },
+    "filter-deps": {
+      "locked": {
+        "path": "./filter-deps",
+        "type": "path"
+      },
+      "original": {
+        "path": "./filter-deps",
+        "type": "path"
+      },
+      "parent": []
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -693,6 +704,7 @@
         "dep_zig-overlay": "dep_zig-overlay",
         "dep_zon2nix": "dep_zon2nix",
         "deploy-rs": "deploy-rs",
+        "filter-deps": "filter-deps",
         "flake-parts": "flake-parts",
         "flake-root": "flake-root",
         "ghostty": "ghostty",

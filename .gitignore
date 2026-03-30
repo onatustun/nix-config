@@ -14,6 +14,9 @@ result/
 !modules/
 !modules/**/
 
+!filter-deps/
+!filter-deps/**/
+
 !**/cradio.conf
 !**/cradio.keymap
 !**/west.yml
