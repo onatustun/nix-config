@@ -4,7 +4,6 @@
     let
       locale = "en_GB.UTF-8";
       inherit (lib.attrsets) genAttrs;
-      inherit (lib.trivial) const;
     in
     {
       time.timeZone = "Europe/London";
@@ -22,7 +21,7 @@
           "PAPER"
           "TELEPHONE"
           "TIME"
-        ]) (const locale);
+        ]) (_: locale);
       };
     };
 }
