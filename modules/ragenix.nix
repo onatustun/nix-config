@@ -3,7 +3,13 @@
   partitions.dev.module.perSystem =
     { inputs', ... }:
     {
-      make-shells.default.packages = [ inputs'.ragenix.packages.default ];
+      make-shells.default = {
+        shellHook = ''
+          export RULES="$(git rev-parse --show-toplevel)/secrets.nix"
+        '';
+
+        packages = [ inputs'.ragenix.packages.default ];
+      };
     };
 
   flake = {
