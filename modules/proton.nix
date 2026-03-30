@@ -8,7 +8,7 @@
       home.packages = attrValues {
         inherit (pkgs)
           openvpn
-          protonvpn-gui
+          proton-vpn
           wireguard-tools
           ;
       };
