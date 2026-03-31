@@ -8,6 +8,6 @@
   };
 
   partitions.dev.extraInputs =
-    inputs.filter-deps
+    inputs.input-filter
       (import inputs.flake-compat { src = inputs.dev-inputs; }).outputs.inputs;
 }

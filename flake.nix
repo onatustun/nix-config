@@ -49,10 +49,10 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    filter-deps = {
+    input-filter = {
       type = "github";
       owner = "onatustun";
-      repo = "filter-deps";
+      repo = "input-filter";
     };
 
     systems = {
@@ -328,13 +328,13 @@
   outputs =
     {
       flake-parts,
-      filter-deps,
+      input-filter,
       ...
     }@allInputs:
     let
       inherit (flake-parts.lib) mkFlake;
     in
-    mkFlake { inputs = filter-deps allInputs; } (
+    mkFlake { inputs = input-filter allInputs; } (
       { lib, ... }:
       let
         inherit (lib.lists) filter;
