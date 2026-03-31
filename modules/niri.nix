@@ -168,7 +168,7 @@
             ];
 
             "Mod+E".action.spawn = getExe pkgs.thunar;
-            "Mod+Z".action.spawn = getExe' inputs'.zen-browser.packages.twilight "zen-twilight";
+            "Mod+Z".action.spawn = getExe inputs'.helium.packages.default;
             "Mod+C".action.close-window = [ ];
             "Mod+O".action.toggle-overview = [ ];
             "Mod+Shift+E".action.quit = [ ];

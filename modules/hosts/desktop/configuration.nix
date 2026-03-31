@@ -51,7 +51,6 @@ in
           thunar
           users
           yubikey
-          zen-browser
           ;
       }
       ++ singleton (
@@ -74,6 +73,7 @@ in
               fish
               gh
               git
+              helium
               jujutsu
               media
               nh

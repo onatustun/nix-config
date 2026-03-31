@@ -12,7 +12,6 @@
       "https://niri.cachix.org"
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
-      "https://zen-browser.cachix.org"
     ];
 
     extra-trusted-substituters = extra-substituters;
@@ -25,7 +24,6 @@
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-      "zen-browser.cachix.org-1:z/QLGrEkiBYF/7zoHX1Hpuv0B26QrmbVBSy9yDD2tSs="
     ];
 
     extra-experimental-features = [
@@ -226,15 +224,11 @@
       };
     };
 
-    zen-browser = {
+    helium = {
       type = "github";
-      owner = "0xc000022070";
-      repo = "zen-browser-flake";
-
-      inputs = {
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-      };
+      owner = "amaanq";
+      repo = "helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     dep_flake-utils = {

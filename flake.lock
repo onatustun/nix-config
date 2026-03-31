@@ -425,6 +425,26 @@
         "type": "gitlab"
       }
     },
+    "helium": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774471299,
+        "narHash": "sha256-2c5vpl2WUUvXR4VPMjzKnGxdnVfkjblmd06Le0s/pMI=",
+        "owner": "amaanq",
+        "repo": "helium-flake",
+        "rev": "9dce150ececbf2996d356b96d90fe8468cca8871",
+        "type": "github"
+      },
+      "original": {
+        "owner": "amaanq",
+        "repo": "helium-flake",
+        "type": "github"
+      }
+    },
     "helix": {
       "inputs": {
         "nixpkgs": [
@@ -683,6 +703,7 @@
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "ghostty": "ghostty",
+        "helium": "helium",
         "helix": "helix",
         "home-manager": "home-manager",
         "input-filter": "input-filter",
@@ -697,7 +718,6 @@
         "stylix": "stylix",
         "systems": "systems",
         "xwayland-satellite": "xwayland-satellite",
-        "zen-browser": "zen-browser",
         "zmk-nix": "zmk-nix"
       }
     },
@@ -857,29 +877,6 @@
       "original": {
         "owner": "supreeeme",
         "repo": "xwayland-satellite",
-        "type": "github"
-      }
-    },
-    "zen-browser": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1774848370,
-        "narHash": "sha256-Esm+aiabP563BcUFfFUCIOlFaTxKUXPp6jw0LMAV7ik=",
-        "owner": "0xc000022070",
-        "repo": "zen-browser-flake",
-        "rev": "712c476500e96df74276be99bb3fa9631f494f3a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "0xc000022070",
-        "repo": "zen-browser-flake",
         "type": "github"
       }
     },

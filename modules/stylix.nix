@@ -84,7 +84,6 @@
           rofi.enable = false;
           tmux.enable = false;
           waybar.enable = false;
-          zen-browser.enable = false;
         };
 
         programs.helix.settings.theme = config.stylix.base16Scheme.name;
