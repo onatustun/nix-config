@@ -23,8 +23,13 @@
         channel.enable = false;
 
         gc = {
-          automatic = !config.home-manager.users.${username}.programs.nh.clean.enable;
-          options = "--delete-older-than 3d";
+          automatic =
+            if config ? home-manager then
+              !config.home-manager.users.${username}.programs.nh.clean.enable
+            else
+              true;
+
+          options = "--delete-older-than 3d --keep-last 3";
         };
 
         optimise.automatic = true;
