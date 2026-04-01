@@ -1,7 +1,7 @@
 {
   description = "Nix config";
 
-  nixConfig = rec {
+  nixConfig = {
     commit-lockfile-summary = "chore: update `flake.lock`";
 
     extra-substituters = [
@@ -13,8 +13,6 @@
       "https://nix-community.cachix.org"
       "https://noctalia.cachix.org"
     ];
-
-    extra-trusted-substituters = extra-substituters;
 
     extra-trusted-public-keys = [
       "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
