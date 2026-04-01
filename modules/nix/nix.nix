@@ -8,8 +8,8 @@
       ...
     }:
     let
-      inherit (lib.modules) mkDefault;
       inherit (lib.lists) singleton;
+      inherit (lib.modules) mkDefault;
     in
     {
       age.secrets."github-token" = {
@@ -20,7 +20,6 @@
       };
 
       nix = {
-        enable = mkDefault true;
         channel.enable = false;
 
         gc = {
@@ -36,7 +35,6 @@
         settings = {
           auto-optimise-store = true;
           builders-use-substitutes = true;
-          cores = mkDefault 0;
           extra-substituters = [ "https://nix-community.cachix.org" ];
           extra-trusted-public-keys = singleton "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
 
