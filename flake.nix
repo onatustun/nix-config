@@ -318,11 +318,7 @@
   };
 
   outputs =
-    {
-      flake-parts,
-      input-filter,
-      ...
-    }@allInputs:
+    { flake-parts, input-filter, ... }@allInputs:
     let
       inherit (flake-parts.lib) mkFlake;
     in
