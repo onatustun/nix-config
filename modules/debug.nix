@@ -1,9 +1,14 @@
-{ config, ... }:
+{ lib, config, ... }:
+let
+  inherit (lib.attrsets) optionalAttrs;
+in
 {
   partitionedAttrs = {
     allSystems = "dev";
-    currentSystem = "dev";
     debug = "dev";
+  }
+  // optionalAttrs (builtins ? currentSystem) {
+    currentSystem = "dev";
   };
 
   partitions.dev.module =
