@@ -54,7 +54,7 @@
     systems = {
       type = "github";
       owner = "nix-systems";
-      repo = "default";
+      repo = "x86_64-linux";
     };
 
     flake-compat = {
