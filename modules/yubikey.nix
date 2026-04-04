@@ -4,9 +4,8 @@
       {
         pkgs,
         lib,
-        keys,
         username,
-        inputs,
+        keys,
         ...
       }:
       let
@@ -29,12 +28,10 @@
           };
 
           services = {
-            gdm-password.u2fAuth = true;
-            login.u2fAuth = true;
-            polkit-1.u2fAuth = true;
-            sshd.u2fAuth = true;
-            sudo.u2fAuth = true;
-            su.u2fAuth = true;
+            gdm-password.u2fAuth = false;
+            login.u2fAuth = false;
+            polkit-1.u2fAuth = false;
+            sshd.u2fAuth = false;
           };
         };
 
@@ -66,27 +63,6 @@
         programs.yubikey-touch-detector = {
           enable = true;
           libnotify = true;
-        };
-
-        home-manager.sharedModules = [ inputs.self.homeModules.yubikey ];
-      };
-
-    homeModules.yubikey =
-      { lib, pkgs, ... }:
-      let
-        inherit (lib.meta) getExe;
-      in
-      {
-        home.packages = [ pkgs.yubikey-touch-detector ];
-
-        systemd.user.services.yubikey-touch-detector = {
-          Unit = {
-            Description = "YubiKey touch detector";
-            PartOf = "graphical-session.target";
-          };
-
-          Service.ExecStart = getExe pkgs.yubikey-touch-detector;
-          Install.WantedBy = [ "graphical-session.target" ];
         };
       };
   };

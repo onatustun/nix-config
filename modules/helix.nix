@@ -198,13 +198,13 @@
               ];
 
               language-server = {
-                uwu-colors.command = "uwu_colors";
-
                 rust-analyzer.config = {
                   cargo.features = "all";
                   check.command = "clippy";
                   completion.callable.snippets = "add_parentheses";
                 };
+
+                uwu-colors.command = "uwu_colors";
               };
             };
           };

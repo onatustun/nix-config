@@ -4,7 +4,7 @@
       enable = true;
 
       settings = {
-        AuthenticationMethods = "publickey keyboard-interactive:pam";
+        KbdInteractiveAuthentication = false;
         PasswordAuthentication = false;
       };
     };
