@@ -31,20 +31,8 @@
     );
 
     homeModules.home-manager =
+      { username, homeDir, ... }:
       {
-        osConfig,
-        username,
-        homeDir,
-        ...
-      }:
-      {
-        nixpkgs = {
-          inherit (osConfig.nixpkgs)
-            config
-            overlays
-            ;
-        };
-
         home = {
           inherit username;
           sessionVariables.FLAKE = "${homeDir}/nix";

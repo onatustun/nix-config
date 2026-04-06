@@ -123,17 +123,6 @@
       repo = "nixos-hardware";
     };
 
-    nur = {
-      type = "github";
-      owner = "nix-community";
-      repo = "nur";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     stylix = {
       type = "github";
       owner = "danth";
@@ -142,8 +131,11 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
-        nur.follows = "nur";
+        nur.follows = "";
         systems.follows = "systems";
+        tinted-foot.follows = "";
+        tinted-kitty.follows = "";
+        tinted-zed.follows = "";
       };
     };
 

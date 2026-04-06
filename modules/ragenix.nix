@@ -17,7 +17,6 @@
       { inputs, ... }:
       {
         imports = [ inputs.ragenix.nixosModules.default ];
-        nixpkgs.overlays = [ inputs.ragenix.overlays.default ];
 
         nix.settings = {
           extra-substituters = [ "https://crane.cachix.org" ];

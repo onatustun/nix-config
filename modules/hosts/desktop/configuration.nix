@@ -39,9 +39,7 @@ in
           niri
           nix
           nix-index
-          nixpkgs
           noctalia
-          nur
           nushell
           printing
           ragenix
