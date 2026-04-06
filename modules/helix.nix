@@ -28,20 +28,17 @@
       { inputs', ... }:
       {
         lib,
-        pkgs,
         config,
         ...
       }:
       let
         inherit (lib.meta) getExe';
         package = inputs'.helix.packages.default;
+        inherit (lib.lists) singleton;
       in
       {
         home = {
-          packages = [
-            inputs'.nixd.packages.default
-            pkgs.uwu-colors
-          ];
+          packages = [ inputs'.nixd.packages.default ];
 
           sessionVariables = {
             EDITOR = getExe' package "hx";
@@ -174,37 +171,23 @@
             };
 
             languages = {
-              language = [
-                {
-                  name = "haskell";
+              language = singleton {
+                name = "haskell";
 
-                  formatter = {
-                    command = "fourmolu";
+                formatter = {
+                  command = "fourmolu";
 
-                    args = [
-                      "--stdin-input-file"
-                      "%{buffer_name}"
-                    ];
-                  };
-                }
-                {
-                  name = "nix";
-
-                  language-servers = [
-                    "nixd"
-                    "uwu-colors"
+                  args = [
+                    "--stdin-input-file"
+                    "%{buffer_name}"
                   ];
-                }
-              ];
-
-              language-server = {
-                rust-analyzer.config = {
-                  cargo.features = "all";
-                  check.command = "clippy";
-                  completion.callable.snippets = "add_parentheses";
                 };
+              };
 
-                uwu-colors.command = "uwu_colors";
+              language-server.rust-analyzer.config = {
+                cargo.features = "all";
+                check.command = "clippy";
+                completion.callable.snippets = "add_parentheses";
               };
             };
           };
