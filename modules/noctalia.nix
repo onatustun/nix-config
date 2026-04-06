@@ -23,6 +23,7 @@
       }:
       let
         inherit (lib.attrsets) attrValues;
+        inherit (lib.lists) singleton;
       in
       {
         imports = [ inputs.noctalia.homeModules.default ];
@@ -47,13 +48,10 @@
               showCapsule = false;
 
               widgets = {
-                left = [
-                  {
-                    id = "Workspace";
-                    hideUnoccupied = true;
-                  }
-                  { id = "ActiveWindow"; }
-                ];
+                left = singleton {
+                  id = "Workspace";
+                  hideUnoccupied = true;
+                };
 
                 center = [
                   {
