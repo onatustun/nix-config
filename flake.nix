@@ -32,10 +32,8 @@
 
   inputs = {
     nixpkgs = {
-      type = "github";
-      owner = "nixos";
-      repo = "nixpkgs";
-      ref = "nixpkgs-unstable";
+      type = "tarball";
+      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     };
 
     flake-parts = {

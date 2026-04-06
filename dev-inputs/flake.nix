@@ -33,10 +33,8 @@
     };
 
     dep_nixpkgs = {
-      type = "github";
-      owner = "nixos";
-      repo = "nixpkgs";
-      ref = "nixpkgs-unstable";
+      type = "tarball";
+      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     };
 
     dep_gitignore = {
