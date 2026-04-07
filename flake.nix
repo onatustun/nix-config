@@ -55,6 +55,12 @@
       repo = "x86_64-linux";
     };
 
+    keys = {
+      type = "path";
+      path = "./keys.nix";
+      flake = false;
+    };
+
     flake-compat = {
       type = "github";
       owner = "edolstra";

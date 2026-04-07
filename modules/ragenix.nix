@@ -1,5 +1,7 @@
-{ moduleWithSystem, ... }:
+{ inputs, moduleWithSystem, ... }:
 {
+  _module.args.keys = import inputs.keys;
+
   partitions.dev.module.perSystem =
     { inputs', ... }:
     {

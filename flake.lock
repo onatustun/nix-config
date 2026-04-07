@@ -503,6 +503,18 @@
         "type": "github"
       }
     },
+    "keys": {
+      "flake": false,
+      "locked": {
+        "path": "./keys.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "./keys.nix",
+        "type": "path"
+      },
+      "parent": []
+    },
     "niri": {
       "inputs": {
         "niri-stable": [],
@@ -681,6 +693,7 @@
         "helix": "helix",
         "home-manager": "home-manager",
         "input-filter": "input-filter",
+        "keys": "keys",
         "niri": "niri",
         "nix-index-database": "nix-index-database",
         "nixd": "nixd",

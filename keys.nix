@@ -33,16 +33,15 @@ let
 
   u2fKeys = attrValues u2f;
 in
-{
-  _module.args.keys = keys // {
-    inherit
-      desktopKeys
-      laptopKeys
-      userKeys
-      hostKeys
-      allKeys
-      u2f
-      u2fKeys
-      ;
-  };
+keys
+// {
+  inherit
+    desktopKeys
+    laptopKeys
+    userKeys
+    hostKeys
+    allKeys
+    u2f
+    u2fKeys
+    ;
 }
