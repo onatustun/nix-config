@@ -315,12 +315,10 @@
     mkFlake { inputs = input-filter allInputs; } (
       { lib, ... }:
       let
-        inherit (lib.lists) filter;
-        inherit (lib.strings) hasSuffix;
-        inherit (lib.filesystem) listFilesRecursive;
+        inherit (lib.fileset) toList fileFilter;
       in
       {
-        imports = filter (hasSuffix ".nix") (listFilesRecursive ./modules);
+        imports = toList (fileFilter (file: file.hasExt "nix") ./modules);
       }
     );
 }
