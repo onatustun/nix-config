@@ -3,8 +3,8 @@
     { config, ... }:
     {
       home.sessionVariables = {
-        NH_FLAKE = config.programs.nh.flake;
-        NH_OS_FLAKE = config.programs.nh.flake;
+        NH_FLAKE = config.home.sessionVariables.FLAKE;
+        NH_OS_FLAKE = config.home.sessionVariables.FLAKE;
       };
 
       programs = {
@@ -17,7 +17,6 @@
 
         nh = {
           enable = true;
-          flake = "${config.home.homeDirectory}/nix";
 
           clean = {
             enable = true;
