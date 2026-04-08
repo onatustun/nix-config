@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   perSystem =
     {
@@ -33,7 +34,7 @@
           meta = {
             description = "ZMK firmware";
             license = lib.licenses.mit;
-            platforms = lib.platforms.all;
+            platforms = config.systems;
           };
         };
 
