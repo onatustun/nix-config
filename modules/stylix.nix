@@ -10,20 +10,17 @@
             nativeBuildInputs = [ pkgs.yaml2nix ];
           } "yaml2nix ${pkgs.base16-schemes + "/share/themes/gruber.yaml"} > $out"
         );
-
-        base16Scheme = {
-          name = "gruber-darker";
-          polarity = base16.variant;
-        }
-        // base16.palette;
       in
       {
         imports = [ inputs.stylix.nixosModules.stylix ];
 
         stylix = {
           enable = true;
-          inherit base16Scheme;
-          inherit (base16Scheme) polarity;
+          polarity = base16.variant;
+
+          base16Scheme = base16.palette // {
+            name = "gruber-darker";
+          };
 
           fonts = {
             sizes.terminal = 14;
