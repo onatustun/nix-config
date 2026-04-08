@@ -12,7 +12,7 @@
       inherit (lib.modules) mkDefault;
     in
     {
-      age.secrets."github-token" = {
+      age.secrets.github-token = {
         file = ./github-token.age;
         owner = "root";
         group = "root";

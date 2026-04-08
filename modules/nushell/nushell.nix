@@ -13,21 +13,25 @@
       };
 
     homeModules.nushell =
-      { lib, pkgs, ... }:
+      {
+        lib,
+        pkgs,
+        config,
+        ...
+      }:
       let
-        inherit (lib.meta) getExe';
-        nushellExe = getExe' pkgs.nushell "nu";
+        inherit (lib.meta) getExe;
         inherit (lib.strings) readFile;
       in
       {
         home = {
           packages = [ pkgs.nushell ];
-          sessionVariables.SHELL = nushellExe;
+          sessionVariables.SHELL = getExe pkgs.nushell;
           shell.enableShellIntegration = true;
         };
 
         programs = {
-          ghostty.settings.command = "${nushellExe} --login";
+          ghostty.settings.command = "${config.home.sessionVariables.SHELL} --login";
 
           helix.settings.editor.shell = [
             "nu"
@@ -38,7 +42,7 @@
             enable = true;
 
             environmentVariables = {
-              SHELL = nushellExe;
+              inherit (config.home.sessionVariables) SHELL;
               NIXPKGS_ALLOW_UNFREE = "1";
               PROMPT_COMMAND = "";
               PROMPT_COMMAND_RIGHT = "";

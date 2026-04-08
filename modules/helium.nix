@@ -9,7 +9,7 @@
     in
     {
       home = {
-        sessionVariables."BROWSER" = getExe package;
+        sessionVariables.BROWSER = getExe package;
         packages = [ package ];
       };
     }

@@ -4,7 +4,7 @@
     {
       home.sessionVariables = {
         NH_FLAKE = config.home.sessionVariables.FLAKE;
-        NH_OS_FLAKE = config.home.sessionVariables.FLAKE;
+        NH_OS_FLAKE = config.home.sessionVariables.NH_FLAKE;
       };
 
       programs = {

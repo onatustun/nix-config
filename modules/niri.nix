@@ -28,8 +28,8 @@
       let
         inherit (lib.attrsets) attrValues;
         inherit (lib.meta)
-          getExe'
           getExe
+          getExe'
           ;
         inherit (lib.lists) singleton;
       in
@@ -62,7 +62,7 @@
             QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
             WLR_NO_HARDWARE_CURSORS = "1";
             WLR_RENDERER_ALLOW_SOFTWARE = "1";
-            XCURSOR_SIZE = "${toString config.home.pointerCursor.size}";
+            XCURSOR_SIZE = toString config.home.pointerCursor.size;
             XDG_CURRENT_DESKTOP = "niri";
             XDG_SESSION_TYPE = "wayland";
           };
@@ -161,13 +161,13 @@
             ];
 
             "Mod+Q".action.spawn = [
-              (getExe' pkgs.nushell "nu")
+              config.home.sessionVariables.SHELL
               "-c"
               (getExe config.programs.ghostty.package)
             ];
 
             "Mod+E".action.spawn = getExe pkgs.thunar;
-            "Mod+Z".action.spawn = getExe inputs'.helium.packages.default;
+            "Mod+Z".action.spawn = config.home.sessionVariables.BROWSER;
             "Mod+C".action.close-window = [ ];
             "Mod+O".action.toggle-overview = [ ];
             "Mod+Shift+E".action.quit = [ ];

@@ -26,14 +26,9 @@
 
     homeModules.helix = moduleWithSystem (
       { inputs', ... }:
-      {
-        lib,
-        config,
-        ...
-      }:
+      { lib, config, ... }:
       let
-        inherit (lib.meta) getExe';
-        package = inputs'.helix.packages.default;
+        inherit (lib.meta) getExe;
         inherit (lib.lists) singleton;
       in
       {
@@ -41,7 +36,7 @@
           packages = [ inputs'.nixd.packages.default ];
 
           sessionVariables = {
-            EDITOR = getExe' package "hx";
+            EDITOR = getExe config.programs.helix.package;
             VISUAL = config.home.sessionVariables.EDITOR;
           };
         };
@@ -56,7 +51,7 @@
 
           helix = {
             enable = true;
-            inherit package;
+            package = inputs'.helix.packages.default;
 
             settings = {
               editor = {

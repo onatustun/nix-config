@@ -10,10 +10,7 @@
     }:
     let
       inherit (lib.lists) singleton;
-      inherit (lib.meta)
-        getExe'
-        getExe
-        ;
+      inherit (lib.meta) getExe;
     in
     {
       home.packages = [ pkgs.sway-audio-idle-inhibit ];
@@ -23,7 +20,7 @@
 
         timeouts = singleton {
           timeout = 300;
-          command = "${getExe' inputs'.noctalia.packages.default "noctalia-shell"} ipc call lockScreen lock";
+          command = "${getExe inputs'.noctalia.packages.default} ipc call lockScreen lock";
         };
       };
 
