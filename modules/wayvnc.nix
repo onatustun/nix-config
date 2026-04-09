@@ -4,12 +4,16 @@
       lib,
       pkgs,
       config,
-      isDesktop,
       hostName,
       ...
     }:
     let
       inherit (lib.meta) getExe;
+
+      monitor = {
+        desktop = "HDMI-A-1";
+        laptop = "eDP-1";
+      };
     in
     {
       home.packages = [
@@ -24,10 +28,7 @@
         };
 
         Service = {
-          ExecStart = "${getExe pkgs.wayvnc} -Linfo -o ${
-            if isDesktop then "HDMI-A-1" else "eDP-1"
-          } ${hostName}.tail32e3ea.ts.net 5901";
-
+          ExecStart = "${getExe pkgs.wayvnc} -Linfo -o ${monitor.${hostName}} ${hostName}.tail32e3ea.ts.net 5901";
           Restart = "on-failure";
           RestartSec = "1m";
         };

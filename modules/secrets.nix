@@ -1,4 +1,9 @@
-{ inputs, moduleWithSystem, ... }:
+{
+  inputs,
+  keys,
+  moduleWithSystem,
+  ...
+}:
 {
   _module.args.keys = import inputs.keys;
 
@@ -15,19 +20,23 @@
     };
 
   flake = {
-    nixosModules.ragenix =
-      { inputs, ... }:
-      {
-        imports = [ inputs.ragenix.nixosModules.default ];
+    nixosModules = {
+      core._module.args = { inherit keys; };
 
-        nix.settings = {
-          extra-substituters = [ "https://crane.cachix.org" ];
-          extra-trusted-public-keys = [ "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk=" ];
+      ragenix =
+        { inputs, ... }:
+        {
+          imports = [ inputs.ragenix.nixosModules.default ];
+
+          nix.settings = {
+            extra-substituters = [ "https://crane.cachix.org" ];
+            extra-trusted-public-keys = [ "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk=" ];
+          };
+
+          age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+          home-manager.sharedModules = [ inputs.self.homeModules.ragenix ];
         };
-
-        age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-        home-manager.sharedModules = [ inputs.self.homeModules.ragenix ];
-      };
+    };
 
     homeModules.ragenix = moduleWithSystem (
       { inputs', ... }:
