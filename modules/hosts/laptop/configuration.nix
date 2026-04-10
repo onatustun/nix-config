@@ -106,21 +106,10 @@ in
           framework.enableKmod = true;
         };
 
-        age.secrets.password = {
-          file = ./password.age;
-          owner = "root";
-          group = "root";
-          mode = "0400";
-        };
-
         users.users = {
-          root = {
-            hashedPasswordFile = config.age.secrets.password.path;
-            openssh.authorizedKeys.keys = keys.userKeys;
-          };
+          root.openssh.authorizedKeys.keys = keys.userKeys;
 
           ${username} = {
-            hashedPasswordFile = config.age.secrets.password.path;
             openssh.authorizedKeys.keys = keys.userKeys;
 
             extraGroups = [

@@ -17,13 +17,9 @@
         inherit (lib.modules) mkDefault;
       in
       {
-        users = {
-          mutableUsers = false;
-
-          users.${username} = {
-            home = homeDir;
-            isNormalUser = mkDefault true;
-          };
+        users.users.${username} = {
+          home = homeDir;
+          isNormalUser = mkDefault true;
         };
       };
   };
