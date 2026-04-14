@@ -1,7 +1,10 @@
 let
   inherit (builtins)
     attrNames
+    listToAttrs
     attrValues
+    concatLists
+    head
     ;
 
   keys = {
@@ -16,15 +19,23 @@ let
     };
   };
 
-  forDevice = device: map (type: keys.${type}.${device}) (attrNames keys);
+  types = attrNames keys;
 
-  desktopKeys = forDevice "desktop";
-  laptopKeys = forDevice "laptop";
+  typeKeys = listToAttrs (
+    map (type: {
+      name = "${type}Keys";
+      value = attrValues keys.${type};
+    }) types
+  );
 
-  userKeys = attrValues keys.user;
-  hostKeys = attrValues keys.host;
+  allKeys = concatLists (attrValues typeKeys);
 
-  allKeys = userKeys ++ hostKeys;
+  deviceKeys = listToAttrs (
+    map (device: {
+      name = "${device}Keys";
+      value = map (type: keys.${type}.${device}) types;
+    }) (attrNames keys.${head types})
+  );
 
   u2f = {
     primary = "JLXDGTk3Ga2sRBz1cCrARjYbPySed5ZGDVX+T70NBePnAAZsxeAiK0Cl4cBXUjZ+3mx/bicbocJdYBf1WpHClw==,XuyXJU85C9ytixnVMBrx5jRuEujpkQJGxW/dS9ZlhjUXzgKw1q4xivdAaN9eFP9WKmDm0RyGo/t3EtxD4wvq0w==,es256,+presence";
@@ -34,12 +45,10 @@ let
   u2fKeys = attrValues u2f;
 in
 keys
+// typeKeys
+// deviceKeys
 // {
   inherit
-    desktopKeys
-    laptopKeys
-    userKeys
-    hostKeys
     allKeys
     u2f
     u2fKeys
