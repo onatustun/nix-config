@@ -1,11 +1,7 @@
 { lib, ... }:
 let
   inherit (lib.options) mkOption;
-  inherit (lib.types)
-    submodule
-    lazyAttrsOf
-    anything
-    ;
+  inherit (lib.types) submodule lazyAttrsOf anything;
 in
 {
   options.flake.deploy = mkOption {

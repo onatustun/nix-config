@@ -8,13 +8,11 @@
       services = {
         pcscd.enable = true;
 
-        udev.packages = attrValues {
-          inherit (pkgs)
-            libfido2
-            libu2f-host
-            yubikey-personalization
-            ;
-        };
+        udev.packages = [
+          pkgs.libfido2
+          pkgs.libu2f-host
+          pkgs.yubikey-personalization
+        ];
       };
 
       programs.yubikey-touch-detector = {

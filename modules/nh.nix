@@ -8,12 +8,7 @@
       };
 
       programs = {
-        nushell.environmentVariables = {
-          inherit (config.home.sessionVariables)
-            NH_FLAKE
-            NH_OS_FLAKE
-            ;
-        };
+        nushell.environmentVariables = { inherit (config.home.sessionVariables) NH_FLAKE NH_OS_FLAKE; };
 
         nh = {
           enable = true;

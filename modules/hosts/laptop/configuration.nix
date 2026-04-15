@@ -127,13 +127,11 @@ in
           upower.enable = true;
         };
 
-        environment.systemPackages = attrValues {
-          inherit (pkgs)
-            framework-tool
-            kmod
-            microcode-amd
-            ;
-        };
+        environment.systemPackages = [
+          pkgs.framework-tool
+          pkgs.kmod
+          pkgs.microcode-amd
+        ];
 
         home-manager.sharedModules =
           attrValues {

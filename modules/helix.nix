@@ -15,10 +15,7 @@
         };
 
         environment.sessionVariables = {
-          inherit (config.home-manager.users.${username}.home.sessionVariables)
-            EDITOR
-            VISUAL
-            ;
+          inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;
         };
 
         home-manager.sharedModules = [ inputs.self.homeModules.helix ];
@@ -42,12 +39,7 @@
         };
 
         programs = {
-          nushell.environmentVariables = {
-            inherit (config.home.sessionVariables)
-              EDITOR
-              VISUAL
-              ;
-          };
+          nushell.environmentVariables = { inherit (config.home.sessionVariables) EDITOR VISUAL; };
 
           helix = {
             enable = true;

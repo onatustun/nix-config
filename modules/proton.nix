@@ -1,16 +1,11 @@
 {
   flake.homeModules.proton =
-    { lib, pkgs, ... }:
-    let
-      inherit (lib.attrsets) attrValues;
-    in
+    { pkgs, ... }:
     {
-      home.packages = attrValues {
-        inherit (pkgs)
-          openvpn
-          proton-vpn
-          wireguard-tools
-          ;
-      };
+      home.packages = [
+        pkgs.openvpn
+        pkgs.proton-vpn
+        pkgs.wireguard-tools
+      ];
     };
 }

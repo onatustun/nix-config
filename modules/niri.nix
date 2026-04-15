@@ -26,21 +26,15 @@
         ...
       }:
       let
-        inherit (lib.attrsets) attrValues;
-        inherit (lib.meta)
-          getExe
-          getExe'
-          ;
+        inherit (lib.meta) getExe getExe';
         inherit (lib.lists) singleton;
       in
       {
-        home.packages = attrValues {
-          inherit (pkgs)
-            gnome-keyring
-            xdg-desktop-portal-gnome
-            xdg-desktop-portal-gtk
-            ;
-        };
+        home.packages = [
+          pkgs.gnome-keyring
+          pkgs.xdg-desktop-portal-gnome
+          pkgs.xdg-desktop-portal-gtk
+        ];
 
         systemd.user.services.xwayland-satellite.Install.WantedBy = [ "niri.service" ];
 

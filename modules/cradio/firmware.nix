@@ -9,11 +9,7 @@
     }:
     let
       inherit (inputs'.zmk-nix.legacyPackages) buildSplitKeyboard;
-      inherit (lib.fileset)
-        toSource
-        intersection
-        gitTracked
-        ;
+      inherit (lib.fileset) toSource intersection gitTracked;
       root = ./.;
     in
     {
@@ -46,14 +42,7 @@
   partitions.dev.module.perSystem =
     { self', inputs', ... }:
     {
-      checks = {
-        inherit (self'.packages)
-          firmware
-          flash
-          update
-          ;
-      };
-
+      checks = { inherit (self'.packages) firmware flash update; };
       make-shells.default.inputsFrom = [ inputs'.zmk-nix.devShells.default ];
     };
 }
