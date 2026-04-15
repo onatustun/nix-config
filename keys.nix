@@ -1,14 +1,15 @@
 let
   inherit (builtins)
-    listToAttrs
     attrValues
     mapAttrs
+    listToAttrs
     attrNames
     concatLists
     head
     ;
 
-  mapAttrs' = f: set: listToAttrs (attrValues (mapAttrs f set));
+  mapAttrsToList = f: attrs: attrValues (mapAttrs f attrs);
+  mapAttrs' = f: set: listToAttrs (mapAttrsToList f set);
 
   keys = {
     host = {
@@ -24,17 +25,19 @@ let
 
   types = attrNames keys;
 
-  typeKeys = mapAttrs' (type: set: {
+  typeKeys = mapAttrs' (type: devices: {
     name = "${type}Keys";
-    value = attrValues set;
+    value = attrValues devices;
   }) keys;
 
   allKeys = concatLists (attrValues typeKeys);
 
-  deviceKeys = mapAttrs' (device: _: {
-    name = "${device}Keys";
-    value = map (type: keys.${type}.${device}) types;
-  }) keys.${head types};
+  deviceKeys = listToAttrs (
+    map (device: {
+      name = "${device}Keys";
+      value = map (type: keys.${type}.${device}) types;
+    }) (attrNames keys.${head types})
+  );
 
   u2f = {
     primary = "JLXDGTk3Ga2sRBz1cCrARjYbPySed5ZGDVX+T70NBePnAAZsxeAiK0Cl4cBXUjZ+3mx/bicbocJdYBf1WpHClw==,XuyXJU85C9ytixnVMBrx5jRuEujpkQJGxW/dS9ZlhjUXzgKw1q4xivdAaN9eFP9WKmDm0RyGo/t3EtxD4wvq0w==,es256,+presence";
@@ -43,13 +46,4 @@ let
 
   u2fKeys = attrValues u2f;
 in
-keys
-// typeKeys
-// deviceKeys
-// {
-  inherit
-    allKeys
-    u2f
-    u2fKeys
-    ;
-}
+keys // typeKeys // deviceKeys // { inherit allKeys u2f u2fKeys; }
