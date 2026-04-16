@@ -106,10 +106,10 @@
             };
 
             users.users = {
-              root.openssh.authorizedKeys.keys = keys.userKeys;
+              root.openssh.authorizedKeys.keys = keys.ssh.users.admins;
 
               ${username} = {
-                openssh.authorizedKeys.keys = keys.userKeys;
+                openssh.authorizedKeys.keys = keys.ssh.users.admins;
 
                 extraGroups = [
                   "networkmanager"

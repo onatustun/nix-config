@@ -1,7 +1,7 @@
 let
-  inherit (import ./keys.nix) hostKeys;
+  keys = import ./keys.nix;
 in
 {
-  "modules/nix/github-token.age".publicKeys = hostKeys;
-  "modules/tailscale/authkey.age".publicKeys = hostKeys;
+  "modules/nix/github-token.age".publicKeys = keys.ssh.hosts.admins;
+  "modules/tailscale/authkey.age".publicKeys = keys.ssh.hosts.admins;
 }

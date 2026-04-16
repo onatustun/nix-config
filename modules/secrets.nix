@@ -1,4 +1,4 @@
-{ moduleWithSystem, ... }:
+{ inputs, moduleWithSystem, ... }:
 {
   partitions.dev.module.perSystem =
     { inputs', ... }:
@@ -12,46 +12,50 @@
       };
     };
 
-  flake.modules = {
-    nixos = {
-      core =
-        { inputs, ... }:
-        {
-          _module.args.keys = import inputs.keys;
-        };
+  flake = {
+    inherit (inputs) keys;
 
-      ragenix =
-        { inputs, ... }:
-        {
-          imports = [ inputs.ragenix.nixosModules.default ];
-
-          nix.settings = {
-            extra-substituters = [ "https://crane.cachix.org" ];
-            extra-trusted-public-keys = [ "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk=" ];
+    modules = {
+      nixos = {
+        core =
+          { inputs, ... }:
+          {
+            _module.args.keys = import inputs.keys;
           };
 
-          age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-          home-manager.sharedModules = [ inputs.self.modules.homeManager.ragenix ];
-        };
+        ragenix =
+          { inputs, ... }:
+          {
+            imports = [ inputs.ragenix.nixosModules.default ];
+
+            nix.settings = {
+              extra-substituters = [ "https://crane.cachix.org" ];
+              extra-trusted-public-keys = [ "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk=" ];
+            };
+
+            age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+            home-manager.sharedModules = [ inputs.self.modules.homeManager.ragenix ];
+          };
+      };
+
+      homeManager.ragenix = moduleWithSystem (
+        { inputs', ... }:
+        {
+          inputs,
+          config,
+          pkgs,
+          ...
+        }:
+        {
+          imports = [ inputs.ragenix.homeManagerModules.default ];
+          age.identityPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
+
+          home.packages = [
+            inputs'.ragenix.packages.default
+            pkgs.rage
+          ];
+        }
+      );
     };
-
-    homeManager.ragenix = moduleWithSystem (
-      { inputs', ... }:
-      {
-        inputs,
-        config,
-        pkgs,
-        ...
-      }:
-      {
-        imports = [ inputs.ragenix.homeManagerModules.default ];
-        age.identityPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
-
-        home.packages = [
-          inputs'.ragenix.packages.default
-          pkgs.rage
-        ];
-      }
-    );
   };
 }
