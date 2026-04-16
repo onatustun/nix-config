@@ -1,6 +1,6 @@
 { moduleWithSystem, ... }:
 {
-  flake.homeModules.swayidle = moduleWithSystem (
+  flake.modules.homeManager.swayidle = moduleWithSystem (
     { inputs', ... }:
     {
       lib,

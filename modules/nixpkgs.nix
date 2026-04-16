@@ -13,8 +13,8 @@ in
       _module.args.pkgs = import inputs.nixpkgs { inherit system config; };
     };
 
-  flake = {
-    nixosModules.core.nixpkgs = { inherit config; };
-    homeModules.home-manager.nixpkgs = { inherit config; };
+  flake.modules = {
+    nixos.core.nixpkgs = { inherit config; };
+    homeManager.home-manager.nixpkgs = { inherit config; };
   };
 }

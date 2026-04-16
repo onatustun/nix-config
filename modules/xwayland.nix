@@ -1,6 +1,6 @@
 { moduleWithSystem, ... }:
 {
-  flake.homeModules.xwayland = moduleWithSystem (
+  flake.modules.homeManager.xwayland = moduleWithSystem (
     { inputs', ... }:
     {
       lib,

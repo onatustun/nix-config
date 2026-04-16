@@ -5,7 +5,7 @@
       make-shells.default.packages = [ pkgs.git ];
     };
 
-  flake.homeModules.git =
+  flake.modules.homeManager.git =
     { config, ... }:
     {
       programs.git = {

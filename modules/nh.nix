@@ -1,5 +1,5 @@
 {
-  flake.homeModules.nh =
+  flake.modules.homeManager.nh =
     { config, ... }:
     {
       home.sessionVariables = {

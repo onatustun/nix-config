@@ -1,5 +1,5 @@
 {
-  flake.homeModules.wayvnc =
+  flake.modules.homeManager.wayvnc =
     {
       lib,
       pkgs,

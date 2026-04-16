@@ -1,5 +1,5 @@
 {
-  flake.homeModules.eza.programs.eza = {
+  flake.modules.homeManager.eza.programs.eza = {
     enable = true;
     colors = "auto";
     git = true;

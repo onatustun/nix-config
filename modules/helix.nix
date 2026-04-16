@@ -1,7 +1,7 @@
 { moduleWithSystem, ... }:
 {
-  flake = {
-    nixosModules.helix =
+  flake.modules = {
+    nixos.helix =
       {
         config,
         username,
@@ -18,10 +18,10 @@
           inherit (config.home-manager.users.${username}.home.sessionVariables) EDITOR VISUAL;
         };
 
-        home-manager.sharedModules = [ inputs.self.homeModules.helix ];
+        home-manager.sharedModules = [ inputs.self.modules.homeManager.helix ];
       };
 
-    homeModules.helix = moduleWithSystem (
+    homeManager.helix = moduleWithSystem (
       { inputs', ... }:
       { lib, config, ... }:
       let

@@ -5,7 +5,7 @@
       make-shells.default.packages = [ pkgs.vim ];
     };
 
-  flake.homeModules.cli =
+  flake.modules.homeManager.cli =
     { lib, pkgs, ... }:
     let
       inherit (lib.attrsets) attrValues;

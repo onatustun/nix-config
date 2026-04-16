@@ -1,5 +1,5 @@
 {
-  flake.homeModules.media =
+  flake.modules.homeManager.media =
     { lib, pkgs, ... }:
     let
       inherit (lib.attrsets) attrValues;

@@ -1,5 +1,5 @@
 {
-  flake.homeModules.wayland =
+  flake.modules.homeManager.wayland =
     { lib, pkgs, ... }:
     let
       inherit (lib.attrsets) attrValues;

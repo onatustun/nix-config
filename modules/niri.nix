@@ -1,7 +1,7 @@
 { moduleWithSystem, ... }:
 {
-  flake = {
-    nixosModules.niri = moduleWithSystem (
+  flake.modules = {
+    nixos.niri = moduleWithSystem (
       { inputs', ... }:
       { inputs, ... }:
       {
@@ -13,11 +13,11 @@
         };
 
         xdg.portal.wlr.enable = true;
-        home-manager.sharedModules = [ inputs.self.homeModules.niri ];
+        home-manager.sharedModules = [ inputs.self.modules.homeManager.niri ];
       }
     );
 
-    homeModules.niri = moduleWithSystem (
+    homeManager.niri = moduleWithSystem (
       { inputs', ... }:
       {
         pkgs,

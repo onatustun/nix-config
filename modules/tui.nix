@@ -1,5 +1,5 @@
 {
-  flake.homeModules.tui =
+  flake.modules.homeManager.tui =
     { pkgs, ... }:
     {
       home.packages = [ pkgs.scooter ];

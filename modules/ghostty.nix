@@ -1,7 +1,7 @@
 { moduleWithSystem, ... }:
 {
-  flake = {
-    nixosModules.ghostty =
+  flake.modules = {
+    nixos.ghostty =
       { inputs, ... }:
       {
         nix.settings = {
@@ -9,10 +9,10 @@
           extra-trusted-public-keys = [ "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns=" ];
         };
 
-        home-manager.sharedModules = [ inputs.self.homeModules.ghostty ];
+        home-manager.sharedModules = [ inputs.self.modules.homeManager.ghostty ];
       };
 
-    homeModules.ghostty = moduleWithSystem (
+    homeManager.ghostty = moduleWithSystem (
       { inputs', ... }:
       {
         programs.ghostty = {

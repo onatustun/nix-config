@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.networking =
+  flake.modules.nixos.networking =
     { hostName, pkgs, ... }:
     {
       networking = {

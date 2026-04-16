@@ -1,12 +1,5 @@
+{ moduleWithSystem, ... }:
 {
-  inputs,
-  keys,
-  moduleWithSystem,
-  ...
-}:
-{
-  _module.args.keys = import inputs.keys;
-
   partitions.dev.module.perSystem =
     { inputs', ... }:
     {
@@ -19,9 +12,13 @@
       };
     };
 
-  flake = {
-    nixosModules = {
-      core._module.args = { inherit keys; };
+  flake.modules = {
+    nixos = {
+      core =
+        { inputs, ... }:
+        {
+          _module.args.keys = import inputs.keys;
+        };
 
       ragenix =
         { inputs, ... }:
@@ -34,11 +31,11 @@
           };
 
           age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-          home-manager.sharedModules = [ inputs.self.homeModules.ragenix ];
+          home-manager.sharedModules = [ inputs.self.modules.homeManager.ragenix ];
         };
     };
 
-    homeModules.ragenix = moduleWithSystem (
+    homeManager.ragenix = moduleWithSystem (
       { inputs', ... }:
       {
         inputs,

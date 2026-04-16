@@ -8,8 +8,8 @@
       make-shells.default.packages = [ inputs'.home-manager.packages.default ];
     };
 
-  flake = {
-    nixosModules.home-manager = moduleWithSystem (
+  flake.modules = {
+    nixos.home-manager = moduleWithSystem (
       { inputs', ... }:
       {
         inputs,
@@ -22,7 +22,7 @@
         environment.systemPackages = [ inputs'.home-manager.packages.default ];
 
         home-manager = {
-          users.${username}.imports = [ inputs.self.homeModules.home-manager ];
+          users.${username}.imports = [ inputs.self.modules.homeManager.home-manager ];
           extraSpecialArgs = config._module.args // config._module.specialArgs;
           useUserPackages = true;
           backupFileExtension = "hmBackup";
@@ -30,7 +30,7 @@
       }
     );
 
-    homeModules.home-manager =
+    homeManager.home-manager =
       { username, homeDir, ... }:
       {
         home = {

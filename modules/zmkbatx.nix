@@ -1,5 +1,5 @@
 {
-  flake.homeModules.zmkbatx =
+  flake.modules.homeManager.zmkbatx =
     { lib, pkgs, ... }:
     let
       inherit (lib.meta) getExe';

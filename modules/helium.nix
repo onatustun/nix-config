@@ -1,6 +1,6 @@
 { moduleWithSystem, ... }:
 {
-  flake.homeModules.helium = moduleWithSystem (
+  flake.modules.homeManager.helium = moduleWithSystem (
     { inputs', ... }:
     { lib, ... }:
     let

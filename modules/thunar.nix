@@ -1,6 +1,6 @@
 {
-  flake = {
-    nixosModules.thunar =
+  flake.modules = {
+    nixos.thunar =
       { pkgs, inputs, ... }:
       {
         services = {
@@ -18,10 +18,10 @@
           ];
         };
 
-        home-manager.sharedModules = [ inputs.self.homeModules.thunar ];
+        home-manager.sharedModules = [ inputs.self.modules.homeManager.thunar ];
       };
 
-    homeModules.thunar =
+    homeManager.thunar =
       { pkgs, ... }:
       {
         home.packages = [

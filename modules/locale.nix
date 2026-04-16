@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.locale =
+  flake.modules.nixos.locale =
     { lib, ... }:
     let
       locale = "en_GB.UTF-8";

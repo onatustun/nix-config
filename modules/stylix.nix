@@ -1,6 +1,6 @@
 {
-  flake = {
-    nixosModules.stylix =
+  flake.modules = {
+    nixos.stylix =
       { pkgs, inputs, ... }:
       let
         inherit (pkgs) runCommand;
@@ -45,10 +45,10 @@
           };
         };
 
-        home-manager.sharedModules = [ inputs.self.homeModules.stylix ];
+        home-manager.sharedModules = [ inputs.self.modules.homeManager.stylix ];
       };
 
-    homeModules.stylix =
+    homeManager.stylix =
       { config, ... }:
       {
         stylix.targets = {

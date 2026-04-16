@@ -1,5 +1,5 @@
 {
-  flake.homeModules.carapace =
+  flake.modules.homeManager.carapace =
     { lib, config, ... }:
     let
       inherit (lib.strings) concatStringsSep;

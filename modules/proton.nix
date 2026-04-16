@@ -1,5 +1,5 @@
 {
-  flake.homeModules.proton =
+  flake.modules.homeManager.proton =
     { pkgs, ... }:
     {
       home.packages = [

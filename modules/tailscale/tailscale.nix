@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.tailscale =
+  flake.modules.nixos.tailscale =
     { config, ... }:
     {
       age.secrets.authkey = {

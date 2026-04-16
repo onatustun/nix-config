@@ -1,6 +1,6 @@
 {
-  flake = {
-    nixosModules.noctalia =
+  flake.modules = {
+    nixos.noctalia =
       { lib, inputs, ... }:
       let
         inherit (lib.lists) singleton;
@@ -11,10 +11,10 @@
           extra-trusted-public-keys = singleton "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=";
         };
 
-        home-manager.sharedModules = [ inputs.self.homeModules.noctalia ];
+        home-manager.sharedModules = [ inputs.self.modules.homeManager.noctalia ];
       };
 
-    homeModules.noctalia =
+    homeManager.noctalia =
       {
         lib,
         inputs,

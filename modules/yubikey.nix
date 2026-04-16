@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.yubikey =
+  flake.modules.nixos.yubikey =
     { lib, pkgs, ... }:
     let
       inherit (lib.attrsets) attrValues;

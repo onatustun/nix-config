@@ -1,6 +1,6 @@
 {
-  flake = {
-    nixosModules.nushell =
+  flake.modules = {
+    nixos.nushell =
       {
         username,
         pkgs,
@@ -9,10 +9,10 @@
       }:
       {
         users.users.${username}.shell = pkgs.nushell;
-        home-manager.sharedModules = [ inputs.self.homeModules.nushell ];
+        home-manager.sharedModules = [ inputs.self.modules.homeManager.nushell ];
       };
 
-    homeModules.nushell =
+    homeManager.nushell =
       {
         lib,
         pkgs,

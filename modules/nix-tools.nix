@@ -1,5 +1,5 @@
 {
-  flake.homeModules.nix-tools =
+  flake.modules.homeManager.nix-tools =
     { lib, pkgs, ... }:
     let
       inherit (lib.attrsets) attrValues;
