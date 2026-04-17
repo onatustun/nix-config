@@ -1,10 +1,9 @@
-{ config, ... }:
-{
+flake-parts: {
   perSystem =
     {
       inputs',
       lib,
-      self',
+      config,
       ...
     }:
     let
@@ -30,19 +29,19 @@
           meta = {
             description = "ZMK firmware";
             license = lib.licenses.mit;
-            platforms = config.systems;
+            platforms = flake-parts.config.systems;
           };
         };
 
         inherit (inputs'.zmk-nix.packages) update;
-        flash = inputs'.zmk-nix.packages.flash.override { inherit (self'.packages) firmware; };
+        flash = inputs'.zmk-nix.packages.flash.override { inherit (config.packages) firmware; };
       };
     };
 
   partitions.dev.module.perSystem =
-    { self', inputs', ... }:
+    { config, inputs', ... }:
     {
-      checks = { inherit (self'.packages) firmware flash update; };
+      checks = { inherit (config.packages) firmware flash update; };
       make-shells.default.inputsFrom = [ inputs'.zmk-nix.devShells.default ];
     };
 }
