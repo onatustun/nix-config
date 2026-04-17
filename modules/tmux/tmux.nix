@@ -1,17 +1,15 @@
 {
   flake.modules.homeManager.tmux =
     {
-      pkgs,
       lib,
+      pkgs,
       config,
       ...
     }:
     let
+      inherit (lib.meta) getExe;
       inherit (pkgs.writers) writeNuBin;
       inherit (lib.strings) readFile;
-      inherit (lib.meta) getExe;
-      github = writeNuBin "github" (readFile ./github.nu);
-      sessionizer = writeNuBin "sessionizer" (readFile ./sessionizer.nu);
     in
     {
       programs.tmux = {
@@ -47,9 +45,9 @@
           bind-key -r K resize-pane -U 5
           bind-key -r L resize-pane -R 5
 
-          bind-key f display-popup -w 80% -h 80% -E ${getExe sessionizer}
+          bind-key f display-popup -w 80% -h 80% -E ${getExe (writeNuBin "sessionizer" (readFile ./sessionizer.nu))}
           bind-key g neww -n "jj" -S ${getExe pkgs.jjui}
-          bind-key G run-shell -b ${getExe github}
+          bind-key G run-shell -b ${getExe (writeNuBin "github" (readFile ./github.nu))}
           bind-key t display-popup -w 80% -h 80% -d '#{pane_current_path}' ${config.home.sessionVariables.SHELL} --login
 
           bind-key c new-window -c "#{pane_current_path}"

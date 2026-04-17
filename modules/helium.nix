@@ -5,12 +5,11 @@
     { lib, ... }:
     let
       inherit (lib.meta) getExe;
-      package = inputs'.helium.packages.default;
     in
     {
       home = {
-        sessionVariables.BROWSER = getExe package;
-        packages = [ package ];
+        sessionVariables.BROWSER = getExe inputs'.helium.packages.default;
+        packages = [ inputs'.helium.packages.default ];
       };
     }
   );

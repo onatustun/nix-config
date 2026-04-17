@@ -19,9 +19,7 @@
 
       modules = {
         nixos = {
-          core = {
-            _module.args.keys = import inputs.keys;
-          };
+          core._module.args.keys = import inputs.keys;
 
           ragenix = {
             imports = [ inputs.ragenix.nixosModules.default ];
