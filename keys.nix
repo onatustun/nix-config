@@ -1,31 +1,29 @@
 let
   inherit (builtins)
-    concatLists
+    concatMap
     isString
     isList
     isAttrs
     attrValues
     mapAttrs
     attrNames
-    listToAttrs
     filter
+    foldl'
     ;
 
   flattenTree =
     tree:
-    concatLists (
-      map (
-        node:
-        if isString node && node != "" then
-          [ node ]
-        else if isList node then
-          node
-        else if isAttrs node then
-          if node ? __functor then node { } else flattenTree node
-        else
-          [ ]
-      ) (attrValues (removeAttrs tree [ "__functor" ]))
-    );
+    concatMap (
+      node:
+      if isString node && node != "" then
+        [ node ]
+      else if isList node then
+        node
+      else if isAttrs node then
+        if node ? __functor then node { } else flattenTree node
+      else
+        [ ]
+    ) (attrValues (removeAttrs tree [ "__functor" ]));
 
   mkTree =
     tree:
@@ -53,44 +51,33 @@ let
     };
   };
 
-  types = attrNames (removeAttrs keys.ssh [ "__functor" ]);
+  types = removeAttrs keys.ssh [ "__functor" ];
 
   adminDevices = [
     "desktop"
     "laptop"
   ];
 
-  typeKeys = listToAttrs (
-    map (name: {
-      inherit name;
+  typeKeys = mapAttrs (
+    _: type:
+    type
+    // {
+      __functor = _: _: type { };
+      admins = map (device: type.${device}) (filter (device: type ? ${device}) adminDevices);
+    }
+  ) types;
 
-      value = keys.ssh.${name} // {
-        __functor = _: _: keys.ssh.${name} { };
-
-        admins = map (device: keys.ssh.${name}.${device}) (
-          filter (adminDevice: keys.ssh.${name} ? ${adminDevice}) adminDevices
-        );
-      };
-    }) types
-  );
-
-  deviceKeys = listToAttrs (
-    map
-      (name: {
-        inherit name;
-        value = map (type: keys.ssh.${type}.${name}) (filter (type: keys.ssh.${type} ? ${name}) types);
-      })
+  deviceKeys =
+    mapAttrs
       (
-        attrNames (
-          listToAttrs (
-            map (name: {
-              inherit name;
-              value = null;
-            }) (concatLists (map (type: attrNames (removeAttrs keys.ssh.${type} [ "__functor" ])) types))
-          )
+        device: _:
+        map (type: keys.ssh.${type}.${device}) (
+          filter (type: keys.ssh.${type} ? ${device}) (attrNames types)
         )
       )
-  );
+      (
+        foldl' (devices: type: devices // removeAttrs types.${type} [ "__functor" ]) { } (attrNames types)
+      );
 in
 keys
 // {
@@ -100,6 +87,6 @@ keys
     // deviceKeys
     // {
       __functor = _: _: keys.ssh { };
-      admins = concatLists (map (device: deviceKeys.${device}) adminDevices);
+      admins = concatMap (device: deviceKeys.${device}) adminDevices;
     };
 }
