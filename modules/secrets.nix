@@ -12,44 +12,37 @@
       };
     };
 
-  flake = {
-    inherit (inputs) keys;
+  flake =
+    { config, ... }:
+    {
+      inherit (inputs) keys;
 
-    modules = {
-      nixos = {
-        core =
-          { inputs, ... }:
-          {
+      modules = {
+        nixos = {
+          core = {
             _module.args.keys = import inputs.keys;
           };
 
-        ragenix =
-          { inputs, ... }:
-          {
+          ragenix = {
             imports = [ inputs.ragenix.nixosModules.default ];
             age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-            home-manager.sharedModules = [ inputs.self.modules.homeManager.ragenix ];
+            home-manager.sharedModules = [ config.modules.homeManager.ragenix ];
           };
+        };
+
+        homeManager.ragenix = moduleWithSystem (
+          { inputs', ... }:
+          { config, pkgs, ... }:
+          {
+            imports = [ inputs.ragenix.homeManagerModules.default ];
+            age.identityPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
+
+            home.packages = [
+              inputs'.ragenix.packages.default
+              pkgs.rage
+            ];
+          }
+        );
       };
-
-      homeManager.ragenix = moduleWithSystem (
-        { inputs', ... }:
-        {
-          inputs,
-          config,
-          pkgs,
-          ...
-        }:
-        {
-          imports = [ inputs.ragenix.homeManagerModules.default ];
-          age.identityPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
-
-          home.packages = [
-            inputs'.ragenix.packages.default
-            pkgs.rage
-          ];
-        }
-      );
     };
-  };
 }

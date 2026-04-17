@@ -1,10 +1,10 @@
+{ inputs, ... }:
 {
   flake.modules.nixos.nix =
     {
       lib,
-      inputs,
-      username,
       config,
+      username,
       ...
     }:
     let

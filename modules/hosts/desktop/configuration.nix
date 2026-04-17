@@ -1,19 +1,15 @@
-{ inputs, ... }:
 {
   flake =
-    { lib, ... }:
+    { lib, ... }@flake:
     let
       inherit (lib) nixosSystem;
       inherit (lib.lists) singleton;
     in
     {
       nixosConfigurations.desktop = nixosSystem {
-        specialArgs = { inherit inputs; };
-
         modules = singleton (
           {
             lib,
-            inputs,
             modulesPath,
             config,
             keys,
@@ -26,7 +22,7 @@
           {
             imports =
               attrValues {
-                inherit (inputs.self.modules.nixos)
+                inherit (flake.config.modules.nixos)
                   audio
                   bluetooth
                   core
@@ -123,7 +119,7 @@
 
             home-manager.sharedModules =
               attrValues {
-                inherit (inputs.self.modules.homeManager)
+                inherit (flake.config.modules.homeManager)
                   bash
                   bat
                   carapace
