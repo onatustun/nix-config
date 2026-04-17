@@ -27,12 +27,6 @@
           { inputs, ... }:
           {
             imports = [ inputs.ragenix.nixosModules.default ];
-
-            nix.settings = {
-              extra-substituters = [ "https://crane.cachix.org" ];
-              extra-trusted-public-keys = [ "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk=" ];
-            };
-
             age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
             home-manager.sharedModules = [ inputs.self.modules.homeManager.ragenix ];
           };
