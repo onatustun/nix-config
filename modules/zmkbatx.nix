@@ -1,26 +1,31 @@
 {
   flake.modules.homeManager.zmkbatx =
-    { lib, pkgs, ... }:
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
     let
-      inherit (lib.meta) getExe';
+      inherit (lib.meta) getExe' getExe;
     in
     {
       home.packages = [ pkgs.zmkbatx ];
 
       systemd.user.services.zmkbatx = {
         Unit = {
-          Description = "zmkbatx";
-          After = [ "noctalia-shell.service" ];
+          After = [ config.wayland.systemd.target ];
+          PartOf = [ config.wayland.systemd.target ];
         };
 
         Service = {
           ExecStartPre = "${getExe' pkgs.coreutils "sleep"} 5";
-          ExecStart = getExe' pkgs.zmkbatx "zmkBATx";
+          ExecStart = getExe pkgs.zmkbatx;
           Restart = "on-failure";
           RestartSec = 3;
         };
 
-        Install.WantedBy = [ "noctalia-shell.service" ];
+        Install.WantedBy = [ config.wayland.systemd.target ];
       };
     };
 }
