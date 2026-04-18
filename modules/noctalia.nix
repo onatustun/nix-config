@@ -19,7 +19,12 @@
           };
 
         homeManager.noctalia =
-          { lib, pkgs, ... }:
+          {
+            lib,
+            pkgs,
+            config,
+            ...
+          }:
           let
             inherit (lib.attrsets) attrValues;
             inherit (lib.lists) singleton;
@@ -78,7 +83,7 @@
                 };
 
                 wallpaper.enabled = false;
-                appLauncher.terminalCommand = "nu -c";
+                appLauncher.terminalCommand = "${config.home.sessionVariables.SHELL} -c";
 
                 controlCenter = {
                   position = "top-center";

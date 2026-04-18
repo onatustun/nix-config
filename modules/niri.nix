@@ -159,7 +159,7 @@
                 "Mod+Q".action.spawn = [
                   config.home.sessionVariables.SHELL
                   "-c"
-                  (getExe config.programs.ghostty.package)
+                  config.home.sessionVariables.TERMINAL
                 ];
 
                 "Mod+E".action.spawn = getExe pkgs.thunar;

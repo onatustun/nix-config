@@ -15,13 +15,20 @@
 
         homeManager.ghostty = moduleWithSystem (
           { inputs', ... }:
+          { lib, config, ... }:
+          let
+            inherit (lib.meta) getExe;
+          in
           {
+            home.sessionVariables.TERMINAL = getExe inputs'.ghostty.packages.default;
+
             programs.ghostty = {
               enable = true;
               package = inputs'.ghostty.packages.default;
               installVimSyntax = true;
 
               settings = {
+                command = "${config.home.sessionVariables.SHELL} --login";
                 confirm-close-surface = false;
                 mouse-hide-while-typing = true;
                 shell-integration-features = "no-cursor";

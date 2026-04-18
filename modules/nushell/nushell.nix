@@ -28,40 +28,40 @@
               shell.enableShellIntegration = true;
             };
 
-            programs = {
-              ghostty.settings.command = "${config.home.sessionVariables.SHELL} --login";
+            programs.nushell = {
+              enable = true;
 
-              helix.settings.editor.shell = [
-                "nu"
-                "--commands"
-              ];
+              environmentVariables = {
+                inherit (config.home.sessionVariables)
+                  SHELL
+                  EDITOR
+                  VISUAL
+                  BROWSER
+                  FLAKE
+                  NH_FLAKE
+                  NH_OS_FLAKE
+                  ;
 
-              nushell = {
-                enable = true;
-
-                environmentVariables = {
-                  inherit (config.home.sessionVariables) SHELL;
-                  NIXPKGS_ALLOW_UNFREE = "1";
-                  PROMPT_COMMAND = "";
-                  PROMPT_COMMAND_RIGHT = "";
-                  PROMPT_INDICATOR_VI_INSERT = "";
-                  PROMPT_INDICATOR_VI_NORMAL = "";
-                  TRANSIENT_PROMPT_COMMAND = "";
-                  TRANSIENT_PROMPT_COMMAND_RIGHT = "";
-                  TRANSIENT_PROMPT_INDICATOR = "";
-                  TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = "";
-                  TRANSIENT_PROMPT_INDICATOR_VI_INSERT = "";
-                  TRANSIENT_PROMPT_MULTILINE_INDICATOR = "";
-                };
-
-                shellAliases = {
-                  c = "clear";
-                  ff = "fastfetch";
-                  lt = "eza -T --git-ignore --group-directories-first";
-                };
-
-                extraConfig = readFile ./extraConfig.nu;
+                NIXPKGS_ALLOW_UNFREE = "1";
+                PROMPT_COMMAND = "";
+                PROMPT_COMMAND_RIGHT = "";
+                PROMPT_INDICATOR_VI_INSERT = "";
+                PROMPT_INDICATOR_VI_NORMAL = "";
+                TRANSIENT_PROMPT_COMMAND = "";
+                TRANSIENT_PROMPT_COMMAND_RIGHT = "";
+                TRANSIENT_PROMPT_INDICATOR = "";
+                TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = "";
+                TRANSIENT_PROMPT_INDICATOR_VI_INSERT = "";
+                TRANSIENT_PROMPT_MULTILINE_INDICATOR = "";
               };
+
+              shellAliases = {
+                c = "clear";
+                ff = "fastfetch";
+                lt = "eza -T --git-ignore --group-directories-first";
+              };
+
+              extraConfig = readFile ./extraConfig.nu;
             };
           };
       };
