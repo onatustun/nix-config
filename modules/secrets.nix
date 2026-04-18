@@ -15,7 +15,7 @@
   flake =
     { config, ... }:
     {
-      inherit (inputs) keys;
+      keys = import inputs.keys;
 
       modules = {
         nixos = {
