@@ -31,8 +31,8 @@
         {
           home = {
             inherit username;
-            sessionVariables.FLAKE = "${homeDir}/nix";
             homeDirectory = homeDir;
+            sessionVariables.FLAKE = "${homeDir}/nix";
           };
 
           programs.home-manager.enable = true;

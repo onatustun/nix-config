@@ -59,7 +59,6 @@
             };
 
             nixpkgs.hostPlatform.system = "x86_64-linux";
-            system.stateVersion = "26.05";
 
             boot = {
               kernelModules = [ "kvm-intel" ];
@@ -117,43 +116,41 @@
               };
             };
 
-            home-manager.sharedModules =
-              attrValues {
-                inherit (flake.config.modules.homeManager)
-                  bash
-                  bat
-                  carapace
-                  cli
-                  cursor
-                  direnv
-                  eza
-                  fastfetch
-                  fish
-                  gh
-                  git
-                  helium
-                  jujutsu
-                  media
-                  nh
-                  nix-tools
-                  obsidian
-                  proton
-                  starship
-                  swayidle
-                  tmux
-                  tui
-                  wayland
-                  wayvnc
-                  wl-clipboard
-                  xdg
-                  xwayland
-                  yazi
-                  zathura
-                  zoxide
-                  zsh
-                  ;
-              }
-              ++ [ { home.stateVersion = "26.05"; } ];
+            home-manager.sharedModules = attrValues {
+              inherit (flake.config.modules.homeManager)
+                bash
+                bat
+                carapace
+                cli
+                cursor
+                direnv
+                eza
+                fastfetch
+                fish
+                gh
+                git
+                helium
+                jujutsu
+                media
+                nh
+                nix-tools
+                obsidian
+                proton
+                starship
+                swayidle
+                tmux
+                tui
+                wayland
+                wayvnc
+                wl-clipboard
+                xdg
+                xwayland
+                yazi
+                zathura
+                zoxide
+                zsh
+                ;
+            };
           }
         );
       };

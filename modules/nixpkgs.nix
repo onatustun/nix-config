@@ -14,7 +14,24 @@ in
     };
 
   flake.modules = {
-    nixos.core.nixpkgs = { inherit config; };
-    homeManager.home-manager.nixpkgs = { inherit config; };
+    nixos.core =
+      { lib, ... }:
+      let
+        inherit (lib.modules) mkDefault;
+      in
+      {
+        nixpkgs = { inherit config; };
+        system.stateVersion = mkDefault lib.trivial.release;
+      };
+
+    homeManager.home-manager =
+      { lib, ... }:
+      let
+        inherit (lib.modules) mkDefault;
+      in
+      {
+        nixpkgs = { inherit config; };
+        home.stateVersion = mkDefault lib.trivial.release;
+      };
   };
 }
