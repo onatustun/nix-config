@@ -13,14 +13,21 @@
 
       homeManager.helix = moduleWithSystem (
         { inputs', ... }:
-        { lib, config, ... }:
+        {
+          lib,
+          pkgs,
+          config,
+          ...
+        }:
         let
           inherit (lib.meta) getExe;
-          inherit (lib.lists) singleton;
         in
         {
           home = {
-            packages = [ inputs'.nixd.packages.default ];
+            packages = [
+              inputs'.nixd.packages.default
+              pkgs.steel
+            ];
 
             sessionVariables = {
               EDITOR = getExe config.programs.helix.package;
@@ -28,9 +35,14 @@
             };
           };
 
+          xdg.configFile."helix/init.scm".source = ./init.scm;
+
           programs.helix = {
             enable = true;
-            package = inputs'.helix.packages.default;
+
+            package = inputs'.helix.packages.default.overrideAttrs (prevAttrs: {
+              cargoBuildFeatures = (prevAttrs.cargoBuildFeatures or [ ]) ++ [ "steel" ];
+            });
 
             settings = {
               editor = {
@@ -150,23 +162,33 @@
             };
 
             languages = {
-              language = singleton {
-                name = "haskell";
+              language = [
+                {
+                  name = "haskell";
 
-                formatter = {
-                  command = "fourmolu";
+                  formatter = {
+                    command = "fourmolu";
 
-                  args = [
-                    "--stdin-input-file"
-                    "%{buffer_name}"
-                  ];
+                    args = [
+                      "--stdin-input-file"
+                      "%{buffer_name}"
+                    ];
+                  };
+                }
+                {
+                  name = "scheme";
+                  language-servers = [ "steel-language-server" ];
+                }
+              ];
+
+              language-server = {
+                rust-analyzer.config = {
+                  cargo.features = "all";
+                  check.command = "clippy";
+                  completion.callable.snippets = "add_parentheses";
                 };
-              };
 
-              language-server.rust-analyzer.config = {
-                cargo.features = "all";
-                check.command = "clippy";
-                completion.callable.snippets = "add_parentheses";
+                steel-language-server.command = "steel-language-server";
               };
             };
           };

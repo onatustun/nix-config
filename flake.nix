@@ -141,13 +141,21 @@
 
     helix = {
       type = "github";
-      owner = "helix-editor";
+      owner = "mattwparas";
       repo = "helix";
+      ref = "steel-event-system";
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "dep_rust-overlay";
       };
+    };
+
+    oil-hx = {
+      type = "github";
+      owner = "Ra77a3l3-jar";
+      repo = "oil.hx";
+      flake = false;
     };
 
     nixd = {

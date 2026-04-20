@@ -13,6 +13,7 @@ result/
 !*.age
 !*.nix
 !*.nu
+!*.scm
 
 !cradio.conf
 !cradio.keymap

@@ -455,15 +455,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1774761447,
-        "narHash": "sha256-mYzy2zJbNot/YZBbNu4nsE2ZO4vUbT1goh6EwlmvkaQ=",
-        "owner": "helix-editor",
+        "lastModified": 1776313770,
+        "narHash": "sha256-pmMsgiKQavlqqdPk6tfz1Y+3JHFT6LUXiOuVMH0I12k=",
+        "owner": "mattwparas",
         "repo": "helix",
-        "rev": "e7874bc69c0549fe87e863c4b4f6a5c2fccffca7",
+        "rev": "cba44fdf36d1c728468da73a5373348c7d831fb7",
         "type": "github"
       },
       "original": {
-        "owner": "helix-editor",
+        "owner": "mattwparas",
+        "ref": "steel-event-system",
         "repo": "helix",
         "type": "github"
       }
@@ -641,6 +642,22 @@
         "type": "github"
       }
     },
+    "oil-hx": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776619738,
+        "narHash": "sha256-x/flkkCkgTDU0yCwFGS54lBQGxUfaWkCr6yzxS7BrDM=",
+        "owner": "Ra77a3l3-jar",
+        "repo": "oil.hx",
+        "rev": "16c4751e8728be3eb53324d591f73f810bad11b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Ra77a3l3-jar",
+        "repo": "oil.hx",
+        "type": "github"
+      }
+    },
     "ragenix": {
       "inputs": {
         "agenix": [
@@ -700,6 +717,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "noctalia": "noctalia",
+        "oil-hx": "oil-hx",
         "ragenix": "ragenix",
         "stylix": "stylix",
         "systems": "systems",
