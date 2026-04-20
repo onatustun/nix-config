@@ -145,7 +145,6 @@
                 wl-clipboard
                 xdg
                 xwayland
-                yazi
                 zathura
                 zoxide
                 zsh

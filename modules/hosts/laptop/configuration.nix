@@ -157,7 +157,6 @@
                 wl-clipboard
                 xdg
                 xwayland
-                yazi
                 zathura
                 zmkbatx
                 zoxide
