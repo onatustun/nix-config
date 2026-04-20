@@ -11,9 +11,4 @@
         (u ":oil-up")
         (s ":oil-save")
         (r ":oil-refresh")
-        (q ":oil-close")
-        (m
-          (y ":oil-yank")
-          (x ":oil-cut")
-          (p ":oil-paste")
-          (c ":oil-clipboard-clear"))))))
+        (q ":oil-close")))))
